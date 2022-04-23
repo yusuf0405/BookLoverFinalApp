@@ -1,0 +1,141 @@
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="Theme.KnigolyubApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/app_theme</item>
+        <item name="colorPrimaryVariant">@color/app_theme</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="background">@color/app_theme</item>
+        <item name="android:fontFamily">@font/comic_sans</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/progressTextColor</item>
+        <item name="colorSecondaryVariant">@color/progressTextColor</item>
+        <item name="colorOnSecondary">@color/black</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="BottomCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeBottomRight">30dp</item>
+        <item name="cornerSizeBottomLeft">30dp</item>
+    </style>
+
+    <style name="MaterialBtnNext" parent="Widget.MaterialComponents.Button">
+        <item name="rippleColor"> @color/teal_200</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="backgroundTint">@color/testBtnNext</item>
+        <item name="iconSize">@dimen/btnIconSize</item>
+        <item name="icon"> @drawable/ic_next</item>
+        <item name="borderRound"> @dimen/cardAllCornersRadius</item>
+        <item name="textFillColor">@color/white</item>
+        <item name="minWidth">@dimen/testButtonSize</item>
+        <item name="android:elevation"> @dimen/cardElevation</item>
+    </style>
+
+
+    <style name="MaterialBtnPrev" parent="Widget.MaterialComponents.Button">
+        <item name="rippleColor"> @color/teal_200</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="iconTint">@color/white</item>
+        <item name="backgroundTint">@color/testBtnPrev</item>
+        <item name="iconSize">@dimen/btnIconSize</item>
+        <item name="icon"> @drawable/ic_baseline_skip_previous_24</item>
+        <item name="borderRound"> @dimen/cardAllCornersRadius</item>
+        <item name="textFillColor">@color/white</item>
+        <item name="minWidth">@dimen/testButtonSize</item>
+        <item name="android:elevation"> @dimen/cardElevation</item>
+    </style>
+
+    <style name="book_question_radio_button_style" parent="@style/Widget.Material3.CompoundButton.RadioButton">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">60dp</item>
+        <item name="android:layout_marginStart">8dp</item>
+        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_marginTop">16sp</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:background">@drawable/book_qustion_background</item>
+    </style>
+
+
+    <style name="toolbar_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:background">@color/app_theme</item>
+    </style>
+
+    <style name="type_title_edit_profile" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/grey</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textSize">@dimen/textSizeProfileTIL</item>
+    </style>
+
+    <style name="type_des_book_details" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/app_theme</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/textSizeBookDetails</item>
+        <!--        <item name="android:layout_marginStart">16dp</item>-->
+        <!--        <item name="android:layout_marginTop">16dp</item>-->
+    </style>
+
+    <style name="view_style">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">@dimen/profileLineHeight</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:background">@color/grey</item>
+    </style>
+
+    <style name="type_title_book_details" parent="Widget.AppCompat.TextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textColor">@color/book_details_text</item>
+        <item name="android:fontFamily">@font/roboto_medium</item>
+        <item name="android:textStyle">italic</item>
+        <item name="android:textSize">@dimen/textSizeBookDetails</item>
+        <!--        <item name="android:layout_marginStart">16dp</item>-->
+        <!--        <item name="android:layout_marginTop">16dp</item>-->
+    </style>
+
+    <style name="edit_text_edit_profile" parent="Widget.AppCompat.EditText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:backgroundTint">@android:color/transparent</item>
+        <item name="android:ems">14</item>
+        <item name="android:inputType">textPersonName</item>
+    </style>
+
+    <style name="button_style" parent="TextAppearance.AppCompat.Button">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">32dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:textSize">@dimen/textSizeForButtons</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/violet_btn_bg</item>
+    </style>
+
+    <style name="text_input_layout_style" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">8dp</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:shadowDy">3</item>
+        <item name="android:shadowRadius">6</item>
+        <item name="android:ems">10</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@drawable/violet_btn_bg</item>
+    </style>
+
+</resources>

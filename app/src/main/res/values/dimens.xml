@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="marginForTIL">10dp</dimen>
+    <dimen name="textSizeForRegularTexts">14sp</dimen>
+    <dimen name="cornerRadiusTIL">10dp</dimen>
+    <dimen name="textSizeForButtons">16sp</dimen>
+    <dimen name="marginProfileTIL">16dp</dimen>
+    <dimen name="profileCardViewHeight">250dp</dimen>
+    <dimen name="editProfileFotoSize">150dp</dimen>
+    <dimen name="testButtonSize">100dp</dimen>
+    <dimen name="textSizeProfileTIL">18sp</dimen>
+    <dimen name="textSizeBookDetails">14sp</dimen>
+    <dimen name="editProfileClassDegreeWidth">120dp</dimen>
+    <dimen name="addQuestionsFAB">20dp</dimen>
+    <dimen name="recyclerViewMargin">5dp</dimen>
+    <dimen name="profileTextDP">20dp</dimen>
+    <dimen name="profileLineHeight">1dp</dimen>
+    <dimen name="profileNameBigTextSize">24sp</dimen>
+    <dimen name="smallIconSize">20dp</dimen>
+    <dimen name="bigTextSize">30sp</dimen>
+    <dimen name="cardAllCornersRadius">24dp</dimen>
+    <dimen name="cardElevation">25dp</dimen>
+    <dimen name="constraintInside">15dp</dimen>
+    <dimen name="textSizeForSmallTexts">12sp</dimen>
+    <dimen name="recyclerViewIconSize">30dp</dimen>
+    <dimen name="btnIconSize">35dp</dimen>
+    <dimen name="smallProfileImageSize">70dp</dimen>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+</resources>

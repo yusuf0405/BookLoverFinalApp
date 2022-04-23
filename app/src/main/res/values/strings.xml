@@ -1,0 +1,129 @@
+<resources>
+    <string name="app_name">KnigolyubApp</string>
+
+    <string-array name="schools">
+        <item>Средняя школа №7 им. Нариманова</item>
+        <item>Школа-гимназия №2 им. К.Маркса</item>
+        <item>Школа-гимназии №3 им. М.В. Ломоносова</item>
+        <item>Школа-гимназия №5 имени Ж.Боконбаева</item>
+        <item>Средняя школа №6 им. Макаренко</item>
+        <item>Школа-гимназиия №9 имени А.Рудаки</item>
+        <item>Частная школа "Олимп"</item>
+        <item>частная школа "Грамотей"</item>
+    </string-array>
+
+    //Loading Dialog
+    <string name="loading_please_wait">Загрузка, пожалуйста, подождите.</string>
+    <string name="loading_books">Подгружаем все книги…</string>
+    <string name="loading_my_books">Подгружаем ваши книги…</string>
+    <string name="loading_chapters">Подгружаем главы…</string>
+    <string name="loading_book">Подготовка к чтению…</string>
+
+    //Errors
+    <string name="name_input_format_error">Недопустимый формат ввода имени!</string>
+    <string name="last_name_input_format_error">Неверный формат ввода фамилии!</string>
+    <string name="email_input_format_error">Неверный формат ввода электронной почты!</string>
+    <string name="password_input_format_error">Неверный формат ввода пароля!</string>
+    <string name="phone_input_format_error">Недопустимый формат ввода номера телефона!</string>
+    <string name="invalid_password_error">Неверный пароль!</string>
+    <string name="answer_is_error">Вы неправильно ответили на вопрос!</string>
+    <string name="network_error">Нету подключение к интернету.</string>
+    <string name="generic_error">Что то пошло не так.</string>
+    <string name="service_unavailable">Ошибка Сервера.</string>
+    <string name="try_again">Повторит попытку</string>
+
+    //Success
+    <string name="profile_has_been_successfully_updated">Ваш профиль успешно обновлен!</string>
+    <string name="book_success_added">Книга успешно добавлено!</string>
+    <string name="answer_is_success">Вы успешно ответили на вопрос!</string>
+    <string name="survey_is_success">Вы успешно прошли опрос!</string>
+
+
+    //Toasts
+    <string name="choose_class">Выберите ваш класс</string>
+    <string name="choose_school">Выберите вашу школу</string>
+    <string name="book_added_successfully">Книга успешно добавлено.</string>
+    <string name="no_book_questions">Вопросов по главе нет.</string>
+    <string name="all_books">Все книги</string>
+    <string name="my_books">Мои книги</string>
+
+
+    <string name="hello_blank_fragment">Hello world</string>
+    <string name="my_profile">Мой профиль</string>
+    <string name="knigolyub">Книголюб</string>
+    <string name="your_email">Ваш email</string>
+    <string name="your_password">Ваш пароль</string>
+    <string name="signIn">Вход</string>
+    <string name="enter">Войти</string>
+    <string name="remember_me">Запомнить меня</string>
+    <string name="forget_password">Забыл пароль?</string>
+    <string name="signIn_with_google">Войти c аккаунтом Google</string>
+    <string name="no_account">Еще не зарегистрирован?</string>
+    <string name="signUp">Регистрация</string>
+    <string name="already_have_account">Уже зарегистрированы?</string>
+    <string name="teacher">Учитель</string>
+    <string name="student">ученик</string>
+    <string name="your_position">Укажите свой статус</string>
+    <string name="student_signUp">Регистрация ученика</string>
+    <string name="last_name">Фамилия</string>
+    <string name="first_name">Имя</string>
+    <string name="grade">Класс</string>
+    <string name="grade_letter">Буква</string>
+    <string name="male">Мужской</string>
+    <string name="female">Женский</string>
+    <string name="your_gender">Ваш пол</string>
+    <string name="your_number">Ваш номер телефона</string>
+    <string name="teacher_sighUp">Регистрация учителя</string>
+    <string name="next">Далее</string>
+    <string name="signUp_teacher_text">Выберите ваш класс из списка или создайте новый</string>
+    <string name="number_of_students">Кол-во учеников</string>
+    <string name="i_am_classroom_teacher">Я классный руководитель</string>
+    <string name="create_class">Создать класс</string>
+    <string name="books">Книги</string>
+    <string name="progress">Прогресс</string>
+    <string name="account">Профиль</string>
+    <string name="settings">Настройки</string>
+    <string name="one_page_on_screen">Одна страница на экране</string>
+    <string name="night_mode">Ночной режим</string>
+    <string name="fullscreen">Полноэкранный вид</string>
+    <string name="help">Помощь</string>
+    <string name="about_document">О документе</string>
+    <string name="title_activity_main_student">ActivityMainStudent</string>
+    <string name="title_home">Home</string>
+    <string name="title_dashboard">Dashboard</string>
+    <string name="title_notifications">Notifications</string>
+
+    //Splash
+    <string name="splash_screen_txt">«Те, кто читает книги, всегда будут управлять теми, кто смотрит телевизор».</string>
+    <string name="splash_screen_name">Билл Гейтс</string>
+
+    //Student Edit Profile
+    <string name="student_edit_profile_name_title">Имя</string>
+    <string name="student_edit_profile_last_name_title">Фамилия</string>
+    <string name="student_edit_profile_email_title">email</string>
+    <string name="student_edit_profile_save_btn">Сохранить</string>
+    <string name="student_edit_profile_confirm_password_title">Подтвердить пароль</string>
+    <string name="student_edit_profile_number_title">Номер</string>
+    <string name="student_edit_profile_password_title">Пароль</string>
+    <string name="student_edit_profile_image_edit_title">Изменить фото</string>
+    <string name="student_edit_profile_confirm_password_btn">Подтвердть</string>
+    <string name="student_edit_profile_confirm_password_hint">Введите свой пароль</string>
+    <string name="student_book_detals_book_title">Название</string>
+    <string name="student_book_details_book_title">Автор(ы)</string>
+    <string name="student_book_details_book_public_year">Год издания</string>
+    <string name="student_book_details_book_page_count">Количество страниц</string>
+    <string name="student_book_details_book_chapters">Количество глав</string>
+    <string name="student_book_details_book_add_my_books">Добавить в мои книги</string>
+    <string name="student_book_details_book_read">Прочитано</string>
+
+
+    <string name="student_book_question_button">Ответить</string>
+    <string name="student_progress_reads_from">Читает с:</string>
+    <string name="student_progress_statistics">Статистика</string>
+    <string name="student_progress_chapters_read">глав прочитано</string>
+    <string name="student_progress_books_read">книг прочитано</string>
+    <string name="student_progress_pages_read">страниц прочитано</string>
+    <string name="student_progress_hours_spent">часов потрачено</string>
+    <string name="book_details_pages_read">Страниц прочитано:</string>
+    <string name="book_details_chapters_read">Глав прочитано:</string>
+</resources>

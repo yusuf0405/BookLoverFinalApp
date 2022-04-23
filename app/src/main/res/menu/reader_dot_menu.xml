@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title=""
+        android:icon="@drawable/ic_search"
+        android:id="@+id/dot_search"
+        app:showAsAction="always" />
+    <item
+        android:title="@string/one_page_on_screen"
+        android:id="@+id/dot_one_page" />
+    <item
+        android:title="@string/night_mode"
+        android:id="@+id/dot_night_mode" />
+    <item
+        android:title="@string/fullscreen"
+        android:id="@+id/dot_fullScreen" />
+    <item
+        android:title="@string/help"
+        android:id="@+id/dot_help" />
+    <item
+        android:title="@string/about_document"
+        android:id="@+id/dot_about" />
+</menu>
