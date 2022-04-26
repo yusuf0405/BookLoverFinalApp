@@ -4,7 +4,7 @@ enum class Status {
     SUCCESS,
     ERROR,
     NETWORK_ERROR,
-    LOADING
+    LOADING,
 }
 
 data class Resource<T>(

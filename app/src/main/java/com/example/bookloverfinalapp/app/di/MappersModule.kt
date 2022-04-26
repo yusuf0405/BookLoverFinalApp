@@ -1,26 +1,31 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.data.data.cache.mappers.BookDbBookMapper
+import com.example.bookloverfinalapp.app.models.AddNewBookModel
+import com.example.bookloverfinalapp.app.models.BookAdapterModel
+import com.example.bookloverfinalapp.app.models.StudentBook
+import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_all_books.mappers.BookAdapterModelMapper
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.mappers.AddBookModelToDomainMapper
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentAdapterModelMapper
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentBookUiMapper
+import com.example.data.data.cache.mappers.BookDataToBookDbMapper
 import com.example.data.data.cache.mappers.BookDbToDataMapper
-import com.example.data.data.cache.mappers.StudentBookDbBookMapper
+import com.example.data.data.cache.mappers.StudentBookDataToBookDbMapper
 import com.example.data.data.cache.mappers.StudentBookDbToDataMapper
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.StudentBookDb
 import com.example.data.data.cloud.mappers.BookCloudDataMapper
+import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
+import com.example.data.data.mappers.AddNewBookMapper
 import com.example.data.data.mappers.BookDataMapper
 import com.example.data.data.mappers.StudentBookDataMapper
 import com.example.data.data.models.BookData
 import com.example.data.data.models.StudentBookData
 import com.example.domain.domain.Mapper
+import com.example.domain.domain.models.AddNewBookDomain
 import com.example.domain.domain.models.BookDomain
 import com.example.domain.domain.models.StudentBookDomain
-import com.example.bookloverfinalapp.app.models.BookAdapterModel
-import com.example.bookloverfinalapp.app.models.StudentBook
-import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_all_books.mappers.BookAdapterModelMapper
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentAdapterModelMapper
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentBookUiMapper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,7 +38,7 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideBookDbBookMapper(): Mapper<BookData, BookDb> = BookDbBookMapper()
+    fun provideBookDbBookMapper(): Mapper<BookData, BookDb> = BookDataToBookDbMapper()
 
     @Provides
     @Singleton
@@ -64,7 +69,7 @@ object MappersModule {
     @Provides
     @Singleton
     fun provideStudentBookDbBookMapper(): Mapper<StudentBookData, StudentBookDb> =
-        StudentBookDbBookMapper()
+        StudentBookDataToBookDbMapper()
 
 
     @Provides
@@ -85,9 +90,14 @@ object MappersModule {
         StudentBookDataMapper()
 
 
-//    @Provides
-//    @Singleton
-//    fun provide(): =
+    @Provides
+    @Singleton
+    fun provideAddNewBookMapper(): Mapper<AddNewBookDomain, AddNewBookCloud> = AddNewBookMapper()
 
+
+    @Provides
+    @Singleton
+    fun provideAddBookModelToDomainMapper(): Mapper<AddNewBookModel, AddNewBookDomain> =
+        AddBookModelToDomainMapper()
 
 }

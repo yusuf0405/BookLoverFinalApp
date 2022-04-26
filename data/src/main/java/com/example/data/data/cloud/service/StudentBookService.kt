@@ -1,12 +1,8 @@
 package com.example.data.data.cloud.service
 
-import com.example.data.data.cloud.models.BookResponse
-import com.example.data.data.cloud.models.BooksThatReadResponse
+import com.example.data.data.cloud.models.*
 import retrofit2.Response
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface StudentBookService {
 
@@ -25,4 +21,28 @@ interface StudentBookService {
     suspend fun getBook(
         @Query("where") id: String,
     ): Response<BookResponse>
+
+
+    @POST("classes/BooksThatRead")
+    suspend fun addNewBookStudent(
+        @Body book: AddNewBookCloud,
+    ): Response<PostRequestAnswer>
+
+
+    @PUT("classes/BooksThatRead/{id}")
+    suspend fun updateProgressStudentBook(
+        @Path("id") id: String,
+        @Body progress: UpdateProgressCloud,
+    ): Response<Unit>
+
+
+    @PUT("classes/BooksThatRead/{id}")
+    suspend fun updatePagesStudentBook(
+        @Path("id") id: String,
+        @Body chapters: UpdateChaptersCloud,
+    ): Response<Unit>
+
+
+
+
 }

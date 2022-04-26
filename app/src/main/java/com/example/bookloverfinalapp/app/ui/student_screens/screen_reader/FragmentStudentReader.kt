@@ -148,7 +148,7 @@ class FragmentStudentReader :
     }
 
     private fun saveChanges(type: Boolean) {
-        if (bookCurrentProgress < progress) {
+        if (bookCurrentProgress < progress + 1) {
             viewModel.updateProgress(id = book.objectId,
                 BookUpdateProgress(progress = progress),
                 type = type,

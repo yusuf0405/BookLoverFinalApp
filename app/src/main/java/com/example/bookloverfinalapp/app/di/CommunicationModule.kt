@@ -18,12 +18,17 @@ object CommunicationModule {
         NetworkErrorCommunication.Base()
 
     @Provides
+    fun provideStudentBooksCommunication(): StudentBooksCommunication =
+        StudentBooksCommunication.Base()
+
+
+    @Provides
     fun provideBooksCommunication(): BooksCommunication =
         BooksCommunication.Base()
 
     @Provides
-    fun provideStudentBooksCommunication(): StudentBooksCommunication =
-        StudentBooksCommunication.Base()
+    fun provideStudentBooksAdapterCommunication(): StudentBooksAdapterCommunication =
+        StudentBooksAdapterCommunication.Base()
 
 
     @Provides

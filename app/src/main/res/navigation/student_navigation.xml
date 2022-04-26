@@ -78,7 +78,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentStudentBookDetails"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.FragmentStudentBookDetails"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.ui.FragmentStudentBookDetails"
         android:label="fragment_student_book_details"
         tools:layout="@layout/fragment_student_book_details">
         <argument

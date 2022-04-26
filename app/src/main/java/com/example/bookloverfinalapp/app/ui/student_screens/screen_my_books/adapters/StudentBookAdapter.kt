@@ -1,6 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.adapters
 
 import android.annotation.SuppressLint
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
@@ -45,7 +46,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
         class FullScreenProgress(view: View) : BookViewHolder(view) {
             private val loadingDialog = itemView.findViewById<LoadingAnimation>(R.id.loadingAnim)
             override fun bind(book: StudentBookAdapterModel) {
-                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_books))
+                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_my_books))
                 loadingDialog.setTextViewVisibility(true)
                 loadingDialog.setTextStyle(true)
             }
@@ -74,13 +75,11 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                         chapterCount: Int,
                         chaptersRead: Int,
                         poster: StudentBookPoster,
-                        updatedAt: String,
+                        updatedAt: Date,
                         book: StudentBookPdf,
                         progress: Int,
                         isReadingPages: List<Boolean>,
-                    ) {
-                        TODO("Not yet implemented")
-                    }
+                    ) {}
                 })
 
             }
@@ -106,7 +105,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                     override fun map(
                         author: String,
                         createdAt: Date,
-                        id: String,
+                        bookId: String,
                         objectId: String,
                         page: Int,
                         publicYear: String,
@@ -114,7 +113,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                         chapterCount: Int,
                         chaptersRead: Int,
                         poster: StudentBookPoster,
-                        updatedAt: String,
+                        updatedAt: Date,
                         book: StudentBookPdf,
                         progress: Int,
                         isReadingPages: List<Boolean>,
@@ -146,17 +145,16 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                                 publicYear = publicYear,
                                 poster = StudentBookPoster(name = poster.name, url = poster.url),
                                 book = StudentBookPdf(name = book.name, url = book.url),
-                                objectId = id,
+                                objectId = objectId,
                                 isReadingPages = isReadingPages,
                                 progress = progress,
                                 chaptersRead = chaptersRead,
-                                bookId = id
+                                bookId = bookId
                             ))
                         }
 
                     }
                 })
-
             }
         }
 
@@ -168,7 +166,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                 actionListener)
             1 -> BookViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> BookViewHolder.FullScreenProgress(R.layout.item_progress_fullscreen.makeView(parent = parent))
+            2 -> BookViewHolder.FullScreenProgress(R.layout.item_student_progress_fullscreen.makeView(parent = parent))
             3 -> BookViewHolder.EmptyList(R.layout.item_empty_list.makeView(parent = parent))
             else -> throw ClassCastException()
         }

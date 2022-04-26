@@ -1,6 +1,7 @@
 package com.example.bookloverfinalapp.app.models
 
 import com.example.bookloverfinalapp.app.base.Abstract
+import java.util.*
 
 sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMapper>() {
 
@@ -12,7 +13,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
 
     class Base(
         var author: String,
-        var createdAt: String,
+        var createdAt: Date,
         var id: String,
         var page: Int,
         var publicYear: String,
@@ -20,7 +21,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
         var title: String,
         var chapterCount: Int,
         var poster: BookPosterAdapter,
-        var updatedAt: String,
+        var updatedAt: Date,
     ) : BookAdapterModel() {
         override fun map(mapper: StringMapper) {
             mapper.map(author = author,
@@ -47,7 +48,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
         fun map(text: String)
         fun map(
             author: String,
-            createdAt: String,
+            createdAt: Date,
             id: String,
             page: Int,
             publicYear: String,
@@ -55,7 +56,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
             title: String,
             chapterCount: Int,
             poster: BookPoster,
-            updatedAt: String,
+            updatedAt: Date,
         )
     }
 

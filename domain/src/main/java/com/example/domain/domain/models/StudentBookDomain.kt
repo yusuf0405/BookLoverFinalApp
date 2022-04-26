@@ -13,7 +13,7 @@ data class StudentBookDomain(
     var chapterCount: Int,
     var chaptersRead: Int,
     var poster: StudentBookPosterDomain,
-    var updatedAt: String,
+    var updatedAt: Date,
     var book: StudentBookPdfDomain,
     var progress: Int,
     var isReadingPages: List<Boolean>,

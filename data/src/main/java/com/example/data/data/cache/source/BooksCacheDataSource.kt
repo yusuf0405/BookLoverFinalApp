@@ -2,8 +2,9 @@ package com.example.data.data.cache.source
 
 import com.example.data.data.cache.db.BooksDao
 import com.example.data.data.cache.models.BookDb
-import com.example.domain.domain.Mapper
 import com.example.data.data.models.BookData
+import com.example.domain.domain.Mapper
+import com.example.domain.models.Resource
 
 interface BooksCacheDataSource {
 
@@ -11,14 +12,16 @@ interface BooksCacheDataSource {
 
     suspend fun saveBooks(books: List<BookData>)
 
+
     class Base(
         private val bookDao: BooksDao,
-        private val mapper: Mapper<BookData, BookDb>,
+        private val dataMapper: Mapper<BookData, BookDb>,
     ) : BooksCacheDataSource {
         override suspend fun fetchBooks() = bookDao.getAllBooks()
 
         override suspend fun saveBooks(books: List<BookData>) {
-            books.forEach { book -> bookDao.addNewBook(book = mapper.map(book)) }
+            books.forEach { book -> bookDao.addNewBook(book = dataMapper.map(book)) }
         }
+
     }
 }

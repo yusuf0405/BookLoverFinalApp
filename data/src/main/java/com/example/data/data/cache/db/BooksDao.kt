@@ -23,5 +23,5 @@ interface BooksDao {
     suspend fun getAllBooks(): MutableList<BookDb>
 
     @Query("select * from book_database where id == :bookId")
-    suspend fun getBook(bookId: Int): BookDb
+    suspend fun getBook(bookId: String): BookDb
 }

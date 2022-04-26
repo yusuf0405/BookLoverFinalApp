@@ -16,7 +16,7 @@ data class StudentBookDb(
     var chapterCount: Int,
     var chaptersRead: Int,
     var poster: StudentBookPosterDb,
-    var updatedAt: String,
+    var updatedAt: Date,
     var book: StudentBookPdfDb,
     var progress: Int,
     var isReadingPages: List<Boolean>,

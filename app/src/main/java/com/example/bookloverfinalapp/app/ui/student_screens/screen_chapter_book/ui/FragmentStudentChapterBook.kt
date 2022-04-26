@@ -2,6 +2,7 @@ package com.example.bookloverfinalapp.app.ui.student_screens.screen_chapter_book
 
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
@@ -47,7 +48,6 @@ class FragmentStudentChapterBook :
     }
 
     private fun observeResource() {
-
         viewModel.getBook(url = book.book.url)
             .observe(viewLifecycleOwner) { stream -> loadSuccess(inputStream = stream) }
 

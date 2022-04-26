@@ -2,11 +2,11 @@ package com.example.bookloverfinalapp.app.ui.student_screens.screen_questions
 
 import android.os.Bundle
 import android.view.View
-import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.models.Chapters
 import com.example.bookloverfinalapp.app.models.StudentBook
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.launchWhenStarted
@@ -15,9 +15,6 @@ import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentStudentBookQuestionBinding
 import com.example.domain.models.Status
 import com.example.domain.models.book.BookQuestion
-import com.parse.ParseException
-import com.parse.ParseObject
-import com.parse.ParseQuery
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -107,11 +104,13 @@ class FragmentStudentBookQuestion :
     }
 
     private fun chekAnswer() {
-        if (rightAnswer == answer) {
-            chekNextQuestion()
-        } else {
-            viewModel.goChapterFragment(book = book)
-            showToast(message = getString(R.string.answer_is_error))
+        when {
+            answer == "" -> showToast(message = "Выберите ответ")
+            rightAnswer == answer -> chekNextQuestion()
+            else -> {
+                viewModel.goChapterFragment(book = book)
+                showToast(message = getString(R.string.answer_is_error))
+            }
         }
     }
 
@@ -136,25 +135,14 @@ class FragmentStudentBookQuestion :
     }
 
     private fun updateObject() {
-        val query = ParseQuery.getQuery<ParseObject>("BooksThatRead")
-        query.getInBackground(book.objectId) { objects: ParseObject, e: ParseException? ->
-            if (e == null) {
-                val list = book.isReadingPages.toMutableList()
-                if (chapter < list.size) {
-                    list[chapter] = true
-                    book.isReadingPages = list
-                    objects.put("isReadingPages", list.toList())
-                    objects.saveInBackground()
-                }
-                if (chapter > book.chaptersRead) {
-                    objects.put("chaptersRead", chapter)
-                    objects.saveInBackground()
-                }
-                viewModel.goChapterFragment(book = book)
-            } else {
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-            }
+        val list = book.isReadingPages.toMutableList()
+        val chapterUpdate = Chapters(chapters = chapter, isReadingPages = list)
+        if (chapter < list.size) {
+            list[chapter] = true
+            chapterUpdate.isReadingPages = list
+            book.isReadingPages = list
         }
+        viewModel.updateChapters(id = book.objectId, chapters = chapterUpdate, book = book)
     }
 
 

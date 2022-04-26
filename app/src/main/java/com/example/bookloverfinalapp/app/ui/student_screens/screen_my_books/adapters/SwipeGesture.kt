@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.ui
+package com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.adapters
 
 import android.R
 import android.content.Context

@@ -1,17 +1,18 @@
 package com.example.bookloverfinalapp.app.models
 
 import java.io.Serializable
+import java.util.*
 
 data class Book(
     var author: String,
-    var createdAt: String,
+    var createdAt: Date,
     var objectId: String,
     var page: Int,
     var publicYear: String,
     var title: String,
     var chapterCount: Int,
     var poster: BookPoster,
-    var updatedAt: String,
+    var updatedAt: Date,
     var book: BookPdf,
 ) : Serializable
 

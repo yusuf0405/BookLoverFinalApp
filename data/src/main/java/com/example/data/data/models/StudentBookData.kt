@@ -13,7 +13,7 @@ data class StudentBookData(
     var chapterCount: Int,
     var chaptersRead: Int,
     var poster: StudentBookPosterData,
-    var updatedAt: String,
+    var updatedAt: Date,
     var book: StudentBookPdfData,
     var progress: Int,
     var isReadingPages: List<Boolean>,

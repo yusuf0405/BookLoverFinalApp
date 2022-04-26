@@ -13,9 +13,7 @@ import com.example.domain.domain.interactor.GetAllBooksUseCase
 import com.example.domain.domain.models.BookDomain
 import com.example.domain.models.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.flow.flowOn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -28,6 +26,7 @@ class FragmentStudentAllBooksViewModel @Inject constructor(
 
     fun observe(owner: LifecycleOwner, observer: Observer<List<BookAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
+
 
     fun goBookDetailsFragment(book: Book) =
         navigate(FragmentRootStudentBookDirections.actionFragmentRootStudentBookToFragmentStudentBookDetails2(

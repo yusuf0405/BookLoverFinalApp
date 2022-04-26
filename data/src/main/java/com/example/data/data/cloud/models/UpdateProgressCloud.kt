@@ -1,7 +1,7 @@
-package com.example.data.models.book
+package com.example.data.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
 
-data class BookUpdateProgressRequest(
+class UpdateProgressCloud(
     @SerializedName("progress") val progress: Int,
 )

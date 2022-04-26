@@ -6,7 +6,7 @@ import com.example.data.data.cache.models.StudentBookPdfDb
 import com.example.data.data.cache.models.StudentBookPosterDb
 import com.example.data.data.models.StudentBookData
 
-class StudentBookDbBookMapper : Mapper<StudentBookData, StudentBookDb>() {
+class StudentBookDataToBookDbMapper : Mapper<StudentBookData, StudentBookDb>() {
 
     override fun map(from: StudentBookData): StudentBookDb = from.run {
         StudentBookDb(

@@ -2,10 +2,12 @@ package com.example.bookloverfinalapp.app.di
 
 import com.example.data.api.KnigolyubApi
 import com.example.data.data.cache.db.BooksDao
+import com.example.data.data.cache.db.StudentBooksDao
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.StudentBookDb
 import com.example.data.data.cache.source.BooksCacheDataSource
 import com.example.data.data.cache.source.StudentBookCacheDataSource
+import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
 import com.example.data.data.cloud.service.BookService
 import com.example.data.data.cloud.service.StudentBookService
@@ -20,15 +22,15 @@ import com.example.data.repository.LoginRepositoryImpl
 import com.example.data.repository.SchoolRepositoryImpl
 import com.example.data.repository.UserRepositoryImpl
 import com.example.domain.domain.Mapper
+import com.example.domain.domain.models.AddNewBookDomain
 import com.example.domain.domain.models.BookDomain
+import com.example.domain.domain.models.StudentBookDomain
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.domain.repository.StudentBooksRepository
 import com.example.domain.repository.BookRepository
 import com.example.domain.repository.LoginRepository
 import com.example.domain.repository.SchoolRepository
 import com.example.domain.repository.UserRepository
-import com.example.data.data.cache.db.StudentBooksDao
-import com.example.domain.domain.models.StudentBookDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -71,8 +73,13 @@ object DataModule {
         cacheDataSource: StudentBookCacheDataSource,
         bookCashMapper: Mapper<StudentBookDb, StudentBookData>,
         bookDomainMapper: Mapper<StudentBookData, StudentBookDomain>,
+        addNewBookMapper: Mapper<AddNewBookDomain, AddNewBookCloud>,
     ): StudentBooksRepository = StudentBooksRepositoryImpl(
-        cloudDataSource, cacheDataSource, bookCashMapper, bookDomainMapper)
+        cloudDataSource,
+        cacheDataSource,
+        bookCashMapper,
+        bookDomainMapper,
+        addNewBookMapper = addNewBookMapper)
 
     @Provides
     @Singleton
@@ -85,7 +92,8 @@ object DataModule {
     fun provideBooksCacheDataSource(
         dao: BooksDao,
         mapper: Mapper<BookData, BookDb>,
-    ): BooksCacheDataSource = BooksCacheDataSource.Base(bookDao = dao, mapper = mapper)
+    ): BooksCacheDataSource =
+        BooksCacheDataSource.Base(bookDao = dao, dataMapper = mapper)
 
 
     @Provides

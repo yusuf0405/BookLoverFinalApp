@@ -1,15 +1,14 @@
 package com.example.data
 
-import com.example.data.models.book.*
+import com.example.data.models.book.BookQuestionDto
 import com.example.data.models.classes.ClassDto
 import com.example.data.models.school.SchoolDto
 import com.example.data.models.student.*
-import com.example.domain.models.book.*
+import com.example.domain.models.book.BookQuestion
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.*
 import com.parse.ParseFile
-import java.util.*
 
 internal fun UserDto.toUser(): User =
     User(
@@ -43,16 +42,6 @@ internal fun UserDto.toStudentNoImage(): User =
         userType = userType, sessionToken = sessionToken
     )
 
-internal fun BooksThatReadDto.toBook(): BooksThatRead =
-    BooksThatRead(bookId = bookId,
-        chaptersRead = chaptersRead,
-        isReadingPages = isReadingPages,
-        progress = progress,
-        userId = userId)
-
-internal fun BookUpdateProgress.toRequest(): BookUpdateProgressRequest =
-    BookUpdateProgressRequest(progress = progress)
-
 internal fun StudentAddBook.toRequestBook(): StudentAddBookRequest =
     StudentAddBookRequest(books = books)
 
@@ -74,13 +63,6 @@ internal fun UserSignUpRes.toDtoSignUp(): UserSignUpRequest =
         userType = userType
     )
 
-internal fun BookStudentRequest.toBook(): AddNewBookRequest =
-    AddNewBookRequest(
-        progress = progress,
-        bookId = bookId,
-        userId = studentId,
-        chaptersRead = chaptersRead,
-        isReadingPages = isReadingPages)
 
 internal fun StudentUpdateRes.toDtoStudent(): UserUpdateRequest =
     UserUpdateRequest(

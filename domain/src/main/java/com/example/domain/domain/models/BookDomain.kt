@@ -1,8 +1,10 @@
 package com.example.domain.domain.models
 
+import java.util.*
+
 data class BookDomain(
     var author: String,
-    var createdAt: String,
+    var createdAt: Date,
     var id: String,
     var page: Int,
     var publicYear: String,
@@ -10,7 +12,7 @@ data class BookDomain(
     var title: String,
     var chapterCount: Int,
     var poster: BookPosterDomain,
-    var updatedAt: String,
+    var updatedAt: Date,
 )
 
 class BookPdfDomain(

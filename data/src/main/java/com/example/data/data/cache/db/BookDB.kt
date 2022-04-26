@@ -8,6 +8,7 @@ import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.BookPdfDb
 import com.example.data.data.cache.models.BookPosterDb
 import org.json.JSONObject
+import java.util.*
 
 @Database(entities = [BookDb::class], version = 1)
 @TypeConverters(BookDbConverter::class)
@@ -51,5 +52,15 @@ class BookDbConverter {
             url = json.getString("url"),
             type = json.getString("type"),
         )
+    }
+
+    @TypeConverter
+    fun toDate(dateLong: Long?): Date? {
+        return dateLong?.let { Date(it) }
+    }
+
+    @TypeConverter
+    fun fromDate(date: Date?): Long? {
+        return date?.time
     }
 }

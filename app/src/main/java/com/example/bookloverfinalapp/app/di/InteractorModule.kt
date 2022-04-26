@@ -1,8 +1,6 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.domain.domain.interactor.DeleteFromMyBooksUseCase
-import com.example.domain.domain.interactor.GetAllBooksUseCase
-import com.example.domain.domain.interactor.GetStudentBookUseCase
+import com.example.domain.domain.interactor.*
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.domain.repository.StudentBooksRepository
 import dagger.Module
@@ -19,6 +17,11 @@ object InteractorModule {
         GetAllBooksUseCase(repository = repository)
 
     @Provides
+    fun provideGetBookForReadingUseCase(repository: BooksRepository): GetBookForReadingUseCase =
+        GetBookForReadingUseCase(repository = repository)
+
+
+    @Provides
     fun provideGetStudentBookUseCase(repository: StudentBooksRepository): GetStudentBookUseCase =
         GetStudentBookUseCase(repository = repository)
 
@@ -26,6 +29,25 @@ object InteractorModule {
     @Provides
     fun provideDeleteFromMyBooksUseCase(repository: StudentBooksRepository): DeleteFromMyBooksUseCase =
         DeleteFromMyBooksUseCase(repository = repository)
+
+
+    @Provides
+    fun provideGetMyBookUseCase(repository: StudentBooksRepository): GetMyBookUseCase =
+        GetMyBookUseCase(repository = repository)
+
+
+    @Provides
+    fun provideAddNewStudentBookUseCase(repository: StudentBooksRepository): AddNewStudentBookUseCase =
+        AddNewStudentBookUseCase(repository = repository)
+
+    @Provides
+    fun provideUpdateChaptersUseCase(repository: StudentBooksRepository): UpdateChaptersUseCase =
+        UpdateChaptersUseCase(repository = repository)
+
+
+    @Provides
+    fun provideUpdateProgressUseCase(repository: StudentBooksRepository): UpdateProgressUseCase =
+        UpdateProgressUseCase(repository = repository)
 
 
 }

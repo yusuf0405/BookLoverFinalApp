@@ -3,7 +3,13 @@ package com.example.data.data.cloud.source
 import com.example.data.base.BaseApiResponse
 import com.example.data.data.cloud.mappers.BookMapper
 import com.example.data.data.cloud.mappers.BookThatReadMapper
+import com.example.data.data.cloud.models.AddNewBookCloud
+import com.example.data.data.cloud.models.PostRequestAnswer
+import com.example.data.data.cloud.models.UpdateChaptersCloud
+import com.example.data.data.cloud.models.UpdateProgressCloud
 import com.example.data.data.cloud.service.StudentBookService
+import com.example.data.data.models.ChaptersData
+import com.example.data.data.models.ProgressData
 import com.example.data.data.models.StudentBookData
 import com.example.domain.models.Resource
 import retrofit2.HttpException
@@ -16,7 +22,16 @@ interface StudentBookCloudDataSource {
 
     suspend fun deleteBook(id: String): Resource<Unit>
 
-    class Base(private val service: StudentBookService) : StudentBookCloudDataSource,
+    suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswer>
+
+    suspend fun updateProgress(id: String, progress: ProgressData): Resource<Unit>
+
+
+    suspend fun updateChapters(id: String, chapters: ChaptersData): Resource<Unit>
+
+    class Base(
+        private val service: StudentBookService,
+    ) : StudentBookCloudDataSource,
         BaseApiResponse() {
 
         override suspend fun fetchMyBooks(id: String): Resource<List<StudentBookData>> = try {
@@ -60,7 +75,28 @@ interface StudentBookCloudDataSource {
             }
         }
 
+
         override suspend fun deleteBook(id: String) = safeApiCall { service.deleteMyBook(id = id) }
+
+
+        override suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswer> =
+            safeApiCall { service.addNewBookStudent(book = book) }
+
+        override suspend fun updateProgress(id: String, progress: ProgressData): Resource<Unit> =
+            safeApiCall {
+                service.updateProgressStudentBook(id = id,
+                    progress = UpdateProgressCloud(progress = progress.progress))
+            }
+
+
+        override suspend fun updateChapters(id: String, chapters: ChaptersData): Resource<Unit> =
+            safeApiCall {
+                service.updatePagesStudentBook(id = id,
+                    chapters = UpdateChaptersCloud(chaptersRead = chapters.chaptersRead,
+                        isReadingPages = chapters.isReadingPages))
+            }
+
+
     }
 }
 

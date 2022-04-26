@@ -15,6 +15,7 @@ import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
 import com.example.loadinganimation.LoadingAnimation
+import java.util.*
 
 class BookAdapter(private val actionListener: BookItemOnClickListener) :
     RecyclerView.Adapter<BookAdapter.BookViewHolder>() {
@@ -52,7 +53,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
 
                     override fun map(
                         author: String,
-                        createdAt: String,
+                        createdAt: Date,
                         id: String,
                         page: Int,
                         publicYear: String,
@@ -60,7 +61,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                         title: String,
                         chapterCount: Int,
                         poster: BookPoster,
-                        updatedAt: String,
+                        updatedAt: Date,
                     ) {
                         TODO("Not yet implemented")
                     }
@@ -82,7 +83,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
 
                     override fun map(
                         author: String,
-                        createdAt: String,
+                        createdAt: Date,
                         id: String,
                         page: Int,
                         publicYear: String,
@@ -90,7 +91,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                         title: String,
                         chapterCount: Int,
                         poster: BookPoster,
-                        updatedAt: String,
+                        updatedAt: Date,
                     ) {
                         bookTitle.text = title
                         bookAuthor.text = author

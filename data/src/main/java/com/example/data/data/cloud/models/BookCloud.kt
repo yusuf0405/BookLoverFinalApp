@@ -1,10 +1,11 @@
 package com.example.data.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
 data class BookCloud(
     @SerializedName("author") var author: String,
-    @SerializedName("createdAt") var createdAt: String,
+    @SerializedName("createdAt") var createdAt: Date,
     @SerializedName("objectId") var id: String,
     @SerializedName("page") var page: Int,
     @SerializedName("publicYear") var publicYear: String,
@@ -12,7 +13,7 @@ data class BookCloud(
     @SerializedName("title") var title: String,
     @SerializedName("chapterCount") var chapterCount: Int,
     @SerializedName("poster") var poster: BookPosterCloud,
-    @SerializedName("updatedAt") var updatedAt: String,
+    @SerializedName("updatedAt") var updatedAt: Date,
 )
 
 data class BookPdfCloud(

@@ -61,7 +61,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
             }
         }
         viewModel.observeProgressDialog(viewLifecycleOwner) {
-            Log.i("ffff","ffffffffff")
             it.getValue()?.let { status ->
                 if (status) loadingDialog.show()
                 else loadingDialog.dismiss()
@@ -75,7 +74,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
         }
         viewModel.observeError(viewLifecycleOwner) {
             it.getValue()?.let { message ->
-                Log.i("dd","dddd")
                 showToast(message = message)
             }
         }

@@ -1,10 +1,10 @@
 package com.example.data.api
 
-import com.example.data.models.book.*
+import com.example.data.models.book.BookQuestionResponse
+import com.example.data.models.book.BookResponse
 import com.example.data.models.classes.ClassesResponse
 import com.example.data.models.school.SchoolResponse
 import com.example.data.models.student.*
-import com.example.domain.models.book.AddNewBookRequest
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -37,32 +37,11 @@ interface KnigolyubApi {
         @Query("where") id: String,
     ): Response<BookResponse>
 
-    @GET("classes/BooksThatRead")
-    suspend fun getAllStudentBooks(
-        @Query("where") id: String,
-    ): Response<BookStudentRequests>
-
-    @GET("classes/BooksThatRead")
-    suspend fun studentMyProgress(
-        @Query("where") id: String,
-    ): Response<BooksThatReadResponse>
 
     @GET("classes/Questions")
     suspend fun getAllChapterQuestions(
         @Query("where") id: String,
     ): Response<BookQuestionResponse>
-
-    @PUT("classes/BooksThatRead/{id}")
-    suspend fun updateProgressStudentBook(
-        @Path("id") id: String,
-        @Body progress: BookUpdateProgressRequest,
-    ): Response<UpdateDto>
-
-
-    @POST("classes/BooksThatRead")
-    suspend fun addNewBookStudent(
-        @Body book: AddNewBookRequest,
-    ): Response<PostRequestAnswerDto>
 
 
     @GET("classes/Classes")
@@ -76,6 +55,4 @@ interface KnigolyubApi {
     @GET("classes/School")
     suspend fun getAllSchools(): Response<SchoolResponse>
 
-    @GET("classes/Books")
-    suspend fun getAllBooks(): Response<BookResponse>
 }

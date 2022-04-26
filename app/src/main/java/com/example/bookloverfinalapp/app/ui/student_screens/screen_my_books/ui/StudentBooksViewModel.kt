@@ -8,7 +8,7 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.StudentBook
 import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_book_root.FragmentRootStudentBookDirections
-import com.example.bookloverfinalapp.app.utils.communication.StudentBooksCommunication
+import com.example.bookloverfinalapp.app.utils.communication.StudentBooksAdapterCommunication
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.interactor.DeleteFromMyBooksUseCase
 import com.example.domain.domain.interactor.GetStudentBookUseCase
@@ -24,7 +24,7 @@ import javax.inject.Inject
 class StudentBooksViewModel @Inject constructor(
     private val studentBookUseCase: GetStudentBookUseCase,
     private val deleteFromMyBooksUseCase: DeleteFromMyBooksUseCase,
-    private val communication: StudentBooksCommunication,
+    private val communication: StudentBooksAdapterCommunication,
     private val mapper: Mapper<StudentBookDomain, StudentBookAdapterModel.Base>,
 ) : BaseViewModel() {
 
@@ -58,4 +58,7 @@ class StudentBooksViewModel @Inject constructor(
             if (resource.status == Status.SUCCESS) emit(resource.data!!)
         }
     }
+
+    fun listIsEmpty() = communication.map(listOf(StudentBookAdapterModel.Empty))
+
 }

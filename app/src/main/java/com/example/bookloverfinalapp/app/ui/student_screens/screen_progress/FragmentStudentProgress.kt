@@ -6,11 +6,10 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.models.StudentBook
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.showView
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentStudentProgressBinding
-import com.example.domain.models.book.BooksThatRead
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -32,10 +31,10 @@ class FragmentStudentProgress :
     }
 
     private fun observeResource() {
-        viewModel.getMyProgress(id = CurrentUser().getCurrentUser(activity = requireActivity()).id)
-            .observe(viewLifecycleOwner) { list ->
-                responseSuccess(list = list)
-            }
+        viewModel.fetchMyBook(id = currentUser.id)
+        viewModel.observe(viewLifecycleOwner) { list ->
+            responseSuccess(list = list)
+        }
         viewModel.observeProgressAnimation(viewLifecycleOwner) {
             binding().progressLoadingAnimation.apply {
                 it.getValue()?.let { status ->
@@ -43,11 +42,10 @@ class FragmentStudentProgress :
                 }
 
             }
-
         }
     }
 
-    private fun responseSuccess(list: List<BooksThatRead>) {
+    private fun responseSuccess(list: List<StudentBook>) {
         var readPages = 0
         var readChapters = 0
         var readBooks = 0

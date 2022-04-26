@@ -1,23 +1,22 @@
-package com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details
+package com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.ui
 
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.models.AddNewBookModel
 import com.example.bookloverfinalapp.app.models.Book
+import com.example.bookloverfinalapp.app.models.StudentBookPdf
+import com.example.bookloverfinalapp.app.models.StudentBookPoster
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
-import com.example.bookloverfinalapp.app.utils.extensions.launchWhenStarted
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentStudentBookDetailsBinding
-import com.example.domain.models.book.AddNewBookRequest
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class FragmentStudentBookDetails :
@@ -43,14 +42,26 @@ class FragmentStudentBookDetails :
         val isReading = arrayListOf<Boolean>()
         isReading.add(true)
         for (i in 1 until book.chapterCount) isReading.add(false)
-        val book = AddNewBookRequest(
-            progress = 0,
+
+        val book = AddNewBookModel(
             bookId = book.objectId,
-            userId = currentUser.id,
+            page = book.page,
+            publicYear = book.publicYear,
+            book = StudentBookPdf(url = book.book.url, name = book.book.name),
+            title = book.title,
+            chapterCount = book.chapterCount,
+            poster = StudentBookPoster(url = book.poster.url, name = book.poster.name),
             isReadingPages = isReading,
-            chaptersRead = 0
-        )
-        viewModel.addNewBook(book = book)
+            chaptersRead = 0,
+            progress = 0,
+            author = book.author,
+            userId = currentUser.id)
+
+        viewModel.addNewBook(book = book).observe(viewLifecycleOwner) {
+            binding().addMyBook.hideView()
+            uiVisibility(status = true)
+            showToast(getString(R.string.book_added_successfully))
+        }
     }
 
     private fun setOnClickListeners() {
@@ -62,34 +73,28 @@ class FragmentStudentBookDetails :
 
     override fun onClick(view: View?) {
         when (view) {
-            binding().addMyBook -> {
-                binding().addMyBook.hideView()
-                progressBarVisibility(status = true)
-                addMyBooks()
-            }
+            binding().addMyBook -> addMyBooks()
+
         }
     }
 
     private fun observeResource() {
         viewModel.observeProgressAnimation(viewLifecycleOwner) {
             it.getValue()?.let { status ->
-                progressBarVisibility(status = status)
+                uiVisibility(status = status)
 
             }
         }
-        viewModel.chekIsMyBook(userId = currentUser.id, bookId = book.objectId)
+        viewModel.chekIsMyBook(id = book.objectId)
             .observe(viewLifecycleOwner) { book ->
                 binding().apply {
                     bookDetailsReadChapters.text = book.chaptersRead.toString()
                     bookDetailsReadPages.text = book.progress.toString()
                 }
             }
-        viewModel.addBookState.onEach {
-            showToast(message = getString(R.string.book_success_added))
-        }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
 
-    private fun progressBarVisibility(status: Boolean) {
+    private fun uiVisibility(status: Boolean) {
         binding().apply {
             if (status) {
                 imageView6.showView()
@@ -98,10 +103,8 @@ class FragmentStudentBookDetails :
                 textView23.showView()
                 bookDetailsReadPages.showView()
                 bookDetailsReadChapters.showView()
-                progressBar.hideView()
             } else {
                 addMyBook.showView()
-                progressBar.hideView()
             }
         }
     }

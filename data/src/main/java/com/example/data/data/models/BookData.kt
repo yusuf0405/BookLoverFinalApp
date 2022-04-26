@@ -1,8 +1,10 @@
 package com.example.data.data.models
 
+import java.util.*
+
 class BookData(
     var author: String,
-    var createdAt: String,
+    var createdAt: Date,
     var id: String,
     var page: Int,
     var publicYear: String,
@@ -10,7 +12,7 @@ class BookData(
     var title: String,
     var chapterCount: Int,
     var poster: BookPosterData,
-    var updatedAt: String,
+    var updatedAt: Date,
 )
 data class BookPdfData(
     var name: String,

@@ -3,6 +3,7 @@ package com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.ui
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.app.base.BaseFragment
@@ -10,8 +11,10 @@ import com.example.bookloverfinalapp.app.models.StudentBook
 import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
 import com.example.bookloverfinalapp.app.models.StudentBookPdf
 import com.example.bookloverfinalapp.app.models.StudentBookPoster
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_book_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.adapters.StudentBookAdapter
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.adapters.StudentBookItemOnClickListener
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.adapters.SwipeGesture
 import com.example.bookloverfinalapp.databinding.FragmentStudentMyBooksBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.*
@@ -29,6 +32,7 @@ class FragmentStudentBooks : BaseFragment<FragmentStudentMyBooksBinding, Student
     override fun onReady(savedInstanceState: Bundle?) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         setupUi()
         observeResource()
     }
@@ -64,13 +68,14 @@ class FragmentStudentBooks : BaseFragment<FragmentStudentMyBooksBinding, Student
                 chapterCount: Int,
                 chaptersRead: Int,
                 poster: StudentBookPoster,
-                updatedAt: String,
+                updatedAt: Date,
                 book: StudentBookPdf,
                 progress: Int,
                 isReadingPages: List<Boolean>,
             ) {
                 viewModel.deleteBook(id = objectId).observe(viewLifecycleOwner) {
                     adapter.deleteBook(position)
+                    if (adapter.books.isEmpty()) viewModel.listIsEmpty()
                 }
             }
 
@@ -88,6 +93,8 @@ class FragmentStudentBooks : BaseFragment<FragmentStudentMyBooksBinding, Student
     }
 
     override fun goChapterFragment(book: StudentBook) {
-        viewModel.goChapterFragment(book = book)
+        findNavController()
+            .navigate(FragmentRootStudentBookDirections.
+            actionFragmentRootStudentBookToFragmentStudentChapterBook(book = book))
     }
 }

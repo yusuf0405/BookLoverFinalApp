@@ -12,4 +12,5 @@ interface SchoolRepository {
     fun getAllSchools(): Flow<Resource<List<School>>>
 
     fun getClass(id: String): Flow<Resource<List<Class>>>
+
 }

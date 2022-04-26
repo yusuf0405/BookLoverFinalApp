@@ -3,7 +3,7 @@ package com.example.bookloverfinalapp.app.ui.student_screens.screen_chapter_book
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.Status
-import com.example.domain.usecase.GetBookForReadingUseCase
+import com.example.domain.domain.interactor.GetBookForReadingUseCase
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.StudentBook
 import dagger.hilt.android.lifecycle.HiltViewModel

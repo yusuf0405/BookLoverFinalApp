@@ -21,7 +21,7 @@ interface BookMapper {
             title: String,
             chapterCount: Int,
             poster: BookPosterCloud,
-            updatedAt: String,
+            updatedAt: Date,
         ): T
     }
 
@@ -34,7 +34,7 @@ interface BookMapper {
         private val title: String,
         private val chapterCount: Int,
         private val poster: BookPosterCloud,
-        private val updatedAt: String,
+        private val updatedAt: Date,
     ) : BookMapper {
         override fun <T> map(mapper: Mapper<T>): T = mapper.map(
             author,
@@ -68,7 +68,7 @@ interface BookMapper {
                 title: String,
                 chapterCount: Int,
                 poster: BookPosterCloud,
-                updatedAt: String,
+                updatedAt: Date
             ): StudentBookData = StudentBookData(
                 author = author,
                 createdAt = createdAt,
