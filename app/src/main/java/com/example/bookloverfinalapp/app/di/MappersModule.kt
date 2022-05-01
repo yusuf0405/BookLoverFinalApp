@@ -1,31 +1,31 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.bookloverfinalapp.app.models.AddNewBookModel
-import com.example.bookloverfinalapp.app.models.BookAdapterModel
-import com.example.bookloverfinalapp.app.models.StudentBook
-import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_all_books.mappers.BookAdapterModelMapper
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.mappers.AddBookModelToDomainMapper
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentAdapterModelMapper
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.mappers.StudentBookUiMapper
+import com.example.bookloverfinalapp.app.models.*
+import com.example.bookloverfinalapp.app.ui.mappers.*
 import com.example.data.data.cache.mappers.BookDataToBookDbMapper
 import com.example.data.data.cache.mappers.BookDbToDataMapper
-import com.example.data.data.cache.mappers.StudentBookDataToBookDbMapper
-import com.example.data.data.cache.mappers.StudentBookDbToDataMapper
+import com.example.data.data.cache.mappers.BookThatReadDataToBookDbMapper
+import com.example.data.data.cache.mappers.BookThatReadDbToDataMapper
 import com.example.data.data.cache.models.BookDb
-import com.example.data.data.cache.models.StudentBookDb
+import com.example.data.data.cache.models.BookThatReadDb
 import com.example.data.data.cloud.mappers.BookCloudDataMapper
+import com.example.data.data.cloud.mappers.BookQuestionCloudMapper
 import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
+import com.example.data.data.cloud.models.BookQuestionCloud
 import com.example.data.data.mappers.AddNewBookMapper
 import com.example.data.data.mappers.BookDataMapper
-import com.example.data.data.mappers.StudentBookDataMapper
+import com.example.data.data.mappers.BookQuestionDataMapper
+import com.example.data.data.mappers.BookThatReadDataMapper
 import com.example.data.data.models.BookData
-import com.example.data.data.models.StudentBookData
+import com.example.data.data.models.BookQuestionData
+import com.example.data.data.models.BookThatReadData
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.AddNewBookDomain
 import com.example.domain.domain.models.BookDomain
-import com.example.domain.domain.models.StudentBookDomain
+import com.example.domain.domain.models.BookThatReadDomain
+import com.example.domain.domain.models.BookQuestionDomain
+import com.example.domain.models.student.UserDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,7 +42,7 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideStudentAdapterModelMapper(): Mapper<StudentBookDomain, StudentBookAdapterModel.Base> =
+    fun provideBookThatReadAdapterModelMapper(): Mapper<BookThatReadDomain, BookThatReadAdapterModel.Base> =
         StudentAdapterModelMapper()
 
 
@@ -68,26 +68,26 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideStudentBookDbBookMapper(): Mapper<StudentBookData, StudentBookDb> =
-        StudentBookDataToBookDbMapper()
+    fun provideBookThatReadDbBookMapper(): Mapper<BookThatReadData, BookThatReadDb> =
+        BookThatReadDataToBookDbMapper()
 
 
     @Provides
     @Singleton
-    fun provideStudentBookDbToDataMapper(): Mapper<StudentBookDb, StudentBookData> =
-        StudentBookDbToDataMapper()
+    fun provideBookThatReadDbToDataMapper(): Mapper<BookThatReadDb, BookThatReadData> =
+        BookThatReadDbToDataMapper()
 
 
     @Provides
     @Singleton
-    fun provideStudentBookUiMapper(): Mapper<StudentBookDomain, StudentBook> =
+    fun provideBookThatReadUiMapper(): Mapper<BookThatReadDomain, BookThatRead> =
         StudentBookUiMapper()
 
 
     @Provides
     @Singleton
-    fun provideStudentBookDataMapper(): Mapper<StudentBookData, StudentBookDomain> =
-        StudentBookDataMapper()
+    fun provideBookThatReadDataMapper(): Mapper<BookThatReadData, BookThatReadDomain> =
+        BookThatReadDataMapper()
 
 
     @Provides
@@ -99,5 +99,27 @@ object MappersModule {
     @Singleton
     fun provideAddBookModelToDomainMapper(): Mapper<AddNewBookModel, AddNewBookDomain> =
         AddBookModelToDomainMapper()
+
+    @Provides
+    @Singleton
+    fun provideBookQuestionCloudMapper(): Mapper<BookQuestionCloud, BookQuestionData> =
+        BookQuestionCloudMapper()
+
+    @Provides
+    @Singleton
+    fun provideBookQuestionDataMapper(): Mapper<BookQuestionData, BookQuestionDomain> =
+        BookQuestionDataMapper()
+
+
+    @Provides
+    @Singleton
+    fun provideBookQuestionsDomainMapper(): Mapper<BookQuestionDomain, BookQuestion> =
+        BookQuestionsDomainMapper()
+
+    @Provides
+    @Singleton
+    fun provideUserDomainToUserMapper(): Mapper<UserDomain, User> =
+        UserDomainToUserMapper()
+
 
 }

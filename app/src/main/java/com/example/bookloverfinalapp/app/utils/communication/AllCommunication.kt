@@ -2,8 +2,8 @@ package com.example.bookloverfinalapp.app.utils.communication
 
 import com.example.bookloverfinalapp.app.base.Abstract
 import com.example.bookloverfinalapp.app.models.BookAdapterModel
-import com.example.bookloverfinalapp.app.models.StudentBook
-import com.example.bookloverfinalapp.app.models.StudentBookAdapterModel
+import com.example.bookloverfinalapp.app.models.BookThatRead
+import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 
@@ -11,14 +11,12 @@ interface BooksCommunication : Communication<List<BookAdapterModel>>, Abstract.M
     class Base : Communication.Base<List<BookAdapterModel>>(), BooksCommunication
 }
 
-interface StudentBooksCommunication : Communication<List<StudentBook>>, Abstract.Mapper {
-    class Base : Communication.Base<List<StudentBook>>(), StudentBooksCommunication
+interface BooksThatReadCommunication : Communication<List<BookThatRead>>, Abstract.Mapper {
+    class Base : Communication.Base<List<BookThatRead>>(), BooksThatReadCommunication
 }
 
-interface StudentBooksAdapterCommunication : Communication<List<StudentBookAdapterModel>>,
-    Abstract.Mapper {
-    class Base : Communication.Base<List<StudentBookAdapterModel>>(),
-        StudentBooksAdapterCommunication
+interface BooksThatReadAdapterCommunication : Communication<List<BookThatReadAdapterModel>>, Abstract.Mapper {
+    class Base : Communication.Base<List<BookThatReadAdapterModel>>(), BooksThatReadAdapterCommunication
 }
 
 interface NavigationCommunication : Communication<Event<NavigationCommand>> {

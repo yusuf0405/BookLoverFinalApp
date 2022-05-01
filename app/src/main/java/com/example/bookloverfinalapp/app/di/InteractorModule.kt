@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.di
 
 import com.example.domain.domain.interactor.*
 import com.example.domain.domain.repository.BooksRepository
-import com.example.domain.domain.repository.StudentBooksRepository
+import com.example.domain.domain.repository.BookThatReadRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,33 +20,36 @@ object InteractorModule {
     fun provideGetBookForReadingUseCase(repository: BooksRepository): GetBookForReadingUseCase =
         GetBookForReadingUseCase(repository = repository)
 
+    @Provides
+    fun provideGetAllChapterQuestionsUseCase(repository: BooksRepository): GetAllChapterQuestionsUseCase =
+        GetAllChapterQuestionsUseCase(repository = repository)
 
     @Provides
-    fun provideGetStudentBookUseCase(repository: StudentBooksRepository): GetStudentBookUseCase =
-        GetStudentBookUseCase(repository = repository)
+    fun provideGetBookThatReadUseCase(repository: BookThatReadRepository): GetBookThatReadUseCase =
+        GetBookThatReadUseCase(repository = repository)
 
 
     @Provides
-    fun provideDeleteFromMyBooksUseCase(repository: StudentBooksRepository): DeleteFromMyBooksUseCase =
+    fun provideDeleteFromMyBooksUseCase(repository: BookThatReadRepository): DeleteFromMyBooksUseCase =
         DeleteFromMyBooksUseCase(repository = repository)
 
 
     @Provides
-    fun provideGetMyBookUseCase(repository: StudentBooksRepository): GetMyBookUseCase =
+    fun provideGetMyBookUseCase(repository: BookThatReadRepository): GetMyBookUseCase =
         GetMyBookUseCase(repository = repository)
 
 
     @Provides
-    fun provideAddNewStudentBookUseCase(repository: StudentBooksRepository): AddNewStudentBookUseCase =
-        AddNewStudentBookUseCase(repository = repository)
+    fun provideAddNewStudentBookUseCase(repository: BookThatReadRepository): AddNewBookThatReadUseCase =
+        AddNewBookThatReadUseCase(repository = repository)
 
     @Provides
-    fun provideUpdateChaptersUseCase(repository: StudentBooksRepository): UpdateChaptersUseCase =
+    fun provideUpdateChaptersUseCase(repository: BookThatReadRepository): UpdateChaptersUseCase =
         UpdateChaptersUseCase(repository = repository)
 
 
     @Provides
-    fun provideUpdateProgressUseCase(repository: StudentBooksRepository): UpdateProgressUseCase =
+    fun provideUpdateProgressUseCase(repository: BookThatReadRepository): UpdateProgressUseCase =
         UpdateProgressUseCase(repository = repository)
 
 

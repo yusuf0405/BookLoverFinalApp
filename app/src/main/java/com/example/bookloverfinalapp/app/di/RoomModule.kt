@@ -4,8 +4,8 @@ import android.content.Context
 import androidx.room.Room
 import com.example.data.data.cache.db.BookDB
 import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.StudentBookDB
-import com.example.data.data.cache.db.StudentBooksDao
+import com.example.data.data.cache.db.BookThatReadDB
+import com.example.data.data.cache.db.BookThatReadDao
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -34,16 +34,16 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideStudentBookDB(
+    fun provideBookThatReadDB(
         @ApplicationContext app: Context,
-    ): StudentBookDB = Room.databaseBuilder(
+    ): BookThatReadDB = Room.databaseBuilder(
         app,
-        StudentBookDB::class.java,
+        BookThatReadDB::class.java,
         "student_books_table"
     ).build()
 
     @Provides
     @Singleton
-    fun provideStudentBookDao(db: StudentBookDB): StudentBooksDao =
+    fun provideBookThatReadDao(db: BookThatReadDB): BookThatReadDao =
         db.bookDao()
 }

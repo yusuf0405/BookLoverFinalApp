@@ -18,8 +18,8 @@ object CommunicationModule {
         NetworkErrorCommunication.Base()
 
     @Provides
-    fun provideStudentBooksCommunication(): StudentBooksCommunication =
-        StudentBooksCommunication.Base()
+    fun provideBookThatReadCommunication(): BooksThatReadCommunication =
+        BooksThatReadCommunication.Base()
 
 
     @Provides
@@ -27,8 +27,8 @@ object CommunicationModule {
         BooksCommunication.Base()
 
     @Provides
-    fun provideStudentBooksAdapterCommunication(): StudentBooksAdapterCommunication =
-        StudentBooksAdapterCommunication.Base()
+    fun provideBookThatReadAdapterCommunication(): BooksThatReadAdapterCommunication =
+        BooksThatReadAdapterCommunication.Base()
 
 
     @Provides

@@ -6,17 +6,17 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.domain.models.classes.Class
-import com.example.domain.models.school.School
-import com.example.domain.models.student.User
-import com.example.domain.models.student.UserImage
-import com.example.domain.models.student.UserSignUpRes
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.extensions.*
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
+import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpTeacherBinding
+import com.example.domain.models.classes.Class
+import com.example.domain.models.school.School
+import com.example.domain.models.student.UserDomainImage
+import com.example.domain.models.student.UserSignUpRes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -122,7 +122,12 @@ class FragmentSignUpTeacher :
         }
     }
 
-    private fun successSignUp(id: String, createdAt: Date, sessionToken: String, image: UserImage) {
+    private fun successSignUp(
+        id: String,
+        createdAt: Date,
+        sessionToken: String,
+        image: UserDomainImage,
+    ) {
         binding().apply {
             val currentUser = User(
                 id = id,
@@ -138,7 +143,7 @@ class FragmentSignUpTeacher :
                 createAt = createdAt,
                 userType = "teacher",
                 sessionToken = sessionToken,
-                image = image
+                image = image.toDto()
             )
             CurrentUser().saveCurrentUser(user = currentUser, activity = requireActivity())
             CheсkNavigation().observeLogin(status = true, activity = requireActivity())

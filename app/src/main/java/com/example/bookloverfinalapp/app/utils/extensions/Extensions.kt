@@ -14,9 +14,12 @@ import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
-import com.example.domain.models.student.UserImage
+import com.example.bookloverfinalapp.app.models.Chapter
+import com.example.bookloverfinalapp.app.models.UserImage
+import com.example.domain.models.student.UserDomainImage
 import com.google.android.material.snackbar.Snackbar
 import com.parse.ParseFile
+import com.shockwave.pdfium.PdfDocument
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -37,12 +40,16 @@ fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Un
 fun Fragment.showToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
 }
+
 fun Int.makeView(parent: ViewGroup): View =
     LayoutInflater.from(parent.context).inflate(this, parent, false)
 
 fun Fragment.showSnackbar(view: View, message: String) {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 }
+
+fun PdfDocument.Bookmark.toChapter(isRead: Boolean): Chapter =
+    Chapter(title = title, isRead = false, pageIdx = pageIdx)
 
 fun EditText.text() {
     this.text.toString()
@@ -61,11 +68,24 @@ fun EditText.validateEmail(): Boolean {
     return email.contains("@") && email.contains(".") && email.length > 7
 }
 
+fun UserImage.toDto(): UserDomainImage = UserDomainImage(
+    type = type,
+    url = url,
+    name = name
+)
+
+fun UserDomainImage.toDto(): UserImage = UserImage(
+    type = type,
+    url = url,
+    name = name
+)
+
 fun Activity.intentClearTask(activity: Activity) {
     val intent = Intent(this, activity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
     startActivity(intent)
 }
+
 fun Fragment.intentClearTask(activity: Activity) {
     val intent = Intent(requireActivity(), activity::class.java)
     intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK

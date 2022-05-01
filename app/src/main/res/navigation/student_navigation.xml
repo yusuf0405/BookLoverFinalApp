@@ -5,48 +5,48 @@
     android:id="@+id/mobile_navigation"
     app:startDestination="@id/fragment_root_student_book">
     <fragment
-        android:id="@+id/fragment_student_progress"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_progress.FragmentStudentProgress"
+        android:id="@+id/fragment_progress"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_progress.FragmentProgress"
         android:label="fragment_student_progress"
-        tools:layout="@layout/fragment_student_progress" >
+        tools:layout="@layout/fragment_progress" >
         <action
-            android:id="@+id/action_fragment_student_progress_to_fragmentAdminUploadPdf"
+            android:id="@+id/action_fragment_progress_to_fragmentAdminUploadPdf"
             app:destination="@id/fragmentAdminUploadPdf" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_student_profile"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_profile.FragmentStudentProfile"
+        android:id="@+id/fragment_profile"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_profile.FragmentProfile"
         android:label="fragment_student_profile"
-        tools:layout="@layout/fragment_student_profile">
+        tools:layout="@layout/fragment_profile">
         <action
-            android:id="@+id/action_fragment_student_profile_to_fragmentStudentEditProfile"
-            app:destination="@id/fragmentStudentEditProfile" />
+            android:id="@+id/action_fragment_profile_to_fragmentEditProfile"
+            app:destination="@id/fragmentEditProfile" />
     </fragment>
     <fragment
-        android:id="@+id/fragment_student_setting"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_setting.FragmentStudentSetting"
+        android:id="@+id/fragment_setting"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_setting.FragmentSetting"
         android:label="fragment_student_setting"
-        tools:layout="@layout/fragment_student_setting" />
+        tools:layout="@layout/fragment_setting" />
     <fragment
-        android:id="@+id/fragmentStudentChapterBook"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_chapter_book.ui.FragmentStudentChapterBook"
+        android:id="@+id/fragmentChapterBook"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_chapter_book.ui.FragmentChapterBook"
         android:label="fragment_student_chapter_book"
-        tools:layout="@layout/fragment_student_chapter_book">
+        tools:layout="@layout/fragment_chapter_book">
         <argument
             android:name="book"
-            app:argType="com.example.bookloverfinalapp.app.models.StudentBook" />
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
         <action
-            android:id="@+id/action_fragmentStudentChapterBook_to_fragmentStudentReader"
-            app:destination="@id/fragmentStudentReader" />
+            android:id="@+id/action_fragmentChapterBook_to_fragmentReader"
+            app:destination="@id/fragmentReader" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentStudentReader"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_reader.FragmentStudentReader"
+        android:id="@+id/fragmentReader"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_reader.FragmentReader"
         android:label="fragment_reader"
         tools:layout="@layout/fragment_reader">
         <argument
             android:name="book"
-            app:argType="com.example.bookloverfinalapp.app.models.StudentBook" />
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
         <argument
             android:name="startPage"
             app:argType="integer" />
@@ -57,12 +57,12 @@
             android:name="chapter"
             app:argType="integer" />
         <action
-            android:id="@+id/action_fragmentStudentReader_to_fragmentStudentBookQuestion"
-            app:destination="@id/fragmentStudentBookQuestion" />
+            android:id="@+id/action_fragmentReader_to_fragmentBookQuestion"
+            app:destination="@id/fragmentBookQuestion" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentStudentEditProfile"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_edit_profile.FragmentStudentEditProfile"
+        android:id="@+id/fragmentEditProfile"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_edit_profile.FragmentEditProfile"
         android:label="FragmentStudentEditProfile" />
     <fragment
         android:id="@+id/fragment_root_student_book"
@@ -70,35 +70,35 @@
         android:label="fragment_student_book_root"
         tools:layout="@layout/fragment_student_book_root">
         <action
-            android:id="@+id/action_fragment_root_student_book_to_fragmentStudentChapterBook"
-            app:destination="@id/fragmentStudentChapterBook" />
+            android:id="@+id/action_fragment_root_student_book_to_fragmentChapterBook"
+            app:destination="@id/fragmentChapterBook" />
         <action
-            android:id="@+id/action_fragment_root_student_book_to_fragmentStudentBookDetails2"
-            app:destination="@id/fragmentStudentBookDetails" />
+            android:id="@+id/action_fragment_root_book_to_fragmentBookDetails"
+            app:destination="@id/fragmentBookDetails" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentStudentBookDetails"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.ui.FragmentStudentBookDetails"
+        android:id="@+id/fragmentBookDetails"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details.ui.FragmentBookDetails"
         android:label="fragment_student_book_details"
-        tools:layout="@layout/fragment_student_book_details">
+        tools:layout="@layout/fragment_book_details">
         <argument
             android:name="book"
             app:argType="com.example.bookloverfinalapp.app.models.Book" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentStudentBookQuestion"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_questions.FragmentStudentBookQuestion"
+        android:id="@+id/fragmentBookQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_questions.FragmentBookQuestion"
         android:label="fragment_student_book_question"
-        tools:layout="@layout/fragment_student_book_question">
+        tools:layout="@layout/fragment_book_question">
         <argument
             android:name="book"
-            app:argType="com.example.bookloverfinalapp.app.models.StudentBook" />
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
         <argument
             android:name="chapter"
             app:argType="integer" />
         <action
-            android:id="@+id/action_fragmentStudentBookQuestion_to_fragmentStudentChapterBook"
-            app:destination="@id/fragmentStudentChapterBook"
+            android:id="@+id/action_fragmentBookQuestion_to_fragmentChapterBook"
+            app:destination="@id/fragmentChapterBook"
             app:popUpTo="@+id/fragment_root_student_book" />
     </fragment>
     <fragment

@@ -9,14 +9,14 @@
     <item
         android:title="@string/progress"
         android:icon="@drawable/ic_progress"
-        android:id="@+id/fragment_student_progress" />
+        android:id="@+id/fragment_progress" />
     <item
         android:title="@string/account"
         android:icon="@drawable/ic_account"
-        android:id="@+id/fragment_student_profile" />
+        android:id="@+id/fragment_profile" />
     <item
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
-        android:id="@+id/fragment_student_setting" />
+        android:id="@+id/fragment_setting" />
 
 </menu>

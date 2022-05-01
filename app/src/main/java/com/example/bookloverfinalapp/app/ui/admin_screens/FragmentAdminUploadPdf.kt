@@ -15,10 +15,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.utils.FOLDER
-import com.example.bookloverfinalapp.app.utils.PERMISSION_CODE
-import com.example.bookloverfinalapp.app.utils.READ_EXTERNAL_STORAGE
-import com.example.bookloverfinalapp.app.utils.REQUEST_CODE
+import com.example.bookloverfinalapp.app.utils.cons.FOLDER
+import com.example.bookloverfinalapp.app.utils.cons.PERMISSION_CODE
+import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
+import com.example.bookloverfinalapp.app.utils.cons.REQUEST_CODE
 import com.example.bookloverfinalapp.databinding.FragmentAdminUploadPdfBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
@@ -104,7 +104,6 @@ class FragmentAdminUploadPdf :
 //                    showToast(it.message!!)
 //                }
 //            })
-            Log.i("dddd", file.toString())
             generateImageFromPdf(uri)
         }
     }
@@ -152,8 +151,6 @@ class FragmentAdminUploadPdf :
 
     override fun onPageChanged(page: Int, pageCount: Int) {
         pageSize = pageCount
-        Log.i("pageCount", pageCount.toString())
-//        setTitle(String.format("%s %s / %s", pdfFileName, page + 1, pageCount));
     }
 
 
@@ -225,7 +222,8 @@ class FragmentAdminUploadPdf :
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String?>,
-        grantResults: IntArray, ) {
+        grantResults: IntArray,
+    ) {
         if (requestCode == PERMISSION_CODE) {
             if (grantResults.isNotEmpty()
                 && grantResults[0] == PackageManager.PERMISSION_GRANTED

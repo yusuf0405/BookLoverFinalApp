@@ -1,17 +1,15 @@
 package com.example.data
 
-import com.example.data.models.book.BookQuestionDto
 import com.example.data.models.classes.ClassDto
 import com.example.data.models.school.SchoolDto
 import com.example.data.models.student.*
-import com.example.domain.models.book.BookQuestion
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.*
 import com.parse.ParseFile
 
-internal fun UserDto.toUser(): User =
-    User(
+internal fun UserDto.toUser(): UserDomain =
+    UserDomain(
         createAt = createAt,
         classId = classId,
         email = email,
@@ -27,8 +25,8 @@ internal fun UserDto.toUser(): User =
         sessionToken = sessionToken
     )
 
-internal fun UserDto.toStudentNoImage(): User =
-    User(
+internal fun UserDto.toStudentNoImage(): UserDomain =
+    UserDomain(
         createAt = createAt,
         classId = classId,
         email = email,
@@ -74,17 +72,6 @@ internal fun StudentUpdateRes.toDtoStudent(): UserUpdateRequest =
         number = number
     )
 
-internal fun BookQuestionDto.toBookQuestion(): BookQuestion =
-    BookQuestion(
-        id = id,
-        question = question,
-        a = a,
-        b = b,
-        d = d,
-        c = c,
-        rightAnswer = rightAnswer,
-        bookId = bookId,
-        chapter = chapter)
 
 internal fun UpdateAnswer.toDtoUpdate(): UpdateDto =
     UpdateDto(
@@ -96,22 +83,22 @@ internal fun UpdateDto.toDtoUpdate(): UpdateAnswer =
         updatedAt = updatedAt
     )
 
-internal fun ParseFile.toImage(): UserImage =
-    UserImage(
+internal fun ParseFile.toImage(): UserDomainImage =
+    UserDomainImage(
         name = name,
         type = "File",
         url = url,
     )
 
 
-private fun UserImageDto.toImage(): UserImage =
-    UserImage(
+private fun UserImageDto.toImage(): UserDomainImage =
+    UserDomainImage(
         name = name,
         url = url,
         type = type
     )
 
-private fun UserImage.toDtoImage(): UserImageDto =
+private fun UserDomainImage.toDtoImage(): UserImageDto =
     UserImageDto(
         name = name,
         url = url,

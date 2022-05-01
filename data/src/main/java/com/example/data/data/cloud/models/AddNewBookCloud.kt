@@ -8,4 +8,5 @@ data class AddNewBookCloud(
     @SerializedName("userId") val userId: String,
     @SerializedName("isReadingPages") val isReadingPages: List<Boolean>,
     @SerializedName("chaptersRead") val chaptersRead: Int,
+    @SerializedName("path") val path: String,
 )

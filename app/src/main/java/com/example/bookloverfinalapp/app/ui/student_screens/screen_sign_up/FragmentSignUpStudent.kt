@@ -6,18 +6,18 @@ import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.domain.models.classes.Class
-import com.example.domain.models.school.School
-import com.example.domain.models.student.User
-import com.example.domain.models.student.UserImage
-import com.example.domain.models.student.UserSignUpRes
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.utils.extensions.*
+import com.example.bookloverfinalapp.app.models.User
+import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
+import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpStudentBinding
+import com.example.domain.models.classes.Class
+import com.example.domain.models.school.School
+import com.example.domain.models.student.UserSignUpRes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.onEach
@@ -109,7 +109,7 @@ class FragmentSignUpStudent :
                         gender = gender,
                         createdAt = user.createdAt,
                         sessionToken = user.sessionToken,
-                        image = user.image
+                        image = user.image.toDto()
                     )
                 }
             }

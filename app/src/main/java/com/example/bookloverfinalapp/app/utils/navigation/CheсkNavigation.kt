@@ -7,8 +7,8 @@ import android.net.NetworkCapabilities
 import android.os.Build
 import android.util.Log
 import androidx.annotation.RequiresApi
-import com.example.bookloverfinalapp.app.utils.APP_NAV_OBSERVER_KEY
-import com.example.bookloverfinalapp.app.utils.APP_NAV_WRITE_KEY
+import com.example.bookloverfinalapp.app.utils.cons.APP_NAV_OBSERVER_KEY
+import com.example.bookloverfinalapp.app.utils.cons.APP_NAV_WRITE_KEY
 
 class CheсkNavigation {
 

@@ -1,7 +1,5 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.domain.domain.interactor.GetBookForReadingUseCase
-import com.example.domain.repository.BookRepository
 import com.example.domain.repository.LoginRepository
 import com.example.domain.repository.SchoolRepository
 import com.example.domain.repository.UserRepository
@@ -36,21 +34,9 @@ object DomainModule {
         SignInUseCase(repository = repository)
 
 
-
-
     @Provides
     fun provideUpdateStudentUseCase(repository: UserRepository): UpdateUserUseCase =
         UpdateUserUseCase(repository = repository)
-
-
-    @Provides
-    fun provideUpdateProgressStudentBookUseCase(repository: BookRepository): UpdateProgressStudentBookUseCase =
-        UpdateProgressStudentBookUseCase(repository = repository)
-
-
-    @Provides
-    fun provideGetAllChapterQuestionsUseCase(repository: BookRepository): GetAllChapterQuestionsUseCase =
-        GetAllChapterQuestionsUseCase(repository = repository)
 
 
 }

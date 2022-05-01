@@ -12,16 +12,15 @@ import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 abstract class BaseViewModel : ViewModel() {
     private var progressCommunication = ProgressCommunication.Base()
 
-    var errorCommunication = ErrorCommunication.Base()
+    private var errorCommunication = ErrorCommunication.Base()
 
-    var networkErrorCommunication = NetworkErrorCommunication.Base()
+    private var networkErrorCommunication = NetworkErrorCommunication.Base()
 
-    var navigationCommunication = NavigationCommunication.Base()
-
+    private var navigationCommunication = NavigationCommunication.Base()
 
     private var progressDialogCommunication = ProgressDialogCommunication.Base()
 
-     var dispatchers = Dispatchers.Base()
+    var dispatchers = Dispatchers.Base()
 
     fun observeProgressAnimation(owner: LifecycleOwner, observer: Observer<Event<Boolean>>) =
         progressCommunication.observe(owner = owner, observer = observer)

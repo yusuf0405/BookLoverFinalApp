@@ -1,33 +1,30 @@
 package com.example.bookloverfinalapp.app.di
 
 import com.example.data.api.KnigolyubApi
+import com.example.data.data.cache.db.BookThatReadDao
 import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.StudentBooksDao
 import com.example.data.data.cache.models.BookDb
-import com.example.data.data.cache.models.StudentBookDb
+import com.example.data.data.cache.models.BookThatReadDb
+import com.example.data.data.cache.source.BookThatReadDataSource
 import com.example.data.data.cache.source.BooksCacheDataSource
-import com.example.data.data.cache.source.StudentBookCacheDataSource
 import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
+import com.example.data.data.cloud.models.BookQuestionCloud
 import com.example.data.data.cloud.service.BookService
-import com.example.data.data.cloud.service.StudentBookService
+import com.example.data.data.cloud.service.BookThatReadService
+import com.example.data.data.cloud.source.BookThatReadCloudDataSource
 import com.example.data.data.cloud.source.BooksCloudDataSource
-import com.example.data.data.cloud.source.StudentBookCloudDataSource
 import com.example.data.data.models.BookData
-import com.example.data.data.models.StudentBookData
-import com.example.data.data.repository.BooksRepositoryImpl
-import com.example.data.data.repository.StudentBooksRepositoryImpl
-import com.example.data.repository.BookRepositoryImpl
-import com.example.data.repository.LoginRepositoryImpl
-import com.example.data.repository.SchoolRepositoryImpl
-import com.example.data.repository.UserRepositoryImpl
+import com.example.data.data.models.BookQuestionData
+import com.example.data.data.models.BookThatReadData
+import com.example.data.data.repository.*
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.AddNewBookDomain
 import com.example.domain.domain.models.BookDomain
-import com.example.domain.domain.models.StudentBookDomain
+import com.example.domain.domain.models.BookQuestionDomain
+import com.example.domain.domain.models.BookThatReadDomain
+import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.domain.repository.BooksRepository
-import com.example.domain.domain.repository.StudentBooksRepository
-import com.example.domain.repository.BookRepository
 import com.example.domain.repository.LoginRepository
 import com.example.domain.repository.SchoolRepository
 import com.example.domain.repository.UserRepository
@@ -51,40 +48,47 @@ object DataModule {
     fun provideBooksRepository(
         cloudDataSource: BooksCloudDataSource,
         cacheDataSource: BooksCacheDataSource,
-        bookCloudMapper: Mapper<BookCloud, BookData>,
         bookCashMapper: Mapper<BookDb, BookData>,
         bookDomainMapper: Mapper<BookData, BookDomain>,
+        questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
     ): BooksRepository =
-        BooksRepositoryImpl(cloudDataSource,
-            cacheDataSource,
-            bookCloudMapper,
-            bookCashMapper,
-            bookDomainMapper)
+        BooksRepositoryImpl(
+            cloudDataSource = cloudDataSource,
+            cacheDataSource = cacheDataSource,
+            bookCashMapper = bookCashMapper,
+            bookDomainMapper = bookDomainMapper,
+            questionsMapper = questionsMapper)
 
     @Provides
     @Singleton
-    fun provideBooksCloudDataSource(service: BookService): BooksCloudDataSource =
-        BooksCloudDataSource.Base(service = service)
+    fun provideBooksCloudDataSource(
+        service: BookService,
+        bookCloudMapper: Mapper<BookCloud, BookData>,
+        questionCloudMapper: Mapper<BookQuestionCloud, BookQuestionData>,
+    ): BooksCloudDataSource =
+        BooksCloudDataSource.Base(service = service,
+            bookCloudMapper = bookCloudMapper,
+            questionCloudMapper = questionCloudMapper)
 
     @Provides
     @Singleton
-    fun provideStudentBooksRepository(
-        cloudDataSource: StudentBookCloudDataSource,
-        cacheDataSource: StudentBookCacheDataSource,
-        bookCashMapper: Mapper<StudentBookDb, StudentBookData>,
-        bookDomainMapper: Mapper<StudentBookData, StudentBookDomain>,
+    fun provideBookThatReadRepository(
+        cloudDataSource: BookThatReadCloudDataSource,
+        cacheDataSource: BookThatReadDataSource,
+        bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
+        bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
         addNewBookMapper: Mapper<AddNewBookDomain, AddNewBookCloud>,
-    ): StudentBooksRepository = StudentBooksRepositoryImpl(
-        cloudDataSource,
-        cacheDataSource,
-        bookCashMapper,
-        bookDomainMapper,
+    ): BookThatReadRepository = BookThatReadRepositoryImpl(
+        cloudDataSource = cloudDataSource,
+        cacheDataSource = cacheDataSource,
+        bookCashMapper = bookCashMapper,
+        bookDomainMapper = bookDomainMapper,
         addNewBookMapper = addNewBookMapper)
 
     @Provides
     @Singleton
-    fun provideStudentBookCloudDataSource(service: StudentBookService): StudentBookCloudDataSource =
-        StudentBookCloudDataSource.Base(service = service)
+    fun provideBookCloudDataSource(thatReadService: BookThatReadService): BookThatReadCloudDataSource =
+        BookThatReadCloudDataSource.Base(thatReadService = thatReadService)
 
 
     @Provides
@@ -98,21 +102,17 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideStudentBookCacheDataSource(
-        dao: StudentBooksDao,
-        mapper: Mapper<StudentBookData, StudentBookDb>,
-    ): StudentBookCacheDataSource =
-        StudentBookCacheDataSource.Base(mapper = mapper, dao = dao)
+    fun provideBookCacheDataSource(
+        dao: BookThatReadDao,
+        mapper: Mapper<BookThatReadData, BookThatReadDb>,
+    ): BookThatReadDataSource =
+        BookThatReadDataSource.Base(mapper = mapper, dao = dao)
 
     @Provides
     @Singleton
     fun provideSchoolRepository(api: KnigolyubApi): SchoolRepository =
         SchoolRepositoryImpl(api = api)
 
-    @Provides
-    @Singleton
-    fun provideBookRepository(api: KnigolyubApi): BookRepository =
-        BookRepositoryImpl(api = api)
 
     @Provides
     @Singleton

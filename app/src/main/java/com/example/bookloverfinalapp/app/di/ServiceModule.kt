@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.di
 
 import com.example.data.api.KnigolyubApi
 import com.example.data.data.cloud.service.BookService
-import com.example.data.data.cloud.service.StudentBookService
+import com.example.data.data.cloud.service.BookThatReadService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -26,8 +26,8 @@ object ServiceModule {
 
     @Provides
     @Singleton
-    fun bookStudentBookService(retrofit: Retrofit): StudentBookService =
-        retrofit.create(StudentBookService::class.java)
+    fun bookBookThatReadService(retrofit: Retrofit): BookThatReadService =
+        retrofit.create(BookThatReadService::class.java)
 
 
 }

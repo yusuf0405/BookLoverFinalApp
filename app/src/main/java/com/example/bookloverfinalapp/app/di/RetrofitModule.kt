@@ -1,9 +1,9 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.bookloverfinalapp.app.utils.APPLICATION_ID
-import com.example.bookloverfinalapp.app.utils.BASE_URL
-import com.example.bookloverfinalapp.app.utils.CONTENT_TYPE
-import com.example.bookloverfinalapp.app.utils.REST_API_KEY
+import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
+import com.example.bookloverfinalapp.app.utils.cons.BASE_URL
+import com.example.bookloverfinalapp.app.utils.cons.CONTENT_TYPE
+import com.example.bookloverfinalapp.app.utils.cons.REST_API_KEY
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

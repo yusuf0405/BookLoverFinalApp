@@ -1,7 +1,6 @@
 package com.example.data.api
 
-import com.example.data.models.book.BookQuestionResponse
-import com.example.data.models.book.BookResponse
+import com.example.data.data.cloud.models.BookQuestionResponse
 import com.example.data.models.classes.ClassesResponse
 import com.example.data.models.school.SchoolResponse
 import com.example.data.models.student.*
@@ -31,12 +30,6 @@ interface KnigolyubApi {
         @Path("id") id: String,
         @Body student: UserUpdateRequest,
     ): Response<UpdateDto>
-
-    @GET("classes/Books")
-    suspend fun getBook(
-        @Query("where") id: String,
-    ): Response<BookResponse>
-
 
     @GET("classes/Questions")
     suspend fun getAllChapterQuestions(

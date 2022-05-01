@@ -1,11 +1,12 @@
 package com.example.bookloverfinalapp.app
 
 import android.app.Application
-import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.StudentBooksDao
-import com.example.bookloverfinalapp.app.utils.APPLICATION_ID
-import com.example.bookloverfinalapp.app.utils.CLIENT_KEY
+import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
+import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
 import com.example.bookloverfinalapp.app.utils.Dispatchers
+import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
+import com.example.data.data.cache.db.BooksDao
+import com.example.data.data.cache.db.BookThatReadDao
 import com.parse.Parse
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -15,8 +16,9 @@ import javax.inject.Inject
 
 @HiltAndroidApp
 class App : Application() {
+
     @Inject
-    lateinit var studentBooksDao: StudentBooksDao
+    lateinit var studentBooksDao: BookThatReadDao
 
     @Inject
     lateinit var booksDao: BooksDao
@@ -36,9 +38,11 @@ class App : Application() {
             .server("https://parseapi.back4app.com")
             .build()
         )
-        dispatchers.launchInBackground(scope = applicationScope) {
-            booksDao.clearTable()
-            studentBooksDao.clearTable()
+        if (CheсkNavigation().isOnline(this)) {
+            dispatchers.launchInBackground(scope = applicationScope) {
+                booksDao.clearTable()
+                studentBooksDao.clearTable()
+            }
         }
     }
 }

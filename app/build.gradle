@@ -99,8 +99,8 @@ dependencies {
     implementation 'com.github.rahuldange09:Splashy:v1.1.0'
 
     //PDF reader library
-    implementation 'com.github.barteksc:AndroidPdfViewer:2.3.0'
-//    implementation 'com.github.barteksc:android-pdf-viewer:3.2.0-beta.1'
+//    implementation 'com.github.barteksc:AndroidPdfViewer:2.3.0'
+    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
 
 
     // Circle image view

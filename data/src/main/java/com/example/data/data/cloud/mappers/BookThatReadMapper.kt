@@ -14,6 +14,7 @@ interface BookThatReadMapper {
             chaptersRead: Int,
             bookId: String,
             studentId: String,
+            path: String,
             isReadingPages: List<Boolean>,
         ): T
     }
@@ -24,15 +25,18 @@ interface BookThatReadMapper {
         private val createdAt: Date,
         private val chaptersRead: Int,
         private val bookId: String,
+        private val path: String,
         private val studentId: String,
         private val isReadingPages: List<Boolean>,
     ) : BookThatReadMapper {
-        override fun <T> map(mapper: Mapper<T>): T = mapper.map(progress,
+        override fun <T> map(mapper: Mapper<T>): T = mapper.map(
+            progress,
             objectId = objectId,
             createdAt = createdAt,
             chaptersRead = chaptersRead,
             bookId = bookId,
             studentId = studentId,
-            isReadingPages = isReadingPages)
+            isReadingPages = isReadingPages,
+            path = path)
     }
 }

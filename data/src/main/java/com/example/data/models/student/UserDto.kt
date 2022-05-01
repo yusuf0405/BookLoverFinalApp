@@ -10,7 +10,7 @@ data class UserDto(
     @SerializedName("createdAt") var createAt: Date,
     @SerializedName("schoolName") var schoolName: String,
     @SerializedName("image") var image: UserImageDto,
-    @SerializedName("className") var className: String,
+    @SerializedName("classsName") var className: String,
     @SerializedName("email") var email: String,
     @SerializedName("gender") var gender: String,
     @SerializedName("lastname") var lastname: String,

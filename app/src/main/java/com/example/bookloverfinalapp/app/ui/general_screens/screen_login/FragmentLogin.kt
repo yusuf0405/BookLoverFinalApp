@@ -5,13 +5,13 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
 import com.example.bookloverfinalapp.app.utils.extensions.validateEmail
 import com.example.bookloverfinalapp.app.utils.extensions.validatePassword
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
+import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentLoginBinding
 import dagger.hilt.android.AndroidEntryPoint
 

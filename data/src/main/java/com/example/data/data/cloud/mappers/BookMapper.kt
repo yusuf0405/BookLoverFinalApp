@@ -1,10 +1,8 @@
 package com.example.data.data.cloud.mappers
 
-import com.example.data.data.cloud.models.BookPdfCloud
 import com.example.data.data.cloud.models.BookPosterCloud
-import com.example.data.data.models.StudentBookData
-import com.example.data.data.models.StudentBookPdfData
-import com.example.data.data.models.StudentBookPosterData
+import com.example.data.data.models.BookThatReadData
+import com.example.data.data.models.BookThatReadPosterData
 import java.util.*
 
 interface BookMapper {
@@ -17,7 +15,6 @@ interface BookMapper {
             id: String,
             page: Int,
             publicYear: String,
-            book: BookPdfCloud,
             title: String,
             chapterCount: Int,
             poster: BookPosterCloud,
@@ -30,7 +27,6 @@ interface BookMapper {
         private val id: String,
         private val page: Int,
         private val publicYear: String,
-        private val book: BookPdfCloud,
         private val title: String,
         private val chapterCount: Int,
         private val poster: BookPosterCloud,
@@ -41,7 +37,6 @@ interface BookMapper {
             id,
             page,
             publicYear,
-            book,
             title,
             chapterCount,
             poster,
@@ -49,7 +44,7 @@ interface BookMapper {
     }
 
     class ComplexMapper(private val booksMapper: BookMapper) :
-        BookThatReadMapper.Mapper<StudentBookData> {
+        BookThatReadMapper.Mapper<BookThatReadData> {
         override fun map(
             progress: Int,
             objectId: String,
@@ -57,19 +52,19 @@ interface BookMapper {
             chaptersRead: Int,
             bookId: String,
             studentId: String,
+            path: String,
             isReadingPages: List<Boolean>,
-        ): StudentBookData = booksMapper.map(object : Mapper<StudentBookData> {
+        ): BookThatReadData = booksMapper.map(object : Mapper<BookThatReadData> {
             override fun map(
                 author: String,
                 id: String,
                 page: Int,
                 publicYear: String,
-                book: BookPdfCloud,
                 title: String,
                 chapterCount: Int,
                 poster: BookPosterCloud,
-                updatedAt: Date
-            ): StudentBookData = StudentBookData(
+                updatedAt: Date,
+            ): BookThatReadData = BookThatReadData(
                 author = author,
                 createdAt = createdAt,
                 bookId = bookId,
@@ -79,9 +74,9 @@ interface BookMapper {
                 title = title,
                 chapterCount = chapterCount,
                 chaptersRead = chaptersRead,
-                poster = StudentBookPosterData(name = poster.name, url = poster.url),
+                poster = BookThatReadPosterData(name = poster.name, url = poster.url),
                 updatedAt = updatedAt,
-                book = StudentBookPdfData(name = book.name, url = book.url),
+                book = path,
                 progress = progress,
                 isReadingPages = isReadingPages,
             )

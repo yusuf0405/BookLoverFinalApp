@@ -11,6 +11,7 @@ data class BookThatReadCloud(
     @SerializedName("objectId") var objectId: String,
     @SerializedName("createdAt") var createdAt: Date,
     @SerializedName("chaptersRead") var chaptersRead: Int,
+    @SerializedName("path") var path: String,
     @SerializedName("bookId") var bookId: String,
     @SerializedName("userId") var studentId: String,
     @SerializedName("isReadingPages") var isReadingPages: List<Boolean>,

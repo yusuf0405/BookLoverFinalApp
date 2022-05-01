@@ -1,7 +1,7 @@
 package com.example.domain.models.student
 
-import com.example.domain.domain.models.StudentBookDomain
+import com.example.domain.domain.models.BookThatReadDomain
 
 data class StudentAddBook(
-    var books: List<StudentBookDomain>,
+    var books: List<BookThatReadDomain>,
 )

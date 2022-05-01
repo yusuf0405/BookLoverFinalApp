@@ -19,9 +19,7 @@ interface Communication<T> : Observe<T>, Mapper.Void<T> {
 }
 
 interface Observe<T> {
-
     fun observe(owner: LifecycleOwner, observer: Observer<T>)
-
 }
 
 interface Mapper<R, S> {

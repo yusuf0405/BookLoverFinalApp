@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.ui.FragmentStudentBooks
-import com.example.bookloverfinalapp.app.ui.student_screens.screen_all_books.ui.FragmentStudentAllBooks
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_my_books.ui.FragmentMyBooks
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_all_books.ui.FragmentAllBooks
 
 class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {
@@ -14,8 +14,8 @@ class ViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> FragmentStudentAllBooks()
-            else -> FragmentStudentBooks()
+            0 -> FragmentAllBooks()
+            else -> FragmentMyBooks()
         }
     }
 }
