@@ -40,10 +40,6 @@ class FragmentEditProfile :
     private lateinit var student: User
     private lateinit var gender: String
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -165,7 +161,7 @@ class FragmentEditProfile :
                 image = image!!.toDto()
             )
             viewModel.updateStudent(id = this@FragmentEditProfile.student.id,
-                student = student, sessionToken = currentUserDomain.sessionToken)
+                student = student, sessionToken = currentUser.sessionToken)
                 .observe(viewLifecycleOwner) { successUpdated() }
         }
     }
@@ -216,5 +212,10 @@ class FragmentEditProfile :
     private fun getImage() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         startActivityForResult(intent, RESULT_LOAD_IMAGE)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
     }
 }

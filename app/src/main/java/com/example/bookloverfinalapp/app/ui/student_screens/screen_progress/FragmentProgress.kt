@@ -1,8 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.student_screens.screen_progress
 
 import android.os.Bundle
-import android.os.Parcel
-import android.os.Parcelable
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -19,12 +17,9 @@ import java.util.*
 @AndroidEntryPoint
 class FragmentProgress() :
     BaseFragment<FragmentProgressBinding, FragmentProgressViewModel>(
-        FragmentProgressBinding::inflate), Parcelable {
+        FragmentProgressBinding::inflate) {
 
     override val viewModel: FragmentProgressViewModel by viewModels()
-
-    constructor(parcel: Parcel) : this() {
-    }
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
@@ -36,16 +31,28 @@ class FragmentProgress() :
     }
 
     private fun observeResource() {
-        viewModel.fetchMyBook(id = currentUserDomain.id)
+        viewModel.fetchMyBook(id = currentUser.id)
         viewModel.observe(viewLifecycleOwner) { list ->
             responseSuccess(list = list)
         }
         viewModel.observeProgressAnimation(viewLifecycleOwner) {
-            binding().progressLoadingAnimation.apply {
+            binding().apply {
                 it.getValue()?.let { status ->
-                    if (status) showView() else hideView()
-                }
+                    if (status) {
+                        progressLoadingAnimation.showView()
+                        progressMaterialCardForBooks.hideView()
+                        progressMaterialCardViewForChapters.hideView()
+                        progressMaterialCardViewForHours.hideView()
+                        progressMaterialCardViewForPages.hideView()
+                    } else {
+                        progressMaterialCardForBooks.showView()
+                        progressMaterialCardViewForChapters.showView()
+                        progressMaterialCardViewForHours.showView()
+                        progressMaterialCardViewForPages.showView()
+                        progressLoadingAnimation.hideView()
+                    }
 
+                }
             }
         }
     }
@@ -73,7 +80,7 @@ class FragmentProgress() :
     private fun setupUi() {
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         binding().apply {
-            currentUserDomain.apply {
+            currentUser.apply {
                 val fullName = "$name $lastname"
                 progressProfileName.text = fullName
                 val readTime = formatter.format(createAt).toString()
@@ -83,24 +90,6 @@ class FragmentProgress() :
                     .placeholder(R.drawable.placeholder_avatar)
                     .into(studentProgressImg)
             }
-        }
-    }
-
-    override fun writeToParcel(parcel: Parcel, flags: Int) {
-
-    }
-
-    override fun describeContents(): Int {
-        return 0
-    }
-
-    companion object CREATOR : Parcelable.Creator<FragmentProgress> {
-        override fun createFromParcel(parcel: Parcel): FragmentProgress {
-            return FragmentProgress(parcel)
-        }
-
-        override fun newArray(size: Int): Array<FragmentProgress?> {
-            return arrayOfNulls(size)
         }
     }
 }

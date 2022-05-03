@@ -5,6 +5,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import retrofit2.HttpException
 import retrofit2.Response
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -21,6 +22,7 @@ abstract class BaseApiResponse {
             return when (exception) {
                 is UnknownHostException -> Resource.error(message = "Нету подключение к интернету")
                 is SocketTimeoutException -> Resource.error(message = "Нету подключение к интернету")
+                is ConnectException -> Resource.error(message = "Нету подключение к интернету")
                 is HttpException -> Resource.error(message = "Ошибка Сервера")
                 else -> Resource.error(message = "Что то пошло не так")
             }

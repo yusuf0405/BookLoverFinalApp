@@ -1,26 +1,25 @@
-package com.example.domain.models.student
+package com.example.data.data.models
+
 
 import java.util.*
 
-
-data class UserDomain(
-    val id: String,
-    var createAt: Date,
+data class UserData(
+    var objectId: String,
     var classId: String,
-    var image: UserDomainImage? = null,
-    var email: String,
+    var createAt: Date,
     var schoolName: String,
+    var image: UserImageData,
     var className: String,
+    var email: String,
     var gender: String,
     var lastname: String,
     var name: String,
     var number: String,
-    var password: String? = null,
     var userType: String,
     var sessionToken: String,
 )
 
-data class UserDomainImage(
+data class UserImageData(
     var name: String,
     var type: String,
     var url: String,

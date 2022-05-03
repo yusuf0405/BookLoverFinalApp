@@ -1,23 +1,19 @@
 package com.example.data.data.cache.source
 
-import com.example.data.data.cache.db.BookThatReadDao
+import com.example.data.data.cache.db.BooksThatReadDao
 import com.example.data.data.cache.models.BookThatReadDb
 import com.example.data.data.models.BookThatReadData
 import com.example.domain.domain.Mapper
 
-interface BookThatReadDataSource {
+interface BooksThatReadDataSource {
 
     suspend fun fetchBooksThatRead(): List<BookThatReadDb>
 
-
     suspend fun saveBooks(books: List<BookThatReadData>)
-
 
     suspend fun deleteBook(id: String)
 
-
     suspend fun getMyBook(id: String): BookThatReadDb
-
 
     suspend fun addBook(book: BookThatReadDb)
 
@@ -27,11 +23,13 @@ interface BookThatReadDataSource {
 
     suspend fun updateIsReadIsPages(id: String, isReadingPages: List<Boolean>)
 
+    suspend fun clearTable()
+
     class Base(
-        private val dao: BookThatReadDao,
+        private val dao: BooksThatReadDao,
         private val mapper: Mapper<BookThatReadData, BookThatReadDb>,
     ) :
-        BookThatReadDataSource {
+        BooksThatReadDataSource {
 
         override suspend fun fetchBooksThatRead(): List<BookThatReadDb> = dao.getAllBooks()
 
@@ -54,6 +52,8 @@ interface BookThatReadDataSource {
 
         override suspend fun updateIsReadIsPages(id: String, isReadingPages: List<Boolean>) =
             dao.updateIsReadingPages(isReadingPages = isReadingPages, id = id)
+
+        override suspend fun clearTable() = dao.clearTable()
 
     }
 }

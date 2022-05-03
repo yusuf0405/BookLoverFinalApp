@@ -35,7 +35,8 @@ class FragmentBookQuestionViewModel @Inject constructor(
                 initialValue = Resource.loading())
 
     fun goChapterFragment(book: BookThatRead) {
-        navigate(FragmentBookQuestionDirections.actionFragmentBookQuestionToFragmentChapterBook(book = book))
+        navigate(FragmentBookQuestionDirections.actionFragmentBookQuestionToFragmentChapterBook(
+            book = book))
     }
 
     fun updateChapters(id: String, chapters: Chapters, book: BookThatRead) {

@@ -3,6 +3,7 @@ package com.example.bookloverfinalapp.app.ui.student_screens.screen_book_details
 import android.graphics.Color
 import android.os.Bundle
 import android.os.Environment
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -36,12 +37,11 @@ class FragmentBookDetails :
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
-    private val book: Book by lazy(LazyThreadSafetyMode.NONE) {
-        FragmentBookDetailsArgs.fromBundle(requireArguments()).book
-    }
+    lateinit var book: Book
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        book = FragmentBookDetailsArgs.fromBundle(requireArguments()).book
         setupUi()
         observeResource()
         setOnClickListeners()
@@ -63,7 +63,7 @@ class FragmentBookDetails :
             chaptersRead = 0,
             progress = 0,
             author = book.author,
-            userId = currentUserDomain.id)
+            userId = currentUser.id)
 
         viewModel.addNewBook(book = book).observe(viewLifecycleOwner) {
             binding().addMyBook.hideView()
@@ -139,12 +139,8 @@ class FragmentBookDetails :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
-    }
-
     private suspend fun InputStream.saveToFile(): String {
+        Log.i("Start", "Start")
         val path = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
         val file = File.createTempFile("my_file", ".pdf", path)
         val result = withContext(Dispatchers.Default) {
@@ -156,6 +152,13 @@ class FragmentBookDetails :
             save.await()
             return@withContext file.path
         }
+        Log.i("End", "End")
         return result
     }
+
+    override fun onResume() {
+        super.onResume()
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()
+    }
+
 }

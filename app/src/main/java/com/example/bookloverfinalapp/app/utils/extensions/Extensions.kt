@@ -16,7 +16,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.example.bookloverfinalapp.app.models.Chapter
 import com.example.bookloverfinalapp.app.models.UserImage
-import com.example.domain.models.student.UserDomainImage
+import com.example.domain.domain.models.UserDomainImage
 import com.google.android.material.snackbar.Snackbar
 import com.parse.ParseFile
 import com.shockwave.pdfium.PdfDocument

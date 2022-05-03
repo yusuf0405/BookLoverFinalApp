@@ -9,13 +9,15 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
+import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
+import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpTeacherBinding
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
-import com.example.domain.models.student.UserDomainImage
+import com.example.domain.domain.models.UserDomainImage
 import com.example.domain.models.student.UserSignUpRes
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
@@ -141,13 +143,13 @@ class FragmentSignUpTeacher :
                 schoolName = schoolTitle,
                 classId = classesId,
                 createAt = createdAt,
-                userType = "teacher",
+                userType = UserType.teacher,
                 sessionToken = sessionToken,
                 image = image.toDto()
             )
             CurrentUser().saveCurrentUser(user = currentUser, activity = requireActivity())
             CheсkNavigation().observeLogin(status = true, activity = requireActivity())
-            //        intentClearTask(activity = ActivityStudentMain())
+            intentClearTask(activity = ActivityStudentMain())
         }
 
     }

@@ -6,7 +6,7 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.User
 import com.example.domain.domain.Mapper
 import com.example.domain.models.Status
-import com.example.domain.models.student.UserDomain
+import com.example.domain.domain.models.UserDomain
 import com.example.domain.usecase.SignInUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest

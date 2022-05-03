@@ -1,21 +1,30 @@
-package com.example.data.models.student
-
+package com.example.data.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
-data class UserDto(
+data class UserResponse(
+    @SerializedName("results") var users: List<UserCloud>,
+)
+
+data class UserCloud(
     @SerializedName("objectId") var objectId: String,
     @SerializedName("classId") var classId: String,
     @SerializedName("createdAt") var createAt: Date,
     @SerializedName("schoolName") var schoolName: String,
-    @SerializedName("image") var image: UserImageDto,
+    @SerializedName("image") var image: UserImageCloud,
     @SerializedName("classsName") var className: String,
-    @SerializedName("email") var email: String,
+    @SerializedName("name") var name: String,
     @SerializedName("gender") var gender: String,
     @SerializedName("lastname") var lastname: String,
-    @SerializedName("username") var name: String,
+    @SerializedName("username") var email: String,
     @SerializedName("number") var number: String,
     @SerializedName("userType") var userType: String,
     @SerializedName("sessionToken") var sessionToken: String,
+)
+
+data class UserImageCloud(
+    @SerializedName("name") var name: String,
+    @SerializedName("__type") var type: String,
+    @SerializedName("url") var url: String,
 )

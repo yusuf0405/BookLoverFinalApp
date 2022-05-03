@@ -1,28 +1,31 @@
 package com.example.bookloverfinalapp.app.di
 
 import com.example.data.api.KnigolyubApi
-import com.example.data.data.cache.db.BookThatReadDao
 import com.example.data.data.cache.db.BooksDao
+import com.example.data.data.cache.db.BooksThatReadDao
+import com.example.data.data.cache.db.UsersDao
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.BookThatReadDb
-import com.example.data.data.cache.source.BookThatReadDataSource
+import com.example.data.data.cache.models.StudentDb
 import com.example.data.data.cache.source.BooksCacheDataSource
+import com.example.data.data.cache.source.BooksThatReadDataSource
+import com.example.data.data.cache.source.UsersCacheDataSource
 import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
 import com.example.data.data.cloud.models.BookQuestionCloud
 import com.example.data.data.cloud.service.BookService
 import com.example.data.data.cloud.service.BookThatReadService
-import com.example.data.data.cloud.source.BookThatReadCloudDataSource
+import com.example.data.data.cloud.service.UserService
 import com.example.data.data.cloud.source.BooksCloudDataSource
+import com.example.data.data.cloud.source.BooksThatReadCloudDataSource
+import com.example.data.data.cloud.source.UsersCloudDataSource
 import com.example.data.data.models.BookData
 import com.example.data.data.models.BookQuestionData
 import com.example.data.data.models.BookThatReadData
+import com.example.data.data.models.StudentData
 import com.example.data.data.repository.*
 import com.example.domain.domain.Mapper
-import com.example.domain.domain.models.AddNewBookDomain
-import com.example.domain.domain.models.BookDomain
-import com.example.domain.domain.models.BookQuestionDomain
-import com.example.domain.domain.models.BookThatReadDomain
+import com.example.domain.domain.models.*
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.repository.LoginRepository
@@ -73,8 +76,8 @@ object DataModule {
     @Provides
     @Singleton
     fun provideBookThatReadRepository(
-        cloudDataSource: BookThatReadCloudDataSource,
-        cacheDataSource: BookThatReadDataSource,
+        cloudDataSource: BooksThatReadCloudDataSource,
+        cacheDataSource: BooksThatReadDataSource,
         bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
         bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
         addNewBookMapper: Mapper<AddNewBookDomain, AddNewBookCloud>,
@@ -87,8 +90,14 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideBookCloudDataSource(thatReadService: BookThatReadService): BookThatReadCloudDataSource =
-        BookThatReadCloudDataSource.Base(thatReadService = thatReadService)
+    fun provideBookCloudDataSource(thatReadService: BookThatReadService): BooksThatReadCloudDataSource =
+        BooksThatReadCloudDataSource.Base(thatReadService = thatReadService)
+
+    @Provides
+    @Singleton
+    fun provideUsersCloudDataSource(
+        service: UserService,
+    ): UsersCloudDataSource = UsersCloudDataSource.Base(service = service)
 
 
     @Provides
@@ -99,14 +108,21 @@ object DataModule {
     ): BooksCacheDataSource =
         BooksCacheDataSource.Base(bookDao = dao, dataMapper = mapper)
 
+    @Provides
+    @Singleton
+    fun provideUsersCacheDataSource(
+        dao: UsersDao,
+        dataMapper: Mapper<StudentData, StudentDb>,
+    ): UsersCacheDataSource = UsersCacheDataSource.Base(dao = dao, dataMapper = dataMapper)
+
 
     @Provides
     @Singleton
     fun provideBookCacheDataSource(
-        dao: BookThatReadDao,
+        dao: BooksThatReadDao,
         mapper: Mapper<BookThatReadData, BookThatReadDb>,
-    ): BookThatReadDataSource =
-        BookThatReadDataSource.Base(mapper = mapper, dao = dao)
+    ): BooksThatReadDataSource =
+        BooksThatReadDataSource.Base(mapper = mapper, dao = dao)
 
     @Provides
     @Singleton
@@ -116,7 +132,17 @@ object DataModule {
 
     @Provides
     @Singleton
-    fun provideStudentRepository(api: KnigolyubApi): UserRepository =
-        UserRepositoryImpl(api = api)
+    fun provideUserRepository(
+        api: KnigolyubApi,
+        cloudDataSource: UsersCloudDataSource,
+        cacheDataSource: UsersCacheDataSource,
+        userDomainMapper: Mapper<StudentData, StudentDomain>,
+        userDbMapper: Mapper<StudentDb, StudentData>,
+    ): UserRepository =
+        UserRepositoryImpl(api = api,
+            cloudDataSource = cloudDataSource,
+            cacheDataSource = cacheDataSource,
+            userDomainMapper = userDomainMapper,
+            userDbMapper = userDbMapper)
 
 }

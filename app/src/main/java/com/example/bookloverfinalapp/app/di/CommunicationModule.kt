@@ -21,6 +21,9 @@ object CommunicationModule {
     fun provideBookThatReadCommunication(): BooksThatReadCommunication =
         BooksThatReadCommunication.Base()
 
+    @Provides
+    fun provideStudentCommunication(): StudentCommunication =
+        StudentCommunication.Base()
 
     @Provides
     fun provideBooksCommunication(): BooksCommunication =

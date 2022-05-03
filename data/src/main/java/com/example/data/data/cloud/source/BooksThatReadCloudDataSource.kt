@@ -16,7 +16,7 @@ import retrofit2.HttpException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
-interface BookThatReadCloudDataSource {
+interface BooksThatReadCloudDataSource {
 
     suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>>
 
@@ -31,7 +31,7 @@ interface BookThatReadCloudDataSource {
 
     class Base(
         private val thatReadService: BookThatReadService,
-    ) : BookThatReadCloudDataSource,
+    ) : BooksThatReadCloudDataSource,
         BaseApiResponse() {
 
         override suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>> = try {

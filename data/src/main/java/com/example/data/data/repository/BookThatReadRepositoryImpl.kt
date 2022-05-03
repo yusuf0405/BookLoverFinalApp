@@ -1,9 +1,9 @@
 package com.example.data.data.repository
 
 import com.example.data.data.cache.models.BookThatReadDb
-import com.example.data.data.cache.source.BookThatReadDataSource
+import com.example.data.data.cache.source.BooksThatReadDataSource
 import com.example.data.data.cloud.models.AddNewBookCloud
-import com.example.data.data.cloud.source.BookThatReadCloudDataSource
+import com.example.data.data.cloud.source.BooksThatReadCloudDataSource
 import com.example.data.data.mappers.toStudentBook
 import com.example.data.data.models.ChaptersData
 import com.example.data.data.models.ProgressData
@@ -20,8 +20,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class BookThatReadRepositoryImpl(
-    private val cloudDataSource: BookThatReadCloudDataSource,
-    private val cacheDataSource: BookThatReadDataSource,
+    private val cloudDataSource: BooksThatReadCloudDataSource,
+    private val cacheDataSource: BooksThatReadDataSource,
     private val bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
     private val bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
     private val addNewBookMapper: Mapper<AddNewBookDomain, AddNewBookCloud>,
@@ -62,7 +62,7 @@ class BookThatReadRepositoryImpl(
         }
     }
 
-    override fun getMyBook(id: String): Flow<Resource<BookThatReadDomain>> = flow {
+    override fun fetchMyBook(id: String): Flow<Resource<BookThatReadDomain>> = flow {
         val result = cacheDataSource.getMyBook(id = id)
         if (result == null) emit(Resource.error(message = null))
         else {
@@ -105,6 +105,8 @@ class BookThatReadRepositoryImpl(
             emit(Resource.success(data = Unit))
         } else emit(Resource.error(message = result.message!!))
     }
+
+    override suspend fun clearBooksCache()  = cacheDataSource.clearTable()
 
 }
 

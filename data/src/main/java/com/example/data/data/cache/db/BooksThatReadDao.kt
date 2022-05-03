@@ -5,7 +5,7 @@ import com.example.data.data.cache.models.BookThatReadDb
 
 
 @Dao
-interface BookThatReadDao {
+interface BooksThatReadDao {
 
     @Insert
     suspend fun addNewBook(book: BookThatReadDb)

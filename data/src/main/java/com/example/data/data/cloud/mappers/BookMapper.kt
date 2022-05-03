@@ -33,14 +33,14 @@ interface BookMapper {
         private val updatedAt: Date,
     ) : BookMapper {
         override fun <T> map(mapper: Mapper<T>): T = mapper.map(
-            author,
-            id,
-            page,
-            publicYear,
-            title,
-            chapterCount,
-            poster,
-            updatedAt)
+            author = author,
+            id = id,
+            page = page,
+            publicYear = publicYear,
+            title = title,
+            chapterCount = chapterCount,
+            poster = poster,
+            updatedAt = updatedAt)
     }
 
     class ComplexMapper(private val booksMapper: BookMapper) :

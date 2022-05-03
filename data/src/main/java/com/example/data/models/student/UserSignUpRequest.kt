@@ -3,7 +3,8 @@ package com.example.data.models.student
 import com.google.gson.annotations.SerializedName
 
 data class UserSignUpRequest(
-    @SerializedName("username") val name: String,
+    @SerializedName("name") val name: String,
+    @SerializedName("username") val username: String,
     @SerializedName("lastname") val lastname: String,
     @SerializedName("email") val email: String,
     @SerializedName("password") val password: String,

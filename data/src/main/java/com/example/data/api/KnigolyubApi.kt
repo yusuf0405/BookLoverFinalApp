@@ -1,6 +1,7 @@
 package com.example.data.api
 
 import com.example.data.data.cloud.models.BookQuestionResponse
+import com.example.data.data.models.UserData
 import com.example.data.models.classes.ClassesResponse
 import com.example.data.models.school.SchoolResponse
 import com.example.data.models.student.*
@@ -15,7 +16,7 @@ interface KnigolyubApi {
         @Header("X-Parse-Revocable-Session") session: Int,
         @Query("username") username: String,
         @Query("password") password: String,
-    ): Response<UserDto>
+    ): Response<UserData>
 
     @POST("users")
     suspend fun signUp(

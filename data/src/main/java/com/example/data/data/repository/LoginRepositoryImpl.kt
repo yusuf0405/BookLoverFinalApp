@@ -8,13 +8,14 @@ import com.example.data.toUser
 import com.example.domain.models.Resource
 import com.example.domain.models.Status.*
 import com.example.domain.models.student.PostRequestAnswer
-import com.example.domain.models.student.UserDomain
+import com.example.domain.domain.models.UserDomain
 import com.example.domain.models.student.UserSignUpRes
 import com.example.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
 class LoginRepositoryImpl(private val api: KnigolyubApi) : LoginRepository, BaseApiResponse() {
+
     override fun signIn(email: String, password: String): Flow<Resource<UserDomain>> = flow {
         emit(Resource.loading())
         val result = safeApiCall { api.signIn(session = 1, username = email, password = password) }

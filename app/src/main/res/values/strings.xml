@@ -44,8 +44,14 @@
     <string name="choose_school">Выберите вашу школу</string>
     <string name="book_added_successfully">Книга успешно добавлено.</string>
     <string name="no_book_questions">Вопросов по главе нет.</string>
+
+
+    //Menu
     <string name="all_books">Все книги</string>
     <string name="my_books">Мои книги</string>
+    <string name="my_students">Мои студенты</string>
+
+
 
 
     <string name="hello_blank_fragment">Hello world</string>

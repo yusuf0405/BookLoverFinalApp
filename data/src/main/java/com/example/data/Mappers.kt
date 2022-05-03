@@ -1,14 +1,18 @@
 package com.example.data
 
+import com.example.data.data.models.UserData
+import com.example.data.data.models.UserImageData
 import com.example.data.models.classes.ClassDto
 import com.example.data.models.school.SchoolDto
 import com.example.data.models.student.*
+import com.example.domain.domain.models.UserDomain
+import com.example.domain.domain.models.UserDomainImage
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.*
 import com.parse.ParseFile
 
-internal fun UserDto.toUser(): UserDomain =
+internal fun UserData.toUser(): UserDomain =
     UserDomain(
         createAt = createAt,
         classId = classId,
@@ -16,16 +20,16 @@ internal fun UserDto.toUser(): UserDomain =
         gender = gender,
         lastname = lastname,
         name = name,
+        image = UserDomainImage(name = image.name, type = image.type, url = image.url),
         number = number,
         schoolName = schoolName,
         className = className,
         id = objectId,
-        image = image.toImage(),
         userType = userType,
         sessionToken = sessionToken
     )
 
-internal fun UserDto.toStudentNoImage(): UserDomain =
+internal fun UserData.toStudentNoImage(): UserDomain =
     UserDomain(
         createAt = createAt,
         classId = classId,
@@ -58,7 +62,8 @@ internal fun UserSignUpRes.toDtoSignUp(): UserSignUpRequest =
         schoolName = schoolName,
         gender = gender,
         classId = classId,
-        userType = userType
+        userType = userType,
+        username = email
     )
 
 
@@ -91,15 +96,15 @@ internal fun ParseFile.toImage(): UserDomainImage =
     )
 
 
-private fun UserImageDto.toImage(): UserDomainImage =
+private fun UserImageData.toImage(): UserDomainImage =
     UserDomainImage(
         name = name,
         url = url,
         type = type
     )
 
-private fun UserDomainImage.toDtoImage(): UserImageDto =
-    UserImageDto(
+private fun UserDomainImage.toDtoImage(): UserImageData =
+    UserImageData(
         name = name,
         url = url,
         type = type
@@ -126,7 +131,7 @@ internal fun PostRequestAnswerDto.toRequestAnswer(): PostRequestAnswer =
         id = objectId,
         createdAt = createdAt,
         sessionToken = sessionToken,
-        image = image.toImage()
+        image = UserDomainImage(name = image.name, type = image.type, url = image.url)
     )
 
 internal fun School.toSchoolDto(): SchoolDto =

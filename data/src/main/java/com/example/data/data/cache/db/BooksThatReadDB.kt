@@ -16,13 +16,13 @@ import java.util.*
 @Database(entities = [BookThatReadDb::class], version = 1)
 @TypeConverters(BookThatReadDbConverter::class)
 abstract class BookThatReadDB : RoomDatabase() {
-    abstract fun bookDao(): BookThatReadDao
+    abstract fun bookDao(): BooksThatReadDao
 }
 
 class BookThatReadDbConverter {
 
     @TypeConverter
-    fun fromCountryLangList(countryLang: List<Boolean?>?): String? {
+    fun fromList(countryLang: List<Boolean?>?): String? {
         if (countryLang == null) {
             return null
         }
@@ -32,7 +32,7 @@ class BookThatReadDbConverter {
     }
 
     @TypeConverter
-    fun toCountryLangList(countryLangString: String?): List<Boolean>? {
+    fun toList(countryLangString: String?): List<Boolean>? {
         if (countryLangString == null) {
             return null
         }

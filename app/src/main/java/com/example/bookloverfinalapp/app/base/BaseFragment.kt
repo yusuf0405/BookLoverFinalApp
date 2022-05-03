@@ -26,7 +26,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     protected fun binding(): V =
         checkNotNull(viewBinding)
 
-    protected val currentUserDomain: User by lazy(LazyThreadSafetyMode.NONE) {
+    protected val currentUser: User by lazy(LazyThreadSafetyMode.NONE) {
         CurrentUser().getCurrentUser(activity = requireActivity())
     }
 

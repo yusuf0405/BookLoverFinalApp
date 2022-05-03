@@ -48,7 +48,7 @@ class FragmentReaderViewModel @Inject constructor(
 
 
     private fun goQuestionFragment(book: BookThatRead, chapter: Int) =
-        navigate(FragmentReaderDirections.actionFragmentReaderToFragmentBookQuestion(
+        navigate(FragmentReaderDirections.actionStudentFragmentReaderToFragmentBookQuestion(
             book = book,
             chapter = chapter,
         ))

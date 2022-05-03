@@ -3,9 +3,11 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_login
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.bookloverfinalapp.ActivityTeacherMain
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
+import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.validateEmail
@@ -63,7 +65,9 @@ class FragmentLogin :
             CurrentUser().saveCurrentUser(user = user,
                 activity = requireActivity())
             CheсkNavigation().observeLogin(status = true, activity = requireActivity())
-            if (user.userType == "student") intentClearTask(activity = ActivityStudentMain())
+            if (user.userType == UserType.student) intentClearTask(activity = ActivityStudentMain())
+            else intentClearTask(activity = ActivityTeacherMain())
+
         }
     }
 }

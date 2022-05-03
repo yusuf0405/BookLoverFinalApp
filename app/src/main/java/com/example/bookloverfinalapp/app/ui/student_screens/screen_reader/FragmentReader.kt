@@ -41,7 +41,6 @@ class FragmentReader :
     private val pages = arrayListOf<Int>()
     private var progress = 0
     private var bookCurrentProgress = 0
-    var byteArray: ByteArray? = null
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

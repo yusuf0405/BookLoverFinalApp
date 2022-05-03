@@ -31,11 +31,6 @@ class MyBooksViewModel @Inject constructor(
     fun observe(owner: LifecycleOwner, observer: Observer<List<BookThatReadAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
 
-    fun goChapterFragment(book: BookThatRead) =
-        navigate(FragmentRootStudentBookDirections.
-        actionFragmentRootStudentBookToFragmentChapterBook(
-            book = book))
-
     fun fetchMyBook(id: String) = dispatchers.launchInBackground(viewModelScope) {
         bookThatReadUseCase.execute(id).collectLatest { resource ->
             when (resource.status) {

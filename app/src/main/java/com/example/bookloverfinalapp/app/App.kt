@@ -1,16 +1,18 @@
 package com.example.bookloverfinalapp.app
 
 import android.app.Application
+import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
-import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.BookThatReadDao
+import com.example.data.data.cache.db.BooksThatReadDao
+import com.example.data.data.cache.db.UsersDao
 import com.parse.Parse
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
+import java.io.File
 import javax.inject.Inject
 
 
@@ -18,10 +20,13 @@ import javax.inject.Inject
 class App : Application() {
 
     @Inject
-    lateinit var studentBooksDao: BookThatReadDao
+    lateinit var booksThatReadDao: BooksThatReadDao
 
     @Inject
     lateinit var booksDao: BooksDao
+
+    @Inject
+    lateinit var userDao: UsersDao
 
     @Inject
     lateinit var dispatchers: Dispatchers
@@ -41,7 +46,8 @@ class App : Application() {
         if (CheсkNavigation().isOnline(this)) {
             dispatchers.launchInBackground(scope = applicationScope) {
                 booksDao.clearTable()
-                studentBooksDao.clearTable()
+                booksThatReadDao.clearTable()
+                userDao.clearTable()
             }
         }
     }

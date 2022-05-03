@@ -11,6 +11,7 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain
+import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
@@ -136,7 +137,7 @@ class FragmentSignUpStudent :
                 schoolName = schoolTitle,
                 classId = classesId,
                 createAt = createdAt,
-                userType = "student",
+                userType = UserType.student,
                 sessionToken = sessionToken,
                 image = image
             )

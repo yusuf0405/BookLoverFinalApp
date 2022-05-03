@@ -40,7 +40,7 @@ class FragmentAllBooks :
     }
 
     override fun goChapterBookFragment(book: Book) {
-        viewModel.goBookDetailsFragment(book = book)
+        viewModel.goStudentBookDetailsFragment(book = book)
     }
 
 

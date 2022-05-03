@@ -1,5 +1,6 @@
 package com.example.bookloverfinalapp.app.models
 
+import com.example.bookloverfinalapp.app.utils.UserType
 import java.util.*
 
 data class User(
@@ -15,7 +16,7 @@ data class User(
     var name: String,
     var number: String,
     var password: String? = null,
-    var userType: String,
+    var userType: UserType,
     var sessionToken: String,
 )
 

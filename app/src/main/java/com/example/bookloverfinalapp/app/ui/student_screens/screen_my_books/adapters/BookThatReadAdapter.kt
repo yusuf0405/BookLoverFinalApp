@@ -9,6 +9,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.App
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster

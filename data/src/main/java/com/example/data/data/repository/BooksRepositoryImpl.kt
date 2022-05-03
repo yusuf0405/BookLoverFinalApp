@@ -7,10 +7,10 @@ import com.example.data.data.models.BookData
 import com.example.data.data.models.BookQuestionData
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.BookDomain
+import com.example.domain.domain.models.BookQuestionDomain
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.models.Resource
 import com.example.domain.models.Status
-import com.example.domain.domain.models.BookQuestionDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.BufferedInputStream
@@ -71,5 +71,7 @@ class BooksRepositoryImpl(
             }))
         } else emit(Resource.error(message = result.message!!))
     }
+
+    override suspend fun clearBooksCache() = cacheDataSource.clearTable()
 
 }

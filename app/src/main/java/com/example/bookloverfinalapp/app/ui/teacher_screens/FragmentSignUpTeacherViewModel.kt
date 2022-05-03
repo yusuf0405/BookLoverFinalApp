@@ -23,6 +23,7 @@ class FragmentSignUpTeacherViewModel @Inject constructor(
     private val signUpUseCase: SignUpUseCase,
     private val getClassUseCasCase: GetClassUseCase,
 ) : BaseViewModel() {
+
     private val _schools = MutableSharedFlow<List<School>>(replay = 1,
         extraBufferCapacity = 0, onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val schools: SharedFlow<List<School>> get() = _schools.asSharedFlow()

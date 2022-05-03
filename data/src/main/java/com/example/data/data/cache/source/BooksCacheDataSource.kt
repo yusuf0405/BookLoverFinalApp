@@ -4,7 +4,6 @@ import com.example.data.data.cache.db.BooksDao
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.models.BookData
 import com.example.domain.domain.Mapper
-import com.example.domain.models.Resource
 
 interface BooksCacheDataSource {
 
@@ -12,6 +11,7 @@ interface BooksCacheDataSource {
 
     suspend fun saveBooks(books: List<BookData>)
 
+    suspend fun clearTable()
 
     class Base(
         private val bookDao: BooksDao,
@@ -22,6 +22,8 @@ interface BooksCacheDataSource {
         override suspend fun saveBooks(books: List<BookData>) {
             books.forEach { book -> bookDao.addNewBook(book = dataMapper.map(book)) }
         }
+
+        override suspend fun clearTable() = bookDao.clearTable()
 
     }
 }

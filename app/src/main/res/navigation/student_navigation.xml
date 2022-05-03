@@ -36,11 +36,11 @@
             android:name="book"
             app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
         <action
-            android:id="@+id/action_fragmentChapterBook_to_fragmentReader"
-            app:destination="@id/fragmentReader" />
+            android:id="@+id/action_student_fragmentChapterBook_to_fragmentReader"
+            app:destination="@id/fragmentStudentReader" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentReader"
+        android:id="@+id/fragmentStudentReader"
         android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_reader.FragmentReader"
         android:label="fragment_reader"
         tools:layout="@layout/fragment_reader">
@@ -57,7 +57,7 @@
             android:name="chapter"
             app:argType="integer" />
         <action
-            android:id="@+id/action_fragmentReader_to_fragmentBookQuestion"
+            android:id="@+id/action_student_fragmentReader_to_fragmentBookQuestion"
             app:destination="@id/fragmentBookQuestion" />
     </fragment>
     <fragment

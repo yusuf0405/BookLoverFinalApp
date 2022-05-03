@@ -85,7 +85,7 @@ class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
     }
 
     private fun observeResource() {
-        viewModel.fetchMyBook(currentUserDomain.id)
+        viewModel.fetchMyBook(currentUser.id)
         viewModel.observe(viewLifecycleOwner) { books ->
             adapter.bookThatReads = books.toMutableList()
         }
@@ -93,7 +93,7 @@ class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
 
 
     override fun tryAgain() {
-        viewModel.fetchMyBook(currentUserDomain.id)
+        viewModel.fetchMyBook(currentUser.id)
     }
 
     override fun goChapterFragment(book: BookThatRead) {
