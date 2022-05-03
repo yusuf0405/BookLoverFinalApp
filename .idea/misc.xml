@@ -63,6 +63,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.13479623824451412" />
+        <entry key="app/src/main/res/layout/fragment_my_books.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_my_students.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_progress.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/fragment_reader.xml" value="0.20101351351351351" />
@@ -76,6 +77,7 @@
         <entry key="app/src/main/res/layout/fragment_student_book_question.xml" value="0.21213836669921876" />
         <entry key="app/src/main/res/layout/fragment_student_book_root.xml" value="0.28651733398437496" />
         <entry key="app/src/main/res/layout/fragment_student_chapter_book.xml" value="0.17437896728515623" />
+        <entry key="app/src/main/res/layout/fragment_student_details.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_student_edit_profile.xml" value="0.10008392333984374" />
         <entry key="app/src/main/res/layout/fragment_student_main.xml" value="0.13479623824451412" />
         <entry key="app/src/main/res/layout/fragment_student_my_books.xml" value="0.19572368421052633" />
@@ -85,16 +87,19 @@
         <entry key="app/src/main/res/layout/fragment_student_setting.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_teacher_book_root.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_book.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_book_progress.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_chapter.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_custom_spinner.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_empty_list.xml" value="0.17222222222222222" />
+        <entry key="app/src/main/res/layout/item_empty_student_list.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_fail_fullscreen.xml" value="0.373046875" />
-        <entry key="app/src/main/res/layout/item_my_book.xml" value="0.34745708264802627" />
+        <entry key="app/src/main/res/layout/item_my_book.xml" value="0.26476168245882603" />
         <entry key="app/src/main/res/layout/item_progress_fullscreen.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_question.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_spinner_custom.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_student.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/item_student_progress_fullscreen.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_students_progress.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/loading_dialog.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/test.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.2953125" />

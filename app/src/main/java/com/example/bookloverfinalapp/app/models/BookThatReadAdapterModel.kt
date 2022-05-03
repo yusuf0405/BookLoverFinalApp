@@ -58,11 +58,6 @@ open class BookThatReadAdapterModel :
 
                 )
         }
-
-        fun getCreatedAt(): String {
-            val prettyTime = PrettyTime(Locale("ru"))
-            return prettyTime.format(createdAt)
-        }
     }
 
 

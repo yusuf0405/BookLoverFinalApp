@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.student_screens.screen_my_books.ui.FragmentMyBooks">
+    tools:context=".app.ui.screen_my_books.ui.FragmentMyBooks">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/my_books_recycler_view"

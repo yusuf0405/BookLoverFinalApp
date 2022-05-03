@@ -18,7 +18,7 @@ import java.util.*
 
 
 class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
-    RecyclerView.Adapter<MyStudentsAdapter.BookViewHolder>() {
+    RecyclerView.Adapter<MyStudentsAdapter.StudentViewHolder>() {
 
     var students: List<StudentAdapterModel> = emptyList()
         @SuppressLint("NotifyDataSetChanged")
@@ -27,25 +27,26 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
             notifyDataSetChanged()
         }
 
-    abstract class BookViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    abstract class StudentViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         open fun bind(student: StudentAdapterModel) {}
 
-        class FullScreenProgress(view: View) : BookViewHolder(view) {
+        class EmptyList(view: View) : MyStudentsAdapter.StudentViewHolder(view)
+
+        class FullScreenProgress(view: View) : StudentViewHolder(view) {
             private val loadingDialog = itemView.findViewById<LoadingAnimation>(R.id.loadingAnim)
             override fun bind(student: StudentAdapterModel) {
-                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_books))
+                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_my_students))
                 loadingDialog.setTextViewVisibility(true)
                 loadingDialog.setTextStyle(true)
             }
         }
 
         class Fail(view: View, private val actionListener: MyStudentOnClickListener) :
-            BookViewHolder(view) {
+            StudentViewHolder(view) {
             private val message = itemView.findViewById<TextView>(R.id.message_text_view)
             private val tryAgain = itemView.findViewById<Button>(R.id.try_again)
             override fun bind(student: StudentAdapterModel) {
                 tryAgain.setOnClickListener { actionListener.tryAgain() }
-
                 student.map(object : StudentAdapterModel.UserStringMapper {
                     override fun map(message: String) {
                         this@Fail.message.text = message
@@ -67,7 +68,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksRead: Int,
                         progress: Int,
                         booksId: List<String>,
-                        image: StudentImage?,
+                        image: StudentImage,
                     ) {
                         TODO("Not yet implemented")
                     }
@@ -77,7 +78,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
         }
 
         class Base(view: View, private val actionListener: MyStudentOnClickListener) :
-            BookViewHolder(view) {
+            StudentViewHolder(view) {
             private val nameText = itemView.findViewById<TextView>(R.id.progressProfileName)
             private val lastNameText = itemView.findViewById<TextView>(R.id.progressProfileLastName)
             private val chaptersReadText =
@@ -105,7 +106,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksRead: Int,
                         progress: Int,
                         booksId: List<String>,
-                        image: StudentImage?,
+                        image: StudentImage,
                     ) {
                         lastNameText.text = lastname
                         nameText.text = name
@@ -113,7 +114,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksReadText.text = booksRead.toString()
                         progressText.text = progress.toString()
                         Glide.with(itemView.context)
-                            .load(image?.url)
+                            .load(image.url)
                             .placeholder(R.drawable.placeholder_avatar)
                             .into(imageView)
 
@@ -134,6 +135,9 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                                 booksRead = booksRead,
                                 progress = progress,
                                 booksId = booksId,
+                                image = StudentImage(name = image.name,
+                                    type = image.type,
+                                    url = image.url)
                             ))
                         }
 
@@ -145,13 +149,15 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
 
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StudentViewHolder =
         when (viewType) {
-            0 -> BookViewHolder.Base(R.layout.item_student.makeView(parent = parent),
+            0 -> StudentViewHolder.Base(R.layout.item_student.makeView(parent = parent),
                 actionListener)
-            1 -> BookViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
+            1 -> StudentViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> BookViewHolder.FullScreenProgress(R.layout.item_progress_fullscreen.makeView(parent = parent))
+            2 -> StudentViewHolder.FullScreenProgress(R.layout.item_students_progress.makeView(
+                parent = parent))
+            3 -> StudentViewHolder.EmptyList(R.layout.item_empty_student_list.makeView(parent = parent))
             else -> throw ClassCastException()
         }
 
@@ -160,12 +166,13 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
         is StudentAdapterModel.Base -> 0
         is StudentAdapterModel.Fail -> 1
         is StudentAdapterModel.Progress -> 2
-        else -> 3
+        is StudentAdapterModel.Empty -> 3
+        else -> 4
     }
 
     override fun getItemCount(): Int = students.size
 
-    override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: StudentViewHolder, position: Int) {
         holder.bind(students[position])
     }
 }

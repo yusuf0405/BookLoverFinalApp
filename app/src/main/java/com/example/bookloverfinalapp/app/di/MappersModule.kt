@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.di
 
 import com.example.bookloverfinalapp.app.models.*
-import com.example.bookloverfinalapp.app.ui.mappers.*
+import com.example.bookloverfinalapp.app.mappers.*
 import com.example.data.data.cache.mappers.*
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.BookThatReadDb
@@ -73,7 +73,7 @@ object MappersModule {
     @Provides
     @Singleton
     fun provideBookThatReadUiMapper(): Mapper<BookThatReadDomain, BookThatRead> =
-        StudentBookUiMapper()
+        BookThatReadUiMapper()
 
 
     @Provides

@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentSignUp"
-        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.FragmentSignUp"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up.FragmentSignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSignUpStudent"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_sign_up.FragmentSignUpStudent"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudent"
         android:label="fragment_sign_up_student"
         tools:layout="@layout/fragment_sign_up_student" >
         <action
@@ -34,7 +34,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSignUpTeacher"
-        android:name="com.example.bookloverfinalapp.app.ui.teacher_screens.FragmentSignUpTeacher"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacher"
         android:label="fragment_sign_up_teacher"
         tools:layout="@layout/fragment_sign_up_teacher" >
         <action
@@ -43,7 +43,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
-        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_login.FragmentLogin"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_login.FragmentLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -55,6 +55,6 @@
     </fragment>
     <activity
         android:id="@+id/activityMainStudent"
-        android:name="com.example.bookloverfinalapp.app.ui.student_screens.screen_main.ActivityStudentMain"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain"
         android:label="ActivityMainStudent" />
 </navigation>

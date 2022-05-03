@@ -1,5 +1,6 @@
 package com.example.data.data.cache.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
@@ -7,21 +8,21 @@ import java.util.*
 @Entity(tableName = "users_database")
 data class StudentDb(
     @PrimaryKey var objectId: String,
-    var classId: String,
-    var createAt: Date,
-    var schoolName: String,
-    var className: String,
-    var email: String,
-    var gender: String,
-    var lastname: String,
-    var name: String,
-    var number: String,
-    var userType: String,
-    var chaptersRead: Int,
-    var booksRead: Int,
-    var progress: Int,
-    val booksId: List<String>,
-    var image: StudentImageDb,
+    @ColumnInfo(name = "classId") var classId: String,
+    @ColumnInfo(name = "createAt") var createAt: Date,
+    @ColumnInfo(name = "schoolName") var schoolName: String,
+    @ColumnInfo(name = "className") var className: String,
+    @ColumnInfo(name = "email") var email: String,
+    @ColumnInfo(name = "gender") var gender: String,
+    @ColumnInfo(name = "lastname") var lastname: String,
+    @ColumnInfo(name = "name") var name: String,
+    @ColumnInfo(name = "number") var number: String,
+    @ColumnInfo(name = "userType") var userType: String,
+    @ColumnInfo(name = "chaptersRead") var chaptersRead: Int,
+    @ColumnInfo(name = "booksRead") var booksRead: Int,
+    @ColumnInfo(name = "progress") var progress: Int,
+    @ColumnInfo(name = "booksId") val booksId: List<String>,
+    @ColumnInfo(name = "image") var image: StudentImageDb,
 )
 
 data class StudentImageDb(

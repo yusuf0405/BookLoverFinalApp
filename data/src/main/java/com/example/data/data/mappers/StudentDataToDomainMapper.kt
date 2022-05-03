@@ -3,6 +3,7 @@ package com.example.data.data.mappers
 import com.example.data.data.models.StudentData
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.StudentDomain
+import com.example.domain.domain.models.StudentImageDomain
 
 class StudentDataToDomainMapper : Mapper<StudentData, StudentDomain>() {
     override fun map(from: StudentData): StudentDomain = from.run {
@@ -21,6 +22,7 @@ class StudentDataToDomainMapper : Mapper<StudentData, StudentDomain>() {
             chaptersRead = chaptersRead,
             booksRead = booksRead,
             progress = progress,
-            booksId = booksId)
+            booksId = booksId,
+            image = StudentImageDomain(name = image.name, type = image.type, url = image.url))
     }
 }

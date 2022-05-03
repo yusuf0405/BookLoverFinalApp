@@ -1,5 +1,7 @@
 package com.example.data
 
+import com.example.data.data.cloud.models.UserCloud
+import com.example.data.data.cloud.models.UserImageCloud
 import com.example.data.data.models.UserData
 import com.example.data.data.models.UserImageData
 import com.example.data.models.classes.ClassDto
@@ -12,7 +14,7 @@ import com.example.domain.models.school.School
 import com.example.domain.models.student.*
 import com.parse.ParseFile
 
-internal fun UserData.toUser(): UserDomain =
+internal fun UserCloud.toUser(): UserDomain =
     UserDomain(
         createAt = createAt,
         classId = classId,
@@ -103,8 +105,8 @@ private fun UserImageData.toImage(): UserDomainImage =
         type = type
     )
 
-private fun UserDomainImage.toDtoImage(): UserImageData =
-    UserImageData(
+private fun UserDomainImage.toDtoImage(): UserImageCloud =
+    UserImageCloud(
         name = name,
         url = url,
         type = type

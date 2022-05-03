@@ -18,7 +18,7 @@ data class StudentDomain(
     var booksRead: Int,
     var progress: Int,
     val booksId: List<String>,
-    var image: StudentImageDomain? = null,
+    var image: StudentImageDomain,
 )
 
 data class StudentImageDomain(

@@ -1,5 +1,7 @@
 package com.example.bookloverfinalapp.app.models
 
+import java.io.Serializable
+import java.text.SimpleDateFormat
 import java.util.*
 
 data class Student(
@@ -18,8 +20,16 @@ data class Student(
     var booksRead: Int,
     var progress: Int,
     val booksId: List<String>,
-    var image: StudentImage? = null,
-)
+    var image: StudentImage,
+) : Serializable {
+    fun fullName(): String = "$lastname $name"
+
+    fun getCreatedAt(): String {
+        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+        return formatter.format(createAt).toString()
+
+    }
+}
 
 data class StudentImage(
     var name: String,

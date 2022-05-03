@@ -16,6 +16,7 @@
     <string name="loading_please_wait">Загрузка, пожалуйста, подождите.</string>
     <string name="loading_books">Подгружаем все книги…</string>
     <string name="loading_my_books">Подгружаем ваши книги…</string>
+    <string name="loading_my_students">Подгружаем ваших студентов…</string>
     <string name="loading_chapters">Подгружаем главы…</string>
     <string name="loading_book">Подготовка к чтению…</string>
 

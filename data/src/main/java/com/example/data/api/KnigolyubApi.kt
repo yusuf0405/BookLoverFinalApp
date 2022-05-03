@@ -1,10 +1,12 @@
 package com.example.data.api
 
-import com.example.data.data.cloud.models.BookQuestionResponse
-import com.example.data.data.models.UserData
+import com.example.data.data.cloud.models.UserCloud
 import com.example.data.models.classes.ClassesResponse
 import com.example.data.models.school.SchoolResponse
-import com.example.data.models.student.*
+import com.example.data.models.student.PostRequestAnswerDto
+import com.example.data.models.student.UpdateDto
+import com.example.data.models.student.UserSignUpRequest
+import com.example.data.models.student.UserUpdateRequest
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -16,7 +18,7 @@ interface KnigolyubApi {
         @Header("X-Parse-Revocable-Session") session: Int,
         @Query("username") username: String,
         @Query("password") password: String,
-    ): Response<UserData>
+    ): Response<UserCloud>
 
     @POST("users")
     suspend fun signUp(
@@ -31,12 +33,7 @@ interface KnigolyubApi {
         @Path("id") id: String,
         @Body student: UserUpdateRequest,
     ): Response<UpdateDto>
-
-    @GET("classes/Questions")
-    suspend fun getAllChapterQuestions(
-        @Query("where") id: String,
-    ): Response<BookQuestionResponse>
-
+    
 
     @GET("classes/Classes")
     suspend fun getAllClasses(): Response<ClassesResponse>

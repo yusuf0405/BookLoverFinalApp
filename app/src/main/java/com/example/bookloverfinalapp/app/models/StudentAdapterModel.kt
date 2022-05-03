@@ -33,7 +33,7 @@ open class StudentAdapterModel : Abstract.Object<Unit, StudentAdapterModel.UserS
         var booksRead: Int,
         var progress: Int,
         val booksId: List<String>,
-        var image: StudentImage? = null,
+        var image: StudentImage,
     ) : StudentAdapterModel() {
 
         override fun map(mapper: UserStringMapper) {
@@ -76,7 +76,7 @@ open class StudentAdapterModel : Abstract.Object<Unit, StudentAdapterModel.UserS
             booksRead: Int,
             progress: Int,
             booksId: List<String>,
-            image: StudentImage? = null,
+            image: StudentImage,
         )
     }
 

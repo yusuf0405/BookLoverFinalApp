@@ -1,5 +1,6 @@
 package com.example.data.data.cache.models
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import java.util.*
@@ -7,15 +8,15 @@ import java.util.*
 @Entity(tableName = "book_database")
 data class BookDb(
     @PrimaryKey var id: String,
-    var author: String,
-    var createdAt: Date,
-    var page: Int,
-    var publicYear: String,
-    var book: BookPdfDb,
-    var title: String,
-    var chapterCount: Int,
-    var poster: BookPosterDb,
-    var updatedAt: Date,
+    @ColumnInfo(name = "author") var author: String,
+    @ColumnInfo(name = "createdAt") var createdAt: Date,
+    @ColumnInfo(name = "page") var page: Int,
+    @ColumnInfo(name = "publicYear") var publicYear: String,
+    @ColumnInfo(name = "book") var book: BookPdfDb,
+    @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "chapterCount") var chapterCount: Int,
+    @ColumnInfo(name = "poster") var poster: BookPosterDb,
+    @ColumnInfo(name = "updatedAt") var updatedAt: Date,
 )
 
 data class BookPdfDb(

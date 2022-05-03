@@ -18,7 +18,7 @@ data class StudentData(
     var booksRead: Int,
     var progress: Int,
     val booksId: List<String>,
-    var image: StudentImageData? = null,
+    var image: StudentImageData,
 )
 
 data class StudentImageData(
