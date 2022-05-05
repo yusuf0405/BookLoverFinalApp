@@ -1,9 +1,9 @@
 package com.example.bookloverfinalapp.app.ui.screen_sign_up_student
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
-import android.widget.AdapterView
-import android.widget.ArrayAdapter
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
@@ -11,6 +11,7 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain
+import com.example.bookloverfinalapp.app.ui.screen_sign_up.FragmentSignUpViewModel
 import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
@@ -20,29 +21,30 @@ import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.UserSignUpRes
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.InternalCoroutinesApi
 import kotlinx.coroutines.flow.onEach
 import java.util.*
 
-@InternalCoroutinesApi
 @AndroidEntryPoint
 class FragmentSignUpStudent :
-    BaseFragment<FragmentSignUpStudentBinding, FragmentSignUpStudentViewModel>(
+    BaseFragment<FragmentSignUpStudentBinding, FragmentSignUpViewModel>(
         FragmentSignUpStudentBinding::inflate),
-    View.OnClickListener, AdapterView.OnItemSelectedListener {
+    View.OnClickListener {
 
-    override val viewModel: FragmentSignUpStudentViewModel by viewModels()
+    override val viewModel: FragmentSignUpViewModel by viewModels()
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
     private val classesTitleList = mutableListOf<String>()
-    private var classesList = mutableListOf<Class>()
+    private var classList = mutableListOf<Class>()
+    private var classCurrentIndex = 0
+    private var classId = ""
+    private var classTitle = ""
 
-    private val schoolsTitleList = mutableListOf<String>()
-    private var schoolsList = mutableListOf<School>()
+    private val schoolTitleList = mutableListOf<String>()
+    private var schoolList = mutableListOf<School>()
+    private var schoolCurrentIndex = 0
 
-    private var classesId = ""
-    private var classesTitle = ""
+
     private var schoolTitle = ""
 
 
@@ -54,16 +56,21 @@ class FragmentSignUpStudent :
 
     private fun observeRecourse() {
         viewModel.schools.onEach { schools ->
-            schoolsList = schools.toMutableList()
-            schools.forEach { schoolsTitleList.add(it.title) }
-            setupSchoolsAdapter()
+            schoolList = schools.toMutableList()
+            viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
+            schools.forEach { schoolTitleList.add(it.title) }
+            binding().schoolTextView.text = schoolTitleList[0]
+            viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
         viewModel.classes.onEach { classes ->
-            classesList = classes.toMutableList()
+            classList = classes.toMutableList()
             classesTitleList.clear()
+            classCurrentIndex = 0
             classes.forEach { classesTitleList.add(it.title) }
-            setupClassesAdapter()
+            classTitle = classesTitleList[classCurrentIndex]
+            classId = classes[classCurrentIndex].objectId
+            binding().classTextView.text = classTitle
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
 
@@ -72,6 +79,8 @@ class FragmentSignUpStudent :
             toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
             signInLink.setOnClickListener(this@FragmentSignUpStudent)
             signUpBtn.setOnClickListener(this@FragmentSignUpStudent)
+            schoolButton.setOnClickListener(this@FragmentSignUpStudent)
+            classButton.setOnClickListener(this@FragmentSignUpStudent)
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
         }
     }
@@ -80,6 +89,10 @@ class FragmentSignUpStudent :
         when (view) {
             binding().signUpBtn -> signUp()
             binding().signInLink -> viewModel.goOverLoginFragment()
+            binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(
+                schoolTitleList)
+            binding().classButton -> showClassSingleChoiceWithConfirmationAlertDialog(list = classesTitleList)
+
         }
     }
 
@@ -91,6 +104,7 @@ class FragmentSignUpStudent :
             else if (!passwordField.validatePassword()) showToast(message = getString(R.string.password_input_format_error))
             else if (!phoneField.validatePhone()) showToast(message = getString(R.string.phone_input_format_error))
             else {
+                Log.i("classesTitle", classTitle)
                 val gender = if (male.isChecked) "male" else "female"
                 val studentDto = UserSignUpRes(
                     name = firstNameField.text.toString(),
@@ -98,10 +112,10 @@ class FragmentSignUpStudent :
                     email = emailField.text.toString(),
                     password = passwordField.text.toString(),
                     number = "+996" + phoneField.text.toString(),
-                    className = classesTitle,
+                    className = classTitle,
                     schoolName = schoolTitle,
                     gender = gender,
-                    classId = classesId,
+                    classId = classId,
                     userType = "student"
                 )
                 viewModel.signUp(user = studentDto).observe(viewLifecycleOwner) { user ->
@@ -133,9 +147,9 @@ class FragmentSignUpStudent :
                 password = passwordField.text.toString(),
                 number = "+996" + phoneField.text.toString(),
                 gender = gender,
-                className = classesTitle,
+                className = classTitle,
                 schoolName = schoolTitle,
-                classId = classesId,
+                classId = classId,
                 createAt = createdAt,
                 userType = UserType.student,
                 sessionToken = sessionToken,
@@ -147,133 +161,33 @@ class FragmentSignUpStudent :
         }
     }
 
-    private fun setupSchoolsAdapter() {
-        val dataAdapter: ArrayAdapter<String> = ArrayAdapter<String>(requireContext(),
-            R.layout.item_custom_spinner, schoolsTitleList)
-        binding().schoolSpinner.adapter = dataAdapter
-        binding().schoolSpinner.onItemSelectedListener = this@FragmentSignUpStudent
-    }
-
-    private fun setupClassesAdapter() {
-        val dataAdapter: ArrayAdapter<String> = ArrayAdapter<String>(requireContext(),
-            R.layout.item_custom_spinner, classesTitleList)
-        binding().classesSpinner.adapter = dataAdapter
-        binding().classesSpinner.onItemSelectedListener = this@FragmentSignUpStudent
-    }
-
-
-    override fun onItemSelected(adapter: AdapterView<*>?, p1: View?, position: Int, p3: Long) {
-        if (adapter == binding().classesSpinner)
-            when (position) {
-                0 -> {
-                    classesTitle = classesTitleList[0]
-                    classesId = classesList[0].objectId
-                }
-                1 -> {
-                    classesTitle = classesTitleList[1]
-                    classesId = classesList[1].objectId
-                }
-                2 -> {
-                    classesTitle = classesTitleList[2]
-                    classesId = classesList[2].objectId
-                }
-                3 -> {
-                    classesTitle = classesTitleList[3]
-                    classesId = classesList[3].objectId
-                }
-                4 -> {
-                    classesTitle = classesTitleList[4]
-                    classesId = classesList[4].objectId
-                }
-                5 -> {
-                    classesTitle = classesTitleList[5]
-                    classesId = classesList[5].objectId
-                }
-                6 -> {
-                    classesTitle = classesTitleList[6]
-                    classesId = classesList[6].objectId
-                }
-                7 -> {
-                    classesTitle = classesTitleList[7]
-                    classesId = classesList[7].objectId
-                }
-                8 -> {
-                    classesTitle = classesTitleList[8]
-                    classesId = classesList[8].objectId
-                }
-                9 -> {
-                    classesTitle = classesTitleList[9]
-                    classesId = classesList[9].objectId
-                }
-                10 -> {
-                    classesTitle = classesTitleList[10]
-                    classesId = classesList[10].objectId
-                }
-                11 -> {
-                    classesTitle = classesTitleList[11]
-                    classesId = classesList[11].objectId
-                }
-                12 -> {
-                    classesTitle = classesTitleList[12]
-                    classesId = classesList[12].objectId
-                }
-            } else
-            when (position) {
-                0 -> {
-                    schoolTitle = schoolsTitleList[0]
-                    viewModel.getClasses(schoolsList[0].classesIds)
-                }
-                1 -> {
-                    schoolTitle = schoolsTitleList[1]
-                    viewModel.getClasses(schoolsList[1].classesIds).toString()
-                }
-                2 -> {
-                    schoolTitle = schoolsTitleList[2]
-                    viewModel.getClasses(schoolsList[2].classesIds).toString()
-                }
-                3 -> {
-                    schoolTitle = schoolsTitleList[3]
-                    viewModel.getClasses(schoolsList[3].classesIds).toString()
-                }
-                4 -> {
-                    schoolTitle = schoolsTitleList[4]
-                    viewModel.getClasses(schoolsList[4].classesIds).toString()
-                }
-                5 -> {
-                    schoolTitle = schoolsTitleList[5]
-                    viewModel.getClasses(schoolsList[5].classesIds).toString()
-                }
-                6 -> {
-                    schoolTitle = schoolsTitleList[6]
-                    viewModel.getClasses(schoolsList[6].classesIds).toString()
-                }
-                7 -> {
-                    schoolTitle = schoolsTitleList[7]
-                    viewModel.getClasses(schoolsList[7].classesIds).toString()
-                }
-                8 -> {
-                    schoolTitle = schoolsTitleList[8]
-                    viewModel.getClasses(schoolsList[8].classesIds).toString()
-                }
-                9 -> {
-                    schoolTitle = schoolsTitleList[9]
-                    viewModel.getClasses(schoolsList[9].classesIds).toString()
-                }
-                10 -> {
-                    schoolTitle = schoolsTitleList[10]
-                    viewModel.getClasses(schoolsList[10].classesIds).toString()
-                }
-                11 -> {
-                    schoolTitle = schoolsTitleList[11]
-                    viewModel.getClasses(schoolsList[11].classesIds).toString()
-                }
-                12 -> {
-                    schoolTitle = schoolsTitleList[12]
-                    viewModel.getClasses(schoolsList[12].classesIds).toString()
-                }
+    private fun showClassSingleChoiceWithConfirmationAlertDialog(list: List<String>) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.volume_class_setup)
+            .setSingleChoiceItems(list.toTypedArray(), classCurrentIndex, null)
+            .setPositiveButton(R.string.action_confirm) { d, _ ->
+                val index = (d as AlertDialog).listView.checkedItemPosition
+                classCurrentIndex = index
+                classTitle = classesTitleList[index]
+                classId = classList[index].objectId
+                binding().classTextView.text = classTitle
             }
+            .create()
+        dialog.show()
     }
 
-    override fun onNothingSelected(p0: AdapterView<*>?) {}
-
+    private fun showSchoolSingleChoiceWithConfirmationAlertDialog(list: List<String>) {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.volume_school_setup)
+            .setSingleChoiceItems(list.toTypedArray(), schoolCurrentIndex, null)
+            .setPositiveButton(R.string.action_confirm) { d, _ ->
+                val index = (d as AlertDialog).listView.checkedItemPosition
+                if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].classesIds)
+                schoolCurrentIndex = index
+                schoolTitle = schoolTitleList[index]
+                binding().schoolTextView.text = schoolTitle
+            }
+            .create()
+        dialog.show()
+    }
 }

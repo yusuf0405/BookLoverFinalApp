@@ -14,7 +14,7 @@ import com.example.bookloverfinalapp.app.models.BookAdapterModel
 import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
-import com.example.loadinganimation.LoadingAnimation
+import com.facebook.shimmer.ShimmerFrameLayout
 import java.util.*
 
 class BookAdapter(private val actionListener: BookItemOnClickListener) :
@@ -31,11 +31,11 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
         open fun bind(book: BookAdapterModel) {}
 
         class FullScreenProgress(view: View) : BookViewHolder(view) {
-            private val loadingDialog = itemView.findViewById<LoadingAnimation>(R.id.loadingAnim)
+            private val shimmerView =
+                itemView.findViewById<ShimmerFrameLayout>(R.id.book_shimmer_effect)
+
             override fun bind(book: BookAdapterModel) {
-                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_books))
-                loadingDialog.setTextViewVisibility(true)
-                loadingDialog.setTextStyle(true)
+                shimmerView.startShimmer()
             }
         }
 
@@ -129,7 +129,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
             0 -> BookViewHolder.Base(R.layout.item_book.makeView(parent = parent), actionListener)
             1 -> BookViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> BookViewHolder.FullScreenProgress(R.layout.item_progress_fullscreen.makeView(parent = parent))
+            2 -> BookViewHolder.FullScreenProgress(R.layout.shimmer_book.makeView(parent = parent))
             else -> throw ClassCastException()
         }
 

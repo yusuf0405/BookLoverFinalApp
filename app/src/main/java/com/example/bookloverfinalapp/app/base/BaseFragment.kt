@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
@@ -49,6 +51,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         onReady(savedInstanceState)
+//        setupTransitions(view = view)
         observeRecourse()
     }
 
@@ -76,6 +79,16 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
             }
         }
     }
+
+    fun showToast(@StringRes messageRes: Int) {
+        Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
+    }
+//    private fun setupTransitions(view: View) {
+//        postponeEnterTransition()
+//        view.doOnPreDraw { startPostponedEnterTransition() }
+//        exitTransition = MaterialFadeThrough().apply { duration = 2000 }
+//        reenterTransition = MaterialFadeThrough().apply { duration = 2000 }
+//    }
 
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {

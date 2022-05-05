@@ -3,7 +3,7 @@ package com.example.bookloverfinalapp.app.di
 import com.example.domain.domain.interactor.*
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.domain.repository.BooksRepository
-import com.example.domain.repository.UserRepository
+import com.example.domain.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -33,6 +33,10 @@ object InteractorModule {
     @Provides
     fun provideGetBookThatReadUseCase(repository: BookThatReadRepository): GetBookThatReadUseCase =
         GetBookThatReadUseCase(repository = repository)
+
+    @Provides
+    fun provideGetMyStudentBooksUseCase(repository: BookThatReadRepository): GetMyStudentBooksUseCase =
+        GetMyStudentBooksUseCase(repository = repository)
 
 
     @Provides

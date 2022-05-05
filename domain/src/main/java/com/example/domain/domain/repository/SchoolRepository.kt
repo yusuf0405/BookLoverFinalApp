@@ -1,4 +1,4 @@
-package com.example.domain.repository
+package com.example.domain.domain.repository
 
 import com.example.domain.models.Resource
 import com.example.domain.models.classes.Class

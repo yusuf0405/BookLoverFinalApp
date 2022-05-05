@@ -1,11 +1,14 @@
 package com.example.bookloverfinalapp.app.ui.screen_my_books.ui
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
@@ -99,5 +102,26 @@ class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
     override fun goChapterFragment(book: BookThatRead) {
         findNavController().navigate(FragmentRootStudentBookDirections.actionFragmentRootBookToFragmentChapterBook(
             book = book))
+    }
+
+    override fun deleteBook(id: String, position: Int) {
+        val listener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> viewModel.deleteBook(id = id)
+                    .observe(viewLifecycleOwner) { adapter.deleteBook(position = position) }
+                DialogInterface.BUTTON_NEGATIVE -> showToast(R.string.cancle_delete)
+                DialogInterface.BUTTON_NEUTRAL -> {}
+            }
+        }
+        val dialog = AlertDialog.Builder(requireContext())
+            .setCancelable(true)
+            .setMessage(R.string.default_delete_alert_message)
+            .setPositiveButton(R.string.action_yes, listener)
+            .setNegativeButton(R.string.action_no, listener)
+            .setNeutralButton(R.string.action_ignore, listener)
+            .setOnCancelListener { showToast(R.string.cancle_delete) }
+            .create()
+
+        dialog.show()
     }
 }

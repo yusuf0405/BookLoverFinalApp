@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.ui.screen_my_books.adapters
+package com.example.bookloverfinalapp.app.ui.screen_student_details.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -9,26 +9,22 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
-import com.facebook.shimmer.ShimmerFrameLayout
+import com.example.loadinganimation.LoadingAnimation
 import com.vaibhavlakhera.circularprogressview.CircularProgressView
-import org.ocpsoft.prettytime.PrettyTime
+import java.text.SimpleDateFormat
 import java.util.*
 
-interface StudentBookItemOnClickListener {
+
+interface MyStudentBookOnClickListener {
 
     fun tryAgain()
-
-    fun goChapterFragment(book: BookThatRead)
-
-    fun deleteBook(id: String, position: Int)
 }
 
-class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListener) :
-    RecyclerView.Adapter<StudentBookAdapter.BookViewHolder>() {
+class MyStudentBooksAdapter(private val actionListener: MyStudentBookOnClickListener) :
+    RecyclerView.Adapter<MyStudentBooksAdapter.BookViewHolder>() {
 
     var bookThatReads: MutableList<BookThatReadAdapterModel> = mutableListOf()
         @SuppressLint("NotifyDataSetChanged")
@@ -44,15 +40,15 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
         class EmptyList(view: View) : BookViewHolder(view)
 
         class FullScreenProgress(view: View) : BookViewHolder(view) {
-            private val shimmerView =
-                itemView.findViewById<ShimmerFrameLayout>(R.id.my_book_shimmer_layout)
-
+            private val loadingDialog = itemView.findViewById<LoadingAnimation>(R.id.loadingAnim)
             override fun bind(book: BookThatReadAdapterModel) {
-                shimmerView.startShimmer()
+                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_my_student_books))
+                loadingDialog.setTextViewVisibility(true)
+                loadingDialog.setTextStyle(true)
             }
         }
 
-        class Fail(view: View, private val actionListener: StudentBookItemOnClickListener) :
+        class Fail(view: View, private val actionListener: MyStudentBookOnClickListener) :
             BookViewHolder(view) {
             private val message = itemView.findViewById<TextView>(R.id.message_text_view)
             private val tryAgain = itemView.findViewById<Button>(R.id.try_again)
@@ -86,7 +82,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
             }
         }
 
-        class Base(view: View, private val actionListener: StudentBookItemOnClickListener) :
+        class Base(view: View) :
             BookViewHolder(view) {
             private val bookTitle = itemView.findViewById<TextView>(R.id.bookTitle)
             private val bookAuthor = itemView.findViewById<TextView>(R.id.bookAuthor)
@@ -127,36 +123,14 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                         publishedYear.text = publicYear
                         val pages = page - 1
                         bookPages.text = pages.toString()
-                        val prettyTime = PrettyTime(Locale("ru"))
-                        val getCreatedAt = prettyTime.format(createdAt)
-                        val bookCreatedAt = "Добавлено: $getCreatedAt"
+                        val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
+                        val bookCreatedAt = "Начал читать с: ${formatter.format(createdAt)}"
                         cratedAtText.text = bookCreatedAt
                         bookProgress.setProgress(progress)
                         Glide.with(itemView.context)
                             .load(poster.url)
                             .into(bookImage)
-                        itemView.setOnLongClickListener {
-                            actionListener.deleteBook(id = objectId, position = position)
-                            false
-                        }
-                        itemView.setOnClickListener {
-                            actionListener.goChapterFragment(book = BookThatRead(
-                                title = title,
-                                author = author,
-                                updatedAt = updatedAt,
-                                page = page,
-                                createdAt = createdAt,
-                                chapterCount = chapterCount,
-                                publicYear = publicYear,
-                                poster = BookThatReadPoster(name = poster.name, url = poster.url),
-                                book = book,
-                                objectId = objectId,
-                                isReadingPages = isReadingPages,
-                                progress = progress,
-                                chaptersRead = chaptersRead,
-                                bookId = bookId
-                            ))
-                        }
+
 
                     }
                 })
@@ -167,11 +141,10 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder =
         when (viewType) {
-            0 -> BookViewHolder.Base(R.layout.item_my_book.makeView(parent = parent),
-                actionListener)
+            0 -> BookViewHolder.Base(R.layout.item_my_book.makeView(parent = parent))
             1 -> BookViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> BookViewHolder.FullScreenProgress(R.layout.shimmer_my_book.makeView(
+            2 -> BookViewHolder.FullScreenProgress(R.layout.item_book_progress.makeView(
                 parent = parent))
             3 -> BookViewHolder.EmptyList(R.layout.item_empty_list.makeView(parent = parent))
             else -> throw ClassCastException()
@@ -184,11 +157,6 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
         is BookThatReadAdapterModel.Progress -> 2
         is BookThatReadAdapterModel.Empty -> 3
         else -> 4
-    }
-
-    fun deleteBook(position: Int) {
-        bookThatReads.removeAt(position)
-        notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int = bookThatReads.size

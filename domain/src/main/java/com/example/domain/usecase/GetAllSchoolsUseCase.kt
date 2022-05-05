@@ -2,7 +2,7 @@ package com.example.domain.usecase
 
 import com.example.domain.models.Resource
 import com.example.domain.models.school.School
-import com.example.domain.repository.SchoolRepository
+import com.example.domain.domain.repository.SchoolRepository
 import kotlinx.coroutines.flow.Flow
 
 class GetAllSchoolsUseCase(private val repository: SchoolRepository) {

@@ -24,4 +24,7 @@ interface BookThatReadRepository {
 
     suspend fun clearBooksCache()
 
+    fun fetchMyStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
+
+
 }

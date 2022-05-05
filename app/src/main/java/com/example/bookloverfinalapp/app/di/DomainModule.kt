@@ -1,8 +1,8 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.domain.repository.LoginRepository
-import com.example.domain.repository.SchoolRepository
-import com.example.domain.repository.UserRepository
+import com.example.domain.domain.repository.LoginRepository
+import com.example.domain.domain.repository.SchoolRepository
+import com.example.domain.domain.repository.UserRepository
 import com.example.domain.usecase.*
 import dagger.Module
 import dagger.Provides

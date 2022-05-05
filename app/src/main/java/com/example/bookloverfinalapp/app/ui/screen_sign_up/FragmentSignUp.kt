@@ -1,18 +1,24 @@
 package com.example.bookloverfinalapp.app.ui.screen_sign_up
 
 import android.os.Bundle
+import android.view.LayoutInflater
 import android.view.View
-import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.app.base.BaseFragment
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.databinding.FragmentSignUpBinding
 
-class FragmentSignUp :
-    BaseFragment<FragmentSignUpBinding, FragmentSignUpViewModel>(FragmentSignUpBinding::inflate),
-    View.OnClickListener {
+class FragmentSignUp : Fragment(), View.OnClickListener {
 
-    override val viewModel: FragmentSignUpViewModel by viewModels()
+    private val binding: FragmentSignUpBinding by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentSignUpBinding.inflate(layoutInflater)
+    }
 
-    override fun onReady(savedInstanceState: Bundle?) {}
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?,
+    ): View = binding.root
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -20,7 +26,7 @@ class FragmentSignUp :
     }
 
     private fun setOnClickListeners() {
-        binding().apply {
+        binding.apply {
             studentBtn.setOnClickListener(this@FragmentSignUp)
             teacherBtn.setOnClickListener(this@FragmentSignUp)
             signInLink.setOnClickListener(this@FragmentSignUp)
@@ -29,9 +35,9 @@ class FragmentSignUp :
 
     override fun onClick(view: View) {
         when (view) {
-            binding().studentBtn -> viewModel.goOverSignUpStudentFragment()
-            binding().teacherBtn -> viewModel.goOverSignUpTeacherFragment()
-            binding().signInLink -> viewModel.goOverLoginFragment()
+            binding.studentBtn -> findNavController().navigate((FragmentSignUpDirections.actionFragmentSignUpToFragmentSignUpStudent()))
+            binding.teacherBtn -> findNavController().navigate(FragmentSignUpDirections.actionFragmentSignUpToFragmentSignUpTeacher())
+            binding.signInLink -> findNavController().navigate(FragmentSignUpDirections.actionFragmentSignUpToFragmentLogin())
 
         }
     }

@@ -1,6 +1,6 @@
 package com.example.domain.domain.interactor
 
-import com.example.domain.repository.UserRepository
+import com.example.domain.domain.repository.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.flowOn
 

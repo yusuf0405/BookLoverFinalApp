@@ -1,15 +1,15 @@
-package com.example.bookloverfinalapp.app.ui.screen_student_details
+package com.example.bookloverfinalapp.app.ui.screen_student_details.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Student
-import com.example.bookloverfinalapp.app.ui.screen_my_books.adapters.StudentBookAdapter
-import com.example.bookloverfinalapp.app.ui.screen_my_books.adapters.StudentBookItemOnClickListener
+import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStudentBookOnClickListener
+import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStudentBooksAdapter
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.databinding.FragmentStudentDetailsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -18,7 +18,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentStudentDetails :
     BaseFragment<FragmentStudentDetailsBinding, FragmentStudentDetailsViewModel>(
-        FragmentStudentDetailsBinding::inflate), StudentBookItemOnClickListener {
+        FragmentStudentDetailsBinding::inflate), MyStudentBookOnClickListener {
 
     override val viewModel: FragmentStudentDetailsViewModel by viewModels()
 
@@ -28,19 +28,25 @@ class FragmentStudentDetails :
         FragmentStudentDetailsArgs.fromBundle(requireArguments()).student
     }
 
-    private val adapter: StudentBookAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        StudentBookAdapter(actionListener = this)
+    private val adapter: MyStudentBooksAdapter by lazy(LazyThreadSafetyMode.NONE) {
+        MyStudentBooksAdapter(actionListener = this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         observeResource()
+        binding().toolbar.setNavigationOnClickListener { viewModel.goBack() }
 
     }
 
     private fun setupUi() {
         binding().apply {
+            toolbar.apply {
+                title = student.fullName()
+                setTitleTextColor(Color.WHITE)
+                setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            }
             val reading = "Книги, которые читает ${student.name}"
             progressProfileName.text = student.fullName()
             progressReadTime.text = student.getCreatedAt()
@@ -72,7 +78,5 @@ class FragmentStudentDetails :
     override fun tryAgain() {
         viewModel.fetchMyBook(id = student.objectId)
     }
-
-    override fun goChapterFragment(book: BookThatRead) {}
 
 }

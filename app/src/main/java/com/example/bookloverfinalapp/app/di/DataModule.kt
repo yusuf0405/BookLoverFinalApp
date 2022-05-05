@@ -28,9 +28,9 @@ import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.*
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.domain.repository.BooksRepository
-import com.example.domain.repository.LoginRepository
-import com.example.domain.repository.SchoolRepository
-import com.example.domain.repository.UserRepository
+import com.example.domain.domain.repository.LoginRepository
+import com.example.domain.domain.repository.SchoolRepository
+import com.example.domain.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

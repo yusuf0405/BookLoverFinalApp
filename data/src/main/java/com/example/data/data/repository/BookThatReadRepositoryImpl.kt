@@ -5,17 +5,18 @@ import com.example.data.data.cache.source.BooksThatReadDataSource
 import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.source.BooksThatReadCloudDataSource
 import com.example.data.data.mappers.toStudentBook
+import com.example.data.data.models.BookThatReadData
 import com.example.data.data.models.ChaptersData
 import com.example.data.data.models.ProgressData
-import com.example.data.data.models.BookThatReadData
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.AddNewBookDomain
+import com.example.domain.domain.models.BookThatReadDomain
 import com.example.domain.domain.models.ChaptersDomain
 import com.example.domain.domain.models.ProgressDomain
-import com.example.domain.domain.models.BookThatReadDomain
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.models.Resource
 import com.example.domain.models.Status
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -106,7 +107,17 @@ class BookThatReadRepositoryImpl(
         } else emit(Resource.error(message = result.message!!))
     }
 
-    override suspend fun clearBooksCache()  = cacheDataSource.clearTable()
+    override suspend fun clearBooksCache() = cacheDataSource.clearTable()
+
+    override fun fetchMyStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
+        emit(Resource.loading())
+        val response = cloudDataSource.fetchMyBooks(id = id)
+        if (response.status == Status.SUCCESS) {
+            val booksDataList = response.data!!
+            val booksDomain = booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+            emit(Resource.success(data = booksDomain))
+        } else emit(Resource.error(message = response.message))
+    }
 
 }
 

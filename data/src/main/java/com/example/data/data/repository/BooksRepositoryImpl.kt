@@ -11,6 +11,7 @@ import com.example.domain.domain.models.BookQuestionDomain
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.models.Resource
 import com.example.domain.models.Status
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.BufferedInputStream

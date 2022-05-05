@@ -12,11 +12,13 @@
         <item>частная школа "Грамотей"</item>
     </string-array>
 
+
     //Loading Dialog
     <string name="loading_please_wait">Загрузка, пожалуйста, подождите.</string>
     <string name="loading_books">Подгружаем все книги…</string>
     <string name="loading_my_books">Подгружаем ваши книги…</string>
-    <string name="loading_my_students">Подгружаем ваших студентов…</string>
+    <string name="loading_my_student_books">Подгружаем книги ученика…</string>
+    <string name="loading_my_students">Ищем ваших студентов…</string>
     <string name="loading_chapters">Подгружаем главы…</string>
     <string name="loading_book">Подготовка к чтению…</string>
 
@@ -133,4 +135,14 @@
     <string name="student_progress_hours_spent">часов потрачено</string>
     <string name="book_details_pages_read">Страниц прочитано:</string>
     <string name="book_details_chapters_read">Глав прочитано:</string>
+    <string name="default_alert_title">Удалить</string>
+    <string name="default_delete_alert_message">Вы действительно хотите удалить книгу?</string>
+    <string name="action_yes">Да</string>
+    <string name="action_no">Нет</string>
+    <string name="action_ignore">Отменить</string>
+    <string name="cancle_delete">Вы отменили удаление</string>
+    <string name="action_confirm">Подтвердить</string>
+    <string name="volume_school_setup">Выберите школу</string>
+    <string name="volume_class_setup">Выберите класс</string>
+    <string name="to_change">Изменить</string>
 </resources>

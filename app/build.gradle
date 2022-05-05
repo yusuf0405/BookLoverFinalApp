@@ -112,6 +112,12 @@ dependencies {
     // Pretty Time
     implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 
+    //Shimmer Effect
+    implementation 'com.facebook.shimmer:shimmer:0.5.0'
+
+    // discrete scrollview
+    implementation 'com.yarolegovich:discrete-scrollview:1.5.1'
+    
     // Loading-Animation
     implementation 'com.github.Marvel999:Android-Loading-Animation:1.0.0'
 

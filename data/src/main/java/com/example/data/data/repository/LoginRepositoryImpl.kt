@@ -10,7 +10,7 @@ import com.example.domain.models.Status.*
 import com.example.domain.models.student.PostRequestAnswer
 import com.example.domain.domain.models.UserDomain
 import com.example.domain.models.student.UserSignUpRes
-import com.example.domain.repository.LoginRepository
+import com.example.domain.domain.repository.LoginRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 

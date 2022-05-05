@@ -4,6 +4,7 @@ import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -11,8 +12,9 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.StudentAdapterModel
 import com.example.bookloverfinalapp.app.models.StudentImage
+import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
-import com.example.loadinganimation.LoadingAnimation
+import com.facebook.shimmer.ShimmerFrameLayout
 import de.hdodenhof.circleimageview.CircleImageView
 import java.util.*
 
@@ -33,11 +35,11 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
         class EmptyList(view: View) : MyStudentsAdapter.StudentViewHolder(view)
 
         class FullScreenProgress(view: View) : StudentViewHolder(view) {
-            private val loadingDialog = itemView.findViewById<LoadingAnimation>(R.id.loadingAnim)
+            private val shimmerLayout =
+                itemView.findViewById<ShimmerFrameLayout>(R.id.student_shimmer_layout)
+
             override fun bind(student: StudentAdapterModel) {
-                loadingDialog.setTextMsg(itemView.context.getString(R.string.loading_my_students))
-                loadingDialog.setTextViewVisibility(true)
-                loadingDialog.setTextStyle(true)
+                shimmerLayout.startShimmer()
             }
         }
 
@@ -83,8 +85,11 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
             private val lastNameText = itemView.findViewById<TextView>(R.id.progressProfileLastName)
             private val chaptersReadText =
                 itemView.findViewById<TextView>(R.id.countOfStudentDimonds)
+            private val chaptersReadImage = itemView.findViewById<ImageView>(R.id.studentsDiamond)
             private val booksReadText = itemView.findViewById<TextView>(R.id.countOfStudentCrowns)
+            private val booksReadImage = itemView.findViewById<ImageView>(R.id.progressCrown)
             private val progressText = itemView.findViewById<TextView>(R.id.countOfStudentPages)
+            private val progressImage = itemView.findViewById<ImageView>(R.id.studentsPages)
             private val imageView = itemView.findViewById<CircleImageView>(R.id.studentProfileImage)
             override fun bind(student: StudentAdapterModel) {
                 student.map(object : StudentAdapterModel.UserStringMapper {
@@ -108,6 +113,9 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksId: List<String>,
                         image: StudentImage,
                     ) {
+                        if (progress == 0) progressText.hideView()
+                        if (chaptersRead == 0) chaptersReadText.hideView()
+                        if (booksRead == 0) booksReadText.hideView()
                         lastNameText.text = lastname
                         nameText.text = name
                         chaptersReadText.text = chaptersRead.toString()
@@ -155,7 +163,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                 actionListener)
             1 -> StudentViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> StudentViewHolder.FullScreenProgress(R.layout.item_students_progress.makeView(
+            2 -> StudentViewHolder.FullScreenProgress(R.layout.shimmer_student.makeView(
                 parent = parent))
             3 -> StudentViewHolder.EmptyList(R.layout.item_empty_student_list.makeView(parent = parent))
             else -> throw ClassCastException()

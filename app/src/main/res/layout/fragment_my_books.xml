@@ -20,5 +20,4 @@
         tools:listitem="@layout/item_my_book" />
 
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>

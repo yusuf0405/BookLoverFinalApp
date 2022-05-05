@@ -37,11 +37,12 @@ class FragmentBookDetails :
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
-    lateinit var book: Book
+    private val book: Book by lazy(LazyThreadSafetyMode.NONE){
+        FragmentBookDetailsArgs.fromBundle(requireArguments()).book
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        book = FragmentBookDetailsArgs.fromBundle(requireArguments()).book
         setupUi()
         observeResource()
         setOnClickListeners()

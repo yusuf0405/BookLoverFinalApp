@@ -6,7 +6,7 @@ import com.example.data.toSchool
 import com.example.domain.models.Resource
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
-import com.example.domain.repository.SchoolRepository
+import com.example.domain.domain.repository.SchoolRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import java.net.UnknownHostException

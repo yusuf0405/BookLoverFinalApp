@@ -15,7 +15,8 @@ import com.example.domain.models.Resource
 import com.example.domain.models.Status
 import com.example.domain.models.student.StudentUpdateRes
 import com.example.domain.models.student.UpdateAnswer
-import com.example.domain.repository.UserRepository
+import com.example.domain.domain.repository.UserRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -48,7 +49,6 @@ class UserRepositoryImpl(
         schoolName: String,
     ): Flow<Resource<List<StudentDomain>>> = flow {
         emit(Resource.loading())
-        Log.i("dddddsss","ssssss")
         val userCacheList = cacheDataSource.fetchMyStudents()
         if (userCacheList.isEmpty()) {
             val result =

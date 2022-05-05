@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="5dp"
+    android:backgroundTint="@color/white"
+    app:cardCornerRadius="10dp"
+    app:cardElevation="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/rounded_book_Image"
+                android:layout_width="100dp"
+                android:layout_height="180dp"
+                android:scaleType="fitXY"
+                android:src="@color/shimmerColor" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TextView
+            android:id="@+id/bookTitle"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="110dp"
+            android:background="@color/shimmerColor"
+            android:textColor="@color/red"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/bookAuthor"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/shimmerColor"
+            android:textColor="@color/violet"
+            android:textSize="15sp"
+            android:textStyle="normal"
+            app:layout_constraintEnd_toStartOf="@+id/bookProgress"
+            app:layout_constraintStart_toStartOf="@+id/bookTitle"
+            app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
+
+
+        <ImageView
+            android:id="@+id/bookDiamond"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/ic_diamond"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
+
+
+        <TextView
+            android:id="@+id/publicYearText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:background="@color/shimmerColor"
+            android:text="Год издания:"
+            android:textColor="@color/shimmerColor"
+            android:textSize="12sp"
+            app:layout_constraintStart_toEndOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/bookDiamond" />
+
+        <TextView
+            android:id="@+id/publishedYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@color/shimmerColor"
+            android:text="2008"
+            android:textColor="@color/shimmerColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/publicYearText"
+            app:layout_constraintStart_toEndOf="@+id/publicYearText"
+            app:layout_constraintTop_toTopOf="@+id/publicYearText" />
+
+        <TextView
+            android:id="@+id/bookPagesText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@color/shimmerColor"
+            android:text="Страниц: "
+            android:textColor="@color/shimmerColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/publishedYear"
+            app:layout_constraintStart_toEndOf="@+id/publishedYear"
+            app:layout_constraintTop_toTopOf="@+id/publishedYear" />
+
+        <TextView
+            android:id="@+id/bookPages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:background="@color/shimmerColor"
+            android:text="300"
+            android:textColor="@color/shimmerColor"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bookPagesText"
+            app:layout_constraintStart_toEndOf="@+id/bookPagesText"
+            app:layout_constraintTop_toTopOf="@+id/bookPagesText" />
+
+        <TextView
+            android:id="@+id/cratedAtText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Добавлено 8 часов назад"
+            android:background="@color/shimmerColor"
+            android:textColor="@color/shimmerColor"            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bookDiamond"
+            app:layout_constraintTop_toBottomOf="@+id/publishedYear" />
+
+        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+            android:id="@+id/bookProgress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="10dp"
+            app:animate="true"
+            app:animateDuration="600"
+            app:fillColor="@color/white"
+            app:layout_constraintBottom_toBottomOf="@+id/bookDiamond"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
+            app:progressColor="@color/shimmerColor"
+            app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+            app:progressTextColor="@color/shimmerColor"
+            app:progressTextEnabled="true"
+            app:progressTextSize="14sp"
+            app:progressTextType="percent"
+            app:progressValue="0"
+            app:progressWidth="5dp"
+            app:startAngle="270"
+            app:totalColor="@color/shimmerColor"
+            app:totalValue="100"
+            app:totalWidth="5dp" />
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="42dp"
+            app:layout_constraintBottom_toBottomOf="@+id/bookDiamond"
+            app:layout_constraintStart_toEndOf="@+id/bookDiamond"
+            app:layout_constraintTop_toTopOf="@+id/bookDiamond"
+            app:layout_constraintVertical_bias="0.285"
+            app:srcCompat="@drawable/ic_open_book" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</com.google.android.material.card.MaterialCardView>
