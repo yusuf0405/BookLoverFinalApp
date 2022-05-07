@@ -3,6 +3,11 @@ package com.example.data.data.cloud.models
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
+data class BookResponse(
+    @SerializedName("results")
+    var books: List<BookCloud>,
+)
+
 data class BookCloud(
     @SerializedName("author") var author: String,
     @SerializedName("createdAt") var createdAt: Date,

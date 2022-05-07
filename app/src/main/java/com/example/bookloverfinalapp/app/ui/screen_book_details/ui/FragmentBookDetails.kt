@@ -2,11 +2,8 @@ package com.example.bookloverfinalapp.app.ui.screen_book_details.ui
 
 import android.graphics.Color
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
@@ -21,12 +18,6 @@ import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.databinding.FragmentBookDetailsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.io.File
-import java.io.InputStream
 
 @AndroidEntryPoint
 class FragmentBookDetails :
@@ -37,7 +28,7 @@ class FragmentBookDetails :
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
-    private val book: Book by lazy(LazyThreadSafetyMode.NONE){
+    private val book: Book by lazy(LazyThreadSafetyMode.NONE) {
         FragmentBookDetailsArgs.fromBundle(requireArguments()).book
     }
 
@@ -48,7 +39,7 @@ class FragmentBookDetails :
         setOnClickListeners()
     }
 
-    private fun addMyBooks(path: String) {
+    private fun addMyBooks() {
         val isReading = arrayListOf<Boolean>()
         isReading.add(true)
         for (i in 1 until book.chapterCount) isReading.add(false)
@@ -56,7 +47,7 @@ class FragmentBookDetails :
             bookId = book.objectId,
             page = book.page,
             publicYear = book.publicYear,
-            book = path,
+            book = book.book.url,
             title = book.title,
             chapterCount = book.chapterCount,
             poster = BookThatReadPoster(url = book.poster.url, name = book.poster.name),
@@ -73,10 +64,7 @@ class FragmentBookDetails :
         }
     }
 
-    private fun saveBook() =
-        viewModel.go(book.book.url).observe(viewLifecycleOwner) { inputStream ->
-            lifecycleScope.launch { addMyBooks(path = inputStream.saveToFile()) }
-        }
+    private fun saveBook() = addMyBooks()
 
 
     private fun setOnClickListeners() {
@@ -138,23 +126,6 @@ class FragmentBookDetails :
                 .load(book.poster.url)
                 .into(bookDetailsPoster)
         }
-    }
-
-    private suspend fun InputStream.saveToFile(): String {
-        Log.i("Start", "Start")
-        val path = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-        val file = File.createTempFile("my_file", ".pdf", path)
-        val result = withContext(Dispatchers.Default) {
-            val save = async {
-                return@async use { input ->
-                    file.outputStream().use { output -> input.copyTo(output) }
-                }
-            }
-            save.await()
-            return@withContext file.path
-        }
-        Log.i("End", "End")
-        return result
     }
 
     override fun onResume() {

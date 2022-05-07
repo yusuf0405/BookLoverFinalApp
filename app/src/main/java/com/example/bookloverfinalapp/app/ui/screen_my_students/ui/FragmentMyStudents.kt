@@ -33,7 +33,10 @@ class FragmentMyStudents :
         viewModel.fetchMyStudents(className = currentUser.className,
             schoolName = currentUser.schoolName)
 
-        viewModel.observe(viewLifecycleOwner) { students -> adapter.students = students }
+        viewModel.observe(viewLifecycleOwner) { students ->
+            adapter.students = students
+
+        }
     }
 
     override fun tryAgain() {
@@ -49,5 +52,6 @@ class FragmentMyStudents :
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()
     }
+
 
 }

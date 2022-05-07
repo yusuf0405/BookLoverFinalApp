@@ -2,10 +2,10 @@ package com.example.data.data.cloud.service
 
 import com.example.data.data.cloud.models.BooksThatReadResponse
 import com.example.data.data.cloud.models.UserResponse
-import com.example.domain.models.Resource
+import com.example.data.data.cloud.models.UpdateCloud
+import com.example.data.data.cloud.models.UserUpdateCloud
 import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface UserService {
 
@@ -14,4 +14,11 @@ interface UserService {
 
     @GET("classes/BooksThatRead")
     suspend fun fetchStudentAttributes(@Query("where") id: String): Response<BooksThatReadResponse>
+
+    @PUT("users/{id}")
+    suspend fun updateUser(
+        @Header("X-Parse-Session-Token") sessionToken: String,
+        @Path("id") id: String,
+        @Body student: UserUpdateCloud,
+    ): Response<UpdateCloud>
 }

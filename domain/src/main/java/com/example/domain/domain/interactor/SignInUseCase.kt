@@ -1,4 +1,4 @@
-package com.example.domain.usecase
+package com.example.domain.domain.interactor
 
 import com.example.domain.domain.repository.LoginRepository
 

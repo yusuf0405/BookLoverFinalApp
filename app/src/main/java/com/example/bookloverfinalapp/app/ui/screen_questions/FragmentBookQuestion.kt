@@ -33,6 +33,9 @@ class FragmentBookQuestion :
     private val chapter: Int by lazy(LazyThreadSafetyMode.NONE) {
         FragmentBookQuestionArgs.fromBundle(requireArguments()).chapter
     }
+    private val path: String by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentBookQuestionArgs.fromBundle(requireArguments()).path
+    }
     private var index = 0
     private var answer: String = ""
     private var rightAnswer: String? = null
@@ -108,7 +111,7 @@ class FragmentBookQuestion :
             answer == "" -> showToast(message = "Выберите ответ")
             rightAnswer == answer -> chekNextQuestion()
             else -> {
-                viewModel.goChapterFragment(book = book)
+                viewModel.goChapterFragment(book = book, path = path)
                 showToast(message = getString(R.string.answer_is_error))
             }
         }
@@ -142,7 +145,10 @@ class FragmentBookQuestion :
             chapterUpdate.isReadingPages = list
             book.isReadingPages = list
         }
-        viewModel.updateChapters(id = book.objectId, chapters = chapterUpdate, book = book)
+        viewModel.updateChapters(id = book.objectId,
+            chapters = chapterUpdate,
+            book = book,
+            path = path)
     }
 
 

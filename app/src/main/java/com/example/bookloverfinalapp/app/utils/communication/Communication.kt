@@ -14,7 +14,7 @@ interface Communication<T> : Observe<T>, Mapper.Void<T> {
             liveData.observe(owner, observer)
         }
 
-        override fun map(source: T) = liveData.postValue(source!!)
+        override fun put(source: T) = liveData.postValue(source!!)
     }
 }
 
@@ -24,7 +24,7 @@ interface Observe<T> {
 
 interface Mapper<R, S> {
 
-    fun map(source: S): R
+    fun put(source: S): R
 
     interface Void<T> : Mapper<Unit, T>
 

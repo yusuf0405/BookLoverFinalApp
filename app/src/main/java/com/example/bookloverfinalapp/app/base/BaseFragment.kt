@@ -90,6 +90,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
 //        reenterTransition = MaterialFadeThrough().apply { duration = 2000 }
 //    }
 
+
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
             is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)

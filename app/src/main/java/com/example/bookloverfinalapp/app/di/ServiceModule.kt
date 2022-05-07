@@ -3,6 +3,7 @@ package com.example.bookloverfinalapp.app.di
 import com.example.data.api.KnigolyubApi
 import com.example.data.data.cloud.service.BookService
 import com.example.data.data.cloud.service.BookThatReadService
+import com.example.data.data.cloud.service.LoginService
 import com.example.data.data.cloud.service.UserService
 import dagger.Module
 import dagger.Provides
@@ -35,6 +36,13 @@ object ServiceModule {
     @Singleton
     fun bookUserService(retrofit: Retrofit): UserService =
         retrofit.create(UserService::class.java)
+
+    @Provides
+    @Singleton
+    fun bookLoginService(retrofit: Retrofit): LoginService =
+        retrofit.create(LoginService::class.java)
+
+
 
 
 }

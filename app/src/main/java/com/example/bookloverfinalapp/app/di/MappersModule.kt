@@ -1,23 +1,32 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.bookloverfinalapp.app.models.*
 import com.example.bookloverfinalapp.app.mappers.*
+import com.example.bookloverfinalapp.app.models.*
 import com.example.data.data.cache.mappers.*
 import com.example.data.data.cache.models.BookDb
 import com.example.data.data.cache.models.BookThatReadDb
 import com.example.data.data.cache.models.StudentDb
 import com.example.data.data.cloud.mappers.BookCloudDataMapper
 import com.example.data.data.cloud.mappers.BookQuestionCloudMapper
+import com.example.data.data.cloud.mappers.PostRequestAnswerToAnswerMapper
+import com.example.data.data.cloud.mappers.UserCloudToUserDomainMapper
 import com.example.data.data.cloud.models.AddNewBookCloud
 import com.example.data.data.cloud.models.BookCloud
 import com.example.data.data.cloud.models.BookQuestionCloud
+import com.example.data.data.cloud.models.UserCloud
 import com.example.data.data.mappers.*
 import com.example.data.data.models.BookData
 import com.example.data.data.models.BookQuestionData
 import com.example.data.data.models.BookThatReadData
 import com.example.data.data.models.StudentData
+import com.example.data.data.cloud.models.SignUpAnswerCloud
+import com.example.data.data.cloud.models.UpdateCloud
+import com.example.data.data.cloud.models.UserUpdateCloud
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.*
+import com.example.domain.models.student.PostRequestAnswerDomain
+import com.example.domain.models.student.UpdateAnswerDomain
+import com.example.domain.models.student.UserUpdateDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -133,6 +142,28 @@ object MappersModule {
     @Singleton
     fun provideStudentAdapterModelMapper(): Mapper<StudentDomain, StudentAdapterModel.Base> =
         StudentAdapterModelMapper()
+
+    @Provides
+    @Singleton
+    fun provideUserUpdateToCloudMapper(): Mapper<UserUpdateDomain, UserUpdateCloud> =
+        UserUpdateToCloudMapper()
+
+
+    @Provides
+    @Singleton
+    fun provideUpdateCloudToUpdateMapper(): Mapper<UpdateCloud, UpdateAnswerDomain> =
+        UpdateCloudToUpdateMapper()
+
+    @Provides
+    @Singleton
+    fun provideUserCloudToUserDomainMapper(): Mapper<UserCloud, UserDomain> =
+        UserCloudToUserDomainMapper()
+
+
+    @Provides
+    @Singleton
+    fun providePostRequestAnswerToAnswerMapper(): Mapper<SignUpAnswerCloud, PostRequestAnswerDomain> =
+        PostRequestAnswerToAnswerMapper()
 
 
 }

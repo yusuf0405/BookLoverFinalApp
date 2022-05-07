@@ -31,6 +31,7 @@
     <string name="invalid_password_error">Неверный пароль!</string>
     <string name="answer_is_error">Вы неправильно ответили на вопрос!</string>
     <string name="network_error">Нету подключение к интернету.</string>
+    <string name="book_is_not_ready">Книга еще не готова к чтению.</string>
     <string name="generic_error">Что то пошло не так.</string>
     <string name="service_unavailable">Ошибка Сервера.</string>
     <string name="try_again">Повторит попытку</string>
@@ -145,4 +146,6 @@
     <string name="volume_school_setup">Выберите школу</string>
     <string name="volume_class_setup">Выберите класс</string>
     <string name="to_change">Изменить</string>
+    <string name="default_login_out_alert_message">Вы действительно хотите выйти из аккаунта?</string>
+    <string name="login_out_title">Выйти</string>
 </resources>

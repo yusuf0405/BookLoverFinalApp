@@ -7,5 +7,7 @@ abstract class Abstract {
         abstract fun map(mapper: M): T
     }
 
-    interface Mapper
+    interface Mapper {
+        class Void : Mapper
+    }
 }

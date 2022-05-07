@@ -19,7 +19,7 @@ import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpStudentBinding
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpRes
+import com.example.domain.models.student.UserSignUpDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -43,8 +43,6 @@ class FragmentSignUpStudent :
     private val schoolTitleList = mutableListOf<String>()
     private var schoolList = mutableListOf<School>()
     private var schoolCurrentIndex = 0
-
-
     private var schoolTitle = ""
 
 
@@ -57,9 +55,9 @@ class FragmentSignUpStudent :
     private fun observeRecourse() {
         viewModel.schools.onEach { schools ->
             schoolList = schools.toMutableList()
-            viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
             schools.forEach { schoolTitleList.add(it.title) }
-            binding().schoolTextView.text = schoolTitleList[0]
+            binding().schoolTextView.text = schoolTitleList[schoolCurrentIndex]
+            schoolTitle = schoolTitleList[schoolCurrentIndex]
             viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
@@ -106,7 +104,7 @@ class FragmentSignUpStudent :
             else {
                 Log.i("classesTitle", classTitle)
                 val gender = if (male.isChecked) "male" else "female"
-                val studentDto = UserSignUpRes(
+                val studentDto = UserSignUpDomain(
                     name = firstNameField.text.toString(),
                     lastname = lastNameField.text.toString(),
                     email = emailField.text.toString(),

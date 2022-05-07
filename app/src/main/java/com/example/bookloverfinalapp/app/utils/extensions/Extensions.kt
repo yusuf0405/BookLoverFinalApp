@@ -33,9 +33,13 @@ fun View.hideView() {
     this.visibility = View.GONE
 }
 
+
 fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
     this.observe(owner) { it?.let(observer) }
 }
+
+fun Activity.getShPrString(key: String): String? =
+    this.getSharedPreferences(key, Context.MODE_PRIVATE).getString(key, null)
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()

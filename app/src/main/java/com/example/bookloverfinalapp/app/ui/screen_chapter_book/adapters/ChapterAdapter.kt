@@ -2,6 +2,7 @@ package com.example.bookloverfinalapp.app.ui.screen_chapter_book.adapters
 
 import android.annotation.SuppressLint
 import android.graphics.Color
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -28,8 +29,10 @@ class ChapterAdapter(private val actionListener: ChapterItemOnClickListener) :
             val chapter = chapters[position]
             binding.apply {
                 chapterText.text = chapter.title
-                if (isReading[position]) itemView.isEnabled = true
-                else {
+                if (isReading[position]) {
+                    chapterText.setTextColor(Color.BLUE)
+                    itemView.isEnabled = true
+                } else {
                     chapterText.setTextColor(Color.GRAY)
                     itemView.isEnabled = false
                 }

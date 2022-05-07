@@ -28,7 +28,14 @@ class FragmentChapterBook :
 
     override fun onReady(savedInstanceState: Bundle?) {}
 
-    lateinit var book: BookThatRead
+    private val book: BookThatRead by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentChapterBookArgs.fromBundle(requireArguments()).book
+    }
+
+    private val path: String by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentChapterBookArgs.fromBundle(requireArguments()).path
+    }
+
     private val adapter: ChapterAdapter by lazy(LazyThreadSafetyMode.NONE) {
         ChapterAdapter(actionListener = this)
     }
@@ -38,7 +45,6 @@ class FragmentChapterBook :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        book = FragmentChapterBookArgs.fromBundle(requireArguments()).book
         setupUi()
         onClickListeners()
         observeResource()
@@ -50,7 +56,7 @@ class FragmentChapterBook :
 
 
     private fun loadSuccess() {
-        binding().pdfView.fromFile(File(book.book))
+        binding().pdfView.fromFile(File(path))
             .onPageChange(this@FragmentChapterBook)
             .onError(this@FragmentChapterBook)
             .onLoad(this@FragmentChapterBook)
@@ -79,7 +85,7 @@ class FragmentChapterBook :
         viewModel.goReaderFragment(book = book,
             chapter = position + 1,
             startPage = chapter.pageIdx.toInt(),
-            lastPage = lastPage)
+            lastPage = lastPage, path = path)
     }
 
     override fun loadComplete(nbPages: Int) {

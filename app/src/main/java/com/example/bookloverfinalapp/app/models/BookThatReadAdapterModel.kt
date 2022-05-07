@@ -61,7 +61,7 @@ open class BookThatReadAdapterModel :
     }
 
 
-    interface BookThatReadStringMapper : Abstract.Mapper {
+    interface BookThatReadStringMapper :  Abstract.Mapper {
 
         fun map(message: String)
         fun map(

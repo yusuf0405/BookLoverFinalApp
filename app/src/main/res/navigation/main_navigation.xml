@@ -35,6 +35,9 @@
         <argument
             android:name="book"
             app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="path"
+            app:argType="string" />
         <action
             android:id="@+id/action_student_fragmentChapterBook_to_fragmentReader"
             app:destination="@id/fragmentStudentReader" />
@@ -47,6 +50,9 @@
         <argument
             android:name="book"
             app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="path"
+            app:argType="string" />
         <argument
             android:name="startPage"
             app:argType="integer" />
@@ -99,6 +105,9 @@
         <argument
             android:name="chapter"
             app:argType="integer" />
+        <argument
+            android:name="path"
+            app:argType="string" />
         <action
             android:id="@+id/action_fragmentBookQuestion_to_fragmentChapterBook"
             app:destination="@id/fragmentChapterBook"
@@ -113,7 +122,7 @@
         android:id="@+id/fragmentStudentDetails"
         android:name="com.example.bookloverfinalapp.app.ui.screen_student_details.ui.FragmentStudentDetails"
         android:label="fragment_student_details"
-        tools:layout="@layout/fragment_student_details" >
+        tools:layout="@layout/fragment_student_details">
 
         <argument
             android:name="student"

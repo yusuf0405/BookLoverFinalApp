@@ -1,8 +1,8 @@
-package com.example.data.models.student
+package com.example.data.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UserSignUpRequest(
+data class UserSignUpCloud(
     @SerializedName("name") val name: String,
     @SerializedName("username") val username: String,
     @SerializedName("lastname") val lastname: String,

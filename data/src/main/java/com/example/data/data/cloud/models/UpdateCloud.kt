@@ -1,7 +1,7 @@
-package com.example.data.models.student
+package com.example.data.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
 
-data class UpdateDto(
+data class UpdateCloud(
     @SerializedName("updatedAt") val updatedAt: String,
 )

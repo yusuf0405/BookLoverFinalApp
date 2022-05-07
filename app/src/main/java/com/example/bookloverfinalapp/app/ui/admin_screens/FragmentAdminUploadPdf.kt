@@ -19,6 +19,7 @@ import com.example.bookloverfinalapp.app.utils.cons.FOLDER
 import com.example.bookloverfinalapp.app.utils.cons.PERMISSION_CODE
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.cons.REQUEST_CODE
+import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.databinding.FragmentAdminUploadPdfBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
@@ -27,6 +28,7 @@ import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
 import com.parse.ParseException
 import com.parse.ParseFile
 import com.parse.ParseObject
+import com.parse.SaveCallback
 import com.shockwave.pdfium.PdfDocument
 import com.shockwave.pdfium.PdfiumCore
 import java.io.File
@@ -54,10 +56,7 @@ class FragmentAdminUploadPdf :
         val permissionCheck = ContextCompat.checkSelfPermission(requireContext(),
             READ_EXTERNAL_STORAGE)
         if (permissionCheck != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(
-                requireActivity(), arrayOf(READ_EXTERNAL_STORAGE),
-                PERMISSION_CODE
-            )
+            ActivityCompat.requestPermissions(requireActivity(), arrayOf(READ_EXTERNAL_STORAGE), PERMISSION_CODE)
             return
         }
         launchPicker()
@@ -90,20 +89,19 @@ class FragmentAdminUploadPdf :
             data != null && data.data != null
         ) {
             val uri = data.data!!
-
             requireActivity().contentResolver?.takePersistableUriPermission(uri,
                 Intent.FLAG_GRANT_READ_URI_PERMISSION
             )
             displayFromUri(uri)
             val file = ParseFile(getFile(uri))
-//            file.saveInBackground(SaveCallback {
-//                if (it == null) {
-//                    createObject(file)
-//                } else {
-//                    loadingDialog.dismiss()
-//                    showToast(it.message!!)
-//                }
-//            })
+            file.saveInBackground(SaveCallback {
+                if (it == null) {
+                    createObject(file)
+                } else {
+                    loadingDialog.dismiss()
+                    showToast(it.message!!)
+                }
+            })
             generateImageFromPdf(uri)
         }
     }

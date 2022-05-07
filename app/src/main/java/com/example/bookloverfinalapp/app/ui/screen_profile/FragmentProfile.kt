@@ -1,8 +1,10 @@
 package com.example.bookloverfinalapp.app.ui.screen_profile
 
+import android.content.DialogInterface
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
@@ -14,7 +16,6 @@ import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.File
 
 @AndroidEntryPoint
 class FragmentProfile :
@@ -34,26 +35,45 @@ class FragmentProfile :
         binding().apply {
             editProfileBtn.setOnClickListener(this@FragmentProfile)
             profileLogoutImg.setOnClickListener(this@FragmentProfile)
+            profileLogoutText.setOnClickListener(this@FragmentProfile)
         }
     }
 
     override fun onClick(view: View?) {
         when (view) {
-            binding().profileLogoutImg -> loginOut()
+            binding().profileLogoutImg -> confirmation()
+            binding().profileLogoutText -> confirmation()
             binding().editProfileBtn -> viewModel.goEditProfileFragment()
         }
     }
 
-    private fun loginOut() {
-        viewModel.clearDataInPhone()
-        viewModel.boosId.observe(viewLifecycleOwner) { pathList ->
-            pathList.forEach { path -> File(path).delete() }
-            viewModel.clearDataInCache()
-            CheсkNavigation().observeLogin(status = false, activity = requireActivity())
-            val intent = Intent(requireActivity(), MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-            startActivity(intent)
+    private fun confirmation() {
+        val listener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE -> loginOut()
+                DialogInterface.BUTTON_NEGATIVE -> {}
+                DialogInterface.BUTTON_NEUTRAL -> {}
+            }
         }
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.login_out_title)
+            .setCancelable(true)
+            .setMessage(R.string.default_login_out_alert_message)
+            .setPositiveButton(R.string.action_yes, listener)
+            .setNegativeButton(R.string.action_no, listener)
+            .setNeutralButton(R.string.action_ignore, listener)
+            .create()
+
+        dialog.show()
+    }
+
+    private fun loginOut() {
+        viewModel.clearDataInCache()
+        CheсkNavigation().observeLogin(status = false, activity = requireActivity())
+        val intent = Intent(requireActivity(), MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+
     }
 
     private fun setupUi() {

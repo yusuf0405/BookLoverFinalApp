@@ -2,8 +2,6 @@ package com.example.bookloverfinalapp.app.ui.screen_reader
 
 import android.graphics.Canvas
 import android.os.Bundle
-import android.util.Log
-import android.view.MotionEvent
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.app.base.BaseFragment
@@ -22,7 +20,7 @@ import java.io.File
 class FragmentReader :
     BaseFragment<FragmentReaderBinding, FragmentReaderViewModel>(FragmentReaderBinding::inflate),
     OnLoadCompleteListener, OnErrorListener, OnPageChangeListener, OnDrawListener,
-    View.OnClickListener, OnRenderListener, OnTapListener {
+    View.OnClickListener, OnRenderListener {
     override val viewModel: FragmentReaderViewModel by viewModels()
     override fun onReady(savedInstanceState: Bundle?) {}
 
@@ -37,6 +35,9 @@ class FragmentReader :
     }
     private val chapter: Int by lazy(LazyThreadSafetyMode.NONE) {
         FragmentReaderArgs.fromBundle(requireArguments()).chapter
+    }
+    private val path: String by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentReaderArgs.fromBundle(requireArguments()).path
     }
     private val pages = arrayListOf<Int>()
     private var progress = 0
@@ -57,7 +58,7 @@ class FragmentReader :
         for (i in startPage until lastPage) {
             pages.add(i)
         }
-        binding().pdfview.fromFile(File(book.book))
+        binding().pdfview.fromFile(File(path))
             .spacing(100)
             .pages(*pages.toIntArray())
             .onDraw(this)
@@ -68,7 +69,6 @@ class FragmentReader :
             .onRender(this)
             .enableAnnotationRendering(true)
             .password(null)
-            .onTap(this)
             .onRender(this)
             .scrollHandle(null)
             .load()
@@ -118,21 +118,20 @@ class FragmentReader :
     ) {
     }
 
-    private fun saveChanges(type: Boolean) {
+    private fun saveChanges() {
         if (bookCurrentProgress < progress + 1) {
             viewModel.updateProgress(id = book.objectId,
-                Progress(progress = progress),
-                type = type,
-                book = book,
-                chapter = chapter)
+                Progress(progress = progress))
             bookCurrentProgress = progress
         }
     }
 
     override fun onClick(view: View?) {
         when (view) {
-            binding().endRead -> saveChanges(type = true)
-            binding().saveChanges -> saveChanges(type = false)
+            binding().endRead -> viewModel.goQuestionFragment(book = book,
+                chapter = chapter,
+                path = path)
+            binding().saveChanges -> saveChanges()
             binding().pageBack -> binding().pdfview.jumpTo(binding().pdfview.currentPage - 1)
             binding().pageForward -> binding().pdfview.jumpTo(binding().pdfview.currentPage + 1)
             binding().pageFirst -> binding().pdfview.jumpTo(0)
@@ -142,16 +141,17 @@ class FragmentReader :
     }
 
     override fun onInitiallyRendered(nbPages: Int, pageWidth: Float, pageHeight: Float) {
-        Log.i("pageHeight", pageHeight.toString())
-        Log.i("pageWidth", pageWidth.toString())
         binding().pdfview.fitToWidth()
         binding().pdfview.moveTo(pageHeight, pageWidth)
 
     }
 
-    override fun onTap(e: MotionEvent?): Boolean {
-        TODO("Not yet implemented")
+
+    override fun onPause() {
+        super.onPause()
+        saveChanges()
     }
+
 }
 
 

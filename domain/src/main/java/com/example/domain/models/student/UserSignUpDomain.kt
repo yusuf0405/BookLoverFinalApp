@@ -1,6 +1,6 @@
 package com.example.domain.models.student
 
-data class UserSignUpRes(
+data class UserSignUpDomain(
     val name: String,
     val lastname: String,
     val email: String,

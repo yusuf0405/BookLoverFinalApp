@@ -1,15 +1,15 @@
 package com.example.bookloverfinalapp.app.ui.screen_reader
 
-import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
-import com.example.bookloverfinalapp.app.models.Progress
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
+import com.example.bookloverfinalapp.app.models.Progress
 import com.example.domain.domain.interactor.UpdateProgressUseCase
 import com.example.domain.domain.models.ProgressDomain
 import com.example.domain.models.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,17 +21,13 @@ class FragmentReaderViewModel @Inject constructor(
     fun updateProgress(
         id: String,
         progress: Progress,
-        type: Boolean,
-        book: BookThatRead,
-        chapter: Int,
-    ) {
+    ) = GlobalScope.launch {
         updateProgressStudentBookUseCase.execute(id = id,
-            progress = ProgressDomain(progress = progress.progress)).onEach { resource ->
+            progress = ProgressDomain(progress = progress.progress)).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()
                 Status.SUCCESS -> {
-                    if (type) goQuestionFragment(book = book, chapter = chapter)
-                    else error(message = "Изменение успешно сохронено")
+                    error(message = "Изменение успешно сохронено")
                     dismissProgressDialog()
                 }
                 Status.ERROR -> {
@@ -43,14 +39,15 @@ class FragmentReaderViewModel @Inject constructor(
                     dismissProgressDialog()
                 }
             }
-        }.viewModelScope(viewModelScope = viewModelScope)
+        }
     }
 
 
-    private fun goQuestionFragment(book: BookThatRead, chapter: Int) =
+    fun goQuestionFragment(book: BookThatRead, chapter: Int, path: String) =
         navigate(FragmentReaderDirections.actionStudentFragmentReaderToFragmentBookQuestion(
             book = book,
             chapter = chapter,
+            path = path
         ))
 
     fun goBack() = navigateBack()

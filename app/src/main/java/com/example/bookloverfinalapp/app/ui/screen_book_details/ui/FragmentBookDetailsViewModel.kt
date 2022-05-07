@@ -22,22 +22,9 @@ class FragmentBookDetailsViewModel @Inject constructor(
     private val getMyBookUseCase: GetMyBookUseCase,
     private val mapper: Mapper<BookThatReadDomain, BookThatRead>,
     private val addBookMapper: Mapper<AddNewBookModel, AddNewBookDomain>,
-    private val getBookForReadingUseCase: GetBookForReadingUseCase,
 ) : BaseViewModel() {
 
-    fun go(url: String) = liveData(context = viewModelScope.coroutineContext) {
-        getBookForReadingUseCase.execute(url = url).collectLatest { resource ->
-            when(resource.status){
-                Status.LOADING -> showProgressDialog()
-                Status.SUCCESS -> emit(resource.data!!)
-                else -> {
-                    dismissProgressDialog()
-                    error(message = resource.message!!)
-                }
-            }
 
-        }
-    }
 
 
     fun chekIsMyBook(id: String) = liveData {

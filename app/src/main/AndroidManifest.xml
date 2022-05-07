@@ -19,7 +19,7 @@
         android:theme="@style/Theme.KnigolyubApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".app.ui.general_screens.screen_splash.ActivitySplash"
+            android:name=".app.ui.ActivitySplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

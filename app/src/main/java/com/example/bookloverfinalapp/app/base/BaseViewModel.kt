@@ -9,7 +9,9 @@ import com.example.bookloverfinalapp.app.utils.communication.*
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 
+
 abstract class BaseViewModel : ViewModel() {
+
     private var progressCommunication = ProgressCommunication.Base()
 
     private var errorCommunication = ErrorCommunication.Base()
@@ -38,21 +40,21 @@ abstract class BaseViewModel : ViewModel() {
         networkErrorCommunication.observe(owner = owner, observer = observer)
 
     fun navigate(navDirections: NavDirections) =
-        navigationCommunication.map(Event(NavigationCommand.ToDirection(navDirections)))
+        navigationCommunication.put(Event(NavigationCommand.ToDirection(navDirections)))
 
-    fun navigateBack() = navigationCommunication.map(Event(value = NavigationCommand.Back))
+    fun navigateBack() = navigationCommunication.put(Event(value = NavigationCommand.Back))
 
-    fun error(message: String) = errorCommunication.map(Event(value = message))
+    fun error(message: String) = errorCommunication.put(Event(value = message))
 
 
-    fun networkError() = networkErrorCommunication.map(Event(value = true))
+    fun networkError() = networkErrorCommunication.put(Event(value = true))
 
-    fun showProgressAnimation() = progressCommunication.map(Event(value = true))
+    fun showProgressAnimation() = progressCommunication.put(Event(value = true))
 
-    fun dismissProgressAnimation() = progressCommunication.map(Event(value = false))
+    fun dismissProgressAnimation() = progressCommunication.put(Event(value = false))
 
-    fun showProgressDialog() = progressDialogCommunication.map(source = Event(true))
+    fun showProgressDialog() = progressDialogCommunication.put(source = Event(true))
 
-    fun dismissProgressDialog() = progressDialogCommunication.map(source = Event(false))
+    fun dismissProgressDialog() = progressDialogCommunication.put(source = Event(false))
 }
 

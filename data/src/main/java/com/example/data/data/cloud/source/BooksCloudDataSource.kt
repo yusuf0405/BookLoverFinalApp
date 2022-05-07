@@ -1,5 +1,6 @@
 package com.example.data.data.cloud.source
 
+import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
 import com.example.data.data.cloud.models.BookCloud
 import com.example.data.data.cloud.models.BookQuestionCloud
@@ -23,10 +24,12 @@ interface BooksCloudDataSource {
         private val service: BookService,
         private val bookCloudMapper: Mapper<BookCloud, BookData>,
         private val questionCloudMapper: Mapper<BookQuestionCloud, BookQuestionData>,
-    ) : BooksCloudDataSource, BaseApiResponse() {
+        resourceProvider: ResourceProvider,
+    ) : BooksCloudDataSource, BaseApiResponse(resourceProvider = resourceProvider) {
 
         override suspend fun fetchBooks(): Resource<List<BookData>> {
-            val response = safeApiCall { service.fetchAllBooks() }
+            val response =
+                safeApiCall() { service.fetchAllBooks() }
             return if (response.status == Status.SUCCESS) {
                 val bookData =
                     response.data!!.books.map { bookCloud -> bookCloudMapper.map(bookCloud) }

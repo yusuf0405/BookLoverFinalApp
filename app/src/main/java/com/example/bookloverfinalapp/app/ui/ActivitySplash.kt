@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.ui.general_screens.screen_splash
+package com.example.bookloverfinalapp.app.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity

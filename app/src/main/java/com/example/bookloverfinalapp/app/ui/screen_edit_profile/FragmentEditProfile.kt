@@ -17,7 +17,7 @@ import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentEditProfileBinding
-import com.example.domain.models.student.StudentUpdateRes
+import com.example.domain.models.student.UserUpdateDomain
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.ParseFile
 import com.parse.SaveCallback
@@ -152,7 +152,7 @@ class FragmentEditProfile :
 
     private fun updateStudent() {
         binding().apply {
-            val student = StudentUpdateRes(
+            val student = UserUpdateDomain(
                 gender = gender,
                 name = editStudentName.text.toString(),
                 lastname = editStudentLastName.text.toString(),
@@ -161,7 +161,7 @@ class FragmentEditProfile :
                 image = image!!.toDto()
             )
             viewModel.updateStudent(id = this@FragmentEditProfile.student.id,
-                student = student, sessionToken = currentUser.sessionToken)
+                user = student, sessionToken = currentUser.sessionToken)
                 .observe(viewLifecycleOwner) { successUpdated() }
         }
     }

@@ -9,8 +9,9 @@ interface UsersCacheDataSource {
 
     suspend fun fetchMyStudents(): List<StudentDb>
 
-    suspend fun saveUsers(users: List<StudentData>)
+    suspend fun saveStudents(users: List<StudentData>)
 
+    suspend fun clearStudents()
     class Base(
         private val dao: UsersDao,
         private val dataMapper: Mapper<StudentData, StudentDb>,
@@ -19,8 +20,10 @@ interface UsersCacheDataSource {
 
         override suspend fun fetchMyStudents(): List<StudentDb> = dao.getAllUsers()
 
-        override suspend fun saveUsers(users: List<StudentData>) {
+        override suspend fun saveStudents(users: List<StudentData>) {
             users.forEach { userData -> dao.addNewUser(user = dataMapper.map(userData)) }
         }
+
+        override suspend fun clearStudents() = dao.clearTable()
     }
 }

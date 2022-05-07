@@ -1,13 +1,21 @@
 package com.example.data.data.cloud.source
 
+import com.example.data.R
+import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
 import com.example.data.data.cloud.mappers.StudentBookMapper
 import com.example.data.data.cloud.mappers.UserMapper
+import com.example.data.data.cloud.models.UpdateCloud
+import com.example.data.data.cloud.models.UserUpdateCloud
 import com.example.data.data.cloud.service.UserService
 import com.example.data.data.models.StudentData
 import com.example.data.data.models.UserImageData
+import com.example.domain.domain.Mapper
 import com.example.domain.models.Resource
+import com.example.domain.models.student.UpdateAnswerDomain
+import com.example.domain.models.student.UserUpdateDomain
 import retrofit2.HttpException
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -15,9 +23,18 @@ interface UsersCloudDataSource {
 
     suspend fun fetchMyStudents(className: String, schoolName: String): Resource<List<StudentData>>
 
+    suspend fun updateUser(
+        id: String,
+        user: UserUpdateDomain,
+        sessionToken: String,
+    ): Resource<UpdateAnswerDomain>
+
     class Base(
         private val service: UserService,
-    ) : UsersCloudDataSource, BaseApiResponse() {
+        private val userToDataMapper: Mapper<UserUpdateDomain, UserUpdateCloud>,
+        private val updateMapper: Mapper<UpdateCloud, UpdateAnswerDomain>,
+     private val  resourceProvider: ResourceProvider,
+    ) : UsersCloudDataSource, BaseApiResponse(resourceProvider = resourceProvider) {
 
         override suspend fun fetchMyStudents(
             className: String,
@@ -73,11 +90,22 @@ interface UsersCloudDataSource {
 
         } catch (e: Exception) {
             when (e) {
-                is UnknownHostException -> Resource.error(message = "Нету подключение к интернету")
-                is SocketTimeoutException -> Resource.error(message = "Нету подключение к интернету")
-                is HttpException -> Resource.error(message = "Ошибка Сервера")
-                else -> Resource.error(message = "Что то пошло не так")
+                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
+                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
             }
+        }
+
+        override suspend fun updateUser(
+            id: String,
+            user: UserUpdateDomain,
+            sessionToken: String,
+        ): Resource<UpdateAnswerDomain> = safeApiMapperCall(mapper = updateMapper) {
+            service.updateUser(sessionToken = sessionToken,
+                id = id,
+                student = userToDataMapper.map(user))
         }
     }
 }

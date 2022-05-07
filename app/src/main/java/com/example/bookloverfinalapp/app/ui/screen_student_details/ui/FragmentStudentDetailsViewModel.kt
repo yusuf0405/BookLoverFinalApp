@@ -27,15 +27,15 @@ class FragmentStudentDetailsViewModel @Inject constructor(
     fun fetchMyBook(id: String) = dispatchers.launchInBackground(viewModelScope) {
         myStudentBooksUseCase.execute(id).collectLatest { resource ->
             when (resource.status) {
-                Status.LOADING -> communication.map(listOf(BookThatReadAdapterModel.Progress))
+                Status.LOADING -> communication.put(listOf(BookThatReadAdapterModel.Progress))
                 Status.SUCCESS -> {
                     val bookList =
                         resource.data!!.map { studentBookDomain -> mapper.map(studentBookDomain) }
-                    if (bookList.isEmpty()) communication.map(listOf(BookThatReadAdapterModel.Empty))
-                    else communication.map(bookList)
+                    if (bookList.isEmpty()) communication.put(listOf(BookThatReadAdapterModel.Empty))
+                    else communication.put(bookList)
                 }
                 Status.ERROR ->
-                    communication.map(listOf(BookThatReadAdapterModel.Fail(resource.message!!)))
+                    communication.put(listOf(BookThatReadAdapterModel.Fail(resource.message!!)))
 
                 Status.NETWORK_ERROR -> {}
             }

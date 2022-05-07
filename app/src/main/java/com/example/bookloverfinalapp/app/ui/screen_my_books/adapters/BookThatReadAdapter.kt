@@ -136,7 +136,8 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                             .load(poster.url)
                             .into(bookImage)
                         itemView.setOnLongClickListener {
-                            actionListener.deleteBook(id = objectId, position = position)
+                            actionListener.deleteBook(id = objectId,
+                                position = position)
                             false
                         }
                         itemView.setOnClickListener {

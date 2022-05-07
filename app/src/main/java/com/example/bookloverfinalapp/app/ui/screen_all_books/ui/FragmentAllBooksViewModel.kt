@@ -32,11 +32,10 @@ class FragmentAllBooksViewModel @Inject constructor(
     fun fetchBooks() = dispatchers.launchInBackground(viewModelScope) {
         useCaseGetAll.execute().collectLatest { resource ->
             when (resource.status) {
-                Status.LOADING -> communication.map(listOf(BookAdapterModel.Progress))
-                Status.SUCCESS ->
-                    communication.map(resource.data!!.map { bookDomain -> mapper.map(bookDomain) })
-                Status.ERROR -> communication.map(listOf(BookAdapterModel.Fail(resource.message!!)))
-                Status.NETWORK_ERROR -> {}
+                Status.LOADING -> communication.put(listOf(BookAdapterModel.Progress))
+                Status.SUCCESS -> communication.put(resource.data!!.map { bookDomain -> mapper.map(bookDomain) })
+                Status.EMPTY -> communication.put(listOf(BookAdapterModel.Empty))
+                Status.ERROR -> communication.put(listOf(BookAdapterModel.Fail(resource.message!!)))
             }
         }
     }

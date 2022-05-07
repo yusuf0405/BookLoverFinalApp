@@ -16,7 +16,6 @@ import com.example.domain.domain.models.ProgressDomain
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.models.Resource
 import com.example.domain.models.Status
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
@@ -35,16 +34,18 @@ class BookThatReadRepositoryImpl(
             val response = cloudDataSource.fetchMyBooks(id = id)
             if (response.status == Status.SUCCESS) {
                 val booksDataList = response.data!!
-                cacheDataSource.saveBooks(books = booksDataList)
-                val booksDomain =
-                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-                emit(Resource.success(data = booksDomain))
+                if (booksDataList.isEmpty()) emit(Resource.empty())
+                else {
+                    cacheDataSource.saveBooks(books = booksDataList)
+                    val bookDomain = booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+                    emit(Resource.success(data = bookDomain))
+                }
             } else emit(Resource.error(message = response.message))
         } else {
-            val booksData =
-                booksCacheList.map { studentBookDb -> bookCashMapper.map(studentBookDb) }
+            val booksData = booksCacheList.map { bookDb -> bookCashMapper.map(bookDb) }
             val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
-            emit(Resource.success(data = booksDomain))
+            if (booksDomain.isEmpty()) emit(Resource.empty())
+            else emit(Resource.success(data = booksDomain))
         }
     }
 
@@ -114,7 +115,8 @@ class BookThatReadRepositoryImpl(
         val response = cloudDataSource.fetchMyBooks(id = id)
         if (response.status == Status.SUCCESS) {
             val booksDataList = response.data!!
-            val booksDomain = booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+            val booksDomain =
+                booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
             emit(Resource.success(data = booksDomain))
         } else emit(Resource.error(message = response.message))
     }

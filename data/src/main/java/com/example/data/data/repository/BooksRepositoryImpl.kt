@@ -11,7 +11,6 @@ import com.example.domain.domain.models.BookQuestionDomain
 import com.example.domain.domain.repository.BooksRepository
 import com.example.domain.models.Resource
 import com.example.domain.models.Status
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.BufferedInputStream
@@ -35,14 +34,18 @@ class BooksRepositoryImpl(
             val result = cloudDataSource.fetchBooks()
             if (result.status == Status.SUCCESS) {
                 val booksData = result.data!!
-                cacheDataSource.saveBooks(books = booksData)
-                val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
-                emit(Resource.success(data = booksDomain))
+                if (booksData.isEmpty()) emit(Resource.empty())
+                else {
+                    cacheDataSource.saveBooks(books = booksData)
+                    val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
+                    emit(Resource.success(data = booksDomain))
+                }
             } else emit(Resource.error(message = result.message))
         } else {
             val booksData = booksCacheList.map { bookDb -> bookCashMapper.map(bookDb) }
             val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
-            emit(Resource.success(data = booksDomain))
+            if (booksDomain.isEmpty()) emit(Resource.empty())
+            else emit(Resource.success(data = booksDomain))
         }
     }
 

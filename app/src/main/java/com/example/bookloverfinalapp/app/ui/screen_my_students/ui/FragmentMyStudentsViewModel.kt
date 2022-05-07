@@ -21,7 +21,7 @@ class FragmentMyStudentsViewModel @Inject constructor(
     private val getMyStudentsUseCase: GetMyStudentsUseCase,
     private val communication: StudentCommunication,
     private val mapper: Mapper<StudentDomain, StudentAdapterModel.Base>,
-) : BaseViewModel() {
+    ) : BaseViewModel() {
 
     fun observe(owner: LifecycleOwner, observer: Observer<List<StudentAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
@@ -35,16 +35,16 @@ class FragmentMyStudentsViewModel @Inject constructor(
             getMyStudentsUseCase.execute(className = className, schoolName = schoolName)
                 .collectLatest { resource ->
                     when (resource.status) {
-                        Status.LOADING -> communication.map(listOf(StudentAdapterModel.Progress))
-                        Status.SUCCESS -> {
-                            val students =
-                                resource.data!!.map { studentDomain -> mapper.map(studentDomain) }
-                            if (students.isEmpty()) communication.map(listOf(StudentAdapterModel.Empty))
-                            else communication.map(students)
-                        }
-                        else -> communication.map(listOf(StudentAdapterModel.Fail(resource.message!!)))
+                        Status.LOADING -> communication.put(listOf(StudentAdapterModel.Progress))
+                        Status.SUCCESS -> communication.put(resource.data!!.map { studentDomain ->
+                            mapper.map(studentDomain)
+                        })
+                        Status.EMPTY -> communication.put(listOf(StudentAdapterModel.Empty))
+                        Status.ERROR -> communication.put(listOf(StudentAdapterModel.Fail(resource.message!!)))
 
                     }
                 }
         }
+
+
 }

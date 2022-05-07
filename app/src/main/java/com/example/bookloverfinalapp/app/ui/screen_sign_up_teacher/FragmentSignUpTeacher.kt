@@ -18,7 +18,7 @@ import com.example.bookloverfinalapp.databinding.FragmentSignUpTeacherBinding
 import com.example.domain.domain.models.UserDomainImage
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpRes
+import com.example.domain.models.student.UserSignUpDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -42,9 +42,8 @@ class FragmentSignUpTeacher :
     private val schoolsTitleList = mutableListOf<String>()
     private var schoolsList = mutableListOf<School>()
     private var schoolCurrentIndex = 0
-
-
     private var schoolTitle = ""
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setOnClickListeners()
@@ -65,9 +64,10 @@ class FragmentSignUpTeacher :
     private fun observeRecourse() {
         viewModel.schools.onEach { schools ->
             schoolsList = schools.toMutableList()
-            viewModel.getClasses(schoolsList[schoolCurrentIndex].classesIds)
             schools.forEach { schoolsTitleList.add(it.title) }
-            binding().schoolTextView.text = schoolsTitleList[0]
+            schoolTitle = schoolsTitleList[schoolCurrentIndex]
+            binding().schoolTextView.text = schoolsTitleList[schoolCurrentIndex]
+            schoolTitle = schoolsTitleList[schoolCurrentIndex]
             viewModel.getClasses(schoolsList[schoolCurrentIndex].classesIds)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
@@ -100,7 +100,7 @@ class FragmentSignUpTeacher :
             else if (!passwordField.validatePassword()) showToast(message = getString(R.string.password_input_format_error))
             else if (!phoneField.validatePhone()) showToast(message = getString(R.string.phone_input_format_error))
             else {
-                val teacherDto = UserSignUpRes(
+                val teacherDto = UserSignUpDomain(
                     name = firstNameField.text.toString(),
                     lastname = lastNameField.text.toString(),
                     email = emailField.text.toString(),

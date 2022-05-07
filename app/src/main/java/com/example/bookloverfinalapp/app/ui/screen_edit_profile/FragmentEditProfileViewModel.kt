@@ -3,8 +3,8 @@ package com.example.bookloverfinalapp.app.ui.screen_edit_profile
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.domain.models.Status
-import com.example.domain.models.student.StudentUpdateRes
-import com.example.domain.usecase.UpdateUserUseCase
+import com.example.domain.models.student.UserUpdateDomain
+import com.example.domain.domain.interactor.UpdateUserUseCase
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
@@ -17,10 +17,10 @@ class FragmentEditProfileViewModel @Inject constructor(
 
     fun updateStudent(
         id: String,
-        student: StudentUpdateRes,
+        user: UserUpdateDomain,
         sessionToken: String,
     ) = liveData(context = viewModelScope.coroutineContext) {
-        updateUserUseCase.execute(id = id, student = student, sessionToken = sessionToken)
+        updateUserUseCase.execute(id = id, user = user, sessionToken = sessionToken)
             .collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()

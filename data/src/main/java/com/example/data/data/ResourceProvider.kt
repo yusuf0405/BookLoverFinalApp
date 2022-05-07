@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.utils
+package com.example.data.data
 
 import android.content.Context
 import androidx.annotation.StringRes

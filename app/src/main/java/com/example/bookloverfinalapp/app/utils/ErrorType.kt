@@ -1,6 +1,7 @@
 package com.example.bookloverfinalapp.app.utils
 
 import com.example.bookloverfinalapp.R
+import com.example.data.data.ResourceProvider
 import retrofit2.HttpException
 import java.net.UnknownHostException
 import javax.inject.Inject

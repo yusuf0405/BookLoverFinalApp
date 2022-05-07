@@ -1,5 +1,5 @@
 package com.example.domain.models.student
 
-data class UpdateAnswer(
+data class UpdateAnswerDomain(
     val updatedAt: String,
 )

@@ -34,12 +34,12 @@ class FragmentBookQuestionViewModel @Inject constructor(
                 started = SharingStarted.Lazily,
                 initialValue = Resource.loading())
 
-    fun goChapterFragment(book: BookThatRead) {
+    fun goChapterFragment(book: BookThatRead, path: String) {
         navigate(FragmentBookQuestionDirections.actionFragmentBookQuestionToFragmentChapterBook(
-            book = book))
+            book = book, path = path))
     }
 
-    fun updateChapters(id: String, chapters: Chapters, book: BookThatRead) {
+    fun updateChapters(id: String, chapters: Chapters, book: BookThatRead, path: String) {
         updateChaptersUseCase.execute(id = id,
             chaptersDomain = ChaptersDomain(chaptersRead = chapters.chapters,
                 isReadingPages = chapters.isReadingPages))
@@ -48,12 +48,12 @@ class FragmentBookQuestionViewModel @Inject constructor(
                     Status.LOADING -> showProgressDialog()
                     Status.SUCCESS -> {
                         dismissProgressDialog()
-                        goChapterFragment(book = book)
+                        goChapterFragment(book = book, path = path)
                     }
                     else -> {
                         dismissProgressDialog()
                         error(message = resource.message!!)
-                        goChapterFragment(book = book)
+                        goChapterFragment(book = book, path = path)
                     }
                 }
 

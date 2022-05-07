@@ -1,17 +1,16 @@
 package com.example.data
 
-import com.example.data.data.cloud.models.UserCloud
-import com.example.data.data.cloud.models.UserImageCloud
+import com.example.data.data.cloud.models.*
 import com.example.data.data.models.UserData
 import com.example.data.data.models.UserImageData
 import com.example.data.models.classes.ClassDto
 import com.example.data.models.school.SchoolDto
-import com.example.data.models.student.*
 import com.example.domain.domain.models.UserDomain
 import com.example.domain.domain.models.UserDomainImage
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.*
+import com.example.domain.models.student.PostRequestAnswerDomain
 import com.parse.ParseFile
 
 internal fun UserCloud.toUser(): UserDomain =
@@ -46,15 +45,15 @@ internal fun UserData.toStudentNoImage(): UserDomain =
         userType = userType, sessionToken = sessionToken
     )
 
-internal fun StudentAddBook.toRequestBook(): StudentAddBookRequest =
-    StudentAddBookRequest(books = books)
+internal fun StudentAddBookDomain.toRequestBook(): StudentAddBookCloud =
+    StudentAddBookCloud(books = books)
 
-internal fun StudentAddBookRequest.toBook(): StudentAddBook =
-    StudentAddBook(books = books)
+internal fun StudentAddBookCloud.toBook(): StudentAddBookDomain =
+    StudentAddBookDomain(books = books)
 
 
-internal fun UserSignUpRes.toDtoSignUp(): UserSignUpRequest =
-    UserSignUpRequest(
+internal fun UserSignUpDomain.toDtoSignUp(): UserSignUpCloud =
+    UserSignUpCloud(
         name = name,
         lastname = lastname,
         email = email,
@@ -69,8 +68,8 @@ internal fun UserSignUpRes.toDtoSignUp(): UserSignUpRequest =
     )
 
 
-internal fun StudentUpdateRes.toDtoStudent(): UserUpdateRequest =
-    UserUpdateRequest(
+internal fun UserUpdateDomain.toDtoStudent(): UserUpdateCloud =
+    UserUpdateCloud(
         image = image.toDtoImage(),
         lastname = lastname,
         name = name,
@@ -80,13 +79,13 @@ internal fun StudentUpdateRes.toDtoStudent(): UserUpdateRequest =
     )
 
 
-internal fun UpdateAnswer.toDtoUpdate(): UpdateDto =
-    UpdateDto(
+internal fun UpdateAnswerDomain.toDtoUpdate(): UpdateCloud =
+    UpdateCloud(
         updatedAt = updatedAt
     )
 
-internal fun UpdateDto.toDtoUpdate(): UpdateAnswer =
-    UpdateAnswer(
+internal fun UpdateCloud.toDtoUpdate(): UpdateAnswerDomain =
+    UpdateAnswerDomain(
         updatedAt = updatedAt
     )
 
@@ -128,8 +127,8 @@ internal fun SchoolDto.toSchool(): School =
         classesIds = classes,
     )
 
-internal fun PostRequestAnswerDto.toRequestAnswer(): PostRequestAnswer =
-    PostRequestAnswer(
+internal fun SignUpAnswerCloud.toRequestAnswer(): PostRequestAnswerDomain =
+    PostRequestAnswerDomain(
         id = objectId,
         createdAt = createdAt,
         sessionToken = sessionToken,

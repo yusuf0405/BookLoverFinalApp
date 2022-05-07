@@ -9,11 +9,18 @@ import javax.inject.Inject
 class FragmentStudentChapterBookViewModel @Inject constructor(
 ) : BaseViewModel() {
 
-    fun goReaderFragment(book: BookThatRead, startPage: Int, lastPage: Int, chapter: Int) =
+    fun goReaderFragment(
+        book: BookThatRead,
+        startPage: Int,
+        lastPage: Int,
+        chapter: Int,
+        path: String,
+    ) =
         navigate(FragmentChapterBookDirections.actionStudentFragmentChapterBookToFragmentReader(book = book,
             startPage = startPage,
             lastPage = lastPage,
-            chapter = chapter))
+            chapter = chapter,
+            path = path))
 
     fun goBack() = navigateBack()
 }

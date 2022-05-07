@@ -30,11 +30,12 @@ class FragmentProgressViewModel @Inject constructor(
                 Status.LOADING -> showProgressAnimation()
                 Status.SUCCESS -> {
                     dismissProgressAnimation()
-                    communication.map(resource.data!!.map { studentBookDomain ->
+                    communication.put(resource.data!!.map { studentBookDomain ->
                         mapper.map(studentBookDomain)
                     })
                 }
-                else -> {
+                Status.EMPTY -> dismissProgressAnimation()
+                Status.ERROR -> {
                     error(message = resource.message!!)
                     dismissProgressAnimation()
                 }

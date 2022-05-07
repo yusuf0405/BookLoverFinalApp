@@ -1,18 +1,21 @@
 package com.example.data.data.cloud.source
 
+import com.example.data.R
+import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
 import com.example.data.data.cloud.mappers.BookMapper
 import com.example.data.data.cloud.mappers.BookThatReadMapper
 import com.example.data.data.cloud.models.AddNewBookCloud
-import com.example.data.data.cloud.models.PostRequestAnswer
+import com.example.data.data.cloud.models.PostRequestAnswerCloud
 import com.example.data.data.cloud.models.UpdateChaptersCloud
 import com.example.data.data.cloud.models.UpdateProgressCloud
 import com.example.data.data.cloud.service.BookThatReadService
+import com.example.data.data.models.BookThatReadData
 import com.example.data.data.models.ChaptersData
 import com.example.data.data.models.ProgressData
-import com.example.data.data.models.BookThatReadData
 import com.example.domain.models.Resource
 import retrofit2.HttpException
+import java.net.ConnectException
 import java.net.SocketTimeoutException
 import java.net.UnknownHostException
 
@@ -22,7 +25,7 @@ interface BooksThatReadCloudDataSource {
 
     suspend fun deleteBook(id: String): Resource<Unit>
 
-    suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswer>
+    suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud>
 
     suspend fun updateProgress(id: String, progress: ProgressData): Resource<Unit>
 
@@ -31,8 +34,9 @@ interface BooksThatReadCloudDataSource {
 
     class Base(
         private val thatReadService: BookThatReadService,
+        private val resourceProvider: ResourceProvider,
     ) : BooksThatReadCloudDataSource,
-        BaseApiResponse() {
+        BaseApiResponse(resourceProvider = resourceProvider) {
 
         override suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>> = try {
             val bookList = mutableListOf<BookThatReadData>()
@@ -41,7 +45,8 @@ interface BooksThatReadCloudDataSource {
 
             booksThatReadCloud.body()!!.books.forEach { booksThatRead ->
 
-                val response = thatReadService.getBook(id = "{\"objectId\":\"${booksThatRead.bookId}\"}")
+                val response =
+                    thatReadService.getBook(id = "{\"objectId\":\"${booksThatRead.bookId}\"}")
 
                 val bookCloud = response.body()!!.books[0]
 
@@ -70,18 +75,20 @@ interface BooksThatReadCloudDataSource {
             Resource.success(bookList)
         } catch (e: Exception) {
             when (e) {
-                is UnknownHostException -> Resource.error(message = "Нету подключение к интернету")
-                is SocketTimeoutException -> Resource.error(message = "Нету подключение к интернету")
-                is HttpException -> Resource.error(message = "Ошибка Сервера")
-                else -> Resource.error(message = "Что то пошло не так")
+                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
+                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
+                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
             }
         }
 
 
-        override suspend fun deleteBook(id: String) = safeApiCall { thatReadService.deleteMyBook(id = id) }
+        override suspend fun deleteBook(id: String) =
+            safeApiCall { thatReadService.deleteMyBook(id = id) }
 
 
-        override suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswer> =
+        override suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud> =
             safeApiCall { thatReadService.addNewBookStudent(book = book) }
 
         override suspend fun updateProgress(id: String, progress: ProgressData): Resource<Unit> =

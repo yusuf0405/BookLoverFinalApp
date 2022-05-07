@@ -3,6 +3,7 @@ package com.example.bookloverfinalapp.app.di
 import com.example.domain.domain.interactor.*
 import com.example.domain.domain.repository.BookThatReadRepository
 import com.example.domain.domain.repository.BooksRepository
+import com.example.domain.domain.repository.LoginRepository
 import com.example.domain.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -67,8 +68,23 @@ object InteractorModule {
         UpdateProgressUseCase(repository = repository)
 
     @Provides
-    fun provideUpdateStudentUseCase(repository: UserRepository): GetMyStudentsUseCase =
+    fun provideGetMyStudentsUseCase(repository: UserRepository): GetMyStudentsUseCase =
         GetMyStudentsUseCase(repository = repository)
 
+    @Provides
+    fun provideClearStudentsCacheUseCase(repository: UserRepository): ClearStudentsCacheUseCase =
+        ClearStudentsCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideUpdateUserUseCase(repository: UserRepository): UpdateUserUseCase =
+        UpdateUserUseCase(repository = repository)
+
+    @Provides
+    fun provideSignUpUseCase(repository: LoginRepository): SignUpUseCase =
+        SignUpUseCase(repository = repository)
+
+    @Provides
+    fun provideSignInUseCase(repository: LoginRepository): SignInUseCase =
+        SignInUseCase(repository = repository)
 
 }

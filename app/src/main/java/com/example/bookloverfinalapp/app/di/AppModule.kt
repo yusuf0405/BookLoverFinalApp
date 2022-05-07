@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
 import com.example.bookloverfinalapp.app.utils.Dispatchers
-import com.example.bookloverfinalapp.app.utils.ResourceProvider
+import com.example.data.data.ResourceProvider
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

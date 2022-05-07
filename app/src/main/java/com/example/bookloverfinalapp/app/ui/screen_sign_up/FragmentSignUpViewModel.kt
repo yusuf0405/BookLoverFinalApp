@@ -7,10 +7,10 @@ import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
 import com.example.domain.models.Status
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpRes
+import com.example.domain.models.student.UserSignUpDomain
 import com.example.domain.usecase.GetAllSchoolsUseCase
 import com.example.domain.usecase.GetClassUseCase
-import com.example.domain.usecase.SignUpUseCase
+import com.example.domain.domain.interactor.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
@@ -49,7 +49,7 @@ class FragmentSignUpViewModel @Inject constructor(
         }.viewModelScope(viewModelScope = viewModelScope)
     }
 
-    fun signUp(user: UserSignUpRes) = liveData(context = viewModelScope.coroutineContext) {
+    fun signUp(user: UserSignUpDomain) = liveData(context = viewModelScope.coroutineContext) {
         signUpUseCase.execute(user = user).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()

@@ -2,7 +2,7 @@ package com.example.domain.models.student
 
 import com.example.domain.domain.models.UserDomainImage
 
-data class StudentUpdateRes(
+data class UserUpdateDomain(
     var image: UserDomainImage,
     var email: String,
     var gender: String,

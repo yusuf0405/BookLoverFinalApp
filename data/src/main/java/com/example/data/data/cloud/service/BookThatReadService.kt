@@ -26,7 +26,7 @@ interface BookThatReadService {
     @POST("classes/BooksThatRead")
     suspend fun addNewBookStudent(
         @Body book: AddNewBookCloud,
-    ): Response<PostRequestAnswer>
+    ): Response<PostRequestAnswerCloud>
 
 
     @PUT("classes/BooksThatRead/{id}")

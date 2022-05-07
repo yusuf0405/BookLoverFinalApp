@@ -1,41 +1,35 @@
 package com.example.data.data.repository
 
-import com.example.data.api.KnigolyubApi
+import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
+import com.example.data.data.cloud.models.SignUpAnswerCloud
+import com.example.data.data.cloud.models.UserCloud
+import com.example.data.data.cloud.service.LoginService
 import com.example.data.toDtoSignUp
-import com.example.data.toRequestAnswer
-import com.example.data.toUser
-import com.example.domain.models.Resource
-import com.example.domain.models.Status.*
-import com.example.domain.models.student.PostRequestAnswer
+import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.UserDomain
-import com.example.domain.models.student.UserSignUpRes
 import com.example.domain.domain.repository.LoginRepository
+import com.example.domain.models.Resource
+import com.example.domain.models.student.PostRequestAnswerDomain
+import com.example.domain.models.student.UserSignUpDomain
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 
-class LoginRepositoryImpl(private val api: KnigolyubApi) : LoginRepository, BaseApiResponse() {
+class LoginRepositoryImpl(
+    private val service: LoginService,
+    private val signInMapper: Mapper<UserCloud, UserDomain>,
+    private val signUpMapper: Mapper<SignUpAnswerCloud, PostRequestAnswerDomain>,
+    resourceProvider: ResourceProvider,
+) : LoginRepository, BaseApiResponse(resourceProvider = resourceProvider) {
 
     override fun signIn(email: String, password: String): Flow<Resource<UserDomain>> = flow {
         emit(Resource.loading())
-        val result = safeApiCall { api.signIn(session = 1, username = email, password = password) }
-        when (result.status) {
-            SUCCESS -> emit(Resource.success(data = result.data!!.toUser()))
-            ERROR -> emit(Resource.error(message = result.message))
-            NETWORK_ERROR -> emit(Resource.networkError())
-            LOADING -> TODO()
-        }
+        emit(safeApiMapperCall(mapper = signInMapper) {
+            service.signIn(session = 1, username = email, password = password) })
     }
 
-
-    override fun signUp(user: UserSignUpRes): Flow<Resource<PostRequestAnswer>> = flow {
+    override fun signUp(user: UserSignUpDomain): Flow<Resource<PostRequestAnswerDomain>> = flow {
         emit(Resource.loading())
-        val result = safeApiCall { api.signUp(session = 1, user = user.toDtoSignUp()) }
-        when (result.status) {
-            SUCCESS -> emit(Resource.success(data = result.data!!.toRequestAnswer()))
-            ERROR -> emit(Resource.error(message = result.message))
-            NETWORK_ERROR -> emit(Resource.networkError())
-            LOADING -> TODO()
-        }
+        emit(safeApiMapperCall(mapper = signUpMapper) { service.signUp(session = 1, user = user.toDtoSignUp()) })
     }
 }
