@@ -13,7 +13,8 @@ class UserUpdateToCloudMapper : Mapper<UserUpdateDomain, UserUpdateCloud>() {
             name = name,
             gender = gender,
             email = email,
-            number = number)
+            number = number,
+            username = email)
     }
 
     private fun UserDomainImage.toDtoImage(): UserImageCloud =

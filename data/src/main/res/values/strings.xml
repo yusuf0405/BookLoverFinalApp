@@ -3,4 +3,6 @@
     <string name="network_error">Нету подключение к интернету.</string>
     <string name="generic_error">Что то пошло не так.</string>
     <string name="service_unavailable">Ошибка Сервера.</string>
+    <string name="account_already">Учетная запись для этого имени пользователя уже существует.</string>
+    <string name="invalid_email_password">Неверное имя пользователя или пароль.</string>
 </resources>

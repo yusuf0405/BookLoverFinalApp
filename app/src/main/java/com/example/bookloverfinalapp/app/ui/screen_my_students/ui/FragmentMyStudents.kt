@@ -52,6 +52,4 @@ class FragmentMyStudents :
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()
     }
-
-
 }

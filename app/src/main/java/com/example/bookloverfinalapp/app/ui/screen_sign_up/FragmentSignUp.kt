@@ -1,12 +1,14 @@
 package com.example.bookloverfinalapp.app.ui.screen_sign_up
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.databinding.FragmentSignUpBinding
+import org.json.JSONObject
 
 class FragmentSignUp : Fragment(), View.OnClickListener {
 

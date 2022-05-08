@@ -113,9 +113,18 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksId: List<String>,
                         image: StudentImage,
                     ) {
-                        if (progress == 0) progressText.hideView()
-                        if (chaptersRead == 0) chaptersReadText.hideView()
-                        if (booksRead == 0) booksReadText.hideView()
+                        if (progress == 0) {
+                            progressText.hideView()
+                            progressImage.hideView()
+                        }
+                        if (chaptersRead == 0) {
+                            chaptersReadText.hideView()
+                            chaptersReadImage.hideView()
+                        }
+                        if (booksRead == 0) {
+                            booksReadText.hideView()
+                            booksReadImage.hideView()
+                        }
                         lastNameText.text = lastname
                         nameText.text = name
                         chaptersReadText.text = chaptersRead.toString()

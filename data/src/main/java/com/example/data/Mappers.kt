@@ -68,17 +68,6 @@ internal fun UserSignUpDomain.toDtoSignUp(): UserSignUpCloud =
     )
 
 
-internal fun UserUpdateDomain.toDtoStudent(): UserUpdateCloud =
-    UserUpdateCloud(
-        image = image.toDtoImage(),
-        lastname = lastname,
-        name = name,
-        gender = gender,
-        email = email,
-        number = number
-    )
-
-
 internal fun UpdateAnswerDomain.toDtoUpdate(): UpdateCloud =
     UpdateCloud(
         updatedAt = updatedAt

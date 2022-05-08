@@ -14,6 +14,9 @@ object CommunicationModule {
     fun provideErrorCommunication(): ErrorCommunication = ErrorCommunication.Base()
 
     @Provides
+    fun provideStudentsCommunication(): StudentsCommunication = StudentsCommunication.Base()
+
+    @Provides
     fun provideNetworkErrorCommunication(): NetworkErrorCommunication =
         NetworkErrorCommunication.Base()
 

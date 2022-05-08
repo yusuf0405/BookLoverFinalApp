@@ -1,14 +1,15 @@
 package com.example.bookloverfinalapp.app.utils.communication
 
-import com.example.bookloverfinalapp.app.models.BookAdapterModel
-import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
-import com.example.bookloverfinalapp.app.models.StudentAdapterModel
+import com.example.bookloverfinalapp.app.models.*
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 
 interface BooksCommunication : Communication<List<BookAdapterModel>> {
     class Base : Communication.Base<List<BookAdapterModel>>(), BooksCommunication
+}
+
+interface StudentsCommunication : Communication<List<Student>> {
+    class Base : Communication.Base<List<Student>>(), StudentsCommunication
 }
 
 interface StudentCommunication : Communication<List<StudentAdapterModel>> {

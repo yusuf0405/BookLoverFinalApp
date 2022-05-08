@@ -90,7 +90,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="@string/student_progress_statistics"
+        android:text="@string/progress_statistics"
         android:textColor="@color/red"
         android:textSize="@dimen/bigTextSize"
         app:layout_constraintEnd_toEndOf="parent"

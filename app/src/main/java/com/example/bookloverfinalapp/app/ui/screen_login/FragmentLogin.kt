@@ -33,6 +33,7 @@ class FragmentLogin :
         binding().apply {
             signInBtn.setOnClickListener(this@FragmentLogin)
             signUpLink.setOnClickListener(this@FragmentLogin)
+            forgotPassword.setOnClickListener(this@FragmentLogin)
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
             toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
         }
@@ -42,6 +43,7 @@ class FragmentLogin :
         when (view) {
             binding().signInBtn -> signInWithEmail()
             binding().signUpLink -> viewModel.goOverSignUpFragment()
+            binding().forgotPassword -> viewModel.goForgotPasswordFragment()
         }
     }
 
@@ -60,9 +62,9 @@ class FragmentLogin :
             email = email,
             password = password).observe(viewLifecycleOwner) { user ->
             user.password = password
-            CurrentUser().saveCurrentUser(user = user,
+            CurrentUser().saveCurrentUser(user = user, activity = requireActivity())
+            if (binding().reminder.isChecked) CheсkNavigation().observeLogin(status = true,
                 activity = requireActivity())
-            CheсkNavigation().observeLogin(status = true, activity = requireActivity())
             intentClearTask(activity = ActivityMain())
         }
     }

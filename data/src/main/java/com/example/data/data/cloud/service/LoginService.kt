@@ -1,8 +1,10 @@
 package com.example.data.data.cloud.service
 
-import com.example.data.data.cloud.models.UserCloud
+import com.example.data.data.cloud.models.PasswordResetCloud
 import com.example.data.data.cloud.models.SignUpAnswerCloud
+import com.example.data.data.cloud.models.UserCloud
 import com.example.data.data.cloud.models.UserSignUpCloud
+import org.json.JSONObject
 import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.Header
@@ -24,5 +26,10 @@ interface LoginService {
         @Header("X-Parse-Revocable-Session") session: Int,
         @Body user: UserSignUpCloud,
     ): Response<SignUpAnswerCloud>
+
+    @POST("requestPasswordReset")
+    suspend fun requestPasswordReset(
+        @Body email: PasswordResetCloud,
+    ): Response<Unit>
 
 }

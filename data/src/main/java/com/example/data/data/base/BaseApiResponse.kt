@@ -7,11 +7,7 @@ import com.example.domain.domain.Mapper
 import com.example.domain.models.Resource
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
-import retrofit2.HttpException
 import retrofit2.Response
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
 abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
 
@@ -23,20 +19,15 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
             val response = withContext(Dispatchers.IO) { apiCall() }
             if (response.isSuccessful) {
                 val body = withContext(Dispatchers.Default) { response.body() }
-                body?.let {
-                    Log.i("ssss","sssssss")
-                    return Resource.success(data = mapper.map(body)) }
+                body?.let { return Resource.success(data = mapper.map(body)) }
             }
-            return Resource.error(message = response.message())
+            return when {
+                response.code() == 400 -> Resource.error(message = resourceProvider.getString(R.string.account_already))
+                response.code() == 404 -> Resource.error(message = resourceProvider.getString(R.string.invalid_email_password))
+                else -> Resource.error(message = response.message())
+            }
         } catch (exception: Exception) {
-            return when (exception) {
-                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
-                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
-            }
-
+            return Resource.error(message = resourceProvider.errorType(exception = exception))
         }
     }
 
@@ -51,14 +42,7 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
             }
             return Resource.error(message = response.message())
         } catch (exception: Exception) {
-            return when (exception) {
-                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
-                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
-            }
-
+            return Resource.error(message = resourceProvider.errorType(exception = exception))
         }
     }
 

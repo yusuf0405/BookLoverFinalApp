@@ -1,6 +1,5 @@
 package com.example.data.data.cloud.source
 
-import com.example.data.R
 import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
 import com.example.data.data.cloud.mappers.StudentBookMapper
@@ -14,10 +13,6 @@ import com.example.domain.domain.Mapper
 import com.example.domain.models.Resource
 import com.example.domain.models.student.UpdateAnswerDomain
 import com.example.domain.models.student.UserUpdateDomain
-import retrofit2.HttpException
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
 interface UsersCloudDataSource {
 
@@ -33,7 +28,7 @@ interface UsersCloudDataSource {
         private val service: UserService,
         private val userToDataMapper: Mapper<UserUpdateDomain, UserUpdateCloud>,
         private val updateMapper: Mapper<UpdateCloud, UpdateAnswerDomain>,
-     private val  resourceProvider: ResourceProvider,
+        private val resourceProvider: ResourceProvider,
     ) : UsersCloudDataSource, BaseApiResponse(resourceProvider = resourceProvider) {
 
         override suspend fun fetchMyStudents(
@@ -88,14 +83,9 @@ interface UsersCloudDataSource {
             }
             Resource.success(studentList)
 
-        } catch (e: Exception) {
-            when (e) {
-                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
-                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
-            }
+        } catch (exception: Exception) {
+            Resource.error(message = resourceProvider.errorType(exception = exception))
+
         }
 
         override suspend fun updateUser(

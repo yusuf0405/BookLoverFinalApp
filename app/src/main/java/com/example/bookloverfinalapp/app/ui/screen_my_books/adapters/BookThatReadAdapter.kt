@@ -96,7 +96,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
             private val bookPages = itemView.findViewById<TextView>(R.id.bookPages)
             private val cratedAtText = itemView.findViewById<TextView>(R.id.cratedAtText)
             private val bookImage = itemView.findViewById<ImageView>(R.id.rounded_book_Image)
-            private val bookProgress =
+            private val bookProgressView =
                 itemView.findViewById<CircularProgressView>(R.id.bookProgress)
 
             override fun bind(book: BookThatReadAdapterModel) {
@@ -121,7 +121,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                     ) {
                         countOfDiamonds.text = chaptersRead.toString()
                         countOfPages.text = progress.toString()
-                        bookProgress.setTotal(page - 1)
+                        bookProgressView.setTotal(page - 1)
                         bookTitle.text = title
                         bookAuthor.text = author
                         publishedYear.text = publicYear
@@ -131,7 +131,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                         val getCreatedAt = prettyTime.format(createdAt)
                         val bookCreatedAt = "Добавлено: $getCreatedAt"
                         cratedAtText.text = bookCreatedAt
-                        bookProgress.setProgress(progress)
+                        bookProgressView.setProgress(progress)
                         Glide.with(itemView.context)
                             .load(poster.url)
                             .into(bookImage)

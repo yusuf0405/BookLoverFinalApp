@@ -1,6 +1,5 @@
 package com.example.data.data.cloud.source
 
-import com.example.data.R
 import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
 import com.example.data.data.cloud.mappers.BookMapper
@@ -14,10 +13,6 @@ import com.example.data.data.models.BookThatReadData
 import com.example.data.data.models.ChaptersData
 import com.example.data.data.models.ProgressData
 import com.example.domain.models.Resource
-import retrofit2.HttpException
-import java.net.ConnectException
-import java.net.SocketTimeoutException
-import java.net.UnknownHostException
 
 interface BooksThatReadCloudDataSource {
 
@@ -28,7 +23,6 @@ interface BooksThatReadCloudDataSource {
     suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud>
 
     suspend fun updateProgress(id: String, progress: ProgressData): Resource<Unit>
-
 
     suspend fun updateChapters(id: String, chapters: ChaptersData): Resource<Unit>
 
@@ -73,20 +67,13 @@ interface BooksThatReadCloudDataSource {
                 bookList.add(thatReadBook.map(BookMapper.ComplexMapper(book)))
             }
             Resource.success(bookList)
-        } catch (e: Exception) {
-            when (e) {
-                is UnknownHostException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is SocketTimeoutException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is ConnectException -> Resource.error(resourceProvider.getString(R.string.network_error))
-                is HttpException -> Resource.error(resourceProvider.getString(R.string.service_unavailable))
-                else -> Resource.error(resourceProvider.getString(R.string.generic_error))
-            }
-        }
+        } catch (exception: Exception) {
+            Resource.error(message = resourceProvider.errorType(exception = exception))
 
+        }
 
         override suspend fun deleteBook(id: String) =
             safeApiCall { thatReadService.deleteMyBook(id = id) }
-
 
         override suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud> =
             safeApiCall { thatReadService.addNewBookStudent(book = book) }

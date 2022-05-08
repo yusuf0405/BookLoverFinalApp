@@ -5,9 +5,9 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.User
 import com.example.domain.domain.Mapper
-import com.example.domain.models.Status
-import com.example.domain.domain.models.UserDomain
 import com.example.domain.domain.interactor.SignInUseCase
+import com.example.domain.domain.models.UserDomain
+import com.example.domain.models.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -41,6 +41,9 @@ class FragmentLoginViewModel @Inject constructor(
 
     fun goOverSignUpFragment() =
         navigate(FragmentLoginDirections.actionFragmentLoginToFragmentSignUp())
+
+    fun goForgotPasswordFragment() =
+        navigate(FragmentLoginDirections.actionFragmentLoginToFragmentForgotPassword())
 
     fun goBack() = navigateBack()
 

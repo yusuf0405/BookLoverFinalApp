@@ -3,14 +3,16 @@ package com.example.bookloverfinalapp.app.ui.screen_sign_up
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
+import com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudentDirections
+import com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacherDirections
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
+import com.example.domain.domain.interactor.SignUpUseCase
 import com.example.domain.models.Status
 import com.example.domain.models.classes.Class
 import com.example.domain.models.school.School
 import com.example.domain.models.student.UserSignUpDomain
 import com.example.domain.usecase.GetAllSchoolsUseCase
 import com.example.domain.usecase.GetClassUseCase
-import com.example.domain.domain.interactor.SignUpUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
@@ -95,6 +97,13 @@ class FragmentSignUpViewModel @Inject constructor(
 
     fun goOverLoginFragment() =
         navigate(FragmentSignUpDirections.actionFragmentSignUpToFragmentLogin())
+
+    fun goStudentToLoginFragment() =
+        navigate(FragmentSignUpStudentDirections.actionFragmentSignUpStudentToFragmentLogin())
+
+    fun goTeacherToLoginFragment() =
+        navigate(FragmentSignUpTeacherDirections.actionFragmentSignUpTeacherToFragmentLogin())
+
 
     fun goBack() = navigateBack()
 

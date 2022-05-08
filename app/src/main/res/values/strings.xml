@@ -129,7 +129,7 @@
 
     <string name="student_book_question_button">Ответить</string>
     <string name="student_progress_reads_from">Читает с:</string>
-    <string name="student_progress_statistics">Статистика</string>
+    <string name="progress_statistics">Ваша статистика</string>
     <string name="student_progress_chapters_read">глав прочитано</string>
     <string name="student_progress_books_read">книг прочитано</string>
     <string name="student_progress_pages_read">страниц прочитано</string>
@@ -148,4 +148,9 @@
     <string name="to_change">Изменить</string>
     <string name="default_login_out_alert_message">Вы действительно хотите выйти из аккаунта?</string>
     <string name="login_out_title">Выйти</string>
+    <string name="progress_class_statistics">Статистика класса</string>
+    <string name="forgot_password">Забыли пароль?</string>
+    <string name="send_you_a_message">* Мы отправим вам сообщение для установки или сброса вашего нового пароля</string>
+    <string name="send_code">Отправить код</string>
+    <string name="message_has_been_successfully">Сообщения было успешно отправлено на ваш электронный адрес.</string>
 </resources>

@@ -1,7 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.screen_profile
 
 import android.content.DialogInterface
-import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -10,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.MainActivity
+import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
@@ -70,10 +70,7 @@ class FragmentProfile :
     private fun loginOut() {
         viewModel.clearDataInCache()
         CheсkNavigation().observeLogin(status = false, activity = requireActivity())
-        val intent = Intent(requireActivity(), MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-
+        requireActivity().intentClearTask(MainActivity())
     }
 
     private fun setupUi() {

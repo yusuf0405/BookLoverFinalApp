@@ -19,7 +19,7 @@
     <dimen name="smallIconSize">20dp</dimen>
     <dimen name="bigTextSize">30sp</dimen>
     <dimen name="cardAllCornersRadius">12dp</dimen>
-    <dimen name="cardElevation">25dp</dimen>
+    <dimen name="cardElevation">8dp</dimen>
     <dimen name="constraintInside">15dp</dimen>
     <dimen name="textSizeForSmallTexts">12sp</dimen>
     <dimen name="recyclerViewIconSize">24dp</dimen>

@@ -2,8 +2,10 @@ package com.example.bookloverfinalapp.app.ui.screen_my_books.ui
 
 import androidx.lifecycle.*
 import com.example.bookloverfinalapp.app.base.BaseViewModel
+import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadAdapterCommunication
+import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.interactor.DeleteFromMyBooksUseCase
 import com.example.domain.domain.interactor.GetBookForReadingUseCase
@@ -18,26 +20,26 @@ import javax.inject.Inject
 class MyBooksViewModel @Inject constructor(
     private val bookThatReadUseCase: GetBookThatReadUseCase,
     private val deleteFromMyBooksUseCase: DeleteFromMyBooksUseCase,
-    private val communication: BooksThatReadAdapterCommunication,
-    private val mapper: Mapper<BookThatReadDomain, BookThatReadAdapterModel.Base>,
     private val getBookForReadingUseCase: GetBookForReadingUseCase,
+    private val communication: BooksThatReadAdapterCommunication,
+    private val bookCommunication: BooksThatReadCommunication,
+    private val mapper: Mapper<BookThatReadDomain, BookThatReadAdapterModel.Base>,
+    private val bookMapper: Mapper<BookThatReadDomain, BookThatRead>,
 ) : BaseViewModel() {
 
     fun observe(owner: LifecycleOwner, observer: Observer<List<BookThatReadAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
 
-    private val _booksUrl = MutableLiveData<List<BookThatReadDomain>>()
-    val booksUrl: LiveData<List<BookThatReadDomain>> = _booksUrl
+    fun bookObserve(owner: LifecycleOwner, observer: Observer<List<BookThatRead>>) =
+        bookCommunication.observe(owner = owner, observer = observer)
 
     fun fetchMyBook(id: String) = dispatchers.launchInBackground(viewModelScope) {
         bookThatReadUseCase.execute(id).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> communication.put(listOf(BookThatReadAdapterModel.Progress))
                 Status.SUCCESS -> {
-                    communication.put(resource.data!!.map { bookDomain ->
-                        mapper.map(bookDomain)
-                    })
-                    _booksUrl.postValue(resource.data!!)
+                    communication.put(resource.data!!.map { bookDomain -> mapper.map(bookDomain) })
+                    bookCommunication.put(resource.data!!.map { bookThatReadDomain -> bookMapper.map(bookThatReadDomain) })
                 }
                 Status.EMPTY -> communication.put(listOf(BookThatReadAdapterModel.Empty))
                 Status.ERROR -> communication.put(listOf(BookThatReadAdapterModel.Fail(resource.message!!)))
@@ -54,7 +56,7 @@ class MyBooksViewModel @Inject constructor(
                     dismissProgressDialog()
                 }
                 Status.ERROR -> {
-                   error(message = resource.message!!)
+                    error(message = resource.message!!)
                     dismissProgressDialog()
                 }
             }

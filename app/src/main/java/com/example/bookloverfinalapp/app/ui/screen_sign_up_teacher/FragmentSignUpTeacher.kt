@@ -85,7 +85,7 @@ class FragmentSignUpTeacher :
     override fun onClick(view: View) {
         when (view) {
             binding().signUpBtn -> signUp()
-            binding().signInLink -> viewModel.goOverLoginFragment()
+            binding().signInLink -> viewModel.goTeacherToLoginFragment()
             binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(schoolsTitleList)
             binding().classButton -> showClassSingleChoiceWithConfirmationAlertDialog(list = classTitleList)
 

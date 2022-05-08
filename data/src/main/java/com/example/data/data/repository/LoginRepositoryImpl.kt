@@ -2,6 +2,7 @@ package com.example.data.data.repository
 
 import com.example.data.data.ResourceProvider
 import com.example.data.data.base.BaseApiResponse
+import com.example.data.data.cloud.models.PasswordResetCloud
 import com.example.data.data.cloud.models.SignUpAnswerCloud
 import com.example.data.data.cloud.models.UserCloud
 import com.example.data.data.cloud.service.LoginService
@@ -25,11 +26,20 @@ class LoginRepositoryImpl(
     override fun signIn(email: String, password: String): Flow<Resource<UserDomain>> = flow {
         emit(Resource.loading())
         emit(safeApiMapperCall(mapper = signInMapper) {
-            service.signIn(session = 1, username = email, password = password) })
+            service.signIn(session = 1, username = email, password = password)
+        })
     }
 
     override fun signUp(user: UserSignUpDomain): Flow<Resource<PostRequestAnswerDomain>> = flow {
         emit(Resource.loading())
-        emit(safeApiMapperCall(mapper = signUpMapper) { service.signUp(session = 1, user = user.toDtoSignUp()) })
+        emit(safeApiMapperCall(mapper = signUpMapper) {
+            service.signUp(session = 1,
+                user = user.toDtoSignUp())
+        })
+    }
+
+    override fun passwordReset(email: String): Flow<Resource<Unit>> = flow {
+        emit(Resource.loading())
+        emit(safeApiCall { service.requestPasswordReset(PasswordResetCloud(email = email)) })
     }
 }

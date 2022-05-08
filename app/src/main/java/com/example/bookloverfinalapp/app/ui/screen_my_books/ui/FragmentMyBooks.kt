@@ -8,7 +8,6 @@ import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
@@ -44,15 +43,17 @@ class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
     private fun observeResource() {
         viewModel.fetchMyBook(currentUser.id)
 
-        viewModel.observe(viewLifecycleOwner) { books -> adapter.bookThatReads = books.toMutableList() }
+        viewModel.observe(viewLifecycleOwner) { books ->
+            adapter.bookThatReads = books.toMutableList()
+        }
 
-        viewModel.booksUrl.observe(viewLifecycleOwner) { books ->
+        viewModel.bookObserve(viewLifecycleOwner) { books ->
             books.forEach { book ->
                 val path = requireActivity().getShPrString(book.objectId)
                 if (path == null)
                     viewModel.getBookPdf(book.book).observe(viewLifecycleOwner) { inputStream ->
-                            createNewPath(inputStream = inputStream, key = book.objectId)
-                        }
+                        createNewPath(inputStream = inputStream, key = book.objectId)
+                    }
             }
         }
     }

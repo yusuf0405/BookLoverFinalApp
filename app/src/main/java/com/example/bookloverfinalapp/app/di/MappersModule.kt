@@ -10,18 +10,12 @@ import com.example.data.data.cloud.mappers.BookCloudDataMapper
 import com.example.data.data.cloud.mappers.BookQuestionCloudMapper
 import com.example.data.data.cloud.mappers.PostRequestAnswerToAnswerMapper
 import com.example.data.data.cloud.mappers.UserCloudToUserDomainMapper
-import com.example.data.data.cloud.models.AddNewBookCloud
-import com.example.data.data.cloud.models.BookCloud
-import com.example.data.data.cloud.models.BookQuestionCloud
-import com.example.data.data.cloud.models.UserCloud
+import com.example.data.data.cloud.models.*
 import com.example.data.data.mappers.*
 import com.example.data.data.models.BookData
 import com.example.data.data.models.BookQuestionData
 import com.example.data.data.models.BookThatReadData
 import com.example.data.data.models.StudentData
-import com.example.data.data.cloud.models.SignUpAnswerCloud
-import com.example.data.data.cloud.models.UpdateCloud
-import com.example.data.data.cloud.models.UserUpdateCloud
 import com.example.domain.domain.Mapper
 import com.example.domain.domain.models.*
 import com.example.domain.models.student.PostRequestAnswerDomain
@@ -164,6 +158,11 @@ object MappersModule {
     @Singleton
     fun providePostRequestAnswerToAnswerMapper(): Mapper<SignUpAnswerCloud, PostRequestAnswerDomain> =
         PostRequestAnswerToAnswerMapper()
+
+    @Provides
+    @Singleton
+    fun provideStudentDomainToStudentMapper(): Mapper<StudentDomain, Student> =
+        StudentDomainToStudentMapper()
 
 
 }

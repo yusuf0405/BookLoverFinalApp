@@ -28,9 +28,6 @@
         <action
             android:id="@+id/action_fragmentSignUpStudent_to_fragmentLogin"
             app:destination="@id/fragmentLogin" />
-        <action
-            android:id="@+id/action_fragmentSignUpStudent_to_activityMainStudent"
-            app:destination="@id/activityMainStudent" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSignUpTeacher"
@@ -50,11 +47,12 @@
             android:id="@+id/action_fragmentLogin_to_fragmentSignUp"
             app:destination="@id/fragmentSignUp" />
         <action
-            android:id="@+id/action_fragmentLogin_to_activityMainStudent"
-            app:destination="@id/activityMainStudent" />
+            android:id="@+id/action_fragmentLogin_to_fragmentForgotPassword"
+            app:destination="@id/fragmentForgotPassword" />
     </fragment>
-    <activity
-        android:id="@+id/activityMainStudent"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain"
-        android:label="ActivityMainStudent" />
+    <fragment
+        android:id="@+id/fragmentForgotPassword"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_forgot_password.FragmentForgotPassword"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>

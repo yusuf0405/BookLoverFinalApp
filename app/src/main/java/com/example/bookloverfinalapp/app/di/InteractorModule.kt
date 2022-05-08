@@ -18,7 +18,6 @@ object InteractorModule {
     fun provideGetAllBooksUseCase(repository: BooksRepository): GetAllBooksUseCase =
         GetAllBooksUseCase(repository = repository)
 
-
     @Provides
     fun provideClearBooksCacheUseCase(repository: BooksRepository): ClearBooksCacheUseCase =
         ClearBooksCacheUseCase(repository = repository)
@@ -86,5 +85,10 @@ object InteractorModule {
     @Provides
     fun provideSignInUseCase(repository: LoginRepository): SignInUseCase =
         SignInUseCase(repository = repository)
+
+    @Provides
+    fun providePasswordResetUseCase(repository: LoginRepository): PasswordResetUseCase =
+        PasswordResetUseCase(repository = repository)
+
 
 }
