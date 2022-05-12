@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.data.data.cache.db.*
+import com.example.data.cache.db.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -59,4 +59,19 @@ object RoomModule {
     @Singleton
     fun provideUsersDao(db: UsersDB): UsersDao =
         db.usersDao()
+
+    @Provides
+    @Singleton
+    fun provideClassDB(
+        @ApplicationContext app: Context,
+    ): ClassDB = Room.databaseBuilder(
+        app,
+        ClassDB::class.java,
+        "class_table"
+    ).build()
+
+    @Provides
+    @Singleton
+    fun provideClassDao(db: ClassDB): ClassDao =
+        db.classDao()
 }

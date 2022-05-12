@@ -1,10 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.screen_my_books.ui
 
-import android.content.Context
 import android.content.DialogInterface
 import android.os.Bundle
-import android.os.Environment
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
@@ -12,15 +9,14 @@ import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.ui.screen_book_root.FragmentRootStudentBookDirections
+import com.example.bookloverfinalapp.app.ui.screen_main_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.ui.screen_my_books.adapters.StudentBookAdapter
 import com.example.bookloverfinalapp.app.ui.screen_my_books.adapters.StudentBookItemOnClickListener
+import com.example.bookloverfinalapp.app.utils.extensions.createNewPath
 import com.example.bookloverfinalapp.app.utils.extensions.getShPrString
 import com.example.bookloverfinalapp.databinding.FragmentMyBooksBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.*
 import java.io.File
-import java.io.InputStream
 
 @AndroidEntryPoint
 class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
@@ -57,33 +53,6 @@ class FragmentMyBooks : BaseFragment<FragmentMyBooksBinding, MyBooksViewModel>(
             }
         }
     }
-
-    private fun createNewPath(inputStream: InputStream, key: String) = GlobalScope.launch {
-        val newPath = inputStream.saveToFile()
-        requireContext().getSharedPreferences(key,
-            Context.MODE_PRIVATE)
-            .edit()
-            .putString(key, newPath)
-            .apply()
-    }
-
-    private suspend fun InputStream.saveToFile(): String {
-        Log.i("Start", "Start")
-        val path = requireContext().getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
-        val file = File.createTempFile("my_file", ".pdf", path)
-        val result = withContext(Dispatchers.Default) {
-            val save = async {
-                return@async use { input ->
-                    file.outputStream().use { output -> input.copyTo(output) }
-                }
-            }
-            save.await()
-            return@withContext file.path
-        }
-        Log.i("End", "End")
-        return result
-    }
-
 
     override fun tryAgain() {
         viewModel.fetchMyBook(currentUser.id)

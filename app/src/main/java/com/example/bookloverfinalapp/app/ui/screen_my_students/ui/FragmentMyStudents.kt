@@ -30,8 +30,7 @@ class FragmentMyStudents :
         super.onViewCreated(view, savedInstanceState)
 
         binding().studentsRecyclerView.adapter = adapter
-        viewModel.fetchMyStudents(className = currentUser.className,
-            schoolName = currentUser.schoolName)
+        viewModel.fetchMyStudents(classId = currentUser.classId)
 
         viewModel.observe(viewLifecycleOwner) { students ->
             adapter.students = students
@@ -40,8 +39,7 @@ class FragmentMyStudents :
     }
 
     override fun tryAgain() {
-        viewModel.fetchMyStudents(className = currentUser.className,
-            schoolName = currentUser.schoolName)
+        viewModel.fetchMyStudents(classId = currentUser.classId)
     }
 
     override fun goStudentDetails(student: Student) {

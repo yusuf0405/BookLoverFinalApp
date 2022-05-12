@@ -5,14 +5,13 @@ import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
-import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.BooksThatReadDao
-import com.example.data.data.cache.db.UsersDao
+import com.example.data.cache.db.BooksDao
+import com.example.data.cache.db.BooksThatReadDao
+import com.example.data.cache.db.UsersDao
 import com.parse.Parse
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
-import java.io.File
 import javax.inject.Inject
 
 

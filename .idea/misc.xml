@@ -4,6 +4,7 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.28888888888888886" />
+        <entry key="app/src/main/res/drawable-v24/ic_delete_shimmer.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/'.xml" value="0.1555" />
         <entry key="app/src/main/res/drawable/book_qustion_background.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/btn_next.xml" value="0.1555" />
@@ -14,6 +15,7 @@
         <entry key="app/src/main/res/drawable/ic_account.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_add.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_arrow_bold.xml" value="0.156" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_box_24.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_baseline_arrow_back_24.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.156" />
         <entry key="app/src/main/res/drawable/ic_baseline_save_24.xml" value="0.146" />
@@ -41,6 +43,7 @@
         <entry key="app/src/main/res/drawable/ic_notifications_black_24dp.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_open_book.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_progress.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/ic_read_students.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic_search.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_settings.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_text_white_bg.xml" value="0.146" />
@@ -53,27 +56,46 @@
         <entry key="app/src/main/res/font/aguafina_script.xml" value="0.2638243984803715" />
         <entry key="app/src/main/res/font/comic_neue.xml" value="0.2638243984803715" />
         <entry key="app/src/main/res/font/roboto_medium.xml" value="0.27037037037037037" />
+        <entry key="app/src/main/res/layout/activity_admin_main.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/activity_login_main.xml" value="0.1" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.28125" />
         <entry key="app/src/main/res/layout/activity_main_student.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/activity_student_main.xml" value="0.14583333333333334" />
         <entry key="app/src/main/res/layout/activity_student_main2.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/activity_teacher_main.xml" value="0.20101351351351351" />
+        <entry key="app/src/main/res/layout/dialog_question_input.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragmen_admin_edit_question.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragment_add_question.xml" value="0.1351806640625" />
+        <entry key="app/src/main/res/layout/fragment_admin_chapters.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_admin_edit_question.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragment_admin_main_root.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragment_admin_profile.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_admin_upload_pdf.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_all_books.xml" value="0.19155405405405404" />
+        <entry key="app/src/main/res/layout/fragment_all_question.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_all_question_fragment.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_book_details.xml" value="0.19155405405405404" />
+        <entry key="app/src/main/res/layout/fragment_book_question.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_book_root.xml" value="0.33959899749373434" />
+        <entry key="app/src/main/res/layout/fragment_books.xml" value="0.17763157894736842" />
+        <entry key="app/src/main/res/layout/fragment_chapter_book.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_class_students.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_classes.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_help.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_main.xml" value="0.13479623824451412" />
+        <entry key="app/src/main/res/layout/fragment_main_root.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_my_books.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_my_students.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_progress.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/fragment_reader.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_reader_fragment.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/fragment_school_progress.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_sign_up.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_sign_up_student.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/fragment_sign_up_teacher.xml" value="0.19155405405405404" />
@@ -95,6 +117,7 @@
         <entry key="app/src/main/res/layout/item_book.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/item_book_progress.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_chapter.xml" value="0.2953125" />
+        <entry key="app/src/main/res/layout/item_class.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/item_custom_spinner.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_empty_list.xml" value="0.17222222222222222" />
         <entry key="app/src/main/res/layout/item_empty_student_list.xml" value="0.373046875" />
@@ -103,6 +126,7 @@
         <entry key="app/src/main/res/layout/item_progress_fullscreen.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_question.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_shimmer_book.xml" value="0.19155405405405404" />
+        <entry key="app/src/main/res/layout/item_shimmer_class.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/item_shimmer_my_book.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/item_shimmer_student.xml" value="0.23767832163217906" />
         <entry key="app/src/main/res/layout/item_spinner_custom.xml" value="0.2953125" />
@@ -112,9 +136,12 @@
         <entry key="app/src/main/res/layout/item_students_progress.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/loading_dialog.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/shimmer_book.xml" value="0.19155405405405404" />
+        <entry key="app/src/main/res/layout/shimmer_class.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/shimmer_my_book.xml" value="0.19155405405405404" />
+        <entry key="app/src/main/res/layout/shimmer_my_student.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/shimmer_student.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/test.xml" value="0.14583333333333334" />
+        <entry key="app/src/main/res/menu/admin_bottom_nav_menu.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/menu/bottom_menu.xml" value="0.2953125" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.2953125" />
         <entry key="app/src/main/res/menu/edrit_profile_menu.xml" value="0.2953125" />

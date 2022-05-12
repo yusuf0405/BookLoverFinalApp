@@ -2,8 +2,8 @@ package com.example.bookloverfinalapp.app.mappers
 
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.models.BookThatReadDomain
+import com.example.domain.Mapper
+import com.example.domain.models.BookThatReadDomain
 
 class BookThatReadAdapterModelMapper : Mapper<BookThatReadDomain, BookThatReadAdapterModel.Base>() {
 

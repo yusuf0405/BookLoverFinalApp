@@ -18,6 +18,8 @@
         <include layout="@layout/item_shimmer_book" />
 
         <include layout="@layout/item_shimmer_book" />
+
+        <include layout="@layout/item_shimmer_book" />
     </LinearLayout>
 
 </com.facebook.shimmer.ShimmerFrameLayout>

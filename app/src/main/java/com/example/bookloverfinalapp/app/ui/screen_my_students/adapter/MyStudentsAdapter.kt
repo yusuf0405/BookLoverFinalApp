@@ -172,7 +172,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                 actionListener)
             1 -> StudentViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
-            2 -> StudentViewHolder.FullScreenProgress(R.layout.shimmer_student.makeView(
+            2 -> StudentViewHolder.FullScreenProgress(R.layout.shimmer_my_student.makeView(
                 parent = parent))
             3 -> StudentViewHolder.EmptyList(R.layout.item_empty_student_list.makeView(parent = parent))
             else -> throw ClassCastException()

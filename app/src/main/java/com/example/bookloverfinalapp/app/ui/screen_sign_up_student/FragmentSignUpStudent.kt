@@ -17,9 +17,9 @@ import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpStudentBinding
-import com.example.domain.models.classes.Class
-import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpDomain
+import com.example.domain.models.ClassDomain
+import com.example.domain.models.SchoolDomain
+import com.example.domain.models.UserSignUpDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -35,15 +35,16 @@ class FragmentSignUpStudent :
     override fun onReady(savedInstanceState: Bundle?) {}
 
     private val classesTitleList = mutableListOf<String>()
-    private var classList = mutableListOf<Class>()
+    private var classList = mutableListOf<ClassDomain>()
     private var classCurrentIndex = 0
-    private var classId = ""
     private var classTitle = ""
+    private var classId = ""
 
     private val schoolTitleList = mutableListOf<String>()
-    private var schoolList = mutableListOf<School>()
+    private var schoolList = mutableListOf<SchoolDomain>()
     private var schoolCurrentIndex = 0
     private var schoolTitle = ""
+    private var schoolId = ""
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -58,6 +59,7 @@ class FragmentSignUpStudent :
             schools.forEach { schoolTitleList.add(it.title) }
             binding().schoolTextView.text = schoolTitleList[schoolCurrentIndex]
             schoolTitle = schoolTitleList[schoolCurrentIndex]
+            schoolId = schools[schoolCurrentIndex].objectId
             viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
@@ -67,7 +69,7 @@ class FragmentSignUpStudent :
             classCurrentIndex = 0
             classes.forEach { classesTitleList.add(it.title) }
             classTitle = classesTitleList[classCurrentIndex]
-            classId = classes[classCurrentIndex].objectId
+            classId = classes[classCurrentIndex].id
             binding().classTextView.text = classTitle
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
@@ -87,7 +89,8 @@ class FragmentSignUpStudent :
         when (view) {
             binding().signUpBtn -> signUp()
             binding().signInLink -> viewModel.goStudentToLoginFragment()
-            binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(schoolTitleList)
+            binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(
+                schoolTitleList)
             binding().classButton -> showClassSingleChoiceWithConfirmationAlertDialog(list = classesTitleList)
 
         }
@@ -113,7 +116,8 @@ class FragmentSignUpStudent :
                     schoolName = schoolTitle,
                     gender = gender,
                     classId = classId,
-                    userType = "student"
+                    userType = "student",
+                    schoolId = schoolId
                 )
                 viewModel.signUp(user = studentDto).observe(viewLifecycleOwner) { user ->
                     signUpSuccess(
@@ -150,7 +154,8 @@ class FragmentSignUpStudent :
                 createAt = createdAt,
                 userType = UserType.student,
                 sessionToken = sessionToken,
-                image = image
+                image = image,
+                schoolId = schoolId
             )
             CurrentUser().saveCurrentUser(user = currentStudent, activity = requireActivity())
             CheсkNavigation().observeLogin(status = true, activity = requireActivity())
@@ -166,7 +171,7 @@ class FragmentSignUpStudent :
                 val index = (d as AlertDialog).listView.checkedItemPosition
                 classCurrentIndex = index
                 classTitle = classesTitleList[index]
-                classId = classList[index].objectId
+                classId = classList[index].id
                 binding().classTextView.text = classTitle
             }
             .create()
@@ -182,6 +187,7 @@ class FragmentSignUpStudent :
                 if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].classesIds)
                 schoolCurrentIndex = index
                 schoolTitle = schoolTitleList[index]
+                schoolId = schoolList[index].objectId
                 binding().schoolTextView.text = schoolTitle
             }
             .create()

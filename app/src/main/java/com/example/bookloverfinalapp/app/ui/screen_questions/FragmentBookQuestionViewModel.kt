@@ -4,18 +4,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookQuestion
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.models.Chapters
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.GetAllChapterQuestionsUseCase
-import com.example.domain.domain.interactor.UpdateChaptersUseCase
-import com.example.domain.domain.models.BookQuestionDomain
-import com.example.domain.domain.models.ChaptersDomain
-import com.example.domain.models.Resource
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.Resource
+import com.example.domain.Status
+import com.example.domain.interactor.GetAllChapterQuestionsUseCase
+import com.example.domain.interactor.UpdateChaptersUseCase
+import com.example.domain.models.BookQuestionDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import javax.inject.Inject
 
 @HiltViewModel
@@ -39,11 +39,11 @@ class FragmentBookQuestionViewModel @Inject constructor(
             book = book, path = path))
     }
 
-    fun updateChapters(id: String, chapters: Chapters, book: BookThatRead, path: String) {
-        updateChaptersUseCase.execute(id = id,
-            chaptersDomain = ChaptersDomain(chaptersRead = chapters.chapters,
-                isReadingPages = chapters.isReadingPages))
-            .flowOn(Dispatchers.IO).onEach { resource ->
+    fun updateChapters(
+        id: String, chapters: Int, isReadingPages: List<Boolean>, book: BookThatRead, path: String,
+    ) {
+        updateChaptersUseCase.execute(id = id, isReadingPages = isReadingPages, chapters = chapters)
+            .onEach { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()
                     Status.SUCCESS -> {

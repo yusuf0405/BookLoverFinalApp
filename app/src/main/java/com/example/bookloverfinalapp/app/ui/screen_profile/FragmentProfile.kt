@@ -8,7 +8,7 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.ui.MainActivity
+import com.example.bookloverfinalapp.app.ui.screen_login_main.ActivityLoginMain
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
@@ -70,7 +70,7 @@ class FragmentProfile :
     private fun loginOut() {
         viewModel.clearDataInCache()
         CheсkNavigation().observeLogin(status = false, activity = requireActivity())
-        requireActivity().intentClearTask(MainActivity())
+        requireActivity().intentClearTask(ActivityLoginMain())
     }
 
     private fun setupUi() {

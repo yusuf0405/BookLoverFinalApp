@@ -8,13 +8,12 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookQuestion
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.models.Chapters
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.launchWhenStarted
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentBookQuestionBinding
-import com.example.domain.models.Status
+import com.example.domain.Status
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 
@@ -62,26 +61,24 @@ class FragmentBookQuestion :
         viewModel.getAllChapterQuestions(id = book.bookId, chapter = chapter).onEach { state ->
             when (state.status) {
                 Status.LOADING -> loadingDialog.show()
-                Status.SUCCESS -> responseSuccess(list = state.data!!.map { viewModel.mapper.map(it) })
-                Status.ERROR -> responseError(message = state.message!!)
-                else -> loadingDialog.dismiss()
+                Status.SUCCESS -> {
+                    loadingDialog.dismiss()
+                    listQuestions = state.data!!.map { viewModel.mapper.map(it) }.toMutableList()
+                    setupUi(listQuestions[index])
+                }
+                Status.ERROR -> {
+                    showToast(message = state.message!!)
+                    loadingDialog.dismiss()
+                }
+                Status.EMPTY -> {
+                    showToast(message = getString(R.string.no_book_questions))
+                    updateObject()
+                    loadingDialog.dismiss()
+                }
             }
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
 
-    private fun responseSuccess(list: List<BookQuestion>) {
-        loadingDialog.dismiss()
-        listQuestions = list.toMutableList()
-        setupUi(listQuestions[index])
-    }
-
-    private fun responseError(message: String) {
-        if (message == "No questions!!") {
-            showToast(message = getString(R.string.no_book_questions))
-            updateObject()
-        }
-        loadingDialog.dismiss()
-    }
 
     private fun setupUi(bookDomain: BookQuestion) {
         binding().apply {
@@ -138,15 +135,14 @@ class FragmentBookQuestion :
     }
 
     private fun updateObject() {
-        val list = book.isReadingPages.toMutableList()
-        val chapterUpdate = Chapters(chapters = chapter, isReadingPages = list)
-        if (chapter < list.size) {
-            list[chapter] = true
-            chapterUpdate.isReadingPages = list
-            book.isReadingPages = list
+        val isReadingPages = book.isReadingPages.toMutableList()
+        if (chapter < isReadingPages.size) {
+            isReadingPages[chapter] = true
+            book.isReadingPages = isReadingPages
         }
         viewModel.updateChapters(id = book.objectId,
-            chapters = chapterUpdate,
+            chapters = chapter,
+            isReadingPages = isReadingPages,
             book = book,
             path = path)
     }

@@ -47,10 +47,6 @@ class FragmentChapterBook :
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         onClickListeners()
-        observeResource()
-    }
-
-    private fun observeResource() {
         loadSuccess()
     }
 

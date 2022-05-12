@@ -8,12 +8,12 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication
 import com.example.bookloverfinalapp.app.utils.communication.StudentsCommunication
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.GetBookThatReadUseCase
-import com.example.domain.domain.interactor.GetMyStudentsUseCase
-import com.example.domain.domain.models.BookThatReadDomain
-import com.example.domain.domain.models.StudentDomain
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.Status
+import com.example.domain.interactor.GetBookThatReadUseCase
+import com.example.domain.interactor.GetMyStudentsUseCase
+import com.example.domain.models.BookThatReadDomain
+import com.example.domain.models.StudentDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -40,7 +40,9 @@ class FragmentProgressViewModel @Inject constructor(
                 Status.LOADING -> showProgressAnimation()
                 Status.SUCCESS -> {
                     dismissProgressAnimation()
-                    bookCommunication.put(resource.data!!.map { studentBookDomain -> bookMapper.map(studentBookDomain) })
+                    bookCommunication.put(resource.data!!.map { studentBookDomain ->
+                        bookMapper.map(studentBookDomain)
+                    })
                 }
                 Status.EMPTY -> dismissProgressAnimation()
                 Status.ERROR -> {
@@ -51,13 +53,15 @@ class FragmentProgressViewModel @Inject constructor(
         }
     }
 
-    fun fetchMyStudent(className: String, schoolName: String, id: String) =
+    fun fetchMyStudent(classId: String, id: String) =
         dispatchers.launchInBackground(viewModelScope) {
-            getMyStudentsUseCase.execute(className, schoolName).collectLatest { resource ->
+            getMyStudentsUseCase.execute(classId = classId).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressAnimation()
                     Status.SUCCESS -> {
-                        studentCommunication.put(resource.data!!.map { studentDomain -> studentMapper.map(studentDomain) })
+                        studentCommunication.put(resource.data!!.map { studentDomain ->
+                            studentMapper.map(studentDomain)
+                        })
                         fetchMyBook(id = id)
                     }
                     Status.EMPTY -> dismissProgressAnimation()
@@ -68,7 +72,4 @@ class FragmentProgressViewModel @Inject constructor(
                 }
             }
         }
-
-    fun go() =
-        navigate(FragmentProgressDirections.actionFragmentProgressToFragmentAdminUploadPdf())
 }

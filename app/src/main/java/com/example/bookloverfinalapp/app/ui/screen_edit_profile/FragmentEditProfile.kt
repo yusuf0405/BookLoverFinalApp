@@ -17,7 +17,7 @@ import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentEditProfileBinding
-import com.example.domain.models.student.UserUpdateDomain
+import com.example.domain.models.UserUpdateDomain
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.ParseFile
 import com.parse.SaveCallback
@@ -39,7 +39,6 @@ class FragmentEditProfile :
 
     private lateinit var student: User
     private lateinit var gender: String
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -72,11 +71,9 @@ class FragmentEditProfile :
         binding().apply {
             if (editStudentPasswordConfirm.text.toString() == student.password) {
                 editStudentNumber.isEnabled = true
-                editStudentPassword.isEnabled = true
                 editStudentEmail.isEnabled = true
             } else {
                 editStudentNumber.isEnabled = false
-                editStudentPassword.isEnabled = false
                 editStudentEmail.isEnabled = false
                 showToast(message = getString(R.string.invalid_password_error))
             }
@@ -87,7 +84,6 @@ class FragmentEditProfile :
         student = CurrentUser().getCurrentUser(activity = requireActivity())
         binding().apply {
             gender = student.gender
-            editStudentPassword.setText(student.password)
             editStudentNumber.setText(student.number)
             editStudentName.setText(student.name)
             editStudentLastName.setText(student.lastname)
@@ -111,7 +107,6 @@ class FragmentEditProfile :
             if (editStudentName.text.toString() == student.name &&
                 editStudentLastName.text.toString() == student.lastname &&
                 editStudentEmail.text.toString() == student.email &&
-                editStudentPassword.text.toString() == student.password &&
                 editStudentNumber.text.toString() == student.number &&
                 gender == student.gender && parseFile == null
             ) return@apply
@@ -124,7 +119,6 @@ class FragmentEditProfile :
             if (!editStudentName.validateName()) showToast(message = getString(R.string.name_input_format_error))
             else if (!editStudentLastName.validateLastName()) showToast(message = getString(R.string.last_name_input_format_error))
             else if (!editStudentNumber.validateEditPhone()) showToast(message = getString(R.string.phone_input_format_error))
-            else if (!editStudentPassword.validatePassword()) showToast(message = getString(R.string.password_input_format_error))
             else if (!editStudentEmail.validateEmail()) showToast(message = getString(R.string.email_input_format_error))
             else {
                 if (parseFile == null) {
@@ -173,7 +167,7 @@ class FragmentEditProfile :
                 name = editStudentName.text.toString(),
                 lastname = editStudentLastName.text.toString(),
                 email = editStudentEmail.text.toString(),
-                password = editStudentPassword.text.toString(),
+                password = student.password.toString(),
                 number = editStudentNumber.text.toString(),
                 image = image!!,
                 classId = student.classId,
@@ -182,7 +176,8 @@ class FragmentEditProfile :
                 id = student.id,
                 createAt = student.createAt,
                 userType = student.userType,
-                sessionToken = student.sessionToken
+                sessionToken = student.sessionToken,
+                schoolId = student.schoolId
             )
             CurrentUser().saveCurrentUser(user = newStudent, requireActivity())
             student = CurrentUser().getCurrentUser(activity = requireActivity())
@@ -197,8 +192,7 @@ class FragmentEditProfile :
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK &&
             data != null && data.data != null
         ) {
-            val bitmap =
-                MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, data.data)
+            val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, data.data)
             val stream = ByteArrayOutputStream()
             bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
             val byteArray: ByteArray = stream.toByteArray()

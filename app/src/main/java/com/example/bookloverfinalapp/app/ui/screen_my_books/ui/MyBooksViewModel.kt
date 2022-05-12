@@ -6,12 +6,12 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadAdapterCommunication
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.DeleteFromMyBooksUseCase
-import com.example.domain.domain.interactor.GetBookForReadingUseCase
-import com.example.domain.domain.interactor.GetBookThatReadUseCase
-import com.example.domain.domain.models.BookThatReadDomain
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.interactor.DeleteFromMyBooksUseCase
+import com.example.domain.interactor.GetBookForReadingUseCase
+import com.example.domain.interactor.GetBookThatReadUseCase
+import com.example.domain.models.BookThatReadDomain
+import com.example.domain.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -68,9 +68,7 @@ class MyBooksViewModel @Inject constructor(
             when (resource.status) {
                 Status.SUCCESS -> emit(resource.data!!)
                 Status.ERROR -> error(message = resource.message!!)
-
             }
-
         }
     }
 

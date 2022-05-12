@@ -11,14 +11,12 @@ import com.example.bookloverfinalapp.databinding.FragmentAllBooksBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentAllBooks :
-    BaseFragment<FragmentAllBooksBinding, FragmentAllBooksViewModel>(
+class FragmentAllBooks : BaseFragment<FragmentAllBooksBinding, FragmentAllBooksViewModel>(
         FragmentAllBooksBinding::inflate),
     BookItemOnClickListener {
     override fun onReady(savedInstanceState: Bundle?) {}
 
     override val viewModel: FragmentAllBooksViewModel by viewModels()
-
 
     private val adapter: BookAdapter by lazy(LazyThreadSafetyMode.NONE) {
         BookAdapter(actionListener = this)
@@ -29,14 +27,14 @@ class FragmentAllBooks :
 
         binding().bookRecyclerView.adapter = adapter
 
-        viewModel.fetchBooks()
+        viewModel.fetchBooks(schoolId = currentUser.schoolId)
 
         viewModel.observe(viewLifecycleOwner) { books -> adapter.books = books }
 
     }
 
     override fun tryAgain() {
-        viewModel.fetchBooks()
+        viewModel.fetchBooks(schoolId = currentUser.schoolId)
     }
 
     override fun goChapterBookFragment(book: Book) {

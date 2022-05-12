@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.StudentAdapterModel
-import com.example.bookloverfinalapp.app.ui.screen_book_root.FragmentRootStudentBookDirections
+import com.example.bookloverfinalapp.app.ui.screen_main_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.utils.communication.StudentCommunication
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.GetMyStudentsUseCase
-import com.example.domain.domain.models.StudentDomain
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.Status
+import com.example.domain.interactor.GetMyStudentsUseCase
+import com.example.domain.models.StudentDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -21,7 +21,7 @@ class FragmentMyStudentsViewModel @Inject constructor(
     private val getMyStudentsUseCase: GetMyStudentsUseCase,
     private val communication: StudentCommunication,
     private val mapper: Mapper<StudentDomain, StudentAdapterModel.Base>,
-    ) : BaseViewModel() {
+) : BaseViewModel() {
 
     fun observe(owner: LifecycleOwner, observer: Observer<List<StudentAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
@@ -30,9 +30,9 @@ class FragmentMyStudentsViewModel @Inject constructor(
         navigate(FragmentRootStudentBookDirections.actionFragmentRootBookToFragmentStudentDetails(
             student = student))
 
-    fun fetchMyStudents(className: String, schoolName: String) =
+    fun fetchMyStudents(classId: String) =
         dispatchers.launchInBackground(viewModelScope) {
-            getMyStudentsUseCase.execute(className = className, schoolName = schoolName)
+            getMyStudentsUseCase.execute(classId = classId)
                 .collectLatest { resource ->
                     when (resource.status) {
                         Status.LOADING -> communication.put(listOf(StudentAdapterModel.Progress))

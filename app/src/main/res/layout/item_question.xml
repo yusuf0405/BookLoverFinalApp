@@ -1,16 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/recyclerViewMargin"
-    app:cardCornerRadius="@dimen/cardAllCornersRadius"
-    app:cardElevation="@dimen/cardElevation"
     android:backgroundTint="@color/cardBackground"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    app:cardCornerRadius="8dp"
+    app:cardElevation="@dimen/cardElevation">
+
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_margin="@dimen/profileTextDP"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/profileTextDP">
 
         <TextView
             android:id="@+id/chapterText"
@@ -27,9 +28,9 @@
             app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
-            android:id="@+id/ic_deleteQuestion"
-            android:layout_width="@dimen/recyclerViewIconSize"
-            android:layout_height="@dimen/recyclerViewIconSize"
+            android:id="@+id/deleteQuestion"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_gravity="center"
             android:layout_marginEnd="@dimen/marginForTIL"
             app:layout_constraintBottom_toBottomOf="parent"

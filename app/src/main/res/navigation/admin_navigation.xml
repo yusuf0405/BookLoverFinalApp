@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/admin_navigation"
+    app:startDestination="@id/fragmentAdminMainRoot">
+
+    <fragment
+        android:id="@+id/fragmentAdminMainRoot"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRoot"
+        android:label="fragment_admin_main_root"
+        tools:layout="@layout/fragment_admin_main_root">
+        <action
+            android:id="@+id/action_fragmentAdminMainRoot_to_fragmentAdminChapters"
+            app:destination="@id/fragmentAdminChapters" />
+        <action
+            android:id="@+id/action_fragmentAdminMainRoot_to_fragmentClassStudents"
+            app:destination="@id/fragmentClassStudents" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSchoolProgress"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_school_progress.FragmentSchoolProgress"
+        android:label="fragment_school_progress"
+        tools:layout="@layout/fragment_school_progress" />
+    <fragment
+        android:id="@+id/fragmentAdminUploadPdf"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book.FragmentAdminUploadPdf"
+        android:label="fragment_admin_upload_pdf"
+        tools:layout="@layout/fragment_admin_upload_pdf" />
+    <fragment
+        android:id="@+id/fragmentAdminProfile"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_profile.FragmentAdminProfile"
+        android:label="fragment_admin_profile"
+        tools:layout="@layout/fragment_admin_profile" />
+    <fragment
+        android:id="@+id/fragmentSetting"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_setting.FragmentSetting"
+        android:label="fragment_setting"
+        tools:layout="@layout/fragment_setting" />
+    <fragment
+        android:id="@+id/fragmentAdminChapters"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.ui.FragmentAdminChapters"
+        android:label="fragment_admin_chapters"
+        tools:layout="@layout/fragment_admin_chapters">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.Book" />
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentAdminChapters_to_fragmentAllQuestion"
+            app:destination="@id/fragmentAllQuestion" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_all_questions.ui.FragmentAllQuestion"
+        android:label="fragment_all_question"
+        tools:layout="@layout/fragment_all_question">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_fragmentAllQuestion_to_fragmentAddQuestion"
+            app:destination="@id/fragmentAddQuestion" />
+        <action
+            android:id="@+id/action_fragmentAllQuestion_to_fragmenAdminEditQuestion"
+            app:destination="@id/fragmenAdminEditQuestion" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_add_question.FragmentAddQuestion"
+        android:label="fragment_add_question"
+        tools:layout="@layout/fragment_add_question">
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmenAdminEditQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_question.FragmentAdminEditQuestion"
+        android:label="fragmen_admin_edit_question"
+        tools:layout="@layout/fragment_admin_edit_question">
+        <argument
+            android:name="question"
+            app:argType="com.example.bookloverfinalapp.app.models.BookQuestion" />
+        <argument
+            android:name="title"
+            app:argType="string" />
+        <argument
+            android:name="id"
+            app:argType="string" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentClassStudents"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_class_students.FragmentClassStudents"
+        android:label="fragment_class_students"
+        tools:layout="@layout/fragment_class_students">
+        <argument
+            android:name="schoolClass"
+            app:argType="com.example.bookloverfinalapp.app.models.SchoolClass" />
+    </fragment>
+
+</navigation>

@@ -1,5 +1,7 @@
 package com.example.bookloverfinalapp.app.models
 
+import java.io.Serializable
+
 data class BookQuestion(
     val id: String,
     val question: String,
@@ -9,5 +11,5 @@ data class BookQuestion(
     val c: String,
     val rightAnswer: String,
     val bookId: String,
-    val chapter: Int,
-)
+    val chapter: String,
+) : Serializable

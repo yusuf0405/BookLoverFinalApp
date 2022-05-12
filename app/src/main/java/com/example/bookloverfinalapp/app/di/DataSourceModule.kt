@@ -1,32 +1,31 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.data.data.ResourceProvider
-import com.example.data.data.cache.db.BooksDao
-import com.example.data.data.cache.db.BooksThatReadDao
-import com.example.data.data.cache.db.UsersDao
-import com.example.data.data.cache.models.BookDb
-import com.example.data.data.cache.models.BookThatReadDb
-import com.example.data.data.cache.models.StudentDb
-import com.example.data.data.cache.source.BooksCacheDataSource
-import com.example.data.data.cache.source.BooksThatReadDataSource
-import com.example.data.data.cache.source.UsersCacheDataSource
-import com.example.data.data.cloud.models.BookCloud
-import com.example.data.data.cloud.models.BookQuestionCloud
-import com.example.data.data.cloud.models.UpdateCloud
-import com.example.data.data.cloud.models.UserUpdateCloud
-import com.example.data.data.cloud.service.BookService
-import com.example.data.data.cloud.service.BookThatReadService
-import com.example.data.data.cloud.service.UserService
-import com.example.data.data.cloud.source.BooksCloudDataSource
-import com.example.data.data.cloud.source.BooksThatReadCloudDataSource
-import com.example.data.data.cloud.source.UsersCloudDataSource
-import com.example.data.data.models.BookData
-import com.example.data.data.models.BookQuestionData
-import com.example.data.data.models.BookThatReadData
-import com.example.data.data.models.StudentData
-import com.example.domain.domain.Mapper
-import com.example.domain.models.student.UpdateAnswerDomain
-import com.example.domain.models.student.UserUpdateDomain
+import com.example.data.ResourceProvider
+import com.example.data.cache.db.BooksDao
+import com.example.data.cache.db.BooksThatReadDao
+import com.example.data.cache.db.ClassDao
+import com.example.data.cache.db.UsersDao
+import com.example.data.cache.models.BookDb
+import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.ClassCache
+import com.example.data.cache.models.StudentDb
+import com.example.data.cache.source.BooksCacheDataSource
+import com.example.data.cache.source.BooksThatReadDataSource
+import com.example.data.cache.source.ClassCacheDataSource
+import com.example.data.cache.source.UsersCacheDataSource
+import com.example.data.cloud.models.*
+import com.example.data.cloud.service.BookService
+import com.example.data.cloud.service.BookThatReadService
+import com.example.data.cloud.service.ClassService
+import com.example.data.cloud.service.UserService
+import com.example.data.cloud.source.BooksCloudDataSource
+import com.example.data.cloud.source.BooksThatReadCloudDataSource
+import com.example.data.cloud.source.ClassCloudDataSource
+import com.example.data.cloud.source.UsersCloudDataSource
+import com.example.data.models.*
+import com.example.domain.Mapper
+import com.example.domain.models.UpdateAnswerDomain
+import com.example.domain.models.UserUpdateDomain
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -44,18 +43,23 @@ object DataSourceModule {
         bookCloudMapper: Mapper<BookCloud, BookData>,
         questionCloudMapper: Mapper<BookQuestionCloud, BookQuestionData>,
         resourceProvider: ResourceProvider,
+        questionDataMapper: Mapper<AddBookQuestionData, AddBookQuestionCloud>,
     ): BooksCloudDataSource =
-        BooksCloudDataSource.Base(service = service,
+        BooksCloudDataSource.Base(
+            service = service,
             bookCloudMapper = bookCloudMapper,
             questionCloudMapper = questionCloudMapper,
-            resourceProvider = resourceProvider)
+            resourceProvider = resourceProvider,
+            questionDataMapper = questionDataMapper)
 
     @Provides
     @Singleton
     fun provideBookCloudDataSource(
-        thatReadService: BookThatReadService, resourceProvider: ResourceProvider,
+        thatReadService: BookThatReadService,
+        resourceProvider: ResourceProvider,
     ): BooksThatReadCloudDataSource =
-        BooksThatReadCloudDataSource.Base(thatReadService = thatReadService,
+        BooksThatReadCloudDataSource.Base(
+            thatReadService = thatReadService,
             resourceProvider = resourceProvider)
 
     @Provides
@@ -65,7 +69,8 @@ object DataSourceModule {
         userToDataMapper: Mapper<UserUpdateDomain, UserUpdateCloud>,
         updateMapper: Mapper<UpdateCloud, UpdateAnswerDomain>,
         resourceProvider: ResourceProvider,
-    ): UsersCloudDataSource = UsersCloudDataSource.Base(service = service,
+    ): UsersCloudDataSource = UsersCloudDataSource.Base(
+        service = service,
         userToDataMapper = userToDataMapper,
         updateMapper = updateMapper, resourceProvider = resourceProvider)
 
@@ -76,14 +81,18 @@ object DataSourceModule {
         dao: BooksDao,
         mapper: Mapper<BookData, BookDb>,
     ): BooksCacheDataSource =
-        BooksCacheDataSource.Base(bookDao = dao, dataMapper = mapper)
+        BooksCacheDataSource.Base(
+            bookDao = dao,
+            dataMapper = mapper)
 
     @Provides
     @Singleton
     fun provideUsersCacheDataSource(
         dao: UsersDao,
         dataMapper: Mapper<StudentData, StudentDb>,
-    ): UsersCacheDataSource = UsersCacheDataSource.Base(dao = dao, dataMapper = dataMapper)
+    ): UsersCacheDataSource = UsersCacheDataSource.Base(
+        dao = dao,
+        dataMapper = dataMapper)
 
 
     @Provides
@@ -92,7 +101,25 @@ object DataSourceModule {
         dao: BooksThatReadDao,
         mapper: Mapper<BookThatReadData, BookThatReadDb>,
     ): BooksThatReadDataSource =
-        BooksThatReadDataSource.Base(mapper = mapper, dao = dao)
+        BooksThatReadDataSource.Base(
+            mapper = mapper,
+            dao = dao)
 
+    @Provides
+    @Singleton
+    fun provideClassCacheDataSource(
+        dao: ClassDao,
+        mapper: Mapper<ClassData, ClassCache>,
+    ): ClassCacheDataSource = ClassCacheDataSource.Base(dao = dao, mapper = mapper)
+
+    @Provides
+    @Singleton
+    fun provideClassCloudDataSource(
+        service: ClassService,
+        resourceProvider: ResourceProvider,
+        mapper: Mapper<ClassCloud, ClassData>,
+    ): ClassCloudDataSource = ClassCloudDataSource.Base(service = service,
+        resourceProvider = resourceProvider,
+        mapper = mapper)
 
 }

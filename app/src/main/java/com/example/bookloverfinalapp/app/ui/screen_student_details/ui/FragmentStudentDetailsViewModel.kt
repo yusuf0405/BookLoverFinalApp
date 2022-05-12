@@ -6,10 +6,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadAdapterCommunication
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.GetMyStudentBooksUseCase
-import com.example.domain.domain.models.BookThatReadDomain
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.interactor.GetMyStudentBooksUseCase
+import com.example.domain.models.BookThatReadDomain
+import com.example.domain.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -28,16 +28,10 @@ class FragmentStudentDetailsViewModel @Inject constructor(
         myStudentBooksUseCase.execute(id).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> communication.put(listOf(BookThatReadAdapterModel.Progress))
-                Status.SUCCESS -> {
-                    val bookList =
-                        resource.data!!.map { studentBookDomain -> mapper.map(studentBookDomain) }
-                    if (bookList.isEmpty()) communication.put(listOf(BookThatReadAdapterModel.Empty))
-                    else communication.put(bookList)
-                }
-                Status.ERROR ->
-                    communication.put(listOf(BookThatReadAdapterModel.Fail(resource.message!!)))
+                Status.SUCCESS -> communication.put(resource.data!!.map { studentBookDomain -> mapper.map(studentBookDomain) })
+                Status.EMPTY -> communication.put(listOf(BookThatReadAdapterModel.Empty))
+                Status.ERROR -> communication.put(listOf(BookThatReadAdapterModel.Fail(resource.message!!)))
 
-                Status.NETWORK_ERROR -> {}
             }
         }
     }

@@ -6,7 +6,6 @@ import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.showView
@@ -28,17 +27,27 @@ class FragmentProgress() :
         super.onViewCreated(view, savedInstanceState)
         setupUi()
         observeResource()
-        binding().studentProgressImg.setOnClickListener { viewModel.go() }
-
-        if (currentUser.userType == UserType.student) viewModel.fetchMyBook(id = currentUser.id)
-        else viewModel.fetchMyStudent(className = currentUser.className,
-            schoolName = currentUser.schoolName,
-            id = currentUser.id)
     }
 
     private fun observeResource() {
+        if (currentUser.userType == UserType.student) viewModel.fetchMyBook(id = currentUser.id)
+        else viewModel.fetchMyStudent(classId = currentUser.classId, id = currentUser.id)
+
         viewModel.booksObserve(viewLifecycleOwner) { books ->
-            responseSuccess(list = books)
+            var readPages = 0
+            var readChapters = 0
+            var readBooks = 0
+            books.forEach { book ->
+                readChapters += book.chaptersRead
+                readPages += book.progress
+                if (book.isReadingPages[book.isReadingPages.lastIndex]) readBooks += 1
+            }
+            binding().apply {
+                progressDiamondReadText.text = readChapters.toString()
+                progressBookReadText.text = readBooks.toString()
+                progressPageReadText.text = readPages.toString()
+                myStatisticsContainer.showView()
+            }
         }
         viewModel.studentsObserve(viewLifecycleOwner) { students ->
             var readPages = 0
@@ -71,23 +80,6 @@ class FragmentProgress() :
 
                 }
             }
-        }
-    }
-
-    private fun responseSuccess(list: List<BookThatRead>) {
-        var readPages = 0
-        var readChapters = 0
-        var readBooks = 0
-        list.forEach { books ->
-            readChapters += books.chaptersRead
-            readPages += books.progress
-            if (books.isReadingPages[books.isReadingPages.lastIndex]) readBooks += 1
-        }
-        binding().apply {
-            progressDiamondReadText.text = readChapters.toString()
-            progressBookReadText.text = readBooks.toString()
-            progressPageReadText.text = readPages.toString()
-            myStatisticsContainer.showView()
         }
     }
 

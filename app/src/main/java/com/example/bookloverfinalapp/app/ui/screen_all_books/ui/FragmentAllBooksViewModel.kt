@@ -6,12 +6,12 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookAdapterModel
-import com.example.bookloverfinalapp.app.ui.screen_book_root.FragmentRootStudentBookDirections
-import com.example.bookloverfinalapp.app.utils.communication.BooksCommunication
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.GetAllBooksUseCase
-import com.example.domain.domain.models.BookDomain
-import com.example.domain.models.Status
+import com.example.bookloverfinalapp.app.ui.screen_main_root.FragmentRootStudentBookDirections
+import com.example.bookloverfinalapp.app.utils.communication.BooksAdapterModelCommunication
+import com.example.domain.Mapper
+import com.example.domain.interactor.GetAllBooksUseCase
+import com.example.domain.models.BookDomain
+import com.example.domain.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -19,7 +19,7 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentAllBooksViewModel @Inject constructor(
     private val useCaseGetAll: GetAllBooksUseCase,
-    private val communication: BooksCommunication,
+    private val communication: BooksAdapterModelCommunication,
     private val mapper: Mapper<BookDomain, BookAdapterModel.Base>,
 ) : BaseViewModel() {
 
@@ -29,8 +29,8 @@ class FragmentAllBooksViewModel @Inject constructor(
     fun goStudentBookDetailsFragment(book: Book) =
         navigate(FragmentRootStudentBookDirections.actionFragmentRootBookToFragmentBookDetails(book = book))
 
-    fun fetchBooks() = dispatchers.launchInBackground(viewModelScope) {
-        useCaseGetAll.execute().collectLatest { resource ->
+    fun fetchBooks(schoolId:String) = dispatchers.launchInBackground(viewModelScope) {
+        useCaseGetAll.execute(schoolId = schoolId).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> communication.put(listOf(BookAdapterModel.Progress))
                 Status.SUCCESS -> communication.put(resource.data!!.map { bookDomain -> mapper.map(bookDomain) })

@@ -4,10 +4,10 @@ import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.User
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.interactor.SignInUseCase
-import com.example.domain.domain.models.UserDomain
-import com.example.domain.models.Status
+import com.example.domain.Mapper
+import com.example.domain.interactor.SignInUseCase
+import com.example.domain.models.UserDomain
+import com.example.domain.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
@@ -30,10 +30,6 @@ class FragmentLoginViewModel @Inject constructor(
                     Status.ERROR -> {
                         dismissProgressDialog()
                         error(message = resource.message!!)
-                    }
-                    Status.NETWORK_ERROR -> {
-                        dismissProgressDialog()
-                        networkError()
                     }
                 }
             }

@@ -6,7 +6,6 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.models.Progress
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.showView
@@ -120,8 +119,7 @@ class FragmentReader :
 
     private fun saveChanges() {
         if (bookCurrentProgress < progress + 1) {
-            viewModel.updateProgress(id = book.objectId,
-                Progress(progress = progress))
+            viewModel.updateProgress(id = book.objectId, progress = progress)
             bookCurrentProgress = progress
         }
     }

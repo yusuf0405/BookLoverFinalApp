@@ -1,10 +1,7 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.domain.domain.interactor.*
-import com.example.domain.domain.repository.BookThatReadRepository
-import com.example.domain.domain.repository.BooksRepository
-import com.example.domain.domain.repository.LoginRepository
-import com.example.domain.domain.repository.UserRepository
+import com.example.domain.interactor.*
+import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +18,18 @@ object InteractorModule {
     @Provides
     fun provideClearBooksCacheUseCase(repository: BooksRepository): ClearBooksCacheUseCase =
         ClearBooksCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideAddNewBookQuestionUseCase(repository: BooksRepository): AddNewBookQuestionUseCase =
+        AddNewBookQuestionUseCase(repository = repository)
+
+    @Provides
+    fun provideDeleteBookQuestionUseCase(repository: BooksRepository): DeleteBookQuestionUseCase =
+        DeleteBookQuestionUseCase(repository = repository)
+
+    @Provides
+    fun provideUpdateBookQuestionUseCase(repository: BooksRepository): UpdateBookQuestionUseCase =
+        UpdateBookQuestionUseCase(repository = repository)
 
     @Provides
     fun provideGetBookForReadingUseCase(repository: BooksRepository): GetBookForReadingUseCase =
@@ -89,6 +98,26 @@ object InteractorModule {
     @Provides
     fun providePasswordResetUseCase(repository: LoginRepository): PasswordResetUseCase =
         PasswordResetUseCase(repository = repository)
+
+    @Provides
+    fun provideGetAllClassesUseCase(repository: SchoolRepository): GetAllClassesUseCase =
+        GetAllClassesUseCase(repository = repository)
+
+    @Provides
+    fun provideGetAllSchoolsUseCase(repository: SchoolRepository): GetAllSchoolsUseCase =
+        GetAllSchoolsUseCase(repository = repository)
+
+    @Provides
+    fun provideGetClassUseCase(repository: SchoolRepository): GetClassUseCase =
+        GetClassUseCase(repository = repository)
+
+    @Provides
+    fun provideGetAllClassUseCase(repository: ClassRepository): GetAllClassUseCase =
+        GetAllClassUseCase(repository = repository)
+
+    @Provides
+    fun provideDeleteClassUseCase(repository: ClassRepository): DeleteClassUseCase =
+        DeleteClassUseCase(repository = repository)
 
 
 }

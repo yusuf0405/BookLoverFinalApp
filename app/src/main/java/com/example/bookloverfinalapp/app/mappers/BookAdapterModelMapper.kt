@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.mappers
 
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.models.BookDomain
+import com.example.domain.Mapper
+import com.example.domain.models.BookDomain
 import com.example.bookloverfinalapp.app.models.BookAdapterModel
 import com.example.bookloverfinalapp.app.models.BookPdfAdapter
 import com.example.bookloverfinalapp.app.models.BookPosterAdapter

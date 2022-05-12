@@ -4,8 +4,20 @@ import com.example.bookloverfinalapp.app.models.*
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 
-interface BooksCommunication : Communication<List<BookAdapterModel>> {
-    class Base : Communication.Base<List<BookAdapterModel>>(), BooksCommunication
+interface BooksAdapterModelCommunication : Communication<List<BookAdapterModel>> {
+    class Base : Communication.Base<List<BookAdapterModel>>(), BooksAdapterModelCommunication
+}
+
+interface BooksCommunication : Communication<List<Book>> {
+    class Base : Communication.Base<List<Book>>(), BooksCommunication
+}
+
+interface BooksQuestionCommunication : Communication<List<BookQuestion>> {
+    class Base : Communication.Base<List<BookQuestion>>(), BooksQuestionCommunication
+}
+
+interface ClassAdapterCommunication : Communication<List<ClassAdapterModel>> {
+    class Base : Communication.Base<List<ClassAdapterModel>>(), ClassAdapterCommunication
 }
 
 interface StudentsCommunication : Communication<List<Student>> {
@@ -41,6 +53,3 @@ interface ErrorCommunication : Communication<Event<String>> {
     class Base : Communication.Base<Event<String>>(), ErrorCommunication
 }
 
-interface NetworkErrorCommunication : Communication<Event<Boolean>> {
-    class Base : Communication.Base<Event<Boolean>>(), NetworkErrorCommunication
-}

@@ -14,23 +14,30 @@ object CommunicationModule {
     fun provideErrorCommunication(): ErrorCommunication = ErrorCommunication.Base()
 
     @Provides
-    fun provideStudentsCommunication(): StudentsCommunication = StudentsCommunication.Base()
+    fun provideBooksCommunication(): BooksCommunication = BooksCommunication.Base()
 
     @Provides
-    fun provideNetworkErrorCommunication(): NetworkErrorCommunication =
-        NetworkErrorCommunication.Base()
+    fun provideClassAdapterCommunication(): ClassAdapterCommunication =
+        ClassAdapterCommunication.Base()
+
+
+    @Provides
+    fun provideBooksQuestionCommunication(): BooksQuestionCommunication =
+        BooksQuestionCommunication.Base()
+
+    @Provides
+    fun provideStudentsCommunication(): StudentsCommunication = StudentsCommunication.Base()
 
     @Provides
     fun provideBookThatReadCommunication(): BooksThatReadCommunication =
         BooksThatReadCommunication.Base()
 
     @Provides
-    fun provideStudentCommunication(): StudentCommunication =
-        StudentCommunication.Base()
+    fun provideStudentCommunication(): StudentCommunication = StudentCommunication.Base()
 
     @Provides
-    fun provideBooksCommunication(): BooksCommunication =
-        BooksCommunication.Base()
+    fun provideBooksAdapterCommunication(): BooksAdapterModelCommunication =
+        BooksAdapterModelCommunication.Base()
 
     @Provides
     fun provideBookThatReadAdapterCommunication(): BooksThatReadAdapterCommunication =

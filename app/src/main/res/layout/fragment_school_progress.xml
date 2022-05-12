@@ -1,0 +1,214 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.ui.admin_screens.screen_school_progress.FragmentSchoolProgress">
+
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Средняя школа №7 им. Нариманова"
+        android:textColor="@color/violet"
+        android:layout_marginStart="8dp"
+        android:textSize="@dimen/profileNameBigTextSize"
+        app:layout_constraintBottom_toBottomOf="@+id/studentProgressImg"
+        app:layout_constraintEnd_toStartOf="@+id/studentProgressImg"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/studentProgressImg" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/studentProgressImg"
+        android:layout_width="@dimen/editProfileFotoSize"
+        android:layout_height="@dimen/editProfileFotoSize"
+        android:layout_marginTop="16dp"
+        android:src="@drawable/background_start"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/my_statistics_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline16"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/studentProgressImg"
+        app:layout_constraintVertical_bias="1.0">
+
+        <TextView
+            android:id="@+id/progressStatisticText"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/progress_statistics"
+            android:textColor="@color/red"
+            android:textSize="@dimen/bigTextSize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.5" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/progressMaterialCardViewForChapters"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginForTIL"
+            android:layout_marginTop="@dimen/profileTextDP"
+            android:layout_marginEnd="@dimen/recyclerViewMargin"
+            android:backgroundTint="@color/white"
+            android:visibility="visible"
+            app:cardCornerRadius="@dimen/cardAllCornersRadius"
+            app:cardElevation="@dimen/cardElevation"
+            app:layout_constraintEnd_toStartOf="@+id/guideline3"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/progressStatisticText">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/chapter_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/constraintInside">
+
+                <ImageView
+                    android:id="@+id/progressDiamond"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_student"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/progressDiamondReadText"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/violet"
+                    android:textSize="@dimen/textSizeProfileTIL"
+                    app:layout_constraintBottom_toTopOf="@+id/progressReadenText"
+                    app:layout_constraintEnd_toEndOf="@+id/progressReadenText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/progressReadenText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/progressReadenText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_progress_chapters_read"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/textSizeForSmallTexts"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/progressDiamond"
+                    app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/progressMaterialCardForBooks"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="@dimen/recyclerViewMargin"
+            android:layout_marginEnd="@dimen/marginForTIL"
+            android:backgroundTint="@color/white"
+            android:visibility="visible"
+
+            app:cardCornerRadius="@dimen/cardAllCornersRadius"
+            app:cardElevation="@dimen/cardElevation"
+            app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForChapters"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/guideline3"
+            app:layout_constraintTop_toTopOf="@+id/progressMaterialCardViewForChapters">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/book_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/constraintInside">
+
+                <ImageView
+                    android:id="@+id/progressCrown"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_page_1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/progressBookReadenText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/progressBookReadText"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/violet"
+                    android:textSize="@dimen/textSizeProfileTIL"
+                    app:layout_constraintBottom_toTopOf="@+id/progressBookReadenText"
+                    app:layout_constraintEnd_toEndOf="@+id/progressBookReadenText"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="@+id/progressBookReadenText"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/progressBookReadenText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/student_progress_books_read"
+                    android:textColor="@color/grey"
+                    android:textSize="@dimen/textSizeForSmallTexts"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/progressCrown"
+                    app:layout_constraintTop_toBottomOf="@+id/progressBookReadText" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline11"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.27" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline13"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.76" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline16"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.45" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -2,8 +2,8 @@ package com.example.bookloverfinalapp.app.mappers
 
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.StudentImage
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.models.StudentDomain
+import com.example.domain.Mapper
+import com.example.domain.models.StudentDomain
 
 class StudentDomainToStudentMapper : Mapper<StudentDomain, Student>() {
     override fun map(from: StudentDomain): Student = from.run {

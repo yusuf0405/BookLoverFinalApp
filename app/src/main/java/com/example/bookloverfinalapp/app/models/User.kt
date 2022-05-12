@@ -7,6 +7,7 @@ data class User(
     val id: String,
     var createAt: Date,
     var classId: String,
+    var schoolId: String,
     var image: UserImage? = null,
     var email: String,
     var schoolName: String,

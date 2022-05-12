@@ -8,11 +8,7 @@
         android:id="@+id/fragment_progress"
         android:name="com.example.bookloverfinalapp.app.ui.screen_progress.FragmentProgress"
         android:label="fragment_student_progress"
-        tools:layout="@layout/fragment_progress">
-        <action
-            android:id="@+id/action_fragment_progress_to_fragmentAdminUploadPdf"
-            app:destination="@id/fragmentAdminUploadPdf" />
-    </fragment>
+        tools:layout="@layout/fragment_progress"/>
     <fragment
         android:id="@+id/fragment_profile"
         android:name="com.example.bookloverfinalapp.app.ui.screen_profile.FragmentProfile"
@@ -72,9 +68,9 @@
         android:label="FragmentStudentEditProfile" />
     <fragment
         android:id="@+id/fragment_root_book"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_book_root.FragmentRootStudentBook"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_main_root.FragmentRootStudentBook"
         android:label="fragment_student_book_root"
-        tools:layout="@layout/fragment_book_root">
+        tools:layout="@layout/fragment_main_root">
         <action
             android:id="@+id/action_fragment_root_book_to_fragmentChapterBook"
             app:destination="@id/fragmentChapterBook" />
@@ -113,11 +109,6 @@
             app:destination="@id/fragmentChapterBook"
             app:popUpTo="@+id/fragment_root_book" />
     </fragment>
-    <fragment
-        android:id="@+id/fragmentAdminUploadPdf"
-        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.FragmentAdminUploadPdf"
-        android:label="fragment_admin_upload_pdf"
-        tools:layout="@layout/fragment_admin_upload_pdf" />
     <fragment
         android:id="@+id/fragmentStudentDetails"
         android:name="com.example.bookloverfinalapp.app.ui.screen_student_details.ui.FragmentStudentDetails"

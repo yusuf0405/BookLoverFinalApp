@@ -48,14 +48,19 @@
     <string name="choose_school">Выберите вашу школу</string>
     <string name="book_added_successfully">Книга успешно добавлено.</string>
     <string name="no_book_questions">Вопросов по главе нет.</string>
-
+    <string name="book_question_updated_successfully">Вопрос успешно обновлен</string>
+    <string name="enter_the_change">Сначала введите изменение</string>
+    <string name="book_question_added_successfully">Вопрос успешно добавлен</string>
+    <string name="book_question_deleted_successfully">Вопрос успешно удален</string>
+    <string name="class_deleted_successfully">Класс успешно удален</string>
+    <string name="fill_in_all_fields">Сначала заполните все поля</string>
 
     //Menu
     <string name="all_books">Все книги</string>
+    <string name="admin_books">Книги</string>
+    <string name="admin_classes">Классы</string>
     <string name="my_books">Мои книги</string>
     <string name="my_students">Мои студенты</string>
-
-
 
 
     <string name="hello_blank_fragment">Hello world</string>
@@ -153,4 +158,18 @@
     <string name="send_you_a_message">* Мы отправим вам сообщение для установки или сброса вашего нового пароля</string>
     <string name="send_code">Отправить код</string>
     <string name="message_has_been_successfully">Сообщения было успешно отправлено на ваш электронный адрес.</string>
+    <string name="upload_book">Добавить книгу</string>
+    <string name="add_question">Добавить вопрос</string>
+    <string name="click_add_question">Нажмите чтобы загрузить вопрос</string>
+    <string name="right_answer">Выберите правильный ответ</string>
+    <string name="response_options">Вариант ответа</string>
+    <string name="question_dilaog_title">Введите ответ</string>
+    <string name="empty_value">Пусто</string>
+    <string name="question_text">Текст вопроса (не более 200 символов)</string>
+
+    <string name="default_delete_question_alert_message">Вы действительно хотите удалить этот вопрос?</string>
+    <string name="default_delete_class_alert_message">Вы действительно хотите удалить этот класс?</string>
+
+    <string name="edit_question">Изменить</string>
+    <string name="edit_a_question">Изменить вопрос</string>
 </resources>

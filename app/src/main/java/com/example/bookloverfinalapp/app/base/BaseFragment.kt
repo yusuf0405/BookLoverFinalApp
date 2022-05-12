@@ -68,11 +68,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
             }
         }
 
-        viewModel.observeNetworkError(viewLifecycleOwner) {
-            it.getValue()?.let {
-                showSnackbar(binding().root, getString(R.string.network_error))
-            }
-        }
         viewModel.observeError(viewLifecycleOwner) {
             it.getValue()?.let { message ->
                 showToast(message = message)

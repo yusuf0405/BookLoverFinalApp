@@ -2,10 +2,8 @@ package com.example.bookloverfinalapp.app.ui.screen_reader
 
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.models.Progress
-import com.example.domain.domain.interactor.UpdateProgressUseCase
-import com.example.domain.domain.models.ProgressDomain
-import com.example.domain.models.Status
+import com.example.domain.Status
+import com.example.domain.interactor.UpdateProgressUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.flow.collectLatest
@@ -20,10 +18,10 @@ class FragmentReaderViewModel @Inject constructor(
 
     fun updateProgress(
         id: String,
-        progress: Progress,
+        progress: Int,
     ) = GlobalScope.launch {
         updateProgressStudentBookUseCase.execute(id = id,
-            progress = ProgressDomain(progress = progress.progress)).collectLatest { resource ->
+            progress = progress).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()
                 Status.SUCCESS -> {
@@ -32,10 +30,6 @@ class FragmentReaderViewModel @Inject constructor(
                 }
                 Status.ERROR -> {
                     error(message = resource.message!!)
-                    dismissProgressDialog()
-                }
-                Status.NETWORK_ERROR -> {
-                    networkError()
                     dismissProgressDialog()
                 }
             }

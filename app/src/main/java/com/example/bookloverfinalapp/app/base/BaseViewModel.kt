@@ -5,7 +5,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
 import com.example.bookloverfinalapp.app.utils.Dispatchers
-import com.example.bookloverfinalapp.app.utils.communication.*
+import com.example.bookloverfinalapp.app.utils.communication.ErrorCommunication
+import com.example.bookloverfinalapp.app.utils.communication.NavigationCommunication
+import com.example.bookloverfinalapp.app.utils.communication.ProgressCommunication
+import com.example.bookloverfinalapp.app.utils.communication.ProgressDialogCommunication
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 
@@ -15,8 +18,6 @@ abstract class BaseViewModel : ViewModel() {
     private var progressCommunication = ProgressCommunication.Base()
 
     private var errorCommunication = ErrorCommunication.Base()
-
-    private var networkErrorCommunication = NetworkErrorCommunication.Base()
 
     private var navigationCommunication = NavigationCommunication.Base()
 
@@ -36,18 +37,12 @@ abstract class BaseViewModel : ViewModel() {
     fun observeError(owner: LifecycleOwner, observer: Observer<Event<String>>) =
         errorCommunication.observe(owner = owner, observer = observer)
 
-    fun observeNetworkError(owner: LifecycleOwner, observer: Observer<Event<Boolean>>) =
-        networkErrorCommunication.observe(owner = owner, observer = observer)
-
     fun navigate(navDirections: NavDirections) =
         navigationCommunication.put(Event(NavigationCommand.ToDirection(navDirections)))
 
     fun navigateBack() = navigationCommunication.put(Event(value = NavigationCommand.Back))
 
     fun error(message: String) = errorCommunication.put(Event(value = message))
-
-
-    fun networkError() = networkErrorCommunication.put(Event(value = true))
 
     fun showProgressAnimation() = progressCommunication.put(Event(value = true))
 

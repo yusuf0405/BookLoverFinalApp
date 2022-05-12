@@ -1,29 +1,28 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.data.api.KnigolyubApi
-import com.example.data.data.ResourceProvider
-import com.example.data.data.cache.models.BookDb
-import com.example.data.data.cache.models.BookThatReadDb
-import com.example.data.data.cache.models.StudentDb
-import com.example.data.data.cache.source.BooksCacheDataSource
-import com.example.data.data.cache.source.BooksThatReadDataSource
-import com.example.data.data.cache.source.UsersCacheDataSource
-import com.example.data.data.cloud.models.AddNewBookCloud
-import com.example.data.data.cloud.models.SignUpAnswerCloud
-import com.example.data.data.cloud.models.UserCloud
-import com.example.data.data.cloud.service.LoginService
-import com.example.data.data.cloud.source.BooksCloudDataSource
-import com.example.data.data.cloud.source.BooksThatReadCloudDataSource
-import com.example.data.data.cloud.source.UsersCloudDataSource
-import com.example.data.data.models.BookData
-import com.example.data.data.models.BookQuestionData
-import com.example.data.data.models.BookThatReadData
-import com.example.data.data.models.StudentData
-import com.example.data.data.repository.*
-import com.example.domain.domain.Mapper
-import com.example.domain.domain.models.*
-import com.example.domain.domain.repository.*
-import com.example.domain.models.student.PostRequestAnswerDomain
+import com.example.data.ResourceProvider
+import com.example.data.cache.models.BookDb
+import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.ClassCache
+import com.example.data.cache.models.StudentDb
+import com.example.data.cache.source.BooksCacheDataSource
+import com.example.data.cache.source.BooksThatReadDataSource
+import com.example.data.cache.source.ClassCacheDataSource
+import com.example.data.cache.source.UsersCacheDataSource
+import com.example.data.cloud.models.AddNewBookCloud
+import com.example.data.cloud.models.SignUpAnswerCloud
+import com.example.data.cloud.models.UserCloud
+import com.example.data.cloud.service.LoginService
+import com.example.data.cloud.service.SchoolService
+import com.example.data.cloud.source.BooksCloudDataSource
+import com.example.data.cloud.source.BooksThatReadCloudDataSource
+import com.example.data.cloud.source.ClassCloudDataSource
+import com.example.data.cloud.source.UsersCloudDataSource
+import com.example.data.models.*
+import com.example.data.repository.*
+import com.example.domain.Mapper
+import com.example.domain.models.*
+import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -55,18 +54,23 @@ object RepositoryModule {
         bookCashMapper: Mapper<BookDb, BookData>,
         bookDomainMapper: Mapper<BookData, BookDomain>,
         questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
+        questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
     ): BooksRepository =
         BooksRepositoryImpl(
             cloudDataSource = cloudDataSource,
             cacheDataSource = cacheDataSource,
             bookCashMapper = bookCashMapper,
             bookDomainMapper = bookDomainMapper,
-            questionsMapper = questionsMapper)
+            questionsMapper = questionsMapper,
+            questionsDomainMapper = questionsDomainMapper)
 
     @Provides
     @Singleton
-    fun provideSchoolRepository(api: KnigolyubApi): SchoolRepository =
-        SchoolRepositoryImpl(api = api)
+    fun provideSchoolRepository(
+        service: SchoolService,
+        resourceProvider: ResourceProvider,
+    ): SchoolRepository =
+        SchoolRepositoryImpl(service = service, resourceProvider = resourceProvider)
 
 
     @Provides
@@ -98,5 +102,20 @@ object RepositoryModule {
         bookCashMapper = bookCashMapper,
         bookDomainMapper = bookDomainMapper,
         addNewBookMapper = addNewBookMapper)
+
+    @Provides
+    @Singleton
+    fun provideClassRepository(
+        cloudDataSource: ClassCloudDataSource,
+        cacheDataSource: ClassCacheDataSource,
+        classMapper: Mapper<ClassData, ClassDomain>,
+        classCashMapper: Mapper<ClassCache, ClassData>,
+    ): ClassRepository = ClassRepositoryImpl(
+        cloudDataSource = cloudDataSource,
+        cacheDataSource = cacheDataSource,
+        classMapper = classMapper,
+        classCashMapper = classCashMapper
+    )
+
 
 }

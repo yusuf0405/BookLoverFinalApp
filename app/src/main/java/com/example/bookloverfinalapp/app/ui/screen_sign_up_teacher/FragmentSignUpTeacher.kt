@@ -15,10 +15,10 @@ import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpTeacherBinding
-import com.example.domain.domain.models.UserDomainImage
-import com.example.domain.models.classes.Class
-import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpDomain
+import com.example.domain.models.UserDomainImage
+import com.example.domain.models.ClassDomain
+import com.example.domain.models.SchoolDomain
+import com.example.domain.models.UserSignUpDomain
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.onEach
 import java.util.*
@@ -34,15 +34,17 @@ class FragmentSignUpTeacher :
     override fun onReady(savedInstanceState: Bundle?) {}
 
     private val classTitleList = mutableListOf<String>()
-    private var classList = mutableListOf<Class>()
+    private var classList = mutableListOf<ClassDomain>()
     private var classCurrentIndex = 0
     private var classId = ""
     private var classTitle = ""
 
     private val schoolsTitleList = mutableListOf<String>()
-    private var schoolsList = mutableListOf<School>()
+    private var schoolList = mutableListOf<SchoolDomain>()
     private var schoolCurrentIndex = 0
+    private var schoolId = ""
     private var schoolTitle = ""
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -63,12 +65,13 @@ class FragmentSignUpTeacher :
 
     private fun observeRecourse() {
         viewModel.schools.onEach { schools ->
-            schoolsList = schools.toMutableList()
+            schoolList = schools.toMutableList()
             schools.forEach { schoolsTitleList.add(it.title) }
             schoolTitle = schoolsTitleList[schoolCurrentIndex]
             binding().schoolTextView.text = schoolsTitleList[schoolCurrentIndex]
             schoolTitle = schoolsTitleList[schoolCurrentIndex]
-            viewModel.getClasses(schoolsList[schoolCurrentIndex].classesIds)
+            schoolId = schools[schoolCurrentIndex].objectId
+            viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
         viewModel.classes.onEach { classes ->
@@ -77,7 +80,7 @@ class FragmentSignUpTeacher :
             classCurrentIndex = 0
             classes.forEach { classTitleList.add(it.title) }
             classTitle = classTitleList[classCurrentIndex]
-            classId = classes[classCurrentIndex].objectId
+            classId = classes[classCurrentIndex].id
             binding().classTextView.text = classTitle
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
@@ -86,7 +89,8 @@ class FragmentSignUpTeacher :
         when (view) {
             binding().signUpBtn -> signUp()
             binding().signInLink -> viewModel.goTeacherToLoginFragment()
-            binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(schoolsTitleList)
+            binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog(
+                schoolsTitleList)
             binding().classButton -> showClassSingleChoiceWithConfirmationAlertDialog(list = classTitleList)
 
         }
@@ -110,7 +114,8 @@ class FragmentSignUpTeacher :
                     schoolName = schoolTitle,
                     gender = "female",
                     classId = classId,
-                    userType = "teacher"
+                    userType = "teacher",
+                    schoolId = schoolId
                 )
                 viewModel.signUp(user = teacherDto).observe(viewLifecycleOwner) { user ->
                     successSignUp(id = user.id,
@@ -144,7 +149,8 @@ class FragmentSignUpTeacher :
                 createAt = createdAt,
                 userType = UserType.teacher,
                 sessionToken = sessionToken,
-                image = image.toDto()
+                image = image.toDto(),
+                schoolId = schoolId
             )
             CurrentUser().saveCurrentUser(user = currentUser, activity = requireActivity())
             CheсkNavigation().observeLogin(status = true, activity = requireActivity())
@@ -161,7 +167,7 @@ class FragmentSignUpTeacher :
                 val index = (d as AlertDialog).listView.checkedItemPosition
                 classCurrentIndex = index
                 classTitle = classTitleList[index]
-                classId = classList[index].objectId
+                classId = classList[index].id
                 binding().classTextView.text = classTitle
             }
             .create()
@@ -174,9 +180,10 @@ class FragmentSignUpTeacher :
             .setSingleChoiceItems(list.toTypedArray(), schoolCurrentIndex, null)
             .setPositiveButton(R.string.action_confirm) { d, _ ->
                 val index = (d as AlertDialog).listView.checkedItemPosition
-                if (index != schoolCurrentIndex) viewModel.getClasses(schoolsList[index].classesIds)
+                if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].classesIds)
                 schoolCurrentIndex = index
                 schoolTitle = schoolsTitleList[index]
+                schoolId = schoolList[index].objectId
                 binding().schoolTextView.text = schoolTitle
             }
             .create()

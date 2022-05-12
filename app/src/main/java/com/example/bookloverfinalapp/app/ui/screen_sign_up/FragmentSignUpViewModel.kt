@@ -6,13 +6,13 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudentDirections
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacherDirections
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
-import com.example.domain.domain.interactor.SignUpUseCase
-import com.example.domain.models.Status
-import com.example.domain.models.classes.Class
-import com.example.domain.models.school.School
-import com.example.domain.models.student.UserSignUpDomain
-import com.example.domain.usecase.GetAllSchoolsUseCase
-import com.example.domain.usecase.GetClassUseCase
+import com.example.domain.interactor.SignUpUseCase
+import com.example.domain.Status
+import com.example.domain.models.ClassDomain
+import com.example.domain.models.SchoolDomain
+import com.example.domain.models.UserSignUpDomain
+import com.example.domain.interactor.GetAllSchoolsUseCase
+import com.example.domain.interactor.GetClassUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
@@ -26,13 +26,13 @@ class FragmentSignUpViewModel @Inject constructor(
     private val getClassUseCase: GetClassUseCase,
 ) : BaseViewModel() {
 
-    private val _schools = MutableSharedFlow<List<School>>(replay = 1, extraBufferCapacity = 0,
+    private val _schools = MutableSharedFlow<List<SchoolDomain>>(replay = 1, extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val schools: SharedFlow<List<School>> get() = _schools.asSharedFlow()
+    val schools: SharedFlow<List<SchoolDomain>> get() = _schools.asSharedFlow()
 
-    private val _classes = MutableSharedFlow<List<Class>>(replay = 1, extraBufferCapacity = 0,
+    private val _classes = MutableSharedFlow<List<ClassDomain>>(replay = 1, extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val classes: SharedFlow<List<Class>> get() = _classes.asSharedFlow()
+    val classes: SharedFlow<List<ClassDomain>> get() = _classes.asSharedFlow()
 
     init {
         getAllSchoolsUseCase.execute().onEach { resource ->
@@ -41,10 +41,6 @@ class FragmentSignUpViewModel @Inject constructor(
                 Status.SUCCESS -> _schools.emit(resource.data!!)
                 Status.ERROR -> {
                     error(message = resource.message!!)
-                    dismissProgressDialog()
-                }
-                Status.NETWORK_ERROR -> {
-                    networkError()
                     dismissProgressDialog()
                 }
             }
@@ -63,16 +59,12 @@ class FragmentSignUpViewModel @Inject constructor(
                     error(message = resource.message!!)
                     dismissProgressDialog()
                 }
-                Status.NETWORK_ERROR -> {
-                    networkError()
-                    dismissProgressDialog()
-                }
             }
         }
     }
 
     fun getClasses(classesIds: List<String>) = viewModelScope.launch {
-        val listClasses = mutableListOf<Class>()
+        val listClasses = mutableListOf<ClassDomain>()
         classesIds.forEach { id ->
             getClassUseCase.execute(id = id).collectLatest { resource ->
                 when (resource.status) {
@@ -83,10 +75,6 @@ class FragmentSignUpViewModel @Inject constructor(
                     }
                     Status.ERROR -> {
                         error(message = resource.message!!)
-                        dismissProgressDialog()
-                    }
-                    Status.NETWORK_ERROR -> {
-                        networkError()
                         dismissProgressDialog()
                     }
                 }
