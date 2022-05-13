@@ -2,14 +2,14 @@ package com.example.data.mappers
 
 import com.example.data.cache.models.BookThatReadDb
 import com.example.data.cache.models.BookThatReadPosterDb
-import com.example.data.cloud.models.AddNewBookCloud
+import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.domain.Mapper
-import com.example.domain.models.AddNewBookDomain
+import com.example.domain.models.AddNewBookThatReadDomain
 import java.util.*
 
-class AddNewBookMapper : Mapper<AddNewBookDomain, AddNewBookCloud>() {
-    override fun map(from: AddNewBookDomain): AddNewBookCloud = from.run {
-        AddNewBookCloud(
+class AddNewBookMapper : Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>() {
+    override fun map(from: AddNewBookThatReadDomain): AddNewBookThatReadCloud = from.run {
+        AddNewBookThatReadCloud(
             progress = progress,
             bookId = bookId,
             userId = userId,
@@ -19,7 +19,7 @@ class AddNewBookMapper : Mapper<AddNewBookDomain, AddNewBookCloud>() {
     }
 }
 
-internal fun AddNewBookDomain.toStudentBook(
+internal fun AddNewBookThatReadDomain.toStudentBook(
     objectId: String,
     createdAt: Date,
     path: String,

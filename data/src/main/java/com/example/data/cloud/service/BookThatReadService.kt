@@ -25,7 +25,7 @@ interface BookThatReadService {
 
     @POST("classes/BooksThatRead")
     suspend fun addNewBookStudent(
-        @Body book: AddNewBookCloud,
+        @Body book: AddNewBookThatReadCloud,
     ): Response<PostRequestAnswerCloud>
 
 
@@ -41,8 +41,4 @@ interface BookThatReadService {
         @Path("id") id: String,
         @Body chapters: UpdateChaptersCloud,
     ): Response<Unit>
-
-
-
-
 }

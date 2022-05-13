@@ -3,6 +3,8 @@ package com.example.bookloverfinalapp.app.di
 import android.content.Context
 import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.data.ResourceProvider
+import com.example.domain.interactor.GetCurrentUserUseCase
+import com.example.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,5 +29,7 @@ object AppModule {
     fun provideResourceProvider(context: Context): ResourceProvider =
         ResourceProvider.Base(context = context)
 
-
+    @Provides
+    fun provideGetCurrentUserUseCase(repository: UserRepository): GetCurrentUserUseCase =
+        GetCurrentUserUseCase(repository = repository)
 }

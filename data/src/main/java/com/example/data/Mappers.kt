@@ -1,11 +1,16 @@
 package com.example.data
 
-import com.example.data.cloud.models.UserSignUpCloud
 import com.example.data.cloud.models.ClassCloud
+import com.example.data.cloud.models.UserSignUpCloud
+import com.example.data.models.BookData
+import com.example.data.models.BookPdfData
+import com.example.data.models.BookPosterData
 import com.example.data.models.school.SchoolCloud
+import com.example.domain.models.AddNewBookDomain
 import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.models.UserSignUpDomain
+import java.util.*
 
 
 internal fun UserSignUpDomain.toDtoSignUp(): UserSignUpCloud =
@@ -21,13 +26,25 @@ internal fun UserSignUpDomain.toDtoSignUp(): UserSignUpCloud =
         classId = classId,
         userType = userType,
         username = email,
-        schoolId = schoolId
+        schoolId = schoolId,
+        userSessionToken = "null"
     )
+
+internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = BookData(
+    id = id,
+    createdAt = createdAt,
+    book = BookPdfData(name = book.name, url = book.url, type = book.type),
+    author = author,
+    poster = BookPosterData(name = poster.name, url = poster.url),
+    updatedAt = createdAt,
+    chapterCount = chapterCount.toInt(), page = page, publicYear = publicYear,
+    title = title
+)
 
 
 internal fun ClassCloud.toClass(): ClassDomain =
-    ClassDomain(id = objectId, title = title, )
+    ClassDomain(id = objectId, title = title)
 
 
 internal fun SchoolCloud.toSchool(): SchoolDomain =
-    SchoolDomain(objectId = objectId, title = title, classesIds = classes, )
+    SchoolDomain(objectId = objectId, title = title, classesIds = classes)

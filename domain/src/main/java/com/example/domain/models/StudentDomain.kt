@@ -8,6 +8,7 @@ data class StudentDomain(
     var createAt: Date,
     var schoolName: String,
     var className: String,
+    var sessionToken: String,
     var email: String,
     var gender: String,
     var lastname: String,

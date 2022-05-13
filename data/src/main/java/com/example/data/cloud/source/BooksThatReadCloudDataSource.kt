@@ -4,7 +4,7 @@ import com.example.data.ResourceProvider
 import com.example.data.base.BaseApiResponse
 import com.example.data.cloud.mappers.BookMapper
 import com.example.data.cloud.mappers.BookThatReadMapper
-import com.example.data.cloud.models.AddNewBookCloud
+import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.data.cloud.models.PostRequestAnswerCloud
 import com.example.data.cloud.models.UpdateChaptersCloud
 import com.example.data.cloud.models.UpdateProgressCloud
@@ -18,7 +18,7 @@ interface BooksThatReadCloudDataSource {
 
     suspend fun deleteBook(id: String): Resource<Unit>
 
-    suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud>
+    suspend fun addNewBook(book: AddNewBookThatReadCloud): Resource<PostRequestAnswerCloud>
 
     suspend fun updateProgress(id: String, progress: Int): Resource<Unit>
 
@@ -77,7 +77,7 @@ interface BooksThatReadCloudDataSource {
         override suspend fun deleteBook(id: String) =
             safeApiCall { thatReadService.deleteMyBook(id = id) }
 
-        override suspend fun addNewBook(book: AddNewBookCloud): Resource<PostRequestAnswerCloud> =
+        override suspend fun addNewBook(book: AddNewBookThatReadCloud): Resource<PostRequestAnswerCloud> =
             safeApiCall { thatReadService.addNewBookStudent(book = book) }
 
         override suspend fun updateProgress(id: String, progress: Int): Resource<Unit> =

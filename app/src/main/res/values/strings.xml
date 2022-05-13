@@ -172,4 +172,17 @@
 
     <string name="edit_question">Изменить</string>
     <string name="edit_a_question">Изменить вопрос</string>
+    <string name="books_he_reads">Книги, которые читает ...</string>
+    <string name="delete_student">Удалить профиль</string>
+    <string name="student_deleted_successfuly">Студент успешно удален</string>
+    <string name="you_account_deleted">Ваш профиль был удален администратором</string>
+    <string name="splash_error_title">Ошибка</string>
+    <string name="student_statistics">Статистика ученика</string>
+    <string name="login_out">Выход из профиля</string>
+    <string name="school">Школа</string>
+    <string name="name">Имя</string>
+    <string name="profile_class">Класс</string>
+    <string name="bookTitle">Название</string>
+    <string name="bookAutor">Автор</string>
+    <string name="bookPublicYear">Дата публикации</string>
 </resources>

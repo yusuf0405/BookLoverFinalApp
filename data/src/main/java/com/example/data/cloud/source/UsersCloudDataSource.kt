@@ -4,7 +4,9 @@ import com.example.data.ResourceProvider
 import com.example.data.base.BaseApiResponse
 import com.example.data.cloud.mappers.StudentBookMapper
 import com.example.data.cloud.mappers.UserMapper
+import com.example.data.cloud.models.SessionTokenCloud
 import com.example.data.cloud.models.UpdateCloud
+import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.models.UserUpdateCloud
 import com.example.data.cloud.service.UserService
 import com.example.data.models.StudentData
@@ -23,6 +25,12 @@ interface UsersCloudDataSource {
         user: UserUpdateDomain,
         sessionToken: String,
     ): Resource<UpdateAnswerDomain>
+
+    suspend fun deleteUser(id: String, sessionToken: String): Resource<Unit>
+
+    suspend fun addSessionToken(id: String, sessionToken: String): Resource<Unit>
+
+    suspend fun getCurrentUser(sessionToken: String): Resource<UserCloud>
 
     class Base(
         private val service: UserService,
@@ -75,7 +83,9 @@ interface UsersCloudDataSource {
                         gender = userCloud.gender,
                         lastname = userCloud.lastname,
                         name = userCloud.name,
-                        number = userCloud.number)
+                        number = userCloud.number,
+                        sessionToken = userCloud.userSessionToken)
+
 
                 studentList.add(student.map(StudentBookMapper.ComplexMapper(attributes)))
 
@@ -96,5 +106,18 @@ interface UsersCloudDataSource {
                 id = id,
                 student = userToDataMapper.map(user))
         }
+
+        override suspend fun deleteUser(id: String, sessionToken: String): Resource<Unit> =
+            safeApiCall { service.deleteUser(sessionToken = sessionToken, id = id) }
+
+        override suspend fun addSessionToken(id: String, sessionToken: String): Resource<Unit> =
+            safeApiCall {
+                service.addSessionToken(id = id,
+                    userSessionToken = SessionTokenCloud(sessionToken = sessionToken),
+                    sessionToken = sessionToken)
+            }
+
+        override suspend fun getCurrentUser(sessionToken: String): Resource<UserCloud> =
+            safeApiCall { service.getMe(sessionToken = sessionToken) }
     }
 }

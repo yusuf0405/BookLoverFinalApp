@@ -1,5 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.screen_sign_up_student
 
+import android.content.DialogInterface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -54,22 +55,47 @@ class FragmentSignUpStudent :
     }
 
     private fun observeRecourse() {
+
+        viewModel.schoolError.onEach { value ->
+            value.getValue()?.let { message ->
+                val listener = DialogInterface.OnClickListener { _, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> viewModel.getAllSchools()
+                    }
+                }
+                requireContext().shoErrorDialog(message, listener)
+            }
+
+        }.launchWhenStarted(lifecycleScope = lifecycleScope)
+
+        viewModel.classError.onEach { value ->
+            value.getValue()?.let { message ->
+                val listener = DialogInterface.OnClickListener { _, which ->
+                    when (which) {
+                        DialogInterface.BUTTON_POSITIVE -> viewModel.getClasses(schoolList[schoolCurrentIndex].objectId)
+                    }
+                }
+                requireContext().shoErrorDialog(message, listener)
+            }
+
+        }.launchWhenStarted(lifecycleScope = lifecycleScope)
+
         viewModel.schools.onEach { schools ->
             schoolList = schools.toMutableList()
             schools.forEach { schoolTitleList.add(it.title) }
             binding().schoolTextView.text = schoolTitleList[schoolCurrentIndex]
             schoolTitle = schoolTitleList[schoolCurrentIndex]
             schoolId = schools[schoolCurrentIndex].objectId
-            viewModel.getClasses(schoolList[schoolCurrentIndex].classesIds)
+            viewModel.getClasses(schoolList[schoolCurrentIndex].objectId)
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
 
         viewModel.classes.onEach { classes ->
             classList = classes.toMutableList()
             classesTitleList.clear()
             classCurrentIndex = 0
-            classes.forEach { classesTitleList.add(it.title) }
+            classList.forEach { classesTitleList.add(it.title) }
             classTitle = classesTitleList[classCurrentIndex]
-            classId = classes[classCurrentIndex].id
+            classId = classList[classCurrentIndex].id
             binding().classTextView.text = classTitle
         }.launchWhenStarted(lifecycleScope = lifecycleScope)
     }
@@ -142,11 +168,11 @@ class FragmentSignUpStudent :
         binding().apply {
             val currentStudent = User(
                 id = id,
-                name = firstNameField.text.toString(),
-                lastname = lastNameField.text.toString(),
-                email = emailField.text.toString(),
-                password = passwordField.text.toString(),
-                number = "+996" + phoneField.text.toString(),
+                name = firstNameField.text.toString().trim(),
+                lastname = lastNameField.text.toString().trim(),
+                email = emailField.text.toString().trim(),
+                password = passwordField.text.toString().trim(),
+                number = "+996" + phoneField.text.toString().trim(),
                 gender = gender,
                 className = classTitle,
                 schoolName = schoolTitle,
@@ -157,9 +183,14 @@ class FragmentSignUpStudent :
                 image = image,
                 schoolId = schoolId
             )
-            CurrentUser().saveCurrentUser(user = currentStudent, activity = requireActivity())
-            CheсkNavigation().observeLogin(status = true, activity = requireActivity())
-            intentClearTask(activity = ActivityMain())
+            viewModel.addSessionToken(id = id, sessionToken = sessionToken)
+                .observe(viewLifecycleOwner) {
+                    CurrentUser().saveCurrentUser(user = currentStudent,
+                        activity = requireActivity())
+                    CheсkNavigation().observeLogin(status = true, activity = requireActivity())
+                    intentClearTask(activity = ActivityMain())
+                }
+
         }
     }
 
@@ -184,7 +215,7 @@ class FragmentSignUpStudent :
             .setSingleChoiceItems(list.toTypedArray(), schoolCurrentIndex, null)
             .setPositiveButton(R.string.action_confirm) { d, _ ->
                 val index = (d as AlertDialog).listView.checkedItemPosition
-                if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].classesIds)
+                if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].objectId)
                 schoolCurrentIndex = index
                 schoolTitle = schoolTitleList[index]
                 schoolId = schoolList[index].objectId
@@ -193,4 +224,5 @@ class FragmentSignUpStudent :
             .create()
         dialog.show()
     }
+
 }

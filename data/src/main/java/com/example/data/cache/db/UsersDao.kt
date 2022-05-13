@@ -23,6 +23,8 @@ interface UsersDao {
     @Query("select * from users_database where objectId == :id")
     suspend fun getUser(id: String): StudentDb
 
+    @Query("DELETE FROM users_database WHERE objectId = :id")
+    fun deleteByUserId(id: String)
 
     @Query("select * from users_database where classId == :classId")
     suspend fun getMyUsers(classId: String): MutableList<StudentDb>

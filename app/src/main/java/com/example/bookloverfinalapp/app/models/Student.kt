@@ -10,6 +10,7 @@ data class Student(
     var createAt: Date,
     var schoolName: String,
     var className: String,
+    var sessionToken: String,
     var email: String,
     var gender: String,
     var lastname: String,
@@ -22,7 +23,7 @@ data class Student(
     val booksId: List<String>,
     var image: StudentImage,
 ) : Serializable {
-    fun fullName(): String = "$lastname $name"
+    fun fullName(): String = "$name $lastname"
 
     fun getCreatedAt(): String {
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)

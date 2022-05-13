@@ -36,9 +36,7 @@ class FragmentAllQuestionViewModel @Inject constructor(
                         Status.LOADING -> showProgressDialog()
 
                         Status.SUCCESS -> {
-                            communication.put(resource.data!!.map { bookQuestionDomain ->
-                                mapper.map(bookQuestionDomain)
-                            })
+                            communication.put(resource.data!!.map { bookQuestionDomain -> mapper.map(bookQuestionDomain) })
                             dismissProgressDialog()
                         }
                         Status.ERROR -> {

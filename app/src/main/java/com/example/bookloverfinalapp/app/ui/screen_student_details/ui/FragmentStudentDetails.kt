@@ -10,7 +10,9 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStudentBookOnClickListener
 import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStudentBooksAdapter
+import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
+import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentStudentDetailsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,10 +40,20 @@ class FragmentStudentDetails :
         observeResource()
         binding().toolbar.setNavigationOnClickListener { viewModel.goBack() }
 
+        binding().deleteProfileButton.setOnClickListener {
+            viewModel.deleteStudent(id = student.objectId, sessionToken = student.sessionToken)
+                .observe(viewLifecycleOwner) {
+                    showToast(R.string.student_deleted_successfuly)
+                    viewModel.goBack()
+                }
+        }
+
     }
 
     private fun setupUi() {
         binding().apply {
+            if (currentUser.userType == UserType.admin) deleteProfileButton.showView()
+            else deleteProfileButton.hideView()
             toolbar.apply {
                 title = student.fullName()
                 setTitleTextColor(Color.WHITE)
@@ -64,7 +76,9 @@ class FragmentStudentDetails :
     }
 
     private fun observeResource() {
+
         viewModel.fetchMyBook(id = student.objectId)
+
         viewModel.observe(viewLifecycleOwner) { books ->
             adapter.bookThatReads = books.toMutableList()
         }

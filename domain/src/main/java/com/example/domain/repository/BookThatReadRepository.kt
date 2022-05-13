@@ -1,7 +1,7 @@
 package com.example.domain.repository
 
 import com.example.domain.Resource
-import com.example.domain.models.AddNewBookDomain
+import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadDomain
 import kotlinx.coroutines.flow.Flow
 
@@ -14,7 +14,7 @@ interface BookThatReadRepository {
 
     fun deleteMyBook(id: String): Flow<Resource<Unit>>
 
-    fun addBook(book: AddNewBookDomain): Flow<Resource<Unit>>
+    fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>>
 
     fun updateProgress(id: String, progress: Int): Flow<Resource<Unit>>
 

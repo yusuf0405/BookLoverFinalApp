@@ -31,7 +31,11 @@
         android:id="@+id/fragmentAdminProfile"
         android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_profile.FragmentAdminProfile"
         android:label="fragment_admin_profile"
-        tools:layout="@layout/fragment_admin_profile" />
+        tools:layout="@layout/fragment_admin_profile" >
+        <action
+            android:id="@+id/action_fragmentAdminProfile_to_fragmentAdminEditProfile"
+            app:destination="@id/fragmentAdminEditProfile" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentSetting"
         android:name="com.example.bookloverfinalapp.app.ui.screen_setting.FragmentSetting"
@@ -115,6 +119,23 @@
         <argument
             android:name="schoolClass"
             app:argType="com.example.bookloverfinalapp.app.models.SchoolClass" />
+        <action
+            android:id="@+id/action_fragmentClassStudents_to_fragmentStudentDetails2"
+            app:destination="@id/fragmentStudentDetails2" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentStudentDetails2"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_student_details.ui.FragmentStudentDetails"
+        android:label="fragment_student_details"
+        tools:layout="@layout/fragment_student_details" >
+        <argument
+            android:name="student"
+            app:argType="com.example.bookloverfinalapp.app.models.Student" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAdminEditProfile"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_profile.FragmentAdminEditProfile"
+        android:label="fragment_admin_edit_profile"
+        tools:layout="@layout/fragment_admin_edit_profile" />
 
 </navigation>

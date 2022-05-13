@@ -23,6 +23,7 @@ class UserDbToDataMapper : Mapper<StudentDb, StudentData>() {
             chaptersRead = chaptersRead,
             booksRead = booksRead,
             progress = progress,
-            booksId = booksId)
+            booksId = booksId,
+            sessionToken = sessionToken)
     }
 }

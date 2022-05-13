@@ -24,6 +24,10 @@ object InteractorModule {
         AddNewBookQuestionUseCase(repository = repository)
 
     @Provides
+    fun provideAddNewBookUseCase(repository: BooksRepository): AddNewBookUseCase =
+        AddNewBookUseCase(repository = repository)
+
+    @Provides
     fun provideDeleteBookQuestionUseCase(repository: BooksRepository): DeleteBookQuestionUseCase =
         DeleteBookQuestionUseCase(repository = repository)
 
@@ -84,6 +88,18 @@ object InteractorModule {
         ClearStudentsCacheUseCase(repository = repository)
 
     @Provides
+    fun provideDeleteUserUseCase(repository: UserRepository): DeleteUserUseCase =
+        DeleteUserUseCase(repository = repository)
+
+    @Provides
+    fun provideAddSessionTokenUseCase(repository: UserRepository): AddSessionTokenUseCase =
+        AddSessionTokenUseCase(repository = repository)
+
+    @Provides
+    fun provideGetClassStudentsUseCase(repository: UserRepository): GetClassStudentsUseCase =
+        GetClassStudentsUseCase(repository = repository)
+
+    @Provides
     fun provideUpdateUserUseCase(repository: UserRepository): UpdateUserUseCase =
         UpdateUserUseCase(repository = repository)
 
@@ -106,10 +122,6 @@ object InteractorModule {
     @Provides
     fun provideGetAllSchoolsUseCase(repository: SchoolRepository): GetAllSchoolsUseCase =
         GetAllSchoolsUseCase(repository = repository)
-
-    @Provides
-    fun provideGetClassUseCase(repository: SchoolRepository): GetClassUseCase =
-        GetClassUseCase(repository = repository)
 
     @Provides
     fun provideGetAllClassUseCase(repository: ClassRepository): GetAllClassUseCase =

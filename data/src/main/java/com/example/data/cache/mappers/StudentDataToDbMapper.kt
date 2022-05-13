@@ -26,6 +26,7 @@ class StudentDataToDbMapper : Mapper<StudentData, StudentDb>() {
             progress = progress,
             chaptersRead = chaptersRead,
             booksId = booksId,
+            sessionToken=sessionToken
         )
     }
 }

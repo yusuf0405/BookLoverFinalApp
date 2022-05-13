@@ -34,6 +34,7 @@ class FragmentEditProfile :
     override val viewModel: FragmentEditProfileViewModel by viewModels()
 
     override fun onReady(savedInstanceState: Bundle?) {}
+
     private var parseFile: ParseFile? = null
     private var image: UserImage? = null
 

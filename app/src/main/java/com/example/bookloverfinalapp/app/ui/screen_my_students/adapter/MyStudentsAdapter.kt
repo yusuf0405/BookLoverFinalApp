@@ -56,6 +56,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
 
                     override fun map(
                         objectId: String,
+                        sessionToken: String,
                         classId: String,
                         createAt: Date,
                         schoolName: String,
@@ -70,7 +71,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                         booksRead: Int,
                         progress: Int,
                         booksId: List<String>,
-                        image: StudentImage,
+                        image: StudentImage
                     ) {
                         TODO("Not yet implemented")
                     }
@@ -97,6 +98,7 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
 
                     override fun map(
                         objectId: String,
+                        sessionToken: String,
                         classId: String,
                         createAt: Date,
                         schoolName: String,
@@ -115,15 +117,15 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                     ) {
                         if (progress == 0) {
                             progressText.hideView()
-                            progressImage.hideView()
+//                            progressImage.hideView()
                         }
                         if (chaptersRead == 0) {
                             chaptersReadText.hideView()
-                            chaptersReadImage.hideView()
+//                            chaptersReadImage.hideView()
                         }
                         if (booksRead == 0) {
                             booksReadText.hideView()
-                            booksReadImage.hideView()
+//                            booksReadImage.hideView()
                         }
                         lastNameText.text = lastname
                         nameText.text = name
@@ -154,7 +156,8 @@ class MyStudentsAdapter(private val actionListener: MyStudentOnClickListener) :
                                 booksId = booksId,
                                 image = StudentImage(name = image.name,
                                     type = image.type,
-                                    url = image.url)
+                                    url = image.url),
+                                sessionToken = sessionToken
                             ))
                         }
 

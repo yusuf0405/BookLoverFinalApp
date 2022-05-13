@@ -114,7 +114,6 @@
         android:name="com.example.bookloverfinalapp.app.ui.screen_student_details.ui.FragmentStudentDetails"
         android:label="fragment_student_details"
         tools:layout="@layout/fragment_student_details">
-
         <argument
             android:name="student"
             app:argType="com.example.bookloverfinalapp.app.models.Student" />

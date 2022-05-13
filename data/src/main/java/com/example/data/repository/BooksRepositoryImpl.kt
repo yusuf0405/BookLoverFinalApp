@@ -4,12 +4,15 @@ import com.example.data.cache.models.BookDb
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cloud.source.BooksCloudDataSource
 import com.example.data.models.AddBookQuestionData
+import com.example.data.models.AddNewBookData
 import com.example.data.models.BookData
 import com.example.data.models.BookQuestionData
+import com.example.data.toBook
 import com.example.domain.Mapper
 import com.example.domain.Resource
 import com.example.domain.Status
 import com.example.domain.models.AddBookQuestionDomain
+import com.example.domain.models.AddNewBookDomain
 import com.example.domain.models.BookDomain
 import com.example.domain.models.BookQuestionDomain
 import com.example.domain.repository.BooksRepository
@@ -26,6 +29,7 @@ class BooksRepositoryImpl(
     private val cacheDataSource: BooksCacheDataSource,
     private val bookCashMapper: Mapper<BookDb, BookData>,
     private val bookDomainMapper: Mapper<BookData, BookDomain>,
+    private val addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
     private val questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
     private val questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
 ) : BooksRepository {
@@ -50,6 +54,16 @@ class BooksRepositoryImpl(
             if (booksDomain.isEmpty()) emit(Resource.empty())
             else emit(Resource.success(data = booksDomain))
         }
+    }
+
+    override fun addNewBook(book: AddNewBookDomain): Flow<Resource<Unit>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.addNewBook(book = addBookDomainMapper.map(book))
+        if (result.status == Status.SUCCESS) {
+            cacheDataSource.addNewBook(book = book.toBook(id = result.data!!.objectId,
+                createdAt = result.data!!.createdAt))
+            emit(Resource.success(data = Unit))
+        } else emit(Resource.error(message = result.message!!))
     }
 
     override fun getBookForReading(url: String): Flow<Resource<InputStream>> = flow {
@@ -98,7 +112,8 @@ class BooksRepositoryImpl(
         question: AddBookQuestionDomain,
     ): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
-        val result = cloudDataSource.updateQuestion(id = id, question = questionsDomainMapper.map(question))
+        val result =
+            cloudDataSource.updateQuestion(id = id, question = questionsDomainMapper.map(question))
         if (result.status == Status.SUCCESS) emit(Resource.success(data = Unit))
         else emit(Resource.error(message = result.message!!))
 

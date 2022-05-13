@@ -22,6 +22,7 @@ class StudentAdapterModelMapper : Mapper<StudentDomain, StudentAdapterModel.Base
             booksRead = booksRead,
             progress = progress,
             booksId = booksId,
-            image = StudentImage(name = image.name, type = image.type, url = image.url))
+            image = StudentImage(name = image.name, type = image.type, url = image.url),
+            sessionToken = sessionToken)
     }
 }

@@ -15,4 +15,5 @@ data class UserSignUpCloud(
     @SerializedName("classId") val classId: String,
     @SerializedName("schoolId") val schoolId: String,
     @SerializedName("userType") val userType: String,
+    @SerializedName("userSessionToken") val userSessionToken: String,
 )

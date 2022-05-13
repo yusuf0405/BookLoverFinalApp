@@ -68,9 +68,10 @@
         <entry key="app/src/main/res/layout/fragmen_admin_edit_question.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_add_question.xml" value="0.1351806640625" />
         <entry key="app/src/main/res/layout/fragment_admin_chapters.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_admin_edit_profile.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_admin_edit_question.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_admin_main_root.xml" value="0.18651315789473685" />
-        <entry key="app/src/main/res/layout/fragment_admin_profile.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/fragment_admin_profile.xml" value="0.4681372549019608" />
         <entry key="app/src/main/res/layout/fragment_admin_upload_pdf.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_all_books.xml" value="0.19155405405405404" />
         <entry key="app/src/main/res/layout/fragment_all_question.xml" value="0.1" />

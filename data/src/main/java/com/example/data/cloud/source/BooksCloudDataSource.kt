@@ -2,11 +2,10 @@ package com.example.data.cloud.source
 
 import com.example.data.ResourceProvider
 import com.example.data.base.BaseApiResponse
-import com.example.data.cloud.models.AddBookQuestionCloud
-import com.example.data.cloud.models.BookCloud
-import com.example.data.cloud.models.BookQuestionCloud
+import com.example.data.cloud.models.*
 import com.example.data.cloud.service.BookService
 import com.example.data.models.AddBookQuestionData
+import com.example.data.models.AddNewBookData
 import com.example.data.models.BookData
 import com.example.data.models.BookQuestionData
 import com.example.domain.Mapper
@@ -16,6 +15,8 @@ import com.example.domain.Status
 interface BooksCloudDataSource {
 
     suspend fun fetchBooks(schoolId: String): Resource<List<BookData>>
+
+    suspend fun addNewBook(book: AddNewBookData): Resource<PostRequestAnswerCloud>
 
     suspend fun getAllChapterQuestions(
         id: String,
@@ -31,6 +32,7 @@ interface BooksCloudDataSource {
     class Base(
         private val service: BookService,
         private val bookCloudMapper: Mapper<BookCloud, BookData>,
+        private val addBookCloudMapper: Mapper<AddNewBookData, AddNewBookCloud>,
         private val questionCloudMapper: Mapper<BookQuestionCloud, BookQuestionData>,
         private val questionDataMapper: Mapper<AddBookQuestionData, AddBookQuestionCloud>,
         resourceProvider: ResourceProvider,
@@ -46,6 +48,10 @@ interface BooksCloudDataSource {
             } else Resource.error(message = response.message!!)
 
         }
+
+        override suspend fun addNewBook(book: AddNewBookData): Resource<PostRequestAnswerCloud> =
+            safeApiCall { service.addNewBook(book = addBookCloudMapper.map(book)) }
+
 
         override suspend fun getAllChapterQuestions(
             id: String,

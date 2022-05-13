@@ -46,6 +46,7 @@ interface StudentBookMapper {
             name: String,
             number: String,
             userType: String,
+            sessionToken: String,
         ): StudentData = mapper.map(object : Mapper<StudentData> {
             override fun map(
                 chaptersRead: Int,
@@ -67,7 +68,8 @@ interface StudentBookMapper {
                 booksId = booksId,
                 progress = progress,
                 booksRead = booksRead,
-                chaptersRead = chaptersRead)
+                chaptersRead = chaptersRead,
+                sessionToken = sessionToken)
 
         })
 

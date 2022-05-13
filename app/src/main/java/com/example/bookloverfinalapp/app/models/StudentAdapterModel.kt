@@ -29,6 +29,7 @@ open class StudentAdapterModel : Abstract.Object<Unit, StudentAdapterModel.UserS
         var name: String,
         var number: String,
         var userType: String,
+        var sessionToken: String,
         var chaptersRead: Int,
         var booksRead: Int,
         var progress: Int,
@@ -38,6 +39,7 @@ open class StudentAdapterModel : Abstract.Object<Unit, StudentAdapterModel.UserS
 
         override fun map(mapper: UserStringMapper) {
             mapper.map(
+                sessionToken = sessionToken,
                 objectId = objectId,
                 classId = classId,
                 createAt = createAt,
@@ -62,6 +64,7 @@ open class StudentAdapterModel : Abstract.Object<Unit, StudentAdapterModel.UserS
         fun map(message: String)
         fun map(
             objectId: String,
+            sessionToken: String,
             classId: String,
             createAt: Date,
             schoolName: String,

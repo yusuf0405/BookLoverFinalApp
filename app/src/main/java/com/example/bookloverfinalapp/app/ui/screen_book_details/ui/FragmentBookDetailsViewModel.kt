@@ -8,7 +8,7 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.domain.Mapper
 import com.example.domain.interactor.AddNewBookThatReadUseCase
 import com.example.domain.interactor.GetMyBookUseCase
-import com.example.domain.models.AddNewBookDomain
+import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadDomain
 import com.example.domain.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,7 +20,7 @@ class FragmentBookDetailsViewModel @Inject constructor(
     private val addNewBookThatReadUseCase: AddNewBookThatReadUseCase,
     private val getMyBookUseCase: GetMyBookUseCase,
     private val mapper: Mapper<BookThatReadDomain, BookThatRead>,
-    private val addBookMapper: Mapper<AddNewBookModel, AddNewBookDomain>,
+    private val addBookMapper: Mapper<AddNewBookModel, AddNewBookThatReadDomain>,
 ) : BaseViewModel() {
 
 

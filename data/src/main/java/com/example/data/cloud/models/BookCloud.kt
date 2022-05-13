@@ -29,5 +29,6 @@ data class BookPdfCloud(
 
 data class BookPosterCloud(
     @SerializedName("name") var name: String,
+    @SerializedName("__type") var type: String,
     @SerializedName("url") var url: String,
 )

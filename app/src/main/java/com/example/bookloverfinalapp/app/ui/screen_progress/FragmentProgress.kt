@@ -15,7 +15,7 @@ import java.text.SimpleDateFormat
 import java.util.*
 
 @AndroidEntryPoint
-class FragmentProgress() :
+class FragmentProgress :
     BaseFragment<FragmentProgressBinding, FragmentProgressViewModel>(
         FragmentProgressBinding::inflate) {
 

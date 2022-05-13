@@ -2,14 +2,14 @@ package com.example.data.repository
 
 import com.example.data.cache.models.BookThatReadDb
 import com.example.data.cache.source.BooksThatReadDataSource
-import com.example.data.cloud.models.AddNewBookCloud
+import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.data.cloud.source.BooksThatReadCloudDataSource
 import com.example.data.mappers.toStudentBook
 import com.example.data.models.BookThatReadData
 import com.example.domain.Mapper
 import com.example.domain.Resource
 import com.example.domain.Status
-import com.example.domain.models.AddNewBookDomain
+import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadDomain
 import com.example.domain.repository.BookThatReadRepository
 import kotlinx.coroutines.flow.Flow
@@ -20,7 +20,7 @@ class BookThatReadRepositoryImpl(
     private val cacheDataSource: BooksThatReadDataSource,
     private val bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
     private val bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
-    private val addNewBookMapper: Mapper<AddNewBookDomain, AddNewBookCloud>,
+    private val addNewBookMapper: Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>,
 ) : BookThatReadRepository {
 
     override fun fetchMyBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
@@ -70,7 +70,7 @@ class BookThatReadRepositoryImpl(
     }
 
 
-    override fun addBook(book: AddNewBookDomain): Flow<Resource<Unit>> = flow {
+    override fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
         val request = cloudDataSource.addNewBook(addNewBookMapper.map(book))
         if (request.status == Status.SUCCESS) {

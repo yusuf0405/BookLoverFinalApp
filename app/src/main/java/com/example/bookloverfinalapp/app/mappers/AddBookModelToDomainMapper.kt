@@ -2,13 +2,13 @@ package com.example.bookloverfinalapp.app.mappers
 
 import com.example.bookloverfinalapp.app.models.AddNewBookModel
 import com.example.domain.Mapper
-import com.example.domain.models.AddNewBookDomain
+import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadPosterDomain
 
-class AddBookModelToDomainMapper : Mapper<AddNewBookModel, AddNewBookDomain>() {
+class AddBookModelToDomainMapper : Mapper<AddNewBookModel, AddNewBookThatReadDomain>() {
 
-    override fun map(from: AddNewBookModel): AddNewBookDomain = from.run {
-        AddNewBookDomain(bookId = bookId, userId = userId,
+    override fun map(from: AddNewBookModel): AddNewBookThatReadDomain = from.run {
+        AddNewBookThatReadDomain(bookId = bookId, userId = userId,
             chaptersRead = chaptersRead,
             author = author,
             progress = progress,

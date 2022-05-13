@@ -46,11 +46,15 @@ class FragmentClassStudents :
 
     private fun setupUi() {
         binding().apply {
-            toolbar.title = schoolClass.title
-            toolbar.setTitleTextColor(Color.WHITE)
+            toolbar.apply {
+                title = schoolClass.title
+                setTitleTextColor(Color.WHITE)
+                setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+                setNavigationOnClickListener { viewModel.goBack() }
+            }
             studentsRecyclerView.adapter = adapter
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            toolbar.setNavigationOnClickListener { viewModel.goBack() }
+
+
         }
     }
 
@@ -58,7 +62,9 @@ class FragmentClassStudents :
         viewModel.fetchMyStudents(classId = currentUser.classId)
     }
 
-    override fun goStudentDetails(student: Student) {}
+    override fun goStudentDetails(student: Student) {
+        viewModel.goStudentDetailsFragment(student = student)
+    }
 
     override fun onResume() {
         super.onResume()

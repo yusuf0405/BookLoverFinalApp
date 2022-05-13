@@ -3,10 +3,11 @@ package com.example.data.cloud.models
 import com.google.gson.annotations.SerializedName
 
 data class AddNewBookCloud(
-    @SerializedName("progress") val progress: Int,
-    @SerializedName("bookId") val bookId: String,
-    @SerializedName("userId") val userId: String,
-    @SerializedName("isReadingPages") val isReadingPages: List<Boolean>,
-    @SerializedName("chaptersRead") val chaptersRead: Int,
-    @SerializedName("path") val path: String,
+    @SerializedName("title") var title: String,
+    @SerializedName("publicYear") var publicYear: String,
+    @SerializedName("page") var page: Int,
+    @SerializedName("author") var author: String,
+    @SerializedName("poster") var poster: BookPosterCloud,
+    @SerializedName("book") var book: BookPdfCloud,
+    @SerializedName("chapterCount") var chapterCount: Int,
 )

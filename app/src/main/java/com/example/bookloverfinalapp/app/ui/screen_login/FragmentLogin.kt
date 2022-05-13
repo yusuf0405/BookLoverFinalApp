@@ -5,7 +5,9 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main.ActivityAdminMain
 import com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain
+import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.validateEmail
@@ -65,7 +67,8 @@ class FragmentLogin :
             CurrentUser().saveCurrentUser(user = user, activity = requireActivity())
             if (binding().reminder.isChecked) CheсkNavigation().observeLogin(status = true,
                 activity = requireActivity())
-            intentClearTask(activity = ActivityMain())
+            if (user.userType == UserType.admin) intentClearTask(activity = ActivityAdminMain())
+            else intentClearTask(activity = ActivityMain())
         }
     }
 }

@@ -7,35 +7,36 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.util.Log
 import android.view.View
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
+import androidx.lifecycle.lifecycleScope
+import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.utils.cons.FOLDER
+import com.example.bookloverfinalapp.app.models.AddNewBook
 import com.example.bookloverfinalapp.app.utils.cons.PERMISSION_CODE
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.cons.REQUEST_CODE
-import com.example.bookloverfinalapp.app.utils.extensions.showToast
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentAdminUploadPdfBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.scroll.DefaultScrollHandle
-import com.parse.ParseException
 import com.parse.ParseFile
-import com.parse.ParseObject
 import com.parse.SaveCallback
 import com.shockwave.pdfium.PdfDocument
 import com.shockwave.pdfium.PdfiumCore
-import java.io.File
-import java.io.FileOutputStream
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.ByteArrayOutputStream
 
 
 @Suppress("DEPRECATION")
+@AndroidEntryPoint
 class FragmentAdminUploadPdf :
     BaseFragment<FragmentAdminUploadPdfBinding, FragmentAdminUploadPdfViewModel>(
         FragmentAdminUploadPdfBinding::inflate), OnPageChangeListener, OnLoadCompleteListener,
@@ -44,10 +45,18 @@ class FragmentAdminUploadPdf :
     override val viewModel: FragmentAdminUploadPdfViewModel by viewModels()
 
     override fun onReady(savedInstanceState: Bundle?) {}
-    private var pageSize = 0
+
+    private var bookFile: ParseFile? = null
+    private var bookChapterCount: Int = 0
+    private var bookPageCount: Int = 0
+    private var bookPoster: ParseFile? = null
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding().savePdfButton.setOnClickListener {
+            saveFiles()
+        }
+        binding().pickPdfButton.setOnClickListener {
             pickFile()
         }
     }
@@ -95,67 +104,47 @@ class FragmentAdminUploadPdf :
                 Intent.FLAG_GRANT_READ_URI_PERMISSION
             )
             displayFromUri(uri)
-            val file = ParseFile(getFile(uri))
-//            file.saveInBackground(SaveCallback {
-//                if (it == null) {
-//                    createObject(file)
-//                } else {
-//                    loadingDialog.dismiss()
-//                    showToast(it.message!!)
-//                }
-//            })
             generateImageFromPdf(uri)
+            bookFile = ParseFile(getFile(uri))
         }
     }
 
-    private fun createObject(file: ParseFile) {
-        val entity = ParseObject("Books")
-        entity.put("title", "A string")
-        entity.put("publicYear", "A string")
-        entity.put("page", 1)
-        entity.put("author", "A string")
-        entity.put("poster", ParseFile("resume.txt", "My string content".toByteArray()))
-        entity.put("chapterCount", 1)
-        entity.put("book", file)
-
-        entity.saveInBackground { e: ParseException? ->
-            if (e == null) {
-                Toast.makeText(requireContext(), "Savve", Toast.LENGTH_SHORT).show()
-            } else {
-                Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
-
-    private fun getFile(documentUri: Uri): File {
-        val inputStream = requireActivity().contentResolver?.openInputStream(documentUri)
-        var file: File
-        inputStream.use { input ->
-            file = File(requireActivity().cacheDir, System.currentTimeMillis().toString() + ".pdf")
-            FileOutputStream(file).use { output ->
-                val buffer =
-                    ByteArray(4 * 1024)
-                var read: Int = -1
-                while (input?.read(buffer).also {
-                        if (it != null) {
-                            read = it
+    private fun saveFiles() {
+        loadingDialog.show()
+        if (bookFile != null) {
+            bookFile!!.saveInBackground(SaveCallback { it ->
+                if (it == null) {
+                    bookPoster!!.saveInBackground(SaveCallback {
+                        if (it == null) {
+                            addNewBook()
                         }
-                    } != -1) {
-                    output.write(buffer, 0, read)
+                    })
                 }
-                output.flush()
+            })
+        }
+    }
+
+    private fun addNewBook() {
+        binding().apply {
+            val newBook = AddNewBook(author = editTextBookTitleAutor.text.toString(),
+                chapterCount = bookChapterCount,
+                title = binding().editTextBookTitle.text.toString(),
+                publicYear = binding().editTextBookPublicYear.text.toString(),
+                poster = bookPoster!!.toBookImage(),
+                book = bookFile!!.toPdf(), page = bookPageCount)
+
+            viewModel.addBook(book = newBook).observe(viewLifecycleOwner) {
+                showToast(R.string.book_added_successfully)
             }
         }
-        return file
     }
 
     override fun onPageChanged(page: Int, pageCount: Int) {
-        pageSize = pageCount
-        Log.i("TAG ", "Количество страниц: $pageSize")
+        bookPageCount = pageCount
     }
 
 
-    private fun generateImageFromPdf(pdfUri: Uri) {
+    private fun generateImageFromPdf(pdfUri: Uri) = lifecycleScope.launch(Dispatchers.IO) {
         val pageNumber = 0
         val pdfiumCore = PdfiumCore(requireContext())
         try {
@@ -167,65 +156,43 @@ class FragmentAdminUploadPdf :
             val height = pdfiumCore.getPageHeightPoint(pdfDocument, pageNumber)
             val bmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
             pdfiumCore.renderPageBitmap(pdfDocument, bmp, pageNumber, 0, 0, width, height)
-//            saveImage(bmp)
-            Glide.with(requireActivity())
-                .load(bmp)
-                .into(binding().imageView3)
-            pdfiumCore.closeDocument(pdfDocument) // important!
-        } catch (e: Exception) {
-            //todo with exception
-        }
-    }
-
-    private fun saveImage(bmp: Bitmap) {
-        var out: FileOutputStream? = null
-        try {
-            val folder = File(FOLDER)
-            if (!folder.exists()) folder.mkdirs()
-            val file = File(folder, "PDF.png")
-            out = FileOutputStream(file)
-            bmp.compress(Bitmap.CompressFormat.PNG, 100, out) // bmp is your Bitmap instance
-        } catch (e: Exception) {
-            //todo with exception
-        } finally {
-            try {
-                out?.close()
-            } catch (e: Exception) {
-                //todo with exception
+            val stream = ByteArrayOutputStream()
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, stream)
+            val byteArray: ByteArray = stream.toByteArray()
+            bookPoster = ParseFile("image.png", byteArray)
+            pdfiumCore.closeDocument(pdfDocument)
+            withContext(Dispatchers.Main) {
+                requireContext().glide(bmp,
+                    binding().roundedBookImage)
             }
+        } catch (e: Exception) {
+            //todo with exception
         }
     }
 
 
     override fun loadComplete(nbPages: Int) {
-        val meta: PdfDocument.Meta = binding().pdfViewAdmin.documentMeta
-        Log.e("TAG", "title = " + meta.title)
-        Log.e("TAG", "author = " + meta.author)
-        Log.e("TAG", "subject = " + meta.subject)
-        Log.e("TAG", "keywords = " + meta.keywords)
-        Log.e("TAG", "creator = " + meta.creator)
-        Log.e("TAG", "producer = " + meta.producer)
-        Log.e("TAG", "creationDate = " + meta.creationDate)
-        Log.e("TAG", "modDate = " + meta.modDate)
-        Log.e("TAG", "chapterCount = " + binding().pdfViewAdmin.tableOfContents.size.toString())
-
-
+        binding().apply {
+            savePdfButton.showView()
+            pickPdfButton.hideView()
+            val meta: PdfDocument.Meta = pdfViewAdmin.documentMeta
+            editTextBookTitle.setText(meta.title)
+            editTextBookTitleAutor.setText(meta.author)
+            bookChapterCount = pdfViewAdmin.tableOfContents.size
+        }
 
     }
-
 
     @Deprecated("Deprecated in Java")
     override fun onRequestPermissionsResult(
         requestCode: Int, permissions: Array<String?>,
         grantResults: IntArray,
     ) {
-        if (requestCode == PERMISSION_CODE) {
-            if (grantResults.isNotEmpty()
-                && grantResults[0] == PackageManager.PERMISSION_GRANTED
-            ) {
-                launchPicker()
-            }
-        }
+        if (requestCode == PERMISSION_CODE &&
+            grantResults.isNotEmpty() &&
+            grantResults[0] == PackageManager.PERMISSION_GRANTED
+        ) launchPicker()
+
     }
 
     override fun onError(t: Throwable?) {

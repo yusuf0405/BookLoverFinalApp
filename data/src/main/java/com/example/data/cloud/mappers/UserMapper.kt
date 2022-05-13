@@ -20,6 +20,7 @@ interface UserMapper {
             name: String,
             number: String,
             userType: String,
+            sessionToken: String,
         ): T
     }
 
@@ -36,6 +37,7 @@ interface UserMapper {
         var name: String,
         var number: String,
         var userType: String,
+        val sessionToken: String,
     ) : UserMapper {
         override fun <T> map(mapper: Mapper<T>): T = mapper.map(
             objectId = objectId,
@@ -49,6 +51,8 @@ interface UserMapper {
             lastname = lastname,
             name = name,
             number = number,
-            userType = userType,)
+            userType = userType,
+            sessionToken = sessionToken
+        )
     }
 }

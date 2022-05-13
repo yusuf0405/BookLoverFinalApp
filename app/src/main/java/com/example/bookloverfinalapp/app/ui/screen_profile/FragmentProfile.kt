@@ -69,7 +69,10 @@ class FragmentProfile :
 
     private fun loginOut() {
         viewModel.clearDataInCache()
-        CheсkNavigation().observeLogin(status = false, activity = requireActivity())
+        CheсkNavigation().apply {
+            observeLogin(status = false, activity = requireActivity())
+            loginOut(activity = requireActivity())
+        }
         requireActivity().intentClearTask(ActivityLoginMain())
     }
 

@@ -11,6 +11,8 @@ interface BooksCacheDataSource {
 
     suspend fun saveBooks(books: List<BookData>)
 
+    suspend fun addNewBook(book: BookData)
+
     suspend fun clearTable()
 
     class Base(
@@ -21,6 +23,10 @@ interface BooksCacheDataSource {
 
         override suspend fun saveBooks(books: List<BookData>) {
             books.forEach { book -> bookDao.addNewBook(book = dataMapper.map(book)) }
+        }
+
+        override suspend fun addNewBook(book: BookData) {
+            bookDao.addNewBook(dataMapper.map(book))
         }
 
         override suspend fun clearTable() = bookDao.clearTable()

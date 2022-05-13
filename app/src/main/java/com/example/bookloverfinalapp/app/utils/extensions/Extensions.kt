@@ -4,23 +4,26 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Environment
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
-import android.widget.EditText
-import android.widget.RadioButton
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
+import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.models.BookPdf
+import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.bookloverfinalapp.app.models.Chapter
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
@@ -31,7 +34,9 @@ import com.shockwave.pdfium.PdfDocument
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
+import java.io.ByteArrayOutputStream
 import java.io.File
+import java.io.FileOutputStream
 import java.io.InputStream
 
 fun View.showView() {
@@ -40,6 +45,13 @@ fun View.showView() {
 
 fun View.hideView() {
     this.visibility = View.GONE
+}
+
+fun Fragment.image(uri: Uri): ByteArray {
+    val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+    val stream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+    return stream.toByteArray()
 }
 
 suspend fun InputStream.saveToFile(context: Context): String {
@@ -72,11 +84,27 @@ fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Un
     this.observe(owner) { it?.let(observer) }
 }
 
+fun Context.shoErrorDialog(message: String, listener: DialogInterface.OnClickListener) {
+
+    val dialog = AlertDialog.Builder(this)
+        .setTitle(R.string.splash_error_title)
+        .setCancelable(false)
+        .setMessage(message)
+        .setPositiveButton(R.string.try_again, listener)
+        .create()
+
+    dialog.show()
+}
+
 fun Activity.getShPrString(key: String): String? =
     this.getSharedPreferences(key, Context.MODE_PRIVATE).getString(key, null)
 
 fun Fragment.showToast(message: String) {
     Toast.makeText(requireContext(), message, Toast.LENGTH_LONG).show()
+}
+
+fun Activity.showToast(message: String) {
+    Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
 fun Int.makeView(parent: ViewGroup): View =
@@ -149,6 +177,12 @@ fun EditText.validateLastName(): Boolean {
 fun ParseFile.toImage(): UserImage =
     UserImage(name = name, type = "File", url = url)
 
+fun ParseFile.toBookImage(): BookPoster =
+    BookPoster(name = name, url = url)
+
+fun ParseFile.toPdf(): BookPdf =
+    BookPdf(name = name, url = url)
+
 fun <T> Flow<T>.launchWhenStarted(lifecycleScope: LifecycleCoroutineScope) {
     lifecycleScope.launchWhenStarted {
         this@launchWhenStarted.collect()
@@ -218,5 +252,45 @@ fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton, text: String) 
     }
     dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     dialog.show()
+}
+
+fun Fragment.getFile(documentUri: Uri): File {
+    val inputStream = requireActivity().contentResolver?.openInputStream(documentUri)
+    var file: File
+    inputStream.use { input ->
+        file = File(requireActivity().cacheDir, System.currentTimeMillis().toString() + ".pdf")
+        FileOutputStream(file).use { output ->
+            val buffer =
+                ByteArray(4 * 1024)
+            var read: Int = -1
+            while (input?.read(buffer).also {
+                    if (it != null) {
+                        read = it
+                    }
+                } != -1) {
+                output.write(buffer, 0, read)
+            }
+            output.flush()
+        }
+    }
+    return file
+}
+
+fun Context.glide(uri: Uri, imageView: ImageView) {
+    Glide.with(this)
+        .load(uri)
+        .into(imageView)
+}
+
+fun Context.glide(bitmap: Bitmap, imageView: ImageView) {
+    Glide.with(this)
+        .load(bitmap)
+        .into(imageView)
+}
+
+fun Context.glide(uri: String, imageView: ImageView) {
+    Glide.with(this)
+        .load(uri)
+        .into(imageView)
 }
 

@@ -1,5 +1,6 @@
 package com.example.data.base
 
+import android.util.Log
 import com.example.data.R
 import com.example.data.ResourceProvider
 import com.example.domain.Mapper
@@ -23,6 +24,7 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
             return when {
                 response.code() == 400 -> Resource.error(message = resourceProvider.getString(R.string.account_already))
                 response.code() == 404 -> Resource.error(message = resourceProvider.getString(R.string.invalid_email_password))
+                response.code() == 209 -> Resource.empty()
                 else -> Resource.error(message = response.message())
             }
         } catch (exception: Exception) {
@@ -59,7 +61,11 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
                 val body = withContext(Dispatchers.Default) { response.body() }
                 body?.let { return Resource.success(data = body) }
             }
-            return Resource.error(message = response.message())
+            Log.i("CODE", response.code().toString())
+            return when {
+                response.code() == 400 -> Resource.empty()
+                else -> Resource.error(message = response.message())
+            }
         } catch (exception: Exception) {
             return Resource.error(message = resourceProvider.errorType(exception = exception))
         }

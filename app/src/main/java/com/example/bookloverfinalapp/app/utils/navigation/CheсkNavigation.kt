@@ -2,6 +2,7 @@ package com.example.bookloverfinalapp.app.utils.navigation
 
 import android.app.Activity
 import android.content.Context
+import android.content.SharedPreferences
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
@@ -9,6 +10,7 @@ import android.util.Log
 import androidx.annotation.RequiresApi
 import com.example.bookloverfinalapp.app.utils.cons.APP_NAV_OBSERVER_KEY
 import com.example.bookloverfinalapp.app.utils.cons.APP_NAV_WRITE_KEY
+import com.example.bookloverfinalapp.app.utils.cons.CURRENT_EDITOR_STUDENT_SAVE_KEY
 
 class CheсkNavigation {
 
@@ -17,6 +19,9 @@ class CheсkNavigation {
             .edit()
             .putBoolean(APP_NAV_WRITE_KEY, status)
             .apply()
+
+    fun loginOut(activity: Activity) =
+        activity.getSharedPreferences(CURRENT_EDITOR_STUDENT_SAVE_KEY, Context.MODE_PRIVATE).edit().clear().commit()
 
 
     fun readLoginStatus(activity: Activity): Boolean =

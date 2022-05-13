@@ -17,6 +17,7 @@ data class StudentDb(
     @ColumnInfo(name = "lastname") var lastname: String,
     @ColumnInfo(name = "name") var name: String,
     @ColumnInfo(name = "number") var number: String,
+    @ColumnInfo(name = "sessionToken") var sessionToken: String,
     @ColumnInfo(name = "userType") var userType: String,
     @ColumnInfo(name = "chaptersRead") var chaptersRead: Int,
     @ColumnInfo(name = "booksRead") var booksRead: Int,

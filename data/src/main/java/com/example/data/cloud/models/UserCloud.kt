@@ -22,6 +22,7 @@ data class UserCloud(
     @SerializedName("number") var number: String,
     @SerializedName("userType") var userType: String,
     @SerializedName("sessionToken") var sessionToken: String,
+    @SerializedName("userSessionToken") var userSessionToken: String,
 )
 
 data class UserImageCloud(

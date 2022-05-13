@@ -12,6 +12,7 @@ data class StudentData(
     var gender: String,
     var lastname: String,
     var name: String,
+    val sessionToken: String,
     var number: String,
     var userType: String,
     var chaptersRead: Int,

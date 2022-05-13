@@ -84,12 +84,13 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideAddNewBookMapper(): Mapper<AddNewBookDomain, AddNewBookCloud> = AddNewBookMapper()
+    fun provideAddNewBookMapper(): Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud> =
+        AddNewBookMapper()
 
 
     @Provides
     @Singleton
-    fun provideAddBookModelToDomainMapper(): Mapper<AddNewBookModel, AddNewBookDomain> =
+    fun provideAddBookModelToDomainMapper(): Mapper<AddNewBookModel, AddNewBookThatReadDomain> =
         AddBookModelToDomainMapper()
 
     @Provides
@@ -203,5 +204,19 @@ object MappersModule {
     fun provideClassCacheToDataMapper(): Mapper<ClassCache, ClassData> =
         ClassCacheToDataMapper()
 
+    @Provides
+    @Singleton
+    fun provideAddBookDomainToDataMapper(): Mapper<AddNewBookDomain, AddNewBookData> =
+        AddBookDomainToDataMapper()
 
+
+    @Provides
+    @Singleton
+    fun provideAddBookDataMapperToCloudMapper(): Mapper<AddNewBookData, AddNewBookCloud> =
+        AddBookDataMapperToCloudMapper()
+
+    @Provides
+    @Singleton
+    fun provideAddNewBookToDomainMapper(): Mapper<AddNewBook, AddNewBookDomain> =
+        AddNewBookToDomainMapper()
 }

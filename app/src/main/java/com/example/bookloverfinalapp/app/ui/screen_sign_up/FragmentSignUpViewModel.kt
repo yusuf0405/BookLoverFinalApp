@@ -5,15 +5,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudentDirections
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacherDirections
+import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
-import com.example.domain.interactor.SignUpUseCase
 import com.example.domain.Status
+import com.example.domain.interactor.AddSessionTokenUseCase
+import com.example.domain.interactor.GetAllClassUseCase
+import com.example.domain.interactor.GetAllSchoolsUseCase
+import com.example.domain.interactor.SignUpUseCase
 import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.models.UserSignUpDomain
-import com.example.domain.interactor.GetAllSchoolsUseCase
-import com.example.domain.interactor.GetClassUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -21,27 +24,41 @@ import javax.inject.Inject
 
 @HiltViewModel
 class FragmentSignUpViewModel @Inject constructor(
-    getAllSchoolsUseCase: GetAllSchoolsUseCase,
+    private val getAllSchoolsUseCase: GetAllSchoolsUseCase,
+    private val addSessionTokenUseCase: AddSessionTokenUseCase,
     private val signUpUseCase: SignUpUseCase,
-    private val getClassUseCase: GetClassUseCase,
+    private val getAllClassUseCase: GetAllClassUseCase,
 ) : BaseViewModel() {
 
-    private val _schools = MutableSharedFlow<List<SchoolDomain>>(replay = 1, extraBufferCapacity = 0,
-        onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    private val _schools =
+        MutableSharedFlow<List<SchoolDomain>>(replay = 1, extraBufferCapacity = 0,
+            onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val schools: SharedFlow<List<SchoolDomain>> get() = _schools.asSharedFlow()
 
     private val _classes = MutableSharedFlow<List<ClassDomain>>(replay = 1, extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val classes: SharedFlow<List<ClassDomain>> get() = _classes.asSharedFlow()
 
+    private val _schoolError = MutableSharedFlow<Event<String>>(replay = 1, extraBufferCapacity = 0,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val schoolError: SharedFlow<Event<String>> get() = _schoolError.asSharedFlow()
+
+    private val _classError = MutableSharedFlow<Event<String>>(replay = 1, extraBufferCapacity = 0,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST)
+    val classError: SharedFlow<Event<String>> get() = _classError.asSharedFlow()
+
     init {
+        getAllSchools()
+    }
+
+    fun getAllSchools(){
         getAllSchoolsUseCase.execute().onEach { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()
                 Status.SUCCESS -> _schools.emit(resource.data!!)
                 Status.ERROR -> {
-                    error(message = resource.message!!)
                     dismissProgressDialog()
+                    _schoolError.emit(Event(resource.message!!))
                 }
             }
         }.viewModelScope(viewModelScope = viewModelScope)
@@ -51,10 +68,7 @@ class FragmentSignUpViewModel @Inject constructor(
         signUpUseCase.execute(user = user).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()
-                Status.SUCCESS -> {
-                    emit(resource.data!!)
-                    dismissProgressDialog()
-                }
+                Status.SUCCESS -> emit(resource.data!!)
                 Status.ERROR -> {
                     error(message = resource.message!!)
                     dismissProgressDialog()
@@ -63,24 +77,38 @@ class FragmentSignUpViewModel @Inject constructor(
         }
     }
 
-    fun getClasses(classesIds: List<String>) = viewModelScope.launch {
-        val listClasses = mutableListOf<ClassDomain>()
-        classesIds.forEach { id ->
-            getClassUseCase.execute(id = id).collectLatest { resource ->
-                when (resource.status) {
-                    Status.LOADING -> showProgressDialog()
-                    Status.SUCCESS -> {
-                        dismissProgressDialog()
-                        listClasses.add(resource.data!![0])
+    fun addSessionToken(id: String, sessionToken: String) =
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            addSessionTokenUseCase.execute(id = id, sessionToken = sessionToken)
+                .collectLatest { resource ->
+                    when (resource.status) {
+                        Status.SUCCESS -> {
+                            emit(Unit)
+                            dismissProgressDialog()
+                        }
+                        Status.ERROR -> {
+                            error(message = resource.message!!)
+                            dismissProgressDialog()
+                        }
                     }
-                    Status.ERROR -> {
-                        error(message = resource.message!!)
-                        dismissProgressDialog()
-                    }
+                }
+        }
+
+    fun getClasses(schoolId: String) = viewModelScope.launch {
+        getAllClassUseCase.execute(schoolId = schoolId).collectLatest { resource ->
+            when (resource.status) {
+                Status.LOADING -> showProgressDialog()
+                Status.SUCCESS -> {
+                    dismissProgressDialog()
+                    _classes.emit(resource.data!!)
+                }
+                Status.ERROR -> {
+                    dismissProgressDialog()
+                    _schoolError.emit(Event(resource.message!!))
                 }
             }
         }
-        _classes.emit(listClasses)
+
     }
 
     fun goOverLoginFragment() =

@@ -25,6 +25,6 @@ class CurrentUser {
     ): User {
         val pref =
             activity.getSharedPreferences(CURRENT_EDITOR_STUDENT_SAVE_KEY, Context.MODE_PRIVATE)
-        return Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, "")!!, User::class.java)
+        return Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null)!!, User::class.java)
     }
 }

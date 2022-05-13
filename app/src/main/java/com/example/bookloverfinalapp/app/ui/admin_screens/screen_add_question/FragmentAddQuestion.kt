@@ -85,7 +85,6 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
                     )
                     viewModel.addNewQuestionBook(question = question).observe(viewLifecycleOwner) {
                         showToast(R.string.book_question_added_successfully)
-                        viewModel.goBack()
                     }
 
                 }
@@ -95,10 +94,14 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
 
     override fun onClick(view: View?) {
         when (view) {
-            binding().answerAButton -> showCustomInputAlertDialog(binding().answerAButton)
-            binding().answerBButton -> showCustomInputAlertDialog(binding().answerBButton)
-            binding().answerCButton -> showCustomInputAlertDialog(binding().answerCButton)
-            binding().answerDButton -> showCustomInputAlertDialog(binding().answerDButton)
+            binding().answerAButton -> showCustomInputAlertDialog(binding().answerAButton,
+                binding().answerAButton.text.toString())
+            binding().answerBButton -> showCustomInputAlertDialog(binding().answerBButton,
+                binding().answerBButton.text.toString())
+            binding().answerCButton -> showCustomInputAlertDialog(binding().answerCButton,
+                binding().answerCButton.text.toString())
+            binding().answerDButton -> showCustomInputAlertDialog(binding().answerDButton,
+                binding().answerDButton.text.toString())
             binding().addBookQuestionButton -> addQuestion()
         }
     }

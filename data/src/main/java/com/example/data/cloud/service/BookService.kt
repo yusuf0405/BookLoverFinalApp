@@ -1,8 +1,6 @@
 package com.example.data.cloud.service
 
-import com.example.data.cloud.models.AddBookQuestionCloud
-import com.example.data.cloud.models.BookQuestionResponse
-import com.example.data.cloud.models.BookResponse
+import com.example.data.cloud.models.*
 import retrofit2.Response
 import retrofit2.http.*
 
@@ -31,4 +29,9 @@ interface BookService {
         @Path("id") id: String,
         @Body question: AddBookQuestionCloud,
     ): Response<Unit>
+
+    @POST("classes/Books")
+    suspend fun addNewBook(
+        @Body book: AddNewBookCloud,
+    ): Response<PostRequestAnswerCloud>
 }

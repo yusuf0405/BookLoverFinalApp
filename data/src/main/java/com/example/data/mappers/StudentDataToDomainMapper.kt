@@ -23,6 +23,7 @@ class StudentDataToDomainMapper : Mapper<StudentData, StudentDomain>() {
             booksRead = booksRead,
             progress = progress,
             booksId = booksId,
-            image = StudentImageDomain(name = image.name, type = image.type, url = image.url))
+            image = StudentImageDomain(name = image.name, type = image.type, url = image.url),
+            sessionToken = sessionToken)
     }
 }
