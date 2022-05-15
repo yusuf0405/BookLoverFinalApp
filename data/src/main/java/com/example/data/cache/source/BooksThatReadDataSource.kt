@@ -31,7 +31,8 @@ interface BooksThatReadDataSource {
     ) :
         BooksThatReadDataSource {
 
-        override suspend fun fetchBooksThatRead(): List<BookThatReadDb> = dao.getAllBooks()
+        override suspend fun fetchBooksThatRead(): List<BookThatReadDb> =
+            dao.getAllBooks()
 
         override suspend fun saveBooks(books: List<BookThatReadData>) {
             books.map { book -> dao.addNewBook(book = mapper.map(book)) }

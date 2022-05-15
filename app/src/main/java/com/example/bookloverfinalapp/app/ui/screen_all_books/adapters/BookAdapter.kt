@@ -7,13 +7,15 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookAdapterModel
 import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
+import com.example.bookloverfinalapp.app.utils.extensions.glide
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
+import com.example.bookloverfinalapp.databinding.ItemBookBinding
+import com.example.bookloverfinalapp.databinding.ItemFailFullscreenBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import java.util.*
 
@@ -41,14 +43,13 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
 
         class Fail(view: View, private val actionListener: BookItemOnClickListener) :
             BookViewHolder(view) {
-            private val message = itemView.findViewById<TextView>(R.id.message_text_view)
-            private val tryAgain = itemView.findViewById<Button>(R.id.try_again)
+            val binding = ItemFailFullscreenBinding.bind(view)
             override fun bind(book: BookAdapterModel) {
-                tryAgain.setOnClickListener { actionListener.tryAgain() }
+                binding.tryAgain.setOnClickListener { actionListener.tryAgain() }
 
                 book.map(object : BookAdapterModel.StringMapper {
                     override fun map(text: String) {
-                        message.text = text
+                        binding.messageTextView.text = text
                     }
 
                     override fun map(
@@ -72,11 +73,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
 
         class Base(view: View, private val actionListener: BookItemOnClickListener) :
             BookViewHolder(view) {
-            private val bookTitle = itemView.findViewById<TextView>(R.id.bookTitle)
-            private val bookAuthor = itemView.findViewById<TextView>(R.id.bookAuthor)
-            private val publishedYear = itemView.findViewById<TextView>(R.id.publishedYear)
-            private val bookPages = itemView.findViewById<TextView>(R.id.bookPages)
-            private val bookImage = itemView.findViewById<ImageView>(R.id.rounded_book_Image)
+            val binding = ItemBookBinding.bind(view)
             override fun bind(book: BookAdapterModel) {
                 book.map(object : BookAdapterModel.StringMapper {
                     override fun map(text: String) {}
@@ -93,13 +90,13 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                         poster: BookPoster,
                         updatedAt: Date,
                     ) {
-                        bookTitle.text = title
-                        bookAuthor.text = author
-                        publishedYear.text = publicYear
-                        bookPages.text = page.toString()
-                        Glide.with(itemView.context)
-                            .load(poster.url)
-                            .into(bookImage)
+                        binding.apply {
+                            bookTitle.text = title
+                            bookAuthor.text = author
+                            publicYearText.text = publicYear
+                            bookPages.text = page.toString()
+                            itemView.context.glide(poster.url, roundedBookImage)
+                        }
 
                         itemView.setOnClickListener {
                             actionListener.goChapterBookFragment(book = Book(
@@ -149,6 +146,8 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
 }
 
 interface BookItemOnClickListener {
+
     fun tryAgain()
+
     fun goChapterBookFragment(book: Book)
 }

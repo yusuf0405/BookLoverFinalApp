@@ -46,6 +46,20 @@ class BookThatReadRepositoryImpl(
         }
     }
 
+    override fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
+        emit(Resource.loading())
+        val response = cloudDataSource.fetchMyBooks(id = id)
+        if (response.status == Status.SUCCESS) {
+            val booksDataList = response.data!!
+            if (booksDataList.isEmpty()) emit(Resource.empty())
+            else {
+                val bookDomain =
+                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+                emit(Resource.success(data = bookDomain))
+            }
+        } else emit(Resource.error(message = response.message))
+    }
+
 
     override fun deleteMyBook(id: String): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
@@ -68,7 +82,6 @@ class BookThatReadRepositoryImpl(
             emit(Resource.success(bookDomainMapper.map(bookData)))
         }
     }
-
 
     override fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())

@@ -13,6 +13,11 @@ object CommunicationModule {
     @Provides
     fun provideErrorCommunication(): ErrorCommunication = ErrorCommunication.Base()
 
+
+    @Provides
+    fun provideClassesCommunication(): ClassesCommunication = ClassesCommunication.Base()
+
+
     @Provides
     fun provideBooksCommunication(): BooksCommunication = BooksCommunication.Base()
 

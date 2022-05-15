@@ -3,18 +3,12 @@ package com.example.data.repository
 import com.example.data.cache.models.BookDb
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cloud.source.BooksCloudDataSource
-import com.example.data.models.AddBookQuestionData
-import com.example.data.models.AddNewBookData
-import com.example.data.models.BookData
-import com.example.data.models.BookQuestionData
+import com.example.data.models.*
 import com.example.data.toBook
 import com.example.domain.Mapper
 import com.example.domain.Resource
 import com.example.domain.Status
-import com.example.domain.models.AddBookQuestionDomain
-import com.example.domain.models.AddNewBookDomain
-import com.example.domain.models.BookDomain
-import com.example.domain.models.BookQuestionDomain
+import com.example.domain.models.*
 import com.example.domain.repository.BooksRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -29,6 +23,7 @@ class BooksRepositoryImpl(
     private val cacheDataSource: BooksCacheDataSource,
     private val bookCashMapper: Mapper<BookDb, BookData>,
     private val bookDomainMapper: Mapper<BookData, BookDomain>,
+    private val updateBookDomainMapper: Mapper<UpdateBookDomain, UpdateBookData>,
     private val addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
     private val questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
     private val questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
@@ -79,12 +74,21 @@ class BooksRepositoryImpl(
 
     }
 
-    override fun getAllChapterQuestions(
+    override fun deleteBook(id: String): Flow<Resource<Unit>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.deleteBook(id = id)
+        if (result.status == Status.SUCCESS) {
+            cacheDataSource.deleteBook(id = id)
+            emit(Resource.success(data = Unit))
+        } else emit(Resource.error(message = result.message))
+    }
+
+    override fun fetchChapterQuestions(
         id: String,
         chapter: String,
     ): Flow<Resource<List<BookQuestionDomain>>> = flow {
         emit(Resource.loading())
-        val result = cloudDataSource.getAllChapterQuestions(id = id, chapter = chapter)
+        val result = cloudDataSource.fetchChapterQuestions(id = id, chapter = chapter)
         if (result.status == Status.SUCCESS) {
             if (result.data!!.isEmpty()) emit(Resource.empty())
             else emit(Resource.success(data = result.data!!.map { questionData ->
@@ -117,6 +121,18 @@ class BooksRepositoryImpl(
         if (result.status == Status.SUCCESS) emit(Resource.success(data = Unit))
         else emit(Resource.error(message = result.message!!))
 
+    }
+
+    override fun updateBook(id: String, book: UpdateBookDomain): Flow<Resource<Unit>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.updateBook(id = id, book = updateBookDomainMapper.map(book))
+        if (result.status == Status.SUCCESS) {
+            cacheDataSource.updateTitle(id = id, title = book.title)
+            cacheDataSource.updateAuthor(id = id, author = book.author)
+            cacheDataSource.updatePublicYear(id = id, publicYear = book.publicYear)
+            cacheDataSource.updatePoster(id = id, poster = book.poster)
+            emit(Resource.success(data = Unit))
+        } else emit(Resource.error(message = result.message))
     }
 
     override suspend fun clearBooksCache() = cacheDataSource.clearTable()

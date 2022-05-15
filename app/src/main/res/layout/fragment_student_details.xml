@@ -130,7 +130,7 @@
                 android:padding="@dimen/constraintInside">
 
                 <ImageView
-                    android:id="@+id/progressDiamond"
+                    android:id="@+id/progressAllStudentImage"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:src="@drawable/ic_diamond"
@@ -162,7 +162,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/progressDiamond"
+                    app:layout_constraintStart_toEndOf="@+id/progressAllStudentImage"
                     app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -170,7 +170,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardForBooks"
+            android:id="@+id/progressMaterialCardForAllBooks"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:layout_marginStart="@dimen/recyclerViewMargin"
@@ -227,7 +227,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toEndOf="@+id/progressCrown"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBookReadText" />
+                    app:layout_constraintTop_toBottomOf="@+id/progressAllBookText" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
 

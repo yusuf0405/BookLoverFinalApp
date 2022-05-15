@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.view.WindowManager
 import android.widget.*
+import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
@@ -26,7 +27,9 @@ import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.bookloverfinalapp.app.models.Chapter
 import com.example.bookloverfinalapp.app.models.UserImage
+import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
+import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UserDomainImage
 import com.google.android.material.snackbar.Snackbar
 import com.parse.ParseFile
@@ -107,6 +110,10 @@ fun Activity.showToast(message: String) {
     Toast.makeText(this, message, Toast.LENGTH_LONG).show()
 }
 
+fun Context.showToast(@StringRes messageRes: Int) {
+    Toast.makeText(this, messageRes, Toast.LENGTH_SHORT).show()
+}
+
 fun Int.makeView(parent: ViewGroup): View =
     LayoutInflater.from(parent.context).inflate(this, parent, false)
 
@@ -180,6 +187,9 @@ fun ParseFile.toImage(): UserImage =
 fun ParseFile.toBookImage(): BookPoster =
     BookPoster(name = name, url = url)
 
+fun ParseFile.toBookDomainImage(): BookPosterDomain =
+    BookPosterDomain(name = name, url = url)
+
 fun ParseFile.toPdf(): BookPdf =
     BookPdf(name = name, url = url)
 
@@ -228,6 +238,22 @@ fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton) {
     }
     dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     dialog.show()
+}
+
+fun BookPoster.toDomainPoster(): BookPosterDomain = BookPosterDomain(
+    url = url, name = name
+)
+
+fun Fragment.getImage() {
+    val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+    startActivityForResult(intent, RESULT_LOAD_IMAGE)
+}
+
+fun Fragment.uriToImage(uri: Uri): ByteArray {
+    val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+    val stream = ByteArrayOutputStream()
+    bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
+    return stream.toByteArray()
 }
 
 fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton, text: String) {

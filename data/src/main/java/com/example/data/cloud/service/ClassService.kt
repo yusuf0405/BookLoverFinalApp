@@ -1,11 +1,10 @@
 package com.example.data.cloud.service
 
+import com.example.data.cloud.models.AddClassCloud
 import com.example.data.cloud.models.ClassResponse
+import com.example.data.cloud.models.PostRequestAnswerCloud
 import retrofit2.Response
-import retrofit2.http.DELETE
-import retrofit2.http.GET
-import retrofit2.http.Path
-import retrofit2.http.Query
+import retrofit2.http.*
 
 interface ClassService {
 
@@ -18,4 +17,10 @@ interface ClassService {
     suspend fun deleteClass(
         @Path("id") id: String,
     ): Response<Unit>
+
+
+    @POST("classes/Classes")
+    suspend fun addBookQuestion(
+        @Body schoolClass: AddClassCloud,
+    ): Response<PostRequestAnswerCloud>
 }

@@ -37,13 +37,13 @@ internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = Bo
     author = author,
     poster = BookPosterData(name = poster.name, url = poster.url),
     updatedAt = createdAt,
-    chapterCount = chapterCount.toInt(), page = page, publicYear = publicYear,
+    chapterCount = chapterCount, page = page, publicYear = publicYear,
     title = title
 )
 
 
 internal fun ClassCloud.toClass(): ClassDomain =
-    ClassDomain(id = objectId, title = title)
+    ClassDomain(id = objectId, title = title, schoolId = schoolId)
 
 
 internal fun SchoolCloud.toSchool(): SchoolDomain =

@@ -6,5 +6,5 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetAllChapterQuestionsUseCase(private val repository: BooksRepository) {
     fun execute(id: String, chapter: Int) =
-        repository.getAllChapterQuestions(id = id, chapter = chapter.toString()).flowOn(Dispatchers.IO)
+        repository.fetchChapterQuestions(id = id, chapter = chapter.toString()).flowOn(Dispatchers.IO)
 }

@@ -1,26 +1,29 @@
-package com.example.bookloverfinalapp.app.ui.admin_screens.screen_books
+package com.example.bookloverfinalapp.app.ui.admin_screens.screen_books.adaper
 
 import android.annotation.SuppressLint
+import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.PopupMenu
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookAdapterModel
 import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
+import com.example.bookloverfinalapp.app.utils.cons.ID_BOOK_DELETE
+import com.example.bookloverfinalapp.app.utils.cons.ID_BOOK_UPDATE
+import com.example.bookloverfinalapp.app.utils.extensions.glide
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
+import com.example.bookloverfinalapp.databinding.ItemAdminBookBinding
+import com.example.bookloverfinalapp.databinding.ItemFailFullscreenBinding
 import com.facebook.shimmer.ShimmerFrameLayout
 import java.util.*
 
 class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener) :
     RecyclerView.Adapter<AdminBookAdapter.BookViewHolder>() {
 
-    var books: List<BookAdapterModel> = emptyList()
+    var books: MutableList<BookAdapterModel> = mutableListOf()
         @SuppressLint("NotifyDataSetChanged")
         set(newValue) {
             field = newValue
@@ -41,14 +44,13 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
 
         class Fail(view: View, private val actionListener: AdminBookItemOnClickListener) :
             BookViewHolder(view) {
-            private val message = itemView.findViewById<TextView>(R.id.message_text_view)
-            private val tryAgain = itemView.findViewById<Button>(R.id.try_again)
+            val binding = ItemFailFullscreenBinding.bind(view)
             override fun bind(book: BookAdapterModel) {
-                tryAgain.setOnClickListener { actionListener.tryAgain() }
+                binding.tryAgain.setOnClickListener { actionListener.tryAgain() }
 
                 book.map(object : BookAdapterModel.StringMapper {
                     override fun map(text: String) {
-                        message.text = text
+                        binding.messageTextView.text = text
                     }
 
                     override fun map(
@@ -72,11 +74,7 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
 
         class Base(view: View, private val actionListener: AdminBookItemOnClickListener) :
             BookViewHolder(view) {
-            private val bookTitle = itemView.findViewById<TextView>(R.id.bookTitle)
-            private val bookAuthor = itemView.findViewById<TextView>(R.id.bookAuthor)
-            private val publishedYear = itemView.findViewById<TextView>(R.id.publishedYear)
-            private val bookPages = itemView.findViewById<TextView>(R.id.bookPages)
-            private val bookImage = itemView.findViewById<ImageView>(R.id.rounded_book_Image)
+            val binding = ItemAdminBookBinding.bind(view)
             override fun bind(book: BookAdapterModel) {
                 book.map(object : BookAdapterModel.StringMapper {
                     override fun map(text: String) {}
@@ -93,16 +91,8 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                         poster: BookPoster,
                         updatedAt: Date,
                     ) {
-                        bookTitle.text = title
-                        bookAuthor.text = author
-                        publishedYear.text = publicYear
-                        bookPages.text = page.toString()
-                        Glide.with(itemView.context)
-                            .load(poster.url)
-                            .into(bookImage)
-
-                        itemView.setOnClickListener {
-                            actionListener.goChapterBookFragment(book = Book(
+                        binding.apply {
+                            moreButton.tag = Book(
                                 title = title,
                                 author = author,
                                 updatedAt = updatedAt,
@@ -113,12 +103,43 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                                 poster = BookPoster(name = poster.name, url = poster.url),
                                 book = BookPdf(name = book.name, url = book.url),
                                 objectId = id
-                            ))
+                            )
+                            bookTitle.text = title
+                            bookAuthor.text = author
+                            publishedYear.text = publicYear
+                            bookPages.text = page.toString()
+                            itemView.context.glide(poster.url, roundedBookImage)
+                        }
+                        binding.moreButton.setOnClickListener {
+                            showPopupMenu(binding.moreButton, position)
+                        }
+
+                        itemView.setOnClickListener {
+                            actionListener.goChapterBookFragment(book = binding.moreButton.tag as Book)
                         }
 
                     }
                 })
 
+            }
+
+            fun showPopupMenu(view: View, position: Int) {
+                val popupMenu = PopupMenu(view.context, view)
+                val context = view.context
+                val book = view.tag as Book
+                popupMenu.menu.add(0, ID_BOOK_DELETE, Menu.NONE, context.getString(R.string.delete))
+                popupMenu.menu.add(1, ID_BOOK_UPDATE, Menu.NONE, context.getString(R.string.update))
+
+                popupMenu.setOnMenuItemClickListener {
+                    when (it.itemId) {
+                        ID_BOOK_DELETE -> actionListener.deleteBook(id = book.objectId,
+                            position = position)
+                        ID_BOOK_UPDATE -> actionListener.updateBook(book = book,
+                            position = position)
+                    }
+                    return@setOnMenuItemClickListener true
+                }
+                popupMenu.show()
             }
         }
 
@@ -126,7 +147,8 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BookViewHolder =
         when (viewType) {
-            0 -> BookViewHolder.Base(R.layout.item_book.makeView(parent = parent), actionListener)
+            0 -> BookViewHolder.Base(R.layout.item_admin_book.makeView(parent = parent),
+                actionListener)
             1 -> BookViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
             2 -> BookViewHolder.FullScreenProgress(R.layout.shimmer_book.makeView(parent = parent))
@@ -141,7 +163,18 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
         else -> 3
     }
 
+    fun deleteBook(position: Int) {
+        books.removeAt(position)
+        notifyItemRemoved(position)
+    }
+
+    fun updateBook(position: Int, newBook: BookAdapterModel.Base) {
+        books[position] = newBook
+        notifyItemChanged(position)
+    }
+
     override fun getItemCount(): Int = books.size
+
 
     override fun onBindViewHolder(holder: BookViewHolder, position: Int) {
         holder.bind(books[position])
@@ -150,5 +183,10 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
 
 interface AdminBookItemOnClickListener {
     fun tryAgain()
+
     fun goChapterBookFragment(book: Book)
+
+    fun deleteBook(id: String, position: Int)
+
+    fun updateBook(position: Int, book: Book)
 }

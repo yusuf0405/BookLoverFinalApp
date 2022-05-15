@@ -6,7 +6,7 @@ import com.example.data.cache.models.ClassCache
 @Dao
 interface ClassDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNewClass(schoolClass: ClassCache)
 
     @Update

@@ -1,6 +1,5 @@
 package com.example.data.base
 
-import android.util.Log
 import com.example.data.R
 import com.example.data.ResourceProvider
 import com.example.domain.Mapper
@@ -61,11 +60,8 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
                 val body = withContext(Dispatchers.Default) { response.body() }
                 body?.let { return Resource.success(data = body) }
             }
-            Log.i("CODE", response.code().toString())
-            return when {
-                response.code() == 400 -> Resource.empty()
-                else -> Resource.error(message = response.message())
-            }
+            return Resource.error(message = response.message())
+
         } catch (exception: Exception) {
             return Resource.error(message = resourceProvider.errorType(exception = exception))
         }

@@ -5,9 +5,10 @@ import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
-import com.example.data.cache.db.BooksDao
-import com.example.data.cache.db.BooksThatReadDao
-import com.example.data.cache.db.UsersDao
+import com.example.domain.interactor.ClearBooksCacheUseCase
+import com.example.domain.interactor.ClearBooksThatReadCacheUseCase
+import com.example.domain.interactor.ClearClassCacheUseCase
+import com.example.domain.interactor.ClearStudentsCacheUseCase
 import com.parse.Parse
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
@@ -19,19 +20,21 @@ import javax.inject.Inject
 class App : Application() {
 
     @Inject
-    lateinit var booksThatReadDao: BooksThatReadDao
+    lateinit var clearStudentsCacheUseCase: ClearStudentsCacheUseCase
 
     @Inject
-    lateinit var booksDao: BooksDao
+    lateinit var clearClassCacheUseCase: ClearClassCacheUseCase
 
     @Inject
-    lateinit var userDao: UsersDao
+    lateinit var clearBooksThatReadCacheUseCase: ClearBooksThatReadCacheUseCase
+
+    @Inject
+    lateinit var clearBooksCacheUseCase: ClearBooksCacheUseCase
 
     @Inject
     lateinit var dispatchers: Dispatchers
 
-    private val applicationScope =
-        CoroutineScope(SupervisorJob() + kotlinx.coroutines.Dispatchers.Main)
+    private val applicationScope = CoroutineScope(SupervisorJob() + kotlinx.coroutines.Dispatchers.Main)
 
     override fun onCreate() {
         super.onCreate()
@@ -44,9 +47,10 @@ class App : Application() {
         )
         if (CheсkNavigation().isOnline(this)) {
             dispatchers.launchInBackground(scope = applicationScope) {
-                booksDao.clearTable()
-                booksThatReadDao.clearTable()
-                userDao.clearTable()
+                clearBooksCacheUseCase.execute()
+                clearBooksThatReadCacheUseCase.execute()
+                clearClassCacheUseCase.execute()
+                clearStudentsCacheUseCase.execute()
             }
         }
     }

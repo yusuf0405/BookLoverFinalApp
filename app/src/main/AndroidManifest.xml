@@ -19,6 +19,9 @@
         android:theme="@style/Theme.KnigolyubApp"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".app.ui.screen_class_has_deleted.ActivityClassHasDeleted"
+            android:exported="false" />
+        <activity
             android:name=".app.ui.admin_screens.screen_main.ActivityAdminMain"
             android:exported="false" />
         <activity

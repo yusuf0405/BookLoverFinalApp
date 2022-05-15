@@ -19,6 +19,13 @@ interface UserService {
         @Body student: UserUpdateCloud,
     ): Response<UpdateCloud>
 
+    @PUT("users/{id}")
+    suspend fun updateStudentClass(
+        @Header("X-Parse-Session-Token") sessionToken: String,
+        @Path("id") id: String,
+        @Body updateClass: UpdateStudentClassCloud,
+    ): Response<Unit>
+
     @DELETE("users/{id}")
     suspend fun deleteUser(
         @Header("X-Parse-Session-Token") sessionToken: String,

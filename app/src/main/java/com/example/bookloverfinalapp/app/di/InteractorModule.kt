@@ -16,10 +16,6 @@ object InteractorModule {
         GetAllBooksUseCase(repository = repository)
 
     @Provides
-    fun provideClearBooksCacheUseCase(repository: BooksRepository): ClearBooksCacheUseCase =
-        ClearBooksCacheUseCase(repository = repository)
-
-    @Provides
     fun provideAddNewBookQuestionUseCase(repository: BooksRepository): AddNewBookQuestionUseCase =
         AddNewBookQuestionUseCase(repository = repository)
 
@@ -44,8 +40,22 @@ object InteractorModule {
         GetAllChapterQuestionsUseCase(repository = repository)
 
     @Provides
+    fun provideDeleteBookUseCase(repository: BooksRepository): DeleteBookUseCase =
+        DeleteBookUseCase(repository = repository)
+
+    @Provides
+    fun provideUpdateBookUseCase(repository: BooksRepository): UpdateBookUseCase =
+        UpdateBookUseCase(repository = repository)
+
+
+    @Provides
     fun provideGetBookThatReadUseCase(repository: BookThatReadRepository): GetBookThatReadUseCase =
         GetBookThatReadUseCase(repository = repository)
+
+    @Provides
+    fun provideGetStudentBooksUseCase(repository: BookThatReadRepository): GetStudentBooksUseCase =
+        GetStudentBooksUseCase(repository = repository)
+
 
     @Provides
     fun provideGetMyStudentBooksUseCase(repository: BookThatReadRepository): GetMyStudentBooksUseCase =
@@ -55,10 +65,6 @@ object InteractorModule {
     @Provides
     fun provideDeleteFromMyBooksUseCase(repository: BookThatReadRepository): DeleteFromMyBooksUseCase =
         DeleteFromMyBooksUseCase(repository = repository)
-
-    @Provides
-    fun provideClearBooksThatReadCacheUseCase(repository: BookThatReadRepository): ClearBooksThatReadCacheUseCase =
-        ClearBooksThatReadCacheUseCase(repository = repository)
 
 
     @Provides
@@ -84,10 +90,6 @@ object InteractorModule {
         GetMyStudentsUseCase(repository = repository)
 
     @Provides
-    fun provideClearStudentsCacheUseCase(repository: UserRepository): ClearStudentsCacheUseCase =
-        ClearStudentsCacheUseCase(repository = repository)
-
-    @Provides
     fun provideDeleteUserUseCase(repository: UserRepository): DeleteUserUseCase =
         DeleteUserUseCase(repository = repository)
 
@@ -104,6 +106,11 @@ object InteractorModule {
         UpdateUserUseCase(repository = repository)
 
     @Provides
+    fun provideUpdateStudentClassUseCase(repository: UserRepository): UpdateStudentClassUseCase =
+        UpdateStudentClassUseCase(repository = repository)
+
+
+    @Provides
     fun provideSignUpUseCase(repository: LoginRepository): SignUpUseCase =
         SignUpUseCase(repository = repository)
 
@@ -114,10 +121,6 @@ object InteractorModule {
     @Provides
     fun providePasswordResetUseCase(repository: LoginRepository): PasswordResetUseCase =
         PasswordResetUseCase(repository = repository)
-
-    @Provides
-    fun provideGetAllClassesUseCase(repository: SchoolRepository): GetAllClassesUseCase =
-        GetAllClassesUseCase(repository = repository)
 
     @Provides
     fun provideGetAllSchoolsUseCase(repository: SchoolRepository): GetAllSchoolsUseCase =
@@ -131,5 +134,8 @@ object InteractorModule {
     fun provideDeleteClassUseCase(repository: ClassRepository): DeleteClassUseCase =
         DeleteClassUseCase(repository = repository)
 
+    @Provides
+    fun provideAddNewClassUseCase(repository: ClassRepository): AddNewClassUseCase =
+        AddNewClassUseCase(repository = repository)
 
 }

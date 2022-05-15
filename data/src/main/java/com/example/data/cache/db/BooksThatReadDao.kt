@@ -7,7 +7,7 @@ import com.example.data.cache.models.BookThatReadDb
 @Dao
 interface BooksThatReadDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNewBook(book: BookThatReadDb)
 
     @Update
@@ -33,9 +33,6 @@ interface BooksThatReadDao {
 
     @Query("select * from book_that_read_database")
     suspend fun getAllBooks(): MutableList<BookThatReadDb>
-
-    @Query("select * from book_that_read_database where objectId == :bookId")
-    suspend fun getBook(bookId: String): BookThatReadDb
 
     @Query("select * from book_that_read_database where bookId == :bookId")
     suspend fun getMyBook(bookId: String): BookThatReadDb

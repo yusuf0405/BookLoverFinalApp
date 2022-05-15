@@ -1,96 +1,112 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.ui.admin_screens.screen_upload_book.FragmentAdminUploadPdf">
 
-    <androidx.cardview.widget.CardView
-        android:id="@+id/cardView"
-        android:layout_width="200dp"
-        android:layout_height="280dp"
-        android:layout_margin="5dp"
-        app:cardCornerRadius="15dp"
-        app:cardElevation="20dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-        <ImageView
-            android:id="@+id/rounded_book_Image"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:src="@drawable/book_example"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cardView"
+            android:layout_width="200dp"
+            android:layout_height="280dp"
+            android:layout_marginTop="32dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent">
 
-    </androidx.cardview.widget.CardView>
+            <ImageView
+                android:id="@+id/rounded_book_Image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/shimmerColor"
+                android:scaleType="centerCrop"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/pick_pdf_button"
-        style="@style/button_style"
-        android:layout_marginTop="32dp"
-        android:text="@string/upload_book"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
-
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/save_pdf_button"
-        style="@style/button_style"
-        android:layout_marginTop="32dp"
-        android:text="@string/student_edit_profile_save_btn"
-        android:visibility="gone"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
-
-    <com.github.barteksc.pdfviewer.PDFView
-        android:id="@+id/pdfViewAdmin"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="gone">
-
-    </com.github.barteksc.pdfviewer.PDFView>
-
-    <EditText
-        android:id="@+id/editTextBookTitle"
-        style="@style/edit_text_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:hint="@string/bookTitle"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardView" />
-
-    <EditText
-        android:id="@+id/editTextBookTitleAutor"
-        style="@style/edit_text_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/bookAutor"
-        app:layout_constraintEnd_toEndOf="@+id/editTextBookTitle"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextBookTitle"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBookTitle" />
-
-    <EditText
-        android:id="@+id/editTextBookPublicYear"
-        style="@style/edit_text_edit_profile"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:hint="@string/bookPublicYear"
-        app:layout_constraintEnd_toEndOf="@+id/editTextBookTitleAutor"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/editTextBookTitleAutor"
-        app:layout_constraintTop_toBottomOf="@+id/editTextBookTitleAutor" />
+        </androidx.cardview.widget.CardView>
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/pick_pdf_button"
+            style="@style/button_style"
+            android:layout_marginTop="32dp"
+            android:text="@string/upload_book"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
+
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/save_pdf_button"
+            style="@style/button_style"
+            android:layout_marginTop="32dp"
+            android:text="@string/student_edit_profile_save_btn"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
+
+        <com.github.barteksc.pdfviewer.PDFView
+            android:id="@+id/pdfViewAdmin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+        </com.github.barteksc.pdfviewer.PDFView>
+
+        <EditText
+            android:id="@+id/editTextBookTitle"
+            style="@style/edit_text_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="@string/bookTitle"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.493"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/to_change" />
+
+        <EditText
+            android:id="@+id/editTextBookAutor"
+            style="@style/edit_text_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/bookAutor"
+            app:layout_constraintEnd_toEndOf="@+id/editTextBookTitle"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextBookTitle"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBookTitle" />
+
+        <EditText
+            android:id="@+id/editTextBookPublicYear"
+            style="@style/edit_text_edit_profile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="@string/bookPublicYear"
+            android:inputType="number"
+            app:layout_constraintEnd_toEndOf="@+id/editTextBookAutor"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/editTextBookAutor"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBookAutor" />
+
+        <Button
+            android:id="@+id/to_change"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/to_change"
+            app:layout_constraintEnd_toEndOf="@+id/cardView"
+            app:layout_constraintStart_toStartOf="@+id/cardView"
+            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+</ScrollView>

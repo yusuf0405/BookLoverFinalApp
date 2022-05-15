@@ -8,4 +8,5 @@ data class AddNewBook(
     var poster: BookPoster,
     var book: BookPdf,
     var chapterCount: Int,
+    var schoolId: String,
 )

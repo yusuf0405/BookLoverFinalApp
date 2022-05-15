@@ -5,7 +5,8 @@ import com.example.data.cache.models.StudentDb
 
 @Dao
 interface UsersDao {
-    @Insert
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addNewUser(user: StudentDb)
 
     @Update

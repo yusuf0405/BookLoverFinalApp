@@ -53,11 +53,15 @@ class FragmentAdminUploadPdf :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         binding().savePdfButton.setOnClickListener {
             saveFiles()
         }
         binding().pickPdfButton.setOnClickListener {
             pickFile()
+        }
+        binding().toChange.setOnClickListener {
+            getImage()
         }
     }
 
@@ -96,48 +100,62 @@ class FragmentAdminUploadPdf :
     @Deprecated("Deprecated in Java")
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == REQUEST_CODE && resultCode == RESULT_OK &&
-            data != null && data.data != null
-        ) {
-            val uri = data.data!!
-            requireActivity().contentResolver?.takePersistableUriPermission(uri,
-                Intent.FLAG_GRANT_READ_URI_PERMISSION
-            )
-            displayFromUri(uri)
-            generateImageFromPdf(uri)
-            bookFile = ParseFile(getFile(uri))
+        if (resultCode == RESULT_OK && data != null && data.data != null) {
+            if (requestCode == REQUEST_CODE) {
+                val uri = data.data!!
+                requireActivity().contentResolver?.takePersistableUriPermission(uri,
+                    Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                displayFromUri(uri)
+                generateImageFromPdf(uri)
+                bookFile = ParseFile(getFile(uri))
+            } else {
+                val uri = data.data!!
+                bookPoster = ParseFile("image.png", uriToImage(uri))
+                requireContext().glide(uri, binding().roundedBookImage)
+            }
+
         }
     }
 
     private fun saveFiles() {
-        loadingDialog.show()
-        if (bookFile != null) {
-            bookFile!!.saveInBackground(SaveCallback { it ->
-                if (it == null) {
-                    bookPoster!!.saveInBackground(SaveCallback {
+        when {
+            binding().editTextBookTitle.text.isBlank() -> showToast(R.string.fill_in_all_fields)
+            binding().editTextBookAutor.text.isBlank() -> showToast(R.string.fill_in_all_fields)
+            binding().editTextBookPublicYear.text.isBlank() -> showToast(R.string.fill_in_all_fields)
+            else -> {
+                loadingDialog.show()
+                if (bookFile != null) {
+                    bookFile!!.saveInBackground(SaveCallback { it ->
                         if (it == null) {
-                            addNewBook()
+                            bookPoster!!.saveInBackground(SaveCallback {
+                                if (it == null) {
+                                    addNewBook()
+                                }
+                            })
                         }
                     })
                 }
-            })
+            }
         }
     }
 
     private fun addNewBook() {
         binding().apply {
-            val newBook = AddNewBook(author = editTextBookTitleAutor.text.toString(),
+            val newBook = AddNewBook(author = editTextBookAutor.text.toString(),
                 chapterCount = bookChapterCount,
                 title = binding().editTextBookTitle.text.toString(),
                 publicYear = binding().editTextBookPublicYear.text.toString(),
                 poster = bookPoster!!.toBookImage(),
-                book = bookFile!!.toPdf(), page = bookPageCount)
+                book = bookFile!!.toPdf(), page = bookPageCount,
+                schoolId = currentUser.schoolId)
 
             viewModel.addBook(book = newBook).observe(viewLifecycleOwner) {
                 showToast(R.string.book_added_successfully)
             }
         }
+
     }
+
 
     override fun onPageChanged(page: Int, pageCount: Int) {
         bookPageCount = pageCount
@@ -177,7 +195,7 @@ class FragmentAdminUploadPdf :
             pickPdfButton.hideView()
             val meta: PdfDocument.Meta = pdfViewAdmin.documentMeta
             editTextBookTitle.setText(meta.title)
-            editTextBookTitleAutor.setText(meta.author)
+            editTextBookAutor.setText(meta.author)
             bookChapterCount = pdfViewAdmin.tableOfContents.size
         }
 

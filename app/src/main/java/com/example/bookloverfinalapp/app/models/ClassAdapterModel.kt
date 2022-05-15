@@ -14,9 +14,10 @@ sealed class ClassAdapterModel : Abstract.Object<Unit, ClassAdapterModel.StringM
     class Base(
         private val id: String,
         private val title: String,
+        private val schoolId: String,
     ) : ClassAdapterModel() {
         override fun map(mapper: StringMapper) {
-            mapper.map(id = id, title = title)
+            mapper.map(id = id, title = title, schoolId = schoolId)
         }
     }
 
@@ -31,6 +32,7 @@ sealed class ClassAdapterModel : Abstract.Object<Unit, ClassAdapterModel.StringM
         fun map(
             id: String,
             title: String,
+            schoolId: String,
         )
     }
 

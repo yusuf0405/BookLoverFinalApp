@@ -4,10 +4,7 @@ import com.example.data.ResourceProvider
 import com.example.data.base.BaseApiResponse
 import com.example.data.cloud.mappers.StudentBookMapper
 import com.example.data.cloud.mappers.UserMapper
-import com.example.data.cloud.models.SessionTokenCloud
-import com.example.data.cloud.models.UpdateCloud
-import com.example.data.cloud.models.UserCloud
-import com.example.data.cloud.models.UserUpdateCloud
+import com.example.data.cloud.models.*
 import com.example.data.cloud.service.UserService
 import com.example.data.models.StudentData
 import com.example.data.models.UserImageData
@@ -15,6 +12,8 @@ import com.example.domain.Mapper
 import com.example.domain.Resource
 import com.example.domain.models.UpdateAnswerDomain
 import com.example.domain.models.UserUpdateDomain
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
 interface UsersCloudDataSource {
 
@@ -25,6 +24,13 @@ interface UsersCloudDataSource {
         user: UserUpdateDomain,
         sessionToken: String,
     ): Resource<UpdateAnswerDomain>
+
+    suspend fun updateClass(
+        id: String,
+        sessionToken: String,
+        classId: String,
+        classTitle: String,
+    ): Resource<Unit>
 
     suspend fun deleteUser(id: String, sessionToken: String): Resource<Unit>
 
@@ -107,6 +113,17 @@ interface UsersCloudDataSource {
                 student = userToDataMapper.map(user))
         }
 
+        override suspend fun updateClass(
+            id: String,
+            sessionToken: String,
+            classId: String,
+            classTitle: String,
+        ): Resource<Unit> = safeApiCall {
+            service.updateStudentClass(sessionToken = sessionToken,
+                id = id,
+                updateClass = UpdateStudentClassCloud(classId = classId, classTitle = classTitle))
+        }
+
         override suspend fun deleteUser(id: String, sessionToken: String): Resource<Unit> =
             safeApiCall { service.deleteUser(sessionToken = sessionToken, id = id) }
 
@@ -118,6 +135,19 @@ interface UsersCloudDataSource {
             }
 
         override suspend fun getCurrentUser(sessionToken: String): Resource<UserCloud> =
-            safeApiCall { service.getMe(sessionToken = sessionToken) }
+            try {
+                val response =
+                    withContext(Dispatchers.IO) { service.getMe(sessionToken = sessionToken) }
+                if (response.isSuccessful) {
+                    val body = withContext(Dispatchers.Default) { response.body() }
+                    body?.let { return Resource.success(data = body) }
+                }
+                when {
+                    response.code() == 400 -> Resource.empty()
+                    else -> Resource.error(message = response.message())
+                }
+            } catch (exception: Exception) {
+                Resource.error(message = resourceProvider.errorType(exception = exception))
+            }
     }
 }

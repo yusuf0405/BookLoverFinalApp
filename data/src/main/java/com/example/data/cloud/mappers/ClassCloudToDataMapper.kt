@@ -6,6 +6,6 @@ import com.example.domain.Mapper
 
 class ClassCloudToDataMapper : Mapper<ClassCloud, ClassData>() {
     override fun map(from: ClassCloud): ClassData = from.run {
-        ClassData(objectId = objectId, title = title)
+        ClassData(objectId = objectId, title = title, schoolId = schoolId)
     }
 }

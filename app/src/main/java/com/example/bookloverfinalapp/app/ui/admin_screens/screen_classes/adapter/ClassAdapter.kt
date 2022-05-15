@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.ui.admin_screens.screen_classes
+package com.example.bookloverfinalapp.app.ui.admin_screens.screen_classes.adapter
 
 import android.annotation.SuppressLint
 import android.view.View
@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.ClassAdapterModel
 import com.example.bookloverfinalapp.app.models.SchoolClass
+import com.example.bookloverfinalapp.app.ui.screen_my_books.adapters.StudentBookAdapter
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
 import com.facebook.shimmer.ShimmerFrameLayout
 
@@ -25,6 +26,8 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
 
     abstract class ClassViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         open fun bind(book: ClassAdapterModel) {}
+
+        class EmptyList(view: View) : ClassAdapter.ClassViewHolder(view)
 
         class FullScreenProgress(view: View) : ClassViewHolder(view) {
             private val shimmerView =
@@ -47,7 +50,7 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
                         message.text = text
                     }
 
-                    override fun map(id: String, title: String) {
+                    override fun map(id: String, title: String, schoolId: String) {
                         TODO("Not yet implemented")
                     }
                 })
@@ -63,7 +66,7 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
                 book.map(object : ClassAdapterModel.StringMapper {
                     override fun map(text: String) {}
 
-                    override fun map(id: String, title: String) {
+                    override fun map(id: String, title: String, schoolId: String) {
                         titleView.text = title
 
                         deleteButton.setOnClickListener {
@@ -71,7 +74,8 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
                         }
                         itemView.setOnClickListener {
                             actionListener.goAllStudentsFragment(schoolClass = SchoolClass(id = id,
-                                title = title)) }
+                                title = title, schoolId = schoolId))
+                        }
                     }
                 })
 
@@ -87,6 +91,7 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
             1 -> ClassViewHolder.Fail(R.layout.item_fail_fullscreen.makeView(parent = parent),
                 actionListener = actionListener)
             2 -> ClassViewHolder.FullScreenProgress(R.layout.shimmer_class.makeView(parent = parent))
+            3 -> ClassViewHolder.EmptyList(R.layout.item_empty_list.makeView(parent = parent))
             else -> throw ClassCastException()
         }
 
@@ -95,12 +100,17 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
         is ClassAdapterModel.Base -> 0
         is ClassAdapterModel.Fail -> 1
         is ClassAdapterModel.Progress -> 2
-        else -> 3
+        is ClassAdapterModel.Empty -> 3
     }
 
     fun deleteClass(position: Int) {
         classes.removeAt(position)
         notifyItemRemoved(position)
+    }
+
+    fun addClass(schoolClass: ClassAdapterModel.Base) {
+        classes.add(0, schoolClass)
+        notifyItemInserted(0)
     }
 
     override fun getItemCount(): Int = classes.size

@@ -8,4 +8,5 @@ import androidx.room.PrimaryKey
 data class ClassCache(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "title") var title: String,
+    @ColumnInfo(name = "schoolId") var schoolId: String,
 )

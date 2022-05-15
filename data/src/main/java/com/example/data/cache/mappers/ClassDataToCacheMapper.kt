@@ -6,6 +6,6 @@ import com.example.domain.Mapper
 
 class ClassDataToCacheMapper : Mapper<ClassData, ClassCache>() {
     override fun map(from: ClassData): ClassCache = from.run {
-        ClassCache(id = objectId, title = title)
+        ClassCache(id = objectId, title = title, schoolId = schoolId)
     }
 }

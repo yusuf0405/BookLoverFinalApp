@@ -10,6 +10,7 @@ import com.example.domain.Status
 import com.example.domain.models.ClassDomain
 import com.example.domain.repository.ClassRepository
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
 class ClassRepositoryImpl(
@@ -42,6 +43,8 @@ class ClassRepositoryImpl(
         }
     }
 
+    override fun getClass(id: String): Flow<Resource<Unit>> = cloudDataSource.getClass(id = id)
+
     override fun deleteClass(id: String): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
         val result = cloudDataSource.deleteClass(id = id)
@@ -51,4 +54,20 @@ class ClassRepositoryImpl(
         } else emit(Resource.error(message = result.message))
 
     }
+
+    override fun addClass(title: String, schoolId: String): Flow<Resource<String>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.addClass(title = title, schoolId = schoolId)
+        if (result.status == Status.SUCCESS) {
+            val id = result.data!!.objectId
+            cacheDataSource.addClass(ClassData(
+                objectId = id,
+                title = title,
+                schoolId = schoolId))
+            emit(Resource.success(data = id))
+        } else emit(Resource.error(message = result.message))
+    }
+
+    override suspend fun clearTable() = cacheDataSource.clearTable()
+
 }

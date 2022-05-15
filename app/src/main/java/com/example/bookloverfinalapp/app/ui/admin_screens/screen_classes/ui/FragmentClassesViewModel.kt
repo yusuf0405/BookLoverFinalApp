@@ -9,8 +9,10 @@ import com.example.bookloverfinalapp.app.models.ClassAdapterModel
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRootDirections
 import com.example.bookloverfinalapp.app.utils.communication.ClassAdapterCommunication
+import com.example.bookloverfinalapp.app.utils.communication.ClassesCommunication
 import com.example.domain.Mapper
 import com.example.domain.Status
+import com.example.domain.interactor.AddNewClassUseCase
 import com.example.domain.interactor.DeleteClassUseCase
 import com.example.domain.interactor.GetAllClassUseCase
 import com.example.domain.models.ClassDomain
@@ -23,20 +25,34 @@ import javax.inject.Inject
 class FragmentClassesViewModel @Inject constructor(
     private val getAllClassUseCase: GetAllClassUseCase,
     private val deleteClassUseCase: DeleteClassUseCase,
+    private var addNewClassUseCase: AddNewClassUseCase,
     private val mapper: Mapper<ClassDomain, ClassAdapterModel.Base>,
+    private val classMapper: Mapper<ClassDomain, SchoolClass>,
     private val communication: ClassAdapterCommunication,
+    private val classCommunication: ClassesCommunication,
 ) : BaseViewModel() {
+
 
     fun observe(owner: LifecycleOwner, observer: Observer<List<ClassAdapterModel>>) =
         communication.observe(owner = owner, observer = observer)
+
+    fun classObserve(owner: LifecycleOwner, observer: Observer<List<SchoolClass>>) =
+        classCommunication.observe(owner = owner, observer = observer)
+
 
     fun fetchClasses(schoolId: String) = dispatchers.launchInBackground(viewModelScope) {
         getAllClassUseCase.execute(schoolId = schoolId).collectLatest { resource ->
             when (resource.status) {
                 Status.LOADING -> communication.put(listOf(ClassAdapterModel.Progress))
-                Status.SUCCESS -> communication.put(resource.data!!.map { classDomain ->
-                    mapper.map(classDomain)
-                })
+                Status.SUCCESS -> {
+                    val classListDomain = resource.data!!
+                    classCommunication.put(classListDomain.map { classDomain ->
+                        classMapper.map(classDomain)
+                    })
+                    communication.put(classListDomain.map { classDomain ->
+                        mapper.map(classDomain)
+                    })
+                }
                 Status.EMPTY -> communication.put(listOf(ClassAdapterModel.Empty))
                 Status.ERROR -> communication.put(listOf(ClassAdapterModel.Fail(resource.message!!)))
             }
@@ -59,6 +75,25 @@ class FragmentClassesViewModel @Inject constructor(
                 }
 
             }
+        }
+
+
+    fun addNewClass(title: String, schoolId: String) =
+        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+            addNewClassUseCase.execute(title = title, schoolId = schoolId)
+                .collectLatest { resource ->
+                    when (resource.status) {
+                        Status.LOADING -> showProgressDialog()
+                        Status.SUCCESS -> {
+                            emit(resource.data!!)
+                            dismissProgressDialog()
+                        }
+                        Status.ERROR -> {
+                            error(message = resource.message!!)
+                            dismissProgressDialog()
+                        }
+                    }
+                }
         }
 
     fun goClassStudentFragment(schoolClass: SchoolClass) =

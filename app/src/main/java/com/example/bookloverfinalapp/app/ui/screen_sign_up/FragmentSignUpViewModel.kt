@@ -3,10 +3,12 @@ package com.example.bookloverfinalapp.app.ui.screen_sign_up
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
+import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudentDirections
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacherDirections
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
+import com.example.domain.Mapper
 import com.example.domain.Status
 import com.example.domain.interactor.AddSessionTokenUseCase
 import com.example.domain.interactor.GetAllClassUseCase
@@ -28,6 +30,7 @@ class FragmentSignUpViewModel @Inject constructor(
     private val addSessionTokenUseCase: AddSessionTokenUseCase,
     private val signUpUseCase: SignUpUseCase,
     private val getAllClassUseCase: GetAllClassUseCase,
+    private val classMapper: Mapper<ClassDomain, SchoolClass>,
 ) : BaseViewModel() {
 
     private val _schools =
@@ -35,9 +38,9 @@ class FragmentSignUpViewModel @Inject constructor(
             onBufferOverflow = BufferOverflow.DROP_OLDEST)
     val schools: SharedFlow<List<SchoolDomain>> get() = _schools.asSharedFlow()
 
-    private val _classes = MutableSharedFlow<List<ClassDomain>>(replay = 1, extraBufferCapacity = 0,
+    private val _classes = MutableSharedFlow<List<SchoolClass>>(replay = 1, extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST)
-    val classes: SharedFlow<List<ClassDomain>> get() = _classes.asSharedFlow()
+    val classes: SharedFlow<List<SchoolClass>> get() = _classes.asSharedFlow()
 
     private val _schoolError = MutableSharedFlow<Event<String>>(replay = 1, extraBufferCapacity = 0,
         onBufferOverflow = BufferOverflow.DROP_OLDEST)
@@ -51,7 +54,7 @@ class FragmentSignUpViewModel @Inject constructor(
         getAllSchools()
     }
 
-    fun getAllSchools(){
+    fun getAllSchools() {
         getAllSchoolsUseCase.execute().onEach { resource ->
             when (resource.status) {
                 Status.LOADING -> showProgressDialog()
@@ -100,7 +103,7 @@ class FragmentSignUpViewModel @Inject constructor(
                 Status.LOADING -> showProgressDialog()
                 Status.SUCCESS -> {
                     dismissProgressDialog()
-                    _classes.emit(resource.data!!)
+                    _classes.emit(resource.data!!.map { classDomain -> classMapper.map(classDomain) })
                 }
                 Status.ERROR -> {
                     dismissProgressDialog()

@@ -80,6 +80,21 @@ class UserRepositoryImpl(
         } else emit(Resource.error(message = result.message!!))
     }
 
+    override fun updateStudentClass(
+        id: String,
+        sessionToken: String,
+        classId: String,
+        classTitle: String,
+    ): Flow<Resource<Unit>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.updateClass(id = id,
+            sessionToken = sessionToken,
+            classId = classId,
+            classTitle = classTitle)
+        if (result.status == Status.SUCCESS) emit(Resource.success(data = Unit))
+        else emit(Resource.error(message = result.message))
+    }
+
 
     override fun addSessionToken(id: String, sessionToken: String): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())

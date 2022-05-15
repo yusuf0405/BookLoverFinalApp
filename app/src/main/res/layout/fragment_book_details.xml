@@ -83,7 +83,7 @@
             app:layout_constraintTop_toBottomOf="@+id/book_details_title" />
 
         <TextView
-            android:id="@+id/textView17"
+            android:id="@+id/studentNameText"
             style="@style/type_title_book_details"
             android:layout_marginTop="16dp"
             android:text="@string/student_book_details_book_title"
@@ -97,10 +97,10 @@
             style="@style/type_des_book_details"
             android:layout_marginTop="8dp"
             android:text="Лев Толстой"
-            app:layout_constraintEnd_toEndOf="@+id/textView17"
+            app:layout_constraintEnd_toEndOf="@+id/studentNameText"
             app:layout_constraintHorizontal_bias="0.032"
-            app:layout_constraintStart_toStartOf="@+id/textView17"
-            app:layout_constraintTop_toBottomOf="@+id/textView17" />
+            app:layout_constraintStart_toStartOf="@+id/studentNameText"
+            app:layout_constraintTop_toBottomOf="@+id/studentNameText" />
 
         <View
             android:id="@+id/view2"

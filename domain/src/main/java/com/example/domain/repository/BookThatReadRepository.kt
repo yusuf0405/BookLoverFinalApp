@@ -10,6 +10,8 @@ interface BookThatReadRepository {
 
     fun fetchMyBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
+    fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
+
     fun fetchMyBook(id: String): Flow<Resource<BookThatReadDomain>>
 
     fun deleteMyBook(id: String): Flow<Resource<Unit>>
@@ -18,7 +20,11 @@ interface BookThatReadRepository {
 
     fun updateProgress(id: String, progress: Int): Flow<Resource<Unit>>
 
-    fun updateChapters(id: String, chapters: Int, isReadingPages: List<Boolean>): Flow<Resource<Unit>>
+    fun updateChapters(
+        id: String,
+        chapters: Int,
+        isReadingPages: List<Boolean>,
+    ): Flow<Resource<Unit>>
 
     fun fetchMyStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 

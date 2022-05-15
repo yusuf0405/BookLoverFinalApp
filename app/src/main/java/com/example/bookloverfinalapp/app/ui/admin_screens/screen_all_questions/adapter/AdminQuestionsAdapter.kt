@@ -45,7 +45,7 @@ class AdminQuestionsAdapter(private val actionListener: AdminChapterItemOnClickL
         return ViewHolder(binding)
     }
 
-    fun deleteBook(position: Int) {
+    fun deleteQuestion(position: Int) {
         questions.removeAt(position)
         notifyItemRemoved(position)
     }

@@ -43,30 +43,30 @@ interface BooksThatReadCloudDataSource {
 
                 val response =
                     thatReadService.getBook(id = "{\"objectId\":\"${booksThatRead.bookId}\"}")
+                val bookCloudList = response.body()!!.books
+                if (bookCloudList.isNotEmpty()) {
+                    val bookCloud = bookCloudList[0]
+                    val thatReadBook = BookThatReadMapper.Base(
+                        progress = booksThatRead.progress,
+                        objectId = booksThatRead.objectId,
+                        createdAt = booksThatRead.createdAt,
+                        chaptersRead = booksThatRead.chaptersRead,
+                        bookId = booksThatRead.bookId,
+                        studentId = booksThatRead.studentId,
+                        isReadingPages = booksThatRead.isReadingPages,
+                        path = booksThatRead.path)
 
-                val bookCloud = response.body()!!.books[0]
+                    val book = BookMapper.Base(author = bookCloud.author,
+                        id = bookCloud.id,
+                        poster = bookCloud.poster,
+                        page = bookCloud.page,
+                        chapterCount = bookCloud.chapterCount,
+                        publicYear = bookCloud.publicYear,
+                        title = bookCloud.title,
+                        updatedAt = bookCloud.updatedAt)
 
-
-                val thatReadBook = BookThatReadMapper.Base(
-                    progress = booksThatRead.progress,
-                    objectId = booksThatRead.objectId,
-                    createdAt = booksThatRead.createdAt,
-                    chaptersRead = booksThatRead.chaptersRead,
-                    bookId = booksThatRead.bookId,
-                    studentId = booksThatRead.studentId,
-                    isReadingPages = booksThatRead.isReadingPages,
-                    path = booksThatRead.path)
-
-                val book = BookMapper.Base(author = bookCloud.author,
-                    id = bookCloud.id,
-                    poster = bookCloud.poster,
-                    page = bookCloud.page,
-                    chapterCount = bookCloud.chapterCount,
-                    publicYear = bookCloud.publicYear,
-                    title = bookCloud.title,
-                    updatedAt = bookCloud.updatedAt)
-
-                bookList.add(thatReadBook.map(BookMapper.ComplexMapper(book)))
+                    bookList.add(thatReadBook.map(BookMapper.ComplexMapper(book)))
+                }
             }
             Resource.success(bookList)
         } catch (exception: Exception) {

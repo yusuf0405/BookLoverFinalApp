@@ -1,214 +1,698 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.ui.admin_screens.screen_school_progress.FragmentSchoolProgress">
 
-
-    <TextView
-        android:id="@+id/textView2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="Средняя школа №7 им. Нариманова"
-        android:textColor="@color/violet"
-        android:layout_marginStart="8dp"
-        android:textSize="@dimen/profileNameBigTextSize"
-        app:layout_constraintBottom_toBottomOf="@+id/studentProgressImg"
-        app:layout_constraintEnd_toStartOf="@+id/studentProgressImg"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/studentProgressImg" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/studentProgressImg"
-        android:layout_width="@dimen/editProfileFotoSize"
-        android:layout_height="@dimen/editProfileFotoSize"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/background_start"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/my_statistics_container"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/guideline16"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/studentProgressImg"
-        app:layout_constraintVertical_bias="1.0">
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
 
         <TextView
-            android:id="@+id/progressStatisticText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
+            android:id="@+id/textView2"
+            android:layout_width="0dp"
+            android:gravity="center"
             android:layout_height="wrap_content"
-            android:text="@string/progress_statistics"
-            android:textColor="@color/red"
-            android:textSize="@dimen/bigTextSize"
+            android:layout_marginTop="32dp"
+            android:text="Средняя школа №7 им. Нариманова"
+            android:textColor="@color/violet"
+            android:textSize="@dimen/profileNameBigTextSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardViewForChapters"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/school_statistics_container"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/marginForTIL"
-            android:layout_marginTop="@dimen/profileTextDP"
-            android:layout_marginEnd="@dimen/recyclerViewMargin"
-            android:backgroundTint="@color/white"
+            android:layout_marginTop="32dp"
             android:visibility="visible"
-            app:cardCornerRadius="@dimen/cardAllCornersRadius"
-            app:cardElevation="@dimen/cardElevation"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressStatisticText">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chapter_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/constraintInside">
-
-                <ImageView
-                    android:id="@+id/progressDiamond"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_student"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressDiamondReadText"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/violet"
-                    android:textSize="@dimen/textSizeProfileTIL"
-                    app:layout_constraintBottom_toTopOf="@+id/progressReadenText"
-                    app:layout_constraintEnd_toEndOf="@+id/progressReadenText"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/progressReadenText"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressReadenText"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/student_progress_chapters_read"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/textSizeForSmallTexts"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/progressDiamond"
-                    app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardForBooks"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/recyclerViewMargin"
-            android:layout_marginEnd="@dimen/marginForTIL"
-            android:backgroundTint="@color/white"
-            android:visibility="visible"
-
-            app:cardCornerRadius="@dimen/cardAllCornersRadius"
-            app:cardElevation="@dimen/cardElevation"
-            app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForChapters"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/progressMaterialCardViewForChapters">
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/book_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/constraintInside">
+            <TextView
+                android:id="@+id/progressStatisticText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/school_statistics"
+                android:textColor="@color/red"
+                android:textSize="@dimen/bigTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressMaterialCardViewForAllStudents"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginForTIL"
+                android:layout_marginTop="@dimen/profileTextDP"
+                android:layout_marginEnd="@dimen/recyclerViewMargin"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressStatisticText">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/all_students_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressAllStudentImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_student"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressStudentsText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressAllStudentsText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressAllStudentsText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressAllStudentsText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressAllStudentsText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/students_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressAllStudentImage"
+                        app:layout_constraintTop_toBottomOf="@+id/progressStudentsText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressMaterialCardForAllBooks"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/recyclerViewMargin"
+                android:layout_marginEnd="@dimen/marginForTIL"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForAllStudents"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="@+id/progressMaterialCardViewForAllStudents">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/all_book_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressAllBooksImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_page_1"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/progressAllBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressAllBookText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressAllBookReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressAllBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressAllBookReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressAllBookReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/books_in_the_database"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressAllBooksImage"
+                        app:layout_constraintTop_toBottomOf="@+id/progressAllBookText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressMaterialCardViewForChapters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginForTIL"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="@dimen/recyclerViewMargin"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintEnd_toStartOf="@+id/guideline3"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressMaterialCardViewForAllStudents">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chapter_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressDiamondImage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_diamond"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressDiamondReadText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_chapters_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressDiamondImage"
+                        app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressMaterialCardForBooks"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/recyclerViewMargin"
+                android:layout_marginEnd="@dimen/marginForTIL"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForChapters"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline3"
+                app:layout_constraintTop_toTopOf="@+id/progressMaterialCardViewForChapters">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/book_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressCrown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_crown_gold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/progressBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressBookText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressBookReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressBookReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressBookReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_books_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressCrown"
+                        app:layout_constraintTop_toBottomOf="@+id/progressBookText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressMaterialCardViewForPages"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline13"
+                app:layout_constraintStart_toStartOf="@+id/guideline11"
+                app:layout_constraintTop_toBottomOf="@+id/progressMaterialCardViewForChapters">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/page_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressBookPage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_open_book"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressPageReadText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressPageReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressPageReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressPageReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressPageReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_pages_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressBookPage"
+                        app:layout_constraintTop_toBottomOf="@+id/progressPageReadText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.27" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.76" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/student_statistics_container"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2">
+
+            <TextView
+                android:id="@+id/progressClassStatisticText"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/student_statistics"
+                android:textColor="@color/red"
+                android:textSize="@dimen/bigTextSize"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressClassMaterialCardViewForChapters"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginForTIL"
+                android:layout_marginTop="@dimen/profileTextDP"
+                android:layout_marginEnd="@dimen/recyclerViewMargin"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintEnd_toStartOf="@+id/guideline14"
+                app:layout_constraintHorizontal_chainStyle="spread"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/progressClassStatisticText">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/chapter_class_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressClassDiamond"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_diamond"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassDiamondReadText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressClassReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressClassReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressClassReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_chapters_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressClassDiamond"
+                        app:layout_constraintTop_toBottomOf="@+id/progressClassDiamondReadText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressClassMaterialCardForBooks"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/recyclerViewMargin"
+                android:layout_marginEnd="@dimen/marginForTIL"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintBottom_toBottomOf="@+id/progressClassMaterialCardViewForChapters"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/guideline14"
+                app:layout_constraintTop_toTopOf="@+id/progressClassMaterialCardViewForChapters">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/book_class_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressClassCrown"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_crown_gold"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toStartOf="@+id/progressClassBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassBookReadText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressClassBookReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressClassBookReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressClassBookReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassBookReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_books_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressClassCrown"
+                        app:layout_constraintTop_toBottomOf="@+id/progressClassBookReadText" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/progressClassMaterialCardViewForPages"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/profileTextDP"
+                android:layout_marginBottom="12dp"
+                android:backgroundTint="@color/white"
+                android:visibility="visible"
+                app:cardCornerRadius="@dimen/cardAllCornersRadius"
+                app:cardElevation="@dimen/cardElevation"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/guideline133"
+                app:layout_constraintStart_toStartOf="@+id/guideline111"
+                app:layout_constraintTop_toBottomOf="@+id/progressClassMaterialCardViewForChapters">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/page_class_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/constraintInside">
+
+                    <ImageView
+                        android:id="@+id/progressClassBookPage"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_open_book"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassPageReadText"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="0"
+                        android:textColor="@color/violet"
+                        android:textSize="@dimen/textSizeProfileTIL"
+                        app:layout_constraintBottom_toTopOf="@+id/progressClassPageReadenText"
+                        app:layout_constraintEnd_toEndOf="@+id/progressClassPageReadenText"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="@+id/progressClassPageReadenText"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/progressClassPageReadenText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/student_progress_pages_read"
+                        android:textColor="@color/grey"
+                        android:textSize="@dimen/textSizeForSmallTexts"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toEndOf="@+id/progressClassBookPage"
+                        app:layout_constraintTop_toBottomOf="@+id/progressClassPageReadText" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline111"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.27" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline133"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.76" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/school_statistics_container">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/cardView2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:elevation="8dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+                <TextView
+                    android:id="@+id/classTitleText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="16sp"
+                    android:hint="@string/select_a_class"
+                    android:textSize="20sp" />
 
                 <ImageView
-                    android:id="@+id/progressCrown"
+                    android:id="@+id/classEditButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/ic_page_1"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/progressBookReadenText"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:layout_gravity="end|center"
+                    android:layout_marginEnd="8dp"
+                    android:src="@drawable/ic_mnog" />
+            </androidx.cardview.widget.CardView>
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:elevation="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                app:cardCornerRadius="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/cardView2">
+
 
                 <TextView
-                    android:id="@+id/progressBookReadText"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:text="0"
-                    android:textColor="@color/violet"
-                    android:textSize="@dimen/textSizeProfileTIL"
-                    app:layout_constraintBottom_toTopOf="@+id/progressBookReadenText"
-                    app:layout_constraintEnd_toEndOf="@+id/progressBookReadenText"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/progressBookReadenText"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressBookReadenText"
+                    android:id="@+id/studentNameText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/student_progress_books_read"
-                    android:textColor="@color/grey"
-                    android:textSize="@dimen/textSizeForSmallTexts"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/progressCrown"
-                    app:layout_constraintTop_toBottomOf="@+id/progressBookReadText" />
+                    android:layout_margin="16sp"
+                    android:hint="@string/select_a_student"
+                    android:textSize="20sp" />
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
+                <ImageView
+                    android:id="@+id/studentEditButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end|center"
+                    android:layout_marginEnd="8dp"
 
+                    android:src="@drawable/ic_mnog" />
+            </androidx.cardview.widget.CardView>
 
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.76" />
-
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline16"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.45" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

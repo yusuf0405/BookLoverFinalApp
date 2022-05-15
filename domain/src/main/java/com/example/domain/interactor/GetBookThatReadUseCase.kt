@@ -9,6 +9,5 @@ import kotlinx.coroutines.flow.flowOn
 
 class GetBookThatReadUseCase(private val repository: BookThatReadRepository) {
      fun execute(id: String): Flow<Resource<List<BookThatReadDomain>>> =
-        repository.fetchMyBooks(id = id).flowOn(
-            Dispatchers.IO)
+        repository.fetchMyBooks(id = id).flowOn(Dispatchers.IO)
 }

@@ -7,10 +7,5 @@ import kotlinx.coroutines.flow.Flow
 
 interface SchoolRepository {
 
-    fun getAllClasses(): Flow<Resource<List<ClassDomain>>>
-
     fun getAllSchools(): Flow<Resource<List<SchoolDomain>>>
-
-    fun getClass(id: String): Flow<Resource<List<ClassDomain>>>
-
 }

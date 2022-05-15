@@ -12,6 +12,11 @@ interface BooksCommunication : Communication<List<Book>> {
     class Base : Communication.Base<List<Book>>(), BooksCommunication
 }
 
+interface ClassesCommunication : Communication<List<SchoolClass>> {
+    class Base : Communication.Base<List<SchoolClass>>(), ClassesCommunication
+}
+
+
 interface BooksQuestionCommunication : Communication<List<BookQuestion>> {
     class Base : Communication.Base<List<BookQuestion>>(), BooksQuestionCommunication
 }

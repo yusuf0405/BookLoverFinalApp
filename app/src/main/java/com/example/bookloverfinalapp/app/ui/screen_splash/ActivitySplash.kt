@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main.ActivityAdminMain
+import com.example.bookloverfinalapp.app.ui.screen_class_has_deleted.ActivityClassHasDeleted
 import com.example.bookloverfinalapp.app.ui.screen_login_main.ActivityLoginMain
 import com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain
 import com.example.bookloverfinalapp.app.utils.UserType
@@ -19,6 +20,7 @@ import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.ActivitySplashBinding
 import com.example.domain.Mapper
 import com.example.domain.Status
+import com.example.domain.interactor.GetClassUseCase
 import com.example.domain.interactor.GetCurrentUserUseCase
 import com.example.domain.models.UserDomain
 import com.google.gson.Gson
@@ -41,13 +43,17 @@ class ActivitySplash : AppCompatActivity() {
     lateinit var getCurrentUserUseCase: GetCurrentUserUseCase
 
     @Inject
+    lateinit var getClassUseCase: GetClassUseCase
+
+    @Inject
     lateinit var mapper: Mapper<UserDomain, User>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val pref = getSharedPreferences(CURRENT_EDITOR_STUDENT_SAVE_KEY, Context.MODE_PRIVATE)
-        currentUser = Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
+        currentUser =
+            Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
 
         lifecycleScope.launch {
             if (currentUser == null) {
@@ -71,7 +77,7 @@ class ActivitySplash : AppCompatActivity() {
                     Status.SUCCESS -> {
                         CurrentUser().saveCurrentUser(mapper.map(resource.data!!),
                             this@ActivitySplash)
-                        intentClearTask(activity = ActivityMain())
+                        chekClass()
                     }
                     Status.EMPTY -> {
                         CheсkNavigation().loginOut(this@ActivitySplash)
@@ -87,6 +93,20 @@ class ActivitySplash : AppCompatActivity() {
         } else {
             delay(3000)
             intentClearTask(activity = ActivityMain())
+        }
+    }
+
+    private fun chekClass() = lifecycleScope.launch {
+        getClassUseCase.execute(id = currentUser!!.classId).collectLatest { resource ->
+            when (resource.status) {
+                Status.LOADING -> binding.progressBar.showView()
+                Status.SUCCESS -> intentClearTask(activity = ActivityMain())
+                Status.EMPTY -> intentClearTask(activity = ActivityClassHasDeleted())
+                Status.ERROR -> {
+                    binding.progressBar.hideView()
+                    createErrorDialog(message = resource.message!!)
+                }
+            }
         }
     }
 

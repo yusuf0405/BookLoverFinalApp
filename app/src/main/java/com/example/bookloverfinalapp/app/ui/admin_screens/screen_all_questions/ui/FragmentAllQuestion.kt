@@ -78,7 +78,7 @@ class FragmentAllQuestion :
                     viewModel.deleteQuestion(id = id).observe(viewLifecycleOwner) {
                         showToast(R.string.book_question_deleted_successfully)
                     }
-                    adapter.deleteBook(position = position)
+                    adapter.deleteQuestion(position = position)
                 }
                 DialogInterface.BUTTON_NEGATIVE -> {}
                 DialogInterface.BUTTON_NEUTRAL -> {}

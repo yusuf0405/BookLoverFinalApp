@@ -1,17 +1,49 @@
 <resources>
     <string name="app_name">KnigolyubApp</string>
 
-    <string-array name="schools">
-        <item>Средняя школа №7 им. Нариманова</item>
-        <item>Школа-гимназия №2 им. К.Маркса</item>
-        <item>Школа-гимназии №3 им. М.В. Ломоносова</item>
-        <item>Школа-гимназия №5 имени Ж.Боконбаева</item>
-        <item>Средняя школа №6 им. Макаренко</item>
-        <item>Школа-гимназиия №9 имени А.Рудаки</item>
-        <item>Частная школа "Олимп"</item>
-        <item>частная школа "Грамотей"</item>
+    <array name="class_numbers">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+        <item>11</item>
+        <!--        <item>12</item>-->
+    </array>
+    <string-array name="class_the_letters">
+        <item>А</item>
+        <item>Б</item>
+        <item>В</item>
+        <item>Г</item>
+        <item>Д</item>
+        <item>Е</item>
+        <item>Ж</item>
+        <item>З</item>
+        <item>И</item>
+        <item>К</item>
+        <item>Л</item>
+        <item>М</item>
+        <item>Н</item>
+        <item>О</item>
+        <item>П</item>
+        <item>Р</item>
+        <item>С</item>
+        <item>Т</item>
+        <item>У</item>
+        <item>Ф</item>
+        <item>Х</item>
+        <item>Ч</item>
+        <item>Ш</item>
+        <item>Э</item>
+        <item>Ю</item>
+        <item>Я</item>
     </string-array>
-
+    <!--    а, б, в, г, д, е, ё, ж, з, и, й, к, л, м, н, о, п, р, с, т, у, ф, х, ц, ч, ш, щ, ъ, ы, ь, э, ю, я-->
 
     //Loading Dialog
     <string name="loading_please_wait">Загрузка, пожалуйста, подождите.</string>
@@ -149,7 +181,7 @@
     <string name="cancle_delete">Вы отменили удаление</string>
     <string name="action_confirm">Подтвердить</string>
     <string name="volume_school_setup">Выберите школу</string>
-    <string name="volume_class_setup">Выберите класс</string>
+    <string name="class_setup">Выберите класс</string>
     <string name="to_change">Изменить</string>
     <string name="default_login_out_alert_message">Вы действительно хотите выйти из аккаунта?</string>
     <string name="login_out_title">Выйти</string>
@@ -185,4 +217,21 @@
     <string name="bookTitle">Название</string>
     <string name="bookAutor">Автор</string>
     <string name="bookPublicYear">Дата публикации</string>
+    <string name="school_statistics">Статистика школы</string>
+    <string name="students_read">учеников читают</string>
+    <string name="books_in_the_database">книг в базе</string>
+    <string name="they_read_books">книг читают</string>
+    <string name="select_a_class">Выберите класс</string>
+    <string name="select_a_student">Выберите ученика</string>
+    <string name="add_class">Добавить класс</string>
+    <string name="such_a_class_already_exists">Tакой класс уже существует</string>
+    <string name="class_added_successfully">Класс успешно добавлен</string>
+    <string name="select_a_class_type">Выберите тип</string>
+    <string name="you_class_has_been_deleted">Ваш класс был удален</string>
+    <string name="delete_class_message">Вероятно ваш класс был удален администратором.Чтобы продолжить выберите другой класс.</string>
+    <string name="delete">Удалить</string>
+    <string name="update">Обновить</string>
+    <string name="book_updated_successfully">Книга успешно обновлено</string>
+    <string name="action_update">Обновить</string>
+    <string name="student_setup">Выберите ученика</string>
 </resources>

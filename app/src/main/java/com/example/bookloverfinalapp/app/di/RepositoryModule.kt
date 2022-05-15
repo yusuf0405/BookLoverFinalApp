@@ -54,6 +54,7 @@ object RepositoryModule {
         bookCashMapper: Mapper<BookDb, BookData>,
         addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
         bookDomainMapper: Mapper<BookData, BookDomain>,
+        updateBookDomainMapper: Mapper<UpdateBookDomain, UpdateBookData>,
         questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
         questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
     ): BooksRepository =
@@ -64,7 +65,8 @@ object RepositoryModule {
             bookDomainMapper = bookDomainMapper,
             questionsMapper = questionsMapper,
             questionsDomainMapper = questionsDomainMapper,
-            addBookDomainMapper = addBookDomainMapper)
+            addBookDomainMapper = addBookDomainMapper,
+            updateBookDomainMapper = updateBookDomainMapper)
 
     @Provides
     @Singleton

@@ -2,10 +2,8 @@ package com.example.bookloverfinalapp.app.ui.screen_edit_profile
 
 import android.app.Activity
 import android.content.Intent
-import android.graphics.Bitmap
 import android.graphics.Color
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.bumptech.glide.Glide
@@ -22,7 +20,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.parse.ParseFile
 import com.parse.SaveCallback
 import dagger.hilt.android.AndroidEntryPoint
-import java.io.ByteArrayOutputStream
 
 
 @Suppress("DEPRECATION")
@@ -193,21 +190,12 @@ class FragmentEditProfile :
         if (requestCode == RESULT_LOAD_IMAGE && resultCode == Activity.RESULT_OK &&
             data != null && data.data != null
         ) {
-            val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, data.data)
-            val stream = ByteArrayOutputStream()
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
-            val byteArray: ByteArray = stream.toByteArray()
-            parseFile = ParseFile("image.png", byteArray)
-            Glide.with(requireActivity())
-                .load(data.dataString)
-                .into(binding().profileImg)
+            val uri = data.data!!
+            parseFile = ParseFile("image.png", uriToImage(uri))
+            requireContext().glide(uri, binding().profileImg)
         }
     }
 
-    private fun getImage() {
-        val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-        startActivityForResult(intent, RESULT_LOAD_IMAGE)
-    }
 
     override fun onResume() {
         super.onResume()

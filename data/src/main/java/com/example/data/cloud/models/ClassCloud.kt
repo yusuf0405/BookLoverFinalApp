@@ -10,4 +10,5 @@ data class ClassResponse(
 data class ClassCloud(
     @SerializedName("objectId") var objectId: String,
     @SerializedName("title") var title: String,
+    @SerializedName("schoolId") var schoolId: String,
 )

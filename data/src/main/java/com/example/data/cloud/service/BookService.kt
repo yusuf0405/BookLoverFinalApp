@@ -30,6 +30,18 @@ interface BookService {
         @Body question: AddBookQuestionCloud,
     ): Response<Unit>
 
+    @PUT("classes/Books/{id}")
+    suspend fun updateBook(
+        @Path("id") id: String,
+        @Body book: UpdateBookCloud,
+    ): Response<Unit>
+
+    @DELETE("classes/Books/{id}")
+    suspend fun deleteBook(
+        @Path("id") id: String,
+    ): Response<Unit>
+
+
     @POST("classes/Books")
     suspend fun addNewBook(
         @Body book: AddNewBookCloud,

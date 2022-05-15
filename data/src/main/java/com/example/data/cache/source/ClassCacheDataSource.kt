@@ -11,8 +11,11 @@ interface ClassCacheDataSource {
 
     suspend fun saveClasses(classes: List<ClassData>)
 
+    suspend fun addClass(schoolClass: ClassData)
+
     suspend fun deleteClass(id: String)
 
+    suspend fun clearTable()
     class Base(
         private val dao: ClassDao,
         private val mapper: Mapper<ClassData, ClassCache>,
@@ -24,6 +27,11 @@ interface ClassCacheDataSource {
             classes.forEach { classData -> dao.addNewClass(schoolClass = mapper.map(classData)) }
         }
 
+        override suspend fun addClass(schoolClass: ClassData) =
+            dao.addNewClass(mapper.map(schoolClass))
+
         override suspend fun deleteClass(id: String) = dao.deleteByClassId(id = id)
+
+        override suspend fun clearTable() = dao.clearTable()
     }
 }

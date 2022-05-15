@@ -3,7 +3,10 @@ package com.example.bookloverfinalapp.app.di
 import android.content.Context
 import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.data.ResourceProvider
-import com.example.domain.interactor.GetCurrentUserUseCase
+import com.example.domain.interactor.*
+import com.example.domain.repository.BookThatReadRepository
+import com.example.domain.repository.BooksRepository
+import com.example.domain.repository.ClassRepository
 import com.example.domain.repository.UserRepository
 import dagger.Module
 import dagger.Provides
@@ -32,4 +35,25 @@ object AppModule {
     @Provides
     fun provideGetCurrentUserUseCase(repository: UserRepository): GetCurrentUserUseCase =
         GetCurrentUserUseCase(repository = repository)
+
+
+    @Provides
+    fun provideClearClassCacheUseCase(repository: ClassRepository): ClearClassCacheUseCase =
+        ClearClassCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideClearStudentsCacheUseCase(repository: UserRepository): ClearStudentsCacheUseCase =
+        ClearStudentsCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideClearBooksThatReadCacheUseCase(repository: BookThatReadRepository): ClearBooksThatReadCacheUseCase =
+        ClearBooksThatReadCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideClearBooksCacheUseCase(repository: BooksRepository): ClearBooksCacheUseCase =
+        ClearBooksCacheUseCase(repository = repository)
+
+    @Provides
+    fun provideGetClassUseCase(repository: ClassRepository): GetClassUseCase =
+        GetClassUseCase(repository = repository)
 }

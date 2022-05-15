@@ -45,6 +45,7 @@ object DataSourceModule {
         resourceProvider: ResourceProvider,
         addBookCloudMapper: Mapper<AddNewBookData, AddNewBookCloud>,
         questionDataMapper: Mapper<AddBookQuestionData, AddBookQuestionCloud>,
+        updateBookCloudMapper: Mapper<UpdateBookData, UpdateBookCloud>,
     ): BooksCloudDataSource =
         BooksCloudDataSource.Base(
             service = service,
@@ -52,7 +53,8 @@ object DataSourceModule {
             questionCloudMapper = questionCloudMapper,
             resourceProvider = resourceProvider,
             questionDataMapper = questionDataMapper,
-            addBookCloudMapper = addBookCloudMapper)
+            addBookCloudMapper = addBookCloudMapper,
+            updateBookCloudMapper = updateBookCloudMapper)
 
     @Provides
     @Singleton

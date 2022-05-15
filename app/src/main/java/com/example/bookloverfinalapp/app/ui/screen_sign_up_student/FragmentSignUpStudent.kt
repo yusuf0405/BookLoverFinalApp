@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.ui.screen_main.ActivityMain
@@ -18,7 +19,6 @@ import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentSignUpStudentBinding
-import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.models.UserSignUpDomain
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,7 +36,7 @@ class FragmentSignUpStudent :
     override fun onReady(savedInstanceState: Bundle?) {}
 
     private val classesTitleList = mutableListOf<String>()
-    private var classList = mutableListOf<ClassDomain>()
+    private var classList = mutableListOf<SchoolClass>()
     private var classCurrentIndex = 0
     private var classTitle = ""
     private var classId = ""
@@ -196,7 +196,7 @@ class FragmentSignUpStudent :
 
     private fun showClassSingleChoiceWithConfirmationAlertDialog(list: List<String>) {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.volume_class_setup)
+            .setTitle(R.string.class_setup)
             .setSingleChoiceItems(list.toTypedArray(), classCurrentIndex, null)
             .setPositiveButton(R.string.action_confirm) { d, _ ->
                 val index = (d as AlertDialog).listView.checkedItemPosition

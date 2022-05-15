@@ -6,6 +6,6 @@ import com.example.domain.models.ClassDomain
 
 class ClassDataToDomainMapper : Mapper<ClassData, ClassDomain>() {
     override fun map(from: ClassData): ClassDomain = from.run {
-        ClassDomain(id = objectId, title = title)
+        ClassDomain(id = objectId, title = title, schoolId = schoolId)
     }
 }

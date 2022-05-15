@@ -91,7 +91,7 @@ object MappersModule {
     @Provides
     @Singleton
     fun provideAddBookModelToDomainMapper(): Mapper<AddNewBookModel, AddNewBookThatReadDomain> =
-        AddBookModelToDomainMapper()
+        AddBookThatReadToDomainMapper()
 
     @Provides
     @Singleton
@@ -206,6 +206,12 @@ object MappersModule {
 
     @Provides
     @Singleton
+    fun provideClassDomainToClassMapper(): Mapper<ClassDomain, SchoolClass> =
+        ClassDomainToClassMapper()
+
+
+    @Provides
+    @Singleton
     fun provideAddBookDomainToDataMapper(): Mapper<AddNewBookDomain, AddNewBookData> =
         AddBookDomainToDataMapper()
 
@@ -219,4 +225,15 @@ object MappersModule {
     @Singleton
     fun provideAddNewBookToDomainMapper(): Mapper<AddNewBook, AddNewBookDomain> =
         AddNewBookToDomainMapper()
+
+    @Provides
+    @Singleton
+    fun provideUpdateBookDomainToDataMapper(): Mapper<UpdateBookDomain, UpdateBookData> =
+        UpdateBookDomainToDataMapper()
+
+    @Provides
+    @Singleton
+    fun provideUpdateBookDataToCloudMapper(): Mapper<UpdateBookData, UpdateBookCloud> =
+        UpdateBookDataToCloudMapper()
+
 }
