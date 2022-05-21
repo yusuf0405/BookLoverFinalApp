@@ -1,6 +1,7 @@
 package com.example.data.cache.source
 
 import com.example.data.cache.db.BooksDao
+import com.example.data.cache.db.BooksThatReadDao
 import com.example.data.cache.models.BookDb
 import com.example.data.cache.models.BookPosterDb
 import com.example.data.models.BookData
@@ -17,6 +18,8 @@ interface BooksCacheDataSource {
 
     suspend fun deleteBook(id: String)
 
+    suspend fun deleteMyBookIsCache(id: String)
+
     suspend fun clearTable()
 
     suspend fun updateTitle(id: String, title: String)
@@ -29,6 +32,7 @@ interface BooksCacheDataSource {
 
     class Base(
         private val bookDao: BooksDao,
+        private val bookThatReadDao: BooksThatReadDao,
         private val dataMapper: Mapper<BookData, BookDb>,
     ) : BooksCacheDataSource {
 
@@ -43,6 +47,10 @@ interface BooksCacheDataSource {
         }
 
         override suspend fun deleteBook(id: String) = bookDao.deleteById(id = id)
+
+        override suspend fun deleteMyBookIsCache(id: String) {
+            bookThatReadDao.deleteById(id = id)
+        }
 
         override suspend fun clearTable() = bookDao.clearTable()
 

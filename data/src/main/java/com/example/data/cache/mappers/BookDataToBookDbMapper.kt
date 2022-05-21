@@ -1,10 +1,10 @@
 package com.example.data.cache.mappers
 
-import com.example.domain.Mapper
 import com.example.data.cache.models.BookDb
 import com.example.data.cache.models.BookPdfDb
 import com.example.data.cache.models.BookPosterDb
 import com.example.data.models.BookData
+import com.example.domain.Mapper
 
 class BookDataToBookDbMapper : Mapper<BookData, BookDb>() {
 
@@ -26,7 +26,8 @@ class BookDataToBookDbMapper : Mapper<BookData, BookDb>() {
                 name = book.name,
                 url = book.url,
                 type = book.type
-            )
+            ),
+            genres = genres
         )
     }
 }

@@ -1,8 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="network_error">Нету подключение к интернету.</string>
-    <string name="generic_error">Что то пошло не так.</string>
-    <string name="service_unavailable">Ошибка Сервера.</string>
-    <string name="account_already">Учетная запись для этого имени пользователя уже существует.</string>
-    <string name="invalid_email_password">Неверное имя пользователя или пароль.</string>
+
+    <string name="criminal">Criminal</string>
+    <string name="secular">Secular</string>
+    <string name="historical">Historical</string>
+    <string name="science_fiction">Science fiction</string>
+    <string name="fantasy">Fantasy</string>
+    <string name="adventures">Adventures</string>
+    <string name="historical_novel">Historical novel</string>
+    <string name="a_love_affair">A love affair</string>
+    <string name="adventure_novel">Adventure novel</string>
+    <string name="scientific_works">Scientific works</string>
+    <string name="articles">Articles</string>
+    <string name="epic">Epic</string>
+    <string name="legends">Legends</string>
+    <string name="fairy_tales">Fairy tales</string>
+    <string name="jokes">Jokes</string>
+    <string name="poetry">Poetry</string>
+    <string name="prose">Prose</string>
+    <string name="childrens_book">Children\'s book</string>
+    <string name="biography">Biography</string>
+    <string name="journalism">Journalism</string>
+    <string name="military_affairs">Military affairs</string>
+    <string name="business">Business</string>
+    <string name="politics">Politics</string>
+    <string name="finance">Finance</string>
+    <string name="economy">Economy</string>
+    <string name="religious_literature">Religious literature</string>
+    <string name="methodical_manual">Methodical manual</string>
+    <string name="textbook">Textbook</string>
+    <string name="psychology">Psychology</string>
+    <string name="hobby">Hobby</string>
+    <string name="foreign_literature">Foreign literature</string>
+    <string name="russian_literature">Russian literature</string>
+
+
+    <string name="network_error">There is no internet connection.</string>
+    <string name="generic_error">Something went wrong.</string>
+    <string name="service_unavailable">Server Error.</string>
+    <string name="account_already">Account already exists for this username.</string>
+    <string name="invalid_email_password">Invalid username/password.</string>
 </resources>

@@ -11,6 +11,8 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="-10dp"
+        app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -18,8 +20,8 @@
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:backgroundTint="@color/app_theme"
+            android:layout_height="match_parent"
+            app:cardElevation="15dp"
             app:shapeAppearanceOverlay="@style/BottomCornerRadius">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -65,8 +67,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/recyclerViewMargin"
-        android:text="Beksultan Suleimanov"
-        android:textColor="@color/violet"
+        tools:text="Beksultan Suleimanov"
+        android:textStyle="bold"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintBottom_toBottomOf="@+id/profile_name_text1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -100,9 +102,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="№7 им. Нариманова"
-        android:textColor="@color/violet"
+        tools:text="№7 им. Нариманова"
         android:textSize="@dimen/textSizeProfileTIL"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/profile_school_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
@@ -135,9 +137,9 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="5 - А"
-        android:textColor="@color/violet"
+        tools:text="5 - А"
         android:textSize="@dimen/textSizeProfileTIL"
+        android:textStyle="italic"
         app:layout_constraintBottom_toBottomOf="@+id/profile_class_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
@@ -158,9 +160,9 @@
         android:id="@+id/editProfileBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@drawable/violet_btn_bg"
-        android:text="Изменить"
-        android:textColor="@color/white"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="@string/to_change"
         android:textSize="@dimen/textSizeForButtons"
         app:layout_constraintBottom_toTopOf="@+id/profile_logout_img"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
@@ -183,13 +185,18 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="@dimen/marginProfileTIL"
         android:text="@string/login_out"
-        android:textColor="@color/violet"
         android:textSize="@dimen/textSizeProfileTIL"
-        app:layout_constraintEnd_toEndOf="@+id/editProfileBtn"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/editProfileBtn"
         app:layout_constraintTop_toTopOf="@+id/profile_logout_img" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline17"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.3" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

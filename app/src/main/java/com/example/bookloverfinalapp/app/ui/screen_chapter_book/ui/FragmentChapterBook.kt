@@ -1,6 +1,5 @@
 package com.example.bookloverfinalapp.app.ui.screen_chapter_book.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -10,6 +9,7 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.screen_chapter_book.adapters.ChapterAdapter
 import com.example.bookloverfinalapp.app.ui.screen_chapter_book.adapters.ChapterItemOnClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.databinding.FragmentChapterBookBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
@@ -46,8 +46,8 @@ class FragmentChapterBook :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
-        onClickListeners()
         loadSuccess()
+        binding().toolbar.setNavigationOnClickListener { viewModel.goBack() }
     }
 
 
@@ -61,18 +61,12 @@ class FragmentChapterBook :
 
     private fun setupUi() {
         binding().apply {
+            setToolbarColor(toolbar = toolbar)
             toolbar.title = book.title
-            toolbar.setTitleTextColor(Color.WHITE)
             chapterRecyclerView.adapter = adapter
         }
     }
 
-    private fun onClickListeners() {
-        binding().apply {
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            toolbar.setNavigationOnClickListener { viewModel.goBack() }
-        }
-    }
 
     override fun goReadPdfFragment(chapter: PdfDocument.Bookmark, position: Int) {
         val lastPageIndex = position + 1

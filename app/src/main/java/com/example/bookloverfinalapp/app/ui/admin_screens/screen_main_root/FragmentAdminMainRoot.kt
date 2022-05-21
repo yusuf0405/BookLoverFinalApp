@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.utils.extensions.setTabLayoutColor
 import com.example.bookloverfinalapp.databinding.FragmentAdminMainRootBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -24,6 +25,7 @@ class FragmentAdminMainRoot : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setTabLayoutColor(tabLayout = binding.tabLayout)
         setupTabLayout()
 
     }

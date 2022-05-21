@@ -9,6 +9,8 @@ interface BooksRepository {
 
     fun fetchBooks(schoolId: String): Flow<Resource<List<BookDomain>>>
 
+    fun fetchSimilarBooks(genres: List<String>, bookId: String): Flow<Resource<List<BookDomain>>>
+
     fun fetchChapterQuestions(
         id: String,
         chapter: String,

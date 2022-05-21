@@ -12,6 +12,7 @@ import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStu
 import com.example.bookloverfinalapp.app.ui.screen_student_details.adapter.MyStudentBooksAdapter
 import com.example.bookloverfinalapp.app.utils.UserType
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentStudentDetailsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -56,8 +57,7 @@ class FragmentStudentDetails :
             else deleteProfileButton.hideView()
             toolbar.apply {
                 title = student.fullName()
-                setTitleTextColor(Color.WHITE)
-                setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+                setToolbarColor(toolbar = toolbar)
             }
             val reading = "Книги, которые читает ${student.name}"
             progressProfileName.text = student.fullName()

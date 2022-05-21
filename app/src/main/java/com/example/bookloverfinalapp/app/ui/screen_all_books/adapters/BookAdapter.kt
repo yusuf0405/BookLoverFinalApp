@@ -3,9 +3,6 @@ package com.example.bookloverfinalapp.app.ui.screen_all_books.adapters
 import android.annotation.SuppressLint
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.Book
@@ -53,6 +50,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                     }
 
                     override fun map(
+                        genres: List<String>,
                         author: String,
                         createdAt: Date,
                         id: String,
@@ -64,7 +62,6 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                         poster: BookPoster,
                         updatedAt: Date,
                     ) {
-                        TODO("Not yet implemented")
                     }
                 })
 
@@ -79,6 +76,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                     override fun map(text: String) {}
 
                     override fun map(
+                        genres: List<String>,
                         author: String,
                         createdAt: Date,
                         id: String,
@@ -93,7 +91,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                         binding.apply {
                             bookTitle.text = title
                             bookAuthor.text = author
-                            publicYearText.text = publicYear
+                            publishedYear.text = publicYear
                             bookPages.text = page.toString()
                             itemView.context.glide(poster.url, roundedBookImage)
                         }
@@ -109,7 +107,7 @@ class BookAdapter(private val actionListener: BookItemOnClickListener) :
                                 publicYear = publicYear,
                                 poster = BookPoster(name = poster.name, url = poster.url),
                                 book = BookPdf(name = book.name, url = book.url),
-                                objectId = id
+                                objectId = id, genres = genres
                             ))
                         }
 

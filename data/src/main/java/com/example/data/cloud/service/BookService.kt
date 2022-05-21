@@ -42,6 +42,17 @@ interface BookService {
     ): Response<Unit>
 
 
+    @GET("classes/BooksThatRead")
+    suspend fun fetchMyBooks(
+        @Query("where") id: String,
+    ): Response<BooksThatReadResponse>
+
+    @DELETE("classes/BooksThatRead/{id}")
+    suspend fun deleteMyBook(
+        @Path("id") id: String,
+    ): Response<Unit>
+
+
     @POST("classes/Books")
     suspend fun addNewBook(
         @Body book: AddNewBookCloud,

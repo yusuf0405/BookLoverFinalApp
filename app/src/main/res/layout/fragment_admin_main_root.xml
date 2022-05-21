@@ -11,12 +11,9 @@
         android:id="@+id/tabLayout"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="@color/app_theme"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:tabIndicatorColor="@color/tab_layout_indicator_color"
-        app:tabTextColor="@color/white" />
+        app:layout_constraintTop_toTopOf="parent"/>
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"

@@ -8,7 +8,7 @@
         android:id="@+id/fragment_progress"
         android:name="com.example.bookloverfinalapp.app.ui.screen_progress.FragmentProgress"
         android:label="fragment_student_progress"
-        tools:layout="@layout/fragment_progress"/>
+        tools:layout="@layout/fragment_progress" />
     <fragment
         android:id="@+id/fragment_profile"
         android:name="com.example.bookloverfinalapp.app.ui.screen_profile.FragmentProfile"
@@ -80,6 +80,9 @@
         <action
             android:id="@+id/action_fragment_root_book_to_fragmentStudentDetails"
             app:destination="@id/fragmentStudentDetails" />
+        <action
+            android:id="@+id/action_fragment_root_book_to_fragmentBookInfo"
+            app:destination="@id/fragmentBookInfo" />
     </fragment>
     <fragment
         android:id="@+id/fragmentBookDetails"
@@ -117,5 +120,14 @@
         <argument
             android:name="student"
             app:argType="com.example.bookloverfinalapp.app.models.Student" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentBookInfo"
+        android:name="com.example.bookloverfinalapp.app.ui.screen_book_details.ui.FragmentBookInfo"
+        android:label="fragment_book_info"
+        tools:layout="@layout/fragment_book_info">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.Book" />
     </fragment>
 </navigation>

@@ -17,6 +17,12 @@ interface BookThatReadService {
         @Path("id") id: String,
     ): Response<Unit>
 
+
+    @GET("classes/BooksThatRead")
+    suspend fun getMyBook(
+        @Query("where") id: String,
+    ): Response<BooksThatReadResponse>
+
     @GET("classes/Books")
     suspend fun getBook(
         @Query("where") id: String,

@@ -2,6 +2,7 @@ package com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_profile
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
@@ -50,7 +51,6 @@ class FragmentAdminEditProfile :
             editStudentImage.setOnClickListener(this@FragmentAdminEditProfile)
             female.setOnClickListener(this@FragmentAdminEditProfile)
             male.setOnClickListener(this@FragmentAdminEditProfile)
-            toolbar.setNavigationOnClickListener { viewModel.goBack() }
         }
     }
 
@@ -67,6 +67,10 @@ class FragmentAdminEditProfile :
     private fun setupUi() {
         admin = CurrentUser().getCurrentUser(activity = requireActivity())
         binding().apply {
+            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor("#2A00A2"))
+                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor("#305F72"))
+            }
             gender = admin.gender
             editStudentNumber.setText(admin.number)
             editStudentName.setText(admin.name)
@@ -74,15 +78,7 @@ class FragmentAdminEditProfile :
             editStudentEmail.setText(admin.email)
             if (admin.gender == "female") female.isChecked = true
             else male.isChecked = true
-            Glide.with(requireActivity())
-                .load(admin.image?.url)
-                .placeholder(R.drawable.placeholder_avatar)
-                .into(binding().profileImg)
-            toolbar.apply {
-                title = getString(R.string.my_profile)
-                setTitleTextColor(Color.WHITE)
-                setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            }
+            requireContext().glide(admin.image?.url, binding().profileImg)
         }
     }
 

@@ -11,6 +11,7 @@ import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.adapter.AdminChapterAdapter
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.adapter.AdminChapterItemOnClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.databinding.FragmentAdminChaptersBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
@@ -60,7 +61,7 @@ class FragmentAdminChapters :
     private fun setupUi() {
         binding().apply {
             toolbar.title = book.title
-            toolbar.setTitleTextColor(Color.WHITE)
+            setToolbarColor(toolbar = toolbar)
             chapterRecyclerView.adapter = adapter
         }
     }

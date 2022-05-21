@@ -11,10 +11,13 @@ import com.example.data.cloud.models.UpdateProgressCloud
 import com.example.data.cloud.service.BookThatReadService
 import com.example.data.models.BookThatReadData
 import com.example.domain.Resource
+import com.example.domain.Status
 
 interface BooksThatReadCloudDataSource {
 
     suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>>
+
+    suspend fun getMyBook(id: String, userId: String): Resource<Int>
 
     suspend fun deleteBook(id: String): Resource<Unit>
 
@@ -74,6 +77,19 @@ interface BooksThatReadCloudDataSource {
 
         }
 
+        override suspend fun getMyBook(id: String, userId: String): Resource<Int> {
+            val response =
+                safeApiCall { thatReadService.getMyBook(id = "{\"bookId\":\"$id\",\"userId\":\"$userId\"}") }
+            return if (response.status == Status.SUCCESS) {
+                val bookList = response.data!!.books
+                if (bookList.isNotEmpty())
+                    Resource.success(data = bookList[0].progress)
+                else Resource.empty()
+            } else Resource.error(message = response.message)
+
+
+        }
+
         override suspend fun deleteBook(id: String) =
             safeApiCall { thatReadService.deleteMyBook(id = id) }
 
@@ -98,9 +114,9 @@ interface BooksThatReadCloudDataSource {
                         isReadingPages = isReadingPages))
             }
 
-
     }
 }
+
 
 
 

@@ -3,10 +3,7 @@ package com.example.bookloverfinalapp.app.di
 import com.example.bookloverfinalapp.app.mappers.*
 import com.example.bookloverfinalapp.app.models.*
 import com.example.data.cache.mappers.*
-import com.example.data.cache.models.BookDb
-import com.example.data.cache.models.BookThatReadDb
-import com.example.data.cache.models.ClassCache
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.*
 import com.example.data.cloud.mappers.*
 import com.example.data.cloud.models.*
 import com.example.data.mappers.*
@@ -235,5 +232,6 @@ object MappersModule {
     @Singleton
     fun provideUpdateBookDataToCloudMapper(): Mapper<UpdateBookData, UpdateBookCloud> =
         UpdateBookDataToCloudMapper()
+
 
 }

@@ -10,6 +10,7 @@ import com.example.bookloverfinalapp.app.models.BookAdapterModel
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRootDirections
 import com.example.bookloverfinalapp.app.utils.communication.BooksAdapterModelCommunication
 import com.example.bookloverfinalapp.app.utils.communication.BooksCommunication
+import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.Status
 import com.example.domain.interactor.DeleteBookUseCase
@@ -19,7 +20,6 @@ import com.example.domain.interactor.UpdateBookUseCase
 import com.example.domain.models.BookDomain
 import com.example.domain.models.UpdateBookDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
@@ -29,6 +29,7 @@ class FragmentBooksViewModel @Inject constructor(
     private val getBookForReadingUseCase: GetBookForReadingUseCase,
     private val updateBookUseCase: UpdateBookUseCase,
     private val deleteBookUseCase: DeleteBookUseCase,
+    private val dispatchersProvider: DispatchersProvider,
     private val communication: BooksAdapterModelCommunication,
     private val bookCommunication: BooksCommunication,
     private val mapper: Mapper<BookDomain, BookAdapterModel.Base>,
@@ -58,7 +59,7 @@ class FragmentBooksViewModel @Inject constructor(
     }
 
     fun deleteBook(id: String) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             deleteBookUseCase.execute(id = id).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()
@@ -75,7 +76,7 @@ class FragmentBooksViewModel @Inject constructor(
         }
 
     fun updateBook(id: String, book: UpdateBookDomain) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             updateBookUseCase.execute(id = id, book = book).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()

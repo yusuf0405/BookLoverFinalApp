@@ -3,8 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="@dimen/recyclerViewMargin"
-    android:backgroundTint="@color/cardBackground"
     app:cardCornerRadius="8dp"
     app:cardElevation="@dimen/cardElevation">
 
@@ -20,8 +20,7 @@
             android:layout_height="match_parent"
             android:layout_marginStart="@dimen/marginForTIL"
             android:gravity="start"
-            android:text="Вопрос 1"
-            android:textColor="@color/violet"
+            tools:text="Вопрос 1"
             android:textSize="@dimen/profileNameBigTextSize"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"

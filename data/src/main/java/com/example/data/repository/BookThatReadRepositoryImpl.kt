@@ -74,13 +74,18 @@ class BookThatReadRepositoryImpl(
         }
     }
 
-    override fun fetchMyBook(id: String): Flow<Resource<BookThatReadDomain>> = flow {
+    override fun fetchMyBook(id: String, userId: String): Flow<Resource<Int>> = flow {
+        emit(Resource.loading())
         val result = cacheDataSource.getMyBook(id = id)
-        if (result == null) emit(Resource.error(message = null))
-        else {
-            val bookData = bookCashMapper.map(result)
-            emit(Resource.success(bookDomainMapper.map(bookData)))
-        }
+        if (result == null) {
+            val cloudResult = cloudDataSource.getMyBook(id = id, userId = userId)
+            when (cloudResult.status) {
+                Status.SUCCESS -> emit(Resource.success(data = cloudResult.data!!))
+                Status.EMPTY -> emit(Resource.empty())
+                Status.ERROR -> emit(Resource.error(message = cloudResult.message))
+            }
+        } else emit(Resource.success(result.progress))
+
     }
 
     override fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>> = flow {

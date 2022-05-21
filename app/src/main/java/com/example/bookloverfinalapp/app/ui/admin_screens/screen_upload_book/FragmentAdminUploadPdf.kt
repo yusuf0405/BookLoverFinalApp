@@ -7,7 +7,9 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
+import android.util.Log
 import android.view.View
+import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
@@ -15,6 +17,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddNewBook
+import com.example.bookloverfinalapp.app.utils.GenresManager
 import com.example.bookloverfinalapp.app.utils.cons.PERMISSION_CODE
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.cons.REQUEST_CODE
@@ -40,7 +43,7 @@ import java.io.ByteArrayOutputStream
 class FragmentAdminUploadPdf :
     BaseFragment<FragmentAdminUploadPdfBinding, FragmentAdminUploadPdfViewModel>(
         FragmentAdminUploadPdfBinding::inflate), OnPageChangeListener, OnLoadCompleteListener,
-    OnErrorListener {
+    OnErrorListener, View.OnClickListener {
 
     override val viewModel: FragmentAdminUploadPdfViewModel by viewModels()
 
@@ -51,17 +54,26 @@ class FragmentAdminUploadPdf :
     private var bookPageCount: Int = 0
     private var bookPoster: ParseFile? = null
 
+    private var allBookGenresList = mutableListOf<String>()
+    private var allBookGenresCodeList = mutableListOf<Int>()
+    private var bookGenresCurrentIndex: Int = 0
+
+    private var uploadBookGenresList = mutableListOf<String>()
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setOnClickListeners()
 
-        binding().savePdfButton.setOnClickListener {
-            saveFiles()
-        }
-        binding().pickPdfButton.setOnClickListener {
-            pickFile()
-        }
-        binding().toChange.setOnClickListener {
-            getImage()
+        allBookGenresCodeList = GenresManager.getAllGenresCode()
+        allBookGenresList = GenresManager.getAllGenres(context = requireContext())
+    }
+
+    private fun setOnClickListeners() {
+        binding().apply {
+            savePdfButton.setOnClickListener(this@FragmentAdminUploadPdf)
+            bookGenresButton.setOnClickListener(this@FragmentAdminUploadPdf)
+            pickPdfButton.setOnClickListener(this@FragmentAdminUploadPdf)
+            toChange.setOnClickListener(this@FragmentAdminUploadPdf)
         }
     }
 
@@ -147,15 +159,14 @@ class FragmentAdminUploadPdf :
                 publicYear = binding().editTextBookPublicYear.text.toString(),
                 poster = bookPoster!!.toBookImage(),
                 book = bookFile!!.toPdf(), page = bookPageCount,
-                schoolId = currentUser.schoolId)
+                schoolId = currentUser.schoolId,
+                genres = uploadBookGenresList)
 
             viewModel.addBook(book = newBook).observe(viewLifecycleOwner) {
                 showToast(R.string.book_added_successfully)
             }
         }
-
     }
-
 
     override fun onPageChanged(page: Int, pageCount: Int) {
         bookPageCount = pageCount
@@ -196,6 +207,7 @@ class FragmentAdminUploadPdf :
             val meta: PdfDocument.Meta = pdfViewAdmin.documentMeta
             editTextBookTitle.setText(meta.title)
             editTextBookAutor.setText(meta.author)
+            Log.i(meta.subject, meta.subject)
             bookChapterCount = pdfViewAdmin.tableOfContents.size
         }
 
@@ -216,4 +228,39 @@ class FragmentAdminUploadPdf :
     override fun onError(t: Throwable?) {
     }
 
+
+    private fun showGenresSingleChoiceWithConfirmationAlertDialog() {
+        val dialog = AlertDialog.Builder(requireContext())
+            .setSingleChoiceItems(allBookGenresList.toTypedArray(), bookGenresCurrentIndex, null)
+            .setPositiveButton(R.string.action_confirm) { d, _ ->
+                val index = (d as AlertDialog).listView.checkedItemPosition
+                bookGenresCurrentIndex = index
+                val newGenres = allBookGenresList[index]
+                uploadBookGenresList.add(GenresManager.checkGenre(allBookGenresCodeList[index]))
+                binding().bookGenresText.apply {
+                    if (text.isBlank()) text = newGenres
+                    else {
+                        var genres = text.toString()
+                        genres = "$genres, $newGenres"
+                        text = genres
+                    }
+
+
+                }
+
+            }
+            .create()
+        dialog.show()
+    }
+
+    override fun onClick(view: View?) {
+        when (view) {
+            binding().savePdfButton -> saveFiles()
+            binding().pickPdfButton -> pickFile()
+            binding().toChange -> getImage()
+            binding().bookGenresButton -> showGenresSingleChoiceWithConfirmationAlertDialog()
+
+        }
+    }
 }
+

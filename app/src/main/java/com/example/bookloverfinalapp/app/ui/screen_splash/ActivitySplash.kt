@@ -52,8 +52,7 @@ class ActivitySplash : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val pref = getSharedPreferences(CURRENT_EDITOR_STUDENT_SAVE_KEY, Context.MODE_PRIVATE)
-        currentUser =
-            Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
+        currentUser = Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
 
         lifecycleScope.launch {
             if (currentUser == null) {
@@ -74,14 +73,15 @@ class ActivitySplash : AppCompatActivity() {
             getCurrentUserUseCase.execute(currentUser!!.sessionToken).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> binding.progressBar.showView()
+
                     Status.SUCCESS -> {
                         CurrentUser().saveCurrentUser(mapper.map(resource.data!!),
                             this@ActivitySplash)
                         chekClass()
                     }
                     Status.EMPTY -> {
-                        CheсkNavigation().loginOut(this@ActivitySplash)
                         showToast(message = getString(R.string.you_account_deleted))
+                        CheсkNavigation().loginOut(this@ActivitySplash)
                         intentClearTask(activity = ActivityLoginMain())
                     }
                     Status.ERROR -> {

@@ -27,8 +27,6 @@ class AdminChapterAdapter(private val actionListener: AdminChapterItemOnClickLis
             val chapter = chapters[position]
             binding.apply {
                 chapterText.text = chapter.title
-                chapterText.setTextColor(Color.BLUE)
-
                 itemView.setOnClickListener {
                     actionListener.goQuestionFragment(chapter = position + 1)
                 }

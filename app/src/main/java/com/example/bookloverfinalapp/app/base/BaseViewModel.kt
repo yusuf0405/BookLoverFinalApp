@@ -4,7 +4,7 @@ import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavDirections
-import com.example.bookloverfinalapp.app.utils.Dispatchers
+import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
 import com.example.bookloverfinalapp.app.utils.communication.ErrorCommunication
 import com.example.bookloverfinalapp.app.utils.communication.NavigationCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ProgressCommunication

@@ -68,7 +68,6 @@ class ClassAdapter(private val actionListener: ClassItemOnClickListener) :
 
                     override fun map(id: String, title: String, schoolId: String) {
                         titleView.text = title
-
                         deleteButton.setOnClickListener {
                             actionListener.deleteClass(id = id, position = position)
                         }

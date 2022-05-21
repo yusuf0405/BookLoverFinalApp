@@ -26,7 +26,6 @@ class AdminQuestionsAdapter(private val actionListener: AdminChapterItemOnClickL
             binding.apply {
                 val title = "Вопрос ${position + 1}"
                 chapterText.text = title
-                chapterText.setTextColor(Color.BLUE)
 
                 deleteQuestion.setOnClickListener {
                     actionListener.deleteQuestion(id = question.id, position = position)

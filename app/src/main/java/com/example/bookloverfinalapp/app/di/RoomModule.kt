@@ -74,4 +74,6 @@ object RoomModule {
     @Singleton
     fun provideClassDao(db: ClassDB): ClassDao =
         db.classDao()
+
+
 }

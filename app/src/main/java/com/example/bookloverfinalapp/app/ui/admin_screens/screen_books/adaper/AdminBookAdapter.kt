@@ -54,6 +54,7 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                     }
 
                     override fun map(
+                        genres: List<String>,
                         author: String,
                         createdAt: Date,
                         id: String,
@@ -63,10 +64,8 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                         title: String,
                         chapterCount: Int,
                         poster: BookPoster,
-                        updatedAt: Date,
-                    ) {
-                        TODO("Not yet implemented")
-                    }
+                        updatedAt: Date
+                    ) {}
                 })
 
             }
@@ -80,6 +79,7 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                     override fun map(text: String) {}
 
                     override fun map(
+                        genres: List<String>,
                         author: String,
                         createdAt: Date,
                         id: String,
@@ -102,7 +102,8 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                                 publicYear = publicYear,
                                 poster = BookPoster(name = poster.name, url = poster.url),
                                 book = BookPdf(name = book.name, url = book.url),
-                                objectId = id
+                                objectId = id,
+                                genres = genres
                             )
                             bookTitle.text = title
                             bookAuthor.text = author
@@ -128,7 +129,10 @@ class AdminBookAdapter(private val actionListener: AdminBookItemOnClickListener)
                 val context = view.context
                 val book = view.tag as Book
                 popupMenu.menu.add(0, ID_BOOK_DELETE, Menu.NONE, context.getString(R.string.delete))
-                popupMenu.menu.add(1, ID_BOOK_UPDATE, Menu.NONE, context.getString(R.string.update))
+                popupMenu.menu.add(1,
+                    ID_BOOK_UPDATE,
+                    Menu.NONE,
+                    context.getString(R.string.more_detailed))
 
                 popupMenu.setOnMenuItemClickListener {
                     when (it.itemId) {

@@ -1,10 +1,10 @@
 package com.example.data.cloud.mappers
 
-import com.example.domain.Mapper
 import com.example.data.cloud.models.BookCloud
 import com.example.data.models.BookData
 import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
+import com.example.domain.Mapper
 
 class BookCloudDataMapper : Mapper<BookCloud, BookData>() {
 
@@ -25,7 +25,8 @@ class BookCloudDataMapper : Mapper<BookCloud, BookData>() {
                 url = poster.url
             ),
             updatedAt = updatedAt, id = id,
-            publicYear = publicYear
+            publicYear = publicYear,
+            genres = genres
         )
     }
 }

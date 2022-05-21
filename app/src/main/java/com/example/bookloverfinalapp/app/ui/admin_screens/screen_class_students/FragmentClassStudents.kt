@@ -11,6 +11,7 @@ import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.ui.screen_my_students.adapter.MyStudentOnClickListener
 import com.example.bookloverfinalapp.app.ui.screen_my_students.adapter.MyStudentsAdapter
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.databinding.FragmentClassStudentsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -51,6 +52,7 @@ class FragmentClassStudents :
                 setTitleTextColor(Color.WHITE)
                 setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
                 setNavigationOnClickListener { viewModel.goBack() }
+                setToolbarColor(toolbar = toolbar)
             }
             studentsRecyclerView.adapter = adapter
 

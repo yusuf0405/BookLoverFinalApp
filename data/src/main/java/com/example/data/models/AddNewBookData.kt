@@ -9,4 +9,5 @@ data class AddNewBookData(
     var poster: BookPosterData,
     var book: BookPdfData,
     var chapterCount: Int,
+    var genres: List<String>,
 )

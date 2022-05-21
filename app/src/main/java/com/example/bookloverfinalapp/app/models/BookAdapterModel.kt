@@ -22,6 +22,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
         var chapterCount: Int,
         var poster: BookPosterAdapter,
         var updatedAt: Date,
+        var genres: List<String>,
     ) : BookAdapterModel() {
         override fun map(mapper: StringMapper) {
             mapper.map(author = author,
@@ -31,6 +32,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
                 publicYear = publicYear,
                 book = BookPdf(name = book.name, url = book.url),
                 title = title,
+                genres = genres,
                 chapterCount = chapterCount,
                 poster = BookPoster(name = poster.name, url = poster.url),
                 updatedAt = updatedAt)
@@ -47,6 +49,7 @@ sealed class BookAdapterModel : Abstract.Object<Unit, BookAdapterModel.StringMap
     interface StringMapper : Abstract.Mapper {
         fun map(text: String)
         fun map(
+            genres: List<String>,
             author: String,
             createdAt: Date,
             id: String,

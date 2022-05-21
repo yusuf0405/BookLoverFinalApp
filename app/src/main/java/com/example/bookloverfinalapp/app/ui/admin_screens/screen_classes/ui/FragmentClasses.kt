@@ -137,12 +137,13 @@ class FragmentClasses :
                         val iterator = allClassesList.iterator()
                         while (iterator.hasNext()) {
                             val item = iterator.next()
-                            if (item.id == id) { iterator.remove() }
+                            if (item.id == id) {
+                                iterator.remove()
+                            }
                         }
                     }
                     adapter.deleteClass(position = position)
                 }
-                DialogInterface.BUTTON_NEGATIVE -> {}
                 DialogInterface.BUTTON_NEUTRAL -> {}
             }
         }
@@ -151,7 +152,6 @@ class FragmentClasses :
             .setCancelable(true)
             .setMessage(R.string.default_delete_class_alert_message)
             .setPositiveButton(R.string.action_yes, listener)
-            .setNegativeButton(R.string.action_no, listener)
             .setNeutralButton(R.string.action_ignore, listener)
             .create()
 
@@ -161,7 +161,6 @@ class FragmentClasses :
 
     private fun showNumbersSingleChoiceWithConfirmationAlertDialog(textView: TextView) {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.class_setup)
             .setSingleChoiceItems(classNumbers.map { it.toString() }.toTypedArray(),
                 classNumberCurrentIndex,
                 null)
@@ -177,7 +176,6 @@ class FragmentClasses :
 
     private fun showTypesSingleChoiceWithConfirmationAlertDialog(textView: TextView) {
         val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(R.string.class_setup)
             .setSingleChoiceItems(classTypes.toTypedArray(), classTypeCurrentIndex, null)
             .setPositiveButton(R.string.action_confirm) { d, _ ->
                 val index = (d as AlertDialog).listView.checkedItemPosition

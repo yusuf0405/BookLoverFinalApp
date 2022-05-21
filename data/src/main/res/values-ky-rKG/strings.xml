@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="criminal">Кылмыш</string>
+    <string name="secular">Светтик</string>
+    <string name="historical">Тарыхый</string>
+    <string name="science_fiction">Илимий фантастика</string>
+    <string name="fantasy">Фантастика</string>
+    <string name="adventures">Укмуштуу окуялар</string>
+    <string name="historical_novel">Тарыхый роман</string>
+    <string name="a_love_affair">Сүйүү мамилеси</string>
+    <string name="adventure_novel">Укмуштуу окуялар романы</string>
+    <string name="scientific_works">Илимий эмгектер</string>
+    <string name="articles">Текшерүү</string>
+    <string name="epic">Эпикалык</string>
+    <string name="legends">Уламыштары</string>
+    <string name="fairy_tales">Жомоктор</string>
+    <string name="jokes">Котормо</string>
+    <string name="poetry">Поэзия</string>
+    <string name="prose">Кыска</string>
+    <string name="childrens_book">Балдар китеби</string>
+    <string name="biography">Бирок</string>
+    <string name="journalism">Кыска</string>
+    <string name="military_affairs">Аскердик иштер</string>
+    <string name="business">Ишкердик</string>
+    <string name="politics">Саясат</string>
+    <string name="finance">Каржы</string>
+    <string name="economy">Экономика</string>
+    <string name="religious_literature">Диний адабият</string>
+    <string name="methodical_manual">Методикалык колдонмо</string>
+    <string name="textbook">Окуу китеби</string>
+    <string name="psychology">Психология</string>
+    <string name="hobby">Хобби</string>
+    <string name="foreign_literature">Чет элдик адабият</string>
+    <string name="russian_literature">Орус адабияты</string>
+
+
+    <string name="network_error">Интернет байланышы жок.</string>
+    <string name="generic_error">Эмне туура эмес кетти.</string>
+    <string name="service_unavailable">Сервер Катасы.</string>
+    <string name="account_already">Бул колдонуучу аты үчүн каттоо эсеби мурунтан эле бар.</string>
+    <string name="invalid_email_password">Туура эмес колдонуучу аты / сырсөз.</string>
+</resources>

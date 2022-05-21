@@ -3,19 +3,20 @@
     <dimen name="marginForTIL">8dp</dimen>
     <dimen name="textSizeForRegularTexts">14sp</dimen>
     <dimen name="cornerRadiusTIL">10dp</dimen>
+    <dimen name="item_book_attribute_size">12sp</dimen>
     <dimen name="textSizeForButtons">16sp</dimen>
     <dimen name="marginProfileTIL">16dp</dimen>
     <dimen name="profileCardViewHeight">250dp</dimen>
     <dimen name="editProfileFotoSize">150dp</dimen>
     <dimen name="testButtonSize">100dp</dimen>
     <dimen name="textSizeProfileTIL">18sp</dimen>
-    <dimen name="textSizeBookDetails">14sp</dimen>
+    <dimen name="textSizeBookDetails">18sp</dimen>
     <dimen name="editProfileClassDegreeWidth">120dp</dimen>
     <dimen name="addQuestionsFAB">20dp</dimen>
     <dimen name="recyclerViewMargin">3dp</dimen>
     <dimen name="profileTextDP">20dp</dimen>
     <dimen name="profileLineHeight">1dp</dimen>
-    <dimen name="profileNameBigTextSize">24sp</dimen>
+    <dimen name="profileNameBigTextSize">18sp</dimen>
     <dimen name="smallIconSize">20dp</dimen>
     <dimen name="bigTextSize">30sp</dimen>
     <dimen name="cardAllCornersRadius">12dp</dimen>
@@ -29,3 +30,4 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 </resources>
+

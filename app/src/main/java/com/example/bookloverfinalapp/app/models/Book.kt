@@ -8,6 +8,7 @@ data class Book(
     var createdAt: Date,
     var objectId: String,
     var page: Int,
+    var genres: List<String>,
     var publicYear: String,
     var title: String,
     var chapterCount: Int,

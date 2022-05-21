@@ -27,7 +27,7 @@ class FragmentAllBooksViewModel @Inject constructor(
         communication.observe(owner = owner, observer = observer)
 
     fun goStudentBookDetailsFragment(book: Book) =
-        navigate(FragmentRootStudentBookDirections.actionFragmentRootBookToFragmentBookDetails(book = book))
+        navigate(FragmentRootStudentBookDirections.actionFragmentRootBookToFragmentBookInfo(book = book))
 
     fun fetchBooks(schoolId:String) = dispatchers.launchInBackground(viewModelScope) {
         useCaseGetAll.execute(schoolId = schoolId).collectLatest { resource ->

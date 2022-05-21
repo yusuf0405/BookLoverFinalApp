@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".app.ui.admin_screens.screen_edit_profile.FragmentAdminEditProfile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -11,14 +11,6 @@
         android:layout_height="wrap_content"
         android:paddingBottom="24dp">
 
-        <Toolbar
-            android:id="@+id/toolbar"
-            style="@style/toolbar_style"
-            app:layout_collapseMode="pin"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
         <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:id="@+id/coordinatorLayout"
@@ -26,13 +18,12 @@
             android:layout_height="0dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar">
+            app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/app_theme"
                 app:shapeAppearanceOverlay="@style/BottomCornerRadius">
 
 
@@ -55,7 +46,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="@string/student_edit_profile_image_edit_title"
+                    android:text="@string/image_edit"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -122,7 +113,6 @@
             android:id="@+id/textView5"
             style="@style/type_title_edit_profile"
             android:text="@string/your_gender"
-            app:layout_constraintEnd_toEndOf="@+id/profile_school_text1"
             app:layout_constraintStart_toStartOf="@+id/profile_school_text1"
             app:layout_constraintTop_toBottomOf="@+id/schoolLine" />
 
@@ -178,6 +168,8 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_edit_button"
             style="@style/button_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
             android:text="@string/student_edit_profile_save_btn"
             app:layout_constraintEnd_toEndOf="@+id/radioGroup"
             app:layout_constraintHorizontal_bias="0.0"

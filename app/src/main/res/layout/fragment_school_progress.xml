@@ -12,17 +12,16 @@
 
 
         <TextView
-            android:id="@+id/textView2"
+            android:id="@+id/schoolNameText"
             android:layout_width="0dp"
-            android:gravity="center"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="Средняя школа №7 им. Нариманова"
-            android:textColor="@color/violet"
+            android:gravity="center"
             android:textSize="@dimen/profileNameBigTextSize"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Средняя школа №7 им. Нариманова" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -34,7 +33,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView2">
+            app:layout_constraintTop_toBottomOf="@+id/schoolNameText">
 
             <TextView
                 android:id="@+id/progressStatisticText"
@@ -42,7 +41,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/school_statistics"
-                android:textColor="@color/red"
                 android:textSize="@dimen/bigTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -62,7 +60,6 @@
                 android:layout_marginStart="@dimen/marginForTIL"
                 android:layout_marginTop="@dimen/profileTextDP"
                 android:layout_marginEnd="@dimen/recyclerViewMargin"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -89,10 +86,9 @@
                     <TextView
                         android:id="@+id/progressStudentsText"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressAllStudentsText"
                         app:layout_constraintEnd_toEndOf="@+id/progressAllStudentsText"
@@ -104,6 +100,7 @@
                         android:id="@+id/progressAllStudentsText"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
                         android:text="@string/students_read"
                         android:textColor="@color/grey"
                         android:textSize="@dimen/textSizeForSmallTexts"
@@ -123,7 +120,6 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/recyclerViewMargin"
                 android:layout_marginEnd="@dimen/marginForTIL"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -155,7 +151,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressAllBookReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressAllBookReadenText"
@@ -188,7 +183,6 @@
                 android:layout_marginStart="@dimen/marginForTIL"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="@dimen/recyclerViewMargin"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -215,15 +209,14 @@
                     <TextView
                         android:id="@+id/progressDiamondReadText"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="0dp"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressReadenText"
-                        app:layout_constraintEnd_toEndOf="@+id/progressReadenText"
+                        app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toStartOf="@+id/progressReadenText"
+                        app:layout_constraintStart_toEndOf="@+id/progressDiamondImage"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <TextView
@@ -234,9 +227,9 @@
                         android:textColor="@color/grey"
                         android:textSize="@dimen/textSizeForSmallTexts"
                         app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintEnd_toEndOf="@+id/progressDiamondReadText"
                         app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/progressDiamondImage"
+                        app:layout_constraintStart_toStartOf="@+id/progressDiamondReadText"
                         app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
                 </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -249,9 +242,7 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/recyclerViewMargin"
                 android:layout_marginEnd="@dimen/marginForTIL"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
-
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
                 app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForChapters"
@@ -282,7 +273,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressBookReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressBookReadenText"
@@ -314,7 +304,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -344,7 +333,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressPageReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressPageReadenText"
@@ -402,8 +390,8 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:gravity="center"
                 android:text="@string/student_statistics"
-                android:textColor="@color/red"
                 android:textSize="@dimen/bigTextSize"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -423,7 +411,6 @@
                 android:layout_marginStart="@dimen/marginForTIL"
                 android:layout_marginTop="@dimen/profileTextDP"
                 android:layout_marginEnd="@dimen/recyclerViewMargin"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -453,7 +440,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressClassReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressClassReadenText"
@@ -484,7 +470,6 @@
                 android:layout_height="0dp"
                 android:layout_marginStart="@dimen/recyclerViewMargin"
                 android:layout_marginEnd="@dimen/marginForTIL"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -516,7 +501,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressClassBookReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressClassBookReadenText"
@@ -547,7 +531,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/profileTextDP"
                 android:layout_marginBottom="12dp"
-                android:backgroundTint="@color/white"
                 android:visibility="visible"
                 app:cardCornerRadius="@dimen/cardAllCornersRadius"
                 app:cardElevation="@dimen/cardElevation"
@@ -577,7 +560,6 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="0"
-                        android:textColor="@color/violet"
                         android:textSize="@dimen/textSizeProfileTIL"
                         app:layout_constraintBottom_toTopOf="@+id/progressClassPageReadenText"
                         app:layout_constraintEnd_toEndOf="@+id/progressClassPageReadenText"
@@ -662,11 +644,11 @@
             <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:elevation="8dp"
-                android:layout_marginEnd="24dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="8dp"
+                android:elevation="8dp"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

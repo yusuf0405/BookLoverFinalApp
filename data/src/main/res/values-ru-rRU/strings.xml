@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="criminal">Преступный</string>
+    <string name="secular">Светский</string>
+    <string name="historical">Исторический</string>
+    <string name="science_fiction">Научная фантастика</string>
+    <string name="fantasy">Фантазия</string>
+    <string name="adventures">Приключения</string>
+    <string name="historical_novel">Исторический роман</string>
+    <string name="a_love_affair">Любовный роман</string>
+    <string name="adventure_novel">Приключенческий роман</string>
+    <string name="scientific_works">Научные труды</string>
+    <string name="articles">Статьи</string>
+    <string name="epic">Эпический</string>
+    <string name="legends">Легенды</string>
+    <string name="fairy_tales">Сказки</string>
+    <string name="jokes">Шутки</string>
+    <string name="poetry">Поэзия</string>
+    <string name="prose">Проза</string>
+    <string name="childrens_book">Детская книга</string>
+    <string name="biography">Биография</string>
+    <string name="journalism">Журналистика</string>
+    <string name="military_affairs">Военное дело</string>
+    <string name="business">Бизнес</string>
+    <string name="politics">Политика</string>
+    <string name="finance">Финансы</string>
+    <string name="economy">Экономика</string>
+    <string name="religious_literature">Религиозная литература</string>
+    <string name="methodical_manual">Методическое пособие</string>
+    <string name="textbook">Учебник</string>
+    <string name="psychology">Психология</string>
+    <string name="hobby">Хобби</string>
+    <string name="foreign_literature">Иностранная литература</string>
+    <string name="russian_literature">Русская литература</string>
+    <string name="network_error">Нету подключение к интернету.</string>
+    <string name="generic_error">Что то пошло не так.</string>
+    <string name="service_unavailable">Ошибка Сервера.</string>
+    <string name="account_already">Учетная запись для этого имени пользователя уже существует.</string>
+    <string name="invalid_email_password">Неверное имя пользователя/пароль.</string>
+</resources>

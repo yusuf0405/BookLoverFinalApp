@@ -13,12 +13,15 @@ class BookData(
     var chapterCount: Int,
     var poster: BookPosterData,
     var updatedAt: Date,
+    var genres: List<String>,
 )
+
 data class BookPdfData(
     var name: String,
     var type: String,
     var url: String,
 )
+
 data class BookPosterData(
     var name: String,
     var url: String,

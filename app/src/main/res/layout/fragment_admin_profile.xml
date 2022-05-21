@@ -18,7 +18,6 @@
             android:id="@+id/materialCardView"
             android:layout_width="match_parent"
             android:layout_height="200dp"
-            android:backgroundTint="@color/app_theme"
             app:shapeAppearanceOverlay="@style/BottomCornerRadius">
 
             <de.hdodenhof.circleimageview.CircleImageView
@@ -64,8 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/recyclerViewMargin"
-        android:text="Beksultan Suleimanov"
-        android:textColor="@color/violet"
+        tools:text="Beksultan Suleimanov"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintBottom_toBottomOf="@+id/profile_name_text1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -99,8 +97,7 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="№7 им. Нариманова"
-        android:textColor="@color/violet"
+        tools:text="№7 им. Нариманова"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintBottom_toBottomOf="@+id/profile_school_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
@@ -122,14 +119,14 @@
         android:id="@+id/editProfileBtn"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:background="@drawable/violet_btn_bg"
-        android:text="Изменить"
-        android:textColor="@color/white"
+        android:layout_marginEnd="32dp"
+        android:text="@string/to_change"
         android:textSize="@dimen/textSizeForButtons"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="@+id/profile_name_text1"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/schoolLine" />
 
     <ImageView
@@ -149,7 +146,6 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/marginProfileTIL"
         android:text="@string/login_out"
-        android:textColor="@color/violet"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintEnd_toEndOf="@+id/editProfileBtn"
         app:layout_constraintStart_toStartOf="@+id/editProfileBtn"

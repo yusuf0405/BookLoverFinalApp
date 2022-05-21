@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".app.ui.screen_book_details.ui.FragmentBookInfo">
+
+    <Toolbar
+        android:id="@+id/title_bar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:title="@string/about_the_book"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_bar">
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline16"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.32" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline15"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_percent="0.02" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/guideline12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.86374694" />
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/iv_book"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="20dp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_chapter_count_text"
+            app:layout_constraintEnd_toStartOf="@+id/guideline16"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/tv_book_image"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/shimmerColor"
+                android:scaleType="centerCrop" />
+
+        </androidx.cardview.widget.CardView>
+
+
+        <TextView
+            android:id="@+id/tv_book_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/bookProgress"
+            app:layout_constraintLeft_toRightOf="@+id/iv_book"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Война и Мир" />
+
+        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+            android:id="@+id/bookProgress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:animate="true"
+            app:animateDuration="600"
+            app:layout_constraintBottom_toTopOf="@+id/tv_book_author"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline12"
+            app:layout_constraintTop_toTopOf="@+id/tv_book_name"
+            app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+            app:progressTextEnabled="true"
+            app:progressTextSize="14sp"
+            app:progressTextType="percent"
+            app:progressValue="62"
+            app:progressWidth="5dp"
+            app:startAngle="270"
+            app:totalValue="100"
+            app:totalWidth="5dp" />
+
+        <TextView
+            android:id="@+id/tv_book_author"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_book_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_book_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_name"
+            tools:text="Лев Толстой" />
+
+        <TextView
+            android:id="@+id/tv_public_year_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/year_of_publication"
+            android:textColor="@color/book_details_text"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_book_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_book_author"
+            app:layout_constraintTop_toBottomOf="@+id/tv_book_author" />
+
+        <TextView
+            android:id="@+id/tv_public_year"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_public_year_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_book_name"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/tv_public_year_text"
+            app:layout_constraintTop_toTopOf="@+id/tv_public_year_text"
+            tools:text="142" />
+
+        <TextView
+            android:id="@+id/tv_page_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/student_book_details_book_page_count"
+            android:textColor="@color/book_details_text"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_book_name"
+            app:layout_constraintTop_toBottomOf="@+id/tv_public_year_text" />
+
+        <TextView
+            android:id="@+id/tv_page_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            tools:text="352"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_page_count_text"
+            app:layout_constraintTop_toTopOf="@+id/tv_page_count_text" />
+
+        <TextView
+            android:id="@+id/tv_chapter_count_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            android:text="@string/student_book_details_book_chapters"
+            android:textColor="@color/book_details_text"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toLeftOf="@+id/tv_book_name"
+            app:layout_constraintStart_toStartOf="@+id/tv_page_count_text"
+            app:layout_constraintTop_toBottomOf="@+id/tv_page_count_text" />
+
+        <TextView
+            android:id="@+id/tv_chapter_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:drawablePadding="5dp"
+            android:ellipsize="end"
+            android:singleLine="true"
+            tools:text="352"
+            android:textSize="16sp"
+            app:layout_constraintLeft_toRightOf="@+id/tv_chapter_count_text"
+            app:layout_constraintTop_toTopOf="@+id/tv_chapter_count_text" />
+
+
+        <TextView
+            android:id="@+id/tv_recommend"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="15dp"
+            android:layout_marginVertical="10dp"
+            android:text="@string/similar_recommend"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/book_genres_layout" />
+
+
+        <org.apmem.tools.layouts.FlowLayout
+            android:id="@+id/book_genres_layout"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/guideline16"
+            app:layout_constraintTop_toBottomOf="@+id/tv_chapter_count_text" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rlv_recommend"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:visibility="visible"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_recommend"
+            tools:listitem="@layout/item_similar_book" />
+
+        <com.airbnb.lottie.LottieAnimationView
+            android:id="@+id/add_button"
+            android:layout_width="30dp"
+            android:layout_height="0dp"
+            android:layout_marginEnd="8dp"
+            android:visibility="gone"
+            app:layout_constraintBottom_toBottomOf="@+id/tv_book_name"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/guideline15"
+            app:lottie_loop="true"
+            app:lottie_rawRes="@raw/add_to_book" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

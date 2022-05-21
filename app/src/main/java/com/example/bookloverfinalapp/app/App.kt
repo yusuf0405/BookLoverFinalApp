@@ -1,15 +1,16 @@
 package com.example.bookloverfinalapp.app
 
 import android.app.Application
-import com.example.bookloverfinalapp.app.utils.Dispatchers
 import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
+import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
 import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
 import com.example.domain.interactor.ClearBooksCacheUseCase
 import com.example.domain.interactor.ClearBooksThatReadCacheUseCase
 import com.example.domain.interactor.ClearClassCacheUseCase
 import com.example.domain.interactor.ClearStudentsCacheUseCase
 import com.parse.Parse
+import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.HiltAndroidApp
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.SupervisorJob
@@ -34,10 +35,12 @@ class App : Application() {
     @Inject
     lateinit var dispatchers: Dispatchers
 
-    private val applicationScope = CoroutineScope(SupervisorJob() + kotlinx.coroutines.Dispatchers.Main)
+    private val applicationScope =
+        CoroutineScope(SupervisorJob() + kotlinx.coroutines.Dispatchers.Main)
 
     override fun onCreate() {
         super.onCreate()
+        Lingver.init(this)
         Parse.enableLocalDatastore(this)
         Parse.initialize(Parse.Configuration.Builder(this)
             .applicationId(APPLICATION_ID)

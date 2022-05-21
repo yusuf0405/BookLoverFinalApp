@@ -1,7 +1,8 @@
 package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
-import com.example.bookloverfinalapp.app.utils.Dispatchers
+import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
+import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.data.ResourceProvider
 import com.example.domain.interactor.*
 import com.example.domain.repository.BookThatReadRepository
@@ -26,6 +27,11 @@ object AppModule {
     @Provides
     @Singleton
     fun provideDispatchers(): Dispatchers = Dispatchers.Base()
+
+    @Provides
+    @Singleton
+    fun provideDispatchersProvider(): DispatchersProvider = DispatchersProvider.Base()
+
 
     @Provides
     @Singleton

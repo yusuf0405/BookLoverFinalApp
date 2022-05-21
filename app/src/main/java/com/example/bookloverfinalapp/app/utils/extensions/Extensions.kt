@@ -4,7 +4,9 @@ import android.app.Activity
 import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Bitmap
+import android.graphics.Color
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
@@ -16,6 +18,7 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
+import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LifecycleOwner
@@ -32,6 +35,7 @@ import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UserDomainImage
 import com.google.android.material.snackbar.Snackbar
+import com.google.android.material.tabs.TabLayout
 import com.parse.ParseFile
 import com.shockwave.pdfium.PdfDocument
 import kotlinx.coroutines.*
@@ -42,6 +46,8 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
+val Context.dataStore by preferencesDataStore("settings")
+
 fun View.showView() {
     this.visibility = View.VISIBLE
 }
@@ -50,11 +56,50 @@ fun View.hideView() {
     this.visibility = View.GONE
 }
 
+fun Fragment.setToolbarColor(toolbar: Toolbar) {
+    when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_NO -> {
+            toolbar.apply {
+                setBackgroundColor(Color.parseColor("#2A00A2"))
+                setTitleTextColor(Color.parseColor("#FAF9F9"))
+                setNavigationIcon(R.drawable.ic_baseline_white_back_24)
+            }
+
+        }
+        Configuration.UI_MODE_NIGHT_YES -> {
+            toolbar.apply {
+                setBackgroundColor(Color.parseColor("#305F72"))
+                setTitleTextColor(Color.WHITE)
+                setNavigationIcon(R.drawable.ic_baseline_white_back_24)
+            }
+        }
+    }
+}
+
+fun Fragment.setTabLayoutColor(tabLayout: TabLayout) {
+    when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_NO -> {
+            tabLayout.setBackgroundColor(Color.parseColor("#2A00A2"))
+            tabLayout.setTabTextColors(requireContext().getColor(R.color.white),
+                requireContext().getColor(R.color.white));
+        }
+        Configuration.UI_MODE_NIGHT_YES -> tabLayout.setBackgroundColor(Color.parseColor("#305F72"))
+    }
+}
+
+
 fun Fragment.image(uri: Uri): ByteArray {
     val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
     val stream = ByteArrayOutputStream()
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
     return stream.toByteArray()
+}
+
+fun List<String>.indexOfIgnoreCase(str: String): Int {
+    for (i in this.indices) {
+        if (get(i).equals(str, true)) return i
+    }
+    return -1
 }
 
 suspend fun InputStream.saveToFile(context: Context): String {
@@ -314,7 +359,7 @@ fun Context.glide(bitmap: Bitmap, imageView: ImageView) {
         .into(imageView)
 }
 
-fun Context.glide(uri: String, imageView: ImageView) {
+fun Context.glide(uri: String?, imageView: ImageView) {
     Glide.with(this)
         .load(uri)
         .into(imageView)

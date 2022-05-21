@@ -1,10 +1,7 @@
 package com.example.bookloverfinalapp.app.di
 
 import com.example.data.ResourceProvider
-import com.example.data.cache.models.BookDb
-import com.example.data.cache.models.BookThatReadDb
-import com.example.data.cache.models.ClassCache
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.*
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cache.source.BooksThatReadDataSource
 import com.example.data.cache.source.ClassCacheDataSource
@@ -45,6 +42,8 @@ object RepositoryModule {
             signInMapper = signInMapper,
             signUpMapper = signUpMapper,
             resourceProvider = resourceProvider)
+
+
 
     @Provides
     @Singleton

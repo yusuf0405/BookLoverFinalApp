@@ -13,6 +13,7 @@ data class BookCloud(
     @SerializedName("createdAt") var createdAt: Date,
     @SerializedName("objectId") var id: String,
     @SerializedName("page") var page: Int,
+    @SerializedName("genres") var genres: List<String>,
     @SerializedName("publicYear") var publicYear: String,
     @SerializedName("book") var book: BookPdfCloud,
     @SerializedName("title") var title: String,

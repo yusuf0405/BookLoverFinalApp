@@ -7,6 +7,7 @@ data class AddNewBookCloud(
     @SerializedName("publicYear") var publicYear: String,
     @SerializedName("schoolId") var schoolId: String,
     @SerializedName("page") var page: Int,
+    @SerializedName("genres") var genres: List<String>,
     @SerializedName("author") var author: String,
     @SerializedName("poster") var poster: BookPosterCloud,
     @SerializedName("book") var book: BookPdfCloud,

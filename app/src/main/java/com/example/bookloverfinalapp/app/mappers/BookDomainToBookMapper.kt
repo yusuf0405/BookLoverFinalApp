@@ -16,6 +16,6 @@ class BookDomainToBookMapper : Mapper<BookDomain, Book>() {
             title = title,
             chapterCount = chapterCount,
             poster = BookPoster(name = poster.name, url = poster.url), updatedAt = updatedAt,
-            book = BookPdf(name = book.name, url = book.url))
+            book = BookPdf(name = book.name, url = book.url), genres = genres)
     }
 }

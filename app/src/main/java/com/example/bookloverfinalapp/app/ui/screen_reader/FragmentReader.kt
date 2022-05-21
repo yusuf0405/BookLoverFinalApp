@@ -1,16 +1,20 @@
 package com.example.bookloverfinalapp.app.ui.screen_reader
 
 import android.graphics.Canvas
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
-import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentReaderBinding
-import com.github.barteksc.pdfviewer.listener.*
+import com.github.barteksc.pdfviewer.listener.OnDrawListener
+import com.github.barteksc.pdfviewer.listener.OnErrorListener
+import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
+import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -19,7 +23,7 @@ import java.io.File
 class FragmentReader :
     BaseFragment<FragmentReaderBinding, FragmentReaderViewModel>(FragmentReaderBinding::inflate),
     OnLoadCompleteListener, OnErrorListener, OnPageChangeListener, OnDrawListener,
-    View.OnClickListener, OnRenderListener {
+    View.OnClickListener {
     override val viewModel: FragmentReaderViewModel by viewModels()
     override fun onReady(savedInstanceState: Bundle?) {}
 
@@ -65,20 +69,16 @@ class FragmentReader :
             .enableDoubletap(true)
             .onPageChange(this)
             .onLoad(this)
-            .onRender(this)
             .enableAnnotationRendering(true)
             .password(null)
-            .onRender(this)
             .scrollHandle(null)
             .load()
-        binding().pdfview.zoom
     }
 
 
     private fun setOnClickListeners() {
         binding().apply {
             endRead.setOnClickListener(this@FragmentReader)
-            saveChanges.setOnClickListener(this@FragmentReader)
             pageLast.setOnClickListener(this@FragmentReader)
             pageFirst.setOnClickListener(this@FragmentReader)
             pageForward.setOnClickListener(this@FragmentReader)
@@ -86,11 +86,10 @@ class FragmentReader :
         }
     }
 
-    override fun loadComplete(nbPages: Int) {
-    }
+    override fun loadComplete(nbPages: Int) {}
 
     override fun onError(t: Throwable?) {
-        showToast(message = "Error!!")
+        showToast(R.string.generic_error)
         viewModel.goBack()
     }
 
@@ -98,12 +97,9 @@ class FragmentReader :
         binding().apply {
             pageEnterField.text = pages[page].toString()
             if (page == pageCount - 1) {
-                saveChanges.hideView()
-                endRead.showView()
-            } else {
-                saveChanges.showView()
-                endRead.hideView()
-            }
+                if (bookCurrentProgress <= progress) endRead.showView()
+            } else endRead.hideView()
+
             progress = pages[page]
         }
 
@@ -114,11 +110,11 @@ class FragmentReader :
         pageWidth: Float,
         pageHeight: Float,
         displayedPage: Int,
-    ) {
-    }
+    ) {}
+
 
     private fun saveChanges() {
-        if (bookCurrentProgress < progress + 1) {
+        if (bookCurrentProgress < progress) {
             viewModel.updateProgress(id = book.objectId, progress = progress)
             bookCurrentProgress = progress
         }
@@ -129,7 +125,6 @@ class FragmentReader :
             binding().endRead -> viewModel.goQuestionFragment(book = book,
                 chapter = chapter,
                 path = path)
-            binding().saveChanges -> saveChanges()
             binding().pageBack -> binding().pdfview.jumpTo(binding().pdfview.currentPage - 1)
             binding().pageForward -> binding().pdfview.jumpTo(binding().pdfview.currentPage + 1)
             binding().pageFirst -> binding().pdfview.jumpTo(0)
@@ -137,13 +132,6 @@ class FragmentReader :
 
         }
     }
-
-    override fun onInitiallyRendered(nbPages: Int, pageWidth: Float, pageHeight: Float) {
-        binding().pdfview.fitToWidth()
-        binding().pdfview.moveTo(pageHeight, pageWidth)
-
-    }
-
 
     override fun onPause() {
         super.onPause()

@@ -13,6 +13,10 @@ interface BooksCloudDataSource {
 
     suspend fun fetchBooks(schoolId: String): Resource<List<BookData>>
 
+    suspend fun fetchMyBooks(bookId: String): Resource<List<BookThatReadCloud>>
+
+    suspend fun deleteMyBook(id: String): Resource<Unit>
+
     suspend fun fetchChapterQuestions(
         id: String,
         chapter: String,
@@ -50,6 +54,17 @@ interface BooksCloudDataSource {
             } else Resource.error(message = response.message!!)
 
         }
+
+        override suspend fun fetchMyBooks(bookId: String): Resource<List<BookThatReadCloud>> {
+            val response = safeApiCall { service.fetchMyBooks(id = "{\"bookId\":\"${bookId}\"}") }
+            return if (response.status == Status.SUCCESS) {
+                Resource.success(data = response.data!!.books)
+            } else Resource.error(message = response.message!!)
+        }
+
+        override suspend fun deleteMyBook(id: String): Resource<Unit> =
+            safeApiCall { service.deleteMyBook(id = id) }
+
 
         override suspend fun addNewBook(book: AddNewBookData): Resource<PostRequestAnswerCloud> =
             safeApiCall { service.addNewBook(book = addBookCloudMapper.map(book)) }

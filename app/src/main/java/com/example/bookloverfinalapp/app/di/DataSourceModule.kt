@@ -54,7 +54,8 @@ object DataSourceModule {
             resourceProvider = resourceProvider,
             questionDataMapper = questionDataMapper,
             addBookCloudMapper = addBookCloudMapper,
-            updateBookCloudMapper = updateBookCloudMapper)
+            updateBookCloudMapper = updateBookCloudMapper,
+        )
 
     @Provides
     @Singleton
@@ -83,11 +84,13 @@ object DataSourceModule {
     @Singleton
     fun provideBooksCacheDataSource(
         dao: BooksDao,
+        bookDao: BooksThatReadDao,
         mapper: Mapper<BookData, BookDb>,
     ): BooksCacheDataSource =
         BooksCacheDataSource.Base(
             bookDao = dao,
-            dataMapper = mapper)
+            dataMapper = mapper,
+            bookThatReadDao = bookDao)
 
     @Provides
     @Singleton

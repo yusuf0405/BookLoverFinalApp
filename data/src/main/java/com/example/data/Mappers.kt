@@ -38,7 +38,8 @@ internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = Bo
     poster = BookPosterData(name = poster.name, url = poster.url),
     updatedAt = createdAt,
     chapterCount = chapterCount, page = page, publicYear = publicYear,
-    title = title
+    title = title,
+    genres = genres
 )
 
 

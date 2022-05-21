@@ -10,6 +10,7 @@ import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRootDirections
 import com.example.bookloverfinalapp.app.utils.communication.ClassAdapterCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ClassesCommunication
+import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.Status
 import com.example.domain.interactor.AddNewClassUseCase
@@ -26,6 +27,7 @@ class FragmentClassesViewModel @Inject constructor(
     private val getAllClassUseCase: GetAllClassUseCase,
     private val deleteClassUseCase: DeleteClassUseCase,
     private var addNewClassUseCase: AddNewClassUseCase,
+    private var dispatchersProvider: DispatchersProvider,
     private val mapper: Mapper<ClassDomain, ClassAdapterModel.Base>,
     private val classMapper: Mapper<ClassDomain, SchoolClass>,
     private val communication: ClassAdapterCommunication,
@@ -60,7 +62,7 @@ class FragmentClassesViewModel @Inject constructor(
     }
 
     fun deleteClass(id: String) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             deleteClassUseCase.execute(id = id).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()
@@ -79,7 +81,7 @@ class FragmentClassesViewModel @Inject constructor(
 
 
     fun addNewClass(title: String, schoolId: String) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             addNewClassUseCase.execute(title = title, schoolId = schoolId)
                 .collectLatest { resource ->
                     when (resource.status) {

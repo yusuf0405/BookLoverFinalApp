@@ -1,6 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_school_progress
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
@@ -38,7 +39,7 @@ class FragmentSchoolProgress :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        binding().schoolNameText.text = currentUser.schoolName
 
         binding().classEditButton.setOnClickListener {
             showClassSingleChoiceWithConfirmationAlertDialog(classesTitleList)

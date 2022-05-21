@@ -10,6 +10,7 @@ import com.example.domain.Resource
 import com.example.domain.Status
 import com.example.domain.models.*
 import com.example.domain.repository.BooksRepository
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import java.io.BufferedInputStream
@@ -51,6 +52,28 @@ class BooksRepositoryImpl(
         }
     }
 
+    override fun fetchSimilarBooks(
+        genres: List<String>,
+        bookId: String,
+    ): Flow<Resource<List<BookDomain>>> = flow {
+        emit(Resource.loading())
+        delay(3000)
+        val booksCacheList = cacheDataSource.fetchBooks()
+        val similarBooks = mutableListOf<BookDomain>()
+        genres.forEach { genre ->
+            booksCacheList.forEach { book ->
+                book.genres.forEach { newGenres ->
+                    if (genre == newGenres && book.id != bookId) {
+                        val bookData = bookCashMapper.map(book)
+                        similarBooks.add(bookDomainMapper.map(bookData))
+                    }
+                }
+            }
+        }
+        emit(Resource.success(data = similarBooks.distinctBy { it.id }))
+
+    }
+
     override fun addNewBook(book: AddNewBookDomain): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
         val result = cloudDataSource.addNewBook(book = addBookDomainMapper.map(book))
@@ -78,8 +101,18 @@ class BooksRepositoryImpl(
         emit(Resource.loading())
         val result = cloudDataSource.deleteBook(id = id)
         if (result.status == Status.SUCCESS) {
-            cacheDataSource.deleteBook(id = id)
-            emit(Resource.success(data = Unit))
+            val booksResult = cloudDataSource.fetchMyBooks(bookId = id)
+            if (booksResult.status == Status.SUCCESS) {
+                val booksThatRead = booksResult.data!!
+                if (booksThatRead.isNotEmpty()) {
+                    booksThatRead.forEach { bookThatReadData ->
+                        cloudDataSource.deleteMyBook(id = bookThatReadData.objectId)
+                        cacheDataSource.deleteMyBookIsCache(id = id)
+                    }
+                }
+                cacheDataSource.deleteBook(id = id)
+                emit(Resource.success(data = Unit))
+            } else emit(Resource.error(message = booksResult.message))
         } else emit(Resource.error(message = result.message))
     }
 

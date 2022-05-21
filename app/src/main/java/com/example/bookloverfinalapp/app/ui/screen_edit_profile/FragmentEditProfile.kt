@@ -2,11 +2,11 @@ package com.example.bookloverfinalapp.app.ui.screen_edit_profile
 
 import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
@@ -81,6 +81,12 @@ class FragmentEditProfile :
     private fun setupUi() {
         student = CurrentUser().getCurrentUser(activity = requireActivity())
         binding().apply {
+            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#2A00A2"))
+                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#305F72"))
+            }
             gender = student.gender
             editStudentNumber.setText(student.number)
             editStudentName.setText(student.name)
@@ -88,15 +94,10 @@ class FragmentEditProfile :
             editStudentEmail.setText(student.email)
             if (student.gender == "female") female.isChecked = true
             else male.isChecked = true
-            Glide.with(requireActivity())
-                .load(student.image?.url)
-                .placeholder(R.drawable.placeholder_avatar)
-                .into(binding().profileImg)
-            toolbar.apply {
-                title = getString(R.string.my_profile)
-                setTitleTextColor(Color.WHITE)
-                setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
-            }
+            requireContext().glide(student.image?.url, binding().profileImg)
+            toolbar.title = getString(R.string.my_profile)
+            setToolbarColor(toolbar = toolbar)
+
         }
     }
 

@@ -10,6 +10,7 @@ data class BookDomain(
     var publicYear: String,
     var book: BookPdfDomain,
     var title: String,
+    var genres: List<String>,
     var chapterCount: Int,
     var poster: BookPosterDomain,
     var updatedAt: Date,

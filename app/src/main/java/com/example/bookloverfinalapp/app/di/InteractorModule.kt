@@ -20,6 +20,10 @@ object InteractorModule {
         AddNewBookQuestionUseCase(repository = repository)
 
     @Provides
+    fun provideGetSimilarBooksUseCase(repository: BooksRepository): GetSimilarBooksUseCase =
+        GetSimilarBooksUseCase(repository = repository)
+
+    @Provides
     fun provideAddNewBookUseCase(repository: BooksRepository): AddNewBookUseCase =
         AddNewBookUseCase(repository = repository)
 

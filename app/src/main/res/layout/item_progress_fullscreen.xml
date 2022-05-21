@@ -17,6 +17,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:textColor="@color/app_theme"
         app:textSize="8sp" />
 </LinearLayout>

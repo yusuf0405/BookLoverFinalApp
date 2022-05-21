@@ -13,7 +13,7 @@ interface BooksThatReadDataSource {
 
     suspend fun deleteBook(id: String)
 
-    suspend fun getMyBook(id: String): BookThatReadDb
+    suspend fun getMyBook(id: String): BookThatReadDb?
 
     suspend fun addBook(book: BookThatReadDb)
 
@@ -40,8 +40,7 @@ interface BooksThatReadDataSource {
 
         override suspend fun deleteBook(id: String) = dao.deleteById(id = id)
 
-        override suspend fun getMyBook(id: String): BookThatReadDb = dao.getMyBook(bookId = id)
-
+        override suspend fun getMyBook(id: String): BookThatReadDb? = dao.getMyBook(bookId = id)
 
         override suspend fun addBook(book: BookThatReadDb) = dao.addNewBook(book = book)
 

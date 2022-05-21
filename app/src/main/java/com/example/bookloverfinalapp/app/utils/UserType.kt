@@ -4,5 +4,4 @@ enum class UserType {
     student,
     teacher,
     admin
-
 }

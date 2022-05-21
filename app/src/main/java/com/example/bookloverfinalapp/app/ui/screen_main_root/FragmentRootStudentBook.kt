@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.UserType
+import com.example.bookloverfinalapp.app.utils.extensions.setTabLayoutColor
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
 import com.example.bookloverfinalapp.databinding.FragmentMainRootBinding
@@ -32,6 +33,8 @@ class FragmentRootStudentBook : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         if (currentUser.userType == UserType.student) setupTabLayout()
         else setupTeacherTabLayout()
+        setTabLayoutColor(tabLayout = binding.tabLayout)
+
     }
 
     private fun setupTabLayout() {
@@ -64,6 +67,7 @@ class FragmentRootStudentBook : Fragment() {
             }.attach()
         }
     }
+
     override fun onResume() {
         super.onResume()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()

@@ -15,6 +15,7 @@ class AddBookDomainToDataMapper : Mapper<AddNewBookDomain, AddNewBookData>() {
             author = author,
             poster = BookPosterData(name = poster.name, url = poster.url),
             book = BookPdfData(name = book.name, type = book.type, url = book.url),
-            chapterCount = chapterCount, schoolId = schoolId)
+            chapterCount = chapterCount, schoolId = schoolId,
+            genres = genres)
     }
 }

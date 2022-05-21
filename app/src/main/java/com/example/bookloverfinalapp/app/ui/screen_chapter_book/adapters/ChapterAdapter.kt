@@ -1,8 +1,8 @@
 package com.example.bookloverfinalapp.app.ui.screen_chapter_book.adapters
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -27,10 +27,14 @@ class ChapterAdapter(private val actionListener: ChapterItemOnClickListener) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(position: Int) {
             val chapter = chapters[position]
+            val chapterString = "${itemView.context.getString(R.string.chapter)} ${position + 1}"
             binding.apply {
-                chapterText.text = chapter.title
+                chapterText.text = chapterString
                 if (isReading[position]) {
-                    chapterText.setTextColor(Color.BLUE)
+                    when (itemView.context.resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+                        Configuration.UI_MODE_NIGHT_NO -> chapterText.setTextColor(Color.BLUE)
+                        Configuration.UI_MODE_NIGHT_YES -> chapterText.setTextColor(Color.WHITE)
+                    }
                     itemView.isEnabled = true
                 } else {
                     chapterText.setTextColor(Color.GRAY)

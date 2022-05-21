@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="criminal">Jinoyat</string>
+    <string name="secular">Dunyoviy</string>
+    <string name="historical">Tarixiy</string>
+    <string name="science_fiction">Ilmiy fantastika</string>
+    <string name="fantasy">Fantaziya</string>
+    <string name="adventures">Sarguzashtlar</string>
+    <string name="historical_novel">Tarixiy roman</string>
+    <string name="a_love_affair">Sevgi ishi</string>
+    <string name="adventure_novel">Sarguzasht roman</string>
+    <string name="scientific_works">Ilmiy ishlar</string>
+    <string name="articles">Maqolalar</string>
+    <string name="epic">Epos</string>
+    <string name="legends">Afsonalar</string>
+    <string name="fairy_tales">Ertaklar</string>
+    <string name="jokes">Hazillar</string>
+    <string name="poetry">Sheriyat</string>
+    <string name="prose">Proza</string>
+    <string name="childrens_book">Bolalar kitobi</string>
+    <string name="biography">Biografiya</string>
+    <string name="journalism">Jurnalistika</string>
+    <string name="military_affairs">Harbiy ishlar</string>
+    <string name="business">Biznes</string>
+    <string name="politics">Siyosat</string>
+    <string name="finance">Moliya</string>
+    <string name="economy">Iqtisodiyot</string>
+    <string name="religious_literature">Diniy adabiyot</string>
+    <string name="methodical_manual">Uslubiy qollanma</string>
+    <string name="textbook">Darslik</string>
+    <string name="psychology">Psixologiya</string>
+    <string name="hobby">Xobbi</string>
+    <string name="foreign_literature">Xorijiy adabiyot</string>
+    <string name="russian_literature">Rus adabiyoti</string>
+
+    <string name="network_error">Internetga ulanish yoq.</string>
+    <string name="generic_error">Biror narsa notogri ketdi.</string>
+    <string name="service_unavailable">Server Xatosi.</string>
+    <string name="account_already">Ushbu foydalanuvchi nomi uchun hisob allaqachon mavjud.</string>
+    <string name="invalid_email_password">Notogri foydalanuvchi nomi/parol.</string>
+</resources>

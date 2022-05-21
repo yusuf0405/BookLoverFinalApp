@@ -12,7 +12,7 @@ interface BookThatReadRepository {
 
     fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
-    fun fetchMyBook(id: String): Flow<Resource<BookThatReadDomain>>
+    fun fetchMyBook(id: String, userId: String): Flow<Resource<Int>>
 
     fun deleteMyBook(id: String): Flow<Resource<Unit>>
 

@@ -65,8 +65,6 @@ class FragmentLogin :
             password = password).observe(viewLifecycleOwner) { user ->
             user.password = password
             CurrentUser().saveCurrentUser(user = user, activity = requireActivity())
-            if (binding().reminder.isChecked) CheсkNavigation().observeLogin(status = true,
-                activity = requireActivity())
             if (user.userType == UserType.admin) intentClearTask(activity = ActivityAdminMain())
             else intentClearTask(activity = ActivityMain())
         }

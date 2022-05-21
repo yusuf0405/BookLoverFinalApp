@@ -18,7 +18,7 @@ import com.example.bookloverfinalapp.app.ui.admin_screens.screen_books.adaper.Ad
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.DialogUpdateBookBinding
-import com.example.bookloverfinalapp.databinding.FragmentBooksBinding
+import com.example.bookloverfinalapp.databinding.FragmentAdminBooksBinding
 import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UpdateBookDomain
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -29,7 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentBooks :
-    BaseFragment<FragmentBooksBinding, FragmentBooksViewModel>(FragmentBooksBinding::inflate),
+    BaseFragment<FragmentAdminBooksBinding, FragmentBooksViewModel>(FragmentAdminBooksBinding::inflate),
     AdminBookItemOnClickListener {
     override val viewModel: FragmentBooksViewModel by viewModels()
 
@@ -75,8 +75,24 @@ class FragmentBooks :
     }
 
     override fun deleteBook(id: String, position: Int) {
-        viewModel.deleteBook(id = id)
-            .observe(viewLifecycleOwner) { adapter.deleteBook(position = position) }
+        val listener = DialogInterface.OnClickListener { _, which ->
+            when (which) {
+                DialogInterface.BUTTON_POSITIVE ->
+                    viewModel.deleteBook(id = id)
+                        .observe(viewLifecycleOwner) { adapter.deleteBook(position = position) }
+
+                DialogInterface.BUTTON_NEUTRAL -> {}
+            }
+        }
+        val dialog = AlertDialog.Builder(requireContext())
+            .setTitle(R.string.delete)
+            .setCancelable(true)
+            .setMessage(R.string.default_book_delete_alert_message)
+            .setPositiveButton(R.string.action_yes, listener)
+            .setNeutralButton(R.string.action_ignore, listener)
+            .create()
+
+        dialog.show()
     }
 
     override fun updateBook(position: Int, book: Book) {
@@ -142,7 +158,8 @@ class FragmentBooks :
                         book = BookPdfAdapter(url = book.book.url,
                             name = book.book.name,
                             type = "File"),
-                        title = title
+                        title = title,
+                        genres = book.genres
                     )
                     showToast(R.string.book_updated_successfully)
                     adapter.updateBook(position = position, newBook = newBook)

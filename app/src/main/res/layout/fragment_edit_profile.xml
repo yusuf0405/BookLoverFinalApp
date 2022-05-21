@@ -32,7 +32,6 @@
                 android:id="@+id/materialCardView"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:backgroundTint="@color/app_theme"
                 app:shapeAppearanceOverlay="@style/BottomCornerRadius">
 
 
@@ -55,7 +54,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|center"
-                    android:text="@string/student_edit_profile_image_edit_title"
+                    android:text="@string/image_edit"
                     android:textColor="@color/white"
                     android:textStyle="bold" />
 
@@ -135,7 +134,6 @@
             android:id="@+id/textView5"
             style="@style/type_title_edit_profile"
             android:text="@string/your_gender"
-            app:layout_constraintEnd_toEndOf="@+id/profile_school_text1"
             app:layout_constraintStart_toStartOf="@+id/profile_school_text1"
             app:layout_constraintTop_toBottomOf="@+id/schoolLine" />
 
@@ -197,10 +195,13 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_edit_button"
             style="@style/button_style"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
             android:text="@string/student_edit_profile_save_btn"
-            app:layout_constraintEnd_toEndOf="@+id/radioGroup"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/textView5"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         <EditText

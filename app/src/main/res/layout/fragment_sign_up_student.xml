@@ -47,6 +47,7 @@
                 android:id="@+id/last_name_field"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:inputType="textPersonName|textCapWords"
                 android:background="@drawable/ic_text_white_bg"
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
@@ -75,6 +76,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/first_name_field"
                 android:layout_width="match_parent"
+                android:inputType="textPersonName|textCapWords"
                 android:layout_height="wrap_content"
                 android:background="@drawable/ic_text_white_bg"
                 android:textSize="18sp" />
@@ -245,6 +247,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:textColor="@color/book_details_text"
             android:text="@string/already_have_account"
             app:layout_constraintEnd_toStartOf="@+id/signIn_link"
             app:layout_constraintHorizontal_bias="0.5"
@@ -288,6 +291,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
+            android:textSize="12sp"
             android:text="@string/to_change"
             app:layout_constraintBottom_toBottomOf="@+id/schoolTextView"
             app:layout_constraintEnd_toEndOf="parent"
@@ -306,6 +310,7 @@
         <Button
             android:id="@+id/classButton"
             android:layout_width="wrap_content"
+            android:textSize="12sp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="@string/to_change"

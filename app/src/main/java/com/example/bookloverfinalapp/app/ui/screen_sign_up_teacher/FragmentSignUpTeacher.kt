@@ -180,7 +180,6 @@ class FragmentSignUpTeacher :
             viewModel.addSessionToken(id = id, sessionToken = sessionToken)
                 .observe(viewLifecycleOwner) {
                     CurrentUser().saveCurrentUser(user = currentUser, activity = requireActivity())
-                    CheсkNavigation().observeLogin(status = true, activity = requireActivity())
                     intentClearTask(activity = ActivityMain())
                 }
         }

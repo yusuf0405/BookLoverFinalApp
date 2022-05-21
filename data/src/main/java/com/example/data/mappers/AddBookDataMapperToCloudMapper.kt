@@ -15,6 +15,6 @@ class AddBookDataMapperToCloudMapper : Mapper<AddNewBookData, AddNewBookCloud>()
             author = author,
             poster = BookPosterCloud(name = poster.name, url = poster.url, type = "File"),
             book = BookPdfCloud(name = book.name, type = book.type, url = book.url),
-            chapterCount = chapterCount,schoolId = schoolId)
+            chapterCount = chapterCount, schoolId = schoolId, genres = genres)
     }
 }

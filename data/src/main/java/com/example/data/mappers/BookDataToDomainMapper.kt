@@ -23,6 +23,7 @@ class BookDataToDomainMapper : Mapper<BookData, BookDomain>() {
                 url = poster.url
             ),
             updatedAt = updatedAt, id = id,
-            publicYear = publicYear)
+            publicYear = publicYear,
+            genres = genres)
     }
 }

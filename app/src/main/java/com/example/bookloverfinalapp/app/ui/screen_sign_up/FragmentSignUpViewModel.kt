@@ -6,6 +6,7 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudentDirections
 import com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacherDirections
+import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.extensions.viewModelScope
 import com.example.domain.Mapper
@@ -18,7 +19,6 @@ import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.models.UserSignUpDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,6 +28,7 @@ import javax.inject.Inject
 class FragmentSignUpViewModel @Inject constructor(
     private val getAllSchoolsUseCase: GetAllSchoolsUseCase,
     private val addSessionTokenUseCase: AddSessionTokenUseCase,
+    private val dispatchersProvider: DispatchersProvider,
     private val signUpUseCase: SignUpUseCase,
     private val getAllClassUseCase: GetAllClassUseCase,
     private val classMapper: Mapper<ClassDomain, SchoolClass>,
@@ -67,21 +68,22 @@ class FragmentSignUpViewModel @Inject constructor(
         }.viewModelScope(viewModelScope = viewModelScope)
     }
 
-    fun signUp(user: UserSignUpDomain) = liveData(context = viewModelScope.coroutineContext) {
-        signUpUseCase.execute(user = user).collectLatest { resource ->
-            when (resource.status) {
-                Status.LOADING -> showProgressDialog()
-                Status.SUCCESS -> emit(resource.data!!)
-                Status.ERROR -> {
-                    error(message = resource.message!!)
-                    dismissProgressDialog()
+    fun signUp(user: UserSignUpDomain) =
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
+            signUpUseCase.execute(user = user).collectLatest { resource ->
+                when (resource.status) {
+                    Status.LOADING -> showProgressDialog()
+                    Status.SUCCESS -> emit(resource.data!!)
+                    Status.ERROR -> {
+                        error(message = resource.message!!)
+                        dismissProgressDialog()
+                    }
                 }
             }
         }
-    }
 
     fun addSessionToken(id: String, sessionToken: String) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             addSessionTokenUseCase.execute(id = id, sessionToken = sessionToken)
                 .collectLatest { resource ->
                     when (resource.status) {
@@ -114,8 +116,6 @@ class FragmentSignUpViewModel @Inject constructor(
 
     }
 
-    fun goOverLoginFragment() =
-        navigate(FragmentSignUpDirections.actionFragmentSignUpToFragmentLogin())
 
     fun goStudentToLoginFragment() =
         navigate(FragmentSignUpStudentDirections.actionFragmentSignUpStudentToFragmentLogin())

@@ -7,19 +7,20 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookQuestion
 import com.example.bookloverfinalapp.app.utils.communication.BooksQuestionCommunication
+import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.Status
 import com.example.domain.interactor.DeleteBookQuestionUseCase
 import com.example.domain.interactor.GetAllChapterQuestionsUseCase
 import com.example.domain.models.BookQuestionDomain
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import javax.inject.Inject
 
 @HiltViewModel
 class FragmentAllQuestionViewModel @Inject constructor(
     private val getAllChapterQuestionsUseCase: GetAllChapterQuestionsUseCase,
+    private val dispatchersProvider: DispatchersProvider,
     private val deleteBookQuestionUseCase: DeleteBookQuestionUseCase,
     private val communication: BooksQuestionCommunication,
     private val mapper: Mapper<BookQuestionDomain, BookQuestion>,
@@ -36,7 +37,9 @@ class FragmentAllQuestionViewModel @Inject constructor(
                         Status.LOADING -> showProgressDialog()
 
                         Status.SUCCESS -> {
-                            communication.put(resource.data!!.map { bookQuestionDomain -> mapper.map(bookQuestionDomain) })
+                            communication.put(resource.data!!.map { bookQuestionDomain ->
+                                mapper.map(bookQuestionDomain)
+                            })
                             dismissProgressDialog()
                         }
                         Status.ERROR -> {
@@ -45,7 +48,6 @@ class FragmentAllQuestionViewModel @Inject constructor(
 
                         }
                         Status.EMPTY -> {
-                            error(message = "No Questions")
                             dismissProgressDialog()
                         }
                     }
@@ -53,7 +55,7 @@ class FragmentAllQuestionViewModel @Inject constructor(
         }
 
     fun deleteQuestion(id: String) =
-        liveData(context = viewModelScope.coroutineContext + Dispatchers.IO) {
+        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
             deleteBookQuestionUseCase.execute(id = id).collectLatest { resource ->
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()

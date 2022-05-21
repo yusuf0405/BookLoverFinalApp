@@ -1,20 +1,21 @@
 package com.example.bookloverfinalapp.app.ui.screen_my_books.adapters
 
 import android.annotation.SuppressLint
+import android.content.res.Configuration
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ImageView
 import android.widget.TextView
+import androidx.preference.PreferenceManager
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadAdapterModel
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
+import com.example.bookloverfinalapp.app.utils.extensions.glide
 import com.example.bookloverfinalapp.app.utils.extensions.makeView
+import com.example.bookloverfinalapp.databinding.ItemMyBookBinding
 import com.facebook.shimmer.ShimmerFrameLayout
-import com.vaibhavlakhera.circularprogressview.CircularProgressView
 import org.ocpsoft.prettytime.PrettyTime
 import java.util.*
 
@@ -88,17 +89,7 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
 
         class Base(view: View, private val actionListener: StudentBookItemOnClickListener) :
             BookViewHolder(view) {
-            private val bookTitle = itemView.findViewById<TextView>(R.id.bookTitle)
-            private val bookAuthor = itemView.findViewById<TextView>(R.id.bookAuthor)
-            private val countOfDiamonds = itemView.findViewById<TextView>(R.id.countOfDimonds)
-            private val countOfPages = itemView.findViewById<TextView>(R.id.countOfPages)
-            private val publishedYear = itemView.findViewById<TextView>(R.id.publishedYear)
-            private val bookPages = itemView.findViewById<TextView>(R.id.bookPages)
-            private val cratedAtText = itemView.findViewById<TextView>(R.id.cratedAtText)
-            private val bookImage = itemView.findViewById<ImageView>(R.id.rounded_book_Image)
-            private val bookProgressView =
-                itemView.findViewById<CircularProgressView>(R.id.bookProgress)
-
+            val binding = ItemMyBookBinding.bind(view)
             override fun bind(book: BookThatReadAdapterModel) {
                 book.map(object : BookThatReadAdapterModel.BookThatReadStringMapper {
                     override fun map(message: String) {}
@@ -119,22 +110,27 @@ class StudentBookAdapter(private val actionListener: StudentBookItemOnClickListe
                         progress: Int,
                         isReadingPages: List<Boolean>,
                     ) {
-                        countOfDiamonds.text = chaptersRead.toString()
-                        countOfPages.text = progress.toString()
-                        bookProgressView.setTotal(page - 1)
-                        bookTitle.text = title
-                        bookAuthor.text = author
-                        publishedYear.text = publicYear
-                        val pages = page - 1
-                        bookPages.text = pages.toString()
-                        val prettyTime = PrettyTime(Locale("ru"))
-                        val getCreatedAt = prettyTime.format(createdAt)
-                        val bookCreatedAt = "Добавлено: $getCreatedAt"
-                        cratedAtText.text = bookCreatedAt
-                        bookProgressView.setProgress(progress)
-                        Glide.with(itemView.context)
-                            .load(poster.url)
-                            .into(bookImage)
+
+                        binding.apply {
+                            countOfDimonds.text = chaptersRead.toString()
+                            countOfPages.text = progress.toString()
+                            bookProgress.setTotal(page - 1)
+                            bookTitle.text = title
+                            bookAuthor.text = author
+                            publishedYear.text = publicYear
+                            val pages = page - 1
+                            bookPages.text = pages.toString()
+                            val language = PreferenceManager.getDefaultSharedPreferences(itemView.context)
+                                .getString("language", "en")
+                            val prettyTime = PrettyTime(Locale(language ?: "en"))
+                            val getCreatedAt = prettyTime.format(createdAt)
+                            val bookCreatedAt =
+                                "${itemView.context.getString(R.string.added)}: $getCreatedAt"
+                            bookCratedAtText.text = bookCreatedAt
+                            bookProgress.setProgress(progress)
+                            itemView.context.glide(poster.url, roundedBookImage)
+                        }
+
                         itemView.setOnLongClickListener {
                             actionListener.deleteBook(id = objectId,
                                 position = position)

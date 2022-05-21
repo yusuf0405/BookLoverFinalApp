@@ -37,11 +37,11 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/pick_pdf_button"
             style="@style/button_style"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="16dp"
             android:text="@string/upload_book"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
+            app:layout_constraintTop_toBottomOf="@+id/bookGenresText" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -97,6 +97,36 @@
             app:layout_constraintStart_toStartOf="@+id/editTextBookAutor"
             app:layout_constraintTop_toBottomOf="@+id/editTextBookAutor" />
 
+        <androidx.cardview.widget.CardView
+            android:id="@+id/classNumberCardView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="24dp"
+            android:elevation="8dp"
+            app:cardCornerRadius="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear">
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="16sp"
+                android:hint="@string/select_a_book_genres"
+                android:textSize="20sp" />
+
+            <ImageView
+                android:id="@+id/bookGenresButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|center"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_mnog" />
+        </androidx.cardview.widget.CardView>
+
         <Button
             android:id="@+id/to_change"
             android:layout_width="wrap_content"
@@ -106,6 +136,15 @@
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />
+
+        <TextView
+            android:id="@+id/bookGenresText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="@+id/classNumberCardView"
+            app:layout_constraintStart_toStartOf="@+id/classNumberCardView"
+            app:layout_constraintTop_toBottomOf="@+id/classNumberCardView" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

@@ -7,7 +7,10 @@ import androidx.room.TypeConverters
 import com.example.data.cache.models.BookDb
 import com.example.data.cache.models.BookPdfDb
 import com.example.data.cache.models.BookPosterDb
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 import org.json.JSONObject
+import java.lang.reflect.Type
 import java.util.*
 
 @Database(entities = [BookDb::class], version = 1)
@@ -17,7 +20,25 @@ abstract class BookDB : RoomDatabase() {
 }
 
 class BookDbConverter {
+    @TypeConverter
+    fun fromList(countryLang: List<String?>?): String? {
+        if (countryLang == null) {
+            return null
+        }
+        val gson = Gson()
+        val type: Type = object : TypeToken<List<String?>?>() {}.type
+        return gson.toJson(countryLang, type)
+    }
 
+    @TypeConverter
+    fun toList(countryLangString: String?): List<String>? {
+        if (countryLangString == null) {
+            return null
+        }
+        val gson = Gson()
+        val type: Type = object : TypeToken<List<String?>?>() {}.type
+        return gson.fromJson<List<String>>(countryLangString, type)
+    }
     @TypeConverter
     fun fromPoster(bookPosterDb: BookPosterDb): String {
         return JSONObject().apply {

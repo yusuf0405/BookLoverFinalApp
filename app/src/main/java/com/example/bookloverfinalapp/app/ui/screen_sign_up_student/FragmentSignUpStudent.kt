@@ -187,7 +187,6 @@ class FragmentSignUpStudent :
                 .observe(viewLifecycleOwner) {
                     CurrentUser().saveCurrentUser(user = currentStudent,
                         activity = requireActivity())
-                    CheсkNavigation().observeLogin(status = true, activity = requireActivity())
                     intentClearTask(activity = ActivityMain())
                 }
 

@@ -1,4 +1,4 @@
-package com.example.bookloverfinalapp.app.utils
+package com.example.bookloverfinalapp.app.utils.dispatchers
 
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
