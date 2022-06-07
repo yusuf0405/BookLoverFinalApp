@@ -1,6 +1,5 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.ui
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -28,8 +27,6 @@ class FragmentAdminChapters :
 
     override val viewModel: FragmentAdminChaptersViewModel by viewModels()
 
-    override fun onReady(savedInstanceState: Bundle?) {}
-
     private val book: Book by lazy(LazyThreadSafetyMode.NONE) {
         FragmentAdminChaptersArgs.fromBundle(requireArguments()).book
     }
@@ -45,31 +42,20 @@ class FragmentAdminChapters :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupUi()
-        onClickListeners()
-        loadSuccess()
-    }
-
-
-    private fun loadSuccess() {
-        binding().pdfView.fromFile(File(path))
-            .onPageChange(this@FragmentAdminChapters)
-            .onError(this@FragmentAdminChapters)
-            .onLoad(this@FragmentAdminChapters)
-            .load()
     }
 
     private fun setupUi() {
         binding().apply {
+            pdfView.fromFile(File(path))
+                .onPageChange(this@FragmentAdminChapters)
+                .onError(this@FragmentAdminChapters)
+                .onLoad(this@FragmentAdminChapters)
+                .load()
             toolbar.title = book.title
             setToolbarColor(toolbar = toolbar)
             chapterRecyclerView.adapter = adapter
-        }
-    }
-
-    private fun onClickListeners() {
-        binding().apply {
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
+
         }
     }
 
@@ -84,8 +70,8 @@ class FragmentAdminChapters :
     override fun onPageChanged(page: Int, pageCount: Int) {
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
     }
 

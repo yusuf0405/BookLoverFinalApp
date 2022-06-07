@@ -6,7 +6,7 @@ import com.example.data.models.BookPosterData
 import com.example.domain.Mapper
 import com.example.domain.models.AddNewBookDomain
 
-class AddBookDomainToDataMapper : Mapper<AddNewBookDomain, AddNewBookData>() {
+class AddBookDomainToDataMapper : Mapper<AddNewBookDomain, AddNewBookData> {
     override fun map(from: AddNewBookDomain): AddNewBookData = from.run {
         AddNewBookData(
             title = title,

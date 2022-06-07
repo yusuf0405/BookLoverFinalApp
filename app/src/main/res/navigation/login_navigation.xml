@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/fragmentSignUp"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up.FragmentSignUp"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.FragmentSignUp"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -22,7 +22,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSignUpStudent"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up_student.FragmentSignUpStudent"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up_student.FragmentSignUpStudent"
         android:label="fragment_sign_up_student"
         tools:layout="@layout/fragment_sign_up_student" >
         <action
@@ -31,7 +31,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentSignUpTeacher"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_sign_up_teacher.FragmentSignUpTeacher"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up_teacher.FragmentSignUpTeacher"
         android:label="fragment_sign_up_teacher"
         tools:layout="@layout/fragment_sign_up_teacher" >
         <action
@@ -40,7 +40,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_login.FragmentLogin"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_login.FragmentLogin"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/fragmentForgotPassword"
-        android:name="com.example.bookloverfinalapp.app.ui.screen_forgot_password.FragmentForgotPassword"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_forgot_password.FragmentForgotPassword"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
 </navigation>

@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/marginForTIL">
+
+    <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+        android:id="@+id/you_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/gilroy_bold"
+        android:text="@string/you"
+        android:textColor="@color/gold"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/materialCardView2"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/recyclerViewMargin"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/you_text"
+        tools:layout_editor_absoluteX="3dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/marginForTIL">
+
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+                android:id="@+id/student_rating_position"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="1"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="@+id/class_name_text"
+                app:layout_constraintStart_toStartOf="@+id/class_name_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/studentProfileImage"
+                android:layout_width="@dimen/smallProfileImageSize"
+                android:layout_height="@dimen/smallProfileImageSize"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/foto"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/class_name_text"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+                android:id="@+id/progressProfileLastName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="16dp"
+                android:textSize="@dimen/textSizeProfileTIL"
+                app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Ташполотова" />
+
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+                android:id="@+id/progressProfileName"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/marginForTIL"
+                android:layout_marginTop="4dp"
+                android:textSize="@dimen/textSizeProfileTIL"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
+                app:layout_constraintTop_toBottomOf="@+id/progressProfileLastName"
+                app:layout_constraintVertical_bias="0.0"
+                tools:text="Венера" />
+
+            <ImageView
+                android:id="@+id/studentsPages"
+                android:layout_width="@dimen/recyclerViewIconSize"
+                android:layout_height="@dimen/recyclerViewIconSize"
+                android:layout_marginEnd="16dp"
+                android:src="@drawable/ic_open_book"
+                app:layout_constraintBottom_toBottomOf="@+id/countOfStudentPages"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/countOfStudentPages" />
+
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+                android:id="@+id/countOfStudentPages"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:textSize="@dimen/textSizeProfileTIL"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/studentsPages"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="345" />
+
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+                android:id="@+id/class_name_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="5-А"
+                android:textSize="16sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/student_rating_position" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

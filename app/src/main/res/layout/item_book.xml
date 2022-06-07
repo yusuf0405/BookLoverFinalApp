@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_margin="5dp"
     app:cardCornerRadius="10dp"
     app:cardElevation="15dp">
@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ImageView
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
                 android:id="@+id/rounded_book_Image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,7 +32,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <TextView
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
             android:id="@+id/bookTitle"
             style="@style/item_book_title_style"
             android:text="Война и мир"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@+id/cardView"
             app:layout_constraintVertical_bias="0.0" />
 
-        <TextView
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
             android:id="@+id/bookAuthor"
             style="@style/item_book_author"
             android:text="Лев Толстой"
@@ -61,35 +61,35 @@
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
 
-        <TextView
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
             android:id="@+id/publishedYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
-            tools:text="2008"
             android:textSize="@dimen/item_book_attribute_size"
             app:layout_constraintBottom_toBottomOf="@+id/publicYearText"
             app:layout_constraintStart_toEndOf="@+id/publicYearText"
-            app:layout_constraintTop_toTopOf="@+id/publicYearText" />
+            app:layout_constraintTop_toTopOf="@+id/publicYearText"
+            tools:text="2008" />
 
         <TextView
             android:id="@+id/bookPagesText"
             style="@style/item_book_paged_count"
-            android:layout_height="wrap_content"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             app:layout_constraintBottom_toBottomOf="@+id/publishedYear"
             app:layout_constraintStart_toEndOf="@+id/publishedYear"
             app:layout_constraintTop_toTopOf="@+id/publishedYear" />
 
-        <TextView
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
             android:id="@+id/bookPages"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="400"
             android:textSize="@dimen/item_book_attribute_size"
             app:layout_constraintBottom_toBottomOf="@+id/bookPagesText"
             app:layout_constraintStart_toEndOf="@+id/bookPagesText"
-            app:layout_constraintTop_toTopOf="@+id/bookPagesText" />
+            app:layout_constraintTop_toTopOf="@+id/bookPagesText"
+            tools:text="400" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline7"
@@ -98,6 +98,16 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.25" />
 
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+            android:id="@+id/more_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="4dp"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_more_vertical_icon" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </com.google.android.material.card.MaterialCardView>

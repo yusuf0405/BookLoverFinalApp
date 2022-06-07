@@ -1,7 +1,6 @@
 package com.example.domain
 
-abstract class Mapper<From, To> {
+interface Mapper<From, To> {
 
-    abstract fun map(from: From): To
-
+    fun map(from: From): To
 }

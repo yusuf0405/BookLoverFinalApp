@@ -1,13 +1,13 @@
 package com.example.data.mappers
 
-import com.example.data.cache.models.BookThatReadDb
-import com.example.data.cache.models.BookThatReadPosterDb
+import com.example.data.cache.models.BookThatReadCache
+import com.example.data.cache.models.BookThatReadPosterCache
 import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.domain.Mapper
 import com.example.domain.models.AddNewBookThatReadDomain
 import java.util.*
 
-class AddNewBookMapper : Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>() {
+class AddNewBookMapper : Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud> {
     override fun map(from: AddNewBookThatReadDomain): AddNewBookThatReadCloud = from.run {
         AddNewBookThatReadCloud(
             progress = progress,
@@ -23,8 +23,8 @@ internal fun AddNewBookThatReadDomain.toStudentBook(
     objectId: String,
     createdAt: Date,
     path: String,
-): BookThatReadDb =
-    BookThatReadDb(
+): BookThatReadCache =
+    BookThatReadCache(
         objectId = objectId,
         createdAt = createdAt,
         chaptersRead = chaptersRead,
@@ -35,7 +35,7 @@ internal fun AddNewBookThatReadDomain.toStudentBook(
         publicYear = publicYear,
         title = title,
         chapterCount = chapterCount,
-        poster = BookThatReadPosterDb(name = poster.name, url = poster.url),
+        poster = BookThatReadPosterCache(name = poster.name, url = poster.url),
         book = path,
         updatedAt = createdAt,
         isReadingPages = isReadingPages

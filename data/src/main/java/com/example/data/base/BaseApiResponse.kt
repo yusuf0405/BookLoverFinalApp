@@ -1,5 +1,6 @@
 package com.example.data.base
 
+import android.util.Log
 import com.example.data.R
 import com.example.data.ResourceProvider
 import com.example.domain.Mapper

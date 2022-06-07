@@ -7,7 +7,9 @@ import retrofit2.http.*
 interface BookService {
 
     @GET("classes/Books")
-    suspend fun fetchAllBooks(): Response<BookResponse>
+    suspend fun fetchAllBooks(
+        @Query("where") id: String,
+    ): Response<BookResponse>
 
     @GET("classes/Questions")
     suspend fun getAllChapterQuestions(

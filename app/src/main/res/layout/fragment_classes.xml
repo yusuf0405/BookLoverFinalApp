@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.admin_screens.screen_classes.ui.FragmentClasses">
+    tools:context=".app.ui.admin_screens.screen_classes.FragmentClasses">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/admin_classes_recycler_view"
@@ -17,8 +17,6 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:reverseLayout="true"
-        app:stackFromEnd="true"
         tools:listitem="@layout/item_class" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton

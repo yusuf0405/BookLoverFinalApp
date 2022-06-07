@@ -7,14 +7,13 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
+import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentAdminEditProfileBinding
 import com.example.domain.models.UserUpdateDomain
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -28,10 +27,6 @@ class FragmentAdminEditProfile :
         FragmentAdminEditProfileBinding::inflate), View.OnClickListener {
 
     override val viewModel: FragmentAdminEditProfileViewModel by viewModels()
-
-
-    override fun onReady(savedInstanceState: Bundle?) {}
-
 
     private var parseFile: ParseFile? = null
     private var image: UserImage? = null
@@ -47,8 +42,8 @@ class FragmentAdminEditProfile :
 
     private fun setOnClickListeners() {
         binding().apply {
-            saveEditButton.setOnClickListener(this@FragmentAdminEditProfile)
-            editStudentImage.setOnClickListener(this@FragmentAdminEditProfile)
+            downEffect(saveEditButton).setOnClickListener(this@FragmentAdminEditProfile)
+            downEffect(editStudentImage).setOnClickListener(this@FragmentAdminEditProfile)
             female.setOnClickListener(this@FragmentAdminEditProfile)
             male.setOnClickListener(this@FragmentAdminEditProfile)
         }
@@ -65,11 +60,13 @@ class FragmentAdminEditProfile :
 
 
     private fun setupUi() {
-        admin = CurrentUser().getCurrentUser(activity = requireActivity())
+        admin = checkNotNull(SharedPreferences().getCurrentUser(activity = requireActivity()))
         binding().apply {
             when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor("#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor("#305F72"))
+                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#2A00A2"))
+                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#305F72"))
             }
             gender = admin.gender
             editStudentNumber.setText(admin.number)
@@ -98,7 +95,7 @@ class FragmentAdminEditProfile :
         binding().apply {
             if (!editStudentName.validateName()) showToast(message = getString(R.string.name_input_format_error))
             else if (!editStudentLastName.validateLastName()) showToast(message = getString(R.string.last_name_input_format_error))
-            else if (!editStudentNumber.validateEditPhone()) showToast(message = getString(R.string.phone_input_format_error))
+            else if (!editStudentNumber.validatePhone()) showToast(message = getString(R.string.phone_input_format_error))
             else if (!editStudentEmail.validateEmail()) showToast(message = getString(R.string.email_input_format_error))
             else {
                 if (parseFile == null) {
@@ -159,8 +156,8 @@ class FragmentAdminEditProfile :
                 sessionToken = admin.sessionToken,
                 schoolId = admin.schoolId
             )
-            CurrentUser().saveCurrentUser(user = newStudent, requireActivity())
-            admin = CurrentUser().getCurrentUser(activity = requireActivity())
+            SharedPreferences().saveCurrentUser(user = newStudent, requireActivity())
+            admin = checkNotNull(SharedPreferences().getCurrentUser(activity = requireActivity()))
             showToast(message = getString(R.string.profile_has_been_successfully_updated))
         }
 
@@ -178,8 +175,8 @@ class FragmentAdminEditProfile :
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
     }
 

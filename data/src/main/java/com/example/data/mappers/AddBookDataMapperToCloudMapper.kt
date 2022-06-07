@@ -6,7 +6,7 @@ import com.example.data.cloud.models.BookPosterCloud
 import com.example.data.models.AddNewBookData
 import com.example.domain.Mapper
 
-class AddBookDataMapperToCloudMapper : Mapper<AddNewBookData, AddNewBookCloud>() {
+class AddBookDataMapperToCloudMapper : Mapper<AddNewBookData, AddNewBookCloud> {
     override fun map(from: AddNewBookData): AddNewBookCloud = from.run {
         AddNewBookCloud(
             title = title,

@@ -10,6 +10,8 @@ interface BookThatReadRepository {
 
     fun fetchMyBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
+    fun onRefresh(id: String): Flow<Resource<List<BookThatReadDomain>>>
+
     fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
     fun fetchMyBook(id: String, userId: String): Flow<Resource<Int>>
@@ -26,7 +28,7 @@ interface BookThatReadRepository {
         isReadingPages: List<Boolean>,
     ): Flow<Resource<Unit>>
 
-    fun fetchMyStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
+    fun fetchUsersBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
     suspend fun clearBooksCache()
 

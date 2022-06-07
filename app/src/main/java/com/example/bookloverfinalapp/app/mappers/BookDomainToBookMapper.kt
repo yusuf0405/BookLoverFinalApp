@@ -6,7 +6,7 @@ import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.domain.Mapper
 import com.example.domain.models.BookDomain
 
-class BookDomainToBookMapper : Mapper<BookDomain, Book>() {
+class BookDomainToBookMapper : Mapper<BookDomain, Book> {
     override fun map(from: BookDomain): Book = from.run {
         Book(author = author,
             createdAt = createdAt,

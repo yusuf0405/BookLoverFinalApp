@@ -1,13 +1,11 @@
 package com.example.data
 
-import com.example.data.cloud.models.ClassCloud
+import com.example.data.cloud.models.SchoolCloud
 import com.example.data.cloud.models.UserSignUpCloud
 import com.example.data.models.BookData
 import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
-import com.example.data.models.school.SchoolCloud
 import com.example.domain.models.AddNewBookDomain
-import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.models.UserSignUpDomain
 import java.util.*
@@ -42,10 +40,5 @@ internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = Bo
     genres = genres
 )
 
-
-internal fun ClassCloud.toClass(): ClassDomain =
-    ClassDomain(id = objectId, title = title, schoolId = schoolId)
-
-
 internal fun SchoolCloud.toSchool(): SchoolDomain =
-    SchoolDomain(objectId = objectId, title = title, classesIds = classes)
+    SchoolDomain(objectId = objectId, title = title)

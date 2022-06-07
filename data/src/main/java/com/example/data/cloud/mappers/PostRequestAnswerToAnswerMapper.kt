@@ -5,7 +5,7 @@ import com.example.domain.Mapper
 import com.example.domain.models.UserDomainImage
 import com.example.domain.models.PostRequestAnswerDomain
 
-class PostRequestAnswerToAnswerMapper : Mapper<SignUpAnswerCloud, PostRequestAnswerDomain>() {
+class PostRequestAnswerToAnswerMapper : Mapper<SignUpAnswerCloud, PostRequestAnswerDomain> {
     override fun map(from: SignUpAnswerCloud): PostRequestAnswerDomain = from.run {
         PostRequestAnswerDomain(id = objectId,
             createdAt = createdAt,

@@ -99,7 +99,7 @@
             style="@style/type_title_edit_profile"
             android:text="@string/student_edit_profile_email_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_student_number" />
+            app:layout_constraintTop_toBottomOf="@+id/editStudentNumber" />
 
         <TextView
             android:id="@+id/textView11"
@@ -113,7 +113,7 @@
             android:id="@+id/textView5"
             style="@style/type_title_edit_profile"
             android:text="@string/your_gender"
-            app:layout_constraintStart_toStartOf="@+id/profile_school_text1"
+            app:layout_constraintStart_toStartOf="@+id/schoolLine"
             app:layout_constraintTop_toBottomOf="@+id/schoolLine" />
 
         <TextView
@@ -128,11 +128,13 @@
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5">
 
             <RadioButton
@@ -196,14 +198,17 @@
             app:layout_constraintTop_toBottomOf="@+id/profile_school_text1"
             tools:ignore="TextFields" />
 
-        <EditText
-            android:id="@+id/edit_student_number"
-            style="@style/edit_text_edit_profile"
-            android:enabled="true"
-            android:inputType="phone"
-            android:maxLength="13"
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/editStudentNumber"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:ems="14"
+            android:backgroundTint="@android:color/transparent"
+            android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:met_mask="+996 (###) ## ## ##" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

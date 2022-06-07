@@ -4,8 +4,8 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.bookloverfinalapp.app.ui.admin_screens.screen_books.ui.FragmentBooks
-import com.example.bookloverfinalapp.app.ui.admin_screens.screen_classes.ui.FragmentClasses
+import com.example.bookloverfinalapp.app.ui.admin_screens.screen_books.FragmentBooks
+import com.example.bookloverfinalapp.app.ui.admin_screens.screen_classes.FragmentClasses
 
 class AdminViewPagerAdapter(fm: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fm, lifecycle) {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_profile.FragmentProfile">
+    tools:context=".app.ui.general_screens.screen_profile.FragmentProfile">
 
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
@@ -104,7 +104,7 @@
         android:layout_height="wrap_content"
         tools:text="№7 им. Нариманова"
         android:textSize="@dimen/textSizeProfileTIL"
-        android:textStyle="italic"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/profile_school_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
@@ -139,7 +139,7 @@
         android:layout_height="wrap_content"
         tools:text="5 - А"
         android:textSize="@dimen/textSizeProfileTIL"
-        android:textStyle="italic"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/profile_class_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"

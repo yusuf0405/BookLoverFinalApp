@@ -40,6 +40,7 @@ interface BooksThatReadCloudDataSource {
         override suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>> = try {
             val bookList = mutableListOf<BookThatReadData>()
 
+
             val booksThatReadCloud = thatReadService.fetchMyBooks(id = "{\"userId\":\"${id}\"}")
 
             booksThatReadCloud.body()!!.books.forEach { booksThatRead ->

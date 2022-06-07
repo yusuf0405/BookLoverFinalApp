@@ -1,12 +1,16 @@
 package com.example.bookloverfinalapp.app.utils.communication
 
-import com.example.bookloverfinalapp.app.models.*
+import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.models.Book
+import com.example.bookloverfinalapp.app.models.BookThatRead
+import com.example.bookloverfinalapp.app.models.SchoolClass
+import com.example.bookloverfinalapp.app.models.Student
+import com.example.bookloverfinalapp.app.ui.admin_screens.screen_school_progress.FragmentSchoolProgressViewModel
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.FragmentProgressViewModel
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
+import com.example.domain.models.SchoolDomain
 
-interface BooksAdapterModelCommunication : Communication<List<BookAdapterModel>> {
-    class Base : Communication.Base<List<BookAdapterModel>>(), BooksAdapterModelCommunication
-}
 
 interface BooksCommunication : Communication<List<Book>> {
     class Base : Communication.Base<List<Book>>(), BooksCommunication
@@ -16,30 +20,35 @@ interface ClassesCommunication : Communication<List<SchoolClass>> {
     class Base : Communication.Base<List<SchoolClass>>(), ClassesCommunication
 }
 
-
-interface BooksQuestionCommunication : Communication<List<BookQuestion>> {
-    class Base : Communication.Base<List<BookQuestion>>(), BooksQuestionCommunication
+interface ItemUiCommunication : Communication<List<ItemUi>> {
+    class Base : Communication.Base<List<ItemUi>>(), ItemUiCommunication
 }
 
-interface ClassAdapterCommunication : Communication<List<ClassAdapterModel>> {
-    class Base : Communication.Base<List<ClassAdapterModel>>(), ClassAdapterCommunication
+interface SchoolProgressCommunication :
+    Communication<FragmentSchoolProgressViewModel.SchoolProgress> {
+    class Base : Communication.Base<FragmentSchoolProgressViewModel.SchoolProgress>(),
+        SchoolProgressCommunication
 }
 
-interface StudentsCommunication : Communication<List<Student>> {
-    class Base : Communication.Base<List<Student>>(), StudentsCommunication
+interface SchoolsCommunication : Communication<List<SchoolDomain>> {
+    class Base : Communication.Base<List<SchoolDomain>>(), SchoolsCommunication
 }
 
-interface StudentCommunication : Communication<List<StudentAdapterModel>> {
-    class Base : Communication.Base<List<StudentAdapterModel>>(), StudentCommunication
+interface SchoolsErrorCommunication : Communication<Event<String>> {
+    class Base : Communication.Base<Event<String>>(), SchoolsErrorCommunication
+}
+
+interface ClassErrorCommunication : Communication<Event<String>> {
+    class Base : Communication.Base<Event<String>>(), ClassErrorCommunication
+}
+
+interface ClassStatisticsCommunication : Communication<FragmentProgressViewModel.ClassStatistics> {
+    class Base : Communication.Base<FragmentProgressViewModel.ClassStatistics>(),
+        ClassStatisticsCommunication
 }
 
 interface BooksThatReadCommunication : Communication<List<BookThatRead>> {
     class Base : Communication.Base<List<BookThatRead>>(), BooksThatReadCommunication
-}
-
-interface BooksThatReadAdapterCommunication : Communication<List<BookThatReadAdapterModel>> {
-    class Base : Communication.Base<List<BookThatReadAdapterModel>>(),
-        BooksThatReadAdapterCommunication
 }
 
 interface NavigationCommunication : Communication<Event<NavigationCommand>> {
@@ -50,11 +59,14 @@ interface ProgressCommunication : Communication<Event<Boolean>> {
     class Base : Communication.Base<Event<Boolean>>(), ProgressCommunication
 }
 
-interface ProgressDialogCommunication : Communication<Event<Boolean>> {
-    class Base : Communication.Base<Event<Boolean>>(), ProgressDialogCommunication
+interface ProgressDialogCommunication : Communication<Boolean> {
+    class Base : Communication.Base<Boolean>(), ProgressDialogCommunication
 }
 
 interface ErrorCommunication : Communication<Event<String>> {
     class Base : Communication.Base<Event<String>>(), ErrorCommunication
 }
 
+interface StudentsCommunication : Communication<List<Student>> {
+    class Base : Communication.Base<List<Student>>(), StudentsCommunication
+}

@@ -12,10 +12,9 @@ import androidx.viewbinding.ViewBinding
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.dialog.LoadingDialog
-import com.example.bookloverfinalapp.app.utils.extensions.showSnackbar
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
+import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     private val binder: (LayoutInflater, ViewGroup?, Boolean) -> V,
@@ -25,14 +24,12 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
 
     private var viewBinding: V? = null
 
-    protected fun binding(): V =
-        checkNotNull(viewBinding)
+    protected fun binding(): V = checkNotNull(viewBinding)
 
     protected val currentUser: User by lazy(LazyThreadSafetyMode.NONE) {
-        CurrentUser().getCurrentUser(activity = requireActivity())
+        SharedPreferences().getCurrentUser(activity = requireActivity())
     }
 
-    protected abstract fun onReady(savedInstanceState: Bundle?)
 
     protected val loadingDialog: LoadingDialog by lazy(LazyThreadSafetyMode.NONE) {
         LoadingDialog(context = requireContext(), getString(R.string.loading_please_wait))
@@ -42,33 +39,30 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View? {
+    ): View {
         val binding = binder.invoke(inflater, container, false)
-        this.viewBinding = binding
+        viewBinding = binding
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        onReady(savedInstanceState)
-//        setupTransitions(view = view)
         observeRecourse()
     }
 
     private fun observeRecourse() {
-        viewModel.observeNavigation(viewLifecycleOwner) {
+        viewModel.collectNavigation(viewLifecycleOwner) {
             it.getValue()?.let { navigationCommand ->
                 handleNavigation(navigationCommand)
             }
         }
-        viewModel.observeProgressDialog(viewLifecycleOwner) {
-            it.getValue()?.let { status ->
-                if (status) loadingDialog.show()
-                else loadingDialog.dismiss()
-            }
+        viewModel.collectProgressDialog(viewLifecycleOwner) { status ->
+            if (status) loadingDialog.show()
+            else loadingDialog.dismiss()
         }
 
-        viewModel.observeError(viewLifecycleOwner) {
+
+        viewModel.collectError(viewLifecycleOwner) {
             it.getValue()?.let { message ->
                 showToast(message = message)
             }
@@ -78,12 +72,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     fun showToast(@StringRes messageRes: Int) {
         Toast.makeText(requireContext(), messageRes, Toast.LENGTH_SHORT).show()
     }
-//    private fun setupTransitions(view: View) {
-//        postponeEnterTransition()
-//        view.doOnPreDraw { startPostponedEnterTransition() }
-//        exitTransition = MaterialFadeThrough().apply { duration = 2000 }
-//        reenterTransition = MaterialFadeThrough().apply { duration = 2000 }
-//    }
 
 
     private fun handleNavigation(navCommand: NavigationCommand) {

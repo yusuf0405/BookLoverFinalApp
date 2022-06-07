@@ -25,12 +25,12 @@ class FragmentAdminEditProfileViewModel @Inject constructor(
                 when (resource.status) {
                     Status.LOADING -> showProgressDialog()
                     Status.SUCCESS -> {
-                        emit(resource.data!!)
                         dismissProgressDialog()
+                        emit(resource.data!!)
                     }
                     Status.ERROR -> {
-                        error(message = resource.message!!)
                         dismissProgressDialog()
+                        error(message = resource.message!!)
                     }
                 }
             }

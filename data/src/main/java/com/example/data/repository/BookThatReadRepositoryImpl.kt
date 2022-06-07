@@ -1,6 +1,6 @@
 package com.example.data.repository
 
-import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.BookThatReadCache
 import com.example.data.cache.source.BooksThatReadDataSource
 import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.data.cloud.source.BooksThatReadCloudDataSource
@@ -18,7 +18,7 @@ import kotlinx.coroutines.flow.flow
 class BookThatReadRepositoryImpl(
     private val cloudDataSource: BooksThatReadCloudDataSource,
     private val cacheDataSource: BooksThatReadDataSource,
-    private val bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
+    private val bookCashMapper: Mapper<BookThatReadCache, BookThatReadData>,
     private val bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
     private val addNewBookMapper: Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>,
 ) : BookThatReadRepository {
@@ -44,6 +44,20 @@ class BookThatReadRepositoryImpl(
             if (booksDomain.isEmpty()) emit(Resource.empty())
             else emit(Resource.success(data = booksDomain))
         }
+    }
+
+    override fun onRefresh(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
+        val response = cloudDataSource.fetchMyBooks(id = id)
+        if (response.status == Status.SUCCESS) {
+            val booksDataList = response.data!!
+            if (booksDataList.isEmpty()) emit(Resource.empty())
+            else {
+                cacheDataSource.saveBooks(books = booksDataList)
+                val bookDomain =
+                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+                emit(Resource.success(data = bookDomain))
+            }
+        } else emit(Resource.error(message = response.message))
     }
 
     override fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
@@ -127,15 +141,14 @@ class BookThatReadRepositoryImpl(
     }
 
 
-    override fun fetchMyStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
+    override fun fetchUsersBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
         emit(Resource.loading())
         val response = cloudDataSource.fetchMyBooks(id = id)
         if (response.status == Status.SUCCESS) {
             val booksDataList = response.data!!
             val booksDomain =
                 booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-            if (booksDomain.isEmpty()) emit(Resource.empty())
-            else emit(Resource.success(data = booksDomain))
+            emit(Resource.success(data = booksDomain))
         } else emit(Resource.error(message = response.message))
     }
 

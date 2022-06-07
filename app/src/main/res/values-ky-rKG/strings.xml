@@ -28,6 +28,7 @@
     <string name="epic">Эпикалык</string>
     <string name="legends">Уламыштары</string>
     <string name="fairy_tales">Жомоктор</string>
+    <string name="user_statistics">Колдонуучунун Статистикасы</string>
     <string name="jokes">Котормо</string>
     <string name="poetry">Поэзия</string>
     <string name="prose">Кыска</string>
@@ -196,7 +197,7 @@
 
     <string name="edit_question">Өзгөртүү</string>
     <string name="edit_a_question">Суроону өзгөртүү</string>
-    <string name="books_he_reads">Окуган китептер …</string>
+    <string name="books_he_reads">Окуган китептер </string>
     <string name="delete_student">Профилди жоготуу</string>
     <string name="student_deleted_successfuly">Студент ийгиликтүү алынып салынды</string>
     <string name="you_account_deleted">Профилиңиз администратор тарабынан алынып салынды</string>
@@ -210,7 +211,7 @@
     <string name="bookAutor">Автору</string>
     <string name="bookPublicYear">Качан жарыяланган</string>
     <string name="school_statistics">Мектептин статистикасы</string>
-    <string name="students_read">окуучулардын саны</string>
+    <string name="number_of_users">колдонуучулардын саны</string>
     <string name="books_in_the_database">базадагы китептер</string>
     <string name="they_read_books">китептер окулат</string>
     <string name="select_a_class">Классты тандаңыз</string>
@@ -237,5 +238,19 @@
     <string name="chapter">Бөлүм</string>
     <string name="added">Кошулду</string>
     <string name="setting">Жөндөөлөр</string>
-
+    <string name="teachers">Мугалимдер</string>
+    <string name="students">Студенттер</string>
+    <string name="teacher_statistics">Окутуучу Статистикасы</string>
+    <string name="search">Издөө</string>
+    <string name="default_delete_user_alert_message">Чын эле бул колдонуучуну жок кылгыңыз келеби?</string>
+    <string name="question">Суроо</string>
+    <string name="phone_text">Телефон номуру:</string>
+    <string name="teacher_books">Мугалим китептери</string>
+    <string name="student_books">Студент китептери</string>
+    <string name="go_to_pages">Сиз өтсөңүз болгон баракчалар</string>
+    <string name="have_gone_beyond">Сиз алгылыктуу барактардын чегинен чыгып кеттиңиз</string>
+    <string name="rating">Рейтинг</string>
+    <string name="school_class">Класс</string>
+    <string name="select_display_mode">Рейтингди көрсөтүү режимин тандаңыз</string>
+    <string name="you">СИЗ</string>
 </resources>

@@ -6,20 +6,22 @@ import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
-import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.ui.screen_login_main.ActivityLoginMain
-import com.example.bookloverfinalapp.app.utils.SettingManager
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_login_main.ActivityLoginMain
+import com.example.bookloverfinalapp.app.utils.setting.SettingManager
+import com.example.bookloverfinalapp.app.utils.extensions.downEffect
 import com.example.bookloverfinalapp.app.utils.extensions.glide
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showView
-import com.example.bookloverfinalapp.app.utils.navigation.CheсkNavigation
-import com.example.bookloverfinalapp.app.utils.pref.CurrentUser
+import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentAdminProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class FragmentAdminProfile :
@@ -27,8 +29,6 @@ class FragmentAdminProfile :
         FragmentAdminProfileBinding::inflate), View.OnClickListener {
 
     override val viewModel: FragmentAdminProfileViewModel by viewModels()
-
-    override fun onReady(savedInstanceState: Bundle?) {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,9 +39,9 @@ class FragmentAdminProfile :
 
     private fun setInClickListeners() {
         binding().apply {
-            editProfileBtn.setOnClickListener(this@FragmentAdminProfile)
-            profileLogoutImg.setOnClickListener(this@FragmentAdminProfile)
-            profileLogoutText.setOnClickListener(this@FragmentAdminProfile)
+            downEffect(editProfileBtn).setOnClickListener(this@FragmentAdminProfile)
+            downEffect(profileLogoutImg).setOnClickListener(this@FragmentAdminProfile)
+            downEffect(profileLogoutText).setOnClickListener(this@FragmentAdminProfile)
         }
     }
 
@@ -74,31 +74,34 @@ class FragmentAdminProfile :
     }
 
     private fun loginOut() {
-        viewModel.clearDataInCache()
-        CheсkNavigation().apply {
-            observeLogin(status = false, activity = requireActivity())
-            loginOut(activity = requireActivity())
+        lifecycleScope.launch {
+            loadingDialog.show()
+            viewModel.clearDataInCache()
+            SettingManager.clearAppSettings(scope = lifecycleScope, requireContext())
+            delay(3000)
+            loadingDialog.dismiss()
+            requireActivity().intentClearTask(activity = ActivityLoginMain())
         }
-        AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-        requireActivity().intentClearTask(ActivityLoginMain())
     }
 
     private fun setupUi() {
-        val student = CurrentUser().getCurrentUser(activity = requireActivity())
+        val admin = SharedPreferences().getCurrentUser(activity = requireActivity())
         binding().apply {
             when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor("#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor("#305F72"))
+                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#2A00A2"))
+                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor(
+                    "#305F72"))
             }
-            val fullName = "${student.name} ${student.lastname}"
+            val fullName = "${admin.name} ${admin.lastname}"
             profileNameText.text = fullName
-            profileSchoolText.text = student.schoolName
-            requireContext().glide(student.image?.url, binding().profileImg)
+            profileSchoolText.text = admin.schoolName
+            requireContext().glide(admin.image?.url, binding().profileImg)
         }
     }
 
-    override fun onResume() {
-        super.onResume()
+    override fun onStart() {
+        super.onStart()
         requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()
     }
 

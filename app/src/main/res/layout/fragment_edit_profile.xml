@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_profile.FragmentProfile">
+    tools:context=".app.ui.general_screens.screen_profile.FragmentProfile">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -91,19 +91,6 @@
             app:layout_constraintTop_toBottomOf="@+id/edit_student_last_name" />
 
         <View
-            android:id="@+id/view3"
-            android:layout_width="0dp"
-            android:layout_height="@dimen/profileLineHeight"
-            android:layout_marginStart="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:background="@color/grey"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/confirm_password_btn" />
-
-        <View
             android:id="@+id/nameLine"
             android:layout_width="0dp"
             android:layout_height="@dimen/profileLineHeight"
@@ -120,7 +107,7 @@
             style="@style/type_title_edit_profile"
             android:text="@string/student_edit_profile_email_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_student_number" />
+            app:layout_constraintTop_toBottomOf="@+id/editStudentNumber" />
 
         <TextView
             android:id="@+id/textView11"
@@ -134,32 +121,27 @@
             android:id="@+id/textView5"
             style="@style/type_title_edit_profile"
             android:text="@string/your_gender"
-            app:layout_constraintStart_toStartOf="@+id/profile_school_text1"
+            app:layout_constraintStart_toStartOf="@+id/edit_student_email"
             app:layout_constraintTop_toBottomOf="@+id/schoolLine" />
-
-        <TextView
-            android:id="@+id/textView14"
-            style="@style/type_title_edit_profile"
-            android:text="@string/student_edit_profile_confirm_password_title"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <TextView
             android:id="@+id/textView15"
             style="@style/type_title_edit_profile"
             android:text="@string/student_edit_profile_number_title"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3" />
+            app:layout_constraintTop_toBottomOf="@+id/view" />
 
         <RadioGroup
             android:id="@+id/radioGroup"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="16dp"
             android:orientation="horizontal"
             app:layout_constraintBottom_toBottomOf="@+id/textView5"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/textView5"
             app:layout_constraintTop_toTopOf="@+id/textView5">
 
             <RadioButton
@@ -219,38 +201,24 @@
         <EditText
             android:id="@+id/edit_student_email"
             style="@style/edit_text_edit_profile"
-            android:enabled="false"
+            android:enabled="true"
             app:layout_constraintStart_toStartOf="@+id/profile_school_text1"
             app:layout_constraintTop_toBottomOf="@+id/profile_school_text1"
             tools:ignore="TextFields" />
 
-        <EditText
-            android:id="@+id/edit_student_number"
-            style="@style/edit_text_edit_profile"
-            android:enabled="false"
-            android:inputType="phone"
-            android:maxLength="13"
-            app:layout_constraintStart_toStartOf="@+id/textView15"
-            app:layout_constraintTop_toBottomOf="@+id/textView15" />
 
-        <Button
-            android:id="@+id/confirm_password_btn"
-            android:layout_width="wrap_content"
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/editStudentNumber"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="@string/student_edit_profile_confirm_password_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.498"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/edit_student_password_confirm" />
-
-        <EditText
-            android:id="@+id/edit_student_password_confirm"
-            style="@style/edit_text_edit_profile"
-            android:hint="@string/student_edit_profile_confirm_password_hint"
-            android:inputType="textPassword"
-            app:layout_constraintStart_toStartOf="@+id/textView14"
-            app:layout_constraintTop_toBottomOf="@+id/textView14" />
+            android:backgroundTint="@android:color/transparent"
+            android:ems="14"
+            android:enabled="true"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:met_mask="+996 (###) ## ## ##" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -4,7 +4,7 @@ import com.example.data.cloud.models.BookQuestionCloud
 import com.example.data.models.BookQuestionData
 import com.example.domain.Mapper
 
-class BookQuestionCloudMapper : Mapper<BookQuestionCloud, BookQuestionData>() {
+class BookQuestionCloudMapper : Mapper<BookQuestionCloud, BookQuestionData> {
     override fun map(from: BookQuestionCloud): BookQuestionData = from.run {
         BookQuestionData(
             id = id,

@@ -46,7 +46,7 @@ interface BooksCloudDataSource {
 
         override suspend fun fetchBooks(schoolId: String): Resource<List<BookData>> {
             val response =
-                safeApiCall() { service.fetchAllBooks() }
+                safeApiCall() { service.fetchAllBooks(id = "{\"schoolId\":\"${schoolId}\"}") }
             return if (response.status == Status.SUCCESS) {
                 val bookData =
                     response.data!!.books.map { bookCloud -> bookCloudMapper.map(bookCloud) }

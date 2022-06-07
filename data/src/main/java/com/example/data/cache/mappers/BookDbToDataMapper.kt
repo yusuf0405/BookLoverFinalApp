@@ -1,13 +1,13 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.BookDb
+import com.example.data.cache.models.BookCache
 import com.example.data.models.BookData
 import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
 import com.example.domain.Mapper
 
-class BookDbToDataMapper : Mapper<BookDb, BookData>() {
-    override fun map(from: BookDb): BookData = from.run {
+class BookDbToDataMapper : Mapper<BookCache, BookData> {
+    override fun map(from: BookCache): BookData = from.run {
         val bookData = BookData(
             genres = genres,
             author = author,

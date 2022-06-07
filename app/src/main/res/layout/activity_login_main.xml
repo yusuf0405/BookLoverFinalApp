@@ -8,4 +8,4 @@
     android:layout_height="match_parent"
     app:defaultNavHost="true"
     app:navGraph="@navigation/login_navigation"
-    tools:context=".app.ui.screen_login_main.ActivityLoginMain" />
+    tools:context=".app.ui.general_screens.screen_login_main.ActivityLoginMain" />

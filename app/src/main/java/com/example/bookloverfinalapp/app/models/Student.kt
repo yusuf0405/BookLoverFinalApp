@@ -1,9 +1,11 @@
 package com.example.bookloverfinalapp.app.models
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.text.SimpleDateFormat
 import java.util.*
 
+@Parcelize
 data class Student(
     var objectId: String,
     var classId: String,
@@ -22,7 +24,7 @@ data class Student(
     var progress: Int,
     val booksId: List<String>,
     var image: StudentImage,
-) : Serializable {
+) : Parcelable {
     fun fullName(): String = "$name $lastname"
 
     fun getCreatedAt(): String {
@@ -30,10 +32,12 @@ data class Student(
         return formatter.format(createAt).toString()
 
     }
+
 }
 
+@Parcelize
 data class StudentImage(
     var name: String,
     var type: String,
     var url: String,
-)
+) : Parcelable

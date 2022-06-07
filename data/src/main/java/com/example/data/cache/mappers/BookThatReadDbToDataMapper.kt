@@ -1,13 +1,13 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.BookThatReadCache
 import com.example.data.models.BookThatReadData
 import com.example.data.models.BookThatReadPosterData
 import com.example.domain.Mapper
 
-class BookThatReadDbToDataMapper : Mapper<BookThatReadDb, BookThatReadData>() {
+class BookThatReadDbToDataMapper : Mapper<BookThatReadCache, BookThatReadData> {
 
-    override fun map(from: BookThatReadDb): BookThatReadData = from.run {
+    override fun map(from: BookThatReadCache): BookThatReadData = from.run {
         BookThatReadData(
             author = author,
             createdAt = createdAt,

@@ -2,11 +2,11 @@ package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
 import androidx.room.Room
+import com.example.bookloverfinalapp.app.utils.cons.APP_DATABASE_NAME
 import com.example.data.cache.db.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -16,64 +16,28 @@ object RoomModule {
 
     @Provides
     @Singleton
-    fun provideBookDB(
-        @ApplicationContext app: Context,
-    ): BookDB = Room.databaseBuilder(
-        app,
-        BookDB::class.java,
-        "books_table"
-    ).build()
+    fun provideAppDatabase(
+        context: Context,
+    ): AppDatabase =
+        Room.databaseBuilder(context, AppDatabase::class.java, APP_DATABASE_NAME).build()
 
     @Provides
     @Singleton
-    fun provideBookDao(db: BookDB): BooksDao =
-        db.bookDao()
+    fun provideBookDao(database: AppDatabase): BooksDao = database.getBooksDao()
 
     @Provides
     @Singleton
-    fun provideBookThatReadDB(
-        @ApplicationContext app: Context,
-    ): BookThatReadDB = Room.databaseBuilder(
-        app,
-        BookThatReadDB::class.java,
-        "books_that_read_table"
-    ).build()
-
-    @Provides
-    @Singleton
-    fun provideBookThatReadDao(db: BookThatReadDB): BooksThatReadDao =
-        db.bookDao()
+    fun provideBookThatReadDao(database: AppDatabase): BooksThatReadDao =
+        database.getBooksThatReadDao()
 
 
     @Provides
     @Singleton
-    fun provideUsersDB(
-        @ApplicationContext app: Context,
-    ): UsersDB = Room.databaseBuilder(
-        app,
-        UsersDB::class.java,
-        "users_books_table"
-    ).build()
+    fun provideUsersDao(database: AppDatabase): UsersDao = database.getUsersDao()
 
     @Provides
     @Singleton
-    fun provideUsersDao(db: UsersDB): UsersDao =
-        db.usersDao()
-
-    @Provides
-    @Singleton
-    fun provideClassDB(
-        @ApplicationContext app: Context,
-    ): ClassDB = Room.databaseBuilder(
-        app,
-        ClassDB::class.java,
-        "class_table"
-    ).build()
-
-    @Provides
-    @Singleton
-    fun provideClassDao(db: ClassDB): ClassDao =
-        db.classDao()
+    fun provideClassDao(database: AppDatabase): ClassDao = database.getClassesDao()
 
 
 }

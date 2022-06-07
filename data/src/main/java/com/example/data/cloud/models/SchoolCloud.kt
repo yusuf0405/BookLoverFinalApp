@@ -1,4 +1,4 @@
-package com.example.data.models.school
+package com.example.data.cloud.models
 
 import com.google.gson.annotations.SerializedName
 
@@ -9,5 +9,4 @@ data class SchoolResponse(
 data class SchoolCloud(
     @SerializedName("objectId") var objectId: String,
     @SerializedName("title") var title: String,
-    @SerializedName("classesIds") var classes: List<String>,
 )

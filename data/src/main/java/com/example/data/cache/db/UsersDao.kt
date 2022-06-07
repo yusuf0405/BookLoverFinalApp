@@ -1,32 +1,24 @@
 package com.example.data.cache.db
 
-import androidx.room.*
-import com.example.data.cache.models.StudentDb
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.example.data.cache.models.UserCache
 
 @Dao
 interface UsersDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addNewUser(user: StudentDb)
+    suspend fun addNewUser(user: UserCache)
 
-    @Update
-    suspend fun updateUser(user: StudentDb)
+    @Query("select * from users where class_id == :classId")
+    suspend fun getMyUsers(classId: String): MutableList<UserCache>
 
-    @Query("DELETE FROM users_database")
-    fun clearTable()
-
-    @Delete
-    suspend fun deleteUser(user: StudentDb)
-
-    @Query("select * from users_database")
-    suspend fun getAllUsers(): MutableList<StudentDb>
-
-    @Query("select * from users_database where objectId == :id")
-    suspend fun getUser(id: String): StudentDb
-
-    @Query("DELETE FROM users_database WHERE objectId = :id")
+    @Query("DELETE FROM users WHERE objectId = :id")
     fun deleteByUserId(id: String)
 
-    @Query("select * from users_database where classId == :classId")
-    suspend fun getMyUsers(classId: String): MutableList<StudentDb>
+    @Query("DELETE FROM users")
+    fun clearTable()
+
 }

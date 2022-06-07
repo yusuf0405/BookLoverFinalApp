@@ -1,9 +1,6 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
-import com.example.bookloverfinalapp.app.utils.cons.BASE_URL
-import com.example.bookloverfinalapp.app.utils.cons.CONTENT_TYPE
-import com.example.bookloverfinalapp.app.utils.cons.REST_API_KEY
+import com.example.bookloverfinalapp.app.utils.cons.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -49,9 +46,9 @@ object RetrofitModule {
     ): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(requestInterceptor)
         .addInterceptor(httpLoggingInterceptor)
-        .connectTimeout(30, TimeUnit.SECONDS)
-        .readTimeout(30, TimeUnit.SECONDS)
-        .writeTimeout(30, TimeUnit.SECONDS)
+        .connectTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .readTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
+        .writeTimeout(CONNECT_TIMEOUT_SECONDS, TimeUnit.SECONDS)
         .build()
 
     @Provides

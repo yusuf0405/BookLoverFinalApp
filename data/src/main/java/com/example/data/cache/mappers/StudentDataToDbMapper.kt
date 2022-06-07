@@ -1,13 +1,13 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.StudentDb
-import com.example.data.cache.models.StudentImageDb
+import com.example.data.cache.models.UserCache
+import com.example.data.cache.models.UserImageCache
 import com.example.data.models.StudentData
 import com.example.domain.Mapper
 
-class StudentDataToDbMapper : Mapper<StudentData, StudentDb>() {
-    override fun map(from: StudentData): StudentDb = from.run {
-        StudentDb(
+class StudentDataToDbMapper : Mapper<StudentData, UserCache> {
+    override fun map(from: StudentData): UserCache = from.run {
+        UserCache(
             createAt = createAt,
             classId = classId,
             email = email,
@@ -19,7 +19,7 @@ class StudentDataToDbMapper : Mapper<StudentData, StudentDb>() {
             className = className,
             objectId = objectId,
             userType = userType,
-            image = StudentImageDb(name = image?.name ?: "",
+            image = UserImageCache(name = image?.name ?: "",
                 type = image?.type ?: "",
                 url = image?.url ?: ""),
             booksRead = booksRead,

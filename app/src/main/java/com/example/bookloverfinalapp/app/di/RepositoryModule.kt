@@ -1,7 +1,10 @@
 package com.example.bookloverfinalapp.app.di
 
 import com.example.data.ResourceProvider
-import com.example.data.cache.models.*
+import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.BookThatReadCache
+import com.example.data.cache.models.ClassCache
+import com.example.data.cache.models.UserCache
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cache.source.BooksThatReadDataSource
 import com.example.data.cache.source.ClassCacheDataSource
@@ -44,13 +47,13 @@ object RepositoryModule {
             resourceProvider = resourceProvider)
 
 
-
     @Provides
     @Singleton
     fun provideBooksRepository(
+        resourceProvider: ResourceProvider,
         cloudDataSource: BooksCloudDataSource,
         cacheDataSource: BooksCacheDataSource,
-        bookCashMapper: Mapper<BookDb, BookData>,
+        bookCashMapper: Mapper<BookCache, BookData>,
         addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
         bookDomainMapper: Mapper<BookData, BookDomain>,
         updateBookDomainMapper: Mapper<UpdateBookDomain, UpdateBookData>,
@@ -58,6 +61,7 @@ object RepositoryModule {
         questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
     ): BooksRepository =
         BooksRepositoryImpl(
+            resourceProvider = resourceProvider,
             cloudDataSource = cloudDataSource,
             cacheDataSource = cacheDataSource,
             bookCashMapper = bookCashMapper,
@@ -83,12 +87,12 @@ object RepositoryModule {
         cacheDataSource: UsersCacheDataSource,
         studentDomainMapper: Mapper<StudentData, StudentDomain>,
         userCloudMapper: Mapper<UserCloud, UserDomain>,
-        studentDbMapper: Mapper<StudentDb, StudentData>,
+        userCacheMapper: Mapper<UserCache, StudentData>,
     ): UserRepository =
         UserRepositoryImpl(
             cloudDataSource = cloudDataSource,
             cacheDataSource = cacheDataSource, studentDomainMapper = studentDomainMapper,
-            userCloudMapper = userCloudMapper, studentDbMapper = studentDbMapper)
+            userCloudMapper = userCloudMapper, userCacheMapper = userCacheMapper)
 
 
     @Provides
@@ -96,7 +100,7 @@ object RepositoryModule {
     fun provideBookThatReadRepository(
         cloudDataSource: BooksThatReadCloudDataSource,
         cacheDataSource: BooksThatReadDataSource,
-        bookCashMapper: Mapper<BookThatReadDb, BookThatReadData>,
+        bookCashMapper: Mapper<BookThatReadCache, BookThatReadData>,
         bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
         addNewBookMapper: Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>,
     ): BookThatReadRepository = BookThatReadRepositoryImpl(

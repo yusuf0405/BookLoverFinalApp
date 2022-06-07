@@ -4,6 +4,7 @@ plugins {
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'androidx.navigation.safeargs.kotlin'
+    id 'org.jetbrains.kotlin.plugin.parcelize'
 }
 
 android {
@@ -41,111 +42,97 @@ dependencies {
     implementation project(":data")
     implementation project(":domain")
 
-    implementation 'androidx.room:room-ktx:2.4.2'
+    //Room
+    implementation "androidx.room:room-ktx:$room_version"
 
     //Hilt
-    def hiltVersion = "2.38.1"
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation("com.google.dagger:hilt-android:$hilt_version")
+    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
 
     // Parse-SDK-Android
-    def parseVersion = "1.17.3"
-    implementation "com.parse:parse-android:$parseVersion"
-
-    // Preference
-    implementation 'androidx.preference:preference:1.2.0'
-
-    // Google SignIn
-    implementation 'com.google.android.gms:play-services-auth:20.2.0'
+    implementation "com.parse:parse-android:$parse_version"
 
     // Coroutines
-    def coroutinesVersion = "1.5.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
 
     //Networking
-    def retrofitVersion = "2.9.0"
-    def okhttpVersion = "4.9.0"
-    def loggingVersion = "4.5.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
-    implementation "com.squareup.okhttp3:okhttp:$okhttpVersion"
-    implementation "com.squareup.okhttp3:logging-interceptor:$loggingVersion"
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
+    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
+    implementation "com.squareup.okhttp3:logging-interceptor:$logging_version"
 
     //Navigation
-    def navigationVersion = "2.4.2"
-    implementation "androidx.navigation:navigation-fragment-ktx:$navigationVersion"
-    implementation "androidx.navigation:navigation-ui-ktx:$navigationVersion"
+    implementation "androidx.navigation:navigation-fragment-ktx:$navigation_version"
+    implementation "androidx.navigation:navigation-ui-ktx:$navigation_version"
 
     // Livedata and viewModel
-    implementation "androidx.lifecycle:lifecycle-livedata-ktx:2.5.0-rc01"
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1"
+    implementation "androidx.lifecycle:lifecycle-livedata-ktx:$live_data_version"
+    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$view_model_version"
 
-    // viewpager2
-    def viewPager2Version = "1.0.0"
-    implementation("androidx.viewpager2:viewpager2:$viewPager2Version")
+    // Viewpager2
+    implementation("androidx.viewpager2:viewpager2:$view_pager2_version")
 
-    //Paging
-    def pagingVersion = "3.1.1"
-    implementation "androidx.paging:paging-runtime:$pagingVersion"
 
-    // Glide
-    def glideVersion = "4.12.0"
-    implementation "com.github.bumptech.glide:glide:$glideVersion"
-
-    //bubble bottom navigation tabs
-    implementation 'io.ak1:bubbletabbar:1.0.8'
-
-    // custom splash screen
-    implementation 'com.github.rahuldange09:Splashy:v1.1.0'
+    //Image
+    implementation "com.github.bumptech.glide:glide:$glide_version"
 
     //PDF reader library
-    implementation 'com.github.barteksc:android-pdf-viewer:2.8.2'
+    //noinspection GradleDependency
+    implementation "com.github.barteksc:android-pdf-viewer:$pdf_library_version"
 
 
     // Circle image view
-    implementation 'de.hdodenhof:circleimageview:3.1.0'
+    implementation "de.hdodenhof:circleimageview:$circle_image_view_version"
 
     //Circular-Progress
-    implementation "com.github.VaibhavLakhera:Circular-Progress-View:0.1.2"
+    implementation "com.github.VaibhavLakhera:Circular-Progress-View:$circular_progress_view_version"
 
     // Pretty Time
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
+    implementation "org.ocpsoft.prettytime:prettytime:$pretty_time_version"
 
     //Shimmer Effect
-    implementation 'com.facebook.shimmer:shimmer:0.5.0'
-
-    // discrete scrollview
-    implementation 'com.yarolegovich:discrete-scrollview:1.5.1'
+    implementation "com.facebook.shimmer:shimmer:$shimmer_effect_version"
 
     // Loading-Animation
-    implementation 'com.github.Marvel999:Android-Loading-Animation:1.0.0'
-
-    //Swipe Recycler View
-    implementation 'com.github.xabaras:RecyclerViewSwipeDecorator:1.4'
+    implementation "com.github.Marvel999:Android-Loading-Animation:$loading_animation_version"
 
     //Flow layout
-    implementation 'org.apmem.tools:layouts:1.10@aar'
+    implementation "org.apmem.tools:layouts:$flow_layout_version"
 
     //Lottie
-    def lottieVersion = "3.4.0"
-    implementation "com.airbnb.android:lottie:$lottieVersion"
+    implementation "com.airbnb.android:lottie:$lottie_version"
 
-    implementation "com.github.YarikSOffice:lingver:1.3.0"
+    // Language Setting
+    implementation "com.github.YarikSOffice:lingver:$lingver_version"
 
-    implementation "androidx.datastore:datastore-preferences:1.0.0"
+    //Preferences
+    implementation "androidx.datastore:datastore-preferences:$datastore_preferences_version"
 
-    //noinspection GradleDependency
-    implementation 'androidx.core:core-ktx:1.7.0'
-    implementation 'androidx.appcompat:appcompat:1.4.1'
-    implementation 'androidx.activity:activity-ktx:1.4.0'
-    implementation 'androidx.fragment:fragment-ktx:1.4.1'
-    implementation 'com.google.android.material:material:1.6.0'
-    implementation 'androidx.constraintlayout:constraintlayout:2.1.3'
-    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    // Preference
+    implementation "androidx.preference:preference:$preference_version"
+
+    //View with push down effect
+    implementation( "com.github.thekhaeng:pushdown-anim-click:$pushdown_anim_click_version" ){
+        exclude group: 'com.android.support'}
+
+    // Material Edit Text
+    implementation "com.rengwuxian.materialedittext:library:$material_edit_text_version"
+
+    // Mask Edit Text
+    implementation "com.github.santalu:mask-edittext:$mask_edit_text_version"
+
+    // Base
+    implementation "androidx.core:core-ktx:$core_ktx_verion"
+    implementation "androidx.appcompat:appcompat:$app_compat_verion"
+    implementation "androidx.activity:activity-ktx:$activity_ktx_version"
+    implementation "androidx.fragment:fragment-ktx:$fragment_ktx_version"
+    implementation "com.google.android.material:material:$material_version"
+    implementation "androidx.constraintlayout:constraintlayout:$constraint_layout_version"
+    implementation "androidx.legacy:legacy-support-v4:$legacy_support_version"
 
     //Test
-    testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.1.3'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
+    testImplementation "junit:junit:$junit_version"
+    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
+    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
 }

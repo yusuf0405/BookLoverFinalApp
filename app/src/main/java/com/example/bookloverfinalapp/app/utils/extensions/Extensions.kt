@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.example.bookloverfinalapp.app.utils.extensions
 
 import android.app.Activity
@@ -10,7 +12,6 @@ import android.graphics.Color
 import android.net.Uri
 import android.os.Environment
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,23 +22,23 @@ import androidx.appcompat.app.AlertDialog
 import androidx.datastore.preferences.preferencesDataStore
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Transformations
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.App
 import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster
-import com.example.bookloverfinalapp.app.models.Chapter
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
+import com.example.bookloverfinalapp.app.utils.cons.SETTINGS_NAME
 import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UserDomainImage
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.parse.ParseFile
-import com.shockwave.pdfium.PdfDocument
+import com.thekhaeng.pushdownanim.PushDownAnim
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
@@ -46,7 +47,7 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
-val Context.dataStore by preferencesDataStore("settings")
+val Context.dataStore by preferencesDataStore(SETTINGS_NAME)
 
 fun View.showView() {
     this.visibility = View.VISIBLE
@@ -81,7 +82,7 @@ fun Fragment.setTabLayoutColor(tabLayout: TabLayout) {
         Configuration.UI_MODE_NIGHT_NO -> {
             tabLayout.setBackgroundColor(Color.parseColor("#2A00A2"))
             tabLayout.setTabTextColors(requireContext().getColor(R.color.white),
-                requireContext().getColor(R.color.white));
+                requireContext().getColor(R.color.white))
         }
         Configuration.UI_MODE_NIGHT_YES -> tabLayout.setBackgroundColor(Color.parseColor("#305F72"))
     }
@@ -95,15 +96,7 @@ fun Fragment.image(uri: Uri): ByteArray {
     return stream.toByteArray()
 }
 
-fun List<String>.indexOfIgnoreCase(str: String): Int {
-    for (i in this.indices) {
-        if (get(i).equals(str, true)) return i
-    }
-    return -1
-}
-
 suspend fun InputStream.saveToFile(context: Context): String {
-    Log.i("Start", "Start")
     val path = context.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS)
     val file = File.createTempFile("my_file", ".pdf", path)
     val result = withContext(Dispatchers.Default) {
@@ -115,21 +108,21 @@ suspend fun InputStream.saveToFile(context: Context): String {
         save.await()
         return@withContext file.path
     }
-    Log.i("End", "End")
     return result
 }
 
-fun Fragment.createNewPath(inputStream: InputStream, key: String) = GlobalScope.launch {
+fun Fragment.downEffect(view: View): View {
+    PushDownAnim.setPushDownAnimTo(view)
+    return view
+}
+
+fun Fragment.createNewPath(inputStream: InputStream, key: String) = App.applicationScope.launch {
     val newPath = inputStream.saveToFile(context = requireContext())
     requireContext().getSharedPreferences(key,
         Context.MODE_PRIVATE)
         .edit()
         .putString(key, newPath)
         .apply()
-}
-
-fun <T> LiveData<T>.observeNonNull(owner: LifecycleOwner, observer: (t: T) -> Unit) {
-    this.observe(owner) { it?.let(observer) }
 }
 
 fun Context.shoErrorDialog(message: String, listener: DialogInterface.OnClickListener) {
@@ -165,9 +158,6 @@ fun Int.makeView(parent: ViewGroup): View =
 fun Fragment.showSnackbar(view: View, message: String) {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 }
-
-fun PdfDocument.Bookmark.toChapter(isRead: Boolean): Chapter =
-    Chapter(title = title, isRead = false, pageIdx = pageIdx)
 
 fun EditText.text() {
     this.text.toString()
@@ -252,42 +242,16 @@ fun <T> Flow<T>.viewModelScope(viewModelScope: CoroutineScope) {
 
 fun <X, Y> LiveData<X>.map(func: (source: X) -> Y) = Transformations.map(this, func)
 
+
 fun EditText.validatePhone(): Boolean {
-    val phone = this.text.toString()
-    return phone.length == 9
+    val phone = this.text.trim().toString()
+    return phone.length == 19
 }
 
-fun EditText.validateEditPhone(): Boolean {
-    val phone = this.text.toString()
-    return phone.length == 13
+fun View.downEffect(): View {
+    PushDownAnim.setPushDownAnimTo(this)
+    return this
 }
-
-fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton) {
-    val dialogBinding = DialogQuestionInputBinding.inflate(layoutInflater)
-    val dialog = AlertDialog.Builder(requireContext())
-        .setTitle(R.string.question_dilaog_title)
-        .setView(dialogBinding.root)
-        .setPositiveButton(R.string.action_confirm, null)
-        .create()
-    dialog.setOnShowListener {
-        dialogBinding.questionInputEditText.requestFocus()
-        dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-            val enteredText = dialogBinding.questionInputEditText.text.toString()
-            if (enteredText.isBlank()) {
-                dialogBinding.questionInputEditText.error = getString(R.string.empty_value)
-                return@setOnClickListener
-            }
-            radioButton.text = enteredText
-            dialog.dismiss()
-        }
-    }
-    dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-    dialog.show()
-}
-
-fun BookPoster.toDomainPoster(): BookPosterDomain = BookPosterDomain(
-    url = url, name = name
-)
 
 fun Fragment.getImage() {
     val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -323,6 +287,14 @@ fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton, text: String) 
     }
     dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
     dialog.show()
+}
+
+fun <T> List<T>.swapElements(): List<T> {
+    val list = mutableListOf<T>()
+    for ((counter, i) in (size - 1 downTo 0).withIndex()) {
+        list.add(counter, this[i])
+    }
+    return list
 }
 
 fun Fragment.getFile(documentUri: Uri): File {
@@ -362,6 +334,26 @@ fun Context.glide(bitmap: Bitmap, imageView: ImageView) {
 fun Context.glide(uri: String?, imageView: ImageView) {
     Glide.with(this)
         .load(uri)
+        .into(imageView)
+}
+
+
+fun Context.getGoldColor(): Int = this.resources.getColor(R.color.gold)
+
+
+fun Context.getSilverColor(): Int = this.resources.getColor(R.color.silver)
+
+
+fun Context.getBronzeColor(): Int = this.resources.getColor(R.color.bronze)
+
+
+fun Context.getGreyColor(): Int = this.resources.getColor(R.color.grey)
+
+
+fun Context.glidePlaceHolder(uri: String?, imageView: ImageView) {
+    Glide.with(this)
+        .load(uri)
+        .placeholder(R.drawable.placeholder_avatar)
         .into(imageView)
 }
 

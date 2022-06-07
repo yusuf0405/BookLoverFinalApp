@@ -19,13 +19,13 @@
         android:theme="@style/Theme.KnigolyubApp"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".app.ui.screen_class_has_deleted.ActivityClassHasDeleted"
+            android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_class_has_deleted.ActivityClassHasDeleted"
             android:exported="false" />
         <activity
             android:name=".app.ui.admin_screens.screen_main.ActivityAdminMain"
             android:exported="false" />
         <activity
-            android:name=".app.ui.screen_splash.ActivitySplash"
+            android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_splash.ActivitySplash"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,12 +34,12 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".app.ui.screen_main.ActivityMain"
+            android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_main.ActivityMain"
             android:configChanges="orientation|screenSize"
             android:exported="false"
             android:label="@string/title_activity_main_student" />
         <activity
-            android:name=".app.ui.screen_login_main.ActivityLoginMain"
+            android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_login_main.ActivityLoginMain"
             android:configChanges="orientation|screenSize"
             android:exported="true">
             <intent-filter>

@@ -1,14 +1,14 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.BookThatReadDb
-import com.example.data.cache.models.BookThatReadPosterDb
+import com.example.data.cache.models.BookThatReadCache
+import com.example.data.cache.models.BookThatReadPosterCache
 import com.example.data.models.BookThatReadData
 import com.example.domain.Mapper
 
-class BookThatReadDataToBookDbMapper : Mapper<BookThatReadData, BookThatReadDb>() {
+class BookThatReadDataToBookDbMapper : Mapper<BookThatReadData, BookThatReadCache> {
 
-    override fun map(from: BookThatReadData): BookThatReadDb = from.run {
-        BookThatReadDb(
+    override fun map(from: BookThatReadData): BookThatReadCache = from.run {
+        BookThatReadCache(
             objectId = objectId,
             title = title,
             author = author,
@@ -20,7 +20,7 @@ class BookThatReadDataToBookDbMapper : Mapper<BookThatReadData, BookThatReadDb>(
             chaptersRead = chaptersRead,
             progress = progress,
             isReadingPages = isReadingPages,
-            poster = BookThatReadPosterDb(name = poster.name, url = poster.url),
+            poster = BookThatReadPosterCache(name = poster.name, url = poster.url),
             book = book,
             bookId = bookId,
         )

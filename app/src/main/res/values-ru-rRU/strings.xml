@@ -117,6 +117,7 @@
     <string name="first_name">Имя</string>
     <string name="grade">Класс</string>
     <string name="grade_letter">Буква</string>
+    <string name="user_statistics">Статистика пользователя</string>
     <string name="male">Мужской</string>
     <string name="female">Женский</string>
     <string name="your_gender">Ваш пол</string>
@@ -193,11 +194,12 @@
     <string name="question_text">Текст вопроса (не более 200 символов)</string>
 
     <string name="default_delete_question_alert_message">Вы действительно хотите удалить этот вопрос?</string>
+    <string name="default_delete_user_alert_message">Вы действительно хотите удалить этого пользователя?</string>
     <string name="default_delete_class_alert_message">Вы действительно хотите удалить этот класс?</string>
 
     <string name="edit_question">Изменить</string>
     <string name="edit_a_question">Изменить вопрос</string>
-    <string name="books_he_reads">Книги, которые читает ...</string>
+    <string name="books_he_reads">Книги, которые читает </string>
     <string name="delete_student">Удалить профиль</string>
     <string name="student_deleted_successfuly">Студент успешно удален</string>
     <string name="you_account_deleted">Ваш профиль был удален администратором</string>
@@ -211,7 +213,7 @@
     <string name="bookAutor">Автор</string>
     <string name="bookPublicYear">Дата публикации</string>
     <string name="school_statistics">Статистика школы</string>
-    <string name="students_read">учеников читают</string>
+    <string name="number_of_users">количество пользователей</string>
     <string name="books_in_the_database">книг в базе</string>
     <string name="they_read_books">книг читают</string>
     <string name="select_a_class">Выберите класс</string>
@@ -230,7 +232,7 @@
     <string name="year_of_publication">Год издания:</string>
     <string name="pages_count">Страниц:</string>
     <string name="default_delete_delete_alert_message">Вы действительно хотите эту книгу?</string>
-    <string name="default_book_delete_alert_message">Вы хотите эту <книгу></книгу> удалить? Все пользователи потеряют доступ к этой книге</string>
+    <string name="default_book_delete_alert_message">Вы хотите удалить эту книгу? Все пользователи потеряют доступ к этой книге</string>
     <string name="more_detailed">Подробнее</string>
     <string name="similar_recommend">Рекмендации</string>
     <string name="about_the_book">О книге</string>
@@ -238,4 +240,18 @@
     <string name="chapter">Глава</string>
     <string name="added">Добавлено</string>
     <string name="setting">Настройки</string>
+    <string name="teachers">Учителя</string>
+    <string name="students">Студенты</string>
+    <string name="teacher_statistics">Статистика Учителя</string>
+    <string name="search">Поиск</string>
+    <string name="question">Вопрос</string>
+    <string name="phone_text">Номер телефона:</string>
+    <string name="teacher_books">Книги учителя</string>
+    <string name="student_books">Книги ученика</string>
+    <string name="go_to_pages">Вы можете перейти к страницам</string>
+    <string name="have_gone_beyond">Вы вышли за рамки допустимых страниц</string>
+    <string name="rating">Рейтинг</string>
+    <string name="school_class">Класс</string>
+    <string name="select_display_mode">Выберите режим отображения рейтинга</string>
+    <string name="you">ТЫ</string>
 </resources>

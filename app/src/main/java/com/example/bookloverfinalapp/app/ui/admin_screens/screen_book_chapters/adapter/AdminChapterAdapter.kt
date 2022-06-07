@@ -1,11 +1,11 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.adapter
 
 import android.annotation.SuppressLint
-import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.utils.extensions.downEffect
 import com.example.bookloverfinalapp.databinding.ItemChapterBinding
 import com.shockwave.pdfium.PdfDocument
 
@@ -27,7 +27,7 @@ class AdminChapterAdapter(private val actionListener: AdminChapterItemOnClickLis
             val chapter = chapters[position]
             binding.apply {
                 chapterText.text = chapter.title
-                itemView.setOnClickListener {
+                itemView.downEffect().setOnClickListener {
                     actionListener.goQuestionFragment(chapter = position + 1)
                 }
             }

@@ -1,39 +1,36 @@
 package com.example.data.cache.db
 
-import androidx.room.*
-import com.example.data.cache.models.BookThatReadDb
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.OnConflictStrategy
+import androidx.room.Query
+import com.example.data.cache.models.BookThatReadCache
 
 
 @Dao
 interface BooksThatReadDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addNewBook(book: BookThatReadDb)
+    suspend fun addNewBook(book: BookThatReadCache)
 
-    @Update
-    suspend fun updateBook(book: BookThatReadDb)
+    @Query("select * from books_that_read")
+    suspend fun getAllBooks(): MutableList<BookThatReadCache>
 
-    @Query("UPDATE book_that_read_database SET progress =:progress WHERE objectId = :id")
+    @Query("select * from books_that_read where book_id == :bookId")
+    suspend fun getMyBook(bookId: String): BookThatReadCache?
+
+    @Query("UPDATE books_that_read SET progress =:progress WHERE objectId = :id")
     suspend fun updateProgress(progress: Int, id: String)
 
-    @Query("UPDATE book_that_read_database SET chaptersRead =:chapters WHERE objectId = :id")
+    @Query("UPDATE books_that_read SET chapters_read =:chapters WHERE objectId = :id")
     suspend fun updateChapters(chapters: Int, id: String)
 
-    @Query("UPDATE book_that_read_database SET isReadingPages =:isReadingPages WHERE objectId = :id")
+    @Query("UPDATE books_that_read SET is_reading_pages =:isReadingPages WHERE objectId = :id")
     suspend fun updateIsReadingPages(isReadingPages: List<Boolean>, id: String)
 
-    @Delete
-    suspend fun deleteBook(book: BookThatReadDb)
-
-    @Query("DELETE FROM book_that_read_database WHERE objectId = :id")
+    @Query("DELETE FROM books_that_read WHERE objectId = :id")
     fun deleteById(id: String)
 
-    @Query("DELETE FROM book_that_read_database")
+    @Query("DELETE FROM books_that_read")
     fun clearTable()
-
-    @Query("select * from book_that_read_database")
-    suspend fun getAllBooks(): MutableList<BookThatReadDb>
-
-    @Query("select * from book_that_read_database where bookId == :bookId")
-    suspend fun getMyBook(bookId: String): BookThatReadDb?
 }

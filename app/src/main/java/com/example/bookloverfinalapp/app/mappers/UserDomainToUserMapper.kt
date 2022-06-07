@@ -2,11 +2,11 @@ package com.example.bookloverfinalapp.app.mappers
 
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserImage
-import com.example.bookloverfinalapp.app.utils.UserType
+import com.example.bookloverfinalapp.app.models.UserType
 import com.example.domain.Mapper
 import com.example.domain.models.UserDomain
 
-class UserDomainToUserMapper : Mapper<UserDomain, User>() {
+class UserDomainToUserMapper : Mapper<UserDomain, User> {
     override fun map(from: UserDomain): User = from.run {
         User(
             createAt = createAt,

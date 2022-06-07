@@ -1,6 +1,6 @@
 package com.example.data.repository
 
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.UserCache
 import com.example.data.cache.source.UsersCacheDataSource
 import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.source.UsersCloudDataSource
@@ -21,7 +21,7 @@ class UserRepositoryImpl(
     private val cacheDataSource: UsersCacheDataSource,
     private val studentDomainMapper: Mapper<StudentData, StudentDomain>,
     private val userCloudMapper: Mapper<UserCloud, UserDomain>,
-    private val studentDbMapper: Mapper<StudentDb, StudentData>,
+    private val userCacheMapper: Mapper<UserCache, StudentData>,
 ) : UserRepository {
 
     override fun updateUser(
@@ -47,7 +47,8 @@ class UserRepositoryImpl(
         emit(Resource.loading())
         val userCacheList = cacheDataSource.fetchMyStudents(classId = classId)
         if (userCacheList.isEmpty()) {
-            val result = cloudDataSource.fetchMyStudents(classId = classId)
+            val result = cloudDataSource.fetchMyStudents(id = classId,
+                responseType = StudentsResponseType.ClASS_STUDENTS)
             if (result.status == Status.SUCCESS) {
                 val userDataList = result.data!!
                 if (userDataList.isEmpty()) emit(Resource.empty())
@@ -59,16 +60,48 @@ class UserRepositoryImpl(
                 }
             } else emit(Resource.error(message = result.message!!))
         } else {
-            val userDataList = userCacheList.map { userDb -> studentDbMapper.map(userDb) }
+            val userDataList = userCacheList.map { userDb -> userCacheMapper.map(userDb) }
             val userDomainList = userDataList.map { userData -> studentDomainMapper.map(userData) }
             if (userDomainList.isEmpty()) emit(Resource.empty())
             else emit(Resource.success(data = userDomainList))
         }
     }
 
-    override fun fetchClassStudents(classId: String): Flow<Resource<List<StudentDomain>>> = flow {
+    override fun fetchSchoolStudents(schoolId: String): Flow<Resource<List<StudentDomain>>> = flow {
         emit(Resource.loading())
-        val result = cloudDataSource.fetchMyStudents(classId = classId)
+        val result = cloudDataSource.fetchMyStudents(id = schoolId,
+            responseType = StudentsResponseType.SCHOOL_STUDENTS)
+        if (result.status == Status.SUCCESS) {
+            val userDataList = result.data!!
+            if (userDataList.isEmpty()) emit(Resource.empty())
+            else {
+                cacheDataSource.saveStudents(userDataList)
+                val userDomainList =
+                    userDataList.map { userData -> studentDomainMapper.map(userData) }
+                emit(Resource.success(data = userDomainList))
+            }
+        } else emit(Resource.error(message = result.message!!))
+    }
+
+    override fun onRefresh(classId: String): Flow<Resource<List<StudentDomain>>> = flow {
+        val result = cloudDataSource.fetchMyStudents(id = classId,
+            responseType = StudentsResponseType.ClASS_STUDENTS)
+        if (result.status == Status.SUCCESS) {
+            val userDataList = result.data!!
+            if (userDataList.isEmpty()) emit(Resource.empty())
+            else {
+                cacheDataSource.saveStudents(userDataList)
+                val userDomainList =
+                    userDataList.map { userData -> studentDomainMapper.map(userData) }
+                emit(Resource.success(data = userDomainList))
+            }
+        } else emit(Resource.error(message = result.message!!))
+    }
+
+    override fun fetchClassUsers(classId: String): Flow<Resource<List<StudentDomain>>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.fetchMyStudents(id = classId,
+            responseType = StudentsResponseType.ClASS_USERS)
         if (result.status == Status.SUCCESS) {
             val userDataList = result.data!!
             if (userDataList.isEmpty()) emit(Resource.empty())
@@ -115,5 +148,12 @@ class UserRepositoryImpl(
 
 
     override suspend fun clearStudentsCache() = cacheDataSource.clearStudents()
+
+}
+
+enum class StudentsResponseType {
+    ClASS_USERS,
+    ClASS_STUDENTS,
+    SCHOOL_STUDENTS
 
 }

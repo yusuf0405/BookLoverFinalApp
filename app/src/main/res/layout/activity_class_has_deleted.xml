@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_class_has_deleted.ActivityClassHasDeleted">
+    tools:context=".app.ui.general_screens.screen_class_has_deleted.ActivityClassHasDeleted">
 
     <TextView
         android:id="@+id/textView10"

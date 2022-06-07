@@ -38,7 +38,9 @@
             android:id="@+id/pick_pdf_button"
             style="@style/button_style"
             android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
             android:text="@string/upload_book"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/bookGenresText" />
@@ -47,12 +49,14 @@
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/save_pdf_button"
             style="@style/button_style"
-            android:layout_marginTop="32dp"
             android:text="@string/student_edit_profile_save_btn"
             android:visibility="gone"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear" />
+            app:layout_constraintTop_toBottomOf="@+id/bookGenresText"  />
 
         <com.github.barteksc.pdfviewer.PDFView
             android:id="@+id/pdfViewAdmin"
@@ -133,6 +137,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:text="@string/to_change"
+            android:visibility="gone"
             app:layout_constraintEnd_toEndOf="@+id/cardView"
             app:layout_constraintStart_toStartOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/cardView" />

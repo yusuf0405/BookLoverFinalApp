@@ -28,12 +28,12 @@ class FragmentAddQuestionViewModel @Inject constructor(
                     when (resource.status) {
                         Status.LOADING -> showProgressDialog()
                         Status.SUCCESS -> {
-                            emit(Unit)
                             dismissProgressDialog()
+                            emit(Unit)
                         }
                         Status.ERROR -> {
-                            error(message = resource.message!!)
                             dismissProgressDialog()
+                            error(message = resource.message!!)
                         }
                     }
                 }

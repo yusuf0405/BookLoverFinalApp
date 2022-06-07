@@ -6,7 +6,7 @@ import com.example.domain.Mapper
 import com.example.domain.models.UserDomainImage
 import com.example.domain.models.UserUpdateDomain
 
-class UserUpdateToCloudMapper : Mapper<UserUpdateDomain, UserUpdateCloud>() {
+class UserUpdateToCloudMapper : Mapper<UserUpdateDomain, UserUpdateCloud> {
     override fun map(from: UserUpdateDomain): UserUpdateCloud = from.run {
         UserUpdateCloud(image = image.toDtoImage(),
             lastname = lastname,

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_sign_up_teacher.FragmentSignUpTeacher">
+    tools:context=".app.ui.general_screens.screen_sign_up_teacher.FragmentSignUpTeacher">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -16,6 +16,7 @@
             android:layout_height="wrap_content"
             android:text="@string/teacher_sighUp"
             android:textSize="24sp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -140,48 +141,6 @@
                 android:textSize="18sp" />
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.MaterialAutoCompleteTextView
-            android:id="@+id/materialAutoCompleteTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:inputType="number|phone"
-            android:text="+996"
-            android:textSize="24sp"
-            app:layout_constraintBottom_toBottomOf="@+id/phone_field_box"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/phone_field_box" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/phone_field_box"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            android:ems="10"
-            android:hint="@string/your_number"
-            android:inputType="number"
-            android:shadowColor="@color/black"
-            android:shadowDy="3"
-            android:shadowRadius="6"
-            app:boxStrokeWidth="0dp"
-            app:boxStrokeWidthFocused="0dp"
-            app:endIconMode="clear_text"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/materialAutoCompleteTextView"
-            app:layout_constraintTop_toBottomOf="@+id/password_field_box">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/phone_field"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/ic_text_white_bg"
-                android:maxLength="9"
-                android:textSize="18sp" />
-        </com.google.android.material.textfield.TextInputLayout>
-
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/signUpBtn"
@@ -219,9 +178,10 @@
             android:id="@+id/signIn_link"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="32dp"
             android:text="@string/enter"
             android:textColor="@color/violet"
-            app:layout_constraintBottom_toBottomOf="@+id/textView4"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toEndOf="@+id/textView4"
@@ -240,11 +200,14 @@
 
         <TextView
             android:id="@+id/schoolTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            app:layout_constraintStart_toStartOf="@+id/materialAutoCompleteTextView"
-            app:layout_constraintTop_toBottomOf="@+id/materialAutoCompleteTextView" />
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/schoolButton"
+            app:layout_constraintStart_toStartOf="@+id/phoneNumberInputLayout"
+            app:layout_constraintTop_toBottomOf="@+id/phoneNumberInputLayout" />
 
         <Button
             android:id="@+id/schoolButton"
@@ -252,20 +215,52 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="@string/to_change"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/schoolTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/schoolTextView" />
 
         <TextView
             android:id="@+id/classTextView"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="36dp"
-            app:layout_constraintEnd_toEndOf="@+id/schoolTextView"
+            android:layout_marginEnd="8dp"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toStartOf="@+id/classButton"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/schoolTextView"
             app:layout_constraintTop_toBottomOf="@+id/schoolTextView" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumberInputLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:ems="10"
+            android:hint="@string/your_number"
+            android:inputType="textPersonName"
+            android:shadowColor="@color/black"
+            android:shadowDy="3"
+            android:shadowRadius="6"
+            app:boxStrokeWidth="0dp"
+            app:boxStrokeWidthFocused="0dp"
+            app:endIconMode="clear_text"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/password_field_box">
+
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/phoneField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ic_text_white_bg"
+                android:inputType="number"
+                android:textSize="18sp"
+                app:met_mask="+996 (###) ## ## ##" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/classButton"
@@ -273,7 +268,7 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="24dp"
             android:text="@string/to_change"
-            android:textSize="12sp"
+            android:textSize="10sp"
             app:layout_constraintBottom_toBottomOf="@+id/classTextView"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="@+id/classTextView" />

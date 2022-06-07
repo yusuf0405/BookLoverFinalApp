@@ -5,10 +5,10 @@ import com.example.data.cache.db.BooksDao
 import com.example.data.cache.db.BooksThatReadDao
 import com.example.data.cache.db.ClassDao
 import com.example.data.cache.db.UsersDao
-import com.example.data.cache.models.BookDb
-import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.BookThatReadCache
 import com.example.data.cache.models.ClassCache
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.UserCache
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cache.source.BooksThatReadDataSource
 import com.example.data.cache.source.ClassCacheDataSource
@@ -85,7 +85,7 @@ object DataSourceModule {
     fun provideBooksCacheDataSource(
         dao: BooksDao,
         bookDao: BooksThatReadDao,
-        mapper: Mapper<BookData, BookDb>,
+        mapper: Mapper<BookData, BookCache>,
     ): BooksCacheDataSource =
         BooksCacheDataSource.Base(
             bookDao = dao,
@@ -96,7 +96,7 @@ object DataSourceModule {
     @Singleton
     fun provideUsersCacheDataSource(
         dao: UsersDao,
-        dataMapper: Mapper<StudentData, StudentDb>,
+        dataMapper: Mapper<StudentData, UserCache>,
     ): UsersCacheDataSource = UsersCacheDataSource.Base(
         dao = dao,
         dataMapper = dataMapper)
@@ -106,7 +106,7 @@ object DataSourceModule {
     @Singleton
     fun provideBookCacheDataSource(
         dao: BooksThatReadDao,
-        mapper: Mapper<BookThatReadData, BookThatReadDb>,
+        mapper: Mapper<BookThatReadData, BookThatReadCache>,
     ): BooksThatReadDataSource =
         BooksThatReadDataSource.Base(
             mapper = mapper,

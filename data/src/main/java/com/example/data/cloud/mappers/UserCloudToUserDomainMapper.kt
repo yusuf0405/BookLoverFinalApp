@@ -5,7 +5,7 @@ import com.example.domain.Mapper
 import com.example.domain.models.UserDomain
 import com.example.domain.models.UserDomainImage
 
-class UserCloudToUserDomainMapper : Mapper<UserCloud, UserDomain>() {
+class UserCloudToUserDomainMapper : Mapper<UserCloud, UserDomain> {
     override fun map(from: UserCloud): UserDomain = from.run {
         UserDomain(createAt = createAt,
             classId = classId,

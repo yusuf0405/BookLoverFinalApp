@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.admin_screens.screen_all_questions.ui.FragmentAllQuestion">
+    tools:context=".app.ui.admin_screens.screen_all_questions.FragmentAllQuestion">
 
     <Toolbar
         android:id="@+id/toolbar"

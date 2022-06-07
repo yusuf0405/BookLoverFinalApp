@@ -1,13 +1,13 @@
 package com.example.data.cache.source
 
 import com.example.data.cache.db.UsersDao
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.UserCache
 import com.example.data.models.StudentData
 import com.example.domain.Mapper
 
 interface UsersCacheDataSource {
 
-    suspend fun fetchMyStudents(classId: String): List<StudentDb>
+    suspend fun fetchMyStudents(classId: String): List<UserCache>
 
     suspend fun saveStudents(users: List<StudentData>)
 
@@ -17,11 +17,11 @@ interface UsersCacheDataSource {
 
     class Base(
         private val dao: UsersDao,
-        private val dataMapper: Mapper<StudentData, StudentDb>,
+        private val dataMapper: Mapper<StudentData, UserCache>,
     ) :
         UsersCacheDataSource {
 
-        override suspend fun fetchMyStudents(classId: String): List<StudentDb> =
+        override suspend fun fetchMyStudents(classId: String): List<UserCache> =
             dao.getMyUsers(classId = classId)
 
         override suspend fun saveStudents(users: List<StudentData>) {

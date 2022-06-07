@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_book_details.ui.FragmentBookInfo">
-
-    <Toolbar
-        android:id="@+id/title_bar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:title="@string/about_the_book"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    tools:context=".app.ui.general_screens.screen_book_details.FragmentBookInfo">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/title_bar">
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Toolbar
+            android:id="@+id/title_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:title="@string/about_the_book"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline16"
@@ -30,13 +30,6 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.32" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline15"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintGuide_percent="0.02" />
 
         <androidx.constraintlayout.widget.Guideline
             android:id="@+id/guideline12"
@@ -56,7 +49,7 @@
             app:layout_constraintBottom_toBottomOf="@+id/tv_chapter_count_text"
             app:layout_constraintEnd_toStartOf="@+id/guideline16"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            app:layout_constraintTop_toBottomOf="@+id/title_bar">
 
             <ImageView
                 android:id="@+id/tv_book_image"
@@ -82,7 +75,7 @@
             app:layout_constraintEnd_toStartOf="@+id/bookProgress"
             app:layout_constraintLeft_toRightOf="@+id/iv_book"
             app:layout_constraintStart_toStartOf="@+id/guideline16"
-            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/title_bar"
             tools:text="Война и Мир" />
 
         <com.vaibhavlakhera.circularprogressview.CircularProgressView
@@ -173,10 +166,10 @@
             android:drawablePadding="5dp"
             android:ellipsize="end"
             android:singleLine="true"
-            tools:text="352"
             android:textSize="16sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_page_count_text"
-            app:layout_constraintTop_toTopOf="@+id/tv_page_count_text" />
+            app:layout_constraintTop_toTopOf="@+id/tv_page_count_text"
+            tools:text="352" />
 
         <TextView
             android:id="@+id/tv_chapter_count_text"
@@ -200,10 +193,10 @@
             android:drawablePadding="5dp"
             android:ellipsize="end"
             android:singleLine="true"
-            tools:text="352"
             android:textSize="16sp"
             app:layout_constraintLeft_toRightOf="@+id/tv_chapter_count_text"
-            app:layout_constraintTop_toTopOf="@+id/tv_chapter_count_text" />
+            app:layout_constraintTop_toTopOf="@+id/tv_chapter_count_text"
+            tools:text="352" />
 
 
         <TextView
@@ -234,9 +227,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
+            android:layout_marginBottom="32dp"
             android:orientation="horizontal"
             android:visibility="visible"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_recommend"
@@ -250,11 +245,11 @@
             android:visibility="gone"
             app:layout_constraintBottom_toBottomOf="@+id/tv_book_name"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/guideline15"
+            app:layout_constraintTop_toBottomOf="@+id/title_bar"
             app:lottie_loop="true"
             app:lottie_rawRes="@raw/add_to_book" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

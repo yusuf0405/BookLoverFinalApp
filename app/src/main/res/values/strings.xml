@@ -215,12 +215,13 @@
 
     <string name="edit_question">To change</string>
     <string name="edit_a_question">Edit a question</string>
-    <string name="books_he_reads">Books he reads …</string>
+    <string name="books_he_reads">Books reads </string>
     <string name="delete_student">Delete Profile</string>
     <string name="student_deleted_successfuly">Student successfully removed</string>
     <string name="you_account_deleted">Your profile has been deleted by the administrator</string>
     <string name="splash_error_title">Mistake</string>
     <string name="student_statistics">Student Statistics</string>
+    <string name="user_statistics">User Statistics</string>
     <string name="login_out">Log out of the profile</string>
     <string name="school">School</string>
     <string name="name">Name</string>
@@ -229,7 +230,7 @@
     <string name="bookAutor">Author</string>
     <string name="bookPublicYear">Date of publication</string>
     <string name="school_statistics">School statistics</string>
-    <string name="students_read">students read</string>
+    <string name="number_of_users">number of users</string>
     <string name="books_in_the_database">books in the database</string>
     <string name="they_read_books">they read books</string>
     <string name="select_a_class">Select a class</string>
@@ -256,4 +257,19 @@
     <string name="chapter">Chapter</string>
     <string name="added">Added</string>
     <string name="setting">Settings</string>
+    <string name="teachers">Teachers</string>
+    <string name="students">Students</string>
+    <string name="teacher_statistics">Teacher Statistics</string>
+    <string name="search">Search</string>
+    <string name="default_delete_user_alert_message">Do you really want to delete this user?</string>
+    <string name="question">Question</string>
+    <string name="phone_text">Telephone number:</string>
+    <string name="teacher_books">Teacher Books</string>
+    <string name="student_books">Student Books</string>
+    <string name="go_to_pages">You can go to pages</string>
+    <string name="have_gone_beyond">You have gone beyond the acceptable pages</string>
+    <string name="rating">Rating</string>
+    <string name="school_class">Class</string>
+    <string name="select_display_mode">Select rating display mode</string>
+    <string name="you">YOU</string>
 </resources>

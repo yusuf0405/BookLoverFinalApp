@@ -1,6 +1,5 @@
 package com.example.bookloverfinalapp.app.models
 
-import com.example.bookloverfinalapp.app.utils.UserType
 import java.util.*
 
 data class User(
@@ -26,3 +25,9 @@ data class UserImage(
     var type: String,
     var url: String,
 )
+
+enum class UserType {
+    student,
+    teacher,
+    admin
+}

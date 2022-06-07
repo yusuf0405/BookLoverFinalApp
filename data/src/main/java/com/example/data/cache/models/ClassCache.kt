@@ -4,9 +4,9 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "class_database")
+@Entity(tableName = "school_classes")
 data class ClassCache(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "title") var title: String,
-    @ColumnInfo(name = "schoolId") var schoolId: String,
+    @ColumnInfo(name = "school_id") var schoolId: String,
 )

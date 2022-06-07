@@ -16,12 +16,21 @@ object InteractorModule {
         GetAllBooksUseCase(repository = repository)
 
     @Provides
+    fun provideBooksOnRefreshUseCase(repository: BooksRepository): BooksOnRefreshUseCase =
+        BooksOnRefreshUseCase(repository = repository)
+
+
+    @Provides
     fun provideAddNewBookQuestionUseCase(repository: BooksRepository): AddNewBookQuestionUseCase =
         AddNewBookQuestionUseCase(repository = repository)
 
     @Provides
     fun provideGetSimilarBooksUseCase(repository: BooksRepository): GetSimilarBooksUseCase =
         GetSimilarBooksUseCase(repository = repository)
+
+    @Provides
+    fun provideGetSearchBookUseCase(repository: BooksRepository): GetSearchBookUseCase =
+        GetSearchBookUseCase(repository = repository)
 
     @Provides
     fun provideAddNewBookUseCase(repository: BooksRepository): AddNewBookUseCase =
@@ -57,8 +66,12 @@ object InteractorModule {
         GetBookThatReadUseCase(repository = repository)
 
     @Provides
-    fun provideGetStudentBooksUseCase(repository: BookThatReadRepository): GetStudentBooksUseCase =
-        GetStudentBooksUseCase(repository = repository)
+    fun provideGetStudentBooksUseCase(repository: BookThatReadRepository): GetUsersBooksUseCase =
+        GetUsersBooksUseCase(repository = repository)
+
+    @Provides
+    fun provideBooksThatReadOnRefreshUseCase(repository: BookThatReadRepository): BooksThatReadOnRefreshUseCase =
+        BooksThatReadOnRefreshUseCase(repository = repository)
 
 
     @Provides
@@ -102,17 +115,24 @@ object InteractorModule {
         AddSessionTokenUseCase(repository = repository)
 
     @Provides
-    fun provideGetClassStudentsUseCase(repository: UserRepository): GetClassStudentsUseCase =
-        GetClassStudentsUseCase(repository = repository)
+    fun provideGetClassStudentsUseCase(repository: UserRepository): GetClassUsersUseCase =
+        GetClassUsersUseCase(repository = repository)
 
     @Provides
     fun provideUpdateUserUseCase(repository: UserRepository): UpdateUserUseCase =
         UpdateUserUseCase(repository = repository)
 
     @Provides
+    fun provideGetSchoolStudentsUseCase(repository: UserRepository): GetSchoolStudentsUseCase =
+        GetSchoolStudentsUseCase(repository = repository)
+
+    @Provides
     fun provideUpdateStudentClassUseCase(repository: UserRepository): UpdateStudentClassUseCase =
         UpdateStudentClassUseCase(repository = repository)
 
+    @Provides
+    fun provideStudentsOnRefreshUseCase(repository: UserRepository): StudentsOnRefreshUseCase =
+        StudentsOnRefreshUseCase(repository = repository)
 
     @Provides
     fun provideSignUpUseCase(repository: LoginRepository): SignUpUseCase =
@@ -141,5 +161,10 @@ object InteractorModule {
     @Provides
     fun provideAddNewClassUseCase(repository: ClassRepository): AddNewClassUseCase =
         AddNewClassUseCase(repository = repository)
+
+    @Provides
+    fun provideGetAllClassesCloudUseCase(repository: ClassRepository): GetAllClassesCloudUseCase =
+        GetAllClassesCloudUseCase(repository = repository)
+
 
 }

@@ -11,7 +11,11 @@ interface UserRepository {
 
     fun fetchMyStudents(classId: String): Flow<Resource<List<StudentDomain>>>
 
-    fun fetchClassStudents(classId: String): Flow<Resource<List<StudentDomain>>>
+    fun fetchSchoolStudents(schoolId: String): Flow<Resource<List<StudentDomain>>>
+
+    fun onRefresh(classId: String): Flow<Resource<List<StudentDomain>>>
+
+    fun fetchClassUsers(classId: String): Flow<Resource<List<StudentDomain>>>
 
     fun updateStudentClass(
         id: String,

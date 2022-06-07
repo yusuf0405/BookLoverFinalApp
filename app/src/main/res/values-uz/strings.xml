@@ -173,6 +173,7 @@
     <string name="action_confirm">Tasdiqlash</string>
     <string name="volume_school_setup">Maktabni tanlang</string>
     <string name="class_setup">Sinfni tanlang</string>
+    <string name="user_statistics">Foydalanuvchining Statistikasi</string>
     <string name="to_change">Ozgartirish</string>
     <string name="default_login_out_alert_message">Agar chindan akkauntdan chiqishni istaysizmi?</string>
     <string name="login_out_title">Chiqish</string>
@@ -195,12 +196,12 @@
 
     <string name="edit_question">Ozgartirish</string>
     <string name="edit_a_question">Savolni ozgartirish</string>
-    <string name="books_he_reads">Oqigan kitoblar …</string>
+    <string name="books_he_reads">Oqigan kitoblar </string>
     <string name="delete_student">Profilni ochirish</string>
     <string name="student_deleted_successfuly">Talaba muvaffaqiyatli ochirildi</string>
     <string name="you_account_deleted">Profilingiz administrator tomonidan olib tashlandi</string>
     <string name="splash_error_title">Xato</string>
-    <string name="student_statistics">Talabalar statistikasi</string>
+    <string name="student_statistics">Talabaning statistikasi</string>
     <string name="login_out">Profildan chiqish</string>
     <string name="school">Maktab</string>
     <string name="name">Ismi</string>
@@ -209,7 +210,7 @@
     <string name="bookAutor">Muallif</string>
     <string name="bookPublicYear">Chop etilgan sana</string>
     <string name="school_statistics">Maktab statistikasi</string>
-    <string name="students_read">talabalar oqiydilar</string>
+    <string name="number_of_users">foydalanuvchi soni</string>
     <string name="books_in_the_database">bazasida kitoblar</string>
     <string name="they_read_books">kitoblar oqildi</string>
     <string name="select_a_class">Sinfni tanlang</string>
@@ -236,4 +237,19 @@
     <string name="chapter">Bob</string>
     <string name="added">Qoshilgan</string>
     <string name="setting">Sozlamalar</string>
+    <string name="teachers">O\'qituvchilar</string>
+    <string name="students">Talabalar</string>
+    <string name="teacher_statistics">O\'qituvchi Statistikasi</string>
+    <string name="search">Qidirmoq</string>
+    <string name="default_delete_user_alert_message">Haqiqatan ham bu foydalanuvchini oʻchirib tashlamoqchimisiz?</string>
+    <string name="question">Savol</string>
+    <string name="phone_text">telefon raqami:</string>
+    <string name="teacher_books">O\'qituvchining kitoblari</string>
+    <string name="student_books">Talabaning kitoblari</string>
+    <string name="go_to_pages">Siz o\'tishingiz mumkin bulgan sahifalar</string>
+    <string name="have_gone_beyond">Siz qabul qilinadigan sahifalardan tashqariga chiqdingiz</string>
+    <string name="rating">Reyting</string>
+    <string name="school_class">Sinf</string>
+    <string name="select_display_mode">Select the frosting mode</string>
+    <string name="you">SIZ</string>
 </resources>

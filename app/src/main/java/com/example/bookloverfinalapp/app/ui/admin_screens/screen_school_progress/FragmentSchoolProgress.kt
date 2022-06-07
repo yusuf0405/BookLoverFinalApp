@@ -1,21 +1,18 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_school_progress
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.models.Student
+import com.example.bookloverfinalapp.app.utils.extensions.downEffect
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
-import com.example.bookloverfinalapp.app.utils.extensions.launchWhenStarted
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.databinding.FragmentSchoolProgressBinding
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 class FragmentSchoolProgress :
@@ -23,8 +20,6 @@ class FragmentSchoolProgress :
         FragmentSchoolProgressBinding::inflate) {
 
     override val viewModel: FragmentSchoolProgressViewModel by viewModels()
-
-    override fun onReady(savedInstanceState: Bundle?) {}
 
     private var classList = mutableListOf<SchoolClass>()
     private val classesTitleList = mutableListOf<String>()
@@ -39,19 +34,20 @@ class FragmentSchoolProgress :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        binding().schoolNameText.text = currentUser.schoolName
 
-        binding().classEditButton.setOnClickListener {
+        binding().progressSchoolTitleText.text = currentUser.schoolName
+
+        downEffect(binding().classCardView).setOnClickListener {
             showClassSingleChoiceWithConfirmationAlertDialog(classesTitleList)
         }
 
-        binding().studentEditButton.setOnClickListener {
+        downEffect(binding().studentCardView).setOnClickListener {
             showStudentSingleChoiceWithConfirmationAlertDialog(studentNameList)
         }
 
         viewModel.fetchAllBooks(schoolId = currentUser.schoolId)
 
-        viewModel.booksObserve(viewLifecycleOwner) { books ->
+        viewModel.booksThatReadCollect(viewLifecycleOwner) { books ->
             var readPages = 0
             var readChapters = 0
             var readBooks = 0
@@ -68,7 +64,7 @@ class FragmentSchoolProgress :
             }
         }
 
-        viewModel.classesObserve(viewLifecycleOwner) { classes ->
+        viewModel.classesCollect(viewLifecycleOwner) { classes ->
             classList.clear()
             classesTitleList.clear()
             classList = classes.toMutableList()
@@ -79,7 +75,7 @@ class FragmentSchoolProgress :
             binding().classTitleText.text = classTitle
         }
 
-        viewModel.studentObserve(viewLifecycleOwner) { students ->
+        viewModel.studentsCollect(viewLifecycleOwner) { students ->
             if (students.isNotEmpty()) {
                 studentList.clear()
                 studentNameList.clear()
@@ -99,7 +95,7 @@ class FragmentSchoolProgress :
 
         }
 
-        viewModel.schoolProgress.onEach { schoolProgress ->
+        viewModel.schoolProgressCollect(viewLifecycleOwner) { schoolProgress ->
             binding().apply {
                 progressStudentsText.text = schoolProgress.allStudents
                 progressAllBookText.text = schoolProgress.allBooks
@@ -108,7 +104,7 @@ class FragmentSchoolProgress :
                 progressPageReadText.text = schoolProgress.pageRead
             }
             loadingDialog.dismiss()
-        }.launchWhenStarted(lifecycleScope = lifecycleScope)
+        }
     }
 
     private fun showClassSingleChoiceWithConfirmationAlertDialog(list: List<String>) {

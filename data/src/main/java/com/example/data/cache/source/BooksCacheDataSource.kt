@@ -2,15 +2,15 @@ package com.example.data.cache.source
 
 import com.example.data.cache.db.BooksDao
 import com.example.data.cache.db.BooksThatReadDao
-import com.example.data.cache.models.BookDb
-import com.example.data.cache.models.BookPosterDb
+import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.BookPosterCache
 import com.example.data.models.BookData
 import com.example.domain.Mapper
 import com.example.domain.models.BookPosterDomain
 
 interface BooksCacheDataSource {
 
-    suspend fun fetchBooks(): List<BookDb>
+    suspend fun fetchBooks(): List<BookCache>
 
     suspend fun saveBooks(books: List<BookData>)
 
@@ -33,7 +33,7 @@ interface BooksCacheDataSource {
     class Base(
         private val bookDao: BooksDao,
         private val bookThatReadDao: BooksThatReadDao,
-        private val dataMapper: Mapper<BookData, BookDb>,
+        private val dataMapper: Mapper<BookData, BookCache>,
     ) : BooksCacheDataSource {
 
         override suspend fun fetchBooks() = bookDao.getAllBooks()
@@ -64,7 +64,7 @@ interface BooksCacheDataSource {
             bookDao.updateBookPublicYear(publicYear = publicYear, id = id)
 
         override suspend fun updatePoster(id: String, poster: BookPosterDomain) =
-            bookDao.updateBookPoster(poster = BookPosterDb(name = poster.name, url = poster.url),
+            bookDao.updateBookPoster(poster = BookPosterCache(name = poster.name, url = poster.url),
                 id = id)
 
     }

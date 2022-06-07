@@ -28,7 +28,7 @@
             android:orientation="vertical"
             tools:ignore="UnusedAttribute">
 
-            <androidx.appcompat.widget.AppCompatImageView
+            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
                 android:id="@+id/similar_book_poster"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

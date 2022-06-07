@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_reader.FragmentReader">
+    android:background="@color/white"
+    tools:context=".app.ui.general_screens.screen_reader.FragmentReader">
 
 
     <com.github.barteksc.pdfviewer.PDFView
@@ -59,13 +60,13 @@
 
             <TextView
                 android:id="@+id/page_enter_field"
-                android:layout_width="40dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:ems="10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:ems="4"
                 android:textAlignment="center"
-                android:textSize="16sp"
+                android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/page_forward"
                 app:layout_constraintHorizontal_bias="0.5"

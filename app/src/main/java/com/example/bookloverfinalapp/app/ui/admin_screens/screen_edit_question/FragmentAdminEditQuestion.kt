@@ -1,14 +1,21 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_question
 
-import android.graphics.Color
+import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
+import android.view.WindowManager
+import android.widget.RadioButton
+import androidx.appcompat.app.AlertDialog
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
 import com.example.bookloverfinalapp.app.models.BookQuestion
+import com.example.bookloverfinalapp.app.utils.extensions.downEffect
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.showCustomInputAlertDialog
+import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.bookloverfinalapp.databinding.FragmentAdminEditQuestionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -18,8 +25,6 @@ class FragmentAdminEditQuestion :
         FragmentAdminEditQuestionBinding::inflate), View.OnClickListener {
 
     override val viewModel: FragmentAdminEditQuestionViewModel by viewModels()
-
-    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val question: BookQuestion by lazy(LazyThreadSafetyMode.NONE) {
         FragmentAdminEditQuestionArgs.fromBundle(requireArguments()).question
@@ -43,7 +48,7 @@ class FragmentAdminEditQuestion :
     private fun setupUi() {
         binding().apply {
             toolbar.title = title
-            toolbar.setTitleTextColor(Color.WHITE)
+            setToolbarColor(toolbar = toolbar)
             questionText.setText(question.question)
             answerAButton.text = question.a
             answerBButton.text = question.b
@@ -60,12 +65,11 @@ class FragmentAdminEditQuestion :
 
     private fun setOnClickListeners() {
         binding().apply {
-            answerAButton.setOnClickListener(this@FragmentAdminEditQuestion)
-            answerBButton.setOnClickListener(this@FragmentAdminEditQuestion)
-            answerCButton.setOnClickListener(this@FragmentAdminEditQuestion)
-            answerDButton.setOnClickListener(this@FragmentAdminEditQuestion)
-            editQuestionButton.setOnClickListener(this@FragmentAdminEditQuestion)
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
+            downEffect(answerAButton).setOnClickListener(this@FragmentAdminEditQuestion)
+            downEffect(answerBButton).setOnClickListener(this@FragmentAdminEditQuestion)
+            downEffect(answerCButton).setOnClickListener(this@FragmentAdminEditQuestion)
+            downEffect(answerDButton).setOnClickListener(this@FragmentAdminEditQuestion)
+            downEffect(editQuestionButton).setOnClickListener(this@FragmentAdminEditQuestion)
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
         }
     }
@@ -118,10 +122,13 @@ class FragmentAdminEditQuestion :
                 rightAnswer = rightAnswer,
                 chapter = chapter.toString()
             )
-            viewModel.updateQuestion(id = question.id, question = updateQuestion).observe(viewLifecycleOwner) {
+            viewModel.updateQuestion(id = question.id, question = updateQuestion)
+                .observe(viewLifecycleOwner) {
                     showToast(R.string.book_question_updated_successfully)
                 }
         }
 
     }
+
+
 }

@@ -1,6 +1,10 @@
 package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
+import com.example.bookloverfinalapp.app.utils.communication.ErrorCommunication
+import com.example.bookloverfinalapp.app.utils.communication.NavigationCommunication
+import com.example.bookloverfinalapp.app.utils.communication.ProgressCommunication
+import com.example.bookloverfinalapp.app.utils.communication.ProgressDialogCommunication
 import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
 import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.data.ResourceProvider
@@ -35,6 +39,22 @@ object AppModule {
 
     @Provides
     @Singleton
+    fun provideProgressCommunication(): ProgressCommunication = ProgressCommunication.Base()
+
+    @Provides
+    @Singleton
+    fun provideNavigationCommunication(): NavigationCommunication = NavigationCommunication.Base()
+
+    @Provides
+    @Singleton
+    fun provideProgressDialogCommunication(): ProgressDialogCommunication =
+        ProgressDialogCommunication.Base()
+
+    @Provides
+    fun provideErrorCommunication(): ErrorCommunication = ErrorCommunication.Base()
+
+    @Provides
+    @Singleton
     fun provideResourceProvider(context: Context): ResourceProvider =
         ResourceProvider.Base(context = context)
 
@@ -62,4 +82,5 @@ object AppModule {
     @Provides
     fun provideGetClassUseCase(repository: ClassRepository): GetClassUseCase =
         GetClassUseCase(repository = repository)
+
 }

@@ -1,8 +1,10 @@
 package com.example.bookloverfinalapp.app.models
 
-import java.io.Serializable
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 data class Book(
     var author: String,
     var createdAt: Date,
@@ -15,15 +17,17 @@ data class Book(
     var poster: BookPoster,
     var updatedAt: Date,
     var book: BookPdf,
-) : Serializable
+) : Parcelable
 
+@Parcelize
 data class BookPdf(
     var name: String,
     var url: String,
-)
+) : Parcelable
 
+@Parcelize
 data class BookPoster(
     var name: String,
     var url: String,
-)
+) : Parcelable
 

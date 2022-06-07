@@ -1,6 +1,7 @@
 package com.example.data.repository
 
-import com.example.data.cache.models.BookDb
+import com.example.data.ResourceProvider
+import com.example.data.cache.models.BookCache
 import com.example.data.cache.source.BooksCacheDataSource
 import com.example.data.cloud.source.BooksCloudDataSource
 import com.example.data.models.*
@@ -18,11 +19,11 @@ import java.io.InputStream
 import java.net.URL
 import javax.net.ssl.HttpsURLConnection
 
-
 class BooksRepositoryImpl(
+    private val resourceProvider: ResourceProvider,
     private val cloudDataSource: BooksCloudDataSource,
     private val cacheDataSource: BooksCacheDataSource,
-    private val bookCashMapper: Mapper<BookDb, BookData>,
+    private val bookCashMapper: Mapper<BookCache, BookData>,
     private val bookDomainMapper: Mapper<BookData, BookDomain>,
     private val updateBookDomainMapper: Mapper<UpdateBookDomain, UpdateBookData>,
     private val addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
@@ -52,6 +53,20 @@ class BooksRepositoryImpl(
         }
     }
 
+    override fun onRefresh(schoolId: String): Flow<Resource<List<BookDomain>>> = flow {
+        emit(Resource.loading())
+        val result = cloudDataSource.fetchBooks(schoolId = schoolId)
+        if (result.status == Status.SUCCESS) {
+            val booksData = result.data!!
+            if (booksData.isEmpty()) emit(Resource.empty())
+            else {
+                cacheDataSource.saveBooks(books = booksData)
+                val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
+                emit(Resource.success(data = booksDomain))
+            }
+        } else emit(Resource.error(message = result.message))
+    }
+
     override fun fetchSimilarBooks(
         genres: List<String>,
         bookId: String,
@@ -70,8 +85,9 @@ class BooksRepositoryImpl(
                 }
             }
         }
-        emit(Resource.success(data = similarBooks.distinctBy { it.id }))
-
+        val finalList = similarBooks.distinctBy { it.id }
+        if (finalList.isEmpty()) emit(Resource.empty())
+        else emit(Resource.success(data = finalList))
     }
 
     override fun addNewBook(book: AddNewBookDomain): Flow<Resource<Unit>> = flow {
@@ -130,6 +146,26 @@ class BooksRepositoryImpl(
         } else emit(Resource.error(message = result.message!!))
     }
 
+    override fun fetchSearchBook(
+        searchText: String,
+        schoolId: String,
+    ): Flow<Resource<List<BookDomain>>> = flow {
+        try {
+            val allBooks = cacheDataSource.fetchBooks()
+            val searchBooks = mutableListOf<BookDomain>()
+            allBooks.forEach { book ->
+                val title = book.title.lowercase()
+                if (title.contains(searchText)) searchBooks.add(bookDomainMapper.map(bookCashMapper.map(
+                    book)))
+            }
+            if (searchBooks.isNotEmpty()) emit(Resource.success(searchBooks))
+            else emit(Resource.empty())
+        } catch (e: Exception) {
+            emit(Resource.error(resourceProvider.errorType(e)))
+        }
+
+    }
+
     override fun addBookQuestion(question: AddBookQuestionDomain): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
         val result = cloudDataSource.addBookQuestion(question = questionsDomainMapper.map(question))
@@ -171,3 +207,4 @@ class BooksRepositoryImpl(
     override suspend fun clearBooksCache() = cacheDataSource.clearTable()
 
 }
+

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="@dimen/recyclerViewMargin"
+    app:cardCornerRadius="@dimen/cardAllCornersRadius"
+    app:cardElevation="@dimen/cardElevation">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/marginForTIL">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/studentProfileImage"
+            android:layout_width="@dimen/smallProfileImageSize"
+            android:layout_height="@dimen/smallProfileImageSize"
+            android:src="@drawable/foto"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            android:id="@+id/progressProfileLastName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:textSize="@dimen/textSizeProfileTIL"
+            app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Ташполотова" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            android:id="@+id/progressProfileName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/marginForTIL"
+            android:layout_marginTop="4dp"
+            android:textSize="@dimen/textSizeProfileTIL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
+            app:layout_constraintTop_toBottomOf="@+id/progressProfileLastName"
+            app:layout_constraintVertical_bias="0.0"
+            tools:text="Венера" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            android:id="@+id/countOfStudentDimonds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="@dimen/textSizeProfileTIL"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentPages"
+            app:layout_constraintStart_toEndOf="@+id/studentsPages"
+            app:layout_constraintTop_toTopOf="@+id/countOfStudentPages"
+            tools:text="18" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+            android:id="@+id/studentsPages"
+            android:layout_width="@dimen/recyclerViewIconSize"
+            android:layout_height="@dimen/recyclerViewIconSize"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_open_book"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentPages"
+            app:layout_constraintStart_toEndOf="@+id/countOfStudentPages"
+            app:layout_constraintTop_toTopOf="@+id/countOfStudentPages" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            android:id="@+id/countOfStudentPages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:textSize="@dimen/textSizeProfileTIL"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/progressProfileLastName"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="345" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+            android:id="@+id/studentsDiamond"
+            android:layout_width="@dimen/recyclerViewIconSize"
+            android:layout_height="@dimen/recyclerViewIconSize"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_diamond"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentDimonds"
+            app:layout_constraintStart_toEndOf="@+id/countOfStudentDimonds"
+            app:layout_constraintTop_toTopOf="@+id/countOfStudentDimonds" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            android:id="@+id/countOfStudentCrowns"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:textSize="@dimen/textSizeProfileTIL"
+            app:layout_constraintBottom_toBottomOf="@+id/studentsDiamond"
+            app:layout_constraintStart_toEndOf="@+id/studentsDiamond"
+            app:layout_constraintTop_toTopOf="@+id/studentsDiamond"
+            tools:text="2" />
+
+        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+            android:id="@+id/progressCrown"
+            android:layout_width="@dimen/recyclerViewIconSize"
+            android:layout_height="@dimen/recyclerViewIconSize"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_crown_gold"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentCrowns"
+            app:layout_constraintStart_toEndOf="@+id/countOfStudentCrowns"
+            app:layout_constraintTop_toTopOf="@+id/countOfStudentCrowns" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

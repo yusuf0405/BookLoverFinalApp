@@ -7,7 +7,6 @@ import android.graphics.Bitmap
 import android.net.Uri
 import android.os.Bundle
 import android.os.ParcelFileDescriptor
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
@@ -17,7 +16,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddNewBook
-import com.example.bookloverfinalapp.app.utils.GenresManager
+import com.example.bookloverfinalapp.app.utils.genre.GenresManager
 import com.example.bookloverfinalapp.app.utils.cons.PERMISSION_CODE
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.cons.REQUEST_CODE
@@ -47,7 +46,6 @@ class FragmentAdminUploadPdf :
 
     override val viewModel: FragmentAdminUploadPdfViewModel by viewModels()
 
-    override fun onReady(savedInstanceState: Bundle?) {}
 
     private var bookFile: ParseFile? = null
     private var bookChapterCount: Int = 0
@@ -70,10 +68,10 @@ class FragmentAdminUploadPdf :
 
     private fun setOnClickListeners() {
         binding().apply {
-            savePdfButton.setOnClickListener(this@FragmentAdminUploadPdf)
-            bookGenresButton.setOnClickListener(this@FragmentAdminUploadPdf)
-            pickPdfButton.setOnClickListener(this@FragmentAdminUploadPdf)
-            toChange.setOnClickListener(this@FragmentAdminUploadPdf)
+            downEffect(savePdfButton).setOnClickListener(this@FragmentAdminUploadPdf)
+            downEffect(classNumberCardView).setOnClickListener(this@FragmentAdminUploadPdf)
+            downEffect(pickPdfButton).setOnClickListener(this@FragmentAdminUploadPdf)
+            downEffect(toChange).setOnClickListener(this@FragmentAdminUploadPdf)
         }
     }
 
@@ -134,6 +132,7 @@ class FragmentAdminUploadPdf :
             binding().editTextBookTitle.text.isBlank() -> showToast(R.string.fill_in_all_fields)
             binding().editTextBookAutor.text.isBlank() -> showToast(R.string.fill_in_all_fields)
             binding().editTextBookPublicYear.text.isBlank() -> showToast(R.string.fill_in_all_fields)
+            uploadBookGenresList.isEmpty() -> showToast(R.string.fill_in_all_fields)
             else -> {
                 loadingDialog.show()
                 if (bookFile != null) {
@@ -204,10 +203,10 @@ class FragmentAdminUploadPdf :
         binding().apply {
             savePdfButton.showView()
             pickPdfButton.hideView()
+            toChange.showView()
             val meta: PdfDocument.Meta = pdfViewAdmin.documentMeta
             editTextBookTitle.setText(meta.title)
             editTextBookAutor.setText(meta.author)
-            Log.i(meta.subject, meta.subject)
             bookChapterCount = pdfViewAdmin.tableOfContents.size
         }
 
@@ -258,7 +257,7 @@ class FragmentAdminUploadPdf :
             binding().savePdfButton -> saveFiles()
             binding().pickPdfButton -> pickFile()
             binding().toChange -> getImage()
-            binding().bookGenresButton -> showGenresSingleChoiceWithConfirmationAlertDialog()
+            binding().classNumberCardView -> showGenresSingleChoiceWithConfirmationAlertDialog()
 
         }
     }

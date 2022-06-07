@@ -1,9 +1,11 @@
 package com.example.bookloverfinalapp.app.models
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import org.ocpsoft.prettytime.PrettyTime
-import java.io.Serializable
 import java.util.*
 
+@Parcelize
 data class BookThatRead(
     var author: String,
     var createdAt: Date,
@@ -19,7 +21,7 @@ data class BookThatRead(
     var book: String,
     var progress: Int,
     var isReadingPages: List<Boolean>,
-) : Serializable {
+) : Parcelable {
 
     fun getCreatedAt(): String {
         val prettyTime = PrettyTime(Locale("ru"))
@@ -27,7 +29,8 @@ data class BookThatRead(
     }
 }
 
+@Parcelize
 data class BookThatReadPoster(
     var name: String,
     var url: String,
-)
+) : Parcelable

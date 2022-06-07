@@ -5,7 +5,7 @@ import com.example.domain.models.BookThatReadDomain
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
 
-class BookThatReadUiMapper : Mapper<BookThatReadDomain, BookThatRead>() {
+class BookThatReadUiMapper : Mapper<BookThatReadDomain, BookThatRead> {
 
     override fun map(from: BookThatReadDomain): BookThatRead = from.run {
         BookThatRead(createdAt = createdAt,

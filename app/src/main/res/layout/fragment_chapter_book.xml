@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.screen_chapter_book.ui.FragmentChapterBook">
+    tools:context=".app.ui.general_screens.screen_chapter_book.ui.FragmentChapterBook">
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdf_view"

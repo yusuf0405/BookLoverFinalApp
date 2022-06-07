@@ -1,12 +1,12 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.StudentDb
+import com.example.data.cache.models.UserCache
 import com.example.data.models.StudentData
 import com.example.data.models.StudentImageData
 import com.example.domain.Mapper
 
-class UserDbToDataMapper : Mapper<StudentDb, StudentData>() {
-    override fun map(from: StudentDb): StudentData = from.run {
+class UserDbToDataMapper : Mapper<UserCache, StudentData> {
+    override fun map(from: UserCache): StudentData = from.run {
         StudentData(
             createAt = createAt,
             classId = classId,

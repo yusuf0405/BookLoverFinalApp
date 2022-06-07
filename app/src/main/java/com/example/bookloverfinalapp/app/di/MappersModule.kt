@@ -2,8 +2,12 @@ package com.example.bookloverfinalapp.app.di
 
 import com.example.bookloverfinalapp.app.mappers.*
 import com.example.bookloverfinalapp.app.models.*
+import com.example.bookloverfinalapp.app.ui.adapter.*
 import com.example.data.cache.mappers.*
-import com.example.data.cache.models.*
+import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.BookThatReadCache
+import com.example.data.cache.models.ClassCache
+import com.example.data.cache.models.UserCache
 import com.example.data.cloud.mappers.*
 import com.example.data.cloud.models.*
 import com.example.data.mappers.*
@@ -22,12 +26,8 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideBookDbBookMapper(): Mapper<BookData, BookDb> = BookDataToBookDbMapper()
+    fun provideBookDbBookMapper(): Mapper<BookData, BookCache> = BookDataToBookDbMapper()
 
-    @Provides
-    @Singleton
-    fun provideBookThatReadAdapterModelMapper(): Mapper<BookThatReadDomain, BookThatReadAdapterModel.Base> =
-        BookThatReadAdapterModelMapper()
 
     @Provides
     @Singleton
@@ -41,13 +41,7 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideBookAdapterModelMapper(): Mapper<BookDomain, BookAdapterModel.Base> =
-        BookAdapterModelMapper()
-
-
-    @Provides
-    @Singleton
-    fun provideBookDbToDataMapper(): Mapper<BookDb, BookData> = BookDbToDataMapper()
+    fun provideBookDbToDataMapper(): Mapper<BookCache, BookData> = BookDbToDataMapper()
 
 
     @Provides
@@ -57,13 +51,13 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideBookThatReadDbBookMapper(): Mapper<BookThatReadData, BookThatReadDb> =
+    fun provideBookThatReadDbBookMapper(): Mapper<BookThatReadData, BookThatReadCache> =
         BookThatReadDataToBookDbMapper()
 
 
     @Provides
     @Singleton
-    fun provideBookThatReadDbToDataMapper(): Mapper<BookThatReadDb, BookThatReadData> =
+    fun provideBookThatReadDbToDataMapper(): Mapper<BookThatReadCache, BookThatReadData> =
         BookThatReadDbToDataMapper()
 
 
@@ -103,8 +97,14 @@ object MappersModule {
 
     @Provides
     @Singleton
+    fun provideBookQuestionAdapterModelDomainMapper(): Mapper<BookQuestionDomain, QuestionModel> =
+        BookQuestionDomainToAdapterModelMapper()
+
+    @Provides
+    @Singleton
     fun provideBookQuestionsDomainMapper(): Mapper<BookQuestionDomain, BookQuestion> =
         BookQuestionsDomainMapper()
+
 
     @Provides
     @Singleton
@@ -113,7 +113,7 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideUserDbToDataMapper(): Mapper<StudentDb, StudentData> =
+    fun provideUserDbToDataMapper(): Mapper<UserCache, StudentData> =
         UserDbToDataMapper()
 
     @Provides
@@ -124,13 +124,9 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideUserDataToDbMapper(): Mapper<StudentData, StudentDb> =
+    fun provideUserDataToDbMapper(): Mapper<StudentData, UserCache> =
         StudentDataToDbMapper()
 
-    @Provides
-    @Singleton
-    fun provideStudentAdapterModelMapper(): Mapper<StudentDomain, StudentAdapterModel.Base> =
-        StudentAdapterModelMapper()
 
     @Provides
     @Singleton
@@ -193,7 +189,7 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideClassDomainToAdapterModelMapper(): Mapper<ClassDomain, ClassAdapterModel.Base> =
+    fun provideClassDomainToAdapterModelMapper(): Mapper<ClassDomain, SchoolClassModel> =
         ClassDomainToAdapterModelMapper()
 
     @Provides
@@ -232,6 +228,32 @@ object MappersModule {
     @Singleton
     fun provideUpdateBookDataToCloudMapper(): Mapper<UpdateBookData, UpdateBookCloud> =
         UpdateBookDataToCloudMapper()
+
+
+    @Provides
+    @Singleton
+    fun provideBookQuestionAdapterModelToQuestionMapper(): Mapper<QuestionModel, BookQuestion> =
+        BookQuestionAdapterModelToQuestionMapper()
+
+    @Provides
+    @Singleton
+    fun provideBookThatReadAdapterModelToBookThatReadMapper(): Mapper<BookThatReadModel, BookThatRead> =
+        BookThatReadAdapterModelToBookThatReadMapper()
+
+    @Provides
+    @Singleton
+    fun provideBookModelToBookMapper(): Mapper<BookModel, Book> =
+        BookModelToBookMapper()
+
+    @Provides
+    @Singleton
+    fun provideBookThatReadDomainToModelMapper(): Mapper<BookThatReadDomain, BookThatReadModel> =
+        BookThatReadDomainToModelMapper()
+
+    @Provides
+    @Singleton
+    fun provideUserModelToUserMapper(): Mapper<UserModel, Student> =
+        UserModelToUserMapper()
 
 
 }

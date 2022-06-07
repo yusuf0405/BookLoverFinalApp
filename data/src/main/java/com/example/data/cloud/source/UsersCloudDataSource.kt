@@ -8,6 +8,7 @@ import com.example.data.cloud.models.*
 import com.example.data.cloud.service.UserService
 import com.example.data.models.StudentData
 import com.example.data.models.UserImageData
+import com.example.data.repository.StudentsResponseType
 import com.example.domain.Mapper
 import com.example.domain.Resource
 import com.example.domain.models.UpdateAnswerDomain
@@ -17,7 +18,10 @@ import kotlinx.coroutines.withContext
 
 interface UsersCloudDataSource {
 
-    suspend fun fetchMyStudents(classId: String): Resource<List<StudentData>>
+    suspend fun fetchMyStudents(
+        responseType: StudentsResponseType,
+        id: String,
+    ): Resource<List<StudentData>>
 
     suspend fun updateUser(
         id: String,
@@ -46,11 +50,16 @@ interface UsersCloudDataSource {
     ) : UsersCloudDataSource, BaseApiResponse(resourceProvider = resourceProvider) {
 
         override suspend fun fetchMyStudents(
-            classId: String,
+            responseType: StudentsResponseType,
+            id: String,
         ): Resource<List<StudentData>> = try {
             val studentList = mutableListOf<StudentData>()
-            val user =
-                service.fetchMyBook(id = "{\"userType\":\"student\",\"classId\":\"$classId\"}")
+            val user = when (responseType) {
+                StudentsResponseType.ClASS_USERS -> service.fetchMyBook(id = "{\"classId\":\"$id\"}")
+                StudentsResponseType.SCHOOL_STUDENTS -> service.fetchMyBook(id = "{\"userType\":\"student\",\"schoolId\":\"$id\"}")
+                else -> service.fetchMyBook(id = "{\"userType\":\"student\",\"classId\":\"$id\"}")
+            }
+
 
             user.body()!!.users.forEach { userCloud ->
                 val response =
@@ -102,6 +111,7 @@ interface UsersCloudDataSource {
             Resource.error(message = resourceProvider.errorType(exception = exception))
 
         }
+
 
         override suspend fun updateUser(
             id: String,

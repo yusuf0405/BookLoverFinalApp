@@ -6,7 +6,7 @@ import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
 import com.example.domain.Mapper
 
-class BookCloudDataMapper : Mapper<BookCloud, BookData>() {
+class BookCloudDataMapper : Mapper<BookCloud, BookData> {
 
     override fun map(from: BookCloud): BookData = from.run {
         BookData(

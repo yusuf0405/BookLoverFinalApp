@@ -4,10 +4,14 @@
     <color name="app_theme">#2A00A2</color>
     <color name="purple_500">#FF6200EE</color>
     <color name="purple_700">#FF3700B3</color>
+    <color name="white">#FFFFFF</color>
     <color name="teal_200">#FF03DAC5</color>
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="grey">#305F72</color>
+    <color name="gold">#FFD700</color>
+    <color name="bronze">#CD7F32</color>
+    <color name="silver">#C0C0C0</color>
     <color name="violet">#9C10FE</color>
     <color name="red">#E91E63</color>
     <color name="tab_layout_indicator_color">#E35959</color>
@@ -31,6 +35,5 @@
     <color name="colorAccent">#E91E63</color>
     <color name="yellow">#D5C42F</color>
     <color name="green">#7EC52C</color>
-    <color name="gold">#E4FF9800</color>
     <color name="blue">#1565C0</color>
 </resources>

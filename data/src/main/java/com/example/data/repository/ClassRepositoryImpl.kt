@@ -10,7 +10,6 @@ import com.example.domain.Status
 import com.example.domain.models.ClassDomain
 import com.example.domain.repository.ClassRepository
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.flow
 
 class ClassRepositoryImpl(
@@ -41,6 +40,20 @@ class ClassRepositoryImpl(
             if (classDomain.isEmpty()) emit(Resource.empty())
             else emit(Resource.success(data = classDomain))
         }
+    }
+
+    override fun fetchAllClassCloud(schoolId: String): Flow<Resource<List<ClassDomain>>> = flow {
+        val result = cloudDataSource.getAllClass(schoolId = schoolId)
+        if (result.status == Status.SUCCESS) {
+            val classData = result.data!!
+            if (classData.isEmpty()) emit(Resource.empty())
+            else {
+                cacheDataSource.saveClasses(classes = classData)
+                val classDomain = classData.map { classData -> classMapper.map(classData) }
+                classDomain.lastIndex
+                emit(Resource.success(data = classDomain))
+            }
+        } else emit(Resource.error(message = result.message))
     }
 
     override fun getClass(id: String): Flow<Resource<Unit>> = cloudDataSource.getClass(id = id)

@@ -5,15 +5,12 @@ plugins {
 
 dependencies {
 
-    def retrofitVersion = "2.9.0"
-    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    // Retrofit
+    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 
     // Coroutines
-    def coroutinesVersion = "1.5.2"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutinesVersion"
+    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
 
-    // Pretty Time
-    implementation 'org.ocpsoft.prettytime:prettytime:4.0.4.Final'
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7

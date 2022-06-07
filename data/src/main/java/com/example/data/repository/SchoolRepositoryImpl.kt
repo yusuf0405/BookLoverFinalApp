@@ -2,10 +2,8 @@ package com.example.data.repository
 
 import com.example.data.ResourceProvider
 import com.example.data.cloud.service.SchoolService
-import com.example.data.toClass
 import com.example.data.toSchool
 import com.example.domain.Resource
-import com.example.domain.models.ClassDomain
 import com.example.domain.models.SchoolDomain
 import com.example.domain.repository.SchoolRepository
 import kotlinx.coroutines.Dispatchers

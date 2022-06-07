@@ -1,15 +1,15 @@
 package com.example.data.cache.mappers
 
-import com.example.data.cache.models.BookDb
-import com.example.data.cache.models.BookPdfDb
-import com.example.data.cache.models.BookPosterDb
+import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.BookPdfCache
+import com.example.data.cache.models.BookPosterCache
 import com.example.data.models.BookData
 import com.example.domain.Mapper
 
-class BookDataToBookDbMapper : Mapper<BookData, BookDb>() {
+class BookDataToBookDbMapper : Mapper<BookData, BookCache> {
 
-    override fun map(from: BookData): BookDb = from.run {
-        BookDb(
+    override fun map(from: BookData): BookCache = from.run {
+        BookCache(
             id = id,
             title = title,
             author = author,
@@ -18,11 +18,11 @@ class BookDataToBookDbMapper : Mapper<BookData, BookDb>() {
             createdAt = createdAt,
             chapterCount = chapterCount,
             publicYear = publicYear,
-            poster = BookPosterDb(
+            poster = BookPosterCache(
                 name = poster.name,
                 url = poster.url
             ),
-            book = BookPdfDb(
+            book = BookPdfCache(
                 name = book.name,
                 url = book.url,
                 type = book.type

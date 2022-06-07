@@ -1,12 +1,12 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_add_question
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
+import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.showCustomInputAlertDialog
 import com.example.bookloverfinalapp.databinding.FragmentAddQuestionBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,8 +16,6 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
     FragmentAddQuestionBinding::inflate), View.OnClickListener {
 
     override val viewModel: FragmentAddQuestionViewModel by viewModels()
-
-    override fun onReady(savedInstanceState: Bundle?) {}
 
     private val id: String by lazy(LazyThreadSafetyMode.NONE) {
         FragmentAddQuestionArgs.fromBundle(requireArguments()).id
@@ -43,7 +41,6 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
             answerCButton.setOnClickListener(this@FragmentAddQuestion)
             answerDButton.setOnClickListener(this@FragmentAddQuestion)
             addBookQuestionButton.setOnClickListener(this@FragmentAddQuestion)
-            toolbar.setNavigationIcon(R.drawable.ic_baseline_arrow_back_24)
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
         }
     }
@@ -51,8 +48,7 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
     private fun setupUi() {
         binding().apply {
             toolbar.title = title
-            toolbar.setTitleTextColor(Color.WHITE)
-
+            setToolbarColor(toolbar = toolbar)
         }
     }
 

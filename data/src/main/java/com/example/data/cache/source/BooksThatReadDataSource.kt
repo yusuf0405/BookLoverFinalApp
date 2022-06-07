@@ -1,21 +1,21 @@
 package com.example.data.cache.source
 
 import com.example.data.cache.db.BooksThatReadDao
-import com.example.data.cache.models.BookThatReadDb
+import com.example.data.cache.models.BookThatReadCache
 import com.example.data.models.BookThatReadData
 import com.example.domain.Mapper
 
 interface BooksThatReadDataSource {
 
-    suspend fun fetchBooksThatRead(): List<BookThatReadDb>
+    suspend fun fetchBooksThatRead(): List<BookThatReadCache>
 
     suspend fun saveBooks(books: List<BookThatReadData>)
 
     suspend fun deleteBook(id: String)
 
-    suspend fun getMyBook(id: String): BookThatReadDb?
+    suspend fun getMyBook(id: String): BookThatReadCache?
 
-    suspend fun addBook(book: BookThatReadDb)
+    suspend fun addBook(book: BookThatReadCache)
 
     suspend fun updateProgress(id: String, progress: Int)
 
@@ -27,11 +27,11 @@ interface BooksThatReadDataSource {
 
     class Base(
         private val dao: BooksThatReadDao,
-        private val mapper: Mapper<BookThatReadData, BookThatReadDb>,
+        private val mapper: Mapper<BookThatReadData, BookThatReadCache>,
     ) :
         BooksThatReadDataSource {
 
-        override suspend fun fetchBooksThatRead(): List<BookThatReadDb> =
+        override suspend fun fetchBooksThatRead(): List<BookThatReadCache> =
             dao.getAllBooks()
 
         override suspend fun saveBooks(books: List<BookThatReadData>) {
@@ -40,9 +40,9 @@ interface BooksThatReadDataSource {
 
         override suspend fun deleteBook(id: String) = dao.deleteById(id = id)
 
-        override suspend fun getMyBook(id: String): BookThatReadDb? = dao.getMyBook(bookId = id)
+        override suspend fun getMyBook(id: String): BookThatReadCache? = dao.getMyBook(bookId = id)
 
-        override suspend fun addBook(book: BookThatReadDb) = dao.addNewBook(book = book)
+        override suspend fun addBook(book: BookThatReadCache) = dao.addNewBook(book = book)
 
         override suspend fun updateProgress(id: String, progress: Int) =
             dao.updateProgress(progress, id = id)

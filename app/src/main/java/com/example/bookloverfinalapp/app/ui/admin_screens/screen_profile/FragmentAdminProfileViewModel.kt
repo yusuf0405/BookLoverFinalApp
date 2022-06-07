@@ -14,7 +14,8 @@ class FragmentAdminProfileViewModel @Inject constructor(
     private val clearBooksCacheUseCase: ClearBooksCacheUseCase,
     private val clearStudentsCacheUseCase: ClearStudentsCacheUseCase,
 ) : BaseViewModel() {
-    fun clearDataInCache() = dispatchers.launchInBackground(viewModelScope) {
+
+    fun clearDataInCache() = launchInBackground {
         clearBooksCacheUseCase.execute()
         clearBooksThatReadCacheUseCase.execute()
         clearStudentsCacheUseCase.execute()
