@@ -12,7 +12,7 @@ import com.example.bookloverfinalapp.app.ui.adapter.BookModel
 import com.example.bookloverfinalapp.app.ui.adapter.CatEmptyModel
 import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_ADMIN_BOOK_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRootDirections
 import com.example.bookloverfinalapp.app.utils.communication.BooksCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication

@@ -10,7 +10,7 @@ import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
 import com.example.bookloverfinalapp.app.ui.adapter.UserLoadingModel
 import com.example.bookloverfinalapp.app.ui.adapter.UserModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.domain.Mapper

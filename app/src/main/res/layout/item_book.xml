@@ -23,7 +23,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+            <com.example.bookloverfinalapp.app.custom.MyImageView
                 android:id="@+id/rounded_book_Image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -32,7 +32,7 @@
 
         </androidx.cardview.widget.CardView>
 
-        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+        <com.example.bookloverfinalapp.app.custom.MyTextView
             android:id="@+id/bookTitle"
             style="@style/item_book_title_style"
             android:text="Война и мир"
@@ -43,7 +43,7 @@
             app:layout_constraintTop_toTopOf="@+id/cardView"
             app:layout_constraintVertical_bias="0.0" />
 
-        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+        <com.example.bookloverfinalapp.app.custom.MyTextView
             android:id="@+id/bookAuthor"
             style="@style/item_book_author"
             android:text="Лев Толстой"
@@ -61,7 +61,7 @@
             app:layout_constraintStart_toEndOf="@+id/cardView"
             app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
 
-        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+        <com.example.bookloverfinalapp.app.custom.MyTextView
             android:id="@+id/publishedYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
             app:layout_constraintStart_toEndOf="@+id/publishedYear"
             app:layout_constraintTop_toTopOf="@+id/publishedYear" />
 
-        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+        <com.example.bookloverfinalapp.app.custom.MyTextView
             android:id="@+id/bookPages"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -98,7 +98,7 @@
             android:orientation="vertical"
             app:layout_constraintGuide_percent="0.25" />
 
-        <com.example.bookloverfinalapp.app.ui.adapter.custom.MyImageView
+        <com.example.bookloverfinalapp.app.custom.MyImageView
             android:id="@+id/more_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

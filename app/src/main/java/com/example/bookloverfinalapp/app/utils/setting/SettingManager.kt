@@ -11,13 +11,14 @@ import com.example.bookloverfinalapp.app.utils.cons.*
 import com.example.bookloverfinalapp.app.utils.extensions.dataStore
 import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 object SettingManager {
 
     fun setAppSetting(scope: CoroutineScope, context: Context) {
         scope.launch {
-            context.dataStore.data.collect { pref ->
+            context.dataStore.data.collectLatest { pref ->
                 val lang = pref[stringPreferencesKey(KEY_DEFAULT_LANGUAGE)]
                 setAppLanguage(lang ?: SETTING_LANGUAGE_AUTO_KEY, context = context)
                 val currentMode = pref[booleanPreferencesKey(KEY_APP_MODE)] ?: false

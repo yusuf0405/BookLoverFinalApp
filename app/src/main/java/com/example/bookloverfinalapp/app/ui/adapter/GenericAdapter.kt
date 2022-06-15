@@ -4,7 +4,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.domain.Mapper
 
 class GenericAdapter(private val actionListener: ItemOnClickListener) :

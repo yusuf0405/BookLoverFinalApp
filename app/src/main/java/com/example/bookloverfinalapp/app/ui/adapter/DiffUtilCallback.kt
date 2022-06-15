@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 
 class DiffUtilCallback(
     private val oldList: List<ItemUi>,
@@ -17,5 +17,4 @@ class DiffUtilCallback(
 
     override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean =
         oldList[oldItemPosition]== newList[newItemPosition]
-
 }

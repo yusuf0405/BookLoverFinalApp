@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/marginForTIL">
 
-    <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+    <com.example.bookloverfinalapp.app.custom.MyTextView
         android:id="@+id/you_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -36,7 +36,7 @@
             android:layout_height="match_parent"
             android:layout_margin="@dimen/marginForTIL">
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            <com.example.bookloverfinalapp.app.custom.MyTextView
                 android:id="@+id/student_rating_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -57,7 +57,7 @@
                 app:layout_constraintStart_toEndOf="@+id/class_name_text"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            <com.example.bookloverfinalapp.app.custom.MyTextView
                 android:id="@+id/progressProfileLastName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="wrap_content"
@@ -69,7 +69,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Ташполотова" />
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            <com.example.bookloverfinalapp.app.custom.MyTextView
                 android:id="@+id/progressProfileName"
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
@@ -93,7 +93,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/countOfStudentPages" />
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            <com.example.bookloverfinalapp.app.custom.MyTextView
                 android:id="@+id/countOfStudentPages"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="345" />
 
-            <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+            <com.example.bookloverfinalapp.app.custom.MyTextView
                 android:id="@+id/class_name_text"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

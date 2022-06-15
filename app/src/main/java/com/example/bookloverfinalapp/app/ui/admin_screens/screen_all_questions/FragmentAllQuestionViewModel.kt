@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.*
 import com.example.bookloverfinalapp.app.models.BookQuestion
 import com.example.bookloverfinalapp.app.ui.adapter.*
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.domain.Mapper

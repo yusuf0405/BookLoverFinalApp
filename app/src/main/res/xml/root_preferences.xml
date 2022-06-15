@@ -7,12 +7,11 @@
 
         <ListPreference
             android:defaultValue="1"
-            android:dialogTitle="Выберите Язык"
+            android:dialogTitle="@string/select_language"
             android:entries="@array/languages"
             android:entryValues="@array/languages_values"
             android:key="language"
-            android:summary="@string/choose_language"
-            android:title="@string/language" />
+            android:summary="@string/choose_language" android:title="@string/language" />
 
     </PreferenceCategory>
 

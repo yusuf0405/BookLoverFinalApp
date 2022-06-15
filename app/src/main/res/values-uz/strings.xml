@@ -250,6 +250,7 @@
     <string name="have_gone_beyond">Siz qabul qilinadigan sahifalardan tashqariga chiqdingiz</string>
     <string name="rating">Reyting</string>
     <string name="school_class">Sinf</string>
-    <string name="select_display_mode">Select the frosting mode</string>
+    <string name="select_display_mode">Reytingni ko\'rsatish rejimini tanlang</string>
     <string name="you">SIZ</string>
+    <string name="select_language">Tilni tanlang</string>
 </resources>

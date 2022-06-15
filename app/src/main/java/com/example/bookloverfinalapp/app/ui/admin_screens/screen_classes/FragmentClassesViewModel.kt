@@ -7,7 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.*
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.adapter.*
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main_root.FragmentAdminMainRootDirections
 import com.example.bookloverfinalapp.app.utils.communication.ClassesCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication

@@ -73,14 +73,11 @@ dependencies {
     // Viewpager2
     implementation("androidx.viewpager2:viewpager2:$view_pager2_version")
 
-
     //Image
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
     //PDF reader library
-    //noinspection GradleDependency
     implementation "com.github.barteksc:android-pdf-viewer:$pdf_library_version"
-
 
     // Circle image view
     implementation "de.hdodenhof:circleimageview:$circle_image_view_version"

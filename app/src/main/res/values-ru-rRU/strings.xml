@@ -254,4 +254,5 @@
     <string name="school_class">Класс</string>
     <string name="select_display_mode">Выберите режим отображения рейтинга</string>
     <string name="you">ТЫ</string>
+    <string name="select_language">Выберите Язык</string>
 </resources>

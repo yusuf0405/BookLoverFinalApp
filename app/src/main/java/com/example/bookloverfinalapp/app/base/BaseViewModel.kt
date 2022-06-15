@@ -29,7 +29,8 @@ abstract class BaseViewModel : ViewModel() {
     @Inject
     lateinit var progressDialogCommunication: ProgressDialogCommunication
 
-    var dispatchers = Dispatchers.Base()
+    @Inject
+    lateinit var dispatchers: Dispatchers
 
     fun collectProgressAnimation(owner: LifecycleOwner, observer: Observer<Event<Boolean>>) =
         progressCommunication.observe(owner = owner, observer = observer)

@@ -12,7 +12,7 @@ import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.adapter.UserModel
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
@@ -33,6 +33,7 @@ class FragmentProgress :
     private val adapter: GenericAdapter by lazy(LazyThreadSafetyMode.NONE) {
         GenericAdapter(actionListener = this)
     }
+
     private var isFilter = false
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -75,6 +76,7 @@ class FragmentProgress :
         }
         viewModel.studentAdapterModelsCollect(viewLifecycleOwner) { students ->
             adapter.map(students.toMutableList())
+            adapter.notifyDataSetChanged()
         }
 
         viewModel.collectProgressAnimation(viewLifecycleOwner) {

@@ -8,7 +8,7 @@ import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.adapter.*
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.domain.Mapper
 import com.example.domain.Resource

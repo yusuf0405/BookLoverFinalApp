@@ -13,7 +13,7 @@ import com.example.bookloverfinalapp.app.ui.adapter.CubeEmptyModel
 import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
 import com.example.bookloverfinalapp.app.ui.adapter.SimilarBookLoadingModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_SIMILAR_BOOK_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.adapter.custom.ItemUi
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.domain.Mapper

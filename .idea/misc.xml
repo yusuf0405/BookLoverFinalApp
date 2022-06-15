@@ -82,11 +82,11 @@
         <entry key="app/src/main/res/layout/dialog_question_input.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/dialog_update_book.xml" value="0.27546296296296297" />
         <entry key="app/src/main/res/layout/fragmen_admin_edit_question.xml" value="0.18651315789473685" />
-        <entry key="app/src/main/res/layout/fragment_add_question.xml" value="0.2152777777777778" />
+        <entry key="app/src/main/res/layout/fragment_add_question.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_admin_books.xml" value="0.15" />
         <entry key="app/src/main/res/layout/fragment_admin_chapters.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_admin_edit_profile.xml" value="0.19572368421052633" />
-        <entry key="app/src/main/res/layout/fragment_admin_edit_question.xml" value="0.18651315789473685" />
+        <entry key="app/src/main/res/layout/fragment_admin_edit_question.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_admin_main_root.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_admin_profile.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_admin_upload_pdf.xml" value="0.19572368421052633" />
@@ -114,7 +114,7 @@
         <entry key="app/src/main/res/layout/fragment_my_books.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_my_students.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19572368421052633" />
-        <entry key="app/src/main/res/layout/fragment_progress.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_progress.xml" value="0.18618421052631579" />
         <entry key="app/src/main/res/layout/fragment_reader.xml" value="0.27546296296296297" />
         <entry key="app/src/main/res/layout/fragment_reader_fragment.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/fragment_school_progress.xml" value="0.27546296296296297" />

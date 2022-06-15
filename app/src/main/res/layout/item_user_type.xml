@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+    <com.example.bookloverfinalapp.app.custom.MyTextView
         android:id="@+id/user_type_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

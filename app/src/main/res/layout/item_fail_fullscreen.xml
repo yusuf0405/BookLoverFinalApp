@@ -18,7 +18,7 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/error_response" />
 
-    <com.example.bookloverfinalapp.app.ui.adapter.custom.MyTextView
+    <com.example.bookloverfinalapp.app.custom.MyTextView
         android:id="@+id/message_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.example.bookloverfinalapp.app.ui.adapter.custom.MyButton
+    <com.example.bookloverfinalapp.app.custom.MyButton
         android:id="@+id/try_again"
         style="@style/button_style"
         android:layout_width="wrap_content"
