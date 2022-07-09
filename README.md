@@ -28,7 +28,7 @@ books
 [<img src="meta/android/screenshots/screenshot_student_edit_profile.png" width=160>](meta/android/screenshots/screenshot_student_edit_profile.png)
 [<img src="meta/android/screenshots/screenshot_student_setting.png" width=160>](meta/android/screenshots/screenshot_student_setting.png)
 
-## Teachers Screens (Night Mode)
+## Teacher Screens (Night Mode)
 
 [<img src="meta/android/screenshots/screenshot_teacher_all_books.png" width=160>](meta/android/screenshots/screenshot_teacher_all_books.png)
 [<img src="meta/android/screenshots/screenshot_teacher_book_details.png" width=160>](meta/android/screenshots/screenshot_teacher_book_details.png)

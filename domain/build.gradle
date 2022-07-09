@@ -4,7 +4,6 @@ plugins {
 }
 
 dependencies {
-
     // Retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
 

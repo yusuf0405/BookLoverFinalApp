@@ -50,7 +50,6 @@ class ClassRepositoryImpl(
             else {
                 cacheDataSource.saveClasses(classes = classData)
                 val classDomain = classData.map { classData -> classMapper.map(classData) }
-                classDomain.lastIndex
                 emit(Resource.success(data = classDomain))
             }
         } else emit(Resource.error(message = result.message))

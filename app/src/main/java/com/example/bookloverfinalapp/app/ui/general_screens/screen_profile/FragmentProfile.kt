@@ -1,8 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile
 
 import android.content.DialogInterface
-import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.appcompat.app.AlertDialog
@@ -11,17 +9,21 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login_main.ActivityLoginMain
-import com.example.bookloverfinalapp.app.utils.setting.SettingManager.clearAppSettings
-import com.example.bookloverfinalapp.app.utils.extensions.downEffect
-import com.example.bookloverfinalapp.app.utils.extensions.glide
-import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
-import com.example.bookloverfinalapp.app.utils.extensions.showView
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
+import com.example.bookloverfinalapp.app.utils.setting.SettingManager.clearAppSettings
 import com.example.bookloverfinalapp.databinding.FragmentProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+
+internal object List {
+    @JvmStatic
+    fun main(args: ArrayList<String>) {
+
+    }
+
+}
 
 @AndroidEntryPoint
 class FragmentProfile :
@@ -78,7 +80,6 @@ class FragmentProfile :
             viewModel.clearDataInCache()
             SharedPreferences().saveIsFilter(false, requireContext())
             clearAppSettings(scope = lifecycleScope, requireContext())
-            delay(3000)
             loadingDialog.dismiss()
             requireActivity().intentClearTask(activity = ActivityLoginMain())
         }
@@ -87,10 +88,7 @@ class FragmentProfile :
     private fun setupUi() {
         val student = SharedPreferences().getCurrentUser(activity = requireActivity())
         binding().apply {
-            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor("#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor("#305F72"))
-            }
+            setCardViewColor(materialCardView)
             val fullName = "${student.name} ${student.lastname}"
             profileNameText.text = fullName
             profileSchoolText.text = student.schoolName

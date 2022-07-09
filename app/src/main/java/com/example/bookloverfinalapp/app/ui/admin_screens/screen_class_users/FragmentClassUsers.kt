@@ -8,7 +8,7 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
-import com.example.bookloverfinalapp.app.ui.adapter.UserModel
+import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor

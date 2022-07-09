@@ -3,14 +3,14 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.example.bookloverfinalapp.app.base.BaseViewModel
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.mappers.BookDomainToBookModelMapper
 import com.example.bookloverfinalapp.app.models.Book
-import com.example.bookloverfinalapp.app.ui.adapter.BookLoadingModel
-import com.example.bookloverfinalapp.app.ui.adapter.BookModel
-import com.example.bookloverfinalapp.app.ui.adapter.CatEmptyModel
-import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
+import com.example.bookloverfinalapp.app.models.BookLoadingModel
+import com.example.bookloverfinalapp.app.models.BookModel
+import com.example.bookloverfinalapp.app.models.CatEmptyModel
+import com.example.bookloverfinalapp.app.models.ErrorModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_BOOK_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.domain.Mapper
@@ -33,16 +33,13 @@ class FragmentAllBooksViewModel @Inject constructor(
     var mapper: Mapper<BookModel, Book>,
 ) : BaseViewModel() {
 
-
     fun collect(owner: LifecycleOwner, observer: Observer<List<ItemUi>>) =
         communication.observe(owner = owner, observer = observer)
 
     fun fetchBooks(schoolId: String) = launchInBackground {
-        useCaseGetAll.execute(schoolId = schoolId)
-            .collectLatest { resource ->
-                unravelingResource(resource = resource,
-                    schoolId = schoolId)
-            }
+        useCaseGetAll.execute(schoolId = schoolId).collectLatest { resource ->
+            unravelingResource(resource = resource, schoolId = schoolId)
+        }
     }
 
     fun onRefresh(schoolId: String) = launchInBackground {
@@ -52,10 +49,9 @@ class FragmentAllBooksViewModel @Inject constructor(
     }
 
     fun searchBook(searchText: String, schoolId: String) = launchInBackground {
-        getSearchBookUseCase.execute(schoolId = schoolId, searchText = searchText)
-            .collectLatest { resource ->
-                unravelingResource(resource = resource, schoolId = schoolId)
-            }
+        getSearchBookUseCase.execute(schoolId, searchText = searchText).collectLatest { resource ->
+            unravelingResource(resource = resource, schoolId = schoolId)
+        }
     }
 
     private fun unravelingResource(resource: Resource<List<BookDomain>>, schoolId: String) {

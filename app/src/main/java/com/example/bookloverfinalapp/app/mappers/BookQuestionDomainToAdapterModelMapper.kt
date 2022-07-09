@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.mappers
 
-import com.example.bookloverfinalapp.app.ui.adapter.QuestionModel
+import com.example.bookloverfinalapp.app.models.QuestionModel
 import com.example.domain.Mapper
 import com.example.domain.models.BookQuestionDomain
 

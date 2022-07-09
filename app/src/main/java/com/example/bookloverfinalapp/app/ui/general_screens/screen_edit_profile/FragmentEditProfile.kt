@@ -2,8 +2,6 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_edit_profile
 
 import android.app.Activity
 import android.content.Intent
-import android.content.res.Configuration
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -65,10 +63,7 @@ class FragmentEditProfile :
     private fun setupUi() {
         user = checkNotNull(SharedPreferences().getCurrentUser(activity = requireActivity()))
         binding().apply {
-            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor("#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor("#305F72"))
-            }
+            setCardViewColor(materialCardView)
             gender = user.gender
             editStudentNumber.setText(user.number)
             editStudentName.setText(user.name)

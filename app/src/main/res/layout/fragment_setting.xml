@@ -18,6 +18,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
 
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>

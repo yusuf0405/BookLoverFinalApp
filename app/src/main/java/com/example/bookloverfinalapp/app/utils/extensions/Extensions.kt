@@ -35,6 +35,7 @@ import com.example.bookloverfinalapp.app.utils.cons.SETTINGS_NAME
 import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UserDomainImage
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
 import com.parse.ParseFile
@@ -57,19 +58,26 @@ fun View.hideView() {
     this.visibility = View.GONE
 }
 
+fun Fragment.setCardViewColor(cardView: MaterialCardView) {
+    when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
+        Configuration.UI_MODE_NIGHT_NO -> cardView.setBackgroundColor(requireContext().getAppThemeColor())
+        Configuration.UI_MODE_NIGHT_YES -> cardView.setBackgroundColor(requireContext().getGreyColor())
+    }
+}
+
 fun Fragment.setToolbarColor(toolbar: Toolbar) {
     when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
         Configuration.UI_MODE_NIGHT_NO -> {
             toolbar.apply {
-                setBackgroundColor(Color.parseColor("#2A00A2"))
-                setTitleTextColor(Color.parseColor("#FAF9F9"))
+                setBackgroundColor(requireContext().getAppThemeColor())
+                setTitleTextColor(requireContext().getWhiteColor())
                 setNavigationIcon(R.drawable.ic_baseline_white_back_24)
             }
 
         }
         Configuration.UI_MODE_NIGHT_YES -> {
             toolbar.apply {
-                setBackgroundColor(Color.parseColor("#305F72"))
+                setBackgroundColor(requireContext().getGreyColor())
                 setTitleTextColor(Color.WHITE)
                 setNavigationIcon(R.drawable.ic_baseline_white_back_24)
             }
@@ -80,11 +88,11 @@ fun Fragment.setToolbarColor(toolbar: Toolbar) {
 fun Fragment.setTabLayoutColor(tabLayout: TabLayout) {
     when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
         Configuration.UI_MODE_NIGHT_NO -> {
-            tabLayout.setBackgroundColor(Color.parseColor("#2A00A2"))
+            tabLayout.setBackgroundColor(requireContext().getAppThemeColor())
             tabLayout.setTabTextColors(requireContext().getColor(R.color.white),
                 requireContext().getColor(R.color.white))
         }
-        Configuration.UI_MODE_NIGHT_YES -> tabLayout.setBackgroundColor(Color.parseColor("#305F72"))
+        Configuration.UI_MODE_NIGHT_YES -> tabLayout.setBackgroundColor(requireContext().getGreyColor())
     }
 }
 
@@ -125,7 +133,7 @@ fun Fragment.createNewPath(inputStream: InputStream, key: String) = App.applicat
         .apply()
 }
 
-fun Context.shoErrorDialog(message: String, listener: DialogInterface.OnClickListener) {
+fun Context.showErrorDialog(message: String, listener: DialogInterface.OnClickListener) {
 
     val dialog = AlertDialog.Builder(this)
         .setTitle(R.string.splash_error_title)
@@ -349,11 +357,9 @@ fun Context.getBronzeColor(): Int = this.resources.getColor(R.color.bronze)
 
 fun Context.getGreyColor(): Int = this.resources.getColor(R.color.grey)
 
+fun Context.getWhiteColor(): Int = this.resources.getColor(R.color.cardBackground)
 
-fun Context.glidePlaceHolder(uri: String?, imageView: ImageView) {
-    Glide.with(this)
-        .load(uri)
-        .placeholder(R.drawable.placeholder_avatar)
-        .into(imageView)
-}
+
+fun Context.getAppThemeColor(): Int = this.resources.getColor(R.color.app_theme)
+
 

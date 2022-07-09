@@ -44,9 +44,7 @@ class FragmentSignUpViewModel @Inject constructor(
     private val classMapper: Mapper<ClassDomain, SchoolClass>,
 ) : BaseViewModel() {
 
-    init {
-        getAllSchools()
-    }
+    init { getAllSchools() }
 
     fun schoolsCollect(owner: LifecycleOwner, observer: Observer<List<SchoolDomain>>) =
         schoolsCommunication.observe(owner = owner, observer = observer)
@@ -89,8 +87,7 @@ class FragmentSignUpViewModel @Inject constructor(
 
     fun addSessionToken(id: String, sessionToken: String) =
         liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
-            addSessionTokenUseCase.execute(id = id, sessionToken = sessionToken)
-                .collectLatest { resource ->
+            addSessionTokenUseCase.execute(id = id, sessionToken = sessionToken).collectLatest { resource ->
                     when (resource.status) {
                         Status.SUCCESS -> {
                             dismissProgressDialog()
@@ -107,13 +104,17 @@ class FragmentSignUpViewModel @Inject constructor(
     fun getClasses(schoolId: String) = viewModelScope.launch {
         getAllClassUseCase.execute(schoolId = schoolId).collectLatest { resource ->
             when (resource.status) {
+
                 Status.LOADING -> showProgressDialog()
+
                 Status.SUCCESS -> {
                     dismissProgressDialog()
                     classesCommunication.put(resource.data!!.map { classDomain ->
                         classMapper.map(classDomain)
                     })
                 }
+                Status.EMPTY -> classesCommunication.put(mutableListOf())
+
                 Status.ERROR -> {
                     dismissProgressDialog()
                     schoolsErrorCommunication.put(Event(resource.message!!))

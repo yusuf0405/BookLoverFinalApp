@@ -9,7 +9,7 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
-import com.example.bookloverfinalapp.app.ui.adapter.QuestionModel
+import com.example.bookloverfinalapp.app.models.QuestionModel
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements
@@ -20,7 +20,8 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FragmentAllQuestion :
     BaseFragment<FragmentAllQuestionBinding, FragmentAllQuestionViewModel>(
-        FragmentAllQuestionBinding::inflate), ItemOnClickListener {
+        FragmentAllQuestionBinding::inflate
+    ), ItemOnClickListener {
 
     override val viewModel: FragmentAllQuestionViewModel by viewModels()
 
@@ -54,28 +55,28 @@ class FragmentAllQuestion :
         }
     }
 
-    private fun setupUi() {
-        binding().apply {
-            toolbar.title = title
-            setToolbarColor(toolbar)
-            adminQuestionsRecyclerView.adapter = adapter
-        }
+    private fun setupUi() = binding().apply {
+        toolbar.title = title
+        setToolbarColor(toolbar)
+        adminQuestionsRecyclerView.adapter = adapter
     }
 
-    private fun onClickListeners() {
-        binding().apply {
+
+    private fun onClickListeners() = binding().apply {
             PushDownAnim.setPushDownAnimTo(addQuestionButton).setOnClickListener {
                 viewModel.goAddQuestionFragment(id = id, chapter = chapter, title = title)
             }
             toolbar.setNavigationOnClickListener { viewModel.goBack() }
         }
-    }
+
 
     override fun showAnotherFragment(item: ItemUi) {
-        viewModel.goQuestionEditFragment(question = viewModel.adapterMapper.map(item as QuestionModel),
+        viewModel.goQuestionEditFragment(
+            question = viewModel.adapterMapper.map(item as QuestionModel),
             title = title,
             id = id,
-            chapter = chapter)
+            chapter = chapter
+        )
     }
 
     override fun deleteItem(item: ItemUi, position: Int) {
@@ -86,6 +87,7 @@ class FragmentAllQuestion :
                 DialogInterface.BUTTON_POSITIVE -> {
                     viewModel.deleteQuestion(id = id).observe(viewLifecycleOwner) {
                         showToast(R.string.book_question_deleted_successfully)
+                        adapter.notifyDataSetChanged()
                     }
                     adapter.deleteItem(position = position)
                 }

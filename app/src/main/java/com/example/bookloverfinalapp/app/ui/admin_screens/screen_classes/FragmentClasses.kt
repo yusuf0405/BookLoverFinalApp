@@ -12,7 +12,7 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
-import com.example.bookloverfinalapp.app.ui.adapter.SchoolClassModel
+import com.example.bookloverfinalapp.app.models.SchoolClassModel
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements
@@ -111,9 +111,11 @@ class FragmentClasses :
                     title = newSchoolClass,
                     schoolId = currentUser.schoolId))
 
-                adapter.addItem(SchoolClassModel(id = it,
+                adapter.addItem(
+                    SchoolClassModel(id = it,
                     title = newSchoolClass,
-                    schoolId = currentUser.schoolId))
+                    schoolId = currentUser.schoolId)
+                )
 
                 classNumberCurrentIndex = 0
                 classTypeCurrentIndex = 0

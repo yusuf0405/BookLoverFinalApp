@@ -2,7 +2,6 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up_stud
 
 import android.content.DialogInterface
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
@@ -52,22 +51,19 @@ class FragmentSignUpStudent :
         viewModel.schoolsErrorCollect(viewLifecycleOwner) { value ->
             value.getValue()?.let { message ->
                 val listener = DialogInterface.OnClickListener { _, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> viewModel.getAllSchools()
-                    }
+                    if (which == DialogInterface.BUTTON_POSITIVE) viewModel.getAllSchools()
                 }
-                requireContext().shoErrorDialog(message, listener)
+                requireContext().showErrorDialog(message, listener)
             }
         }
 
         viewModel.classErrorCollect(viewLifecycleOwner) { value ->
             value.getValue()?.let { message ->
                 val listener = DialogInterface.OnClickListener { _, which ->
-                    when (which) {
-                        DialogInterface.BUTTON_POSITIVE -> viewModel.getClasses(schoolList[schoolCurrentIndex].objectId)
-                    }
+                    if (which == DialogInterface.BUTTON_POSITIVE)
+                        viewModel.getClasses(schoolList[schoolCurrentIndex].objectId)
                 }
-                requireContext().shoErrorDialog(message, listener)
+                requireContext().showErrorDialog(message, listener)
             }
         }
 
@@ -88,6 +84,7 @@ class FragmentSignUpStudent :
             classTitle = classesTitleList[classCurrentIndex]
             classId = classList[classCurrentIndex].id
             binding().classTextView.text = classTitle
+
         }
     }
 
@@ -108,7 +105,6 @@ class FragmentSignUpStudent :
             binding().signInLink -> viewModel.goStudentToLoginFragment()
             binding().schoolButton -> showSchoolSingleChoiceWithConfirmationAlertDialog()
             binding().classButton -> showClassSingleChoiceWithConfirmationAlertDialog()
-
         }
     }
 
@@ -172,9 +168,7 @@ class FragmentSignUpStudent :
                 image = image,
                 schoolId = schoolId
             )
-            Log.i("password", passwordField.text.toString())
-            viewModel.addSessionToken(id = id, sessionToken = sessionToken)
-                .observe(viewLifecycleOwner) {
+            viewModel.addSessionToken(id = id, sessionToken = sessionToken).observe(viewLifecycleOwner) {
                     SharedPreferences().saveCurrentUser(user = currentStudent, requireActivity())
                     intentClearTask(activity = ActivityMain())
                 }
@@ -202,10 +196,7 @@ class FragmentSignUpStudent :
             .setSingleChoiceItems(schoolTitleList.toTypedArray(), schoolCurrentIndex, null)
             .setPositiveButton(R.string.action_confirm) { d, _ ->
                 val index = (d as AlertDialog).listView.checkedItemPosition
-                if (index != schoolCurrentIndex) {
-                    viewModel.getClasses(schoolList[index].objectId)
-                }
-
+                if (index != schoolCurrentIndex) viewModel.getClasses(schoolList[index].objectId)
                 schoolCurrentIndex = index
                 schoolTitle = schoolTitleList[index]
                 schoolId = schoolList[index].objectId

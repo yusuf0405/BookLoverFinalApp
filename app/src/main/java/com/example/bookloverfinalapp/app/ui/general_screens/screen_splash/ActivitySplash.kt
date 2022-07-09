@@ -54,8 +54,7 @@ class ActivitySplash : AppCompatActivity() {
         setContentView(binding.root)
         SettingManager.setAppSetting(scope = lifecycleScope, context = this)
         val pref = getSharedPreferences(CURRENT_STUDENT_EDITOR_SAVE_KEY, Context.MODE_PRIVATE)
-        currentUser =
-            Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
+        currentUser = Gson().fromJson(pref.getString(CURRENT_STUDENT_SAVE_KEY, null), User::class.java)
 
         lifecycleScope.launch {
             if (currentUser == null) {
@@ -78,7 +77,10 @@ class ActivitySplash : AppCompatActivity() {
                     Status.LOADING -> binding.progressBar.showView()
 
                     Status.SUCCESS -> {
-                        SharedPreferences().saveCurrentUser(mapper.map(resource.data!!), this@ActivitySplash)
+                        SharedPreferences().saveCurrentUser(
+                            mapper.map(resource.data!!),
+                            this@ActivitySplash
+                        )
                         checkUserClass()
                     }
                     Status.EMPTY -> {
@@ -86,6 +88,7 @@ class ActivitySplash : AppCompatActivity() {
                         NavigationManager().loginOut(this@ActivitySplash)
                         intentClearTask(activity = ActivityLoginMain())
                     }
+
                     Status.ERROR -> {
                         binding.progressBar.hideView()
                         createErrorDialog(message = resource.message!!)
@@ -114,10 +117,8 @@ class ActivitySplash : AppCompatActivity() {
 
     private fun createErrorDialog(message: String) {
         val listener = DialogInterface.OnClickListener { _, which ->
-            when (which) {
-                DialogInterface.BUTTON_POSITIVE -> lifecycleScope.launch { checkUserStatus() }
-            }
+            if (which == DialogInterface.BUTTON_POSITIVE) lifecycleScope.launch { checkUserStatus() }
         }
-        this.shoErrorDialog(message = message, listener = listener)
+        this.showErrorDialog(message = message, listener = listener)
     }
 }

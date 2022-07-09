@@ -11,12 +11,9 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login_main.ActivityLoginMain
-import com.example.bookloverfinalapp.app.utils.setting.SettingManager
-import com.example.bookloverfinalapp.app.utils.extensions.downEffect
-import com.example.bookloverfinalapp.app.utils.extensions.glide
-import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
-import com.example.bookloverfinalapp.app.utils.extensions.showView
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
+import com.example.bookloverfinalapp.app.utils.setting.SettingManager
 import com.example.bookloverfinalapp.databinding.FragmentAdminProfileBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
@@ -87,12 +84,7 @@ class FragmentAdminProfile :
     private fun setupUi() {
         val admin = SharedPreferences().getCurrentUser(activity = requireActivity())
         binding().apply {
-            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor(
-                    "#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor(
-                    "#305F72"))
-            }
+            setCardViewColor(materialCardView)
             val fullName = "${admin.name} ${admin.lastname}"
             profileNameText.text = fullName
             profileSchoolText.text = admin.schoolName

@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.mappers
 
-import com.example.bookloverfinalapp.app.ui.adapter.BookModel
+import com.example.bookloverfinalapp.app.models.BookModel
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookPdf
 import com.example.bookloverfinalapp.app.models.BookPoster

@@ -20,6 +20,7 @@ class FragmentProfileViewModel @Inject constructor(
         clearStudentsCacheUseCase.execute()
     }
 
+
     fun goEditProfileFragment() =
         navigate(FragmentProfileDirections.actionFragmentProfileToFragmentEditProfile())
 }

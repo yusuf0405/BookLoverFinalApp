@@ -10,7 +10,6 @@ interface ClassRepository {
 
     fun fetchAllClassCloud(schoolId: String): Flow<Resource<List<ClassDomain>>>
 
-
     fun deleteClass(id: String): Flow<Resource<Unit>>
 
     fun addClass(title: String, schoolId: String): Flow<Resource<String>>

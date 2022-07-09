@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.mappers
 
-import com.example.bookloverfinalapp.app.ui.adapter.UserModel
+import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.models.StudentImage
 import com.example.domain.Mapper
 import com.example.domain.models.StudentDomain

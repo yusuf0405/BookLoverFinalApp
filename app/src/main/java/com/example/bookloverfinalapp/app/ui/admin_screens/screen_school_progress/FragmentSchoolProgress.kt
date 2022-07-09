@@ -100,7 +100,7 @@ class FragmentSchoolProgress :
                 progressStudentsText.text = schoolProgress.allStudents
                 progressAllBookText.text = schoolProgress.allBooks
                 progressDiamondReadText.text = schoolProgress.chaptersRead
-                progressBookText.text = schoolProgress.booksRead
+                 progressBookText.text = schoolProgress.booksRead
                 progressPageReadText.text = schoolProgress.pageRead
             }
             loadingDialog.dismiss()

@@ -5,8 +5,11 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.*
-import com.example.bookloverfinalapp.app.ui.adapter.*
 import com.example.bookloverfinalapp.app.custom.ItemUi
+import com.example.bookloverfinalapp.app.models.BookThatReadLoadingModel
+import com.example.bookloverfinalapp.app.models.BookThatReadModel
+import com.example.bookloverfinalapp.app.models.CatEmptyModel
+import com.example.bookloverfinalapp.app.models.ErrorModel
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.domain.Mapper
 import com.example.domain.Resource

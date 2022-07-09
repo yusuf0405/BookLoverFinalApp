@@ -11,7 +11,6 @@ import com.example.bookloverfinalapp.app.utils.cons.CURRENT_STUDENT_EDITOR_SAVE_
 
 class NavigationManager {
 
-
     fun loginOut(activity: Activity) =
         activity.getSharedPreferences(CURRENT_STUDENT_EDITOR_SAVE_KEY, Context.MODE_PRIVATE).edit()
             .clear().commit()

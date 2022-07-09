@@ -62,12 +62,7 @@ class FragmentAdminEditProfile :
     private fun setupUi() {
         admin = checkNotNull(SharedPreferences().getCurrentUser(activity = requireActivity()))
         binding().apply {
-            when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
-                Configuration.UI_MODE_NIGHT_NO -> materialCardView.setBackgroundColor(Color.parseColor(
-                    "#2A00A2"))
-                Configuration.UI_MODE_NIGHT_YES -> materialCardView.setBackgroundColor(Color.parseColor(
-                    "#305F72"))
-            }
+            setCardViewColor(materialCardView)
             gender = admin.gender
             editStudentNumber.setText(admin.number)
             editStudentName.setText(admin.name)

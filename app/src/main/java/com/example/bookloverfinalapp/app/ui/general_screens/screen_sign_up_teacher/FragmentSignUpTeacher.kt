@@ -69,7 +69,7 @@ class FragmentSignUpTeacher :
                         DialogInterface.BUTTON_POSITIVE -> viewModel.getAllSchools()
                     }
                 }
-                requireContext().shoErrorDialog(message, listener)
+                requireContext().showErrorDialog(message, listener)
             }
         }
 
@@ -80,7 +80,7 @@ class FragmentSignUpTeacher :
                         DialogInterface.BUTTON_POSITIVE -> viewModel.getClasses(schoolList[schoolCurrentIndex].objectId)
                     }
                 }
-                requireContext().shoErrorDialog(message, listener)
+                requireContext().showErrorDialog(message, listener)
             }
         }
 
@@ -99,9 +99,11 @@ class FragmentSignUpTeacher :
             classTitleList.clear()
             classCurrentIndex = 0
             classes.forEach { classTitleList.add(it.title) }
-            classTitle = classTitleList[classCurrentIndex]
-            classId = classes[classCurrentIndex].id
-            binding().classTextView.text = classTitle
+            if (classTitleList.isNotEmpty()) {
+                classTitle = classTitleList[classCurrentIndex]
+                classId = classList[classCurrentIndex].id
+                binding().classTextView.text = classTitle
+            }
         }
     }
 

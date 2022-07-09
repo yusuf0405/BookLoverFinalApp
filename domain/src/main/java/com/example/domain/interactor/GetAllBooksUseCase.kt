@@ -8,6 +8,6 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flowOn
 
 class GetAllBooksUseCase(private val repository: BooksRepository) {
-    suspend fun execute(schoolId: String): Flow<Resource<List<BookDomain>>> =
+    fun execute(schoolId: String): Flow<Resource<List<BookDomain>>> =
         repository.fetchBooks(schoolId = schoolId).flowOn(Dispatchers.IO)
 }

@@ -15,7 +15,6 @@ import javax.inject.Inject
 @HiltViewModel
 class FragmentLoginViewModel @Inject constructor(
     private val signInUseCase: SignInUseCase,
-
     private val mapper: Mapper<UserDomain, User>,
 ) : BaseViewModel() {
 

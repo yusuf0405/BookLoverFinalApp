@@ -7,10 +7,10 @@ import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.*
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.custom.ItemUi
-import com.example.bookloverfinalapp.app.ui.adapter.BookThatReadLoadingModel
-import com.example.bookloverfinalapp.app.ui.adapter.BookThatReadModel
-import com.example.bookloverfinalapp.app.ui.adapter.CatEmptyModel
-import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
+import com.example.bookloverfinalapp.app.models.BookThatReadLoadingModel
+import com.example.bookloverfinalapp.app.models.BookThatReadModel
+import com.example.bookloverfinalapp.app.models.CatEmptyModel
+import com.example.bookloverfinalapp.app.models.ErrorModel
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
 import com.example.domain.Mapper

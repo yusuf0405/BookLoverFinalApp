@@ -56,6 +56,7 @@ class FragmentSetting : PreferenceFragmentCompat() {
                 }
                 true
             }
+
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 }

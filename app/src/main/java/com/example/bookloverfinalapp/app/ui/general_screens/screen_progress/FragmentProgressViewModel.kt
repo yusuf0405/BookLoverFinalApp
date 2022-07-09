@@ -6,10 +6,10 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.mappers.StudentDomainToUserModelMapper
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Student
-import com.example.bookloverfinalapp.app.ui.adapter.CubeEmptyModel
-import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
-import com.example.bookloverfinalapp.app.ui.adapter.UserLoadingModel
-import com.example.bookloverfinalapp.app.ui.adapter.UserModel
+import com.example.bookloverfinalapp.app.models.CubeEmptyModel
+import com.example.bookloverfinalapp.app.models.ErrorModel
+import com.example.bookloverfinalapp.app.models.UserLoadingModel
+import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_RATING_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication

@@ -1,11 +1,8 @@
-package com.example.bookloverfinalapp.app.ui.adapter
+package com.example.bookloverfinalapp.app.models
 
 import android.content.Context
 import androidx.preference.PreferenceManager
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.models.BookThatReadPoster
-import com.example.bookloverfinalapp.app.models.StudentImage
-import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.adapter.GenericViewHolder.Companion.VIEW_POSITION_FIFTH
 import com.example.bookloverfinalapp.app.ui.adapter.GenericViewHolder.Companion.VIEW_POSITION_FIRST
 import com.example.bookloverfinalapp.app.ui.adapter.GenericViewHolder.Companion.VIEW_POSITION_FOURTH

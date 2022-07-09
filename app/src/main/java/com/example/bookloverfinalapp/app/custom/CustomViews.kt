@@ -16,13 +16,9 @@ class MyTextView : androidx.appcompat.widget.AppCompatTextView, CustomView {
         attrs,
         defStyleAttr)
 
-    override fun show(text: String) {
-        setText(text)
-    }
+    override fun show(text: String) { setText(text) }
 
-    override fun visibility(status: Boolean) {
-        visibility = if (status) View.VISIBLE else View.GONE
-    }
+    override fun visibility(status: Boolean) { visibility = if (status) View.VISIBLE else View.GONE }
 
 }
 

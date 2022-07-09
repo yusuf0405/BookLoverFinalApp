@@ -11,7 +11,7 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
-import com.example.bookloverfinalapp.app.ui.adapter.UserModel
+import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.showView
@@ -26,7 +26,8 @@ import java.util.*
 @AndroidEntryPoint
 class FragmentProgress :
     BaseFragment<FragmentProgressBinding, FragmentProgressViewModel>(
-        FragmentProgressBinding::inflate), ItemOnClickListener {
+        FragmentProgressBinding::inflate
+    ), ItemOnClickListener {
 
     override val viewModel: FragmentProgressViewModel by viewModels()
 
@@ -127,25 +128,22 @@ class FragmentProgress :
         dialog.show()
     }
 
-    private fun setupUi() {
+    private fun setupUi() = binding().apply {
         isFilter = SharedPreferences().getIsFilter(requireActivity())
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
-        binding().apply {
-            filterButton.setOnClickListener { showFilterAlertDialog() }
-            studentsRatingRecyclerView.adapter = adapter
-            currentUser.apply {
-                val fullName = "$name $lastname"
-                progressProfileName.text = fullName
-                val readTime = formatter.format(createAt).toString()
-                progressReadTime.text = readTime
-                Glide.with(requireActivity())
-                    .load(image?.url)
-                    .placeholder(R.drawable.placeholder_avatar)
-                    .into(studentProgressImg)
-            }
+        filterButton.setOnClickListener { showFilterAlertDialog() }
+        studentsRatingRecyclerView.adapter = adapter
+        currentUser.apply {
+            val fullName = "$name $lastname"
+            progressProfileName.text = fullName
+            val readTime = formatter.format(createAt).toString()
+            progressReadTime.text = readTime
+            Glide.with(requireActivity())
+                .load(image?.url)
+                .placeholder(R.drawable.placeholder_avatar)
+                .into(studentProgressImg)
         }
     }
-
 
     override fun onStart() {
         super.onStart()

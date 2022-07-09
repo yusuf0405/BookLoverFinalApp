@@ -2,7 +2,6 @@ package com.example.bookloverfinalapp.app.di
 
 import com.example.bookloverfinalapp.app.mappers.*
 import com.example.bookloverfinalapp.app.models.*
-import com.example.bookloverfinalapp.app.ui.adapter.*
 import com.example.data.cache.mappers.*
 import com.example.data.cache.models.BookCache
 import com.example.data.cache.models.BookThatReadCache

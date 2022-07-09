@@ -7,6 +7,8 @@ import android.widget.PopupMenu
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.custom.MyTextView
+import com.example.bookloverfinalapp.app.models.BookThatReadModel
+import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.*
 

@@ -8,10 +8,10 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.mappers.BookDomainToBookModelMapper
 import com.example.bookloverfinalapp.app.models.AddNewBookModel
 import com.example.bookloverfinalapp.app.models.Book
-import com.example.bookloverfinalapp.app.ui.adapter.BookModel
-import com.example.bookloverfinalapp.app.ui.adapter.CubeEmptyModel
-import com.example.bookloverfinalapp.app.ui.adapter.ErrorModel
-import com.example.bookloverfinalapp.app.ui.adapter.SimilarBookLoadingModel
+import com.example.bookloverfinalapp.app.models.BookModel
+import com.example.bookloverfinalapp.app.models.CubeEmptyModel
+import com.example.bookloverfinalapp.app.models.ErrorModel
+import com.example.bookloverfinalapp.app.models.SimilarBookLoadingModel
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_SIMILAR_BOOK_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication

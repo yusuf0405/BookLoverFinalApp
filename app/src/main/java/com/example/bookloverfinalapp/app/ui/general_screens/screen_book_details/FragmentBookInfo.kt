@@ -6,13 +6,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.models.AddNewBookModel
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
-import com.example.bookloverfinalapp.app.ui.adapter.BookModel
+import com.example.bookloverfinalapp.app.models.BookModel
 import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
 import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
-import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
 import com.example.bookloverfinalapp.app.utils.genre.GenreTags
@@ -102,16 +102,6 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
 
         viewModel.collect(viewLifecycleOwner) { books -> adapter.map(books.toMutableList()) }
 
-        book.genres.forEach { genreCode ->
-            binding().bookGenresLayout.addView(
-                GenreTags(context = requireContext(),
-                    actionListener = this).getGenreTag(genreName =
-                GenresManager.getGenreByCloudCode(
-                    context = requireContext(),
-                    code = genreCode),
-                    genreCode = genreCode)
-            )
-        }
         viewModel.collectProgressAnimation(viewLifecycleOwner) {
             it.getValue()?.let { status -> uiVisibility(status = status) }
         }
@@ -143,6 +133,17 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
             tvPageCount.text = book.page.toString()
             requireContext().glide(book.poster.url, tvBookImage)
             bookProgress.hideView()
+            bookGenresLayout.removeAllViews()
+            book.genres.forEach { genreCode ->
+                bookGenresLayout.addView(
+                    GenreTags(context = requireContext(),
+                        actionListener = this@FragmentBookInfo).getGenreTag(genreName =
+                    GenresManager.getGenreByCloudCode(
+                        context = requireContext(),
+                        code = genreCode),
+                        genreCode = genreCode)
+                )
+            }
         }
     }
 

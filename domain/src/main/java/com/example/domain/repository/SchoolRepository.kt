@@ -8,4 +8,5 @@ import kotlinx.coroutines.flow.Flow
 interface SchoolRepository {
 
     fun getAllSchools(): Flow<Resource<List<SchoolDomain>>>
+
 }
