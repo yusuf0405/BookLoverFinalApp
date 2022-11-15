@@ -5,6 +5,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import com.example.bookloverfinalapp.R
+import com.example.bookloverfinalapp.app.base.GenericViewHolder
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.custom.MyTextView
 import com.example.bookloverfinalapp.app.models.BookThatReadModel

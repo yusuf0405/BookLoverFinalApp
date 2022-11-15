@@ -9,8 +9,8 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.UserType
-import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
-import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
+import com.example.bookloverfinalapp.app.base.GenericAdapter
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.glide
 import com.example.bookloverfinalapp.app.utils.extensions.hideView
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor

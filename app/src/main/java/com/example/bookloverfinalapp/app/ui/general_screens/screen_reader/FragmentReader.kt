@@ -1,7 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_reader
 
 import android.content.DialogInterface
-import android.graphics.Canvas
 import android.os.Bundle
 import android.view.View
 import android.view.WindowManager
@@ -16,7 +15,6 @@ import com.example.bookloverfinalapp.app.utils.extensions.showView
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationManager
 import com.example.bookloverfinalapp.databinding.DialogPageEnterBinding
 import com.example.bookloverfinalapp.databinding.FragmentReaderBinding
-import com.github.barteksc.pdfviewer.listener.OnDrawListener
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener

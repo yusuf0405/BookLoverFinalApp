@@ -116,8 +116,7 @@ class BookThatReadRepositoryImpl(
 
     override fun updateProgress(id: String, progress: Int): Flow<Resource<Unit>> = flow {
         emit(Resource.loading())
-        val result = cloudDataSource.updateProgress(id = id,
-            progress = progress)
+        val result = cloudDataSource.updateProgress(id = id, progress = progress)
         if (result.status == Status.SUCCESS) {
             cacheDataSource.updateProgress(id = id, progress = progress)
             emit(Resource.success(data = Unit))

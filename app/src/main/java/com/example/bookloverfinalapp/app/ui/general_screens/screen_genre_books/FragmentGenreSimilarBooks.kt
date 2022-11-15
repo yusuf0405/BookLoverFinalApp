@@ -5,8 +5,8 @@ import android.view.View
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookModel
-import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
-import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
+import com.example.bookloverfinalapp.app.base.GenericAdapter
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements

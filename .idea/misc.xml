@@ -11,6 +11,7 @@
         <entry key="app/src/main/res/drawable/btn_previus.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/btn_questions.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/btn_sdat.xml" value="0.146" />
+        <entry key="app/src/main/res/drawable/card_view_bg.xml" value="0.2695" />
         <entry key="app/src/main/res/drawable/ic__844473_hamburger_menu_more_navigation_110336.xml" value="0.211" />
         <entry key="app/src/main/res/drawable/ic__add.xml" value="0.146" />
         <entry key="app/src/main/res/drawable/ic_account.xml" value="0.156" />
@@ -104,7 +105,7 @@
         <entry key="app/src/main/res/layout/fragment_class_has_deleted.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_class_students.xml" value="0.19572368421052633" />
         <entry key="app/src/main/res/layout/fragment_classes.xml" value="0.44296875" />
-        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_edit_profile.xml" value="0.4421875" />
         <entry key="app/src/main/res/layout/fragment_forgot_password.xml" value="0.3098958333333333" />
         <entry key="app/src/main/res/layout/fragment_genre_similar_books.xml" value="0.33519553072625696" />
         <entry key="app/src/main/res/layout/fragment_help.xml" value="0.2953125" />
@@ -114,7 +115,7 @@
         <entry key="app/src/main/res/layout/fragment_main_root.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/fragment_my_books.xml" value="0.20101351351351351" />
         <entry key="app/src/main/res/layout/fragment_my_students.xml" value="0.20101351351351351" />
-        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.19572368421052633" />
+        <entry key="app/src/main/res/layout/fragment_profile.xml" value="0.3202247191011236" />
         <entry key="app/src/main/res/layout/fragment_progress.xml" value="0.18618421052631579" />
         <entry key="app/src/main/res/layout/fragment_reader.xml" value="0.27546296296296297" />
         <entry key="app/src/main/res/layout/fragment_reader_fragment.xml" value="0.2953125" />
@@ -146,7 +147,7 @@
         <entry key="app/src/main/res/layout/item_class.xml" value="0.18651315789473685" />
         <entry key="app/src/main/res/layout/item_custom_spinner.xml" value="0.2953125" />
         <entry key="app/src/main/res/layout/item_empty_list.xml" value="0.17222222222222222" />
-        <entry key="app/src/main/res/layout/item_empty_similar_books.xml" value="0.3225806451612903" />
+        <entry key="app/src/main/res/layout/item_empty_similar_books.xml" value="0.49829351535836175" />
         <entry key="app/src/main/res/layout/item_empty_student_list.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_fail_fullscreen.xml" value="0.373046875" />
         <entry key="app/src/main/res/layout/item_genre.xml" value="0.46484375" />

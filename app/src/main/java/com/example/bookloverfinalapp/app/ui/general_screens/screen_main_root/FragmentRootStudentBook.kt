@@ -40,9 +40,8 @@ class FragmentRootStudentBook : Fragment() {
     private fun setupTabLayout() {
         binding.apply {
             viewPager.isSaveEnabled = false
-            viewPager.adapter =
-                StudentViewPagerAdapter(fm = requireActivity().supportFragmentManager,
-                    lifecycle = lifecycle)
+            viewPager.adapter = StudentViewPagerAdapter(fm = requireActivity().supportFragmentManager, lifecycle = lifecycle)
+
             TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
                 when (pos) {
                     0 -> tab.text = getString(R.string.all_books)

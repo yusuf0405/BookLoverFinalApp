@@ -113,8 +113,7 @@ class FragmentAdminUploadPdf :
         if (resultCode == RESULT_OK && data != null && data.data != null) {
             if (requestCode == REQUEST_CODE) {
                 val uri = data.data!!
-                requireActivity().contentResolver?.takePersistableUriPermission(uri,
-                    Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                requireActivity().contentResolver?.takePersistableUriPermission(uri, Intent.FLAG_GRANT_READ_URI_PERMISSION)
                 displayFromUri(uri)
                 generateImageFromPdf(uri)
                 bookFile = ParseFile(getFile(uri))

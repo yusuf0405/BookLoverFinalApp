@@ -10,8 +10,8 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatReadModel
-import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
-import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
+import com.example.bookloverfinalapp.app.base.GenericAdapter
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main_root.FragmentRootStudentBookDirections
 import com.example.bookloverfinalapp.app.utils.extensions.createNewPath
@@ -75,8 +75,7 @@ class FragmentMyBooks :
         val path = requireActivity().getShPrString(book.objectId)
         if (path == null) showToast(R.string.book_is_not_ready)
         else findNavController().navigate(FragmentRootStudentBookDirections
-            .actionFragmentRootBookToFragmentChapterBook(book = viewModel.adapterMapper.map(book),
-                path = path))
+            .actionFragmentRootBookToFragmentChapterBook(book = viewModel.adapterMapper.map(book), path = path))
     }
 
     override fun deleteItem(item: ItemUi, position: Int) {

@@ -11,8 +11,8 @@ import com.example.bookloverfinalapp.app.models.AddNewBookModel
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatReadPoster
 import com.example.bookloverfinalapp.app.models.BookModel
-import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
-import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
+import com.example.bookloverfinalapp.app.base.GenericAdapter
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
 import com.example.bookloverfinalapp.app.utils.genre.GenreTags

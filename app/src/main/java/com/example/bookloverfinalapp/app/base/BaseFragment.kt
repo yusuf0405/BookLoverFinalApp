@@ -30,7 +30,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
         SharedPreferences().getCurrentUser(activity = requireActivity())
     }
 
-
     protected val loadingDialog: LoadingDialog by lazy(LazyThreadSafetyMode.NONE) {
         LoadingDialog(context = requireContext(), getString(R.string.loading_please_wait))
     }
@@ -81,8 +80,8 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
         }
     }
 
-    override fun onDestroy() {
+    override fun onDestroyView() {
+        super.onDestroyView()
         viewBinding = null
-        super.onDestroy()
     }
 }

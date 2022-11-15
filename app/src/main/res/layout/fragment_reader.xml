@@ -1,26 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
+    android:orientation="vertical"
+    android:weightSum="1"
     tools:context=".app.ui.general_screens.screen_reader.FragmentReader">
 
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfview"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/cardView3"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="-50dp"
+        android:layout_marginEnd="-50dp"
+        android:layout_weight="1"
+        android:paddingHorizontal="100dp" />
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
         app:cardCornerRadius="24sp"
+        android:layout_weight="1"
         app:cardElevation="12sp"
         android:layout_height="wrap_content"
         app:layout_constraintBottom_toBottomOf="parent">
@@ -109,4 +112,4 @@
 
     </androidx.cardview.widget.CardView>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

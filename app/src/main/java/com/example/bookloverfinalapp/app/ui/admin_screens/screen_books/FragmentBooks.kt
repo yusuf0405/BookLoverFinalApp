@@ -12,8 +12,8 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookModel
-import com.example.bookloverfinalapp.app.ui.adapter.GenericAdapter
-import com.example.bookloverfinalapp.app.ui.adapter.ItemOnClickListener
+import com.example.bookloverfinalapp.app.base.GenericAdapter
+import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_ADMIN_BOOK_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE

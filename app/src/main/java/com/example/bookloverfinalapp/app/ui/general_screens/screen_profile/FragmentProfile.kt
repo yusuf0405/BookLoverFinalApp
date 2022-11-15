@@ -17,14 +17,6 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
-internal object List {
-    @JvmStatic
-    fun main(args: ArrayList<String>) {
-
-    }
-
-}
-
 @AndroidEntryPoint
 class FragmentProfile :
     BaseFragment<FragmentProfileBinding, FragmentProfileViewModel>(
