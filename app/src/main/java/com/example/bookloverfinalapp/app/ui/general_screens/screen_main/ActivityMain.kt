@@ -22,6 +22,9 @@ class ActivityMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         setAppSetting(scope = lifecycleScope, context = this)
+
+        // Some changes
+
         binding.navView.setupWithNavController(findNavController(R.id.nav_host_fragment_activity_main))
     }
 }
