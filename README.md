@@ -6,55 +6,21 @@ to their answers, reading speed, number of completed book, etc. Includes admin
 functions to manage all readers’ data, statistics for all users, add and manage  
 books
 
-## Login Screens
+## Screens
 
-[<img src="meta/android/screenshots/screenshot_splash.png" width=160>](meta/android/screenshots/screenshot_splash.png)
-[<img src="meta/android/screenshots/screenshot_main_sign_in.png" width=160>](meta/android/screenshots/screenshot_main_sign_in.png)
-[<img src="meta/android/screenshots/screenshot_teacher_registration.png" width=160>](meta/android/screenshots/screenshot_teacher_registration.png)
-[<img src="meta/android/screenshots/screenshot_student_registration.png" width=160>](meta/android/screenshots/screenshot_student_registration.png)
-[<img src="meta/android/screenshots/screenshot_enter.png" width=160>](meta/android/screenshots/screenshot_enter.png)
-[<img src="meta/android/screenshots/screenshot_forgot_password.png" width=160>](meta/android/screenshots/screenshot_forgot_password.png)
+[<img src="meta/android/screenshots/screenshot_main_screen.jpg" width=160>](meta/android/screenshots/screenshot_main_screen.jpg)
+[<img src="meta/android/screenshots/screenshot_player.jpg" width=160>](meta/android/screenshots/screenshot_player.jpg)
+[<img src="meta/android/screenshots/screenshot_profile_screen.jpg" width=160>](meta/android/screenshots/screenshot_profile_screen.jpg)
+[<img src="meta/android/screenshots/screenshot_leadershboard_screen.jpg" width=160>](meta/android/screenshots/screenshot_leadershboard_screen.jpg)
+[<img src="meta/android/screenshots/screenshot_statistics_screen.jpg" width=160>](meta/android/screenshots/screenshot_statistics_screen.jpg)
 
-## Student Screens (Light Mode)
+## Animations
 
-[<img src="meta/android/screenshots/screenshot_student_all_books.png" width=160>](meta/android/screenshots/screenshot_student_all_books.png)
-[<img src="meta/android/screenshots/screenshot_student_book_details.png" width=160>](meta/android/screenshots/screenshot_student_book_details.png)
-[<img src="meta/android/screenshots/screenshot_student_genre_books.png" width=160>](meta/android/screenshots/screenshot_student_genre_books.png)
-[<img src="meta/android/screenshots/screenshot_student_my_books.png" width=160>](meta/android/screenshots/screenshot_student_my_books.png)
-[<img src="meta/android/screenshots/screenshot_student_book_chapters.png" width=160>](meta/android/screenshots/screenshot_student_book_chapters.png)
-[<img src="meta/android/screenshots/screenshot_student_reader.png" width=160>](meta/android/screenshots/screenshot_student_reader.png)
-[<img src="meta/android/screenshots/screenshot_student_progress.png" width=160>](meta/android/screenshots/screenshot_student_progress.png)
-[<img src="meta/android/screenshots/screenshot_student_profile.png" width=160>](meta/android/screenshots/screenshot_student_profile.png)
-[<img src="meta/android/screenshots/screenshot_student_edit_profile.png" width=160>](meta/android/screenshots/screenshot_student_edit_profile.png)
-[<img src="meta/android/screenshots/screenshot_student_setting.png" width=160>](meta/android/screenshots/screenshot_student_setting.png)
-
-## Teacher Screens (Night Mode)
-
-[<img src="meta/android/screenshots/screenshot_teacher_all_books.png" width=160>](meta/android/screenshots/screenshot_teacher_all_books.png)
-[<img src="meta/android/screenshots/screenshot_teacher_book_details.png" width=160>](meta/android/screenshots/screenshot_teacher_book_details.png)
-[<img src="meta/android/screenshots/screenshot_teacher_genre_books.png" width=160>](meta/android/screenshots/screenshot_teacher_genre_books.png)
-[<img src="meta/android/screenshots/screenshot_teacher_my_books.png" width=160>](meta/android/screenshots/screenshot_teacher_my_books.png)
-[<img src="meta/android/screenshots/screenshot_teacher_book_chapters.png" width=160>](meta/android/screenshots/screenshot_teacher_book_chapters.png)
-[<img src="meta/android/screenshots/screenshot_teacher_my_students.png" width=160>](meta/android/screenshots/screenshot_teacher_my_students.png)
-[<img src="meta/android/screenshots/screenshot_teacher_student_details.png" width=160>](meta/android/screenshots/screenshot_teacher_student_details.png)
-[<img src="meta/android/screenshots/screenshot_teacher_progress.png" width=160>](meta/android/screenshots/screenshot_teacher_progress.png)
-[<img src="meta/android/screenshots/screenshot_teacher_rating.png" width=160>](meta/android/screenshots/screenshot_teacher_rating.png)
-[<img src="meta/android/screenshots/screenshot_teacher_profile.png" width=160>](meta/android/screenshots/screenshot_teacher_profile.png)
-[<img src="meta/android/screenshots/screenshot_teacher_edit_profile.png" width=160>](meta/android/screenshots/screenshot_teacher_edit_profile.png)
-[<img src="meta/android/screenshots/screenshot_teacher_setting.png" width=160>](meta/android/screenshots/screenshot_teacher_setting.png)
-
-## Admin Screens (Night Mode)
-
-[<img src="meta/android/screenshots/screenshot_admin_all_books.png" width=160>](meta/android/screenshots/screenshot_admin_all_books.png)
-[<img src="meta/android/screenshots/screenshot_admin_book_chapters.png" width=160>](meta/android/screenshots/screenshot_admin_book_chapters.png)
-[<img src="meta/android/screenshots/screenshot_admin_book_questions.png" width=160>](meta/android/screenshots/screenshot_admin_book_questions.png)
-[<img src="meta/android/screenshots/screenshot_admin_book_edit_questions.png" width=160>](meta/android/screenshots/screenshot_admin_book_edit_questions.png)
-[<img src="meta/android/screenshots/screenshot_admin_book_add_question.png" width=160>](meta/android/screenshots/screenshot_admin_book_add_question.png)
-[<img src="meta/android/screenshots/screenshot_admin_all_classes.png" width=160>](meta/android/screenshots/screenshot_admin_all_classes.png)
-[<img src="meta/android/screenshots/screenshot_admin_class_users.png" width=160>](meta/android/screenshots/screenshot_admin_class_users.png)
-[<img src="meta/android/screenshots/screenshot_admin_user_details.png" width=160>](meta/android/screenshots/screenshot_admin_user_details.png)
-[<img src="meta/android/screenshots/screenshot_admin_school_progress.png" width=160>](meta/android/screenshots/screenshot_admin_school_progress.png)
-[<img src="meta/android/screenshots/screenshot_admin_add_book.png" width=160>](meta/android/screenshots/screenshot_admin_add_book.png)
+[<img src="meta/android/gifs/app_first_animate.gif" width=160>](meta/android/gifs/app_first_animate.gif)
+[<img src="meta/android/gifs/app_second_animate.gif" width=160>](meta/android/gifs/app_second_animate.gif)
+[<img src="meta/android/gifs/app_third_animate.gif" width=160>](meta/android/gifs/app_second_animate.gif)
+[<img src="meta/android/gifs/app_fouth_animate.gif" width=160>](meta/android/gifs/app_fouth_animate.gif)
+[<img src="meta/android/gifs/app_fifth_animate.gif" width=160>](meta/android/gifs/app_fifth_animate.gif)
 
 ## Libraries
 
