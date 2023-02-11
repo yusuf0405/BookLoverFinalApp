@@ -7,7 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.models.User
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.ActivityMain
+import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain
 import com.example.bookloverfinalapp.app.utils.dialog.LoadingDialog
 import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
 import com.example.bookloverfinalapp.app.utils.extensions.showToast
@@ -54,13 +54,14 @@ class ActivityClassHasDeleted : AppCompatActivity() {
                     viewModel.updateStudentClass(id = currentUser.id,
                         sessionToken = currentUser.sessionToken,
                         classId = classId!!,
-                        classTitle = classTitle!!).observe(this) {
-                        val newCurrentUser = currentUser
-                        newCurrentUser.classId = classId!!
-                        newCurrentUser.className = classTitle!!
-                        SharedPreferences().saveCurrentUser(user = newCurrentUser, activity = this)
-                        intentClearTask(activity = ActivityMain())
-                    }
+                        classTitle = classTitle!!)
+//                        .observe(this) {
+//                        val newCurrentUser = currentUser
+//                        newCurrentUser.classId = classId!!
+//                        newCurrentUser.className = classTitle!!
+//                        SharedPreferences().saveCurrentUser(user = newCurrentUser, activity = this)
+//                        intentClearTask(activity = ActivityMain())
+//                    }
             }
         }
         viewModel.collectError(this) {

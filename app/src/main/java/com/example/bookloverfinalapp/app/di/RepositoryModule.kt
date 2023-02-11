@@ -1,31 +1,28 @@
 package com.example.bookloverfinalapp.app.di
 
+import android.content.Context
 import com.example.data.ResourceProvider
-import com.example.data.cache.models.BookCache
-import com.example.data.cache.models.BookThatReadCache
 import com.example.data.cache.models.ClassCache
 import com.example.data.cache.models.UserCache
-import com.example.data.cache.source.BooksCacheDataSource
-import com.example.data.cache.source.BooksThatReadDataSource
-import com.example.data.cache.source.ClassCacheDataSource
-import com.example.data.cache.source.UsersCacheDataSource
-import com.example.data.cloud.models.AddNewBookThatReadCloud
+import com.example.data.cache.source.classes.ClassCacheDataSource
+import com.example.data.cache.source.users.UsersCacheDataSource
 import com.example.data.cloud.models.SignUpAnswerCloud
 import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.service.LoginService
 import com.example.data.cloud.service.SchoolService
-import com.example.data.cloud.source.BooksCloudDataSource
 import com.example.data.cloud.source.BooksThatReadCloudDataSource
 import com.example.data.cloud.source.ClassCloudDataSource
 import com.example.data.cloud.source.UsersCloudDataSource
 import com.example.data.models.*
 import com.example.data.repository.*
+import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.*
 import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
+import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
@@ -41,35 +38,25 @@ object RepositoryModule {
         signUpMapper: Mapper<SignUpAnswerCloud, PostRequestAnswerDomain>,
         resourceProvider: ResourceProvider,
     ): LoginRepository =
-        LoginRepositoryImpl(service = service,
+        LoginRepositoryImpl(
+            service = service,
             signInMapper = signInMapper,
             signUpMapper = signUpMapper,
-            resourceProvider = resourceProvider)
-
+            resourceProvider = resourceProvider
+        )
 
     @Provides
     @Singleton
-    fun provideBooksRepository(
-        resourceProvider: ResourceProvider,
-        cloudDataSource: BooksCloudDataSource,
-        cacheDataSource: BooksCacheDataSource,
-        bookCashMapper: Mapper<BookCache, BookData>,
-        addBookDomainMapper: Mapper<AddNewBookDomain, AddNewBookData>,
-        bookDomainMapper: Mapper<BookData, BookDomain>,
-        updateBookDomainMapper: Mapper<UpdateBookDomain, UpdateBookData>,
-        questionsMapper: Mapper<BookQuestionData, BookQuestionDomain>,
-        questionsDomainMapper: Mapper<AddBookQuestionDomain, AddBookQuestionData>,
-    ): BooksRepository =
-        BooksRepositoryImpl(
-            resourceProvider = resourceProvider,
-            cloudDataSource = cloudDataSource,
-            cacheDataSource = cacheDataSource,
-            bookCashMapper = bookCashMapper,
-            bookDomainMapper = bookDomainMapper,
-            questionsMapper = questionsMapper,
-            questionsDomainMapper = questionsDomainMapper,
-            addBookDomainMapper = addBookDomainMapper,
-            updateBookDomainMapper = updateBookDomainMapper)
+    fun provideUserCacheRepository(
+        @ApplicationContext context: Context,
+        mapperToDomain: Mapper<UserSaveModel, UserDomain>,
+        mapperToSaveModel: Mapper<UserDomain, UserSaveModel>
+    ): UserCacheRepository =
+        UserCacheRepositoryImpl(
+            context = context,
+            mapperToDomain = mapperToDomain,
+            mapperToSaveModel = mapperToSaveModel
+        )
 
     @Provides
     @Singleton
@@ -85,30 +72,21 @@ object RepositoryModule {
     fun provideUserRepository(
         cloudDataSource: UsersCloudDataSource,
         cacheDataSource: UsersCacheDataSource,
+        savedBookCloudDataSource: BooksThatReadCloudDataSource,
+        dispatchersProvider: DispatchersProvider,
         studentDomainMapper: Mapper<StudentData, StudentDomain>,
         userCloudMapper: Mapper<UserCloud, UserDomain>,
         userCacheMapper: Mapper<UserCache, StudentData>,
     ): UserRepository =
         UserRepositoryImpl(
             cloudDataSource = cloudDataSource,
-            cacheDataSource = cacheDataSource, studentDomainMapper = studentDomainMapper,
-            userCloudMapper = userCloudMapper, userCacheMapper = userCacheMapper)
-
-
-    @Provides
-    @Singleton
-    fun provideBookThatReadRepository(
-        cloudDataSource: BooksThatReadCloudDataSource,
-        cacheDataSource: BooksThatReadDataSource,
-        bookCashMapper: Mapper<BookThatReadCache, BookThatReadData>,
-        bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
-        addNewBookMapper: Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>,
-    ): BookThatReadRepository = BookThatReadRepositoryImpl(
-        cloudDataSource = cloudDataSource,
-        cacheDataSource = cacheDataSource,
-        bookCashMapper = bookCashMapper,
-        bookDomainMapper = bookDomainMapper,
-        addNewBookMapper = addNewBookMapper)
+            cacheDataSource = cacheDataSource,
+            studentDomainMapper = studentDomainMapper,
+            dispatchersProvider = dispatchersProvider,
+            userCloudToDomainMapper = userCloudMapper,
+            userCacheMapper = userCacheMapper,
+            savedBookCloudDataSource = savedBookCloudDataSource,
+        )
 
     @Provides
     @Singleton
@@ -121,8 +99,14 @@ object RepositoryModule {
         cloudDataSource = cloudDataSource,
         cacheDataSource = cacheDataSource,
         classMapper = classMapper,
-        classCashMapper = classCashMapper
+        classCashMapper = classCashMapper,
     )
 
-
+    @Provides
+    @Singleton
+    fun provideBooksSaveToFileRepository(
+        @ApplicationContext context: Context
+    ): BooksSaveToFileRepository = BooksSaveToFileRepositoryImpl(
+        context = context
+    )
 }

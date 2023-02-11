@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="settings_icon_margin_right">7dp</dimen>
+    <dimen name="settings_icon_margin_top">9dp</dimen>
+
+    <dimen name="size_player_pager_margin">43dp</dimen>
+</resources>

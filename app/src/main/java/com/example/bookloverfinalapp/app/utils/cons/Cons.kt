@@ -1,10 +1,7 @@
 package com.example.bookloverfinalapp.app.utils.cons
 
-const val APPLICATION_ID = "wjeyjDXpdkgLCnrAPffqinj1YKoZu5ZSnKx4NmFo"
-const val REST_API_KEY = "UtQSEGrS8AHUKGhS3YXRboExnalX0o7GYmWcOAmh"
 const val CLIENT_KEY = "iK0XhXgs0OOSP0UPcGVDysl9ntmLDOZYZPF6AvXn"
 const val BASE_URL = "https://parseapi.back4app.com/"
-const val CONTENT_TYPE = "application/json"
 const val AUTO_LANGUAGE = "auto"
 const val KEY_DEFAULT_LANGUAGE = "com.example.bookloverfinalapp.DefaultLanguage"
 const val KEY_APP_MODE = "KEY_APP_MODE"

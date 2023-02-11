@@ -20,3 +20,4 @@ rootProject.name = "KnigolyubApp"
 include ':app'
 include ':domain'
 include ':data'
+include ':ui-core'

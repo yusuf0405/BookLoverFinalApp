@@ -24,6 +24,7 @@ data class UserCache(
     @ColumnInfo(name = "progress") var progress: Int,
     @ColumnInfo(name = "books_id") val booksId: List<String>,
     @ColumnInfo(name = "image") var image: UserImageCache,
+    @ColumnInfo(name = "school_id") var schoolId: String,
 )
 
 data class UserImageCache(

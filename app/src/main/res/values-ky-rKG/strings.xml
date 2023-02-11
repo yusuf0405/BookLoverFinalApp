@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Китепхан</string>
     <string name="language">Тили</string>
     <string name="choose_language">Тилди тандаңыз</string>
 
@@ -13,7 +14,11 @@
 
     <string name="settings_language">Тилдер</string>
 
-
+    <string name="theme">Тема</string>
+    <string name="light_mode">Жарык режими</string>
+    <string name="admin">Администратор</string>
+    <string name="to_continue_you_need_to_select_a_school_and_a_class">Улантуу үчүн мектепти жана классты тандоо керек</string>
+    <string name="fix">Оңдоо</string>
     <string name="criminal">Кылмыш</string>
     <string name="secular">Светтик</string>
     <string name="historical">Тарыхый</string>
@@ -122,6 +127,7 @@
     <string name="your_gender">Сиздин жынысыңыз</string>
     <string name="your_number">Сиздин телефон номериңиз</string>
     <string name="teacher_sighUp">Мугалимдерди каттоо</string>
+    <string name="admin_sighUp">Администраторду каттоо</string>
     <string name="next">Кийинки</string>
     <string name="books">Китептер</string>
     <string name="progress">Прогресс</string>
@@ -135,7 +141,7 @@
     <string name="title_activity_main_student">ActivityMainStudent</string>
 
     //Splash
-    <string name="splash_screen_txt">"Китеп окугандар ар дайым телевизор көргөндөрдү башкарат".</string>
+    <string name="splash_screen_txt">«Китеп окугандар ар дайым телевизор көргөндөрдү башкарат».</string>
     <string name="splash_screen_name">Билл Гейтс</string>
 
     //Student Edit Profile
@@ -254,4 +260,91 @@
     <string name="select_display_mode">Рейтингди көрсөтүү режимин тандаңыз</string>
     <string name="you">СИЗ</string>
     <string name="select_language">Тилди тандоо</string>
+    <string name="choose_a_school_first">Алгач мектепти тандаңыз!</string>
+    <string name="choose_a_class_first">Биринчи класс тандаңыз!</string>
+    <string name="saved_books">Сакталган китептер</string>
+    <string name="find_you_best_book">Мыкты китепти табыңыз!</string>
+    <string name="see_more">Көбүрөөк көрүү</string>
+    <string name="classmates">Классташтар</string>
+    <string name="hello_plus">Салам</string>
+    <string name="open_settings">Жөндөөлөргө өтүңүү</string>
+    <string name="main">Негизги</string>
+    <string name="book_removed_successfully">Китеп ийгиликтүү жок кылынды.</string>
+    <string name="by_the_title_of_the_book">Китептин аталышы боюнча</string>
+    <string name="by_the_author_name">Автордун аталышы боюнча</string>
+    <string name="recently_added_first">Алгач жакында кошулган</string>
+    <string name="saved_first">Алгач сакталган</string>
+    <string name="sort_text">Түрү</string>
+    <string name="first_read">Алгач окулган</string>
+    <string name="sorted_by_user_name">Колдонуучунун аты боюнча иргелет</string>
+    <string name="sorted_by_user_last_name">Колдонуучунун фамилиясы боюнча иргелет</string>
+    <string name="read_more_books">Көбүрөөк китептерди окуңуз</string>
+    <string name="read_more_pages">Көбүрөөк баракчаларды окуңуз</string>
+    <string name="read_more_chapters">Көбүрөөк бөлүмдөрдү окуңуз</string>
+    <string name="choose">Тандоо</string>
+    <string name="annotations">Аннотациялар</string>
+    <string name="genres">Жанрлар</string>
+    <string name="information">Маалымат</string>
+    <string name="pump_your_brains">Мээни соруп алыңыз!</string>
+    <string name="we_wish_you_good_time">Бактылуу убакыт каалайбыз!</string>
+    <string name="title_of_the_book_name_of_the_author_or_user">Китептин аталышы, автордун же колдонуучунун аты</string>
+    <string name="playback_speed">%sx</string>
+    <string name="all_audio_books">Бардык аудио китептер</string>
+    <string name="all_tasks" />
+    <string name="empty" />
+    <string name="yes_logout">Ооба, Аккаунтдан чыгуу</string>
+    <string name="cancel">Жокко чыгаруу</string>
+    <string name="create_question">Create Question</string>
+    <string name="the_limit">The Limit</string>
+    <string name="ok">Ok</string>
+    <string name="add_new_question">Add question</string>
+    <string name="delete_from_saved_books">Delete from saved books</string>
+    <string name="save_book">Save book</string>
+    <string name="edit_book">Edit book</string>
+    <string name="reviewers">Reviewers</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="your_achievements">Your Achievements</string>
+    <string name="my_statistics">My statistics</string>
+    <string name="your_point_this_week">Your Point this Week</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="thu">Thu</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="web" />
+    <string name="fri">Fri</string>
+    <string name="monday" />
+    <string name="tuesday">Tuesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="satuday">Satuday</string>
+    <string name="sunday">Sunday</string>
+    <string name="webnesday">Webnesday</string>
+    <string name="friday">Friday</string>
+    <string name="points">points</string>
+    <string name="read_book">Read book</string>
+    <string name="enter_title">Enter title</string>
+    <string name="description">Description</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_author">Enter author</string>
+    <string name="date_of_publication">Date of publication</string>
+    <string name="enter_date">Enter date</string>
+    <string name="read_more_tag" />
+    <string name="introduction">Introduction</string>
+    <string name="to_listen">To listen</string>
+    <string name="profile">Profile</string>
+    <string name="number_of_pages_read">number of pages read:</string>
+    <string name="number_of_chapters_read">number of chapters read:</string>
+    <string name="number_of_books_read">number of books read:</string>
+    <string name="all_genres">All genres</string>
+    <string name="learn_more">Learn more</string>
+    <string name="more">More</string>
+    <string name="audio_books">Audio Books</string>
+    <string name="exclusive_books">Exclucive books</string>
+    <string name="what_are_we_looking_for">What are we looking for?</string>
+    <string name="pages">Pages:</string>
+    <string name="default_avatars">Default avatars</string>
+    <string name="other">Other</string>
+    <string name="chapters">Chapters</string>
+    <string name="public_year">Public year</string>
+    <string name="pagess">Pages</string>
 </resources>

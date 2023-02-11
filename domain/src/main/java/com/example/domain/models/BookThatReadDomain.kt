@@ -14,7 +14,7 @@ data class BookThatReadDomain(
     var chaptersRead: Int,
     var poster: BookThatReadPosterDomain,
     var updatedAt: Date,
-    var book: String,
+    var bookPdfUrl: String,
     var progress: Int,
     var isReadingPages: List<Boolean>,
 )

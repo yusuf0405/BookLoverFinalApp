@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region RadioInternetHeaderLinearLayout-->
+    <dimen name="radio_internet_title_header_margin_top">36dp</dimen>
+    <dimen name="radio_internet_title_header_padding_start">20dp</dimen>
+    <dimen name="radio_internet_title_header_padding_end">16dp</dimen>
+    <dimen name="radio_internet_recycler_padding_start">8dp</dimen>
+    <dimen name="radio_internet_recycler_padding_end">20dp</dimen>
+    <dimen name="radio_internet_container_image_width">24dp</dimen>
+    <dimen name="radio_internet_container_image_height">24dp</dimen>
+    <!--endregion-->
+
+    <!--region RadioInternetItem-->
+    <dimen name="container_margin_start">12dp</dimen>
+    <dimen name="radio_internet_container_margin_top">20dp</dimen>
+
+    <dimen name="radio_internet_fast_play_margin_top">102dp</dimen>
+
+    <dimen name="radio_internet_image_title_margin_top">8dp</dimen>
+
+    <dimen name="radio_internet_fast_play_margin_start">8dp</dimen>
+    <dimen name="radio_internet_fast_play_margin_bottom">8dp</dimen>
+    <!--endregion-->
+
+    <!--region RadioInternetFragmentItem-->
+    <dimen name="radio_internet_fragment_item_container_margin_horizontal">6dp</dimen>
+    <dimen name="radio_internet_fragment_item_container_margin_vertical">12dp</dimen>
+
+    <dimen name="radio_internet_fragment_image_width">0dp</dimen>
+    <dimen name="radio_internet_fragment_image_height">0dp</dimen>
+
+    <dimen name="radio_internet_fragment_fast_play_margin_start">8dp</dimen>
+    <dimen name="radio_internet_fragment_fast_play_margin_bottom">8dp</dimen>
+
+    <dimen name="radio_internet_fragment_image_title_margin_top">8dp</dimen>
+    <!--endregion-->
+
+    <!--region RadioInternetFragment-->
+    <dimen name="radio_internet_toolbar_height">52dp</dimen>
+
+    <dimen name="radio_internet_recycler_height">0dp</dimen>
+    <dimen name="radio_internet_recycler_padding_horizontal">14dp</dimen>
+    <!--endregion-->
+
+</resources>

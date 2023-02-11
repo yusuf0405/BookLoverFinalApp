@@ -1,13 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/white"
     android:orientation="vertical"
-    android:weightSum="1"
     tools:context=".app.ui.general_screens.screen_reader.FragmentReader">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="top"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:elevation="1dp">
+
+        <ImageButton
+            android:id="@+id/up_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/transparent"
+            android:paddingVertical="10dp"
+            android:src="@drawable/ic_white_back"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/blackOrWhiteColor" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"
+            android:ellipsize="none"
+            android:fadingEdgeLength="30dp"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/end_read"
+            app:layout_constraintStart_toEndOf="@+id/up_button"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.538"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/end_read"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_marginVertical="4dp"
+            android:visibility="visible"
+            app:cardElevation="2dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearanceOverlay="@style/LiftCornerRadius">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginEnd="24dp"
+                    android:text="Next" />
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <ImageButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:background="@color/transparent"
+            android:paddingVertical="10dp"
+            android:rotation="180"
+            android:src="@drawable/ic_white_back"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="?attr/blackOrWhiteColor" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <com.github.barteksc.pdfviewer.PDFView
@@ -15,18 +95,17 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="-50dp"
-        android:layout_marginEnd="-50dp"
-        android:layout_weight="1"
-        android:paddingHorizontal="100dp" />
+        android:layout_marginEnd="-50dp" />
 
-    <androidx.cardview.widget.CardView
+    <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardView3"
         android:layout_width="match_parent"
-        app:cardCornerRadius="24sp"
-        android:layout_weight="1"
-        app:cardElevation="12sp"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
+        android:layout_gravity="bottom"
+        app:cardBackgroundColor="?attr/card_container_background"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:shapeAppearanceOverlay="@style/TopCornerRadius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
@@ -36,6 +115,15 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:src="@drawable/setting_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:id="@+id/page_first"
@@ -53,6 +141,7 @@
                 android:id="@+id/page_back"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginEnd="4dp"
                 android:rotation="180"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toStartOf="@+id/page_enter_field"
@@ -67,22 +156,25 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
                 android:layout_marginBottom="4dp"
-                android:ems="4"
+                android:background="@drawable/book_qustion_background"
+                android:ems="3"
+                android:paddingTop="4dp"
                 android:textAlignment="center"
                 android:textSize="14sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/page_forward"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/page_back"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="0" />
 
             <ImageView
                 android:id="@+id/page_forward"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="4dp"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toStartOf="@+id/page_last"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/page_enter_field"
                 app:layout_constraintTop_toTopOf="@+id/page_enter_field"
                 app:srcCompat="@drawable/ic_arrow_bold" />
@@ -96,20 +188,8 @@
                 app:layout_constraintStart_toEndOf="@+id/page_forward"
                 app:layout_constraintTop_toTopOf="@+id/page_enter_field"
                 app:srcCompat="@drawable/ic_last_page" />
-
-            <ImageView
-                android:id="@+id/end_read"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="20dp"
-                android:visibility="gone"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/ic_checked" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-    </androidx.cardview.widget.CardView>
+    </com.google.android.material.card.MaterialCardView>
 
-</LinearLayout>
+</FrameLayout>

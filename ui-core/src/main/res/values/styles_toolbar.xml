@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="ToolbarStylesLogin">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?android:attr/actionBarSize</item>
+        <item name="android:background">?attr/toolbar_gradient_background</item>
+        <item name="android:titleTextColor" tools:targetApi="m">?attr/blackOrWhiteColor</item>
+        <item name="android:navigationIcon">@drawable/ic_white_back</item>
+    </style>
+
+    <style name="ShapeAppearanceOverlay.App.CornerSize50Percent" parent="">
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>

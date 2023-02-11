@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="OnboardingHeaderTextView" parent="MtsSansRegular17">
+        <item name="android:background">?backgroundStartColor</item>
+        <item name="android:textColor">?textColorSecondary</item>
+        <item name="android:paddingStart">@dimen/edge_margin_20</item>
+        <item name="android:paddingEnd">@dimen/edge_margin_20</item>
+        <item name="android:paddingBottom">@dimen/edge_margin_20</item>
+    </style>
+
+    <style name="chipGroup">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="chipSpacingHorizontal">8dp</item>
+        <item name="singleLine">true</item>
+    </style>
+
+    <style name="Chip" parent="Widget.MaterialComponents.Chip.Choice">
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/selectable_color_item_text</item>
+        <item name="chipBackgroundColor">@color/chip_background</item>
+        <item name="rippleColor">@null</item>
+        <item name="chipMinTouchTargetSize">32dp</item>
+        <item name="textStartPadding">16dp</item>
+        <item name="textEndPadding">16dp</item>
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/mts_sans_medium</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+</resources>

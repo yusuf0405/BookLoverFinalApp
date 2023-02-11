@@ -4,6 +4,8 @@
     <bytecodeTargetLevel target="1.7">
       <module name="KnigolyubApp.app" target="11" />
       <module name="KnigolyubApp.data" target="11" />
+      <module name="KnigolyubApp.ui-core" target="11" />
+      <module name="KnigolyubApp.ui_core" target="11" />
     </bytecodeTargetLevel>
   </component>
 </project>

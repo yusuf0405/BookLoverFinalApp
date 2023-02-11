@@ -1,156 +1,235 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.admin_screens.screen_upload_book.FragmentAdminUploadPdf">
+    app:layoutDescription="@xml/fragment_admin_upload_pdf_scene">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="200dp"
-            android:layout_height="280dp"
-            android:layout_marginTop="32dp"
-            app:cardCornerRadius="15dp"
-            app:cardElevation="20dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+    <com.github.barteksc.pdfviewer.PDFView
+        android:id="@+id/pdfview"
+        android:layout_width="10dp"
+        android:layout_height="10dp"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/up_button_save_container"
+        android:layout_width="80dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:visibility="invisible"
+        app:cardElevation="9dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/RightCornerRadius" />
+
+    <ImageButton
+        android:id="@+id/up_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/transparent"
+        android:elevation="10dp"
+        android:paddingVertical="10dp"
+        android:src="@drawable/ic_white_back"
+        app:layout_constraintBottom_toBottomOf="@+id/up_button_save_container"
+        app:layout_constraintEnd_toEndOf="@+id/up_button_save_container"
+        app:layout_constraintStart_toStartOf="@+id/up_button_save_container"
+        app:layout_constraintTop_toTopOf="@+id/up_button_save_container"
+        app:tint="?attr/blackOrWhiteColor" />
+
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/save_container"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_marginTop="16dp"
+        android:visibility="visible"
+        app:cardElevation="9dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:shapeAppearanceOverlay="@style/LiftCornerRadius">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/rounded_book_Image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/shimmerColor"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.cardview.widget.CardView>
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/pick_pdf_button"
-            style="@style/button_style"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/upload_book"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookGenresText" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/save_pdf_button"
-            style="@style/button_style"
-            android:text="@string/student_edit_profile_save_btn"
-            android:visibility="gone"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/bookGenresText"  />
-
-        <com.github.barteksc.pdfviewer.PDFView
-            android:id="@+id/pdfViewAdmin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone">
-
-        </com.github.barteksc.pdfviewer.PDFView>
-
-        <EditText
-            android:id="@+id/editTextBookTitle"
-            style="@style/edit_text_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:hint="@string/bookTitle"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.493"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/to_change" />
-
-        <EditText
-            android:id="@+id/editTextBookAutor"
-            style="@style/edit_text_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/bookAutor"
-            app:layout_constraintEnd_toEndOf="@+id/editTextBookTitle"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextBookTitle"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBookTitle" />
-
-        <EditText
-            android:id="@+id/editTextBookPublicYear"
-            style="@style/edit_text_edit_profile"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/bookPublicYear"
-            android:inputType="number"
-            app:layout_constraintEnd_toEndOf="@+id/editTextBookAutor"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/editTextBookAutor"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBookAutor" />
-
-        <androidx.cardview.widget.CardView
-            android:id="@+id/classNumberCardView"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:elevation="8dp"
-            app:cardCornerRadius="8dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/editTextBookPublicYear">
-
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="4dp"
+                android:src="@drawable/ic_action_sheet_selection"
+                app:tint="?attr/blackOrWhiteColor" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_margin="16sp"
-                android:hint="@string/select_a_book_genres"
-                android:textSize="20sp" />
+                android:layout_gravity="center"
+                android:layout_marginEnd="16dp"
+                android:text="@string/student_edit_profile_save_btn" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/upload_book"
+        android:textSize="24sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/up_button_save_container" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/container_nested_scroll_view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
             <ImageView
-                android:id="@+id/bookGenresButton"
+                android:id="@+id/book_upload_poster"
+                android:layout_width="100dp"
+                android:layout_height="140dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/image_placeholder"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <View
+                android:id="@+id/outline"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/ic_item_outline_4dp"
+                app:layout_constraintBottom_toBottomOf="@+id/book_upload_poster"
+                app:layout_constraintEnd_toEndOf="@+id/book_upload_poster"
+                app:layout_constraintStart_toStartOf="@+id/book_upload_poster"
+                app:layout_constraintTop_toTopOf="@+id/book_upload_poster" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/pick_pdf_file"
+                style="@style/ButtonStyle.Blue.AppStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/choose"
+                android:textAllCaps="false"
+                app:layout_constraintEnd_toEndOf="@+id/book_upload_poster"
+                app:layout_constraintStart_toStartOf="@+id/book_upload_poster"
+                app:layout_constraintTop_toBottomOf="@+id/book_upload_poster" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/change_book_poster"
+                style="@style/ButtonStyle.Blue.AppStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/to_change"
+                android:textAllCaps="false"
+                android:textSize="13sp"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="@+id/book_upload_poster"
+                app:layout_constraintStart_toStartOf="@+id/book_upload_poster"
+                app:layout_constraintTop_toBottomOf="@+id/book_upload_poster" />
+
+
+            <EditText
+                android:id="@+id/book_title_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/bookTitle"
+                android:inputType="textPersonName"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pick_pdf_file" />
+
+
+            <EditText
+                android:id="@+id/book_author_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/bookAutor"
+                android:inputType="textPersonName"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_title_input" />
+
+            <EditText
+                android:id="@+id/book_date_publication_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/bookPublicYear"
+                android:inputType="number"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_author_input" />
+
+            <EditText
+                android:id="@+id/book_subtitle_input"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="16dp"
+                android:ems="10"
+                android:hint="@string/annotations"
+                android:inputType="text"
+                android:textSize="13sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_date_publication_input" />
+
+
+            <TextView
+                android:id="@+id/book_genres_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="end|center"
-                android:layout_marginEnd="8dp"
-                android:src="@drawable/ic_mnog" />
-        </androidx.cardview.widget.CardView>
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/select_a_book_genres"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_subtitle_input" />
 
-        <Button
-            android:id="@+id/to_change"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="@string/to_change"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="@+id/cardView"
-            app:layout_constraintStart_toStartOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/cardView" />
+            <org.apmem.tools.layouts.FlowLayout
+                android:id="@+id/book_genres_layout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/book_genres_header" />
 
-        <TextView
-            android:id="@+id/bookGenresText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            app:layout_constraintEnd_toEndOf="@+id/classNumberCardView"
-            app:layout_constraintStart_toStartOf="@+id/classNumberCardView"
-            app:layout_constraintTop_toBottomOf="@+id/classNumberCardView" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-
-</ScrollView>
+</androidx.constraintlayout.motion.widget.MotionLayout>

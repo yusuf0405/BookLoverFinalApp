@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/edit_profile_scrool_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/profile_avatar_block"
+            layout="@layout/profile_avatar_block"
+            android:visibility="gone" />
+
+        <TextView
+            style="@style/type_title_edit_profile"
+            android:text="@string/student_edit_profile_name_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_student_name"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:background="@color/transparent"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileLineHeight"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/whiteOrGrayColor" />
+
+        <TextView
+            style="@style/type_title_edit_profile"
+            android:text="@string/student_edit_profile_last_name_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_student_last_name"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:background="@color/transparent"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileLineHeight"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/whiteOrGrayColor" />
+
+        <TextView
+            style="@style/type_title_edit_profile"
+            android:text="@string/student_edit_profile_email_title" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:layout_marginTop="0dp"
+            android:background="@color/transparent">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edit_student_email"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:background="@color/transparent"
+                android:textSize="16sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileLineHeight"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/whiteOrGrayColor" />
+
+        <TextView
+            style="@style/type_title_edit_profile"
+            android:text="@string/student_edit_profile_number_title" />
+
+        <com.santalu.maskedittext.MaskEditText
+            android:id="@+id/editStudentNumber"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/transparent"
+            android:ems="14"
+            android:enabled="true"
+            android:inputType="number"
+            app:layout_constraintStart_toStartOf="@+id/textView15"
+            app:layout_constraintTop_toBottomOf="@+id/textView15"
+            app:met_mask="+996 (###) ## ## ##" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileLineHeight"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/whiteOrGrayColor" />
+
+        <TextView
+            style="@style/type_title_edit_profile"
+            android:text="@string/your_gender" />
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/male"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginEnd="30dp"
+                android:checked="true"
+                android:text="@string/male"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/female"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/female"
+                android:textSize="12sp" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/profileLineHeight"
+            android:layout_marginHorizontal="16dp"
+            android:background="?attr/whiteOrGrayColor" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/change_image"
+            style="@style/ButtonStyle.Blue.AppStyle"
+            android:text="@string/image_edit" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/saveEditButton"
+            style="@style/ButtonStyle.Grey.AppStyle"
+            android:layout_marginBottom="8dp"
+            android:text="@string/student_edit_profile_save_btn" />
+
+    </LinearLayout>
+
+</androidx.core.widget.NestedScrollView>

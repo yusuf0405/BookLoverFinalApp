@@ -1,12 +1,11 @@
 package com.example.bookloverfinalapp.app.utils.communication
 
-import com.example.bookloverfinalapp.app.custom.ItemUi
+import com.joseph.ui_core.custom.ItemUi
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.models.Student
-import com.example.bookloverfinalapp.app.ui.admin_screens.screen_school_progress.FragmentSchoolProgressViewModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.FragmentProgressViewModel
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.FragmentLeaderboardChartViewModel
 import com.example.bookloverfinalapp.app.utils.event.Event
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 import com.example.domain.models.SchoolDomain
@@ -24,12 +23,6 @@ interface ItemUiCommunication : Communication<List<ItemUi>> {
     class Base : Communication.Base<List<ItemUi>>(), ItemUiCommunication
 }
 
-interface SchoolProgressCommunication :
-    Communication<FragmentSchoolProgressViewModel.SchoolProgress> {
-    class Base : Communication.Base<FragmentSchoolProgressViewModel.SchoolProgress>(),
-        SchoolProgressCommunication
-}
-
 interface SchoolsCommunication : Communication<List<SchoolDomain>> {
     class Base : Communication.Base<List<SchoolDomain>>(), SchoolsCommunication
 }
@@ -42,8 +35,8 @@ interface ClassErrorCommunication : Communication<Event<String>> {
     class Base : Communication.Base<Event<String>>(), ClassErrorCommunication
 }
 
-interface ClassStatisticsCommunication : Communication<FragmentProgressViewModel.ClassStatistics> {
-    class Base : Communication.Base<FragmentProgressViewModel.ClassStatistics>(),
+interface ClassStatisticsCommunication : Communication<FragmentLeaderboardChartViewModel.ClassStatistics> {
+    class Base : Communication.Base<FragmentLeaderboardChartViewModel.ClassStatistics>(),
         ClassStatisticsCommunication
 }
 

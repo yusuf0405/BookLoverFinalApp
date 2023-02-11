@@ -1,9 +1,11 @@
 package com.example.data.cache.mappers
 
 import com.example.data.cache.models.BookCache
+import com.example.data.cache.models.SavedStatusCache
 import com.example.data.models.BookData
 import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
+import com.example.data.models.SavedStatusData
 import com.example.domain.Mapper
 
 class BookDbToDataMapper : Mapper<BookCache, BookData> {
@@ -25,8 +27,17 @@ class BookDbToDataMapper : Mapper<BookCache, BookData> {
                 url = poster.url
             ),
             updatedAt = updatedAt, id = id,
-            publicYear = publicYear
+            publicYear = publicYear,
+            savedStatus = mapSavedStatus(savedStatus),
+            description = description,
         )
         bookData
     }
+
+    private fun mapSavedStatus(status: SavedStatusCache) =
+        when (status) {
+            SavedStatusCache.SAVED -> SavedStatusData.SAVED
+            SavedStatusCache.NOT_SAVED -> SavedStatusData.NOT_SAVED
+            SavedStatusCache.SAVING -> SavedStatusData.SAVING
+        }
 }

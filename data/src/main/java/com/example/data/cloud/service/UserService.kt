@@ -7,7 +7,7 @@ import retrofit2.http.*
 interface UserService {
 
     @GET("users")
-    suspend fun fetchMyBook(@Query("where") id: String): Response<UserResponse>
+    suspend fun fetchUsersFrom(@Query("where") id: String): Response<UserResponse>
 
     @GET("classes/BooksThatRead")
     suspend fun fetchStudentAttributes(@Query("where") id: String): Response<BooksThatReadResponse>

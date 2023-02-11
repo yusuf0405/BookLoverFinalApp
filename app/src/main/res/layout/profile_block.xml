@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="24dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/name"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+
+        <TextView
+            android:id="@+id/profile_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/recyclerViewMargin"
+            android:fontFamily="@font/poppins"
+            android:textColor="?attr/text_secondary"
+            android:textSize="@dimen/textSizeProfileTIL"
+            tools:text="Beksultan Suleimanov" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profileLineHeight"
+        android:layout_marginHorizontal="18dp"
+        android:background="?attr/whiteOrGrayColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="24dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/student_edit_profile_number_title"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+
+        <TextView
+            android:id="@+id/profile_telephone_number"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textColor="?attr/text_secondary"
+            android:textSize="@dimen/textSizeProfileTIL"
+            tools:text="+996 550 555 555" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profileLineHeight"
+        android:layout_marginHorizontal="18dp"
+        android:background="?attr/whiteOrGrayColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="24dp">
+
+        <TextView
+            android:id="@+id/profile_school_text1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/school"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+
+        <TextView
+            android:id="@+id/profile_school_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textColor="?attr/text_secondary"
+            android:textSize="@dimen/textSizeProfileTIL"
+            tools:text="№7 им. Нариманова" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profileLineHeight"
+        android:layout_marginHorizontal="18dp"
+        android:background="?attr/whiteOrGrayColor" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="18dp"
+        android:layout_marginVertical="24dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/profile_class"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+
+        <TextView
+            android:id="@+id/profile_class_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins"
+            android:textColor="?attr/text_secondary"
+            android:textSize="@dimen/textSizeProfileTIL"
+            tools:text="5 - А" />
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/profileLineHeight"
+        android:layout_marginHorizontal="18dp"
+        android:background="?attr/whiteOrGrayColor" />
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/editProfileBtn"
+        style="@style/ButtonStyle.Blue.AppStyle"
+        android:text="@string/to_change" />
+
+    <LinearLayout
+        android:id="@+id/navigate_to_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="24dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginForTIL"
+            android:src="@drawable/ic_settings" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/open_settings"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/login_out_block"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/marginForTIL"
+            app:tint="?attr/textNegativeColor"
+            android:src="@drawable/login_out_icon" />
+
+        <TextView
+            android:id="@+id/profile_logout_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/login_out"
+            android:textColor="?attr/textNegativeColor"
+            android:textSize="@dimen/textSizeProfileTIL" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

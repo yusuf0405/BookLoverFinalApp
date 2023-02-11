@@ -35,11 +35,7 @@
                     android:fitsSystemWindows="true"
                     android:paddingBottom="24dp"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/foto"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
+                    android:src="@drawable/foto" />
 
                 <TextView
                     android:id="@+id/edit_student_image"
@@ -203,8 +199,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:ems="14"
             android:backgroundTint="@android:color/transparent"
+            android:ems="14"
             android:inputType="number"
             app:layout_constraintStart_toStartOf="@+id/textView15"
             app:layout_constraintTop_toBottomOf="@+id/textView15"

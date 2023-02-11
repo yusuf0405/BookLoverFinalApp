@@ -12,7 +12,7 @@ class BookThatReadAdapterModelToBookThatReadMapper :
             bookId = bookId,
             page = page,
             publicYear = publicYear,
-            book = book,
+            bookPdfUrl = book,
             title = title,
             chapterCount = chapterCount,
             poster = BookThatReadPoster(url = poster.url, name = poster.name),

@@ -24,6 +24,8 @@ class UserDbToDataMapper : Mapper<UserCache, StudentData> {
             booksRead = booksRead,
             progress = progress,
             booksId = booksId,
-            sessionToken = sessionToken)
+            sessionToken = sessionToken,
+            schoolId = schoolId
+        )
     }
 }

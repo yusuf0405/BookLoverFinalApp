@@ -1,8 +1,8 @@
 package com.example.data.base
 
-import android.util.Log
 import com.example.data.R
 import com.example.data.ResourceProvider
+import com.example.data.cloud.CloudDataRequestState
 import com.example.domain.Mapper
 import com.example.domain.Resource
 import kotlinx.coroutines.Dispatchers
@@ -28,7 +28,7 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
                 else -> Resource.error(message = response.message())
             }
         } catch (exception: Exception) {
-            return Resource.error(message = resourceProvider.errorType(exception = exception))
+            return Resource.error(message = resourceProvider.fetchErrorMessage(exception = exception))
         }
     }
 
@@ -48,7 +48,7 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
                 else -> Resource.error(message = response.message())
             }
         } catch (exception: Exception) {
-            return Resource.error(message = resourceProvider.errorType(exception = exception))
+            return Resource.error(message = resourceProvider.fetchErrorMessage(exception = exception))
         }
     }
 
@@ -64,7 +64,39 @@ abstract class BaseApiResponse(private val resourceProvider: ResourceProvider) {
             return Resource.error(message = response.message())
 
         } catch (exception: Exception) {
-            return Resource.error(message = resourceProvider.errorType(exception = exception))
+            return Resource.error(message = resourceProvider.fetchErrorMessage(exception = exception))
+        }
+    }
+
+    suspend fun <T> safeApiCalll(
+        apiCall: suspend () -> Response<T>,
+    ): CloudDataRequestState<T> {
+        try {
+            val response = withContext(Dispatchers.IO) { apiCall() }
+            if (response.isSuccessful) {
+                val body = withContext(Dispatchers.Default) { response.body() }
+                body?.let { return CloudDataRequestState.Success(data = body) }
+            }
+            return CloudDataRequestState.Error(error = java.lang.IllegalStateException())
+
+        } catch (exception: Throwable) {
+            return CloudDataRequestState.Error(exception)
+        }
+    }
+
+    suspend fun <T, K> safeApiMapperCalll(
+        mapper: Mapper<T, K>,
+        apiCall: suspend () -> Response<T>,
+    ): CloudDataRequestState<K> {
+        try {
+            val response = withContext(Dispatchers.IO) { apiCall() }
+            if (response.isSuccessful) {
+                val body = withContext(Dispatchers.Default) { response.body() }
+                body?.let { return CloudDataRequestState.Success(data = mapper.map(body)) }
+            }
+            return CloudDataRequestState.Error(error = java.lang.IllegalStateException())
+        } catch (exception: Throwable) {
+            return CloudDataRequestState.Error(exception)
         }
     }
 

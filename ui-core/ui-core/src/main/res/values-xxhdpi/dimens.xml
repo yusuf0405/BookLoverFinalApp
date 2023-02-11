@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="ua_login_music_logotype_padding">150dp</dimen>
+</resources>

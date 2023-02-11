@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book_read_nav_graph"
+    app:startDestination="@id/fragmentChapterBook">
+
+    <fragment
+        android:id="@+id/fragmentChapterBook"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.ui.FragmentChapterBook"
+        android:label="fragment_student_chapter_book"
+        tools:layout="@layout/fragment_chapter_book">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentChapterBook_to_fragmentStudentReader"
+            app:destination="@id/fragmentStudentReader"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentStudentReader"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_reader.FragmentReader"
+        android:label="fragment_reader"
+        tools:layout="@layout/fragment_reader">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <argument
+            android:name="startPage"
+            app:argType="integer" />
+        <argument
+            android:name="lastPage"
+            app:argType="integer" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <argument
+            android:name="chapterTitle"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_student_fragmentReader_to_fragmentBookQuestion"
+            app:destination="@id/fragmentBookQuestion" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentBookQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_questions.FragmentBookQuestion"
+        android:label="fragment_student_book_question"
+        tools:layout="@layout/fragment_book_question">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentBookQuestion_to_fragmentChapterBook"
+            app:destination="@id/fragmentChapterBook"
+            app:popUpTo="@+id/fragment_root_book" />
+    </fragment>
+</navigation>

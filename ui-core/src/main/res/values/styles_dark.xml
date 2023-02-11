@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppThemeRoot.Dark" parent="AppThemeRoot">
+        <item name="grayButtonColor">@color/grey_active_night</item>
+        <item name="buttonNotEnableBackground">@color/controls_dark_inactive</item>
+        <item name="textNegativeColor">@color/text_dark_negative</item>
+    </style>
+
+</resources>

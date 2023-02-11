@@ -1,39 +1,40 @@
 package com.example.domain.repository
 
-import com.example.domain.Resource
+import com.example.domain.RequestState
 import com.example.domain.models.*
 import kotlinx.coroutines.flow.Flow
 import java.io.InputStream
 
 interface BooksRepository {
 
-    fun fetchBooks(schoolId: String): Flow<Resource<List<BookDomain>>>
+    fun fetchAllBooks(schoolId: String, userId: String): Flow<List<BookDomain>>
 
-    fun onRefresh(schoolId: String): Flow<Resource<List<BookDomain>>>
+    fun fetchBookObservable(bookId: String): Flow<BookDomain>
 
-    fun fetchSimilarBooks(genres: List<String>, bookId: String): Flow<Resource<List<BookDomain>>>
+    fun fetchBooksFromCache(): Flow<List<BookDomain>>
 
-    fun fetchChapterQuestions(
+    suspend fun fetchBookFromIdInCache(bookId: String): BookDomain
+
+    fun fetchBooksFromCloud(schoolId: String, userId: String): Flow<List<BookDomain>>
+
+    suspend fun fetchChapterQuestions(
         id: String,
         chapter: String,
-    ): Flow<Resource<List<BookQuestionDomain>>>
+    ): RequestState<List<BookQuestionDomain>>
 
-    fun fetchSearchBook(searchText: String, schoolId: String): Flow<Resource<List<BookDomain>>>
+    suspend fun addNewBook(book: AddNewBookDomain): RequestState<Unit>
 
+    suspend fun addBookQuestion(question: AddBookQuestionDomain): RequestState<Unit>
 
-    fun addNewBook(book: AddNewBookDomain): Flow<Resource<Unit>>
+    suspend fun fetchBookPdfFileForReading(url: String): RequestState<InputStream>
 
-    fun addBookQuestion(question: AddBookQuestionDomain): Flow<Resource<Unit>>
+    suspend fun deleteBook(id: String): RequestState<Unit>
 
-    fun getBookForReading(url: String): Flow<Resource<InputStream>>
+    suspend fun deleteBookQuestion(id: String): RequestState<Unit>
 
-    fun deleteBook(id: String): Flow<Resource<Unit>>
+    suspend fun updateBookQuestion(id: String, question: AddBookQuestionDomain): RequestState<Unit>
 
-    fun deleteBookQuestion(id: String): Flow<Resource<Unit>>
-
-    fun updateBookQuestion(id: String, question: AddBookQuestionDomain): Flow<Resource<Unit>>
-
-    fun updateBook(id: String, book: UpdateBookDomain): Flow<Resource<Unit>>
+    suspend fun updateBook(id: String, book: UpdateBookDomain): RequestState<Unit>
 
     suspend fun clearBooksCache()
 

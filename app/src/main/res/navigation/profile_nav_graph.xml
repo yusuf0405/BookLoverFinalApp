@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profile_nav_graph"
+    app:startDestination="@id/fragment_profile">
+
+    <fragment
+        android:id="@+id/fragment_profile"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.FragmentProfile"
+        android:label="fragment_student_profile"
+        tools:layout="@layout/profile_block" />
+
+</navigation>

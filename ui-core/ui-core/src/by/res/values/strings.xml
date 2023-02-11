@@ -1,0 +1,64 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">@string/mts_app_name</string>
+    <string name="app_name_full">@string/mts_app_name_full</string>
+    <string name="urlscheme">@string/bymts_scheme</string>
+    <string name="subscribe_yandex_music">@string/mts_subscribe_yandex_music</string>
+    <string name="track_no_rights_title">@string/mts_track_no_rights_title</string>
+    <string name="kubr_dlg">@string/mts_kubr_dlg</string>
+    <string name="track_not_found_in_ym_catalog">@string/mts_track_not_found_in_ym_catalog</string>
+    <string name="another_yandex">@string/mts_another_yandex</string>
+    <string name="copyright">@string/bymts_copyright</string>
+    <string name="rate_dialog_text">@string/mts_rate_dialog_text</string>
+    <string name="become_mts">@string/mts_become_mts</string>
+    <string name="confidential_agreement_text">@string/bymts_confidential_agreement_text</string>
+    <string name="plus_of_subscribe">@string/bymts_plus_of_subscribe</string>
+    <string name="need_subscribe_note">@string/mts_need_subscribe_note</string>
+    <string name="subscribe_for_full_access">@string/mts_subscribe_for_full_access</string>
+    <string name="rate_dialog_title">@string/mts_rate_dialog_title</string>
+    <string name="success_subscribe_message">@string/mts_success_subscribe_message</string>
+    <string name="feedback_email">@string/bymts_feedback_email</string>
+    <!-- Текст ссылки для перехода к соглашению с пользователем -->
+    <string name="confidential_agreement"><u>и соглашения о конфиденциальности</u></string>
+    <!-- Текст ссылки для перехода к соглашению с пользователем -->
+    <string name="license_agreement"><u>соглашения об использовании</u></string>
+
+    <!--Экраны приветствия - описание-->
+    <string name="welcome_page_4_description">Месяц подписки бесплатно, чтобы оценить все возможности.</string>
+    <!--Информация о бесплатом периоде-->
+    <string name="subscription_1_month_free">Первый месяц в подарок</string>
+    <!-- Тексты, расположенные в профиле у неподписанного пользователя. -->
+    <string name="trial_capability">Бесплатные 30 дней полного доступа</string>
+    <!--Заголовок кнопки диалогового окна о приемуществах подписки-->
+    <string name="subscription_benefits_button">Первые 30 дней бесплатно!</string>
+    <!--Нотификация-напоминалка про подписку. Месяц бесплатно. %1$s потом заменяется программно на эмоджи."-->
+    <string name="auth_notification_month_trial">Заведите %1$s на Музыке. Первый месяц подписки — бесплатно!</string>
+
+    <!--Бесплатный период. Заголовок информациооного баннера в фрагменте профиля-->
+    <string name="free_period">Бесплатный период</string>
+    <!--Бесплатный период. 30 дней-->
+    <string name="thirty_days">30 дней</string>
+    <!--Бесплатный период. 30 дней-->
+    <string name="seven_days">7 дней</string>
+    <!--Бесплатный период. Текст для определенных тарифов-->
+    <string name="message_free_period_for_tarifs">на тарифах Smart, Smart NonStop, Smart+, Smart Top, Smart Безлимитище, и Ultra</string>
+    <!--Бесплатный период. Текст для остальных тарифов-->
+    <string name="message_free_period_for_other_tariffs">для абонентов на остальных тарифах</string>
+    <!--Бесплатный период. Дополнительй текст под *-->
+    <string name="adding_message_free_period">также в случае повторного подключения на тарифных планах Smart, Smart NonStop, Smart+, Smart Top, Smart Безлимитище и Ultra после истечения бесплатного периода предоставления ограниченной версии услуг</string>
+
+    <string name="first_1_days_free">Один день - бесплатно!</string>
+    <string name="first_7_days_free">Первые 7 дней - бесплатно!</string>
+    <string name="first_30_days_free">Первые 30 дней - бесплатно!</string>
+
+    <string name="free_30_days_bymts">Бесплатный период 30 дней</string>
+
+    <!--Отмена подписки-->
+    <string name="unsubscribed_description">Вам по-прежнему доступно радио</string>
+
+    <string name="mine_unsubscribe_description">После отключения подписки вы не сможете пользоваться платными функциями</string>
+
+    <string name="playlist_restriction_radio_desc">Бесплатное радио</string>
+
+
+</resources>

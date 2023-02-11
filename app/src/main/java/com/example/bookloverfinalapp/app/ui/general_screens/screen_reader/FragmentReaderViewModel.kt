@@ -3,43 +3,38 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_reader
 import com.example.bookloverfinalapp.app.App
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.domain.Status
-import com.example.domain.interactor.UpdateProgressUseCase
+import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
+import com.example.domain.DispatchersProvider
+import com.example.domain.repository.BookThatReadRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FragmentReaderViewModel @Inject constructor(
-    private val updateProgressStudentBookUseCase: UpdateProgressUseCase,
+    private val repository: BookThatReadRepository,
+    private val dispatchersProvider: DispatchersProvider,
 ) : BaseViewModel() {
 
 
-    fun updateProgress(
-        id: String,
-        progress: Int,
-    ) = App.applicationScope.launch {
-        updateProgressStudentBookUseCase.execute(id = id,
-            progress = progress).collectLatest { resource ->
-            when (resource.status) {
-                Status.LOADING -> showProgressDialog()
-                Status.SUCCESS -> dismissProgressDialog()
-                Status.ERROR -> {
-                    dismissProgressDialog()
-                    error(message = resource.message!!)
-                }
+    fun updateBookReadingProgress(id: String, progress: Int, currentDayProgress: Int) {
+        App.applicationScope.launchSafe(
+            dispatcher = dispatchersProvider.io(),
+            safeAction = { repository.updateProgress(id, progress, currentDayProgress) },
+            onSuccess = {
+
+            },
+            onError = {
+
             }
-        }
+        )
     }
 
-
     fun goQuestionFragment(book: BookThatRead, chapter: Int, path: String) =
-        navigate(FragmentReaderDirections.actionStudentFragmentReaderToFragmentBookQuestion(
-            book = book,
-            chapter = chapter,
-            path = path
-        ))
-
-    fun goBack() = navigateBack()
+        navigate(
+            FragmentReaderDirections.actionStudentFragmentReaderToFragmentBookQuestion(
+                book = book,
+                chapter = chapter,
+                path = path
+            )
+        )
 }

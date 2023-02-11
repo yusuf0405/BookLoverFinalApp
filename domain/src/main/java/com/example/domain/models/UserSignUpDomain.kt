@@ -11,5 +11,5 @@ data class UserSignUpDomain(
     val gender: String,
     val classId: String,
     val schoolId: String,
-    val userType: String,
+    var userType: String,
 )

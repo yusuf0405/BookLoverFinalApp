@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="MtsBottomNavigationBarLight" parent="ThemeOverlay.AppCompat">
+        <item name="mtsBottomNavigationColorBarIconChecked">@color/red_active</item>
+        <item name="mtsBottomNavigationColorBarTextChecked">@color/red_active</item>
+        <item name="mtsBottomNavigationColorBarIconUnchecked">@color/grey_sky</item>
+        <item name="mtsBottomNavigationColorBarTextUnchecked">@color/gray_middle</item>
+        <item name="colorPrimary">@color/white</item>
+        <item name="itemIconTint">@color/mts_bottom_navigation_bar_icon_color</item>
+        <item name="itemTextColor">@color/mts_bottom_navigation_bar_text_color</item>
+    </style>
+
+    <style name="MtsBottomNavigationBarDark" parent="ThemeOverlay.AppCompat">
+        <item name="mtsBottomNavigationColorBarIconChecked">@color/red_active</item>
+        <item name="mtsBottomNavigationColorBarTextChecked">@color/white</item>
+        <item name="mtsBottomNavigationColorBarIconUnchecked">@color/grey_slate</item>
+        <item name="mtsBottomNavigationColorBarTextUnchecked">@color/gray_middle</item>
+        <item name="colorPrimary">@color/black_night</item>
+        <item name="itemIconTint">@color/mts_bottom_navigation_bar_icon_color</item>
+        <item name="itemTextColor">@color/mts_bottom_navigation_bar_text_color</item>
+    </style>
+
+</resources>

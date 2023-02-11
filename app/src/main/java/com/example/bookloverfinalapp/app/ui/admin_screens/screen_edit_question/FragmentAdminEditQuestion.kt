@@ -1,28 +1,23 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_question
 
-import android.content.DialogInterface
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
-import android.widget.RadioButton
-import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
 import com.example.bookloverfinalapp.app.models.BookQuestion
-import com.example.bookloverfinalapp.app.utils.extensions.downEffect
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.showCustomInputAlertDialog
-import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.bookloverfinalapp.databinding.FragmentAdminEditQuestionBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentAdminEditQuestion :
     BaseFragment<FragmentAdminEditQuestionBinding, FragmentAdminEditQuestionViewModel>(
-        FragmentAdminEditQuestionBinding::inflate), View.OnClickListener {
+        FragmentAdminEditQuestionBinding::inflate
+    ) {
 
     override val viewModel: FragmentAdminEditQuestionViewModel by viewModels()
 
@@ -45,90 +40,78 @@ class FragmentAdminEditQuestion :
         setOnClickListeners()
     }
 
-    private fun setupUi() {
-        binding().apply {
-            toolbar.title = title
-            setToolbarColor(toolbar = toolbar)
-            questionText.setText(question.question)
-            answerAButton.text = question.a
-            answerBButton.text = question.b
-            answerCButton.text = question.c
-            answerDButton.text = question.d
-            when (question.rightAnswer) {
-                "a" -> answerAButton.isChecked = true
-                "b" -> answerBButton.isChecked = true
-                "c" -> answerCButton.isChecked = true
-                "d" -> answerDButton.isChecked = true
-            }
+    private fun setupUi() = with(binding()) {
+        toolbar.title = title
+        setToolbarColor(toolbar = toolbar)
+        questionText.setText(question.question)
+        answerAButton.text = question.a
+        answerBButton.text = question.b
+        answerCButton.text = question.c
+        answerDButton.text = question.d
+        when (question.rightAnswer) {
+            ANSWER_A -> answerAButton.isChecked = true
+            ANSWER_B -> answerBButton.isChecked = true
+            ANSWER_C -> answerCButton.isChecked = true
+            ANSWER_D -> answerDButton.isChecked = true
         }
     }
 
-    private fun setOnClickListeners() {
-        binding().apply {
-            downEffect(answerAButton).setOnClickListener(this@FragmentAdminEditQuestion)
-            downEffect(answerBButton).setOnClickListener(this@FragmentAdminEditQuestion)
-            downEffect(answerCButton).setOnClickListener(this@FragmentAdminEditQuestion)
-            downEffect(answerDButton).setOnClickListener(this@FragmentAdminEditQuestion)
-            downEffect(editQuestionButton).setOnClickListener(this@FragmentAdminEditQuestion)
-            toolbar.setNavigationOnClickListener { viewModel.goBack() }
+    private fun setOnClickListeners() = with(binding()) {
+        answerAButton.setOnDownEffectClickListener {
+            showCustomInputAlertDialog(radioButton = answerAButton)
         }
-    }
-
-    override fun onClick(view: View?) {
-        when (view) {
-            binding().answerAButton -> showCustomInputAlertDialog(binding().answerAButton,
-                binding().answerAButton.text.toString())
-            binding().answerBButton -> showCustomInputAlertDialog(binding().answerBButton,
-                binding().answerBButton.text.toString())
-            binding().answerCButton -> showCustomInputAlertDialog(binding().answerCButton,
-                binding().answerCButton.text.toString())
-            binding().answerDButton -> showCustomInputAlertDialog(binding().answerDButton,
-                binding().answerDButton.text.toString())
-            binding().editQuestionButton -> chekUpdate()
+        answerBButton.setOnDownEffectClickListener {
+            showCustomInputAlertDialog(radioButton = answerBButton)
         }
-    }
-
-    private fun chekUpdate() {
-        binding().apply {
-            val rightAnswer =
-                when {
-                    answerAButton.isChecked -> "a"
-                    answerBButton.isChecked -> "b"
-                    answerCButton.isChecked -> "c"
-                    else -> "d"
-                }
-            if (answerAButton.text.toString() != question.a ||
-                answerBButton.text.toString() != question.b ||
-                answerCButton.text.toString() != question.c ||
-                answerDButton.text.toString() != question.d ||
-                rightAnswer != question.rightAnswer ||
-                questionText.text.toString() != question.question
-            ) updateQuestion(rightAnswer)
-            else showToast(R.string.enter_the_change)
-
+        answerCButton.setOnDownEffectClickListener {
+            showCustomInputAlertDialog(radioButton = answerCButton)
         }
+        answerDButton.setOnDownEffectClickListener {
+            showCustomInputAlertDialog(radioButton = answerDButton)
+        }
+        editQuestionButton.setOnDownEffectClickListener { checkUpdate() }
+        toolbar.setNavigationOnClickListener { viewModel.navigateBack() }
 
     }
 
-    private fun updateQuestion(rightAnswer: String) {
-        binding().apply {
-            val updateQuestion = AddBookQuestion(
-                question = questionText.text.toString(),
-                a = answerAButton.text.toString(),
-                b = answerBButton.text.toString(),
-                c = answerCButton.text.toString(),
-                d = answerDButton.text.toString(),
-                bookId = id,
-                rightAnswer = rightAnswer,
-                chapter = chapter.toString()
-            )
-            viewModel.updateQuestion(id = question.id, question = updateQuestion)
-                .observe(viewLifecycleOwner) {
-                    showToast(R.string.book_question_updated_successfully)
-                }
+    private fun checkUpdate() = with(binding()) {
+        val rightAnswer = when {
+            answerAButton.isChecked -> ANSWER_A
+            answerBButton.isChecked -> ANSWER_B
+            answerCButton.isChecked -> ANSWER_C
+            else -> ANSWER_D
         }
-
+        if (answerAButton.text.toString() != question.a ||
+            answerBButton.text.toString() != question.b ||
+            answerCButton.text.toString() != question.c ||
+            answerDButton.text.toString() != question.d ||
+            rightAnswer != question.rightAnswer ||
+            questionText.text.toString() != question.question
+        ) updateQuestion(rightAnswer)
+        else showInfoSnackBar(getString(R.string.enter_the_change))
     }
 
+    private fun updateQuestion(rightAnswer: String) = with(binding()) {
+        val updateQuestion = AddBookQuestion(
+            question = questionText.text.toString(),
+            a = answerAButton.text.toString(),
+            b = answerBButton.text.toString(),
+            c = answerCButton.text.toString(),
+            d = answerDButton.text.toString(),
+            bookId = id,
+            rightAnswer = rightAnswer,
+            chapter = chapter.toString()
+        )
+        viewModel.updateQuestion(id = question.id, question = updateQuestion)
+//                .observe(viewLifecycleOwner) {
+//                    showToast(R.string.book_question_updated_successfully)
+//                }
+    }
 
+    private companion object {
+        const val ANSWER_A = "a"
+        const val ANSWER_B = "b"
+        const val ANSWER_C = "c"
+        const val ANSWER_D = "d"
+    }
 }

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditTextStyleInputLayoutLoginStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginStart">16dp</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:ems">10</item>
+        <item name="android:shadowColor">?attr/blackOrWhiteColor</item>
+        <item name="android:shadowDy">6</item>
+        <item name="android:shadowRadius">2</item>
+        <item name="boxStrokeWidth">0dp</item>
+        <item name="boxStrokeWidthFocused">0dp</item>
+        <item name="endIconMode">clear_text</item>
+        <item name="hintTextColor">?attr/text_secondary</item>
+    </style>
+
+    <style name="EditTextStyleInputLoginStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/white_or_gray_corner_background</item>
+        <item name="android:inputType">textPersonName|textCapWords</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+
+</resources>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <style name="SeekBarPlayerCollapsed" parent="android:Widget.Holo.SeekBar">
+        <item name="android:minHeight">2dp</item>
+        <item name="android:maxHeight">2dp</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">0dp</item>
+        <item name="android:paddingRight">0dp</item>
+        <item name="android:paddingStart">0dp</item>
+        <item name="android:paddingEnd">0dp</item>
+        <item name="android:progressDrawable">@drawable/player_collapsed_progress</item>
+        <item name="android:thumb">?collapsedPlayerProgressBarColor</item>
+        <item name="android:thumbOffset">0dp</item>
+    </style>
+
+    <style name="CollapsedPlayerYaRotatingProgress">
+        <item name="android:layout_width">@dimen/collapsed_player_ya_rot_progress_width</item>
+        <item name="android:layout_height">@dimen/collapsed_player_ya_rot_progress_width</item>
+        <item name="android:layout_marginStart">@dimen/collapsed_player_ya_rot_progress_margin_start</item>
+        <item name="android:layout_marginTop">@dimen/collapsed_player_ya_rot_progress_margin_top</item>
+    </style>
+
+    <style name="CollapsedPlayerTextViewLoadingPlayer">
+        <item name="android:layout_width">@dimen/collapsed_player_text_loading_player_width</item>
+        <item name="android:layout_height">@dimen/collapsed_player_text_loading_player_height</item>
+        <item name="android:layout_marginStart">@dimen/collapsed_player_text_loading_player_margin_start</item>
+        <item name="android:layout_marginTop">@dimen/collapsed_player_text_loading_player_margin_top</item>
+        <item name="android:textSize">@dimen/collapsed_player_text_loading_player_text_size</item>
+        <item name="android:maxLines">1</item>
+        <item name="android:scrollHorizontally">false</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+        <!-- -4dp because mtssans_medium add too extra space-->
+        <item name="android:lineSpacingExtra">-4dp</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+    </style>
+
+</resources>

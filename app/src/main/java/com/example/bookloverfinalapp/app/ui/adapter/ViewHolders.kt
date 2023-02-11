@@ -7,8 +7,8 @@ import android.widget.PopupMenu
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.GenericViewHolder
 import com.example.bookloverfinalapp.app.base.ItemOnClickListener
-import com.example.bookloverfinalapp.app.custom.ItemUi
-import com.example.bookloverfinalapp.app.custom.MyTextView
+import com.joseph.ui_core.custom.ItemUi
+import com.joseph.ui_core.custom.MyTextView
 import com.example.bookloverfinalapp.app.models.BookThatReadModel
 import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.utils.extensions.*
@@ -33,11 +33,11 @@ class BookViewHolder(private val view: View, private val actionListener: ItemOnC
                 context = itemView.context,
                 position = adapterPosition)
 
-            moreButton.setOnClickListener {
+            moreButton.setOnDownEffectClickListener {
                 moreButton.tag = item
                 showPopupMenu(moreButton, adapterPosition)
             }
-            itemView.downEffect().setOnClickListener {
+            itemView.setOnDownEffectClickListener {
                 actionListener.showAnotherFragment(item)
             }
         }
@@ -87,7 +87,7 @@ class ErrorViewHolder(private val view: View) : GenericViewHolder(view) {
     override fun bind(item: ItemUi) {
         ItemFailFullscreenBinding.bind(view).apply {
             item.show(messageTextView,
-                tryAgain,
+                messageTextView,
                 context = itemView.context,
                 position = adapterPosition)
         }
@@ -99,7 +99,7 @@ class BookThatReadViewHolder(
     private val actionListener: ItemOnClickListener,
 ) : GenericViewHolder(view) {
     override fun bind(item: ItemUi) {
-        ItemMyBookBinding.bind(view).apply {
+        ItemSavedBookBinding.bind(view).apply {
             item.show(bookTitle,
                 bookAuthor,
                 publishedYear,
@@ -139,7 +139,7 @@ class UserRatingModelViewHolder(
             val context = itemView.context
             val ratingPosition = adapterPosition + 1
 
-            item.show(youText,
+            item.show(
                 studentRatingPosition,
                 progressProfileLastName,
                 progressProfileName,
@@ -153,24 +153,24 @@ class UserRatingModelViewHolder(
             val bronze = context.getBronzeColor()
             val grey = context.getGreyColor()
 
-            context.glide(uri = user.image.url, studentProfileImage)
+            context.showImage(uri = user.image.url, studentProfileImage)
             when (ratingPosition) {
-                VIEW_POSITION_FIRST -> {
-                    studentRatingPosition.setTextColor(gold)
-                    youText.setTextColor(gold)
-                }
-                VIEW_POSITION_SECOND -> {
-                    studentRatingPosition.setTextColor(silver)
-                    youText.setTextColor(silver)
-                }
-                VIEW_POSITION_THIRD -> {
-                    studentRatingPosition.setTextColor(bronze)
-                    youText.setTextColor(bronze)
-                }
-                else -> {
-                    studentRatingPosition.setTextColor( grey)
-                    youText.setTextColor(grey)
-                }
+//                VIEW_POSITION_FIRST -> {
+//                    studentRatingPosition.setTextColor(gold)
+//                    youText.setTextColor(gold)
+//                }
+//                VIEW_POSITION_SECOND -> {
+//                    studentRatingPosition.setTextColor(silver)
+//                    youText.setTextColor(silver)
+//                }
+//                VIEW_POSITION_THIRD -> {
+//                    studentRatingPosition.setTextColor(bronze)
+//                    youText.setTextColor(bronze)
+//                }
+//                else -> {
+//                    studentRatingPosition.setTextColor( grey)
+//                    youText.setTextColor(grey)
+//                }
             }
             itemView.downEffect().setOnClickListener {
                 actionListener.showAnotherFragment(item = item)
@@ -191,13 +191,10 @@ class UserModelViewHolder(
                 countOfStudentDimonds,
                 countOfStudentCrowns,
                 progressProfileLastName,
-                progressProfileName,
-                studentsPages,
-                studentsDiamond,
-                progressCrown,
+                progressProfileLastName,
                 context = context,
                 position = adapterPosition)
-            context.glide(uri = user.image.url, studentProfileImage)
+            context.showImage(uri = user.image.url, studentProfileImage)
 
         }
         itemView.downEffect().setOnClickListener {
@@ -268,11 +265,10 @@ class SchoolClassModelViewHolder(view: View, private val actionListener: ItemOnC
     override fun bind(item: ItemUi) {
         binding.apply {
             item.show(chapterText, context = itemView.context, position = adapterPosition)
-
-            deleteQuestion.setOnClickListener {
+            deleteQuestion.setOnDownEffectClickListener {
                 actionListener.deleteItem(item = item, position = adapterPosition)
             }
-            itemView.downEffect().setOnClickListener {
+            itemView.setOnDownEffectClickListener {
                 actionListener.showAnotherFragment(item = item)
             }
         }
@@ -318,7 +314,7 @@ class ViewHolderChain {
             parent = parent),
             actionListener = actionListener)
 
-        ADAPTER_BOOK_THAT_READ_VIEW_HOLDER -> BookThatReadViewHolder(R.layout.item_my_book.makeView(
+        ADAPTER_BOOK_THAT_READ_VIEW_HOLDER -> BookThatReadViewHolder(R.layout.item_saved_book.makeView(
             parent = parent), actionListener = actionListener)
 
         ADAPTER_USER_RATING_VIEW_HOLDER -> UserRatingModelViewHolder(R.layout.item_student_rating.makeView(
@@ -339,7 +335,7 @@ class ViewHolderChain {
         ADAPTER_ERROR_VIEW_HOLDER -> ErrorViewHolder(R.layout.item_fail_fullscreen.makeView(
             parent = parent))
 
-        ADAPTER_USER_LOADING_VIEW_HOLDER -> UserLoadingViewHolder(R.layout.shimmer_my_student.makeView(
+        ADAPTER_USER_LOADING_VIEW_HOLDER -> UserLoadingViewHolder(R.layout.shimmer_user.makeView(
             parent = parent))
 
         ADAPTER_QUESTION_LOADING_VIEW_HOLDER -> QuestionLoadingViewHolder(R.layout.shimmer_class.makeView(

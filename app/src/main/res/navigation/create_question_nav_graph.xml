@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/create_question_nav_graph"
+    app:startDestination="@id/fragmentAdminChapters">
+
+    <fragment
+        android:id="@+id/fragmentAdminChapters"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.ui.FragmentChaptersForCreateQuestion"
+        android:label="fragment_admin_chapters"
+        tools:layout="@layout/fragment_admin_chapters">
+        <argument
+            android:name="bookId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentAdminChapters_to_fragmentCreateNewQuestion"
+            app:destination="@id/fragmentCreateNewQuestion" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentCreateNewQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.FragmentCreateNewQuestion"
+        android:label="fragment_create_new_question"
+        tools:layout="@layout/fragment_create_new_question">
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <argument
+            android:name="bookId"
+            app:argType="string" />
+    </fragment>
+</navigation>

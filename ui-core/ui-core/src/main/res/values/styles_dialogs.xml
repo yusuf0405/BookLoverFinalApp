@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BottomSheetDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="bottomSheetStyle">@style/ModalStyle</item>
+    </style>
+
+    <style name="ModalStyle" parent="Widget.Design.BottomSheet.Modal">
+        <item name="android:background">?colorPrimary</item>
+        <item name="behavior_peekHeight">@dimen/bottom_sheet_dialog_peek_height</item>
+    </style>
+
+    <style name="Dialog.PlaylistRestriction" parent="ThemeOverlay.AppCompat.Dialog.Alert">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowBackground">@drawable/bg_playlist_restriction</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="windowFixedHeightMajor">100%</item>
+        <item name="android:layout_gravity">bottom</item>
+        <item name="android:windowIsFloating">false</item>
+    </style>
+</resources>

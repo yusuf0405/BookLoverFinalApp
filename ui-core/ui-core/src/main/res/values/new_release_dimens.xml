@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="new_release_title_text_size">20sp</dimen>
+    <dimen name="new_release_item_margin_top">16dp</dimen>
+    <dimen name="new_release_block_padding_bottom">4dp</dimen>
+    <dimen name="new_release_recycler_margin_start">8dp</dimen>
+    <dimen name="new_release_recycler_margin_end">20dp</dimen>
+    <dimen name="new_release_container_image_width">8dp</dimen>
+    <dimen name="new_release_container_image_height">16dp</dimen>
+</resources>

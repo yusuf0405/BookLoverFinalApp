@@ -2,114 +2,155 @@
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="5dp"
-    app:cardCornerRadius="10dp"
-    app:cardElevation="15dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="6dp"
+    android:layout_marginBottom="4dp"
+    app:cardBackgroundColor="?attr/card_background"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="2dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:weightSum="2">
 
-        <androidx.cardview.widget.CardView
-            android:id="@+id/cardView"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            app:cardCornerRadius="10dp"
-            app:cardElevation="20dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline7"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="0">
 
-            <com.example.bookloverfinalapp.app.custom.MyImageView
-                android:id="@+id/rounded_book_Image"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <com.joseph.ui_core.custom.MyImageView
+                android:id="@+id/rounded_book_image"
+                android:layout_width="78dp"
+                android:layout_height="115dp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/book_example" />
 
-        </androidx.cardview.widget.CardView>
+            <View
+                android:id="@+id/outline"
+                android:layout_width="78dp"
+                android:layout_height="115dp"
+                android:background="@drawable/ic_item_outline_4dp" />
+        </FrameLayout>
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/bookTitle"
-            style="@style/item_book_title_style"
-            android:text="Война и мир"
-            app:layout_constraintBottom_toTopOf="@+id/bookAuthor"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toTopOf="@+id/cardView"
-            app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="14dp"
+            android:layout_marginEnd="8dp"
+            android:layout_weight="2"
+            android:orientation="vertical">
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/bookAuthor"
-            style="@style/item_book_author"
-            android:text="Лев Толстой"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="@+id/bookTitle"
-            app:layout_constraintTop_toBottomOf="@+id/bookTitle" />
+            <com.joseph.ui_core.custom.MyTextView
+                android:id="@+id/bookTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ellipsize="none"
+                android:fadingEdgeLength="30dp"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="?attr/blackOrWhiteColor"
+                android:textSize="18sp"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintEnd_toStartOf="@id/downloaded_mark"
+                app:layout_constraintHorizontal_bias="0"
+                app:layout_constraintHorizontal_chainStyle="packed"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                tools:text="Война и мир" />
 
+            <ImageView
+                android:id="@+id/downloaded_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="4dp"
+                android:layout_marginBottom="2dp"
+                app:layout_constraintBottom_toBottomOf="@+id/bookTitle"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bookTitle"
+                app:layout_constraintTop_toTopOf="@+id/bookTitle"
+                app:srcCompat="@drawable/book_downloaded_icon" />
 
-        <TextView
-            android:id="@+id/publicYearText"
-            style="@style/item_book_published_year"
-            android:layout_marginStart="8dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintBottom_toBottomOf="@+id/cardView"
-            app:layout_constraintStart_toEndOf="@+id/cardView"
-            app:layout_constraintTop_toBottomOf="@+id/bookAuthor" />
+            <com.joseph.ui_core.custom.MyTextView
+                android:id="@+id/bookAuthor"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fadingEdgeLength="60dp"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="?attr/text_secondary"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/bookTitle"
+                app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+                tools:text="Лев Толстой" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/publishedYear"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:textSize="@dimen/item_book_attribute_size"
-            app:layout_constraintBottom_toBottomOf="@+id/publicYearText"
-            app:layout_constraintStart_toEndOf="@+id/publicYearText"
-            app:layout_constraintTop_toTopOf="@+id/publicYearText"
-            tools:text="2008" />
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                app:layout_constraintStart_toStartOf="@+id/bookAuthor"
+                app:layout_constraintTop_toBottomOf="@+id/bookAuthor">
 
-        <TextView
-            android:id="@+id/bookPagesText"
-            style="@style/item_book_paged_count"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintBottom_toBottomOf="@+id/publishedYear"
-            app:layout_constraintStart_toEndOf="@+id/publishedYear"
-            app:layout_constraintTop_toTopOf="@+id/publishedYear" />
+                <TextView
+                    android:id="@+id/publicYearText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year_of_publication"
+                    android:textColor="?attr/text_secondary"
+                    android:textSize="10sp" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/bookPages"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:textSize="@dimen/item_book_attribute_size"
-            app:layout_constraintBottom_toBottomOf="@+id/bookPagesText"
-            app:layout_constraintStart_toEndOf="@+id/bookPagesText"
-            app:layout_constraintTop_toTopOf="@+id/bookPagesText"
-            tools:text="400" />
+                <com.joseph.ui_core.custom.MyTextView
+                    android:id="@+id/publishedYear"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:textColor="?attr/blackOrWhiteColor"
+                    android:textSize="@dimen/item_book_attribute_size"
+                    tools:text="2008" />
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.25" />
+                <TextView
+                    android:id="@+id/bookPagesText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:text="@string/pages"
+                    android:textColor="?attr/text_secondary"
+                    android:textSize="10sp" />
 
-        <com.example.bookloverfinalapp.app.custom.MyImageView
+                <com.joseph.ui_core.custom.MyTextView
+                    android:id="@+id/bookPages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
+                    android:ellipsize="none"
+                    android:fadingEdgeLength="60dp"
+                    android:requiresFadingEdge="horizontal"
+                    android:singleLine="true"
+                    android:textColor="?attr/blackOrWhiteColor"
+                    android:textSize="@dimen/item_book_attribute_size"
+                    tools:text="400" />
+
+            </LinearLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <com.joseph.ui_core.custom.MyImageView
             android:id="@+id/more_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="4dp"
-            android:visibility="gone"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/ic_more_vertical_icon" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+            android:layout_gravity="center"
+            android:layout_marginEnd="8dp"
+            app:srcCompat="@drawable/ic_menu_options" />
+    </LinearLayout>
 </com.google.android.material.card.MaterialCardView>
 
 

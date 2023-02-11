@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="app_name">Kitobhon</string>
     <string name="language">Til</string>
     <string name="choose_language">Tilni tanlang</string>
 
+    <string name="theme">Tema</string>
+    <string name="light_mode">Yorug\'lik rejimi</string>
+    <string name="admin">Administrator</string>
+    <string name="fix">Tuzatish</string>
+    <string name="to_continue_you_need_to_select_a_school_and_a_class">Davom etish uchun siz maktab va sinfni tanlashingiz kerak</string>
     <string name="criminal">Jinoyat</string>
     <string name="secular">Dunyoviy</string>
     <string name="historical">Tarixiy</string>
@@ -133,7 +139,7 @@
     <string name="title_activity_main_student">ActivityMainStudent</string>
 
     //Splash
-    <string name="splash_screen_txt">"Kitoblarni o'qiganlar har doim televizorni tomosha qilayotganlarni boshqaradi".</string>
+    <string name="splash_screen_txt">«Kitoblarni o\'qiganlar har doim televizorni tomosha qilayotganlarni boshqaradi».</string>
     <string name="splash_screen_name">Bill Geyts</string>
 
     //Student Edit Profile
@@ -253,4 +259,92 @@
     <string name="select_display_mode">Reytingni ko\'rsatish rejimini tanlang</string>
     <string name="you">SIZ</string>
     <string name="select_language">Tilni tanlang</string>
+    <string name="choose_a_school_first">Avval maktabni tanlang!</string>
+    <string name="choose_a_class_first">Avval sinfni tanlang!</string>
+    <string name="admin_sighUp">Administrator regestratsiyasi</string>
+    <string name="saved_books">Saqlangan kitoblar</string>
+    <string name="find_you_best_book">Sizga eng yaxshi kitobni toping!</string>
+    <string name="see_more">Batafsil</string>
+    <string name="classmates">Sinfdoshlar</string>
+    <string name="hello_plus">Salom</string>
+    <string name="open_settings">Sozlamalarga o\'tish</string>
+    <string name="main">Asosiy</string>
+    <string name="book_removed_successfully">Kitob muvaffaqiyatli o\'chirildi.</string>
+    <string name="by_the_title_of_the_book">Kitob nomi bilan</string>
+    <string name="by_the_author_name">Muallif nomi bilan</string>
+    <string name="recently_added_first">Avval yangi qo\'shilgan</string>
+    <string name="saved_first">Avval saqlangan</string>
+    <string name="sort_text">Saralash</string>
+    <string name="first_read">Avval O\'qilganlar</string>
+    <string name="sorted_by_user_name">Foydalanuvchi nomi bo\'yicha tartiblangan</string>
+    <string name="sorted_by_user_last_name">Foydalanuvchi familiyasi bo\'yicha tartiblangan</string>
+    <string name="read_more_books">Ko\'proq kitoblar o\'qildi</string>
+    <string name="read_more_pages">Ko\'proq sahifalar o\'qildi</string>
+    <string name="read_more_chapters">Ko\'proq boblarni o\'qingdi</string>
+    <string name="choose">Tanlang</string>
+    <string name="annotations">Izohlar</string>
+    <string name="genres">Janrlar</string>
+    <string name="information">Axborot</string>
+    <string name="pump_your_brains">Miyangizni pompalang!</string>
+    <string name="we_wish_you_good_time">Sizga muvaffaqiyatli vaqt utkazishni tilaymiz!</string>
+    <string name="title_of_the_book_name_of_the_author_or_user">Kitob nomi, muallif yoki Foydalanuvchining ismi</string>
+    <string name="playback_speed">%sx</string>
+    <string name="all_audio_books">Barcha audio kitoblar</string>
+    <string name="all_tasks" />
+    <string name="empty" />
+    <string name="yes_logout">Ha, Chiqish</string>
+    <string name="cancel">Bekor qilish</string>
+    <string name="create_question">Create Question</string>
+    <string name="the_limit">The Limit</string>
+    <string name="ok">Ok</string>
+    <string name="add_new_question">Add question</string>
+    <string name="delete_from_saved_books">Delete from saved books</string>
+    <string name="save_book">Save book</string>
+    <string name="edit_book">Edit book</string>
+    <string name="reviewers">Reviewers</string>
+    <string name="leaderboard">Leaderboard</string>
+    <string name="your_achievements">Your Achievements</string>
+    <string name="my_statistics">My statistics</string>
+    <string name="your_point_this_week">Your Point this Week</string>
+    <string name="mon">Mon</string>
+    <string name="tue">Tue</string>
+    <string name="thu">Thu</string>
+    <string name="sat">Sat</string>
+    <string name="sun">Sun</string>
+    <string name="web" />
+    <string name="fri">Fri</string>
+    <string name="monday" />
+    <string name="tuesday">Tuesday</string>
+    <string name="thursday">Thursday</string>
+    <string name="satuday">Satuday</string>
+    <string name="sunday">Sunday</string>
+    <string name="webnesday">Webnesday</string>
+    <string name="friday">Friday</string>
+    <string name="points">points</string>
+    <string name="read_book">Read book</string>
+    <string name="enter_title">Enter title</string>
+    <string name="description">Description</string>
+    <string name="enter_description">Enter description</string>
+    <string name="enter_author">Enter author</string>
+    <string name="date_of_publication">Date of publication</string>
+    <string name="enter_date">Enter date</string>
+    <string name="read_more_tag" />
+    <string name="introduction">Introduction</string>
+    <string name="to_listen">To listen</string>
+    <string name="profile">Profile</string>
+    <string name="number_of_pages_read">number of pages read:</string>
+    <string name="number_of_chapters_read">number of chapters read:</string>
+    <string name="number_of_books_read">number of books read:</string>
+    <string name="all_genres">All genres</string>
+    <string name="learn_more">Learn more</string>
+    <string name="more">More</string>
+    <string name="audio_books">Audio Books</string>
+    <string name="exclusive_books">Exclucive books</string>
+    <string name="what_are_we_looking_for">What are we looking for?</string>
+    <string name="pages">Pages:</string>
+    <string name="default_avatars">Default avatars</string>
+    <string name="other">Other</string>
+    <string name="chapters">Chapters</string>
+    <string name="public_year">Public year</string>
+    <string name="pagess">Pages</string>
 </resources>

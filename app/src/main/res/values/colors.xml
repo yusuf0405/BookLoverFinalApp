@@ -36,4 +36,11 @@
     <color name="yellow">#D5C42F</color>
     <color name="green">#7EC52C</color>
     <color name="blue">#1565C0</color>
+    <color name="rating_color">#FFC41F</color>
+    <color name="rating_background">#161616</color>
+    <color name="rating_first_background">#1e1e24</color>
+
+    <color name="rating_first_color">#FFD12D</color>
+    <color name="rating_second_color">#8FB1D6</color>
+    <color name="rating_third_color">#F2892A</color>
 </resources>

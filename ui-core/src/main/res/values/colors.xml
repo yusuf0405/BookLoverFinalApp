@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingDefaultResource">
+    <color name="red_mts">#E30611</color>
+    <color name="red_button_skip"> #EB4A13</color>
+
+
+
+    <color name="blue">#3D5CFF</color>
+    <color name="dark_blue">#151729</color>
+    <color name="black">#000000</color>
+    <color name="black_smoke">#1D2023</color>
+    <color name="black_space">#2C3135</color>
+    <color name="license">#969FA8</color>
+    <color name="link">#007CFF</color>
+
+    <color name="blue_deep">#001424</color>
+    <color name="blue_midnight">#202D3D</color>
+
+    <color name="grey_dark_alpha_35">#597F8C99</color>
+    <color name="grey_light_alpha_50">#80BCC3D0</color>
+    <color name="grey_stone">#434A51</color>
+    <color name="grey_slate">#626C77</color>
+    <color name="grey_slate_alpha_25">#40626C77</color>
+    <color name="grey_raven">#6E7782</color>
+    <color name="grey_steel">#969FA8</color>
+    <color name="grey_chateau">#9198A0</color>
+    <color name="grey_light">#BCC3D0</color>
+    <color name="grey_sky">#BBC1C7</color>
+    <color name="white_silver">#EBFAFAFA</color>
+    <color name="grey_with_alpha_40">#667F8C99</color>
+    <color name="grey_separator">#80BCC3D0</color>
+    <color name="color_divider">#979797</color>
+
+    <color name="white_space">#E2E5EB</color>
+    <color name="white_smoke">#F2F3F7</color>
+    <color name="white">#FFFFFF</color>
+    <color name="white_with_transparency_10">#1AFFFFFF</color>
+    <color name="white_with_transparency_50">#80FFFFFF</color>
+    <!-- endregion -->
+
+
+    <color name="ds_greyscale900">#000000</color>
+    <color name="ds_greyscale800">#1D2023</color>
+    <color name="ds_greyscale700">#2C3135</color>
+    <color name="ds_greyscale600">#434A51</color>
+    <color name="ds_greyscale500">#626C77</color>
+    <color name="ds_greyscale400">#969FA8</color>
+    <color name="ds_greyscale300">#BBC1C7</color>
+    <color name="ds_greyscale200">#E2E5EB</color>
+    <color name="ds_greyscale100">#F2F3F7</color>
+    <color name="ds_greyscale">#FFFFFF</color>
+
+    <!-- region Дополнительные цвета-->
+    <color name="blackberry_darkest">#002094</color>
+    <color name="blackberry_dark">#003DB7</color>
+    <color name="blackberry_normal">#014FCE</color>
+    <color name="blackberry_light">#6384E0</color>
+    <color name="blackberry_lightest">#E7EAFA</color>
+
+    <color name="blueberry_darkest">#0048AA</color>
+    <color name="blueberry_dark">#007CFF</color>
+    <color name="blueberry_normal">#0097FD</color>
+    <color name="blueberry_light">#45B6FC</color>
+    <color name="blueberry_lightest">#E1F3FE</color>
+
+    <color name="mint_darkest">#00724D</color>
+    <color name="mint_dark">#03A17B</color>
+    <color name="mint_normal">#00C19B</color>
+    <color name="mint_light">#00D9BC</color>
+    <color name="mint_lightest">#DFF9F5</color>
+
+    <color name="blackout">#80000000</color>
+
+    <color name="apple_darkest">#027722</color>
+    <color name="apple_dark">#04AA42</color>
+    <color name="apple_normal">#26CD58</color>
+    <color name="apple_light">#74DF8B</color>
+    <color name="apple_lightest">#E8FAEB</color>
+
+    <color name="lime_darkest">#808201</color>
+    <color name="lime_dark">#A6C100</color>
+    <color name="lime_normal">#C1EB1D</color>
+    <color name="lime_light">#D3F36B</color>
+    <color name="lime_lightest">#F8FEE7</color>
+
+    <color name="banana_darkest">#F37F19</color>
+    <color name="banana_dark">#FAC031</color>
+    <color name="banana_normal">#FBE739</color>
+    <color name="banana_light">#FDF177</color>
+    <color name="banana_lightest">#FFFDE8</color>
+
+    <color name="orange_darkest">#BA360A</color>
+    <color name="orange_dark">#E04A17</color>
+    <color name="orange_normal">#F95721</color>
+    <color name="orange_light">#FA8A64</color>
+    <color name="orange_lightest">#FBE9E7</color>
+
+    <color name="raspberry_darkest">#8E003F</color>
+    <color name="raspberry_dark">#C51345</color>
+    <color name="raspberry_normal">#EA1F49</color>
+    <color name="raspberry_light">#F55F7E</color>
+    <color name="raspberry_lightest">#FFE4E9</color>
+
+    <color name="сranberry_darkest">#7F3363</color>
+    <color name="сranberry_dark">#BB4079</color>
+    <color name="сranberry_normal">#E54887</color>
+    <color name="сranberry_light">#E677AD</color>
+    <color name="сranberry_lightest">#F9E7F0</color>
+
+    <color name="plum_darkest">#471C61</color>
+    <color name="plum_dark">#6D2D79</color>
+    <color name="plum_normal">#883888</color>
+    <color name="plum_light">#A86EA7</color>
+    <color name="plum_lightest">#F0E7F0</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="silver">#D4D2D1</color>
+    <color name="medium_grey">#DADADA</color>
+    <color name="light_grey">#E5E4E4</color>
+
+    <color name="bright_red_10_alpha">#1AE30611</color>
+    <color name="bright_red">#E30611</color>
+
+    <color name="blue_link">#ED1C24</color>
+    <color name="holo_blue_light">#FF33B5E5</color>
+
+    <color name="red_pressed">#CA0B12</color>
+    <color name="red_heart">#ED1C24</color>
+
+    <color name="red_notification">#ED1C24</color>
+
+    <color name="red_mts_pressed">#D62A31</color>
+    <color name="red_pressed_50_alpha">#88ED1C24</color>
+    <color name="red_active">#ED1C24</color>
+    <color name="red_peachy">#F7C2C4</color>
+
+    <color name="light_with_alpha_0">#00FFFFFF</color>
+
+    <color name="dark_with_alpha_0">#00000000</color>
+
+    <color name="text_light_negative">#EB4A13</color>
+    <color name="text_dark_negative">#FFA080</color>
+
+    <color name="grey_active_day">#F2F3F7</color>
+    <color name="grey_active_night">#597F8C99</color>
+
+    <color name="red_liked_playlist_bg">#FB696B</color>
+
+    <color name="widget_icon_background">#E52100</color>
+
+    <color name="inactive_tab">#626C77</color>
+
+    <color name="white_light">#FAFAFA</color>
+
+    <color name="gray_light">#EEEEEE</color>
+    <color name="gray_middle">#BABABA</color>
+    <color name="gray_base">#B9B9B9</color>
+    <color name="gray">#535353</color>
+    <color name="gray_dark">#3D3D3D</color>
+    <color name="gray_silver">#F3F3F3</color>
+    <color name="alabastersolid">#FAFAFA</color>
+
+    <color name="gray_25_alpha">#40626C77</color>
+
+    <color name="black_dark_night">#222222</color>
+    <color name="gray_yandex">#4C4C4C</color>
+    <color name="black_night">#383838</color>
+    <color name="black_90_alpha">#E6000000</color>
+    <color name="black_80_alpha">#CD000000</color>
+    <color name="black_75_alpha">#BF000000</color>
+    <color name="black_70_alpha">#B3000000</color>
+    <color name="black_60_alpha">#9a000000</color>
+    <color name="black_50_alpha">#88000000</color>
+    <color name="black_40_alpha">#66000000</color>
+    <color name="black_30_alpha">#4C000000</color>
+    <color name="black_20_alpha">#33000000</color>
+    <color name="black_15_alpha">#26000000</color>
+    <color name="black_12_alpha" >#33121212</color>
+    <color name="black_10_alpha">#1A000000</color>
+    <color name="black_8_alpha">#14000000</color>
+    <color name="black_5_alpha">#0D000000</color>
+
+
+    <color name="black_80_no_alpha">#FF2A2A2A</color>
+    <color name="black_50_no_alpha">#FF727272</color>
+    <color name="black_30_no_alpha">#b3b3b3</color>
+    <color name="black_15_no_alpha">#FFCFCFCF</color>
+    <color name="black_8_no_alpha">#FFE6E6E6</color>
+
+    <color name="bluish_black">#111315</color>
+    <color name="bluish_black_90_alpha">#111315</color>
+
+    <color name="redesign_in_search_podcast_bg">#191a1c</color>
+
+    <color name="white_yandex">#F9F9F9</color>
+    <color name="white_yandex_50_alpha">#88F6F5F3</color>
+
+    <color name="white_95_alpha">#F0FFFFFF</color>
+    <color name="white_99_alpha">#FCFFFFFF</color>
+    <color name="white_80_alpha">#CDFFFFFF</color>
+    <color name="white_70_alpha">#BFFFFFFF</color>
+    <color name="white_60_alpha">#99FFFFFF</color>
+    <color name="white_50_alpha">#88FFFFFF</color>
+    <color name="white_40_alpha">#66FFFFFF</color>
+    <color name="white_30_alpha">#4CFFFFFF</color>
+    <color name="white_20_alpha">#33FFFFFF</color>
+    <color name="white_15_alpha">#26FFFFFF</color>
+    <color name="white_8_alpha">#14FFFFFF</color>
+    <color name="white_5_alpha">#0DFFFFFF</color>
+
+    <color name="wizard_genre_icon_inactive">#939598</color>
+
+    <color name="ui_kit_transparent">@android:color/transparent</color>
+
+    <color name="controls_light_inactive">#80BCC3D0</color>
+    <color name="light_gray">#AEB5BD</color>
+    <color name="controls_dark_inactive">#597F8C99</color>
+    <color name="dark_grey">#32383E</color>
+    <color name="white_grey_20_alpha">#337F8C99</color>
+    <color name="black_smoke_50_alpha">#801D2023</color>
+    <color name="black_smoke_60_alpha">#991D2023</color>
+    <color name="black_smoke_90_alpha">#E61D2023</color>
+    <color name="black_smoke_with_alpha_0">#001D2023</color>
+
+    <color name="light_slate_grey_20_alpha">#337F8C99</color>
+    <color name="light_slate_grey_15_alpha">#267F8C99</color>
+    <color name="regent_grey_35_alpha">#597F8C99</color>
+    <color name="solitude_40_alpha">#66DFE2EC</color>
+    <color name="solitude_20_alpha">#33DFE2EC</color>
+    <color name="cinder_80_alpha">#CC1D2023</color>
+    <color name="gray_chateau">#969FA8</color>
+    <color name="shark">#1D2023</color>
+    <color name="nevada">#626C77</color>
+    <color name="tangerine_300">#FA8A64</color>
+    <color name="tangerine_500">#F95721</color>
+
+    <array name="congratulation_confetti_colors">
+        <item>#F8702B</item>
+        <item>#F3BC29</item>
+        <item>#FCE075</item>
+    </array>
+
+    <array name="confetti_colors">
+        <item>#ff5656</item>
+        <item>#ff9456</item>
+        <item>#ffcf56</item>
+        <item>#c9ff56</item>
+        <item>#56ff67</item>
+        <item>#56d5ff</item>
+        <item>#5659ff</item>
+        <item>#9a56ff</item>
+        <item>#e356ff</item>
+        <item>#ff56b3</item>
+    </array>
+
+    <color name="background_primary_elevated">#EFEFEF</color><!-- Первый уровень над фоном, например карточки -->
+    <color name="text_inverted">#ffffff</color><!-- Текст для тултипа, тоста и снэкбара -->
+    <color name="background_stroke">#80bcc3d0</color><!-- Сепараторы и обводки 2px поверх Primary Background -->
+    <color name="background_inverted">#1d2023</color><!-- Фон тултипа, тоста и снэкбара -->
+    <color name="control_primary_active">#e30611</color><!-- Основной цвет контролов -->
+    <color name="control_secondary_active">#1d2023</color><!-- Выбранный, активный второстепенный контрол -->
+    <color name="icon_tertiary">#bbc1c7</color><!-- Цвет декоративных иконок -->
+    <color name="control_tertiary_active">#f2f3f7</color><!-- Цвет второстепенной кнопки -->
+    <color name="icon_primary">#000000</color><!-- Цвет иконок в навбаре и второстепенных кнопках -->
+
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color>
+
+    <color name="dark_gray_500">#80626C77</color>
+
+    <!-- Player -->
+    <color name="color_played">#FF5F46F4</color>
+    <color name="color_buffered">#1F5F46F4</color>
+    <color name="color_unplayed">#FFBEBEBE</color>
+
+</resources>

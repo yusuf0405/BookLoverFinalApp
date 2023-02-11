@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="32dp"
+    android:height="32dp"
+    android:viewportWidth="32"
+    android:viewportHeight="32">
+    <path
+        android:pathData="M16,0L16,0A16,16 0,0 1,32 16L32,16A16,16 0,0 1,16 32L16,32A16,16 0,0 1,0 16L0,16A16,16 0,0 1,16 0z"
+        android:fillColor="?attr/backgroundCrossColorBottomSheetUnavailableSong"/>
+    <group>
+        <clip-path
+            android:pathData="M4,4h24v24h-24z"/>
+        <path
+            android:pathData="M10.293,20.293C9.902,20.683 9.902,21.317 10.293,21.707C10.683,22.098 11.317,22.098 11.707,21.707L16,17.414L20.293,21.707C20.683,22.098 21.317,22.098 21.707,21.707C22.098,21.317 22.098,20.684 21.707,20.293L17.414,16L21.707,11.707C22.098,11.317 22.098,10.683 21.707,10.293C21.317,9.902 20.683,9.902 20.293,10.293L16,14.586L11.707,10.293C11.317,9.903 10.683,9.903 10.293,10.293C9.902,10.684 9.902,11.317 10.293,11.707L14.586,16L10.293,20.293Z"
+            android:fillColor="?attr/crossColorBottomSheetUnavailableSong"/>
+    </group>
+</vector>

@@ -1,152 +1,92 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_progress
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.lifecycle.viewModelScope
+import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
-import com.example.bookloverfinalapp.app.mappers.StudentDomainToUserModelMapper
-import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Student
-import com.example.bookloverfinalapp.app.models.CubeEmptyModel
-import com.example.bookloverfinalapp.app.models.ErrorModel
-import com.example.bookloverfinalapp.app.models.UserLoadingModel
-import com.example.bookloverfinalapp.app.models.UserModel
-import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_RATING_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.custom.ItemUi
-import com.example.bookloverfinalapp.app.utils.communication.BooksThatReadCommunication
-import com.example.bookloverfinalapp.app.utils.communication.ClassStatisticsCommunication
-import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
+import com.example.bookloverfinalapp.app.models.User
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.router.FragmentProgressRouter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.mappers.StudentDomainToUserRatingModelMapper
+import com.example.data.cache.models.IdResourceString
+import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
-import com.example.domain.Resource
-import com.example.domain.Status
-import com.example.domain.interactor.GetBookThatReadUseCase
-import com.example.domain.interactor.GetMyStudentsUseCase
-import com.example.domain.interactor.GetSchoolStudentsUseCase
-import com.example.domain.models.BookThatReadDomain
 import com.example.domain.models.StudentDomain
+import com.example.domain.models.UserDomain
+import com.example.domain.models.UserStatisticModel
+import com.example.domain.repository.UserCacheRepository
+import com.example.domain.repository.UserRepository
+import com.example.domain.repository.UserStatisticsRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class FragmentProgressViewModel @Inject constructor(
-    private val bookCommunication: BooksThatReadCommunication,
-    private val studentCommunication: ItemUiCommunication,
-    private val classStatisticsCommunication: ClassStatisticsCommunication,
-    private val getSchoolStudentsUseCase: GetSchoolStudentsUseCase,
-    private val bookThatReadUseCase: GetBookThatReadUseCase,
-    private val getMyStudentsUseCase: GetMyStudentsUseCase,
-    private val bookMapper: Mapper<BookThatReadDomain, BookThatRead>,
-    val adapterMapper: Mapper<UserModel, Student>,
+    private val userStatisticsRepository: UserStatisticsRepository,
+    userCacheRepository: UserCacheRepository,
+    private val userRepository: UserRepository,
+    private val dispatchersProvider: DispatchersProvider,
+    private val router: FragmentProgressRouter,
+    private val mapUserDomainToUiMapper: Mapper<UserDomain, User>,
+    private val studentDomainToUserRatingModelMapper: StudentDomainToUserRatingModelMapper,
+    private val studentDomainToUiMapper: Mapper<StudentDomain, Student>,
 ) : BaseViewModel() {
 
-    fun booksThatReadCollect(owner: LifecycleOwner, observer: Observer<List<BookThatRead>>) =
-        bookCommunication.observe(owner = owner, observer = observer)
+    private val _userStatisticDays = MutableStateFlow<List<UserStatisticModel>>(emptyList())
+    val userStatisticDays: StateFlow<List<UserStatisticModel>> get() = _userStatisticDays.asStateFlow()
 
-    fun studentAdapterModelsCollect(
-        owner: LifecycleOwner,
-        observer: Observer<List<ItemUi>>,
-    ) = studentCommunication.observe(owner = owner, observer = observer)
+    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+        .map(mapUserDomainToUiMapper::map)
+        .flowOn(dispatchersProvider.io())
 
-    fun statisticsObserve(owner: LifecycleOwner, observer: Observer<ClassStatistics>) =
-        classStatisticsCommunication.observe(owner = owner, observer = observer)
+    val userAndProgressFlow = currentUserFlow.map { it.id }
+//        .map(userRepository::fetchUserFromId)
+//        .map(studentDomainToUiMapper::map)
+        .stateIn(viewModelScope, SharingStarted.Lazily, null)
 
-    fun fetchMyBook(id: String) = launchInBackground {
-        bookThatReadUseCase.execute(id).collectLatest { resource ->
-            when (resource.status) {
-                Status.LOADING -> showProgressAnimation()
-                Status.SUCCESS -> {
-                    dismissProgressAnimation()
-                    bookCommunication.put(resource.data!!.map { studentBookDomain ->
-                        bookMapper.map(studentBookDomain)
-                    })
-                }
-                Status.EMPTY -> dismissProgressAnimation()
-                Status.ERROR -> {
-                    error(message = resource.message!!)
-                    dismissProgressAnimation()
-                }
-            }
+    val studentsFromClass = currentUserFlow.flatMapLatest {
+        userRepository.fetchAllStudentsFromClassId(
+            classId = it.classId,
+            schoolId = it.schoolId,
+            currentUserId = String()
+        )
+    }.map { it.sortedByDescending { it.progress } }
+        .map {
+            val topRatedUsers = mutableListOf<StudentDomain>()
+            if (it.isNotEmpty()) topRatedUsers.add(it.first())
+            if (it.size > 1) topRatedUsers.add(it[1])
+            if (it.size > 2) topRatedUsers.add(it[2])
+            topRatedUsers
+        }
+        .map(studentDomainToUserRatingModelMapper::map)
+        .map(::addHeaderToRecyclerView)
+        .flowOn(dispatchersProvider.default())
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    fun fetchUserStatisticDays() {
+        viewModelScope.launch(dispatchersProvider.io()) {
+            _userStatisticDays.tryEmit(userStatisticsRepository.fetchStatisticDays())
         }
     }
 
-    fun fetchSchoolStudents(schoolId: String) = launchInBackground {
-        getSchoolStudentsUseCase.execute(schoolId = schoolId).collectLatest { resource ->
-            unravelingSchoolsStudents(resource = resource, schoolId = schoolId)
+    private fun addHeaderToRecyclerView(items: List<Item>): List<Item> {
+        val mutableItems = mutableListOf<Item>()
+        if (items.isNotEmpty()) {
+            mutableItems.add(
+                HeaderItem(
+                    titleId = IdResourceString(R.string.leaderboard),
+                    onClickListener = { navigateToFragmentLeaderboardChart() }
+                )
+            )
+            mutableItems.add(items.first())
         }
+        return mutableItems
     }
 
-    private fun unravelingSchoolsStudents(
-        resource: Resource<List<StudentDomain>>,
-        schoolId: String,
-    ) {
-        when (resource.status) {
-            Status.LOADING -> studentCommunication.put(listOf(UserLoadingModel))
-            Status.SUCCESS -> studentCommunication.put(resource.data!!.sortedByDescending { it.progress }
-                .map { student ->
-                    StudentDomainToUserModelMapper(ADAPTER_USER_RATING_VIEW_HOLDER).map(student)
-                })
-            Status.EMPTY -> studentCommunication.put(listOf(CubeEmptyModel))
-            Status.ERROR -> studentCommunication.put(listOf(ErrorModel(resource.message!!
-            ) { fetchSchoolStudents(schoolId = schoolId) }))
-        }
+    private fun navigateToFragmentLeaderboardChart() {
+        navigate(router.navigateToFragmentLeaderboardChart())
     }
-
-
-    fun fetchMyStudent(classId: String) = launchInBackground {
-        getMyStudentsUseCase.execute(classId = classId).collectLatest { resource ->
-            unravelingClassStudents(resource = resource, classId = classId)
-        }
-    }
-
-    private fun unravelingClassStudents(resource: Resource<List<StudentDomain>>, classId: String) {
-        when (resource.status) {
-            Status.LOADING -> {
-                studentCommunication.put(listOf(UserLoadingModel))
-                showProgressAnimation()
-            }
-            Status.SUCCESS -> {
-                var readPages = 0
-                var readChapters = 0
-                var readBooks = 0
-                val students = resource.data!!
-                students.forEach { student ->
-                    readPages += student.progress
-                    readChapters += student.chaptersRead
-                    readBooks += student.booksRead
-                }
-                classStatisticsCommunication.put(ClassStatistics(readPages,
-                    readChapters,
-                    readBooks))
-
-                studentCommunication.put(resource.data!!.sortedByDescending { it.progress }
-                    .map { studentDomain ->
-                        StudentDomainToUserModelMapper(ADAPTER_USER_RATING_VIEW_HOLDER).map(
-                            studentDomain)
-                    })
-                dismissProgressAnimation()
-
-            }
-            Status.EMPTY -> {
-                dismissProgressAnimation()
-                studentCommunication.put(listOf(CubeEmptyModel))
-            }
-            Status.ERROR -> {
-                studentCommunication.put(listOf(ErrorModel(resource.message!!
-                ) { fetchMyStudent(classId) }))
-                error(message = resource.message!!)
-                dismissProgressAnimation()
-            }
-        }
-
-    }
-
-
-    data class ClassStatistics(
-        var readPages: Int,
-        var readChapters: Int,
-        var readBooks: Int,
-    )
-
-    fun goStudentDetailsFragment(student: Student) =
-        navigate(FragmentProgressDirections.actionFragmentProgressToFragmentStudentDetails(student = student))
 }

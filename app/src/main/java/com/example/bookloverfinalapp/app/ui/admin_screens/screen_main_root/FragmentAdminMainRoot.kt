@@ -12,7 +12,6 @@ import com.google.android.material.tabs.TabLayoutMediator
 
 class FragmentAdminMainRoot : Fragment() {
 
-
     private val binding: FragmentAdminMainRootBinding by lazy(LazyThreadSafetyMode.NONE) {
         FragmentAdminMainRootBinding.inflate(layoutInflater)
     }
@@ -31,18 +30,18 @@ class FragmentAdminMainRoot : Fragment() {
     }
 
     private fun setupTabLayout() {
-        binding.apply {
-            viewPager.isSaveEnabled = false
-            viewPager.adapter =
-                AdminViewPagerAdapter(fm = requireActivity().supportFragmentManager,
-                    lifecycle = lifecycle)
-            TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
-                when (pos) {
-                    0 -> tab.text = getString(R.string.admin_books)
-                    1 -> tab.text = getString(R.string.admin_classes)
-                }
-            }.attach()
-        }
+//        binding.apply {
+//            viewPager.isSaveEnabled = false
+//            viewPager.adapter =
+//                AdminViewPagerAdapter(fm = requireActivity().supportFragmentManager,
+//                    lifecycle = lifecycle)
+//            TabLayoutMediator(tabLayout, viewPager) { tab, pos ->
+//                when (pos) {
+//                    0 -> tab.text = getString(R.string.admin_books)
+//                    1 -> tab.text = getString(R.string.admin_classes)
+//                }
+//            }.attach()
+//        }
     }
 
 }

@@ -10,9 +10,8 @@ import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.base.GenericAdapter
 import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.models.QuestionModel
-import com.example.bookloverfinalapp.app.custom.ItemUi
+import com.joseph.ui_core.custom.ItemUi
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
-import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.bookloverfinalapp.databinding.FragmentAllQuestionBinding
 import com.thekhaeng.pushdownanim.PushDownAnim
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,11 +47,11 @@ class FragmentAllQuestion :
 
     private fun observeResource() {
 
-        viewModel.fetchBookQuestions(id = id, chapter = chapter)
+        viewModel.fetchBookQuestions(id = id, chapter = chapter.toString())
 
-        viewModel.collect(viewLifecycleOwner) { questions ->
-            adapter.map(questions.swapElements().toMutableList())
-        }
+//        viewModel.collect(viewLifecycleOwner) { questions ->
+//            adapter.map(questions.swapElements().toMutableList())
+//        }
     }
 
     private fun setupUi() = binding().apply {
@@ -85,10 +84,11 @@ class FragmentAllQuestion :
         val listener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
-                    viewModel.deleteQuestion(id = id).observe(viewLifecycleOwner) {
-                        showToast(R.string.book_question_deleted_successfully)
-                        adapter.notifyDataSetChanged()
-                    }
+                    viewModel.deleteQuestion(questionId = id)
+//                        .observe(viewLifecycleOwner) {
+//                        showToast(R.string.book_question_deleted_successfully)
+//                        adapter.notifyDataSetChanged()
+//                    }
                     adapter.deleteItem(position = position)
                 }
             }

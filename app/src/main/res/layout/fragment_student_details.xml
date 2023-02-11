@@ -1,342 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.general_screens.screen_student_details.FragmentStudentDetails">
+    android:background="?attr/background_primary_elevated"
+    app:layoutDescription="@xml/fragment_student_details_scene">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <include
+        android:id="@+id/include_user_info_toolbar_block"
+        layout="@layout/include_user_info_toolbar_block"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-    <Toolbar
-        android:id="@+id/toolbar"
-        style="@style/toolbar_style"
-        app:layout_collapseMode="pin"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <de.hdodenhof.circleimageview.CircleImageView
-            android:id="@+id/studentProgressImg"
-            android:layout_width="@dimen/editProfileFotoSize"
-            android:layout_height="@dimen/editProfileFotoSize"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/foto"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
-
-    <TextView
-        android:id="@+id/progressProfileName"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-        android:layout_width="0dp"
+    <include
+        android:id="@+id/include_user_info_blue_toolbar_block"
+        layout="@layout/include_user_info_blue_toolbar_block"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/marginProfileTIL"
-        android:layout_marginEnd="@dimen/marginProfileTIL"
-        android:textSize="@dimen/profileNameBigTextSize"
-        app:layout_constraintBottom_toTopOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/studentProgressImg"
-        app:layout_constraintHorizontal_chainStyle="spread"
+        android:layout_marginTop="-5dp"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/studentProgressImg"
-        tools:text="Касимова Венера" />
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/user_image"
+        android:layout_width="84dp"
+        android:layout_height="84dp"
+        android:layout_marginTop="-42dp"
+        android:elevation="1dp"
+        android:src="@drawable/avatar_second"
+        app:civ_border_color="@color/white"
+        app:civ_border_width="3dp"
+        app:layout_constraintEnd_toEndOf="@+id/include_user_info_blue_toolbar_block"
+        app:layout_constraintStart_toStartOf="@+id/include_user_info_blue_toolbar_block"
+        app:layout_constraintTop_toBottomOf="@+id/include_user_info_blue_toolbar_block" />
 
     <TextView
-        android:id="@+id/progressReadText"
+        android:id="@+id/user_full_name_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:text="@string/student_progress_reads_from"
-        android:textColor="@color/grey"
-        android:textSize="@dimen/textSizeForRegularTexts"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView4"
-        app:layout_constraintEnd_toStartOf="@+id/progressReadTime"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/imageView4"
-        app:layout_constraintTop_toTopOf="@+id/imageView4" />
-
-        <TextView
-            android:id="@+id/numberText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:text="@string/phone_text"
-            android:textColor="@color/grey"
-            android:textSize="@dimen/textSizeForRegularTexts"
-            app:layout_constraintStart_toStartOf="@+id/imageView4"
-            app:layout_constraintTop_toBottomOf="@+id/imageView4" />
-
-        <ImageView
-        android:id="@+id/imageView4"
-        android:layout_width="@dimen/smallIconSize"
-        android:layout_height="@dimen/smallIconSize"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/ic_watch_later_black"
-        app:layout_constraintHorizontal_chainStyle="spread"
-        app:layout_constraintStart_toStartOf="@+id/progressProfileName"
-        app:layout_constraintTop_toBottomOf="@+id/progressProfileName" />
-
-    <TextView
-        android:id="@+id/progressReadTime"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        android:ellipsize="end"
-        android:maxLines="1"
-        android:singleLine="true"
-        android:text="15.03.2021"
-        android:textSize="@dimen/textSizeForRegularTexts"
-        app:layout_constraintBottom_toBottomOf="@+id/progressReadText"
-        app:layout_constraintEnd_toStartOf="@+id/studentProgressImg"
-        app:layout_constraintStart_toEndOf="@+id/progressReadText"
-        app:layout_constraintTop_toTopOf="@+id/progressReadText" />
-
-        <TextView
-            android:id="@+id/phoneText"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:ellipsize="end"
-            android:maxLines="1"
-            android:singleLine="true"
-            android:text="15.03.2021"
-            android:textSize="@dimen/textSizeForRegularTexts"
-            app:layout_constraintEnd_toStartOf="@+id/studentProgressImg"
-            app:layout_constraintHorizontal_bias="1.0"
-            app:layout_constraintStart_toStartOf="@+id/numberText"
-            app:layout_constraintTop_toBottomOf="@+id/numberText" />
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/my_statistics_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/studentProgressImg">
-
-        <TextView
-            android:id="@+id/progressStatisticText"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:text="@string/student_statistics"
-            android:textSize="@dimen/bigTextSize"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.5" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardViewForChapters"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/marginForTIL"
-            android:layout_marginTop="@dimen/profileTextDP"
-            android:layout_marginEnd="@dimen/recyclerViewMargin"
-            android:visibility="visible"
-            app:cardCornerRadius="@dimen/cardAllCornersRadius"
-            app:cardElevation="@dimen/cardElevation"
-            app:layout_constraintEnd_toStartOf="@+id/guideline3"
-            app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/progressStatisticText">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/chapter_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/constraintInside">
-
-                <ImageView
-                    android:id="@+id/progressAllStudentImage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_diamond"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressDiamondReadText"
-                    style="@style/progress_number_style"
-                    app:layout_constraintStart_toEndOf="@+id/progressAllStudentImage"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressReadenText"
-                    style="@style/progress_text_style"
-                    android:text="@string/student_progress_chapters_read"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/progressDiamondReadText"
-                    app:layout_constraintTop_toBottomOf="@+id/progressDiamondReadText" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardForAllBooks"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="@dimen/recyclerViewMargin"
-            android:layout_marginEnd="@dimen/marginForTIL"
-            android:visibility="visible"
-            app:cardCornerRadius="@dimen/cardAllCornersRadius"
-            app:cardElevation="@dimen/cardElevation"
-            app:layout_constraintBottom_toBottomOf="@+id/progressMaterialCardViewForChapters"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/guideline3"
-            app:layout_constraintTop_toTopOf="@+id/progressMaterialCardViewForChapters">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/book_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/constraintInside">
-
-                <ImageView
-                    android:id="@+id/progressCrown"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_crown_gold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressBookReadText"
-                    style="@style/progress_number_style"
-                    app:layout_constraintStart_toEndOf="@+id/progressCrown"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressBookReadenText"
-                    style="@style/progress_text_style"
-                    android:text="@string/student_progress_books_read"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/progressBookReadText" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/progressMaterialCardViewForPages"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/profileTextDP"
-            android:layout_marginBottom="12dp"
-            android:paddingBottom="12dp"
-            android:visibility="visible"
-            app:cardCornerRadius="@dimen/cardAllCornersRadius"
-            app:cardElevation="@dimen/cardElevation"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/guideline13"
-            app:layout_constraintStart_toStartOf="@+id/guideline11"
-            app:layout_constraintTop_toBottomOf="@+id/progressMaterialCardViewForChapters">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/page_view"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:padding="@dimen/constraintInside">
-
-                <ImageView
-                    android:id="@+id/progressBookPage"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_open_book"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressPageReadText"
-                    style="@style/progress_number_style"
-                    app:layout_constraintStart_toEndOf="@+id/progressBookPage"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                    android:id="@+id/progressPageReadenText"
-                    style="@style/progress_text_style"
-                    android:text="@string/student_progress_pages_read"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="@+id/progressPageReadText"
-                    app:layout_constraintTop_toBottomOf="@+id/progressPageReadText" />
-
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-        </com.google.android.material.card.MaterialCardView>
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.27" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/guideline13"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="0.76" />
-
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/delete_profile_button"
-        style="@style/button_style"
         android:layout_marginTop="8dp"
-        android:text="@string/delete_student"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/my_statistics_container" />
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="@+id/user_image"
+        app:layout_constraintStart_toStartOf="@+id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_image"
+        tools:text="@tools:sample/full_names" />
 
     <TextView
-        android:id="@+id/readName"
+        android:id="@+id/user_number_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="24dp"
-        android:text="@string/books_he_reads"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/delete_profile_button" />
+        android:layout_marginTop="8dp"
+        app:layout_constraintEnd_toEndOf="@+id/user_full_name_text"
+        app:layout_constraintStart_toStartOf="@+id/user_full_name_text"
+        app:layout_constraintTop_toBottomOf="@+id/user_full_name_text"
+        tools:text="@tools:sample/full_names" />
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/my_books_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/readName"
-            tools:listitem="@layout/item_my_book" />
+    <com.joseph.ui_core.custom.CurvedContainer
+        android:id="@+id/user_info_block"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:containerBackground="?attr/card_container_background"
+        app:layout_constraintEnd_toEndOf="@+id/user_image"
+        app:layout_constraintStart_toStartOf="@+id/user_image"
+        app:layout_constraintTop_toBottomOf="@+id/user_full_name_text">
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <include
+            android:id="@+id/include_user_info_block"
+            layout="@layout/include_user_info_block"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="24dp" />
 
-</ScrollView>
+    </com.joseph.ui_core.custom.CurvedContainer>
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

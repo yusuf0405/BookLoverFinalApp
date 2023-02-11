@@ -1,15 +1,11 @@
 package com.example.bookloverfinalapp.app
 
 import android.app.Application
-import com.example.bookloverfinalapp.app.utils.cons.APPLICATION_ID
+import androidx.hilt.work.HiltWorkerFactory
+import androidx.work.*
+import com.example.bookloverfinalapp.app.di.APPLICATION_ID
+import com.example.bookloverfinalapp.app.workers.ClearCacheWorker
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
-import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
-import com.example.bookloverfinalapp.app.utils.navigation.NavigationManager
-import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
-import com.example.domain.interactor.ClearBooksCacheUseCase
-import com.example.domain.interactor.ClearBooksThatReadCacheUseCase
-import com.example.domain.interactor.ClearClassCacheUseCase
-import com.example.domain.interactor.ClearStudentsCacheUseCase
 import com.parse.Parse
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.HiltAndroidApp
@@ -19,53 +15,47 @@ import javax.inject.Inject
 
 
 @HiltAndroidApp
-class App : Application() {
+class App : Application(), Configuration.Provider {
 
     @Inject
-    lateinit var clearStudentsCacheUseCase: ClearStudentsCacheUseCase
-
-    @Inject
-    lateinit var clearClassCacheUseCase: ClearClassCacheUseCase
-
-    @Inject
-    lateinit var clearBooksThatReadCacheUseCase: ClearBooksThatReadCacheUseCase
-
-    @Inject
-    lateinit var clearBooksCacheUseCase: ClearBooksCacheUseCase
-
-    @Inject
-    lateinit var dispatchers: Dispatchers
-
+    lateinit var workerFactory: HiltWorkerFactory
 
     override fun onCreate() {
         super.onCreate()
-
         applicationScope =
             CoroutineScope(context = SupervisorJob() + kotlinx.coroutines.Dispatchers.Main)
-
         Lingver.init(this)
-
         Parse.enableLocalDatastore(this)
-
-        Parse.initialize(Parse.Configuration.Builder(this)
-            .applicationId(APPLICATION_ID)
-            .clientKey(CLIENT_KEY)
-            .server("https://parseapi.back4app.com")
-            .build()
+        Parse.initialize(
+            Parse.Configuration.Builder(this)
+                .applicationId(APPLICATION_ID)
+                .clientKey(CLIENT_KEY)
+                .server("https://parseapi.back4app.com")
+                .build()
         )
-        SharedPreferences().saveIsFilter(false, this)
-
-        if (NavigationManager().isOnline(context = this)) {
-            dispatchers.launchInBackground(scope = applicationScope) {
-                clearBooksCacheUseCase.execute()
-                clearBooksThatReadCacheUseCase.execute()
-                clearClassCacheUseCase.execute()
-                clearStudentsCacheUseCase.execute()
-            }
-        }
+        startSyncWorker()
     }
+
+    private fun startSyncWorker() {
+        val workManager = WorkManager.getInstance(this)
+        workManager.enqueueUniquePeriodicWork(
+            ClearCacheWorker.TAG,
+            ExistingPeriodicWorkPolicy.KEEP,
+            ClearCacheWorker.getSyncWorker(createConstraintsWithInternetConnectedAndBatteryCharged())
+        )
+    }
+
+    private fun createConstraintsWithInternetConnectedAndBatteryCharged() =
+        Constraints
+            .Builder()
+            .build()
 
     companion object {
         lateinit var applicationScope: CoroutineScope
     }
+
+    override fun getWorkManagerConfiguration(): Configuration =
+        Configuration.Builder()
+            .setWorkerFactory(workerFactory)
+            .build()
 }

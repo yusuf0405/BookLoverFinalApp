@@ -2,22 +2,16 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:title="@string/books"
-        android:icon="@drawable/ic_book"
+        android:id="@+id/profile_nav_graph"
+        android:icon="@drawable/profile_icon"
+        android:title="@string/profile" />
+    <item
+        android:id="@+id/main_screen_nav_graph"
         android:checked="true"
-        android:id="@+id/fragment_root_book" />
+        android:icon="@drawable/home_icon"
+        android:title="@string/main" />
     <item
-        android:title="@string/progress"
-        android:icon="@drawable/ic_progress"
-        android:id="@+id/fragment_progress" />
-
-    <item
-        android:title="@string/account"
-        android:icon="@drawable/ic_account"
-        android:id="@+id/fragment_profile" />
-    <item
-        android:title="@string/settings"
-        android:icon="@drawable/ic_settings"
-        android:id="@+id/fragment_setting" />
-
+        android:id="@+id/progress_nav_graph"
+        android:icon="@drawable/progress_icon"
+        android:title="@string/progress" />
 </menu>

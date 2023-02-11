@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--This height takes into account material button insets, so that result visible height will be 48 dp-->
+    <dimen name="tall_material_button_height">60dp</dimen>
+
+    <dimen name="button_height">45dp</dimen>
+    <dimen name="button_min_width">150dp</dimen>
+
+    <!--used as a main button styles, overridden in different api levels-->
+    <style name="ButtonStyle" parent="ButtonStyleRoot">
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="ButtonStyleRoot" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/red_corner_button_background_selector</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:minWidth">@dimen/button_min_width</item>
+        <item name="android:minHeight">@dimen/tall_material_button_height</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:textColor">@color/button_text_selector_light</item>
+    </style>
+
+    <style name="ButtonStyle.Dark" parent="ButtonStyle">
+        <item name="android:background">@drawable/red_corner_button_background_selector_dark</item>
+        <item name="android:textColor">@drawable/red_button_text_color_dark</item>
+    </style>
+
+    <style name="ButtonStyle.Red" parent="Widget.AppCompat.Button">
+        <item name="android:minHeight">45dp</item>
+        <item name="android:background">@drawable/button_primary_background</item>
+        <item name="android:textAppearance">@style/ButtonTextStyle</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="PromocodeButton" parent="ButtonStyle.Red">
+        <item name="android:background">@drawable/promocode_button_background</item>
+    </style>
+
+    <style name="ButtonStyle.White" parent="ButtonStyle.Red">
+        <item name="android:background">@drawable/button_secondary_background</item>
+    </style>
+
+    <style name="ButtonStyle.Common" parent="Widget.AppCompat.Button">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+        <item name="android:stateListAnimator">@null</item>
+    </style>
+
+    <style name="ButtonStyle.Common.Gray" parent="ButtonStyle.Common">
+        <item name="android:background">@drawable/gray_button_background</item>
+    </style>
+
+    <style name="ButtonStyle.Common.Red" parent="ButtonStyle.Common">
+        <item name="android:background">@drawable/red_button_background</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonStyle.Common.InvisibilityBackground" parent="ButtonStyle.Common">
+        <item name="android:background">@null</item>
+        <item name="android:textColor">?attr/audioSettingsBottomSheetHeaderTextColor</item>
+    </style>
+
+    <style name="ButtonStyle.Common.Red.Restriction" parent="ButtonStyle.Common">
+        <item name="android:background">@drawable/red_button_8_radius</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="ButtonStyle.Text.Error.Goodok" parent="ButtonStyle.Common">
+        <item name="android:background">@drawable/button_dialog_lyrics_error</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+        <item name="android:textColor">@color/button_dialog_text_color</item>
+        <item name="android:textSize">17sp</item>
+    </style>
+
+    <style name="ButtonStyle.Red.Dashboard" parent="ButtonStyle.Common">
+        <item name="android:textColor">@color/dashboard_button</item>
+    </style>
+
+    <style name="ButtonStyle.Transparent" parent="ButtonStyle.Common">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="ButtonStyle.Transparent.Red" parent="ButtonStyle.Transparent">
+        <item name="android:textColor">?textNegativeColor</item>
+    </style>
+
+    <style name="ButtonStyle.Grey.Stone" parent="ButtonStyle.Red">
+        <item name="android:background">@drawable/bg_btn_grey_stone</item>
+    </style>
+
+    <style name="ButtonStyle.Border" parent="ButtonStyle">
+        <item name="android:background">@drawable/btn_white_bordered</item>
+        <item name="android:textColor">@color/button_text_selector_light</item>
+    </style>
+
+    <style name="ButtonStyle.Border.Dark" parent="ButtonStyle">
+        <item name="android:background">@drawable/btn_white_bordered_dark</item>
+        <item name="android:textColor">@color/button_text_selector_dark</item>
+    </style>
+
+    <style name="ButtonStyle.Profile.Border.Light" parent="ButtonStyle.Red">
+        <item name="android:background">@drawable/profile_btn_border_light</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:textColor">@color/black_90_alpha</item>
+    </style>
+
+    <style name="ButtonStyle.Profile.Border.Dark" parent="ButtonStyle.Profile.Border.Light">
+        <item name="android:background">@drawable/profile_btn_border_dark</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="WhiteButton" parent="PhonotekaTitle">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:textColor">@drawable/white_button_text_selector</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+        <item name="android:gravity">center</item>
+        <item name="android:maxHeight">@dimen/button_height</item>
+        <item name="android:singleLine">true</item>
+    </style>
+
+    <style name="WhiteButton.MiddleText" parent="WhiteButton">
+        <item name="android:textSize">@dimen/text_size_mid</item>
+    </style>
+
+</resources>

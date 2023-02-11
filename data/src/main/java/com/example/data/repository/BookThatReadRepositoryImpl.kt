@@ -1,154 +1,142 @@
 package com.example.data.repository
 
 import com.example.data.cache.models.BookThatReadCache
-import com.example.data.cache.source.BooksThatReadDataSource
+import com.example.data.cache.models.SavedStatusCache
+import com.example.data.cache.source.books.BooksCacheDataSource
+import com.example.data.cache.source.books_that_read.BooksThatReadCacheDataSource
 import com.example.data.cloud.models.AddNewBookThatReadCloud
 import com.example.data.cloud.source.BooksThatReadCloudDataSource
 import com.example.data.mappers.toStudentBook
 import com.example.data.models.BookThatReadData
 import com.example.domain.Mapper
+import com.example.domain.RequestState
 import com.example.domain.Resource
-import com.example.domain.Status
 import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadDomain
 import com.example.domain.repository.BookThatReadRepository
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.example.domain.repository.UserStatisticsRepository
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.*
+import javax.inject.Inject
 
-class BookThatReadRepositoryImpl(
+class BookThatReadRepositoryImpl @Inject constructor(
     private val cloudDataSource: BooksThatReadCloudDataSource,
-    private val cacheDataSource: BooksThatReadDataSource,
+    private val cacheDataSource: BooksThatReadCacheDataSource,
+    private val bookCacheDataSource: BooksCacheDataSource,
+    private val userStatisticsRepository: UserStatisticsRepository,
     private val bookCashMapper: Mapper<BookThatReadCache, BookThatReadData>,
     private val bookDomainMapper: Mapper<BookThatReadData, BookThatReadDomain>,
     private val addNewBookMapper: Mapper<AddNewBookThatReadDomain, AddNewBookThatReadCloud>,
-) : BookThatReadRepository {
+) : BookThatReadRepository, BaseRepository {
 
-    override fun fetchMyBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
-        emit(Resource.loading())
-        val booksCacheList = cacheDataSource.fetchBooksThatRead()
-        if (booksCacheList.isEmpty()) {
-            val response = cloudDataSource.fetchMyBooks(id = id)
-            if (response.status == Status.SUCCESS) {
-                val booksDataList = response.data!!
-                if (booksDataList.isEmpty()) emit(Resource.empty())
-                else {
-                    cacheDataSource.saveBooks(books = booksDataList)
-                    val bookDomain =
-                        booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-                    emit(Resource.success(data = bookDomain))
-                }
-            } else emit(Resource.error(message = response.message))
-        } else {
-            val booksData = booksCacheList.map { bookDb -> bookCashMapper.map(bookDb) }
-            val booksDomain = booksData.map { bookData -> bookDomainMapper.map(bookData) }
-            if (booksDomain.isEmpty()) emit(Resource.empty())
-            else emit(Resource.success(data = booksDomain))
-        }
+    override fun fetchUserAllBooksThatReadByUserId(id: String): Flow<List<BookThatReadDomain>> =
+        flow { emit(cacheDataSource.fetchBooksThatReadSingle()) }
+            .flatMapLatest { cachedBooks -> handleCachedBook(cachedBooks, id) }
+            .map(::mapBookDataList)
+            .flowOn(Dispatchers.Default)
+
+    private fun handleCachedBook(cachedBooks: List<BookThatReadCache>, userId: String) =
+        if (cachedBooks.isEmpty()) cloudDataSource.fetchUserBooksFromIdObservable(id = userId)
+            .flowOn(Dispatchers.IO)
+            .onEach(cacheDataSource::saveBooks)
+        else cacheDataSource.fetchBooksThatReadObservable()
+            .map(::mapBookCacheList)
+
+    private fun mapBookCacheList(books: List<BookThatReadCache>) = books.map(bookCashMapper::map)
+
+    private fun mapBookDataList(books: List<BookThatReadData>) = books.map(bookDomainMapper::map)
+
+    override fun fetchUserAllBooksThatReadFromCloud(userId: String): Flow<List<BookThatReadDomain>> =
+        cloudDataSource
+            .fetchUserBooksFromIdObservable(id = userId)
+            .map { savedBooks -> savedBooks.map(bookDomainMapper::map) }
+
+    override suspend fun fetchSavedBookByBookIdFromCache(bookId: String): BookThatReadDomain {
+        return bookDomainMapper.map(
+            bookCashMapper.map(
+                cacheDataSource.fetchBooksByBookId(bookId = bookId) ?: BookThatReadCache.unknown()
+            )
+        )
     }
 
-    override fun onRefresh(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
-        val response = cloudDataSource.fetchMyBooks(id = id)
-        if (response.status == Status.SUCCESS) {
-            val booksDataList = response.data!!
-            if (booksDataList.isEmpty()) emit(Resource.empty())
-            else {
-                cacheDataSource.saveBooks(books = booksDataList)
-                val bookDomain =
-                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-                emit(Resource.success(data = bookDomain))
-            }
-        } else emit(Resource.error(message = response.message))
-    }
 
     override fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
-        emit(Resource.loading())
-        val response = cloudDataSource.fetchMyBooks(id = id)
-        if (response.status == Status.SUCCESS) {
-            val booksDataList = response.data!!
-            if (booksDataList.isEmpty()) emit(Resource.empty())
-            else {
-                val bookDomain =
-                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-                emit(Resource.success(data = bookDomain))
-            }
-        } else emit(Resource.error(message = response.message))
+//        emit(Resource.loading())
+//        val response = cloudDataSource.fetchUserBookFromId(id = id)
+//        if (response.status == Status.SUCCESS) {
+//            val booksDataList = response.data!!
+//            if (booksDataList.isEmpty()) emit(Resource.empty())
+//            else {
+//                val bookDomain =
+//                    booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+//                emit(Resource.success(data = bookDomain))
+//            }
+//        } else emit(Resource.error(message = response.message))
     }
 
 
-    override fun deleteMyBook(id: String): Flow<Resource<Unit>> = flow {
-        emit(Resource.loading())
-        val result = cloudDataSource.deleteBook(id = id)
-        when (result.status) {
-            Status.SUCCESS -> {
-                cacheDataSource.deleteBook(id = id)
-                emit(Resource.success(data = result.data!!))
+    override suspend fun deleteBookInSavedBooks(id: String): RequestState<Unit> {
+        val bookCache = cacheDataSource.fetchBooksByBookId(id) ?: BookThatReadCache.unknown()
+        return renderResult(
+            result = cloudDataSource.deleteBook(id = bookCache.objectId),
+            onSuccess = {
+                cacheDataSource.deleteBook(id = bookCache.objectId)
+                bookCacheDataSource.updateBookSavedStatus(SavedStatusCache.NOT_SAVED, id)
             }
-            Status.ERROR -> emit(Resource.error(message = result.message))
-            Status.LOADING -> TODO()
-        }
+        )
     }
 
-    override fun fetchMyBook(id: String, userId: String): Flow<Resource<Int>> = flow {
-        emit(Resource.loading())
-        val result = cacheDataSource.getMyBook(id = id)
-        if (result == null) {
-            val cloudResult = cloudDataSource.getMyBook(id = id, userId = userId)
-            when (cloudResult.status) {
-                Status.SUCCESS -> emit(Resource.success(data = cloudResult.data!!))
-                Status.EMPTY -> emit(Resource.empty())
-                Status.ERROR -> emit(Resource.error(message = cloudResult.message))
-            }
-        } else emit(Resource.success(result.progress))
-
-    }
-
-    override fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>> = flow {
-        emit(Resource.loading())
-        val request = cloudDataSource.addNewBook(addNewBookMapper.map(book))
-        if (request.status == Status.SUCCESS) {
-            val studentBook = book.toStudentBook(objectId = request.data!!.objectId,
-                createdAt = request.data!!.createdAt,
-                path = book.book)
+    override suspend fun addBookToSavedBooks(book: AddNewBookThatReadDomain) = renderResultToUnit(
+        result = cloudDataSource.addNewBook(addNewBookMapper.map(book)),
+        onSuccess = { data ->
+            val studentBook = book.toStudentBook(
+                objectId = data.objectId,
+                createdAt = data.createdAt,
+                path = book.book
+            )
+            bookCacheDataSource.updateBookSavedStatus(SavedStatusCache.SAVED, book.bookId)
             cacheDataSource.addBook(book = studentBook)
-            emit(Resource.success(Unit))
-        } else emit(Resource.error(message = request.message!!))
-    }
+        }
+    )
 
-    override fun updateProgress(id: String, progress: Int): Flow<Resource<Unit>> = flow {
-        emit(Resource.loading())
-        val result = cloudDataSource.updateProgress(id = id, progress = progress)
-        if (result.status == Status.SUCCESS) {
+
+    override suspend fun updateProgress(
+        id: String,
+        progress: Int,
+        currentDayProgress: Int
+    ): RequestState<Unit> = renderResult(
+        result = cloudDataSource.updateProgress(id = id, progress = progress),
+        onSuccess = {
+            userStatisticsRepository.saveNewDayToStatistics(progress = currentDayProgress)
             cacheDataSource.updateProgress(id = id, progress = progress)
-            emit(Resource.success(data = Unit))
-        } else emit(Resource.error(message = result.message))
-    }
+        }
+    )
 
-    override fun updateChapters(
+    override suspend fun updateChapters(
         id: String,
         chapters: Int,
         isReadingPages: List<Boolean>,
-    ): Flow<Resource<Unit>> = flow {
-        emit(Resource.loading())
-        val result = cloudDataSource.updateChapters(id = id,
+    ) = renderResult(
+        result = cloudDataSource.updateChapters(
+            id = id,
             chapters = chapters,
-            isReadingPages = isReadingPages)
-        if (result.status == Status.SUCCESS) {
+            isReadingPages = isReadingPages
+        ),
+        onSuccess = {
             cacheDataSource.updateChapters(id = id, chapters = chapters)
             cacheDataSource.updateIsReadIsPages(id = id, isReadingPages = isReadingPages)
-            emit(Resource.success(data = Unit))
-        } else emit(Resource.error(message = result.message!!))
-    }
-
+        }
+    )
 
     override fun fetchUsersBooks(id: String): Flow<Resource<List<BookThatReadDomain>>> = flow {
-        emit(Resource.loading())
-        val response = cloudDataSource.fetchMyBooks(id = id)
-        if (response.status == Status.SUCCESS) {
-            val booksDataList = response.data!!
-            val booksDomain =
-                booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
-            emit(Resource.success(data = booksDomain))
-        } else emit(Resource.error(message = response.message))
+//        emit(Resource.loading())
+//        val response = cloudDataSource.fetchUserBookFromId(id = id)
+//        if (response.status == Status.SUCCESS) {
+//            val booksDataList = response.data!!
+//            val booksDomain =
+//                booksDataList.map { studentBookData -> bookDomainMapper.map(studentBookData) }
+//            emit(Resource.success(data = booksDomain))
+//        } else emit(Resource.error(message = response.message))
     }
 
     override suspend fun clearBooksCache() = cacheDataSource.clearTable()

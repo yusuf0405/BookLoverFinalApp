@@ -28,7 +28,7 @@ internal fun UserSignUpDomain.toDtoSignUp(): UserSignUpCloud =
         userSessionToken = "null"
     )
 
-internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = BookData(
+internal fun AddNewBookDomain.mapToBook(id: String, createdAt: Date): BookData = BookData(
     id = id,
     createdAt = createdAt,
     book = BookPdfData(name = book.name, url = book.url, type = book.type),
@@ -37,8 +37,10 @@ internal fun AddNewBookDomain.toBook(id: String, createdAt: Date): BookData = Bo
     updatedAt = createdAt,
     chapterCount = chapterCount, page = page, publicYear = publicYear,
     title = title,
-    genres = genres
-)
+    genres = genres,
+    description = description,
+
+    )
 
 internal fun SchoolCloud.toSchool(): SchoolDomain =
-    SchoolDomain(objectId = objectId, title = title)
+    SchoolDomain(id = objectId, title = title)

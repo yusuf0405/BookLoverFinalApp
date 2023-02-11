@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:ignore="MissingTranslation">
+
+    <string name="bottom_player_scrolling_view_behavior">ru.yandex.music.player.BottomPlayerScrollingViewBehavior</string>
+    <string name="bottom_nav_tabs_behavior">ru.yandex.music.main.bottomtabs.BottomNavigationTabsBehavior</string>
+
+    <string name="appsflyer_currency_code" translatable="false">RUB</string>
+
+    <string name="yandex_email_domain" translatable="false">\@yandex.ru</string>
+    <string name="mts_feedback_email" translatable="false">music\@stream.ru</string>
+    <string name="bymts_feedback_email" translatable="false">music\@mts.by</string>
+
+    <string name="mobile_legal_url" translatable="false">http://music.mts.ru/agreement/</string>
+    <string name="mobile_payment_url_format" translatable="false">%1$s?login=%2$s&amp;lang=%3$s</string>
+
+    <string name="concert_address_format">%1$s, %2$s</string>
+
+    <string name="uuid">UUID</string>
+
+    <string name="lorem" translatable="false">Lorem ipsum</string>
+    <string name="lorem_10" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean a.</string>
+    <string name="lorem_100" translatable="false">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed et ante ultrices quam maximus pharetra. Cras vitae sem non sapien aliquam posuere et at tellus. In lacinia, enim eget dictum laoreet, neque risus venenatis enim, semper vulputate mi justo ac felis. Pellentesque ac egestas risus, vel dictum justo. Sed id ante in nibh aliquet facilisis. Pellentesque varius arcu ipsum, ut elementum ex suscipit et. Sed iaculis, sapien at ultrices sagittis, arcu nisi pharetra eros, non venenatis quam sapien eget eros. Donec malesuada enim mi, ac venenatis arcu ornare vestibulum. Aenean porta mattis convallis. Aliquam mauris erat, interdum a cursus in.</string>
+
+    <!-- keys -->
+    <string name="huawei_tracker_id">889845553377136716</string>
+    <string name="appsflyer_dev_key">EB6sjp6CAVxmjL5zZtS7g5</string>
+    <string name="speechkit_key">a995648b-a9f5-4364-b953-5d7c934a1ccf</string>
+
+    <string name="pushwoosh_push_action">ru.yandex.music.action.PUSH_MESSAGE_RECEIVE</string>
+    <string name="pushwoosh_c2d_message_permission">ru.yandex.music.permission.C2D_MESSAGE</string>
+
+    <string name="pdf_viewer_url">https://docs.google.com/gview?embedded=true&amp;url=%s</string>
+
+    <!-- Payment urls -->
+    <!-- Ссылки для оплаты у пользователей которые были авторизированы через старую авторизацию -->
+    <string name="wallet_url_subscribed">https://login.mts.ru:443/amserver/UI/Login?service=oauth2sso&amp;IDToken1=%1$s&amp;goto=%2$s</string>
+    <string name="wallet_url">https://login.mts.ru:443/amserver/UI/Login?service=oauth2sso&amp;IDToken1=%1$s&amp;goto=%2$s</string>
+    <string name="non_sub_url">https://widget.mts.ru/register?serviceId=mts_music169&amp;bindingId=%1$s</string>
+    <string name="premium_wallet_redirect_url">https://widget.mts.ru/newregister?serviceId=16783&amp;returnURL=https://music.mts.ru/&amp;bindingId=%1$s</string>
+
+    <!-- Ссылки для оплаты у пользователей которые были авторизированы через SSO авторизацию -->
+
+    <string name="wallet_url_subscribed_sso">https://login.mts.ru/amserver/oauth2/sso?at=%1$s&amp;redirect_uri=%2$s</string>
+    <string name="wallet_url_sso">https://login.mts.ru/amserver/oauth2/sso?at=%1$s&amp;redirect_uri=%2$s</string>
+    <string name="sso_auth_sub_redirect_url">https://widget.mts.ru/register?serviceId=mts_music_update&amp;bindingId=%1$s</string>
+    <string name="sub_url">https://widget.mts.ru/register?serviceId=mts_music_update&amp;bindingId=%1$s</string>
+
+    <string name="monthly_finish_url">https://music-api.vas-stream.ru/mts/payment.php</string>
+    <string name="premium_finish_url">https://music.mts.ru</string>
+
+
+</resources>

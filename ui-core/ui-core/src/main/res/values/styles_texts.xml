@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="text_size_small">12dp</dimen>
+    <dimen name="text_size_mid">14dp</dimen>
+    <dimen name="text_size_large">16dp</dimen>
+    <dimen name="text_size_xlarge">20dp</dimen>
+    <dimen name="text_size_player_title">18dp</dimen>
+    <dimen name="text_size_player_subtitle">15dp</dimen>
+
+
+    <style name="ToolbarTitleAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">16dp</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+    </style>
+
+    <style name="ToolbarSubtitleAppearance" parent="TextAppearance.AppCompat.Widget.ActionBar.Subtitle">
+        <item name="android:textSize">14dp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="ActionBarTitle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="MineActionBarTitle" parent="Base.TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+        <item name="android:textSize">17dp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="ButtonTextStyle" parent="TextAppearance.AppCompat.Button">
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+        <item name="android:textSize">16dp</item>
+        <item name="android:lineSpacingExtra">4dp</item>
+    </style>
+
+    <style name="PlayerHistoryTabLayoutTextStyle" parent="TextAppearance.Design.Tab">
+        <item name="textAllCaps">false</item>
+        <item name="android:textAllCaps">false</item>
+        <item name="android:fontFamily">@font/mts_sans_medium</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:textColor">?attr/customTabLayoutInactiveTextColor</item>
+    </style>
+
+    <!-- Dark labels -->
+    <style name="PhonotekaTitle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+        <!-- -4dp because mtssans_medium add too extra space-->
+        <item name="android:lineSpacingExtra">-4dp</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+    </style>
+
+    <style name="MixItemStyle">
+        <item name="android:ellipsize">end</item>
+        <item name="android:textColor">?android:attr/textColorPrimary</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/mts_sans_ultra_wide</item>
+    </style>
+
+    <style name="DescriptionTextStyle">
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="PhonotekaSubtitle" parent="PhonotekaTitle">
+        <item name="android:textSize">@dimen/text_size_mid</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="PhonotekaTitleAlpha" parent="PhonotekaTitle">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+    </style>
+
+    <style name="PhonotekaSubtitleAlpha" parent="PhonotekaSubtitle">
+        <item name="android:textColor">?android:attr/textColorSecondary</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <!-- Light labels -->
+    <style name="PhonotekaTitle.Light" parent="PhonotekaTitle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="PhonotekaSubtitle.Light" parent="PhonotekaSubtitle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="SearchResultTitle" parent="PhonotekaTitle">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+
+    <!-- New styles -->
+    <!--TODO review titles with designers -->
+    <style name="PhonotekaTitle.0" parent="PhonotekaTitle">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="PhonotekaTitle.1" parent="PhonotekaTitle">
+        <item name="android:textSize">20sp</item>
+    </style>
+
+    <style name="LargeText">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+        <item name="android:fontFamily">@font/mtssans_medium</item>
+    </style>
+
+    <style name="ShufflePlayMyMusicButton" parent="PhonotekaTitle">
+        <item name="android:background">@drawable/shuffle_button_bg</item>
+    </style>
+
+    <style name="ShufflePlayMyMusicButtonDark" parent="PhonotekaTitle">
+        <item name="android:background">@drawable/shuffle_button_bg_dark</item>
+    </style>
+
+    <style name="MtsSansBoldTitle17">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/mtssans_bold</item>
+    </style>
+
+    <style name="MtsSansBoldTitle20">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:fontFamily">@font/mtssans_bold</item>
+    </style>
+
+    <style name="MtsSansBoldTitle24">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/mtssans_bold</item>
+    </style>
+
+    <style name="MtsSansBoldTitle24White">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:fontFamily">@font/mtssans_bold</item>
+    </style>
+
+    <style name="MtsSansRegular14">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="MtsSansRegular15">
+        <item name="android:textColor">?android:textColorPrimary</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="MtsSansRegular14White">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="MtsSansRegular14PremiumPaywall">
+        <item name="android:textColor">@color/white_light</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="MtsSansRegular17">
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/mtssans_regular</item>
+    </style>
+
+    <style name="MtsSansMedium17">
+        <item name="android:textSize">17sp</item>
+        <item name="android:fontFamily">@font/mts_sans_medium</item>
+    </style>
+
+    <style name="MtsSansMedium14">
+        <item name="android:textSize">14sp</item>
+        <item name="android:fontFamily">@font/mts_sans_medium</item>
+    </style>
+</resources>

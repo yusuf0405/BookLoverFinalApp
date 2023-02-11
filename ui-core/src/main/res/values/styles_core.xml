@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppThemeRoot" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="grayButtonColor">@color/grey_active_day</item>
+        <item name="buttonNotEnableBackground">@color/controls_light_inactive</item>
+        <item name="textNegativeColor">@color/text_light_negative</item>
+    </style>
+
+</resources>

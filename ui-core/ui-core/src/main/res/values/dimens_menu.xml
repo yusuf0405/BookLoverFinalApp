@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_menu_gradient_radius">289dp</dimen>
+    <dimen name="main_menu_divider_height">8dp</dimen>
+    <dimen name="main_menu_padding">16dp</dimen>
+    <dimen name="main_menu_item_height">48dp</dimen>
+    <dimen name="main_menu_item_text_size">14sp</dimen>
+    <dimen name="main_menu_username_text_size">20sp</dimen>
+    <dimen name="main_menu_item_padding_drawable">4dp</dimen>
+    <dimen name="main_menu_width">320dp</dimen>
+    <dimen name="main_menu_auth_photo_size">56dp</dimen>
+    <dimen name="main_menu_auth_login_height">181dp</dimen>
+    <dimen name="main_menu_unauth_login_height">73dp</dimen>
+    <dimen name="main_menu_top_padding">25dp</dimen>
+    <dimen name="main_menu_subscription_padding_horizontal">8dp</dimen>
+    <dimen name="main_menu_subscription_padding_vertical">4dp</dimen>
+</resources>

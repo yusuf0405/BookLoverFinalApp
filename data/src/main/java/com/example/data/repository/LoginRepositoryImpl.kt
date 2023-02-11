@@ -8,38 +8,35 @@ import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.service.LoginService
 import com.example.data.toDtoSignUp
 import com.example.domain.Mapper
-import com.example.domain.models.UserDomain
-import com.example.domain.repository.LoginRepository
-import com.example.domain.Resource
+import com.example.domain.RequestState
 import com.example.domain.models.PostRequestAnswerDomain
+import com.example.domain.models.UserDomain
 import com.example.domain.models.UserSignUpDomain
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import com.example.domain.repository.LoginRepository
 
 class LoginRepositoryImpl(
     private val service: LoginService,
     private val signInMapper: Mapper<UserCloud, UserDomain>,
     private val signUpMapper: Mapper<SignUpAnswerCloud, PostRequestAnswerDomain>,
     resourceProvider: ResourceProvider,
-) : LoginRepository, BaseApiResponse(resourceProvider = resourceProvider) {
+) : LoginRepository, BaseApiResponse(resourceProvider = resourceProvider), BaseRepository {
 
-    override fun signIn(email: String, password: String): Flow<Resource<UserDomain>> = flow {
-        emit(Resource.loading())
-        emit(safeApiMapperCall(mapper = signInMapper) {
+    override suspend fun signIn(email: String, password: String): RequestState<UserDomain> {
+        val result = safeApiMapperCalll(mapper = signInMapper) {
             service.signIn(session = 1, username = email, password = password)
-        })
+        }
+        return renderResult(
+            result = result,
+        )
     }
 
-    override fun signUp(user: UserSignUpDomain): Flow<Resource<PostRequestAnswerDomain>> = flow {
-        emit(Resource.loading())
-        emit(safeApiMapperCall(mapper = signUpMapper) {
-            service.signUp(session = 1,
-                user = user.toDtoSignUp())
-        })
+    override suspend fun signUp(user: UserSignUpDomain): RequestState<PostRequestAnswerDomain> {
+        val result = safeApiCalll { service.signUp(session = 1, user = user.toDtoSignUp()) }
+        return renderResult(result = result).map(signUpMapper)
     }
 
-    override fun passwordReset(email: String): Flow<Resource<Unit>> = flow {
-        emit(Resource.loading())
-        emit(safeApiCall { service.requestPasswordReset(PasswordResetCloud(email = email)) })
+    override suspend fun passwordReset(email: String): RequestState<Unit> {
+        val result = safeApiCalll { service.requestPasswordReset(PasswordResetCloud(email)) }
+        return renderResult(result = result)
     }
 }

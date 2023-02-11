@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+
+    <style name="BottomSheetDialogTheme" parent="Theme.Design.Light.BottomSheetDialog">
+        <item name="android:windowLightNavigationBar" tools:targetApi="27">
+            @bool/use_light_system_bars
+        </item>
+        <item name="android:windowIsFloating">false</item>
+        <item name="android:navigationBarColor">?attr/navigationBarColor</item>
+        <item name="bottomSheetStyle">@style/BottomSheetStyle</item>
+    </style>
+
+</resources>

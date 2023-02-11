@@ -1,73 +1,49 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.domain.interactor.*
+import android.content.Context
+import android.content.SharedPreferences
+import android.preference.PreferenceManager
+import com.example.bookloverfinalapp.app.utils.FetchInternetConnectedStatus
+import com.example.bookloverfinalapp.app.utils.FetchInternetConnectedStatusImpl
+import com.example.domain.DispatchersProvider
+import com.example.domain.use_cases.*
 import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.components.ViewModelComponent
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 
 @Module
-@InstallIn(ViewModelComponent::class)
+@InstallIn(SingletonComponent::class)
 object InteractorModule {
 
     @Provides
-    fun provideGetAllBooksUseCase(repository: BooksRepository): GetAllBooksUseCase =
-        GetAllBooksUseCase(repository = repository)
+    fun provideSharedPreferences(@ApplicationContext context: Context): SharedPreferences =
+        PreferenceManager.getDefaultSharedPreferences(context)
 
     @Provides
-    fun provideBooksOnRefreshUseCase(repository: BooksRepository): BooksOnRefreshUseCase =
-        BooksOnRefreshUseCase(repository = repository)
-
-
-    @Provides
-    fun provideAddNewBookQuestionUseCase(repository: BooksRepository): AddNewBookQuestionUseCase =
-        AddNewBookQuestionUseCase(repository = repository)
+    fun provideFetchBooksFromCloudUseCase(repository: BooksRepository): FetchBooksFromCloudUseCase =
+        FetchBooksFromCloudUseCaseImpl(repository = repository)
 
     @Provides
-    fun provideGetSimilarBooksUseCase(repository: BooksRepository): GetSimilarBooksUseCase =
-        GetSimilarBooksUseCase(repository = repository)
-
-    @Provides
-    fun provideGetSearchBookUseCase(repository: BooksRepository): GetSearchBookUseCase =
-        GetSearchBookUseCase(repository = repository)
-
-    @Provides
-    fun provideAddNewBookUseCase(repository: BooksRepository): AddNewBookUseCase =
-        AddNewBookUseCase(repository = repository)
-
-    @Provides
-    fun provideDeleteBookQuestionUseCase(repository: BooksRepository): DeleteBookQuestionUseCase =
-        DeleteBookQuestionUseCase(repository = repository)
-
-    @Provides
-    fun provideUpdateBookQuestionUseCase(repository: BooksRepository): UpdateBookQuestionUseCase =
-        UpdateBookQuestionUseCase(repository = repository)
-
-    @Provides
-    fun provideGetBookForReadingUseCase(repository: BooksRepository): GetBookForReadingUseCase =
-        GetBookForReadingUseCase(repository = repository)
-
-    @Provides
-    fun provideGetAllChapterQuestionsUseCase(repository: BooksRepository): GetAllChapterQuestionsUseCase =
-        GetAllChapterQuestionsUseCase(repository = repository)
-
-    @Provides
-    fun provideDeleteBookUseCase(repository: BooksRepository): DeleteBookUseCase =
-        DeleteBookUseCase(repository = repository)
-
-    @Provides
-    fun provideUpdateBookUseCase(repository: BooksRepository): UpdateBookUseCase =
-        UpdateBookUseCase(repository = repository)
+    fun provideFetchInternetConnectedStatus(
+        context: Context
+    ): FetchInternetConnectedStatus = FetchInternetConnectedStatusImpl(
+        context = context
+    )
 
 
     @Provides
-    fun provideGetBookThatReadUseCase(repository: BookThatReadRepository): GetBookThatReadUseCase =
-        GetBookThatReadUseCase(repository = repository)
-
-    @Provides
-    fun provideGetStudentBooksUseCase(repository: BookThatReadRepository): GetUsersBooksUseCase =
-        GetUsersBooksUseCase(repository = repository)
+    fun provideFetchSimilarBooksUseCase(
+        repository: BooksRepository,
+        audioBooksRepository: AudioBooksRepository,
+        dispatchersProvider: DispatchersProvider
+    ): FetchSimilarBooksUseCase = FetchSimilarBooksUseCaseImpl(
+        repository = repository,
+        audioBooksRepository = audioBooksRepository,
+        dispatchersProvider = dispatchersProvider
+    )
 
     @Provides
     fun provideBooksThatReadOnRefreshUseCase(repository: BookThatReadRepository): BooksThatReadOnRefreshUseCase =
@@ -75,96 +51,77 @@ object InteractorModule {
 
 
     @Provides
-    fun provideGetMyStudentBooksUseCase(repository: BookThatReadRepository): GetMyStudentBooksUseCase =
-        GetMyStudentBooksUseCase(repository = repository)
-
-
-    @Provides
-    fun provideDeleteFromMyBooksUseCase(repository: BookThatReadRepository): DeleteFromMyBooksUseCase =
-        DeleteFromMyBooksUseCase(repository = repository)
-
-
-    @Provides
-    fun provideGetMyBookUseCase(repository: BookThatReadRepository): GetMyBookUseCase =
-        GetMyBookUseCase(repository = repository)
-
-
-    @Provides
-    fun provideAddNewStudentBookUseCase(repository: BookThatReadRepository): AddNewBookThatReadUseCase =
-        AddNewBookThatReadUseCase(repository = repository)
-
-    @Provides
-    fun provideUpdateChaptersUseCase(repository: BookThatReadRepository): UpdateChaptersUseCase =
-        UpdateChaptersUseCase(repository = repository)
-
-
-    @Provides
-    fun provideUpdateProgressUseCase(repository: BookThatReadRepository): UpdateProgressUseCase =
-        UpdateProgressUseCase(repository = repository)
-
-    @Provides
-    fun provideGetMyStudentsUseCase(repository: UserRepository): GetMyStudentsUseCase =
-        GetMyStudentsUseCase(repository = repository)
-
-    @Provides
-    fun provideDeleteUserUseCase(repository: UserRepository): DeleteUserUseCase =
-        DeleteUserUseCase(repository = repository)
-
-    @Provides
-    fun provideAddSessionTokenUseCase(repository: UserRepository): AddSessionTokenUseCase =
-        AddSessionTokenUseCase(repository = repository)
-
-    @Provides
-    fun provideGetClassStudentsUseCase(repository: UserRepository): GetClassUsersUseCase =
-        GetClassUsersUseCase(repository = repository)
-
-    @Provides
-    fun provideUpdateUserUseCase(repository: UserRepository): UpdateUserUseCase =
-        UpdateUserUseCase(repository = repository)
-
-    @Provides
-    fun provideGetSchoolStudentsUseCase(repository: UserRepository): GetSchoolStudentsUseCase =
-        GetSchoolStudentsUseCase(repository = repository)
-
-    @Provides
-    fun provideUpdateStudentClassUseCase(repository: UserRepository): UpdateStudentClassUseCase =
-        UpdateStudentClassUseCase(repository = repository)
-
-    @Provides
     fun provideStudentsOnRefreshUseCase(repository: UserRepository): StudentsOnRefreshUseCase =
         StudentsOnRefreshUseCase(repository = repository)
 
     @Provides
-    fun provideSignUpUseCase(repository: LoginRepository): SignUpUseCase =
-        SignUpUseCase(repository = repository)
+    fun provideFetchAllSortedUsersUseCase(
+        userCacheRepository: UserCacheRepository,
+        userRepository: UserRepository,
+    ): FetchAllSortedUsersUseCase =
+        FetchAllSortedUsersUseCaseImpl(
+            userCacheRepository = userCacheRepository,
+            userRepository = userRepository
+        )
+
 
     @Provides
-    fun provideSignInUseCase(repository: LoginRepository): SignInUseCase =
-        SignInUseCase(repository = repository)
+    fun provideFetchAllSortedBooksUseCase(
+        booksRepository: BooksRepository,
+    ): FetchAllSortedBooksUseCase =
+        FetchAllSortedBooksUseCaseImpl(
+            booksRepository = booksRepository,
+        )
 
     @Provides
-    fun providePasswordResetUseCase(repository: LoginRepository): PasswordResetUseCase =
-        PasswordResetUseCase(repository = repository)
+    fun provideFetchAllMainItemsUseCase(
+        userCacheRepository: UserCacheRepository,
+        userRepository: UserRepository,
+        booksRepository: BooksRepository,
+        tasksRepository: TasksRepository,
+        dispatchersProvider: DispatchersProvider,
+        audioBooksRepository: AudioBooksRepository,
+        savedBooksRepository: BookThatReadRepository,
+        genresRepository: GenresRepository,
+        checkBookIsSavedAndSaveUseCase: CheckBookIsSavedAndSaveUseCase,
+    ): FetchAllMainScreenItemsUseCase =
+        FetchAllMainScreenItemsUseCaseImpl(
+            dispatchersProvider = dispatchersProvider,
+            userCacheRepository = userCacheRepository,
+            userRepository = userRepository,
+            booksRepository = booksRepository,
+            audioBooksRepository = audioBooksRepository,
+            savedBooksRepository = savedBooksRepository,
+            checkBookIsSavedAndSaveUseCase = checkBookIsSavedAndSaveUseCase,
+            tasksRepository = tasksRepository,
+            genresRepository = genresRepository
+        )
 
     @Provides
-    fun provideGetAllSchoolsUseCase(repository: SchoolRepository): GetAllSchoolsUseCase =
-        GetAllSchoolsUseCase(repository = repository)
+    fun provideFetchAllSavedBooksUseCase(
+        userCacheRepository: UserCacheRepository,
+        savedBooksRepository: BookThatReadRepository,
+    ): FetchAllSortedSavedBooksUseCase =
+        FetchAllSortedSavedBooksUseCaseImpl(
+            userCacheRepository = userCacheRepository,
+            savedBooksRepository = savedBooksRepository
+        )
+
 
     @Provides
-    fun provideGetAllClassUseCase(repository: ClassRepository): GetAllClassUseCase =
-        GetAllClassUseCase(repository = repository)
+    fun provideCheckBookIsSavedAndSaveUseCase(
+        booksSaveToFileRepository: BooksSaveToFileRepository,
+        booksRepository: BooksRepository,
+    ): CheckBookIsSavedAndSaveUseCase = CheckBookIsSavedAndSaveUseCaseImpl(
+        booksSaveToFileRepository = booksSaveToFileRepository,
+        booksRepository = booksRepository
+    )
 
     @Provides
-    fun provideDeleteClassUseCase(repository: ClassRepository): DeleteClassUseCase =
-        DeleteClassUseCase(repository = repository)
-
-    @Provides
-    fun provideAddNewClassUseCase(repository: ClassRepository): AddNewClassUseCase =
-        AddNewClassUseCase(repository = repository)
-
-    @Provides
-    fun provideGetAllClassesCloudUseCase(repository: ClassRepository): GetAllClassesCloudUseCase =
-        GetAllClassesCloudUseCase(repository = repository)
-
+    fun provideFetchAllSortedAudioBooksUseCase(
+        audioBooksRepository: AudioBooksRepository,
+    ): FetchAllSortedAudioBooksUseCase = FetchAllSortedAudioBooksUseCaseImpl(
+        audioBooksRepository = audioBooksRepository
+    )
 
 }

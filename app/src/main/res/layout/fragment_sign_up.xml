@@ -1,107 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".app.ui.general_screens.screen_sign_up.FragmentSignUp">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:text="@string/signUp"
-        android:textColor="@color/black"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:orientation="vertical"
+        android:paddingBottom="16dp">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/teacher_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/red_btn_bg"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/teacher"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        <Toolbar
+            android:id="@+id/toolbar"
+            style="@style/ToolbarStylesLogin"
+            android:title="@string/teacher_sighUp" />
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/student_btn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
-        android:background="@drawable/red_btn_bg"
-        android:clickable="true"
-        android:focusable="true"
-        android:text="@string/student"
-        android:textColor="@color/white"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/teacher_btn" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/first_name_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:hint="@string/first_name">
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/already_have_account"
-        android:textColor="@color/book_details_text"
-        app:layout_constraintEnd_toStartOf="@+id/signIn_link"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/student_btn" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/first_name_field"
+                style="@style/EditTextStyleInputLoginStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/signIn_link"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/enter"
-        android:textColor="@color/violet"
-        app:layout_constraintBottom_toBottomOf="@+id/textView4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/textView4"
-        app:layout_constraintTop_toTopOf="@+id/textView4" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/last_name_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:hint="@string/last_name">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="200dp"
-        android:layout_height="180dp"
-        android:layout_marginTop="16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView"
-        app:srcCompat="@drawable/book" />
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/last_name_field"
+                style="@style/EditTextStyleInputLoginStyle" />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:textColor="@color/book_details_text"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="@string/your_position"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView" />
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:hint="@string/your_email">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_field"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:inputType="textEmailSubject" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:hint="@string/your_password"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_field"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:inputType="textPassword" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/phoneNumberInputLayout"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:hint="@string/your_number">
+
+            <com.santalu.maskedittext.MaskEditText
+                android:id="@+id/phoneField"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:inputType="phone"
+                app:met_mask="+996 (###) ## ## ##" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <include
+            android:id="@+id/your_gender_block"
+            layout="@layout/block_your_gender" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUpBtn"
+            android:layout_marginTop="24dp"
+            style="@style/ButtonStyle.Blue.AppStyle"
+            android:text="@string/signUp" />
+
+        <include
+            android:id="@+id/already_registered_block"
+            layout="@layout/block_already_registered" />
+
+    </LinearLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/book_info_nav_graph"
+    app:startDestination="@id/fragmentBookInfo">
+
+    <fragment
+        android:id="@+id/fragmentBookInfo"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details.FragmentBookInfo"
+        android:label="FragmentBookInfo">
+        <argument
+            android:name="bookId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_fragmentEditBook"
+            app:destination="@id/fragmentEditBook" />
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_book_read_nav_graph"
+            app:destination="@id/book_read_nav_graph">
+            <argument
+                android:name="book"
+                app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+            <argument
+                android:name="path"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_create_question_nav_graph"
+            app:destination="@id/create_question_nav_graph">
+            <argument
+                android:name="bookId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_create_question_nav_graph2"
+            app:destination="@id/create_question_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_create_question_nav_graph3"
+            app:destination="@id/create_question_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentBookInfo_to_book_genre_info_nav_graph"
+            app:destination="@id/book_genre_info_nav_graph">
+            <argument
+                android:name="genreId"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentEditBook"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_edit_book.FragmentEditBook"
+        android:label="fragment_edit_book"
+        tools:layout="@layout/fragment_edit_book">
+        <argument
+            android:name="book_id"
+            app:argType="string" />
+    </fragment>
+
+    <include app:graph="@navigation/book_genre_info_nav_graph" />
+
+    <include app:graph="@navigation/book_read_nav_graph" />
+
+    <include app:graph="@navigation/create_question_nav_graph" />
+</navigation>

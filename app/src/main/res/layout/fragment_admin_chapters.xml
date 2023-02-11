@@ -4,23 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".app.ui.admin_screens.screen_book_chapters.ui.FragmentAdminChapters">
+    tools:context=".app.ui.admin_screens.screen_book_chapters.ui.FragmentChaptersForCreateQuestion">
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdf_view"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:visibility="gone" />
+        android:visibility="invisible" />
 
-    <Toolbar
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="?android:attr/actionBarSize"
-        app:layout_collapseMode="pin"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:popupTheme="@style/ThemeOverlay.MaterialComponents.Light" />
+    <include
+        android:id="@+id/toolbar_block"
+        layout="@layout/toolbar_block" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chapter_recycler_view"
@@ -31,7 +25,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_block"
         app:layout_constraintVertical_bias="0.0"
         tools:listitem="@layout/item_chapter" />
 

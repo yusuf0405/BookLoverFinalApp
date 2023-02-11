@@ -1,18 +1,18 @@
 package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
+import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain
 import com.example.bookloverfinalapp.app.utils.communication.ErrorCommunication
 import com.example.bookloverfinalapp.app.utils.communication.NavigationCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ProgressCommunication
 import com.example.bookloverfinalapp.app.utils.communication.ProgressDialogCommunication
 import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
-import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
 import com.example.data.ResourceProvider
-import com.example.domain.interactor.*
-import com.example.domain.repository.BookThatReadRepository
-import com.example.domain.repository.BooksRepository
-import com.example.domain.repository.ClassRepository
-import com.example.domain.repository.UserRepository
+import com.example.data.base.ResponseHandler
+import com.example.data.base.ResponseHandlerImpl
+import com.example.domain.DispatchersProvider
+import com.example.domain.use_cases.*
+import com.example.domain.repository.*
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -27,6 +27,10 @@ object AppModule {
     @Provides
     @Singleton
     fun provideContext(@ApplicationContext context: Context): Context = context
+
+    @Provides
+    @Singleton
+    fun provideActivity(): ActivityMain = ActivityMain()
 
     @Provides
     @Singleton
@@ -59,28 +63,27 @@ object AppModule {
         ResourceProvider.Base(context = context)
 
     @Provides
-    fun provideGetCurrentUserUseCase(repository: UserRepository): GetCurrentUserUseCase =
-        GetCurrentUserUseCase(repository = repository)
+    @Singleton
+    fun provideResponseHandler(
+        dispatchersProvider: DispatchersProvider
+    ): ResponseHandler = ResponseHandlerImpl(
+        dispatchersProvider = dispatchersProvider
+    )
 
 
     @Provides
-    fun provideClearClassCacheUseCase(repository: ClassRepository): ClearClassCacheUseCase =
-        ClearClassCacheUseCase(repository = repository)
-
-    @Provides
-    fun provideClearStudentsCacheUseCase(repository: UserRepository): ClearStudentsCacheUseCase =
-        ClearStudentsCacheUseCase(repository = repository)
-
-    @Provides
-    fun provideClearBooksThatReadCacheUseCase(repository: BookThatReadRepository): ClearBooksThatReadCacheUseCase =
-        ClearBooksThatReadCacheUseCase(repository = repository)
-
-    @Provides
-    fun provideClearBooksCacheUseCase(repository: BooksRepository): ClearBooksCacheUseCase =
-        ClearBooksCacheUseCase(repository = repository)
-
-    @Provides
-    fun provideGetClassUseCase(repository: ClassRepository): GetClassUseCase =
-        GetClassUseCase(repository = repository)
-
+    fun provideClearStudentsCacheUseCase(
+        userRepository: UserRepository,
+        booksRepository: BooksRepository,
+        audioBooksRepository: AudioBooksRepository,
+        bookThatReadRepository: BookThatReadRepository,
+        classRepository: ClassRepository
+    ): ClearAllAppCacheUseCase =
+        ClearAllAppCacheUseCaseImpl(
+            userRepository = userRepository,
+            booksRepository = booksRepository,
+            audioBooksRepository = audioBooksRepository,
+            bookThatReadRepository = bookThatReadRepository,
+            classRepository = classRepository
+        )
 }

@@ -1,20 +1,22 @@
 package com.example.domain.repository
 
+import com.example.domain.RequestState
 import com.example.domain.Resource
 import com.example.domain.models.ClassDomain
+import com.example.domain.models.PostRequestAnswerDomain
 import kotlinx.coroutines.flow.Flow
 
 interface ClassRepository {
 
-    fun fetchAllClass(schoolId: String): Flow<Resource<List<ClassDomain>>>
+    fun fetchAllClass(schoolId: String): Flow<List<ClassDomain>>
 
-    fun fetchAllClassCloud(schoolId: String): Flow<Resource<List<ClassDomain>>>
+    fun fetchAllClassCloud(schoolId: String): Flow<List<ClassDomain>>
 
-    fun deleteClass(id: String): Flow<Resource<Unit>>
+    suspend fun deleteClass(id: String): RequestState<Unit>
 
-    fun addClass(title: String, schoolId: String): Flow<Resource<String>>
+    suspend fun addClass(title: String, schoolId: String): RequestState<Unit>
 
-    fun getClass(id: String): Flow<Resource<Unit>>
+    fun fetchUserClassesFromId(id: String): Flow<List<ClassDomain>>
 
     suspend fun clearTable()
 

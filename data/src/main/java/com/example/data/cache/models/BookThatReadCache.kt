@@ -21,7 +21,27 @@ data class BookThatReadCache(
     @ColumnInfo(name = "book") var book: String,
     @ColumnInfo(name = "progress") var progress: Int,
     @ColumnInfo(name = "is_reading_pages") var isReadingPages: List<Boolean>,
-)
+) {
+
+    companion object {
+        fun unknown() = BookThatReadCache(
+            author = String(),
+            createdAt = Date(),
+            updatedAt = Date(),
+            bookId = String(),
+            objectId = String(),
+            publicYear = String(),
+            page = 0,
+            title = String(),
+            progress = 0,
+            chapterCount = 0,
+            chaptersRead = 0,
+            poster = BookThatReadPosterCache(String(), String()),
+            book = String(),
+            isReadingPages = emptyList()
+        )
+    }
+}
 
 data class BookThatReadPosterCache(
     var name: String,
