@@ -1,115 +1,149 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/recyclerViewMargin"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="8dp"
+    app:cardBackgroundColor="?attr/card_background"
     app:cardCornerRadius="@dimen/cardAllCornersRadius"
-    app:cardElevation="@dimen/cardElevation">
+    app:cardElevation="15dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/marginForTIL">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
 
         <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/studentProfileImage"
-            android:layout_width="@dimen/smallProfileImageSize"
-            android:layout_height="@dimen/smallProfileImageSize"
-            android:src="@drawable/foto"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_width="100dp"
+            android:layout_height="140dp"
+            android:scaleType="centerCrop"
+            tools:src="@tools:sample/avatars" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/progressProfileLastName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="16dp"
-            android:textSize="@dimen/textSizeProfileTIL"
-            app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="Ташполотова" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/progressProfileName"
-            style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/marginForTIL"
-            android:layout_marginTop="4dp"
-            android:textSize="@dimen/textSizeProfileTIL"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/studentProfileImage"
-            app:layout_constraintTop_toBottomOf="@+id/progressProfileLastName"
-            app:layout_constraintVertical_bias="0.0"
-            tools:text="Венера" />
+            <com.joseph.ui_core.custom.MyTextView
+                android:id="@+id/progressProfileLastName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="4dp"
+                android:layout_weight="1"
+                android:ellipsize="none"
+                android:fadingEdgeLength="30dp"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="?attr/blackOrWhiteColor"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                tools:text="@tools:sample/full_names" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/countOfStudentDimonds"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="@dimen/textSizeProfileTIL"
-            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentPages"
-            app:layout_constraintStart_toEndOf="@+id/studentsPages"
-            app:layout_constraintTop_toTopOf="@+id/countOfStudentPages"
-            tools:text="18" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone">
 
-        <com.example.bookloverfinalapp.app.custom.MyImageView
-            android:id="@+id/studentsPages"
-            android:layout_width="@dimen/recyclerViewIconSize"
-            android:layout_height="@dimen/recyclerViewIconSize"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_open_book"
-            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentPages"
-            app:layout_constraintStart_toEndOf="@+id/countOfStudentPages"
-            app:layout_constraintTop_toTopOf="@+id/countOfStudentPages" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_of_books_read"
+                    android:textColor="?attr/text_secondary"
+                    android:textSize="11sp" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/countOfStudentPages"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:textSize="@dimen/textSizeProfileTIL"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/progressProfileLastName"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="345" />
+                <com.joseph.ui_core.custom.MyTextView
+                    android:id="@+id/countOfStudentPages"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:textColor="?attr/blackOrWhiteColor"
+                    android:textSize="11sp"
+                    tools:text="18" />
+            </LinearLayout>
 
-        <com.example.bookloverfinalapp.app.custom.MyImageView
-            android:id="@+id/studentsDiamond"
-            android:layout_width="@dimen/recyclerViewIconSize"
-            android:layout_height="@dimen/recyclerViewIconSize"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_diamond"
-            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentDimonds"
-            app:layout_constraintStart_toEndOf="@+id/countOfStudentDimonds"
-            app:layout_constraintTop_toTopOf="@+id/countOfStudentDimonds" />
 
-        <com.example.bookloverfinalapp.app.custom.MyTextView
-            android:id="@+id/countOfStudentCrowns"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textSize="@dimen/textSizeProfileTIL"
-            app:layout_constraintBottom_toBottomOf="@+id/studentsDiamond"
-            app:layout_constraintStart_toEndOf="@+id/studentsDiamond"
-            app:layout_constraintTop_toTopOf="@+id/studentsDiamond"
-            tools:text="2" />
+            <LinearLayout
+                android:layout_width="wrap_content"
 
-        <com.example.bookloverfinalapp.app.custom.MyImageView
-            android:id="@+id/progressCrown"
-            android:layout_width="@dimen/recyclerViewIconSize"
-            android:layout_height="@dimen/recyclerViewIconSize"
-            android:layout_marginStart="4dp"
-            android:src="@drawable/ic_crown_gold"
-            app:layout_constraintBottom_toBottomOf="@+id/countOfStudentCrowns"
-            app:layout_constraintStart_toEndOf="@+id/countOfStudentCrowns"
-            app:layout_constraintTop_toTopOf="@+id/countOfStudentCrowns" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:visibility="gone">
 
-</com.google.android.material.card.MaterialCardView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/number_of_chapters_read"
+                    android:textColor="?attr/text_secondary"
+                    android:textSize="11sp" />
+
+                <com.joseph.ui_core.custom.MyTextView
+                    android:id="@+id/countOfStudentDimonds"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:textColor="?attr/blackOrWhiteColor"
+                    android:textSize="11sp"
+                    tools:text="18" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/number_of_pages_read"
+                    android:textColor="?attr/text_secondary"
+                    android:textSize="11sp" />
+
+                <com.joseph.ui_core.custom.MyTextView
+                    android:id="@+id/countOfStudentCrowns"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginStart="4dp"
+                    android:textColor="?attr/blackOrWhiteColor"
+                    android:textSize="11sp"
+                    tools:text="18" />
+            </LinearLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/button"
+                android:layout_width="wrap_content"
+                android:layout_height="25dp"
+                android:layout_marginBottom="12dp"
+                app:cardBackgroundColor="?attr/button_gradient_background"
+                app:cardCornerRadius="4dp"
+                app:cardElevation="4dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="1dp"
+                    android:text="Learn more"
+                    android:textColor="@color/white" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</LinearLayout>

@@ -1,5 +1,6 @@
 package com.example.domain.repository
 
+import com.example.domain.RequestState
 import com.example.domain.Resource
 import com.example.domain.models.StudentDomain
 import com.example.domain.models.UpdateAnswerDomain
@@ -9,32 +10,43 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
-    fun fetchMyStudents(classId: String): Flow<Resource<List<StudentDomain>>>
+    fun fetchAllStudentsFromClassId(
+        classId: String,
+        schoolId: String,
+        currentUserId: String
+    ): Flow<List<StudentDomain>>
 
-    fun fetchSchoolStudents(schoolId: String): Flow<Resource<List<StudentDomain>>>
+    fun fetchAllUsersFromBookId(
+        bookId: String,
+        schoolId: String,
+        currentUserId: String
+    ): Flow<List<UserDomain>>
+
+
+    fun fetchSchoolStudents(schoolId: String): Flow<List<StudentDomain>>
+
+    suspend fun fetchUserFromId(userId: String): StudentDomain
 
     fun onRefresh(classId: String): Flow<Resource<List<StudentDomain>>>
 
-    fun fetchClassUsers(classId: String): Flow<Resource<List<StudentDomain>>>
-
-    fun updateStudentClass(
+    suspend fun updateStudentClass(
         id: String,
         sessionToken: String,
         classId: String,
         classTitle: String,
-    ): Flow<Resource<Unit>>
+    ): RequestState<Unit>
 
-    fun updateUser(
+    suspend fun updateUserParameters(
         id: String,
         user: UserUpdateDomain,
         sessionToken: String,
-    ): Flow<Resource<UpdateAnswerDomain>>
+    ): RequestState<UpdateAnswerDomain>
 
-    fun deleteUser(id: String, sessionToken: String): Flow<Resource<Unit>>
+    suspend fun deleteUser(id: String, sessionToken: String): RequestState<Unit>
 
-    fun addSessionToken(id: String, sessionToken: String): Flow<Resource<Unit>>
+    suspend fun addSessionToken(id: String, sessionToken: String): RequestState<Unit>
 
-    fun getCurrentUser(sessionToken: String): Flow<Resource<UserDomain>>
+    fun getCurrentUserWithCloud(sessionToken: String): Flow<UserDomain>
 
     suspend fun clearStudentsCache()
 

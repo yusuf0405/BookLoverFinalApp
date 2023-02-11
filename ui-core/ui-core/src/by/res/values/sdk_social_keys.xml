@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="com_vk_sdk_AppId">6262106</integer>
+    <string name="ok_app_id">1250406912</string>
+    <string name="ok_host">ok1250406912</string>
+    <string name="ok_redirect_url">okauth://ok1250406912</string>
+    <string name="ok_app_key">14AB0E1257F9D9B05EC1D1AF</string>
+    <string name="facebook_app_id">1085550351550824</string>
+    <string name="fb_login_protocol_scheme">fb1085550351550824</string>
+
+    <string name="twitter_consumer_key">x24AmJj0G16jmTsixLuIcIUwV</string>
+    <string name="twitter_consumer_secret">mqqtTuQpVjPOqZwubVULz7QDEsLjzSjla1hx08ehqolmEYVXxt</string>
+</resources>

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ripple xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="?colorControlHighlight">
+    <item>
+        <layer-list>
+            <item>
+                <shape>
+                    <solid android:color="@color/light_slate_grey_20_alpha" />
+                    <corners android:radius="28dp" />
+                </shape>
+            </item>
+            <item>
+                <shape>
+                    <corners android:radius="16dp" />
+                    <stroke
+                        android:width="2px"
+                        android:color="@color/light_slate_grey_15_alpha" />
+                </shape>
+            </item>
+            <item
+                android:drawable="@drawable/card_nav_dark"/>
+        </layer-list>
+    </item>
+</ripple>

@@ -18,10 +18,29 @@ data class BookThatRead(
     var chaptersRead: Int,
     var poster: BookThatReadPoster,
     var updatedAt: Date,
-    var book: String,
+    var bookPdfUrl: String,
     var progress: Int,
     var isReadingPages: List<Boolean>,
 ) : Parcelable {
+
+    companion object {
+        fun unknown() = BookThatRead(
+            author = String(),
+            createdAt = Date(),
+            updatedAt = Date(),
+            bookId = String(),
+            objectId = String(),
+            publicYear = String(),
+            page = 0,
+            title = String(),
+            bookPdfUrl = String(),
+            progress = 0,
+            chapterCount = 0,
+            chaptersRead = 0,
+            poster = BookThatReadPoster(String(), String()),
+            isReadingPages = emptyList()
+        )
+    }
 
     fun getCreatedAt(): String {
         val prettyTime = PrettyTime(Locale("ru"))

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<MotionScene xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:motion="http://schemas.android.com/apk/res-auto">
+
+    <Transition
+        motion:constraintSetEnd="@+id/end"
+        motion:constraintSetStart="@id/start"
+        motion:duration="1000">
+        <OnSwipe
+            motion:dragScale="1"
+            motion:touchAnchorId="@id/user_info_block"
+            motion:touchAnchorSide="top" />
+
+        <KeyFrameSet>
+            <KeyAttribute
+                android:alpha="1"
+                android:elevation="1dp"
+                android:scaleX="1"
+                android:scaleY="1"
+                motion:framePosition="0"
+                motion:motionTarget="@id/user_image" />
+            <KeyAttribute
+                android:elevation="1dp"
+                android:scaleX="0.7"
+                android:scaleY="0.7"
+                motion:framePosition="60"
+                motion:motionTarget="@id/user_image" />
+
+            <KeyAttribute
+                android:alpha="0"
+                android:elevation="1dp"
+                android:scaleX="0"
+                android:scaleY="0"
+                motion:framePosition="80"
+                motion:motionTarget="@id/user_image" />
+            <KeyAttribute
+                android:alpha="0"
+                android:elevation="1dp"
+                android:scaleX="0"
+                android:scaleY="0"
+                motion:framePosition="100"
+                motion:motionTarget="@id/user_image" />
+
+            <!--            <KeyAttribute-->
+            <!--                android:alpha="1"-->
+            <!--                android:elevation="1dp"-->
+            <!--                android:scaleX="1"-->
+            <!--                android:scaleY="1"-->
+            <!--                motion:framePosition="0"-->
+            <!--                motion:motionTarget="@id/user_full_name_text" />-->
+            <!--            <KeyAttribute-->
+            <!--                android:elevation="1dp"-->
+            <!--                android:scaleX="0.7"-->
+            <!--                android:scaleY="0.7"-->
+            <!--                motion:framePosition="60"-->
+            <!--                motion:motionTarget="@id/user_full_name_text" />-->
+            <!--            <KeyAttribute-->
+            <!--                android:alpha="0"-->
+            <!--                android:elevation="1dp"-->
+            <!--                android:scaleX="0"-->
+            <!--                android:scaleY="0"-->
+            <!--                motion:framePosition="100"-->
+            <!--                motion:motionTarget="@id/user_full_name_text" />-->
+
+
+            <KeyAttribute
+                android:elevation="0dp"
+                motion:framePosition="0"
+                motion:motionTarget="@id/include_user_info_blue_toolbar_block" />
+            <KeyAttribute
+                android:elevation="0dp"
+
+                motion:framePosition="60"
+                motion:motionTarget="@id/include_user_info_blue_toolbar_block" />
+            <KeyAttribute
+                android:elevation="0dp"
+                motion:framePosition="100"
+                motion:motionTarget="@id/include_user_info_blue_toolbar_block" />
+
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="0"
+                motion:motionTarget="@id/include_user_info_toolbar_block" />
+            <KeyAttribute
+                android:alpha="0"
+                motion:framePosition="93"
+                motion:motionTarget="@id/include_user_info_toolbar_block" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="94"
+                motion:motionTarget="@id/include_user_info_toolbar_block" />
+            <KeyAttribute
+                android:alpha="1"
+                motion:framePosition="100"
+                motion:motionTarget="@id/include_user_info_toolbar_block" />
+        </KeyFrameSet>
+    </Transition>
+
+    <ConstraintSet android:id="@+id/start">
+
+        <Constraint
+            android:id="@+id/user_image"
+            android:layout_width="84dp"
+            android:layout_height="84dp"
+            android:layout_marginTop="-41dp"
+            android:elevation="1dp"
+            motion:layout_constraintEnd_toEndOf="@+id/include_user_info_blue_toolbar_block"
+            motion:layout_constraintStart_toStartOf="@+id/include_user_info_blue_toolbar_block"
+            motion:layout_constraintTop_toBottomOf="@+id/include_user_info_blue_toolbar_block" />
+        <Constraint
+            android:id="@+id/user_info_block"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="@+id/user_image"
+            motion:layout_constraintStart_toStartOf="@+id/user_image"
+            motion:layout_constraintTop_toBottomOf="@+id/user_full_name_text" />
+        <Constraint
+            motion:layout_constraintEnd_toEndOf="@+id/user_full_name_text"
+            android:id="@+id/user_number_text"
+            motion:layout_editor_absoluteX="251dp"
+            motion:layout_constraintTop_toBottomOf="@+id/user_full_name_text" />
+    </ConstraintSet>
+
+    <ConstraintSet android:id="@+id/end">
+        <Constraint
+            android:id="@+id/include_user_info_blue_toolbar_block"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="-5dp"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/include_user_info_toolbar_block"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:visibility="visible"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toTopOf="parent" />
+        <Constraint
+            android:id="@+id/user_info_block"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="-24dp"
+            motion:layout_constraintBottom_toBottomOf="parent"
+            motion:layout_constraintEnd_toEndOf="parent"
+            motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintTop_toBottomOf="@+id/include_user_info_toolbar_block" />
+        <Constraint
+            android:id="@+id/user_full_name_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="@+id/user_image"
+            motion:layout_constraintStart_toStartOf="@+id/user_image"
+            motion:layout_constraintTop_toBottomOf="@+id/user_image" />
+        <Constraint
+            android:id="@+id/user_image"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:visibility="invisible"
+            motion:layout_constraintEnd_toEndOf="@+id/include_user_info_blue_toolbar_block"
+            motion:layout_constraintStart_toStartOf="@+id/include_user_info_blue_toolbar_block"
+            motion:layout_constraintTop_toTopOf="parent" />
+    </ConstraintSet>
+</MotionScene>

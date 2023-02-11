@@ -9,6 +9,7 @@ import java.util.*
 data class BookCache(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "author") var author: String,
+    @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "created_at") var createdAt: Date,
     @ColumnInfo(name = "page") var page: Int,
     @ColumnInfo(name = "public_year") var publicYear: String,
@@ -18,7 +19,14 @@ data class BookCache(
     @ColumnInfo(name = "chapter_count") var chapterCount: Int,
     @ColumnInfo(name = "poster") var poster: BookPosterCache,
     @ColumnInfo(name = "updated_at") var updatedAt: Date,
+    @ColumnInfo(name = "saved_status") var savedStatus: SavedStatusCache,
 )
+
+enum class SavedStatusCache {
+    SAVED,
+    NOT_SAVED,
+    SAVING
+}
 
 data class BookPdfCache(
     var name: String,

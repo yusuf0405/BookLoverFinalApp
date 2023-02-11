@@ -8,4 +8,14 @@ data class SignUpAnswerCloud(
     @SerializedName("image") val image: UserImageCloud,
     @SerializedName("sessionToken") val sessionToken: String,
     @SerializedName("createdAt") val createdAt: Date,
-)
+) {
+    companion object {
+
+        fun unknown() = SignUpAnswerCloud(
+            objectId = String(),
+            sessionToken = String(),
+            createdAt = Date(),
+            image = UserImageCloud.unknown(),
+        )
+    }
+}

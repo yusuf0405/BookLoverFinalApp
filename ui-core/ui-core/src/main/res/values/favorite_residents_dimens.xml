@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region FavoriteResidentsFrameLayout-->
+    <dimen name="favorite_resident_title_container_margin_top">36dp</dimen>
+    <dimen name="favorite_resident_title_container_padding_start">20dp</dimen>
+    <dimen name="favorite_resident_title_container_padding_end">23dp</dimen>
+    <dimen name="favorite_resident_recycler_margin_start">8dp</dimen>
+    <dimen name="favorite_resident_container_image_width">8dp</dimen>
+    <dimen name="favorite_resident_container_image_height">16dp</dimen>
+    <!--endregion-->
+
+    <!--region FavoriteResidentsItem-->
+
+    <dimen name="favorite_resident_image_title_margin_top">8dp</dimen>
+
+    <dimen name="favorite_resident_fast_play_margin_start">8dp</dimen>
+    <dimen name="favorite_resident_fast_play_margin_bottom">8dp</dimen>
+    <!--endregion-->
+</resources>

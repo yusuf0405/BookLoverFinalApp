@@ -24,7 +24,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <ImageView
-                android:id="@+id/rounded_book_Image"
+                android:id="@+id/rounded_book_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/shimmerColor"

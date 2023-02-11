@@ -1,0 +1,254 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/new_nav_graph"
+    app:startDestination="@id/fragmentMainScreen">
+
+    <fragment
+        android:id="@+id/fragmentMainScreen"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_main.FragmentMainScreen"
+        android:label="fragment_all_books"
+        tools:layout="@layout/fragment_main_screen">
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentMyBooks"
+            app:destination="@id/fragmentAllSavedBooks"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentMyStudents"
+            app:destination="@id/fragmentAllStudents"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentStudentDetails"
+            app:destination="@id/fragmentStudentDetails" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_profile_nav_graph"
+            app:destination="@id/profile_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAllBooks"
+            app:destination="@id/fragmentAllBooks"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentChapterBook"
+            app:destination="@id/fragmentChapterBook"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_profile_nav_graph2"
+            app:destination="@id/profile_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_book_read_nav_graph"
+            app:destination="@id/book_read_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down">
+            <argument
+                android:name="book"
+                app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+            <argument
+                android:name="path"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAdminUploadPdf"
+            app:destination="@id/fragmentAdminUploadPdf"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAllGenres"
+            app:destination="@id/fragmentAllGenres"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAllSavedBooks"
+            app:destination="@id/fragmentAllSavedBooks" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAllAudioBooks"
+            app:destination="@id/fragmentAllAudioBooks" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentAllTasks"
+            app:destination="@id/fragmentAllTasks" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_profile_nav_graph3"
+            app:destination="@id/profile_nav_graph" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_create_question_nav_graph"
+            app:destination="@id/create_question_nav_graph">
+            <argument
+                android:name="bookId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentEditBook"
+            app:destination="@id/fragmentEditBook" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_book_info_nav_graph"
+            app:destination="@id/book_info_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down">
+            <argument
+                android:name="bookId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_book_genre_info_nav_graph"
+            app:destination="@id/book_genre_info_nav_graph">
+            <argument
+                android:name="genreId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_user_info_nav_graph"
+            app:destination="@id/user_info_nav_graph">
+            <argument
+                android:name="userId"
+                app:argType="string" />
+        </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentSearch"
+            app:destination="@id/fragmentSearch"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllSavedBooks"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.FragmentAllSavedBooks"
+        android:label="fragment_my_books">
+
+        <action
+            android:id="@+id/action_fragmentAllSavedBooks_to_book_read_nav_graph"
+            app:destination="@id/book_read_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down">
+            <argument
+                android:name="book"
+                app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+            <argument
+                android:name="path"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAllStudents"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.FragmentAllStudents"
+        android:label="fragment_my_students" />
+
+    <fragment
+        android:id="@+id/fragmentStudentDetails"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_student_details.FragmentStudentDetails"
+        android:label="fragment_student_details"
+        tools:layout="@layout/fragment_student_details">
+        <argument
+            android:name="student"
+            app:argType="com.example.bookloverfinalapp.app.models.Student" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAllBooks"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.FragmentAllBooks"
+        android:label="fragment_all_books"
+        tools:layout="@layout/fragment_all_items">
+        <action
+            android:id="@+id/action_fragmentAllBooks_to_book_info_nav_graph"
+            app:destination="@id/book_info_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down">
+            <argument
+                android:name="bookId"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAdminUploadPdf"
+        android:name="com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book.FragmentUploadFile"
+        android:label="fragment_admin_upload_pdf"
+        tools:layout="@layout/fragment_admin_upload_pdf">
+
+        <argument
+            android:name="uploadType"
+            app:argType="com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book.UploadFileType" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAllGenres"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_genres.FragmentAllGenres"
+        android:label="FragmentAllGenres">
+        <action
+            android:id="@+id/action_fragmentAllGenres_to_book_genre_info_nav_graph"
+            app:destination="@id/book_genre_info_nav_graph">
+            <argument
+                android:name="genreId"
+                app:argType="string" />
+        </action>
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAllAudioBooks"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_audio_book.FragmentAllAudioBooks"
+        android:label="FragmentAllAudioBooks" />
+
+    <fragment
+        android:id="@+id/fragmentAllTasks"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_tasks.FragmentAllTasks"
+        android:label="FragmentAllTasks" />
+
+
+    <fragment
+        android:id="@+id/fragmentEditBook"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_edit_book.FragmentEditBook"
+        android:label="fragment_edit_book"
+        tools:layout="@layout/fragment_edit_book">
+        <argument
+            android:name="book_id"
+            app:argType="string" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/fragmentSearch"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_search.FragmentSearch"
+        android:label="fragment_search"
+        tools:layout="@layout/fragment_search" />
+
+
+    <include app:graph="@navigation/user_info_nav_graph" />
+
+    <include app:graph="@navigation/profile_nav_graph" />
+
+    <include app:graph="@navigation/book_genre_info_nav_graph" />
+
+    <include app:graph="@navigation/book_info_nav_graph" />
+
+    <include app:graph="@navigation/create_question_nav_graph" />
+
+    <include app:graph="@navigation/book_read_nav_graph" />
+
+</navigation>

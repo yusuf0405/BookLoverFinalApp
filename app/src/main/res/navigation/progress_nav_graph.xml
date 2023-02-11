@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/progress_nav_graph"
+    app:startDestination="@id/fragmentProgress">
+
+    <fragment
+        android:id="@+id/fragment_leaderboard_chart"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.FragmentLeaderboardChart"
+        android:label="fragment_student_progress"
+        tools:layout="@layout/fragment_leaderboard_chart" />
+
+    <fragment
+        android:id="@+id/fragmentProgress"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.FragmentProgress"
+        android:label="fragment_progress"
+        tools:layout="@layout/fragment_progress">
+        <action
+            android:id="@+id/action_fragmentProgress_to_fragment_leaderboard_chart"
+            app:destination="@id/fragment_leaderboard_chart"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+    </fragment>
+
+</navigation>

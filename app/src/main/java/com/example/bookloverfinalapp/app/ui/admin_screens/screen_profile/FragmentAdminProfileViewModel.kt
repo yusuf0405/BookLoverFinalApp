@@ -1,24 +1,17 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_profile
 
-import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
-import com.example.domain.interactor.ClearBooksCacheUseCase
-import com.example.domain.interactor.ClearBooksThatReadCacheUseCase
-import com.example.domain.interactor.ClearStudentsCacheUseCase
+import com.example.domain.use_cases.ClearAllAppCacheUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
 class FragmentAdminProfileViewModel @Inject constructor(
-    private val clearBooksThatReadCacheUseCase: ClearBooksThatReadCacheUseCase,
-    private val clearBooksCacheUseCase: ClearBooksCacheUseCase,
-    private val clearStudentsCacheUseCase: ClearStudentsCacheUseCase,
+    private val clearAllAppCacheUseCase: ClearAllAppCacheUseCase,
 ) : BaseViewModel() {
 
-    fun clearDataInCache() = launchInBackground {
-        clearBooksCacheUseCase.execute()
-        clearBooksThatReadCacheUseCase.execute()
-        clearStudentsCacheUseCase.execute()
+    fun clearDataInCache() {
+        launchInBackground { clearAllAppCacheUseCase.invoke() }
     }
 
     fun goEditProfileFragment() =

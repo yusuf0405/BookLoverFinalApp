@@ -6,6 +6,7 @@ data class AddNewBookDomain(
     var schoolId: String,
     var genres: List<String>,
     var page: Int,
+    val description: String,
     var author: String,
     var poster: BookPosterDomain,
     var book: BookPdfDomain,

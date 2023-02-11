@@ -11,11 +11,19 @@ import org.json.JSONObject
 import java.lang.reflect.Type
 import java.util.*
 
-@Database(entities = [
-    BookCache::class,
-    BookThatReadCache::class,
-    ClassCache::class,
-    UserCache::class], version = 1)
+@Database(
+    entities = [
+        BookCache::class,
+        AudioBookCache::class,
+        BookThatReadCache::class,
+        TaskCache::class,
+        ClassCache::class,
+        UserStatisticCache::class,
+        GenreCache::class,
+        UserCache::class],
+    version = 5,
+    exportSchema = true
+)
 
 @TypeConverters(AppDatabase.DatabaseConverter::class)
 abstract class AppDatabase : RoomDatabase() {
@@ -28,6 +36,12 @@ abstract class AppDatabase : RoomDatabase() {
 
     abstract fun getUsersDao(): UsersDao
 
+    abstract fun audioBooksDao(): AudioBooksDao
+
+    abstract fun tasksDao(): TasksDao
+    abstract fun userStatisticDao(): UserStatisticDao
+
+    abstract fun genresDao(): GenreDao
 
     class DatabaseConverter {
 
@@ -154,6 +168,65 @@ abstract class AppDatabase : RoomDatabase() {
             )
         }
 
+        @TypeConverter
+        fun fromAudioBookFile(audioBookFileCache: AudioBookFileCache): String {
+            return JSONObject().apply {
+                put(AUDIO_BOOK_FILE_NAME_KEY, audioBookFileCache.name)
+                put(AUDIO_BOOK_FILE_URL_KEY, audioBookFileCache.url)
+            }.toString()
+        }
+
+        @TypeConverter
+        fun toAudioBookFile(source: String): AudioBookFileCache {
+            val json = JSONObject(source)
+            return AudioBookFileCache(
+                name = json.getString(AUDIO_BOOK_FILE_NAME_KEY),
+                url = json.getString(AUDIO_BOOK_FILE_URL_KEY),
+            )
+        }
+
+        @TypeConverter
+        fun fromAudioBookPoster(audioBookFileCache: AudioBookPosterCache): String {
+            return JSONObject().apply {
+                put(AUDIO_BOOK_POSTER_NAME_KEY, audioBookFileCache.name)
+                put(AUDIO_BOOK_POSTER_URL_KEY, audioBookFileCache.url)
+            }.toString()
+        }
+
+        @TypeConverter
+        fun toAudioBookPoster(source: String): AudioBookPosterCache {
+            val json = JSONObject(source)
+            return AudioBookPosterCache(
+                name = json.getString(AUDIO_BOOK_POSTER_NAME_KEY),
+                url = json.getString(AUDIO_BOOK_POSTER_URL_KEY),
+            )
+        }
+
+        @TypeConverter
+        fun fromGenrePoster(genreCache: GenrePosterCache): String {
+            return JSONObject().apply {
+                put(GENRE_POSTER_NAME_KEY, genreCache.name)
+                put(GENRE_POSTER_URL_KEY, genreCache.url)
+            }.toString()
+        }
+
+        @TypeConverter
+        fun toGenrePoster(source: String): GenrePosterCache {
+            val json = JSONObject(source)
+            return GenrePosterCache(
+                name = json.getString(GENRE_POSTER_NAME_KEY),
+                url = json.getString(GENRE_POSTER_URL_KEY),
+            )
+        }
+    }
+
+    private companion object {
+        const val AUDIO_BOOK_FILE_NAME_KEY = "AUDIO_BOOK_FILE_NAME_KEY"
+        const val AUDIO_BOOK_POSTER_NAME_KEY = "AUDIO_BOOK_POSTER_NAME_KEY"
+        const val AUDIO_BOOK_FILE_URL_KEY = "AUDIO_BOOK_FILE_URL_KEY"
+        const val AUDIO_BOOK_POSTER_URL_KEY = "AUDIO_BOOK_POSTER_URL_KEY"
+        const val GENRE_POSTER_URL_KEY = "GENRE_POSTER_URL_KEY"
+        const val GENRE_POSTER_NAME_KEY = "GENRE_POSTER_NAME_KEY"
     }
 }
 

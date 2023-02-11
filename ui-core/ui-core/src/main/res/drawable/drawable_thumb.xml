@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:width="26dp"
+        android:height="26dp">
+        <shape android:shape="oval">
+            <gradient android:type="radial"
+                android:endColor="#05000000"
+                android:startColor="#0F000000"
+                android:gradientRadius="50"/>
+        </shape>
+    </item>
+
+    <item
+        android:width="24dp"
+        android:height="24dp"
+        android:top="1dp"
+        android:start="1dp"
+        android:end="1dp"
+        android:bottom="1dp"
+        android:drawable="@drawable/ic_thumb">
+    </item>
+
+</layer-list>

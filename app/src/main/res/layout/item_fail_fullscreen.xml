@@ -18,25 +18,24 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/error_response" />
 
-    <com.example.bookloverfinalapp.app.custom.MyTextView
+    <com.joseph.ui_core.custom.MyTextView
         android:id="@+id/message_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
         android:text="@string/network_error"
-        android:textColor="@color/red"
+        android:textColor="?attr/textNegativeColor"
         android:textSize="18sp"
         app:layout_constraintBottom_toTopOf="@+id/try_again"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
-    <com.example.bookloverfinalapp.app.custom.MyButton
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/try_again"
-        style="@style/button_style"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        style="@style/ButtonStyle.Blue.AppStyle"
         android:layout_marginBottom="32dp"
         android:text="@string/try_again"
+        android:textSize="14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />

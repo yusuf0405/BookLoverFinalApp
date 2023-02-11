@@ -1,123 +1,263 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details
 
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
-import androidx.lifecycle.liveData
+import android.util.Log
 import androidx.lifecycle.viewModelScope
+import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
-import com.example.bookloverfinalapp.app.mappers.BookDomainToBookModelMapper
-import com.example.bookloverfinalapp.app.models.AddNewBookModel
-import com.example.bookloverfinalapp.app.models.Book
-import com.example.bookloverfinalapp.app.models.BookModel
-import com.example.bookloverfinalapp.app.models.CubeEmptyModel
-import com.example.bookloverfinalapp.app.models.ErrorModel
-import com.example.bookloverfinalapp.app.models.SimilarBookLoadingModel
-import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_SIMILAR_BOOK_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.custom.ItemUi
-import com.example.bookloverfinalapp.app.utils.communication.ItemUiCommunication
-import com.example.bookloverfinalapp.app.utils.dispatchers.DispatchersProvider
+import com.example.bookloverfinalapp.app.models.*
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.listener.UserItemOnClickListener
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details.router.FragmentBookInfoRouter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemSecond
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BookHorizontalItem
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
+import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
+import com.example.data.ResourceProvider
+import com.example.data.cache.models.IdResourceString
+import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
-import com.example.domain.Resource
-import com.example.domain.Status
-import com.example.domain.interactor.AddNewBookThatReadUseCase
-import com.example.domain.interactor.GetBookThatReadUseCase
-import com.example.domain.interactor.GetMyBookUseCase
-import com.example.domain.interactor.GetSimilarBooksUseCase
-import com.example.domain.models.AddNewBookThatReadDomain
-import com.example.domain.models.BookDomain
-import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.collectLatest
-import javax.inject.Inject
+import com.example.domain.models.*
+import com.example.domain.use_cases.FetchSimilarBooksUseCase
+import com.example.domain.repository.*
+import kotlinx.coroutines.flow.*
 
-@HiltViewModel
-class FragmentBookInfoViewModel @Inject constructor(
-    private val addNewBookThatReadUseCase: AddNewBookThatReadUseCase,
-    private val getMyBookUseCase: GetMyBookUseCase,
-    private val bookThatReadUseCase: GetBookThatReadUseCase,
-    private val getSimilarBooksUseCase: GetSimilarBooksUseCase,
+class FragmentBookInfoViewModel(
+    private val bookId: String,
+    fetchSimilarBooksUseCase: FetchSimilarBooksUseCase,
+    private val savedBooksRepository: BookThatReadRepository,
+    private val userCacheRepository: UserCacheRepository,
+    private val booksRepository: BooksRepository,
+    private val genresRepository: GenresRepository,
+    private val booksSaveToFileRepository: BooksSaveToFileRepository,
+    private val userRepository: UserRepository,
     private val dispatchersProvider: DispatchersProvider,
-    private val addBookMapper: Mapper<AddNewBookModel, AddNewBookThatReadDomain>,
-    private val communication: ItemUiCommunication,
-    val adapterMapper: Mapper<BookModel, Book>,
-) : BaseViewModel() {
+    private val resourceProvider: ResourceProvider,
+    private val router: FragmentBookInfoRouter,
+    private val bookDomainToBookMapper: Mapper<BookDomain, Book>,
+    private val userDomainToUIMapper: Mapper<UserDomain, User>,
+    private val genreDomainToUiMapper: Mapper<GenreDomain, Genre>
+) : BaseViewModel(), UserItemOnClickListener, BookItemOnClickListener {
 
-    fun collect(owner: LifecycleOwner, observer: Observer<List<ItemUi>>) =
-        communication.observe(owner = owner, observer = observer)
+    private var _motionPosition = MutableStateFlow(0f)
+    val motionPosition get() = _motionPosition.asStateFlow()
 
-    fun fetchMyBook(id: String) = launchInBackground {
-        bookThatReadUseCase.execute(id).collectLatest {}
-    }
+    private val bookSavedStatusFlow = MutableStateFlow(SavedStatus.SAVING)
+    private val bookIdFlow = MutableStateFlow(bookId)
 
-    fun chekIsMyBook(id: String, userId: String) =
-        liveData(context = viewModelScope.coroutineContext + dispatchersProvider.io()) {
-            getMyBookUseCase.execute(id = id, userId = userId).collectLatest { resource ->
-                when (resource.status) {
-                    Status.LOADING -> showProgressDialog()
-                    Status.SUCCESS -> {
-                        dismissProgressDialog()
-                        emit(resource.data!!)
-                        showProgressAnimation()
-                    }
-                    Status.EMPTY -> {
-                        dismissProgressDialog()
-                        dismissProgressAnimation()
-                    }
-                    Status.ERROR -> {
-                        dismissProgressDialog()
-                        error(message = resource.message!!)
-                        dismissProgressAnimation()
-                    }
-                }
-            }
+    val bookFlow = bookIdFlow.flatMapLatest(booksRepository::fetchBookObservable)
+        .map(bookDomainToBookMapper::map)
+        .onEach { bookSavedStatusFlow.tryEmit(it.savedStatus) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, Book.unknown())
+
+    val genres = bookFlow.map { it.genreIds }.map { genresIds ->
+        genresIds.map { genresRepository.fetchGenreFromCache(it) }
+    }.map { genres -> genres.map(genreDomainToUiMapper::map) }
+
+    private val _addOrDeleteOperationStatus =
+        createMutableSharedFlowAsSingleLiveEvent<SavedStatus>()
+    val addOrDeleteOperationStatus: SharedFlow<SavedStatus> =
+        _addOrDeleteOperationStatus.asSharedFlow()
+
+    private val _progressDialogIsShowingDialog = createMutableSharedFlowAsSingleLiveEvent<Boolean>()
+    val progressDialogIsShowingDialog get() = _progressDialogIsShowingDialog.asSharedFlow()
+
+    private val _showBookOptionDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val showBookOptionDialogFlow get() = _showBookOptionDialogFlow.asSharedFlow()
+
+    private val currentUserFlow = userCacheRepository
+        .fetchCurrentUserFromCache()
+        .flowOn(dispatchersProvider.io())
+        .stateIn(viewModelScope, SharingStarted.Lazily, UserDomain.unknown())
+
+    val similarBooksFlow = bookFlow.filter { it != Book.unknown() }.flatMapLatest { book ->
+        fetchSimilarBooksUseCase(
+            genresId = book.genreIds,
+            bookId = book.id
+        )
+    }.flowOn(dispatchersProvider.io())
+        .map { it.first.map(bookDomainToBookMapper::map).map(::bookMapToHorizontalItem) }
+        .map { listOf(BookHorizontalItem(it)) }
+        .map(::addHeaderToSimilarBooks)
+        .flowOn(dispatchersProvider.default())
+        .catch { exception: Throwable -> Log.i("Joseph", exception.toString()) }
+
+    val reviewersFlow = currentUserFlow.filter { it != UserDomain.unknown() }
+        .combine(bookFlow) { user, book -> Pair(user, book) }
+        .flatMapLatest(::startFetchAllUsersFromBookId)
+        .flowOn(dispatchersProvider.io())
+        .map { users -> users.map(userDomainToUIMapper::map).map(::userMapToHorizontalUserMapper) }
+        .map { listOf(HorizontalItemSecond(it)) }
+        .map(::addHeaderToReviewers)
+        .combine(similarBooksFlow) { reviewers, similarBooks ->
+            val items = mutableListOf<Item>()
+            items.addAll(similarBooks)
+            items.addAll(reviewers)
+            items
         }
+        .flowOn(dispatchersProvider.default())
+        .catch { exception: Throwable -> Log.i("Joseph", exception.toString()) }
+        .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    fun fetchSimilarBook(genres: List<String>, bookId: String) = launchInBackground {
-        getSimilarBooksUseCase.execute(genres = genres, bookId = bookId)
-            .collectLatest { resource ->
-                unravelingResource(resource = resource,
-                    genres = genres,
-                    bookId = bookId)
-            }
+    fun updateMotionPosition(position: Float) = _motionPosition.tryEmit(position)
+
+    private fun addHeaderToReviewers(
+        reviewers: List<HorizontalItemSecond>,
+    ): List<Item> {
+        val adapterItems = mutableListOf<Item>()
+        if (reviewers.isNotEmpty() && reviewers.first().items.isNotEmpty()) {
+            adapterItems.add(
+                HeaderItem(
+                    titleId = IdResourceString(R.string.reviewers),
+                    onClickListener = {},
+                    showMoreIsVisible = false
+                )
+            )
+        }
+        adapterItems.addAll(reviewers)
+        return adapterItems
     }
 
-    private fun unravelingResource(
-        resource: Resource<List<BookDomain>>,
-        genres: List<String>,
-        bookId: String,
-    ) {
-        when (resource.status) {
-            Status.LOADING -> communication.put(listOf(SimilarBookLoadingModel))
-            Status.SUCCESS -> communication.put(resource.data!!.map { bookDomain ->
-                BookDomainToBookModelMapper(ADAPTER_SIMILAR_BOOK_VIEW_HOLDER).map(bookDomain)
-            })
-            Status.EMPTY -> communication.put(listOf(CubeEmptyModel))
-            Status.ERROR -> communication.put(listOf(ErrorModel(resource.message!!) {
-                fetchSimilarBook(bookId = bookId,
-                    genres = genres)
-            }))
+    private fun addHeaderToSimilarBooks(
+        similarBooks: List<BookHorizontalItem>
+    ): List<Item> {
+        val adapterItems = mutableListOf<Item>()
+        if (similarBooks.isNotEmpty() && similarBooks.first().items.isNotEmpty()) {
+            adapterItems.add(
+                HeaderItem(
+                    titleId = IdResourceString(R.string.similar_recommend),
+                    onClickListener = {},
+                    showMoreIsVisible = false
+                )
+            )
+        }
+        adapterItems.addAll(similarBooks)
+        return adapterItems
+    }
+
+    private fun userMapToHorizontalUserMapper(user: User) = UserAdapterModel(
+        id = user.id,
+        name = user.name,
+        lastName = user.lastname,
+        imageUrl = user.image?.url ?: String(),
+        listener = this,
+    )
+
+    private fun bookMapToHorizontalItem(book: Book) = HorizontalBookAdapterModel(
+        id = book.id,
+        title = book.title,
+        author = book.author,
+        description = book.description,
+        savedStatus = book.savedStatus,
+        posterUrl = book.poster.url,
+        listener = this
+    )
+
+    fun navigateToEditBookFragment() {
+        navigate(router.navigateToEditBookFragment(bookId = bookFlow.value.id))
+    }
+
+    fun navigateToGenreInfoFragment(genreId: String) {
+        navigate(router.navigateToGenreInfoFragment(genreId = genreId))
+    }
+
+    fun navigateToReadBookFragment(savedBook: BookThatRead) {
+        val savedBookPath = booksSaveToFileRepository.fetchSavedBookFilePath(savedBook.bookId)
+        if (savedBookPath == null) emitToErrorMessageFlow(IdResourceString(R.string.book_is_not_ready))
+        else navigate(router.navigateToReadBookFragment(patch = savedBookPath, book = savedBook))
+    }
+
+    fun navigateToCreateQuestionFragment() {
+        navigate(router.navigateToCreateQuestionFragment(bookId = bookFlow.value.id))
+    }
+
+    fun addOrDeleteBookInSavedBooks() {
+        emitProgressDialogIsShowingDialog(isShow = true)
+        when (bookSavedStatusFlow.value) {
+            SavedStatus.SAVED -> startDeleteBookInSavedBooks()
+            SavedStatus.NOT_SAVED -> startAddBookToSavedBooks()
+            SavedStatus.SAVING -> Unit
         }
     }
 
-    fun addNewBook(book: AddNewBookModel) = liveData(context = viewModelScope.coroutineContext) {
-        addNewBookThatReadUseCase.execute(book = addBookMapper.map(book))
-            .collectLatest { resource ->
-                when (resource.status) {
-                    Status.LOADING -> showProgressDialog()
-                    Status.SUCCESS -> {
-                        dismissProgressDialog()
-                        emit(Unit)
-                    }
-                    Status.ERROR -> {
-                        dismissProgressDialog()
-                        error(message = resource.message!!)
-                    }
-                }
-            }
+    private fun startFetchAllUsersFromBookId(parameters: Pair<UserDomain, Book>) =
+        userRepository.fetchAllUsersFromBookId(
+            bookId = parameters.second.id,
+            currentUserId = parameters.first.id,
+            schoolId = parameters.first.schoolId
+        )
+
+    private fun startDeleteBookInSavedBooks() = viewModelScope.launchSafe(
+        dispatcher = dispatchersProvider.io(),
+        safeAction = { savedBooksRepository.deleteBookInSavedBooks(bookFlow.value.id) },
+        onSuccess = {
+            emitAddOrDeleteOperationFlow((SavedStatus.NOT_SAVED))
+            dismissProgressDialog()
+        },
+        onError = {
+            emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(it))
+            dismissProgressDialog()
+        }
+    )
+
+
+    private fun startAddBookToSavedBooks() = viewModelScope.launchSafe(
+        dispatcher = dispatchersProvider.io(),
+        safeAction = { savedBooksRepository.addBookToSavedBooks(createAddNewBookModel()) },
+        onSuccess = {
+            emitAddOrDeleteOperationFlow((SavedStatus.SAVED))
+            dismissProgressDialog()
+        },
+        onError = {
+            emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(it))
+            dismissProgressDialog()
+        }
+    )
+
+    private fun createAddNewBookModel(): AddNewBookThatReadDomain {
+        val book = bookFlow.value
+        val isReading = arrayListOf<Boolean>()
+        isReading.add(true)
+        for (i in 1 until book.chapterCount) isReading.add(false)
+        return AddNewBookThatReadDomain(
+            bookId = book.id,
+            page = book.page,
+            publicYear = book.publicYear,
+            book = book.bookPdf.url,
+            title = book.title,
+            chapterCount = book.chapterCount,
+            poster = BookThatReadPosterDomain(url = book.poster.url, name = book.poster.name),
+            isReadingPages = isReading,
+            chaptersRead = 0,
+            progress = 0,
+            author = book.author,
+            userId = currentUserFlow.value.id
+        )
     }
 
-    fun goGenreSimilarBooks(genre: String) =
-        navigate(FragmentBookInfoDirections.actionFragmentBookInfoToFragmentGenreSimilarBooks(genre = genre))
+    private fun dismissProgressDialog() {
+        emitProgressDialogIsShowingDialog(isShow = false)
+    }
 
-    fun goBack() = navigateBack()
+    private fun emitProgressDialogIsShowingDialog(isShow: Boolean) {
+        _progressDialogIsShowingDialog.tryEmit(isShow)
+    }
 
+    private fun emitAddOrDeleteOperationFlow(savedStatus: SavedStatus) =
+        _addOrDeleteOperationStatus.tryEmit(savedStatus)
+
+    override fun userItemOnClickListener(userId: String) {
+
+    }
+
+    override fun bookItemOnClick(bookId: String) {
+        bookIdFlow.tryEmit(bookId)
+
+    }
+
+    override fun bookOptionMenuOnClick(bookId: String) {
+        _showBookOptionDialogFlow.tryEmit(bookId)
+    }
 }

@@ -7,6 +7,7 @@ data class StudentData(
     var classId: String,
     var createAt: Date,
     var schoolName: String,
+    var schoolId: String,
     var className: String,
     var email: String,
     var gender: String,

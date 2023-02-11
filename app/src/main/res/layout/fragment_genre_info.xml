@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/card_container_background"
+    app:layoutDescription="@xml/fragment_genre_info_scene"
+    tools:context=".app.ui.general_screens.screen_genre_info.FragmentGenreInfo">
+
+    <include
+        android:id="@+id/include_genre_info_toolbar_block"
+        layout="@layout/include_genre_info_toolbar_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <include
+        android:id="@+id/include_genre_info_poster_block"
+        layout="@layout/include_genre_info_poster_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.joseph.ui_core.custom.CurvedContainer
+        android:id="@+id/curvedContainer"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="-328dp"
+        app:containerBackground="?attr/card_container_background"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/include_genre_info_poster_block">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+
+            <com.joseph.ui_core.custom.FadingTextView
+                android:id="@+id/genre_description"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:ellipsize="end"
+                android:fontFamily="@font/poppins"
+                android:maxLines="4"
+                tools:text="@tools:sample/lorem/random" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/books_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_book" />
+        </LinearLayout>
+
+
+    </com.joseph.ui_core.custom.CurvedContainer>
+
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

@@ -6,6 +6,7 @@ import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
 import com.example.bookloverfinalapp.app.utils.extensions.showCustomInputAlertDialog
 import com.example.bookloverfinalapp.databinding.FragmentAddQuestionBinding
@@ -13,7 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAddQuestionViewModel>(
-    FragmentAddQuestionBinding::inflate), View.OnClickListener {
+    FragmentAddQuestionBinding::inflate
+), View.OnClickListener {
 
     override val viewModel: FragmentAddQuestionViewModel by viewModels()
 
@@ -36,12 +38,12 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
 
     private fun setOnClickListeners() {
         binding().apply {
-            answerAButton.setOnClickListener(this@FragmentAddQuestion)
-            answerBButton.setOnClickListener(this@FragmentAddQuestion)
-            answerCButton.setOnClickListener(this@FragmentAddQuestion)
-            answerDButton.setOnClickListener(this@FragmentAddQuestion)
-            addBookQuestionButton.setOnClickListener(this@FragmentAddQuestion)
-            toolbar.setNavigationOnClickListener { viewModel.goBack() }
+            answerAButton.setOnDownEffectClickListener(this@FragmentAddQuestion)
+            answerBButton.setOnDownEffectClickListener(this@FragmentAddQuestion)
+            answerCButton.setOnDownEffectClickListener(this@FragmentAddQuestion)
+            answerDButton.setOnDownEffectClickListener(this@FragmentAddQuestion)
+            addBookQuestionButton.setOnDownEffectClickListener(this@FragmentAddQuestion)
+            toolbar.setNavigationOnClickListener { viewModel.navigateBack() }
         }
     }
 
@@ -79,9 +81,10 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
                         rightAnswer = rightAnswer,
                         chapter = chapter.toString()
                     )
-                    viewModel.addNewQuestionBook(question = question).observe(viewLifecycleOwner) {
-                        showToast(R.string.book_question_added_successfully)
-                    }
+                    viewModel.addNewQuestionBook(question = question)
+//                        .observe(viewLifecycleOwner) {
+//                        showToast(R.string.book_question_added_successfully)
+//                    }
 
                 }
             }
@@ -90,15 +93,19 @@ class FragmentAddQuestion : BaseFragment<FragmentAddQuestionBinding, FragmentAdd
 
     override fun onClick(view: View?) {
         when (view) {
-            binding().answerAButton -> showCustomInputAlertDialog(binding().answerAButton,
-                binding().answerAButton.text.toString())
-            binding().answerBButton -> showCustomInputAlertDialog(binding().answerBButton,
-                binding().answerBButton.text.toString())
-            binding().answerCButton -> showCustomInputAlertDialog(binding().answerCButton,
-                binding().answerCButton.text.toString())
-            binding().answerDButton -> showCustomInputAlertDialog(binding().answerDButton,
-                binding().answerDButton.text.toString())
-            binding().addBookQuestionButton -> addQuestion()
+//            binding().answerAButton -> showCustomInputAlertDialog(
+//                binding().answerAButton,
+//            )
+//            binding.answerBButton -> showCustomInputAlertDialog(
+//                binding.answerBButton,
+//            )
+//            binding.answerCButton -> showCustomInputAlertDialog(
+//                binding.answerCButton,
+//            )
+//            binding.answerDButton -> showCustomInputAlertDialog(
+//                binding.answerDButton,
+//            )
+//            binding.addBookQuestionButton -> addQuestion()
         }
     }
 

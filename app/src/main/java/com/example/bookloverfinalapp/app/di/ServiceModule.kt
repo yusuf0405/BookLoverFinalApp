@@ -43,5 +43,19 @@ object ServiceModule {
     fun provideClassService(retrofit: Retrofit): ClassService =
         retrofit.create(ClassService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideAudioBookService(retrofit: Retrofit): AudioBookService =
+        retrofit.create(AudioBookService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideTaskService(retrofit: Retrofit): TaskService =
+        retrofit.create(TaskService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideGenreService(retrofit: Retrofit): GenreService =
+        retrofit.create(GenreService::class.java)
 
 }

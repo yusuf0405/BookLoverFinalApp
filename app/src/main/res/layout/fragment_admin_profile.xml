@@ -63,12 +63,12 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/recyclerViewMargin"
-        tools:text="Beksultan Suleimanov"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintBottom_toBottomOf="@+id/profile_name_text1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/profile_name_text1" />
+        app:layout_constraintTop_toTopOf="@+id/profile_name_text1"
+        tools:text="Beksultan Suleimanov" />
 
     <View
         android:id="@+id/nameLine"
@@ -97,12 +97,12 @@
         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        tools:text="№7 им. Нариманова"
         android:textSize="@dimen/textSizeProfileTIL"
         app:layout_constraintBottom_toBottomOf="@+id/profile_school_text1"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintStart_toStartOf="@+id/verticalGuideline"
-        app:layout_constraintTop_toTopOf="@+id/profile_school_text1" />
+        app:layout_constraintTop_toTopOf="@+id/profile_school_text1"
+        tools:text="№7 им. Нариманова" />
 
     <View
         android:id="@+id/schoolLine"
@@ -116,14 +116,9 @@
         app:layout_constraintTop_toBottomOf="@+id/profile_school_text" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/editProfileBtn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
+        android:id="@+id/saveEditButton"
+        style="@style/ButtonStyle.Blue.AppStyle"
         android:text="@string/to_change"
-        android:textSize="@dimen/textSizeForButtons"
         app:layout_constraintEnd_toEndOf="@+id/profile_name_text"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -135,9 +130,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
         android:layout_marginEnd="@dimen/marginForTIL"
-        android:src="@drawable/ic_logout"
+        android:src="@drawable/login_out_icon"
         app:layout_constraintEnd_toStartOf="@+id/profile_logout_text"
-        app:layout_constraintTop_toBottomOf="@+id/editProfileBtn" />
+        app:layout_constraintTop_toBottomOf="@+id/saveEditButton" />
 
     <TextView
         android:id="@+id/profile_logout_text"
@@ -147,8 +142,8 @@
         android:layout_marginEnd="@dimen/marginProfileTIL"
         android:text="@string/login_out"
         android:textSize="@dimen/textSizeProfileTIL"
-        app:layout_constraintEnd_toEndOf="@+id/editProfileBtn"
-        app:layout_constraintStart_toStartOf="@+id/editProfileBtn"
+        app:layout_constraintEnd_toEndOf="@+id/saveEditButton"
+        app:layout_constraintStart_toStartOf="@+id/saveEditButton"
         app:layout_constraintTop_toTopOf="@+id/profile_logout_img" />
 
 

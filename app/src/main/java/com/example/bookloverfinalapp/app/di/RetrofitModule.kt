@@ -14,10 +14,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
+const val APPLICATION_ID = "wjeyjDXpdkgLCnrAPffqinj1YKoZu5ZSnKx4NmFo"
+const val REST_API_KEY = "UtQSEGrS8AHUKGhS3YXRboExnalX0o7GYmWcOAmh"
+const val CONTENT_TYPE = "application/json"
 
 @Module
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
+
 
     @Provides
     @Singleton

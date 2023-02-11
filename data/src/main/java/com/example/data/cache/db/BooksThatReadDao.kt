@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.data.cache.models.BookThatReadCache
+import kotlinx.coroutines.flow.Flow
 
 
 @Dao
@@ -14,7 +15,13 @@ interface BooksThatReadDao {
     suspend fun addNewBook(book: BookThatReadCache)
 
     @Query("select * from books_that_read")
-    suspend fun getAllBooks(): MutableList<BookThatReadCache>
+    fun fetchAllBooksObservable(): Flow<MutableList<BookThatReadCache>>
+
+    @Query("select * from books_that_read")
+    suspend fun fetchAllBooksSingle(): MutableList<BookThatReadCache>
+
+    @Query("select * from books_that_read where book_id == :bookId")
+    suspend fun fetchBooksByBookId(bookId: String): BookThatReadCache?
 
     @Query("select * from books_that_read where book_id == :bookId")
     suspend fun getMyBook(bookId: String): BookThatReadCache?

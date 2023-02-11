@@ -20,7 +20,7 @@ class BookThatReadDataMapper : Mapper<BookThatReadData, BookThatReadDomain> {
             progress = progress,
             isReadingPages = isReadingPages,
             poster = BookThatReadPosterDomain(name = poster.name, url = poster.url),
-            book = book,
+            bookPdfUrl = book,
             bookId = bookId,
         )
     }

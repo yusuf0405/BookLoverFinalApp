@@ -30,9 +30,7 @@ data class Student(
     fun getCreatedAt(): String {
         val formatter = SimpleDateFormat("dd-MM-yyyy", Locale.ENGLISH)
         return formatter.format(createAt).toString()
-
     }
-
 }
 
 @Parcelize

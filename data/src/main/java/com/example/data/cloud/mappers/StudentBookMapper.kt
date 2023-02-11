@@ -14,6 +14,7 @@ interface StudentBookMapper {
             chaptersRead: Int,
             booksRead: Int,
             progress: Int,
+            schoolId: String,
             booksId: List<String>,
         ): T
     }
@@ -23,13 +24,16 @@ interface StudentBookMapper {
         val booksRead: Int,
         val progress: Int,
         val booksId: List<String>,
+        val schoolId: String
     ) : StudentBookMapper {
         override fun <T> map(mapper: Mapper<T>): T =
             mapper.map(
                 chaptersRead = chaptersRead,
                 booksRead = booksRead,
                 progress = progress,
-                booksId = booksId)
+                booksId = booksId,
+                schoolId = schoolId
+            )
     }
 
     class ComplexMapper(private val mapper: StudentBookMapper) : UserMapper.Mapper<StudentData> {
@@ -52,8 +56,10 @@ interface StudentBookMapper {
                 chaptersRead: Int,
                 booksRead: Int,
                 progress: Int,
+                schoolId: String,
                 booksId: List<String>,
-            ): StudentData = StudentData(createAt = createAt,
+            ): StudentData = StudentData(
+                createAt = createAt,
                 classId = classId,
                 email = email,
                 gender = gender,
@@ -69,7 +75,9 @@ interface StudentBookMapper {
                 progress = progress,
                 booksRead = booksRead,
                 chaptersRead = chaptersRead,
-                sessionToken = sessionToken)
+                sessionToken = sessionToken,
+                schoolId = schoolId
+            )
 
         })
 

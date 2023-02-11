@@ -1,0 +1,80 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+    <string name="app_name">@string/mts_app_name</string>
+    <string name="app_name_full">@string/mts_app_name_full</string>
+    <string name="urlscheme">@string/mts_scheme</string>
+    <string name="subscribe_yandex_music">@string/mts_subscribe_yandex_music</string>
+    <string name="track_no_rights_title">@string/mts_track_no_rights_title</string>
+    <string name="kubr_dlg">@string/mts_kubr_dlg</string>
+    <string name="track_not_found_in_ym_catalog">@string/mts_track_not_found_in_ym_catalog</string>
+    <string name="another_yandex">@string/mts_another_yandex</string>
+    <string name="copyright">@string/mts_copyright</string>
+    <string name="rate_dialog_text">@string/mts_rate_dialog_text</string>
+    <string name="become_mts">@string/mts_become_mts</string>
+    <string name="confidential_agreement_text">@string/mts_confidential_agreement_text</string>
+    <string name="plus_of_subscribe">@string/mts_plus_of_subscribe</string>
+    <string name="need_subscribe_note">@string/mts_need_subscribe_note</string>
+    <string name="subscribe_for_full_access">@string/mts_subscribe_for_full_access</string>
+    <string name="rate_dialog_title">@string/mts_rate_dialog_title</string>
+    <string name="success_subscribe_message">@string/mts_success_subscribe_message</string>
+    <string name="feedback_email">@string/mts_feedback_email</string>
+
+    <!--Экраны приветствия - описание. Возможно не используется-->
+    <string name="welcome_page_4_description">Первый месяц подписки бесплатно, чтобы оценить все возможности.</string>
+    <!--Информация о бесплатом периоде. Возможно не используется. -->
+    <string name="subscription_1_month_free">Первый месяц в подарок</string>
+    <!-- Тексты, расположенные в профиле у неподписанного пользователя. -->
+    <string name="trial_capability">Бесплатный 1 месяц полного доступа</string>
+    <!--Заголовок кнопки диалогового окна о приемуществах подписки-->
+    <string name="subscription_benefits_button">Первый месяц бесплатно!</string>
+    <!-- Нотификация-напоминалка про подписку. Первый месяц бесплатно. %1$s потом заменяется
+     программно на эмоджи.". Возможно не используется. -->
+    <string name="auth_notification_month_trial">Заведите %1$s на Музыке. Первый месяц подписки — бесплатно!</string>
+
+    <!--Бесплатный период. Заголовок информациооного баннера в фрагменте профиля-->
+    <string name="free_period">Бесплатный период</string>
+    <!--Бесплатный период. 30 дней-->
+    <string name="thirty_days">1 месяц</string>
+    <!--Бесплатный период. 30 дней-->
+    <string name="seven_days">7 дней</string>
+    <!--Бесплатный период. Текст для определенных тарифов-->
+    <string name="message_free_period_for_tarifs">на тарифах Smart, Smart NonStop, Smart+, Smart Top, Smart Безлимитище, и Ultra</string>
+    <!--Бесплатный период. Текст для остальных тарифов-->
+    <string name="message_free_period_for_other_tariffs">для абонентов на остальных тарифах</string>
+    <!--Бесплатный период. Дополнительй текст под *-->
+    <string name="adding_message_free_period">также в случае повторного подключения на тарифных планах Smart, Smart NonStop, Smart+, Smart Top, Smart Безлимитище и Ultra после истечения бесплатного периода предоставления ограниченной версии услуг</string>
+
+    <string name="first_1_days_free">Один день - бесплатно!</string>
+    <string name="first_7_days_free">Первые 7 дней - бесплатно!</string>
+    <string name="first_30_days_free">Первый месяц - бесплатно!</string>
+
+    <string name="free_30_days_bymts">Бесплатный период 1 месяц</string>
+
+    <!--Отмена подписки-->
+    <string name="unsubscribed_description">Вам по-прежнему доступны все преимущества подписки до конца оплаченного периода</string>
+    <string name="mine_unsubscribe_description">После окончания оплаченного периода вы не сможете пользоваться платными функциями</string>
+
+    <string name="playlist_restriction_radio_desc">Бесплатное радио, огромное количество подборок и пейлистов</string>
+
+    <!-- Podcasts categories -->
+
+    <string name="humor">Юмор</string>
+    <string name="science_and_education">Наука и образование</string>
+    <string name="music">Музыка</string>
+    <string name="health_and_lifestyle">Здоровье и лайфстайл</string>
+    <string name="work_and_business">Бизнес и работа</string>
+    <string name="history">История</string>
+    <string name="movies_and_tv">Кино и сериалы</string>
+    <string name="documentary">Документальное</string>
+    <string name="society_and_culture">Общество и культура</string>
+    <string name="true_crime">Тру-крайм</string>
+    <string name="crafts_and_hobbies">Хобби и творчество</string>
+    <string name="technology">Технологии</string>
+    <string name="art_and_literature">Искусство и литература</string>
+    <string name="family">Для всей семьи</string>
+    <string name="sport">Спорт</string>
+    <string name="fiction_and_audio_dramas">Фикшн и аудиосериалы</string>
+    <string name="news">Новости</string>
+    <string name="religion_and_mysticism">Религия и мистика</string>
+    <string name="about_podcasts">Про подкасты</string>
+</resources>

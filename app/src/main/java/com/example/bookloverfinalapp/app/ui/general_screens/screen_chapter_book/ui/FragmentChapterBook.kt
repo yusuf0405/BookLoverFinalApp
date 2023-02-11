@@ -6,26 +6,38 @@ import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterAdapter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterItemOnClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.hideView
-import com.example.bookloverfinalapp.app.utils.extensions.setToolbarColor
+import com.example.bookloverfinalapp.app.ui.adapter.animations.AddableItemAnimator
+import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleCommonAnimator
+import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
+import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTopCommonAnimator
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SearchFingerprint
+import com.example.bookloverfinalapp.app.utils.extensions.hide
 import com.example.bookloverfinalapp.databinding.FragmentChapterBookBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
-import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.shockwave.pdfium.PdfDocument
+import com.joseph.ui_core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.onEach
 import java.io.File
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class FragmentChapterBook :
     BaseFragment<FragmentChapterBookBinding, FragmentStudentChapterBookViewModel>(
-        FragmentChapterBookBinding::inflate), ChapterItemOnClickListener,
-    OnLoadCompleteListener, OnErrorListener, OnPageChangeListener {
+        FragmentChapterBookBinding::inflate
+    ), OnLoadCompleteListener, OnErrorListener, OnPageChangeListener {
 
-    override val viewModel: FragmentStudentChapterBookViewModel by viewModels()
+    @Inject
+    lateinit var factory: FragmentStudentChapterBookViewModelFactory.Factory
+    override val viewModel: FragmentStudentChapterBookViewModel by viewModels {
+        factory.create(book = book, patch = path)
+    }
 
     private val book: BookThatRead by lazy(LazyThreadSafetyMode.NONE) {
         FragmentChapterBookArgs.fromBundle(requireArguments()).book
@@ -35,22 +47,30 @@ class FragmentChapterBook :
         FragmentChapterBookArgs.fromBundle(requireArguments()).path
     }
 
-    private val adapter: ChapterAdapter by lazy(LazyThreadSafetyMode.NONE) {
-        ChapterAdapter(actionListener = this)
-    }
-
-    private var chapterList = mutableListOf<PdfDocument.Bookmark>()
-    private var lastPageBook = 0
+    private val adapter = FingerprintAdapter(
+        listOf(
+            SearchFingerprint(),
+            ChapterFingerprint()
+        )
+    )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUi()
-        loadSuccess()
-        binding().toolbar.setNavigationOnClickListener { viewModel.goBack() }
+        hideBottomNavigationView()
+        setupViews()
+        observeData()
     }
 
+    private fun setupViews() = with(binding()) {
+        toolbarBlock.title.text = book.title
+        toolbarBlock.sortOptions.hide()
+        chapterRecyclerView.adapter = adapter
+        chapterRecyclerView.itemAnimator = createAddableItemAnimator()
+        toolbarBlock.upButton.setOnClickListener { viewModel.navigateBack() }
+        setupPdfView()
+    }
 
-    private fun loadSuccess() {
+    private fun setupPdfView() {
         binding().pdfView.fromFile(File(path))
             .onPageChange(this@FragmentChapterBook)
             .onError(this@FragmentChapterBook)
@@ -58,41 +78,43 @@ class FragmentChapterBook :
             .load()
     }
 
-    private fun setupUi() {
-        binding().apply {
-            setToolbarColor(toolbar = toolbar)
-            toolbar.title = book.title
-            chapterRecyclerView.adapter = adapter
+    private fun observeData() = with(viewModel) {
+        launchWhenViewStarted {
+            allBookChapters
+                .filterNotNull()
+                .onEach { if (it.isEmpty()) viewModel.navigate() }
+                .filter { it.isNotEmpty() }
+                .observe(adapter::submitList)
         }
     }
 
-
-    override fun goReadPdfFragment(chapter: PdfDocument.Bookmark, position: Int) {
-        val lastPageIndex = position + 1
-        val lastPage = if (lastPageIndex == chapterList.size) lastPageBook
-        else chapterList[lastPageIndex].pageIdx.toInt()
-        viewModel.goReaderFragment(book = book,
-            chapter = position + 1,
-            startPage = chapter.pageIdx.toInt(),
-            lastPage = lastPage, path = path)
-    }
+    private fun createAddableItemAnimator() =
+        AddableItemAnimator(SimpleCommonAnimator()).also { anim ->
+            anim.addViewTypeAnimation(
+                R.layout.item_chapter,
+                SlideInLeftCommonAnimator()
+            )
+            anim.addViewTypeAnimation(
+                R.layout.item_search_view,
+                SlideInTopCommonAnimator()
+            )
+            anim.addDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
+            anim.removeDuration = DEFAULT_ITEMS_ANIMATOR_DURATION
+        }
 
     override fun loadComplete(nbPages: Int) {
-        adapter.isReading = book.isReadingPages.toTypedArray()
-        adapter.chapters = binding().pdfView.tableOfContents
-        chapterList = binding().pdfView.tableOfContents
+        viewModel.updateChapters(binding().pdfView.tableOfContents)
     }
 
     override fun onError(t: Throwable?) {
-        viewModel.goBack()
+        viewModel.navigateBack()
     }
 
     override fun onPageChanged(page: Int, pageCount: Int) {
-        lastPageBook = pageCount
+        viewModel.updateBookLastPage(pageCount)
     }
 
-    override fun onStart() {
-        super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).hideView()
+    override fun onDestroyView() {
+        super.onDestroyView()
     }
 }

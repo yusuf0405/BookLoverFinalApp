@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:layoutDescription="@xml/fragment_main_screen_scene"
+    tools:context=".app.ui.general_screens.screen_main.FragmentMainScreen">
+
+    <include
+        android:id="@+id/avatar_and_name_block"
+        layout="@layout/avatar_and_name_block" />
+
+    <LinearLayout
+        android:id="@+id/items_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/search_header">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/book_recycler_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginVertical="8dp"
+            android:clipToPadding="false"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:spanCount="2"
+            tools:itemCount="99"
+            tools:listitem="@layout/item_book_genre" />
+
+    </LinearLayout>
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/floatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:backgroundTint="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/ic__add"
+        android:visibility="visible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:tint="@color/white" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_pdf_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/read_book_icon"
+        android:tint="?attr/whiteOrBlackColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/floatingActionButton"
+        app:layout_constraintEnd_toEndOf="@+id/floatingActionButton"
+        app:layout_constraintStart_toStartOf="@+id/floatingActionButton"
+        app:tint="@color/white" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/add_audio_book"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp"
+        android:backgroundTint="@color/blue"
+        android:clickable="true"
+        android:focusable="true"
+        android:src="@drawable/audio_icon"
+        android:tint="?attr/whiteOrBlackColor"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/add_pdf_book"
+        app:layout_constraintEnd_toEndOf="@+id/add_pdf_book"
+        app:layout_constraintStart_toStartOf="@+id/add_pdf_book"
+        app:tint="@color/white" />
+
+</androidx.constraintlayout.motion.widget.MotionLayout>

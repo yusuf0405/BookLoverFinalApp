@@ -2,57 +2,70 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/app_nav"
-    app:startDestination="@id/fragmentSignUp">
+    android:id="@+id/login_navigation"
+    app:startDestination="@id/fragmentLogin">
 
+    <fragment
+        android:id="@+id/fragmentSelectSignUp"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.FragmentSelectSignUp"
+        android:label="fragment_sign_up"
+        tools:layout="@layout/fragment_select_sign_up">
+        <action
+            android:id="@+id/action_fragmentSelectSignUp_to_fragmentLogin"
+            app:destination="@id/fragmentLogin"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentSelectSignUp_to_fragmentSignUp"
+            app:destination="@id/fragmentSignUp"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
+    </fragment>
     <fragment
         android:id="@+id/fragmentSignUp"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.FragmentSignUp"
-        android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" >
-        <action
-            android:id="@+id/action_fragmentSignUp_to_fragmentSignUpStudent"
-            app:destination="@id/fragmentSignUpStudent" />
-        <action
-            android:id="@+id/action_fragmentSignUp_to_fragmentSignUpTeacher"
-            app:destination="@id/fragmentSignUpTeacher" />
+        android:label="fragment_sign_up_teacher"
+        tools:layout="@layout/fragment_sign_up">
         <action
             android:id="@+id/action_fragmentSignUp_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentSignUpStudent"
-        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up_student.FragmentSignUpStudent"
-        android:label="fragment_sign_up_student"
-        tools:layout="@layout/fragment_sign_up_student" >
-        <action
-            android:id="@+id/action_fragmentSignUpStudent_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentSignUpTeacher"
-        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up_teacher.FragmentSignUpTeacher"
-        android:label="fragment_sign_up_teacher"
-        tools:layout="@layout/fragment_sign_up_teacher" >
-        <action
-            android:id="@+id/action_fragmentSignUpTeacher_to_fragmentLogin"
-            app:destination="@id/fragmentLogin" />
+            app:destination="@id/fragmentLogin"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
+        <argument
+            android:name="user_type"
+            app:argType="com.example.bookloverfinalapp.app.models.UserType" />
+
     </fragment>
     <fragment
         android:id="@+id/fragmentLogin"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_login.FragmentLogin"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login" >
+        tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_fragmentLogin_to_fragmentSignUp"
-            app:destination="@id/fragmentSignUp" />
+            android:id="@+id/action_fragmentLogin_to_fragmentSelectSignUp"
+            app:destination="@id/fragmentSelectSignUp"
+            app:enterAnim="@anim/to_right_in"
+            app:exitAnim="@anim/to_left_out"
+            app:popEnterAnim="@anim/to_right_in"
+            app:popExitAnim="@anim/to_left_out" />
         <action
             android:id="@+id/action_fragmentLogin_to_fragmentForgotPassword"
-            app:destination="@id/fragmentForgotPassword" />
+            app:destination="@id/fragmentForgotPassword"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down" />
     </fragment>
     <fragment
         android:id="@+id/fragmentForgotPassword"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_forgot_password.FragmentForgotPassword"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
+
 </navigation>

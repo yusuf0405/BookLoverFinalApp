@@ -19,14 +19,17 @@ class StudentDataToDbMapper : Mapper<StudentData, UserCache> {
             className = className,
             objectId = objectId,
             userType = userType,
-            image = UserImageCache(name = image?.name ?: "",
-                type = image?.type ?: "",
-                url = image?.url ?: ""),
+            image = UserImageCache(
+                name = image.name,
+                type = image.type,
+                url = image.url
+            ),
             booksRead = booksRead,
             progress = progress,
             chaptersRead = chaptersRead,
             booksId = booksId,
-            sessionToken=sessionToken
+            sessionToken = sessionToken,
+            schoolId = schoolId
         )
     }
 }

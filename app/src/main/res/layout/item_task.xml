@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="4dp"
+    android:layout_marginHorizontal="4dp"
+    app:cardBackgroundColor="?attr/card_background"
+    app:cardCornerRadius="8dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:paddingHorizontal="8dp">
+
+        <org.apmem.tools.layouts.FlowLayout
+            android:id="@+id/genre_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp" />
+
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:ellipsize="none"
+            android:fadingEdgeLength="60dp"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem" />
+
+        <TextView
+            android:id="@+id/description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:fontFamily="@font/poppins"
+            android:maxLines="8"
+            android:requiresFadingEdge="horizontal"
+            android:textColor="?attr/text_secondary"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem/random" />
+
+        <TextView
+            android:id="@+id/time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="4dp"
+            android:fontFamily="@font/poppins"
+            android:maxLines="5"
+            android:textColor="?attr/text_secondary"
+            android:textSize="12sp"
+            tools:text="9 am to 9:30am" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

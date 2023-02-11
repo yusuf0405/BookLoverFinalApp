@@ -12,7 +12,7 @@ class BookThatReadDomainToModelMapper : Mapper<BookThatReadDomain, BookThatReadM
             bookId = bookId,
             page = page,
             publicYear = publicYear,
-            book = book,
+            book = bookPdfUrl,
             title = title,
             chapterCount = chapterCount,
             poster = BookThatReadPoster(url = poster.url, name = poster.name),

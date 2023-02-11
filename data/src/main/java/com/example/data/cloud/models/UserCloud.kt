@@ -21,12 +21,42 @@ data class UserCloud(
     @SerializedName("username") var email: String,
     @SerializedName("number") var number: String,
     @SerializedName("userType") var userType: String,
-    @SerializedName("sessionToken") var sessionToken: String,
+    @SerializedName("sessionToken") var sessionToken: String?,
     @SerializedName("userSessionToken") var userSessionToken: String,
-)
+) {
+    companion object {
+
+        fun unknown() = UserCloud(
+            objectId = UUID.randomUUID().toString(),
+            createAt = Date(),
+            classId = String(),
+            schoolId = String(),
+            image = UserImageCloud(String(), String(), String()),
+            email = String(),
+            schoolName = String(),
+            className = String(),
+            gender = String(),
+            lastname = String(),
+            name = String(),
+            number = String(),
+            userType = String(),
+            sessionToken = String(),
+            userSessionToken = String()
+        )
+    }
+}
 
 data class UserImageCloud(
     @SerializedName("name") var name: String,
     @SerializedName("__type") var type: String,
     @SerializedName("url") var url: String,
-)
+) {
+    companion object {
+
+        fun unknown() = UserImageCloud(
+            name = String(),
+            type = String(),
+            url = String()
+        )
+    }
+}

@@ -13,8 +13,8 @@ import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.base.GenericAdapter
 import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.models.SchoolClassModel
-import com.example.bookloverfinalapp.app.custom.ItemUi
-import com.example.bookloverfinalapp.app.utils.extensions.showView
+import com.joseph.ui_core.custom.ItemUi
+import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.bookloverfinalapp.databinding.DialogAddClassBinding
 import com.example.bookloverfinalapp.databinding.FragmentClassesBinding
@@ -105,21 +105,22 @@ class FragmentClasses :
         }
         if (counter == allClassesList.size) {
             viewModel.addNewClass(title = newSchoolClass,
-                schoolId = currentUser.schoolId).observe(viewLifecycleOwner) {
-                showToast(R.string.class_added_successfully)
-                allClassesList.add(SchoolClass(id = it,
-                    title = newSchoolClass,
-                    schoolId = currentUser.schoolId))
-
-                adapter.addItem(
-                    SchoolClassModel(id = it,
-                    title = newSchoolClass,
-                    schoolId = currentUser.schoolId)
-                )
-
-                classNumberCurrentIndex = 0
-                classTypeCurrentIndex = 0
-            }
+                schoolId = currentUser.schoolId)
+//                .observe(viewLifecycleOwner) {
+//                showToast(R.string.class_added_successfully)
+//                allClassesList.add(SchoolClass(id = it,
+//                    title = newSchoolClass,
+//                    schoolId = currentUser.schoolId))
+//
+//                adapter.addItem(
+//                    SchoolClassModel(id = it,
+//                    title = newSchoolClass,
+//                    schoolId = currentUser.schoolId)
+//                )
+//
+//                classNumberCurrentIndex = 0
+//                classTypeCurrentIndex = 0
+//            }
         }
 
     }
@@ -187,7 +188,7 @@ class FragmentClasses :
 
     override fun onStart() {
         super.onStart()
-        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).showView()
+        requireActivity().findViewById<BottomNavigationView>(R.id.nav_view).show()
     }
 
     override fun showAnotherFragment(item: ItemUi) {
@@ -204,16 +205,17 @@ class FragmentClasses :
         val listener = DialogInterface.OnClickListener { _, which ->
             when (which) {
                 DialogInterface.BUTTON_POSITIVE -> {
-                    viewModel.deleteClass(id = id).observe(viewLifecycleOwner) {
-                        showToast(R.string.class_deleted_successfully)
-                        val iterator = allClassesList.iterator()
-                        while (iterator.hasNext()) {
-                            val item = iterator.next()
-                            if (item.id == id) {
-                                iterator.remove()
-                            }
-                        }
-                    }
+                    viewModel.deleteClass(id = id)
+//                        .observe(viewLifecycleOwner) {
+//                        showToast(R.string.class_deleted_successfully)
+//                        val iterator = allClassesList.iterator()
+//                        while (iterator.hasNext()) {
+//                            val item = iterator.next()
+//                            if (item.id == id) {
+//                                iterator.remove()
+//                            }
+//                        }
+//                    }
                     adapter.deleteItem(position = position)
                 }
                 DialogInterface.BUTTON_NEUTRAL -> {}

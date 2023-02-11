@@ -13,6 +13,8 @@ interface Dispatchers {
 
     suspend fun changeToUi(block: suspend CoroutineScope.() -> Unit)
 
+    suspend fun changeToBackground(block: suspend CoroutineScope.() -> Unit)
+
     class Base : Dispatchers {
         override fun launchUi(
             scope: CoroutineScope,
@@ -29,6 +31,9 @@ interface Dispatchers {
 
         override suspend fun changeToUi(block: suspend CoroutineScope.() -> Unit) =
             withContext(kotlinx.coroutines.Dispatchers.Main, block)
+
+        override suspend fun changeToBackground(block: suspend CoroutineScope.() -> Unit) =
+            withContext(kotlinx.coroutines.Dispatchers.IO, block)
 
     }
 }

@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="AppTheme.Dark" parent="AppThemeRoot.Dark">
+        <item name="android:colorEdgeEffect">@color/white_yandex</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="tabLayoutTextColor">@drawable/tabs_text_color_dark</item>
+    </style>
+
+    <style name="AppThemeRoot.Dark" parent="AppThemeRoot">
+        <item name="android:colorEdgeEffect">@color/white_yandex</item>
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowActivityTransitions">true</item>
+        <item name="tabLayoutTextColor">@drawable/tabs_text_color_dark</item>
+
+        <item name="colorPrimary">@color/black_night</item>
+        <item name="colorPrimaryDark">@color/black_dark_night</item>
+        <item name="colorControlNormal">@color/white_yandex</item>
+        <item name="colorControlActivated">@color/white</item>
+        <item name="colorAccent">@color/red_active</item>
+        <item name="colorControlHighlight">@color/white_30_alpha</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="podcastCategoryItemColor">@color/redesign_in_search_podcast_bg</item>
+        <item name="textColorMiddle">@color/grey_steel</item>
+        <item name="textColorHeadingMore">@color/white_light</item>
+        <item name="android:textColorSecondary">@color/white_50_alpha</item>
+        <item name="android:windowBackground">@color/black_dark_night</item>
+        <item name="android:colorBackground">@color/black_dark_night</item>
+        <item name="colorBackgroundBtnGrey">@color/regent_grey_35_alpha</item>
+        <item name="backgroundAboutApplication">@color/black</item>
+        <item name="backgroundColorDoYouLikeMTSMusic">@color/shark</item>
+        <item name="lyricsButtonClose">@color/white</item>
+        <item name="popupBackgroundColor">@color/black_space</item>
+        <item name="lyricsButtonBackgroundClose">@color/grey_dark_alpha_35</item>
+        <item name="dividerIntense">@color/white_15_alpha</item>
+        <item name="colorControlAlpha">@color/white_50_alpha</item>
+        <item name="highlightBackground">@color/black_dark_night</item>
+        <item name="colorTextSubTitle">@color/nevada</item>
+        <item name="backgroundCollapsedPlayer">@color/shark</item>
+        <item name="colorBackgroundCatchWaveTitle">@color/black_night</item>
+        <item name="mtsToolbarColorBackground">@color/black_night</item>
+
+        <item name="selectableItemBackgroundBlackHolder">@drawable/ripple_black_holder</item>
+
+        <item name="collapsedPlayerProgressBarColorAuto">#E30611</item>
+        <item name="mtsToolbarColorText">@color/white</item>
+        <item name="lightRedActiveDarkWhiteTextColor">@color/white</item>
+        <item name="grayButtonColor">@color/grey_active_night</item>
+        <item name="textNegativeColor">@color/text_dark_negative</item>
+        <item name="crossIcon">@drawable/dialog_cross_night</item>
+
+        <item name="menuTextSelector">@color/selector_main_menu_item_text_dark</item>
+        <item name="playerProgressBar">@drawable/progress_bar_dark</item>
+
+        <!--region CollapsedPlayer-->
+        <item name="collapsedPlayerProgressBarColor">@color/white</item>
+        <item name="collapsedPlayerBackgroundColor">@color/controls_dark_inactive</item>
+        <item name="collapsedPlayerIconColor">@color/white</item>
+        <item name="collapsedPlayerDislikeColor">@color/white</item>
+        <item name="collapsedPlayerOutlineColor">@color/controls_dark_inactive</item>
+        <!--endregion-->
+
+        <item name="expandedPlayerProgressBar">@drawable/expanded_player_seekbar_progress_style
+        </item>
+        <item name="lyricsPlayerProgressBar">@drawable/lyrics_player_seekbar_progress_style</item>
+        <item name="seekbarLyricsColor">@color/white_40_alpha</item>
+        <item name="seekbarLyricsDownloadedColor">@color/white_40_alpha</item>
+        <item name="seekbarLyricsProgressColor">@color/white</item>
+        <item name="lyricsPlayerThumbColor">@color/white</item>
+        <item name="lyricsPlayToggleColor">@color/white</item>
+        <item name="text_negative_color_50_alpha">@color/white_50_alpha</item>
+
+        <item name="trackTitleColor">@color/selector_track_title_dark</item>
+        <item name="trackSubtitleColor">@color/selector_track_subtitle_dark</item>
+
+        <item name="selectableTrackBackground">@drawable/selector_current_playing_dark</item>
+
+        <item name="buttonStyle">@style/ButtonStyle.Dark</item>
+        <item name="whiteBorderedButtonStyle">@style/ButtonStyle.Border.Dark</item>
+        <item name="roundedRectangleBackground">@drawable/rectangle_rounded_light</item>
+
+        <item name="toolbarBackground">@drawable/toolbar_background_dark</item>
+        <item name="popupTheme">@style/AppTheme.Dark</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme.Dark</item>
+        <item name="appDialogTheme">@style/AppTheme.ContextDialog.Dark</item>
+        <item name="greyEditTextStyle">@style/GreyEditTextControls.Dark</item>
+
+        <!--region PromoCodeFragment-->
+        <item name="promoCodeCardViewColor">@color/black_smoke</item>
+        <item name="promoCodeEditTextBackgroundColor">@color/gray_25_alpha</item>
+        <item name="promoCodeText">@color/white_light</item>
+        <item name="promoCodeTextActivated">@color/grey_steel</item>
+        <item name="promoCodeBackgroundCloseBtn">@color/grey_dark_alpha_35</item>
+        <item name="promoCodePopupTextColor">@color/white</item>
+        <!--endregion-->
+
+        <item name="toolbarRedesignTextColor">@color/white_yandex</item>
+        <item name="mineFragmentBackgroundCardView">@color/black_smoke</item>
+        <item name="mineFragmentButtonIconColor">@color/grey_slate</item>
+        <item name="mineFragmentButtonCounterColor">@color/grey_steel</item>
+        <item name="mineFragmentTextViewAllPlaylistsColor">@color/blueberry_light</item>
+        <item name="refreshLinkTextColor">@color/blueberry_light</item>
+
+        <item name="searchBlockBackgroundColor">@color/white_with_transparency_50</item>
+
+        <item name="selectableTrackBackground_ALBUM_HACK">@drawable/selector_current_playing_hack_dark</item>
+
+        <item name="backgroundBtnLikeRadio">@drawable/ripple_control_dark</item>
+        <item name="backgroundRadioProgress">@color/white_8_alpha</item>
+        <item name="playlistFragmentBackgroundColorFilter">@drawable/filter_up_button_background_dark</item>
+        <item name="secondaryRadioProgress">@color/white_15_alpha</item>
+
+        <item name="shuffleButtonMyMusicStyle">@style/ShufflePlayMyMusicButtonDark</item>
+        <item name="searchViewBackground">@drawable/bg_search_view_dark</item>
+        <item name="searchViewSectionBackground">@drawable/bg_search_seggestions_section_dark</item>
+        <item name="searchViewIcon">@drawable/ic_search_dark</item>
+        <item name="searchIconTint">@color/grey_slate</item>
+
+        <item name="profileButtonStyleWithBorder">@style/ButtonStyle.Profile.Border.Dark</item>
+
+        <item name="mtsBottomNavigationBarStyle">@style/MtsBottomNavigationBarDark</item>
+        <item name="backgroundStartColor">@color/black</item>
+        <item name="loginBackgroundColor">@color/black</item>
+        <item name="loginTextColor">@color/white</item>
+        <item name="loginTextColorLink">@color/link</item>
+        <item name="loginTextColorLicense">@color/license</item>
+
+        <item name="onboardingColorActive">@color/black_smoke</item>
+        <item name="textColorSecondary">@color/white_smoke</item>
+
+        <item name="iconChecked">@drawable/ic_checked_dark</item>
+        <item name="buttonNotEnableBackground">@color/controls_dark_inactive</item>
+
+        <item name="onboardingChipBackgroundChecked">@color/white</item>
+        <item name="onboardingChipBackgroundNotChecked">@color/grey_active_night</item>
+        <item name="onboardingChipTextColorChecked">@color/black</item>
+        <item name="onboardingChipTextColorNotChecked">@color/white_light</item>
+        <item name="onboardingControlsInactiveColor">@color/grey_slate</item>
+        <item name="carouselMixNewReleaseGradientStartColor">@color/dark_with_alpha_0</item>
+        <item name="carouselMixNewReleaseTintColorArtistText">@color/license</item>
+        <item name="carouselMixNewReleaseColorTintImage">@color/inactive_tab</item>
+        <item name="carouselMixNewReleaseColorTextAll">@color/white</item>
+
+        <item name="carouselMixNowInterestTitleMoreTextColor">@color/white</item>
+
+        <item name="carouselHistoryMixColorTextAll">@color/white</item>
+
+        <item name="playlistFragmentBackgroundColor">@color/bluish_black</item>
+        <item name="playlistFragmentGradientStartColor">@color/black_smoke_with_alpha_0</item>
+        <item name="playlistFragmentTextColor">@color/white</item>
+        <item name="playlistFragmentToolbarColor">@color/black_smoke</item>
+        <item name="playlistFragmentPlayIcon">@drawable/header_play_icon_white</item>
+        <item name="playlistFragmentShuffleIcon">@drawable/header_shuffle_icon_white</item>
+        <item name="playlistFragmentShadow">@drawable/header_background_shadow_dark</item>
+        <item name="playlistFragmentDescriptionColor">@color/grey_steel</item>
+        <item name="playlistFragmentUnlikedIcon">@drawable/ic_heart_white</item>
+        <item name="playlistFragmentLikedIcon">@drawable/ic_heart_white</item>
+        <item name="playlistFragmentAllSimilarButton">@drawable/all_similar_button_black</item>
+
+        <item name="albumFragmentBackgroundColorArtistNameBlock">@color/light_slate_grey_20_alpha</item>
+        <item name="albumFragmentBorderColorArtistNameBlock">@color/light_slate_grey_15_alpha</item>
+
+        <item name="playlistPopupDialogCloseIcon">@drawable/close_options_icon_black</item>
+        <item name="playlistPopupDialogBackgroundColor">@color/black_smoke</item>
+        <item name="playlistPopupDialogCardColor">#2D3238</item>
+        <item name="playlistPopupDialogTextColor">@color/white_light</item>
+        <item name="playlistPopupDialogAdditionalTextColor">@color/grey_slate</item>
+
+        <item name="optionTrackDialogBackgroundColor">@color/black_space</item>
+        <item name="optionTrackDialogCardColor">#2D3238</item>
+        <item name="optionTrackDialogTextColor">@color/white_light</item>
+        <item name="optionTrackDialogAdditionalTextColor">@color/grey_steel</item>
+        <item name="optionTrackDialogTitleTextColor">@color/white</item>
+        <item name="optionTrackDialogFadeStart">@color/black_space</item>
+        <item name="buttonMoreInDescriptionArtist">@color/grey_steel</item>
+
+        <item name="playerHistoryBackgroundColor">@color/black_smoke</item>
+        <item name="playerHistoryTrackItemBackgroundColor">@color/grey_slate_alpha_25</item>
+
+        <item name="audioSettingsBottomSheetBackgroundColor">@color/black_space</item>
+        <item name="audioSettingsBottomSheetCloseIcon">@drawable/close_options_icon_black</item>
+        <item name="audioSettingsBottomSheetHeaderTextColor">@color/white</item>
+        <item name="audioSettingsBottomSheetTitleColor">@color/grey_steel</item>
+        <item name="audioSettingsBottomSheetCardColor">@color/dark_grey</item>
+        <item name="audioSettingsBottomSheetTextColor">@color/alabastersolid</item>
+        <item name="audioSettingsBottomSheetDrawableTintColor">@color/white</item>
+        <item name="audioSettingsBottomSheetProgressTint">@color/white</item>
+        <item name="audioSettingsBottomSheetSecondaryProgressTint">@color/light_with_alpha_0</item>
+        <item name="audioSettingsBottomSheetThumbTint">@color/alabastersolid</item>
+        <item name="audioSettingsBottomSheetParametersValue">@color/grey_steel</item>
+        <item name="audioSettingsBottomSheetIndicatorColor">@color/nevada</item>
+        <item name="timeFrameBottomSheetBackgroundColor">@color/grey_slate_alpha_25</item>
+        <item name="timeFrameBottomSheetButtonStartDisableBackgroundColor">@color/regent_grey_35_alpha</item>
+        <item name="buttonCreatePlaylistBackgroundColor">@color/grey_dark_alpha_35</item>
+        <item name="navigationBarColor">@color/black</item>
+
+
+        <item name="albumFragmentCurrentPlayingMark">@color/white</item>
+        <item name="albumFragmentPopularTint">@color/grey_slate</item>
+        <item name="albumFragmentTrackNumberTint">@color/grey_steel</item>
+        <item name="albumFragmentColorTitle">@color/white_light</item>
+
+        <item name="customSnackBarTextColor">@color/black</item>
+        <item name="customSnackBarTintImage">@color/black</item>
+        <item name="customSnackBarBackground">@color/white_70_alpha</item>
+
+        <item name="customProgressBarBaseColor">@color/black</item>
+        <item name="customProgressBarStartGradientColor">@color/dark_with_alpha_0</item>
+        <item name="customProgressBarEndGradientColor">@color/black</item>
+        <item name="customProgressBarCenterGradientColor">@color/black_50_alpha</item>
+
+        <item name="emptyItemTest">@color/grey_slate</item>
+        <item name="titleArtist">@color/alabastersolid</item>
+        <item name="colorForIconLikeArtistOnBoarding">@color/white</item>
+        <item name="description_synchronization">@color/grey_steel</item>
+        <item name="newOnBoardSelectedCount">@color/alabastersolid</item>
+        <item name="selectedFavoriteArtist">@color/grey_steel</item>
+        <item name="onBoardSkipText">@color/alabastersolid</item>
+
+        <item name="customTabLayoutInactiveBackgroundColor">@color/grey_slate</item>
+        <item name="customTabLayoutSelectedBackgroundColor">@color/white</item>
+        <item name="customTabLayoutSelectedTextColor">@color/black_smoke</item>
+        <item name="customTabLayoutInactiveTextColor">@color/grey_steel</item>
+
+        <item name="fastPlayButtonImage">@drawable/fast_play_button</item>
+        <item name="fastPauseButtonImage">@drawable/fast_pause_button</item>
+
+        <!--region ArtistFavoritesCarousel-->
+        <item name="artistFavoritesTextColor">@color/white</item>
+        <!--endregion-->
+
+        <item name="albumFragmentMetadataColor">@color/grey_steel</item>
+        <item name="albumLabelColor">@color/white</item>
+
+        <!--region RecentFavoritesCarousel-->
+        <item name="recentFavoritesBorderColor">@color/grey_slate_alpha_25</item>
+        <!--endregion-->
+
+        <!--region NewArtistFragment-->
+        <item name="backgroundArtistFragmentShadow">@drawable/header_backround_shadow_from_artist</item>
+        <!--endregion-->
+
+
+        <item name="fragmentDefaultBackgroundColor">@color/black</item>
+        <item name="searchHeaderColor">@color/gray_25_alpha</item>
+        <item name="tabBarDefaultBackgroundColor">@color/black</item>
+        <item name="textColorOnView">@color/white</item>
+        <item name="subtitleTextColor">@color/grey_steel</item>
+
+        <!--region ProfileSettingsFragment-->
+        <item name="whiteOrBlackTextColor">@color/black</item>
+        <item name="greetingTextColor">@color/white_light</item>
+        <item name="profilePictureStub">@color/light_gray</item>
+        <item name="profileSettingsFragmentTextColor">@color/settings_track_switch_title_dark</item>
+        <item name="profileSettingsFragmentAdditionalTextColor">@color/settings_track_switch_subtitle_dark</item>
+        <item name="profileSettingsFragmentToolbarContentColor">@color/white</item>
+        <item name="profileSettingsFragmentIconTint">@color/grey_slate</item>
+        <item name="profileSettingsFragmentOrangeIconTint">@color/orange_light</item>
+        <item name="profileSettingsFragmentOrangeText">@color/text_dark_negative</item>
+        <item name="profileSettingsFragmentActiveStatusColor">@color/apple_light</item>
+        <item name="profileSettingsFragmentInactiveStatusColor">@color/orange_light</item>
+        <item name="profileSettingsFragmentDividerColor">@color/controls_dark_inactive</item>
+        <item name="profileSettingsFragmentSwitchTrackTint">@color/green_settings_track_switch_dark</item>
+        <item name="profileSettingFragmentDialogBackground">@color/black_space</item>
+        <item name="blackOrWhiteSnackbarBackground">@color/white</item>
+        <item name="profileSettingDialogChildTextColorEnter">@color/inactive_tab</item>
+        <item name="promocodeButtonColor">@color/grey_active_night</item>
+        <item name="promocodeTextColorInactive">@color/inactive_tab</item>
+        <!--endregion-->
+
+        <!--region SettingsMemoryFragment-->
+        <item name="memorySettingsFragmentBlueColor">@color/blueberry_light</item>
+        <!--endregion-->
+
+        <!--region TimerViewLayout-->
+        <item name="timeFrameBackgroundColor">@color/grey_dark_alpha_35</item>
+        <item name="timeTextDescriptionColor">@color/grey_slate</item>
+        <!--endregion-->
+
+        <!--region UpdateDialog-->
+        <item name="logoImage">@drawable/logo_core</item>
+        <!--endregion-->
+
+        <item name="collapsedPlayerLikeAnim">@raw/like_cell_dark</item>
+        <item name="collapsedPlayerDislikeAnim">@raw/dislike_cell_dark</item>
+
+        <item name="press_pause_anim">@raw/press_pause_anim_white</item>
+        <item name="press_play_anim">@raw/press_play_anim_white</item>
+
+        <item name="personalRadioScreenItemWidth">324dp</item>
+        <item name="personalRadioScreenItemHeight">56dp</item>
+
+        <!-- region TrackOption Dialog-->
+        <item name="removeFromMusicLibrary">@color/orange_light</item>
+        <!--endregion-->
+
+        <!--region BottomSheetMyWave-->
+        <item name="mainTextColorMyWaveBottomSheet">@color/white</item>
+        <item name="titleTextColorMyWaveBottomSheet">@color/white</item>
+        <item name="backgroundColorMyWaveBottomSheet">@color/black_space</item>
+        <item name="crossColorMyWaveBottomSheet">@color/white</item>
+        <item name="backgroundCrossColorMyWaveBottomSheet">@color/grey_dark_alpha_35</item>
+        <item name="mainImageMyWaveBottomSheet">@drawable/image_bottomsheet_my_wave_black</item>
+        <!--endregion-->
+
+        <!--region BottomSheetUnavailableSong-->
+        <item name="descriptionTextColorBottomSheetUnavailableSong">@color/white</item>
+        <item name="titleTextColorBottomSheetUnavailableSong">@color/white</item>
+        <item name="backgroundColorBottomSheetUnavailableSong">@color/black_space</item>
+        <item name="crossColorBottomSheetUnavailableSong">@color/white</item>
+        <item name="backgroundCrossColorBottomSheetUnavailableSong">@color/grey_dark_alpha_35</item>
+        <!--endregion-->
+
+        <!--region BottomSheetLaunchingWeb-->
+        <item name="titleTextColorBottomSheetLaunchingWeb">@color/white</item>
+        <item name="mainTextColorBottomSheetLaunchingWeb">@color/white_light</item>
+        <item name="colorIconShareBottomSheetLaunchingWeb">@color/white</item>
+        <item name="backgroundColorBottomSheetLaunchingWeb">@color/black_smoke</item>
+        <item name="backgroundColorShareBottomSheetLaunchingWeb">@color/grey_active_night</item>
+        <item name="mainImageBottomSheetLaunchingWeb">@drawable/main_image_launching_web_bottom_sheet_black</item>
+        <!--endregion-->
+
+        <!--region Onboarding Confirmation Button-->
+        <item name="confirmationBlockPrimaryColor">@color/black</item>
+        <item name="confirmationBlockSecondaryColor">@color/black_70_alpha</item>
+        <!-- endregion-->
+
+        <!-- region Favorite Artist Tracks Button -->
+        <item name="buttonTitleColor">@color/white_light</item>
+        <!-- endregion-->
+
+    </style>
+
+    <style name="AlertDialogTheme.Dark" parent="Base.Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/blue_link</item>
+        <item name="colorControlNormal">@color/white_yandex</item>
+        <item name="colorControlActivated">@color/red_pressed</item>
+        <item name="colorPrimary">@color/black_night</item>
+        <item name="colorPrimaryDark">@color/white_yandex</item>
+        <item name="colorControlHighlight">@color/white_30_alpha</item>
+        <item name="textColorAlertDialogListItem">@color/selector_text_light</item>
+        <item name="android:textColorPrimary">@color/white_yandex</item>
+        <item name="android:textColorSecondary">@color/white_50_alpha</item>
+        <item name="android:windowBackground">@drawable/context_dialog_background_dark</item>
+        <item name="android:colorBackground">@color/black_night</item>
+    </style>
+
+    <style name="AppTheme.ContextDialog.Dark" parent="Theme.AppCompat.Dialog.Alert">
+        <item name="colorButtonNormal">@color/red_active</item>
+        <item name="colorPrimary">@color/black_night</item>
+        <item name="colorPrimaryDark">@color/white_yandex</item>
+        <item name="colorAccent">@color/white_yandex</item>
+        <item name="colorControlNormal">@color/white_yandex</item>
+        <item name="colorControlHighlight">@color/white_30_alpha</item>
+        <item name="android:textColorPrimary">@color/white_yandex</item>
+        <item name="android:textColorSecondary">@color/white_50_alpha</item>
+        <item name="buttonStyle">@style/ButtonStyle</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@drawable/context_dialog_background_dark</item>
+        <item name="android:colorBackground">@color/black_night</item>
+    </style>
+
+    <style name="AppTheme.Transparent.Dark" parent="AppTheme.Dark">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowAnimationStyle">@android:style/Animation</item>
+    </style>
+
+    <style name="GreyEditTextControls.Dark" parent="ControlsRed">
+        <item name="colorControlNormal">@color/white_50_alpha</item>
+    </style>
+</resources>

@@ -12,7 +12,7 @@ class BookThatReadUiMapper : Mapper<BookThatReadDomain, BookThatRead> {
             bookId = bookId,
             page = page,
             publicYear = publicYear,
-            book = book,
+            bookPdfUrl = bookPdfUrl,
             title = title,
             chapterCount = chapterCount,
             poster = BookThatReadPoster(url = poster.url, name = poster.name),

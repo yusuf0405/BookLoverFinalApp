@@ -1,121 +1,34 @@
 package com.example.data.cloud.source
 
-import com.example.data.ResourceProvider
-import com.example.data.base.BaseApiResponse
-import com.example.data.cloud.mappers.BookMapper
-import com.example.data.cloud.mappers.BookThatReadMapper
+import com.example.data.cloud.CloudDataRequestState
 import com.example.data.cloud.models.AddNewBookThatReadCloud
+import com.example.data.cloud.models.BookThatReadCloud
 import com.example.data.cloud.models.PostRequestAnswerCloud
-import com.example.data.cloud.models.UpdateChaptersCloud
-import com.example.data.cloud.models.UpdateProgressCloud
-import com.example.data.cloud.service.BookThatReadService
 import com.example.data.models.BookThatReadData
-import com.example.domain.Resource
-import com.example.domain.Status
+import kotlinx.coroutines.flow.Flow
 
 interface BooksThatReadCloudDataSource {
 
-    suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>>
+    fun fetchUserBooksFromIdObservable(id: String): Flow<List<BookThatReadData>>
 
-    suspend fun getMyBook(id: String, userId: String): Resource<Int>
+    suspend fun fetchUserSavedBooksId(userId: String): List<String>
 
-    suspend fun deleteBook(id: String): Resource<Unit>
+    fun fetchBookFromUserIdAndBookId(bookId: String, userId: String): Flow<BookThatReadCloud>
 
-    suspend fun addNewBook(book: AddNewBookThatReadCloud): Resource<PostRequestAnswerCloud>
+    fun fetchBooksFromByBookId(bookId: String): Flow<List<BookThatReadCloud>>
 
-    suspend fun updateProgress(id: String, progress: Int): Resource<Unit>
+    suspend fun deleteBook(id: String): CloudDataRequestState<Unit>
+
+    suspend fun addNewBook(book: AddNewBookThatReadCloud): CloudDataRequestState<PostRequestAnswerCloud>
+
+    suspend fun updateProgress(id: String, progress: Int): CloudDataRequestState<Unit>
 
     suspend fun updateChapters(
         id: String,
         chapters: Int,
         isReadingPages: List<Boolean>,
-    ): Resource<Unit>
+    ): CloudDataRequestState<Unit>
 
-    class Base(
-        private val thatReadService: BookThatReadService,
-        private val resourceProvider: ResourceProvider,
-    ) : BooksThatReadCloudDataSource,
-        BaseApiResponse(resourceProvider = resourceProvider) {
-
-        override suspend fun fetchMyBooks(id: String): Resource<List<BookThatReadData>> = try {
-            val bookList = mutableListOf<BookThatReadData>()
-
-
-            val booksThatReadCloud = thatReadService.fetchMyBooks(id = "{\"userId\":\"${id}\"}")
-
-            booksThatReadCloud.body()!!.books.forEach { booksThatRead ->
-
-                val response =
-                    thatReadService.getBook(id = "{\"objectId\":\"${booksThatRead.bookId}\"}")
-                val bookCloudList = response.body()!!.books
-                if (bookCloudList.isNotEmpty()) {
-                    val bookCloud = bookCloudList[0]
-                    val thatReadBook = BookThatReadMapper.Base(
-                        progress = booksThatRead.progress,
-                        objectId = booksThatRead.objectId,
-                        createdAt = booksThatRead.createdAt,
-                        chaptersRead = booksThatRead.chaptersRead,
-                        bookId = booksThatRead.bookId,
-                        studentId = booksThatRead.studentId,
-                        isReadingPages = booksThatRead.isReadingPages,
-                        path = booksThatRead.path)
-
-                    val book = BookMapper.Base(author = bookCloud.author,
-                        id = bookCloud.id,
-                        poster = bookCloud.poster,
-                        page = bookCloud.page,
-                        chapterCount = bookCloud.chapterCount,
-                        publicYear = bookCloud.publicYear,
-                        title = bookCloud.title,
-                        updatedAt = bookCloud.updatedAt)
-
-                    bookList.add(thatReadBook.map(BookMapper.ComplexMapper(book)))
-                }
-            }
-            Resource.success(bookList)
-        } catch (exception: Exception) {
-            Resource.error(message = resourceProvider.errorType(exception = exception))
-
-        }
-
-        override suspend fun getMyBook(id: String, userId: String): Resource<Int> {
-            val response =
-                safeApiCall { thatReadService.getMyBook(id = "{\"bookId\":\"$id\",\"userId\":\"$userId\"}") }
-            return if (response.status == Status.SUCCESS) {
-                val bookList = response.data!!.books
-                if (bookList.isNotEmpty())
-                    Resource.success(data = bookList[0].progress)
-                else Resource.empty()
-            } else Resource.error(message = response.message)
-
-
-        }
-
-        override suspend fun deleteBook(id: String) =
-            safeApiCall { thatReadService.deleteMyBook(id = id) }
-
-        override suspend fun addNewBook(book: AddNewBookThatReadCloud): Resource<PostRequestAnswerCloud> =
-            safeApiCall { thatReadService.addNewBookStudent(book = book) }
-
-        override suspend fun updateProgress(id: String, progress: Int): Resource<Unit> =
-            safeApiCall {
-                thatReadService.bookThatReadUpdateProgress(id = id,
-                    progress = UpdateProgressCloud(progress = progress))
-            }
-
-
-        override suspend fun updateChapters(
-            id: String,
-            chapters: Int,
-            isReadingPages: List<Boolean>,
-        ): Resource<Unit> =
-            safeApiCall {
-                thatReadService.bookThatReadUpdatePages(id = id,
-                    chapters = UpdateChaptersCloud(chaptersRead = chapters,
-                        isReadingPages = isReadingPages))
-            }
-
-    }
 }
 
 

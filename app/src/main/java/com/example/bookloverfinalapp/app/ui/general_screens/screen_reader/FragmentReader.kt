@@ -1,23 +1,24 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_reader
 
-import android.content.DialogInterface
+import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
-import android.view.WindowManager
-import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
+import com.example.bookloverfinalapp.FragmentGoToPage
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.utils.extensions.downEffect
-import com.example.bookloverfinalapp.app.utils.extensions.hideView
-import com.example.bookloverfinalapp.app.utils.extensions.showView
+import com.example.bookloverfinalapp.app.utils.extensions.hide
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationManager
-import com.example.bookloverfinalapp.databinding.DialogPageEnterBinding
 import com.example.bookloverfinalapp.databinding.FragmentReaderBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
+import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui_core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 
@@ -25,8 +26,8 @@ import java.io.File
 @AndroidEntryPoint
 class FragmentReader :
     BaseFragment<FragmentReaderBinding, FragmentReaderViewModel>(FragmentReaderBinding::inflate),
-    OnLoadCompleteListener, OnErrorListener, OnPageChangeListener,
-    View.OnClickListener {
+    OnLoadCompleteListener, OnErrorListener, OnPageChangeListener {
+
     override val viewModel: FragmentReaderViewModel by viewModels()
 
     private val book: BookThatRead by lazy(LazyThreadSafetyMode.NONE) {
@@ -44,6 +45,16 @@ class FragmentReader :
     private val path: String by lazy(LazyThreadSafetyMode.NONE) {
         FragmentReaderArgs.fromBundle(requireArguments()).path
     }
+
+    private val chapterTitle: String by lazy(LazyThreadSafetyMode.NONE) {
+        FragmentReaderArgs.fromBundle(requireArguments()).chapterTitle
+    }
+
+    private val isNightMode: Boolean by lazy(LazyThreadSafetyMode.NONE) {
+        requireContext().resources.configuration.uiMode and
+                Configuration.UI_MODE_NIGHT_MASK ==
+                Configuration.UI_MODE_NIGHT_YES
+    }
     private val pdfPages = arrayListOf<Int>()
     private val pages = arrayListOf<Int>()
     private var progress = 0
@@ -51,16 +62,22 @@ class FragmentReader :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupUi()
         setOnClickListeners()
         observeResource()
     }
 
-
-    private fun observeResource() {
-        loadSuccess()
+    private fun setupUi() = with(binding()) {
+        pdfview.useBestQuality(true)
+        title.text = chapterTitle
+        setupPdfView()
     }
 
-    private fun loadSuccess() {
+    private fun observeResource()= with(viewModel) {
+        launchWhenViewStarted {  }
+    }
+
+    private fun setupPdfView() {
         bookCurrentProgress = book.progress
         for (i in startPage until lastPage) {
             pdfPages.add(i)
@@ -73,115 +90,94 @@ class FragmentReader :
 
         }
         binding().pdfview.fromFile(File(path))
-            .spacing(100)
             .pages(*pdfPages.toIntArray())
             .swipeHorizontal(true)
+            .pageSnap(true)
+            .fitEachPage(false)
+            .autoSpacing(true)
+            .pageFling(true)
             .enableDoubletap(true)
+            .pageFitPolicy(FitPolicy.BOTH)
             .onPageChange(this)
             .onLoad(this)
             .enableAnnotationRendering(true)
-            .password(null)
-            .scrollHandle(null)
+            .nightMode(isNightMode)
             .load()
     }
 
-
-    private fun setOnClickListeners() {
-        binding().apply {
-            downEffect(pageEnterField).setOnClickListener(this@FragmentReader)
-            downEffect(endRead).setOnClickListener(this@FragmentReader)
-            downEffect(pageLast).setOnClickListener(this@FragmentReader)
-            downEffect(pageFirst).setOnClickListener(this@FragmentReader)
-            downEffect(pageForward).setOnClickListener(this@FragmentReader)
-            downEffect(pageBack).setOnClickListener(this@FragmentReader)
+    private fun setOnClickListeners() = with(binding()) {
+        pageEnterField.setOnDownEffectClickListener {
+            showFragmentGoToPage(currentPage = pageEnterField.text.toString().toInt())
         }
+        endRead.setOnDownEffectClickListener {
+            if (NavigationManager().isOnline(context = requireContext())) {
+                viewModel.goQuestionFragment(
+                    book = book,
+                    chapter = chapter,
+                    path = path
+                )
+            } else showErrorSnackbar(getString(R.string.network_error))
+        }
+        pageLast.setOnDownEffectClickListener {
+            setPdfViewPage(pdfPages.size)
+            if (bookCurrentProgress <= progress) endRead.show()
+        }
+        pageFirst.setOnDownEffectClickListener { setPdfViewPage(0) }
+        pageForward.setOnDownEffectClickListener { setPdfViewPage(binding().pdfview.currentPage + 1) }
+        pageBack.setOnDownEffectClickListener { setPdfViewPage(binding().pdfview.currentPage - 1) }
+        upButton.setOnDownEffectClickListener { viewModel.navigateBack() }
     }
 
-    override fun loadComplete(nbPages: Int) {}
+    override fun loadComplete(nbPages: Int) = Unit
 
     override fun onError(t: Throwable?) {
         showToast(R.string.generic_error)
-        viewModel.goBack()
+        viewModel.navigateBack()
     }
 
     override fun onPageChanged(page: Int, pageCount: Int) {
         binding().apply {
             pageEnterField.text = pdfPages[page].toString()
             if (page == pageCount - 1) {
-                if (bookCurrentProgress <= progress) endRead.showView()
-            } else endRead.hideView()
-
+                if (bookCurrentProgress <= progress) endRead.show()
+            } else endRead.hide()
             progress = pdfPages[page]
         }
 
     }
 
     private fun saveChanges() {
-        if (bookCurrentProgress < progress) {
-            viewModel.updateProgress(id = book.objectId, progress = progress)
-            bookCurrentProgress = progress
-        }
+        if (bookCurrentProgress > progress) return
+        viewModel.updateBookReadingProgress(
+            id = book.objectId,
+            progress = progress,
+            currentDayProgress = progress - bookCurrentProgress
+        )
+        bookCurrentProgress = progress
     }
 
-    override fun onClick(view: View?) {
-        when (view) {
-            binding().endRead -> {
-                if (NavigationManager().isOnline(context = requireContext())) viewModel.goQuestionFragment(
-                    book = book,
-                    chapter = chapter,
-                    path = path)
-                else showToast(R.string.network_error)
-            }
-            binding().pageBack -> binding().pdfview.jumpTo(binding().pdfview.currentPage - 1)
-            binding().pageForward -> binding().pdfview.jumpTo(binding().pdfview.currentPage + 1)
-            binding().pageFirst -> binding().pdfview.jumpTo(0)
-            binding().pageLast -> {
-                binding().pdfview.jumpTo(pdfPages.size)
-                if (bookCurrentProgress <= progress) binding().endRead.showView()
-            }
-            binding().pageEnterField -> showCustomInputAlertDialog(text = binding().pageEnterField.text.toString())
+    private fun setPdfViewPage(page: Int) = binding().pdfview.jumpTo(page)
 
-        }
+    private fun handleNavigateToNewPage(newPage: Int) {
+        if (newPage in startPage..lastPage) {
+            pages.forEach { oldPage ->
+                if (oldPage == newPage) setPdfViewPage(pages.indexOf(oldPage))
+            }
+        } else showInfoSnackBar(getString(R.string.have_gone_beyond))
     }
 
-    private fun showCustomInputAlertDialog(text: String) {
-        val dialogBinding = DialogPageEnterBinding.inflate(layoutInflater)
-        val dialogTitle = "${getString(R.string.go_to_pages)} $startPage ... ${lastPage - 1}"
-        val dialog = AlertDialog.Builder(requireContext())
-            .setTitle(dialogTitle)
-            .setView(dialogBinding.root)
-            .setPositiveButton(R.string.action_confirm, null)
-            .create()
-        dialogBinding.questionInputEditText.setText(text)
-        dialog.setOnShowListener {
-            dialogBinding.questionInputEditText.requestFocus()
-            dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
-                val enteredText = dialogBinding.questionInputEditText.text.toString().trim()
-                if (enteredText.isBlank()) {
-                    dialogBinding.questionInputEditText.error = getString(R.string.empty_value)
-                    return@setOnClickListener
-                } else {
-                    val newPage = enteredText.toInt()
-                    if (newPage in startPage..lastPage) {
-                        pages.forEach { oldPage ->
-                            if (oldPage == newPage)
-                                binding().pdfview.jumpTo(pages.indexOf(oldPage))
-                        }
-                        dialog.dismiss()
-                    } else showToast(messageRes = R.string.have_gone_beyond)
-                }
-
-            }
-        }
-        dialog.window?.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE)
-        dialog.show()
+    private fun showFragmentGoToPage(currentPage: Int) {
+        FragmentGoToPage.newInstance(
+            title = "${getString(R.string.go_to_pages)} $startPage ... ${lastPage - 1}",
+            currentPage = currentPage,
+            listener = ::handleNavigateToNewPage
+        ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
     }
 
     override fun onPause() {
         super.onPause()
         saveChanges()
     }
-
 }
 
 

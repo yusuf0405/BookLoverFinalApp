@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="140dp"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="12dp"
+    android:layout_marginBottom="8dp"
+    android:orientation="vertical">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="4dp">
+
+        <ImageView
+            android:id="@+id/book_poster"
+            android:layout_width="140dp"
+            android:layout_height="210dp"
+            android:scaleType="centerCrop"
+            app:srcCompat="@drawable/book_example" />
+
+        <View
+            android:id="@+id/outline"
+            android:layout_width="140dp"
+            android:layout_height="210dp"
+            android:background="@drawable/ic_item_outline_4dp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="4dp"
+            app:cardBackgroundColor="@color/black_30_alpha"
+            app:cardCornerRadius="8dp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <ImageView
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginHorizontal="7dp"
+                    android:layout_marginVertical="2dp"
+                    android:src="@drawable/closed_book_icon" />
+
+                <ImageView
+                    android:id="@+id/downloaded_mark"
+                    android:layout_width="17dp"
+                    android:layout_height="17dp"
+                    android:layout_marginVertical="2dp"
+                    android:layout_marginEnd="4dp"
+                    android:src="@drawable/tick_gray_icon"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <LinearLayout
+        android:id="@+id/info_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:fadingEdgeLength="30dp"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            tools:text="@tools:sample/lorem/random" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/author"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="none"
+            android:fadingEdgeLength="30dp"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textColor="?attr/text_secondary"
+            tools:text="@tools:sample/lorem/random" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/button_block"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/button"
+            style="@style/ButtonStyle.Blue"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="12dp"
+            android:text="@string/learn_more"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/more_button"
+            style="@style/ButtonStyle.Common.Gray"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="4dp"
+            android:text="@string/more"
+            android:textAllCaps="false"
+            android:textSize="14sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</LinearLayout>

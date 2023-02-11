@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+
+    <dimen name="edge_margin">32dp</dimen>
+    <dimen name="content_inset">104dp</dimen>
+    <dimen name="content_inset_small">16dp</dimen>
+    <dimen name="content_inset_normal">92dp</dimen>
+    <dimen name="content_inset_xsmall">8dp</dimen>
+    <dimen name="content_inset_player_controls">180dp</dimen>
+    <dimen name="content_inset_dashboard_title">190dp</dimen>
+
+    <dimen name="text_size_xlarge">24sp</dimen>
+    <dimen name="text_size_title">24sp</dimen>
+    <dimen name="text_size_body">20sp</dimen>
+    <dimen name="text_size_small">16sp</dimen>
+    <dimen name="text_size_xsmall">12sp</dimen>
+
+    <dimen name="size_player_title_text">24sp</dimen>
+
+    <dimen name="about_footer_margin">90dp</dimen>
+    <dimen name="feedback_tutorial_controls_margin">32dp</dimen>
+
+    <dimen name="size_player_toggle">79dp</dimen>
+    <dimen name="size_player_control">59dp</dimen>
+    <dimen name="size_player_control_margin">99dp</dimen>
+    <dimen name="player_track_view_margin">100dp</dimen>
+
+
+    <dimen name="track_container_margin_top">40dp</dimen>
+    <dimen name="track_title_text_size">20sp</dimen>
+    <dimen name="track_subtitle_text_size">18sp</dimen>
+    <dimen name="track_overflow_hack_padding">8dp</dimen>
+    <dimen name="track_meta_padding">20dp</dimen>
+
+</resources>

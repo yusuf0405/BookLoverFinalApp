@@ -16,6 +16,8 @@ class AddNewBookToDomainMapper : Mapper<AddNewBook, AddNewBookDomain> {
             poster = BookPosterDomain(name = poster.name, url = poster.url),
             book = BookPdfDomain(name = book.name, type = "File", url = book.url),
             chapterCount = chapterCount, schoolId = schoolId,
-            genres = genres)
+            genres = genres,
+            description = description,
+        )
     }
 }

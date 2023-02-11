@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.joseph.ui_core.custom.CurvedContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="20dp"
+    android:paddingBottom="10dp"
+    app:containerBackground="?attr/background_primary_elevated">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="12dp"
+                android:layout_weight="1"
+                android:text="@string/sort_text"
+                android:textColor="?attr/blackOrWhiteColor"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sort_by_book_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/by_the_title_of_the_book"
+                android:textColor="?attr/blackOrWhiteColor" />
+
+            <ImageView
+                android:id="@+id/book_name_connected_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_sheet_selection"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sort_by_book_author"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/by_the_author_name"
+                android:textColor="?attr/blackOrWhiteColor" />
+
+            <ImageView
+                android:id="@+id/book_author_connected_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_sheet_selection"
+                android:visibility="invisible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sort_by_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/recently_added_first"
+                android:textColor="?attr/blackOrWhiteColor" />
+
+            <ImageView
+                android:id="@+id/date_connected_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_sheet_selection"
+                android:visibility="visible"
+                tools:visibility="visible" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/sort_by_cached"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingVertical="10dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/saved_first"
+                android:textColor="?attr/blackOrWhiteColor" />
+
+            <ImageView
+                android:id="@+id/by_cached_connected_mark"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_action_sheet_selection"
+                android:visibility="invisible" />
+        </LinearLayout>
+    </LinearLayout>
+</com.joseph.ui_core.custom.CurvedContainer>

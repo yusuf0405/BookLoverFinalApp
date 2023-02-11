@@ -19,19 +19,17 @@ import android.view.WindowManager
 import android.widget.*
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.datastore.preferences.preferencesDataStore
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.Transformations
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.App
-import com.example.bookloverfinalapp.app.models.BookPdf
-import com.example.bookloverfinalapp.app.models.BookPoster
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
-import com.example.bookloverfinalapp.app.utils.cons.SETTINGS_NAME
 import com.example.bookloverfinalapp.databinding.DialogQuestionInputBinding
 import com.example.domain.models.BookPosterDomain
 import com.example.domain.models.UserDomainImage
@@ -48,15 +46,6 @@ import java.io.File
 import java.io.FileOutputStream
 import java.io.InputStream
 
-val Context.dataStore by preferencesDataStore(SETTINGS_NAME)
-
-fun View.showView() {
-    this.visibility = View.VISIBLE
-}
-
-fun View.hideView() {
-    this.visibility = View.GONE
-}
 
 fun Fragment.setCardViewColor(cardView: MaterialCardView) {
     when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -89,8 +78,10 @@ fun Fragment.setTabLayoutColor(tabLayout: TabLayout) {
     when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
         Configuration.UI_MODE_NIGHT_NO -> {
             tabLayout.setBackgroundColor(requireContext().getAppThemeColor())
-            tabLayout.setTabTextColors(requireContext().getColor(R.color.white),
-                requireContext().getColor(R.color.white))
+            tabLayout.setTabTextColors(
+                requireContext().getColor(R.color.white),
+                requireContext().getColor(R.color.white)
+            )
         }
         Configuration.UI_MODE_NIGHT_YES -> tabLayout.setBackgroundColor(requireContext().getGreyColor())
     }
@@ -109,9 +100,7 @@ suspend fun InputStream.saveToFile(context: Context): String {
     val file = File.createTempFile("my_file", ".pdf", path)
     val result = withContext(Dispatchers.Default) {
         val save = async {
-            return@async use { input ->
-                file.outputStream().use { output -> input.copyTo(output) }
-            }
+            return@async use { input -> file.outputStream().use { output -> input.copyTo(output) } }
         }
         save.await()
         return@withContext file.path
@@ -126,8 +115,10 @@ fun Fragment.downEffect(view: View): View {
 
 fun Fragment.createNewPath(inputStream: InputStream, key: String) = App.applicationScope.launch {
     val newPath = inputStream.saveToFile(context = requireContext())
-    requireContext().getSharedPreferences(key,
-        Context.MODE_PRIVATE)
+    requireContext().getSharedPreferences(
+        key,
+        Context.MODE_PRIVATE
+    )
         .edit()
         .putString(key, newPath)
         .apply()
@@ -167,9 +158,8 @@ fun Fragment.showSnackbar(view: View, message: String) {
     Snackbar.make(view, message, Snackbar.LENGTH_SHORT).show()
 }
 
-fun EditText.text() {
-    this.text.toString()
-}
+fun EditText.text() = this.text.toString()
+
 
 fun TextView.text() {
     this.text.toString()
@@ -227,14 +217,9 @@ fun EditText.validateLastName(): Boolean {
 fun ParseFile.toImage(): UserImage =
     UserImage(name = name, type = "File", url = url)
 
-fun ParseFile.toBookImage(): BookPoster =
-    BookPoster(name = name, url = url)
-
 fun ParseFile.toBookDomainImage(): BookPosterDomain =
     BookPosterDomain(name = name, url = url)
 
-fun ParseFile.toPdf(): BookPdf =
-    BookPdf(name = name, url = url)
 
 fun <T> Flow<T>.launchWhenStarted(lifecycleScope: LifecycleCoroutineScope) {
     lifecycleScope.launchWhenStarted {
@@ -248,17 +233,15 @@ fun <T> Flow<T>.viewModelScope(viewModelScope: CoroutineScope) {
     }
 }
 
-fun <X, Y> LiveData<X>.map(func: (source: X) -> Y) = Transformations.map(this, func)
-
-
 fun EditText.validatePhone(): Boolean {
     val phone = this.text.trim().toString()
     return phone.length == 19
 }
 
-fun View.downEffect(): View {
-    PushDownAnim.setPushDownAnimTo(this)
-    return this
+fun AppCompatActivity.findNavControllerById(fragmentContainerId: Int): NavController {
+    val contentFragment = supportFragmentManager.findFragmentById(fragmentContainerId)
+    val navController = if (contentFragment is NavHostFragment) contentFragment.navController else null
+    return navController ?: throw IllegalStateException("NavController is not initialized")
 }
 
 fun Fragment.getImage() {
@@ -273,14 +256,14 @@ fun Fragment.uriToImage(uri: Uri): ByteArray {
     return stream.toByteArray()
 }
 
-fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton, text: String) {
+fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton) {
     val dialogBinding = DialogQuestionInputBinding.inflate(layoutInflater)
     val dialog = AlertDialog.Builder(requireContext())
         .setTitle(R.string.question_dilaog_title)
         .setView(dialogBinding.root)
         .setPositiveButton(R.string.action_confirm, null)
         .create()
-    dialogBinding.questionInputEditText.setText(text)
+    dialogBinding.questionInputEditText.setText(radioButton.text)
     dialog.setOnShowListener {
         dialogBinding.questionInputEditText.requestFocus()
         dialog.getButton(DialogInterface.BUTTON_POSITIVE).setOnClickListener {
@@ -297,13 +280,7 @@ fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton, text: String) 
     dialog.show()
 }
 
-fun <T> List<T>.swapElements(): List<T> {
-    val list = mutableListOf<T>()
-    for ((counter, i) in (size - 1 downTo 0).withIndex()) {
-        list.add(counter, this[i])
-    }
-    return list
-}
+
 
 fun Fragment.getFile(documentUri: Uri): File {
     val inputStream = requireActivity().contentResolver?.openInputStream(documentUri)
@@ -311,8 +288,7 @@ fun Fragment.getFile(documentUri: Uri): File {
     inputStream.use { input ->
         file = File(requireActivity().cacheDir, System.currentTimeMillis().toString() + ".pdf")
         FileOutputStream(file).use { output ->
-            val buffer =
-                ByteArray(4 * 1024)
+            val buffer = ByteArray(4 * 1024)
             var read: Int = -1
             while (input?.read(buffer).also {
                     if (it != null) {
@@ -327,23 +303,13 @@ fun Fragment.getFile(documentUri: Uri): File {
     return file
 }
 
-fun Context.glide(uri: Uri, imageView: ImageView) {
+fun Context.showImage(uri: Uri, imageView: ImageView) {
     Glide.with(this)
         .load(uri)
         .into(imageView)
 }
 
-fun Context.glide(bitmap: Bitmap, imageView: ImageView) {
-    Glide.with(this)
-        .load(bitmap)
-        .into(imageView)
-}
 
-fun Context.glide(uri: String?, imageView: ImageView) {
-    Glide.with(this)
-        .load(uri)
-        .into(imageView)
-}
 
 
 fun Context.getGoldColor(): Int = this.resources.getColor(R.color.gold)

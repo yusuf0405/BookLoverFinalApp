@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_info_nav_graph"
+    app:startDestination="@id/fragmentUserInfo">
+
+    <fragment
+        android:id="@+id/fragmentUserInfo"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_user_info.FragmentUserInfo"
+        android:label="FragmentUserInfo">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+    </fragment>
+</navigation>

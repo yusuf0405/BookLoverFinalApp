@@ -5,7 +5,13 @@ import com.google.gson.annotations.SerializedName
 
 data class ClassResponse(
     @SerializedName("results") var classes: List<ClassCloud>,
-)
+) {
+    companion object {
+
+        fun unknown() = ClassResponse(classes = emptyList())
+
+    }
+}
 
 data class ClassCloud(
     @SerializedName("objectId") var objectId: String,

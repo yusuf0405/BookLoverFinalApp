@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "da087440c553f0c12307b6b1478de588",
+    "identityHash": "812e5d4fe5f0f6b369d672f11d0476d6",
     "entities": [
       {
         "tableName": "books",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `author` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `page` INTEGER NOT NULL, `public_year` TEXT NOT NULL, `book` TEXT NOT NULL, `genres` TEXT NOT NULL, `title` TEXT NOT NULL, `chapter_count` INTEGER NOT NULL, `poster` TEXT NOT NULL, `updated_at` INTEGER NOT NULL, PRIMARY KEY(`id`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `author` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `page` INTEGER NOT NULL, `public_year` TEXT NOT NULL, `book` TEXT NOT NULL, `genres` TEXT NOT NULL, `title` TEXT NOT NULL, `chapter_count` INTEGER NOT NULL, `poster` TEXT NOT NULL, `updated_at` INTEGER NOT NULL, `saved_status` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -72,6 +72,80 @@
             "fieldPath": "updatedAt",
             "columnName": "updated_at",
             "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "savedStatus",
+            "columnName": "saved_status",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "audio_books_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `author` TEXT NOT NULL, `school_id` TEXT NOT NULL, `created_at` INTEGER NOT NULL, `genres` TEXT NOT NULL, `current_start_position` INTEGER NOT NULL, `audio_book_file` TEXT NOT NULL, `audio_book_poster` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "schoolId",
+            "columnName": "school_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "createdAt",
+            "columnName": "created_at",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "genres",
+            "columnName": "genres",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "currentStartPosition",
+            "columnName": "current_start_position",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "audioBookFile",
+            "columnName": "audio_book_file",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "audioBookPoster",
+            "columnName": "audio_book_poster",
+            "affinity": "TEXT",
             "notNull": true
           }
         ],
@@ -183,6 +257,62 @@
         "foreignKeys": []
       },
       {
+        "tableName": "tasks_table",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `description` TEXT NOT NULL, `class_id` TEXT NOT NULL, `start_date` INTEGER NOT NULL, `end_date` INTEGER NOT NULL, `task_genres` TEXT NOT NULL, PRIMARY KEY(`id`))",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "classId",
+            "columnName": "class_id",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "startDate",
+            "columnName": "start_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "endDate",
+            "columnName": "end_date",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "taskGenres",
+            "columnName": "task_genres",
+            "affinity": "TEXT",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
         "tableName": "school_classes",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` TEXT NOT NULL, `title` TEXT NOT NULL, `school_id` TEXT NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
@@ -215,8 +345,34 @@
         "foreignKeys": []
       },
       {
+        "tableName": "user_statistics",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`day` INTEGER NOT NULL, `progress` INTEGER NOT NULL, PRIMARY KEY(`day`))",
+        "fields": [
+          {
+            "fieldPath": "day",
+            "columnName": "day",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "progress",
+            "columnName": "progress",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "day"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
         "tableName": "users",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`objectId` TEXT NOT NULL, `class_id` TEXT NOT NULL, `create_at` INTEGER NOT NULL, `school_name` TEXT NOT NULL, `class_name` TEXT NOT NULL, `email` TEXT NOT NULL, `gender` TEXT NOT NULL, `lastname` TEXT NOT NULL, `name` TEXT NOT NULL, `number` TEXT NOT NULL, `session_token` TEXT NOT NULL, `user_type` TEXT NOT NULL, `chapters_read` INTEGER NOT NULL, `books_read` INTEGER NOT NULL, `progress` INTEGER NOT NULL, `books_id` TEXT NOT NULL, `image` TEXT NOT NULL, PRIMARY KEY(`objectId`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`objectId` TEXT NOT NULL, `class_id` TEXT NOT NULL, `create_at` INTEGER NOT NULL, `school_name` TEXT NOT NULL, `class_name` TEXT NOT NULL, `email` TEXT NOT NULL, `gender` TEXT NOT NULL, `lastname` TEXT NOT NULL, `name` TEXT NOT NULL, `number` TEXT NOT NULL, `session_token` TEXT NOT NULL, `user_type` TEXT NOT NULL, `chapters_read` INTEGER NOT NULL, `books_read` INTEGER NOT NULL, `progress` INTEGER NOT NULL, `books_id` TEXT NOT NULL, `image` TEXT NOT NULL, `school_id` TEXT NOT NULL, PRIMARY KEY(`objectId`))",
         "fields": [
           {
             "fieldPath": "objectId",
@@ -319,6 +475,12 @@
             "columnName": "image",
             "affinity": "TEXT",
             "notNull": true
+          },
+          {
+            "fieldPath": "schoolId",
+            "columnName": "school_id",
+            "affinity": "TEXT",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -334,7 +496,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'da087440c553f0c12307b6b1478de588')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '812e5d4fe5f0f6b369d672f11d0476d6')"
     ]
   }
 }

@@ -2,38 +2,87 @@
     <!-- Base application theme. -->
     <style name="Theme.KnigolyubApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/app_theme</item>
-        <item name="colorPrimaryVariant">@color/app_theme</item>
+        <item name="colorPrimary">@color/black_smoke</item>
+        <item name="colorPrimaryVariant">@color/blue</item>
         <item name="colorOnPrimary">@color/white</item>
         <item name="progressColor">@color/red</item>
+        <item name="android:textColorSecondary">@color/black_smoke</item>
         <item name="progressTextColor">@color/progressTextColor</item>
         <item name="tabIndicatorColor">@color/violet</item>
-        <item name="cardBackgroundColor">@color/white</item>
+        <item name="cardBackgroundColor">@color/white_smoke</item>
         <item name="totalColor">@color/progressLeftcolor</item>
-        <item name="background">@color/app_theme</item>
-        <item name="android:fontFamily">@font/comic_sans</item>
-        <item name="android:textColor">@color/violet</item>
+        <item name="background">@color/cardBackground</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+        <item name="android:textColor">@color/black</item>
 
         <!-- Secondary brand color. -->
-        <item name="colorSecondary">@color/purple_500</item>
-        <item name="colorSecondaryVariant">@color/purple_500</item>
+        <item name="colorSecondary">@color/blue</item>
+        <item name="colorSecondaryVariant">@color/blue</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
+        <item name="grayButtonColor">@color/grey_active_day</item>
+        <item name="buttonNotEnableBackground">@color/grey_stone</item>
+        <item name="textNegativeColor">@color/text_light_negative</item>
+        <item name="blueOrGrayColor">@color/blue</item>
+        <item name="blackOrWhiteColor">@color/black</item>
+        <item name="whiteOrBlackColor">@color/white</item>
+        <item name="whiteOrGrayColor">@color/black_8_no_alpha</item>
+        <item name="grayOrWhiteColor">@color/white</item>
+        <item name="text_secondary">@color/grey_slate</item>
+        <item name="checked_item_color">@color/blackberry_normal</item>
+        <item name="card_background">@color/text_inverted</item>
+        <item name="card_container_background">@color/cardBackground</item>
+        <item name="background_primary_elevated">@color/background_primary_elevated</item>
+        <item name="button_gradient_background">@color/blue</item>
+        <item name="toolbar_gradient_background">@color/white</item>
+        <item name="collapsedPlayerOutlineColor">@color/controls_light_inactive</item>
     </style>
+
 
     <style name="BottomCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
         <item name="cornerFamily">rounded</item>
-        <item name="cornerSizeBottomRight">30dp</item>
-        <item name="cornerSizeBottomLeft">30dp</item>
+        <item name="cornerSizeBottomRight">45dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="android:topRightRadius">0dp</item>
+        <item name="cornerSizeBottomLeft">45dp</item>
     </style>
+
+    <style name="BottomCornerRadius.18" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">cut</item>
+        <item name="cornerSizeBottomRight">18dp</item>
+        <item name="cornerSizeTopLeft">0dp</item>
+        <item name="android:topRightRadius">0dp</item>
+        <item name="cornerSizeBottomLeft">18dp</item>
+    </style>
+
+    <style name="TopCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">37dp</item>
+        <item name="cornerSizeTopLeft">37dp</item>
+    </style>
+
+    <style name="LiftCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeBottomLeft">20dp</item>
+    </style>
+
+    <style name="RightCornerRadius" parent="@style/Widget.MaterialComponents.CardView">
+        <item name="cornerFamily">rounded</item>
+        <item name="cornerSizeTopRight">20dp</item>
+        <item name="cornerSizeBottomRight">20dp</item>
+    </style>
+
+
     <style name="SettingsItemSmall">
         <item name="android:textSize">17sp</item>
         <item name="android:letterSpacing">0.03</item>
         <item name="android:textColor">@android:color/black</item>
         <item name="android:fontFamily">@font/sf_pro_rounded_regular</item>
     </style>
+
     <style name="SettingsTitle">
         <item name="android:textSize">20sp</item>
         <item name="android:letterSpacing">0.03</item>
@@ -42,40 +91,41 @@
         <item name="android:fontFamily">@font/sf_pro_rounded_regular</item>
     </style>
 
-    <style name="item_book_title_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="item_book_title_style">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">24dp</item>
         <item name="android:layout_marginEnd">5dp</item>
-        <item name="android:textSize">20sp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fadingEdgeLength">30dp</item>
+        <item name="android:requiresFadingEdge">horizontal</item>
         <item name="android:textStyle">bold</item>
     </style>
 
 
-    <style name="item_book_author" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="item_book_author">
         <item name="android:layout_width">0dp</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">16dp</item>
         <item name="android:ellipsize">end</item>
         <item name="android:singleLine">true</item>
         <item name="android:maxLines">1</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">11sp</item>
     </style>
 
-    <style name="item_book_published_year" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="item_book_published_year">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginTop">24dp</item>
         <item name="android:layout_marginBottom">16dp</item>
         <item name="android:text">@string/year_of_publication</item>
         <item name="android:textSize">@dimen/item_book_attribute_size</item>
-        <item name="android:textColor">@color/book_details_text</item>
+        <item name="android:textColor">?attr/text_secondary</item>
     </style>
 
-    <style name="item_book_paged_count" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+    <style name="item_book_paged_count">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:ellipsize">end</item>
@@ -84,7 +134,7 @@
         <item name="singleLine">true</item>
         <item name="android:text">@string/pages_count</item>
         <item name="android:textSize">@dimen/item_book_attribute_size</item>
-        <item name="android:textColor">@color/book_details_text</item>
+        <item name="android:textColor">?attr/text_secondary</item>
     </style>
 
 
@@ -115,14 +165,14 @@
         <item name="android:elevation">@dimen/cardElevation</item>
     </style>
 
-    <style name="book_question_radio_button_style" parent="@style/Widget.Material3.CompoundButton.RadioButton">
+    <style name="book_question_radio_button_style">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">60dp</item>
-        <item name="android:layout_marginStart">8dp</item>
-        <item name="android:layout_marginEnd">8dp</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">16sp</item>
         <item name="android:textStyle">italic</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:padding">4dp</item>
         <item name="android:background">@drawable/book_qustion_background</item>
     </style>
 
@@ -135,27 +185,30 @@
     <style name="type_title_edit_profile" parent="Widget.AppCompat.TextView">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:textColor">@color/grey</item>
-        <item name="android:layout_marginStart">16dp</item>
-        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:textColor">?attr/text_secondary</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:layout_marginStart">32dp</item>
+        <item name="android:layout_marginTop">12dp</item>
         <item name="android:textSize">@dimen/textSizeProfileTIL</item>
     </style>
 
-    <style name="progress_number_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:layout_width">0dp</item>
+    <style name="progress_number_style">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginStart">16dp</item>
         <item name="android:text">0</item>
         <item name="android:textSize">@dimen/textSizeProfileTIL</item>
     </style>
-    <style name="progress_text_style" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
-        <item name="android:layout_width">0dp</item>
+
+    <style name="progress_text_style">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:ellipsize">end</item>
-        <item name="android:maxLines">1</item>
-        <item name="singleLine">true</item>
+        <item name="android:ellipsize">none</item>
+        <item name="android:singleLine">true</item>
+        <item name="android:fadingEdgeLength">30dp</item>
+        <item name="android:requiresFadingEdge">horizontal</item>
         <item name="android:text">0</item>
-        <item name="android:textColor">@color/grey</item>
+        <item name="android:fontFamily">@font/poppins</item>
+        <item name="android:textColor">?attr/blackOrWhiteColor</item>
         <item name="android:textSize">@dimen/textSizeForSmallTexts</item>
     </style>
 
@@ -184,17 +237,21 @@
         <item name="android:textSize">@dimen/textSizeBookDetails</item>
     </style>
 
-    <style name="edit_text_edit_profile" parent="Widget.AppCompat.EditText">
-        <item name="android:layout_width">wrap_content</item>
+    <style name="edit_text_edit_profile">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginEnd">16dp</item>
+        <item name="android:layout_marginStart">16dp</item>
         <item name="android:layout_marginTop">8dp</item>
-        <item name="android:backgroundTint">@android:color/transparent</item>
-        <item name="android:ems">14</item>
+        <item name="android:background">?attr/background_primary_elevated</item>
+        <item name="android:textColor">?attr/blackOrWhiteColor</item>
+        <item name="android:ems">16</item>
+        <item name="android:textSize">16sp</item>
         <item name="android:inputType">textPersonName</item>
     </style>
 
-    <style name="button_style" parent="TextAppearance.AppCompat.Button">
-        <item name="android:layout_width">0dp</item>
+    <style name="button_style">
+        <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_marginTop">32dp</item>
         <item name="android:layout_marginStart">16dp</item>

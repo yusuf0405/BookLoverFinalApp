@@ -19,7 +19,7 @@ interface BookThatReadService {
 
 
     @GET("classes/BooksThatRead")
-    suspend fun getMyBook(
+    suspend fun fetchBookFromUserIdAndBookId(
         @Query("where") id: String,
     ): Response<BooksThatReadResponse>
 

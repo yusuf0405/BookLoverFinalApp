@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="4dp"
+    app:cardCornerRadius="4dp"
+    app:cardElevation="15dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.joseph.ui_core.custom.MyImageView
+            android:id="@+id/rounded_book_image"
+            android:layout_width="78dp"
+            android:layout_height="0dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/book_example"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <View
+            android:id="@+id/outline"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/ic_item_outline_4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/rounded_book_image"
+            app:layout_constraintEnd_toEndOf="@+id/rounded_book_image"
+            app:layout_constraintStart_toStartOf="@+id/rounded_book_image"
+            app:layout_constraintTop_toTopOf="@+id/rounded_book_image" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/bookTitle"
+            style="@style/item_book_title_style"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toStartOf="@+id/bookProgress"
+            app:layout_constraintStart_toEndOf="@+id/rounded_book_image"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Война и мир" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/bookAuthor"
+            style="@style/item_book_author"
+            android:layout_marginEnd="8dp"
+            android:ellipsize="none"
+            android:fadingEdgeLength="60dp"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toStartOf="@+id/bookProgress"
+            app:layout_constraintStart_toStartOf="@+id/bookTitle"
+            app:layout_constraintTop_toBottomOf="@+id/bookTitle"
+            tools:text="Лев Толстой" />
+
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/countOfDimonds"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:fontFamily="@font/poppins_extra_bold"
+            android:textSize="13sp"
+            app:layout_constraintStart_toStartOf="@+id/bookAuthor"
+            app:layout_constraintTop_toBottomOf="@+id/bookAuthor"
+            tools:text="0" />
+
+
+        <ImageView
+            android:id="@+id/bookDiamond"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginStart="4dp"
+            android:src="@drawable/ic_diamond"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfDimonds"
+            app:layout_constraintStart_toEndOf="@+id/countOfDimonds"
+            app:layout_constraintTop_toTopOf="@+id/countOfDimonds" />
+
+
+        <ImageView
+            android:id="@+id/imageView5"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginStart="4dp"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfPages"
+            app:layout_constraintStart_toEndOf="@+id/countOfPages"
+            app:layout_constraintTop_toTopOf="@+id/countOfPages"
+            app:layout_constraintVertical_bias="0.285"
+            app:srcCompat="@drawable/ic_open_book" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/countOfPages"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins_extra_bold"
+            android:textSize="13sp"
+            app:layout_constraintBottom_toBottomOf="@+id/countOfDimonds"
+            app:layout_constraintStart_toEndOf="@+id/bookDiamond"
+            app:layout_constraintTop_toTopOf="@+id/countOfDimonds"
+            tools:text="0" />
+
+        <com.vaibhavlakhera.circularprogressview.CircularProgressView
+            android:id="@+id/bookProgress"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginEnd="8dp"
+            app:animate="true"
+            app:animateDuration="600"
+            app:fillColor="@color/white"
+            app:layout_constraintBottom_toTopOf="@+id/bookPagesText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:progressInterpolator="@android:anim/accelerate_decelerate_interpolator"
+            app:progressTextEnabled="true"
+            app:progressTextSize="14sp"
+            app:progressTextType="percent"
+            app:progressValue="62"
+            app:progressWidth="5dp"
+            app:startAngle="270"
+            app:totalValue="100"
+            app:totalWidth="5dp" />
+
+        <TextView
+            android:id="@+id/publicYearText"
+            style="@style/item_book_published_year"
+            android:layout_marginTop="2dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="10sp"
+            app:layout_constraintStart_toStartOf="@+id/countOfDimonds"
+            app:layout_constraintTop_toBottomOf="@+id/bookDiamond" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/publishedYear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:fontFamily="@font/poppins"
+            android:textSize="@dimen/item_book_attribute_size"
+            app:layout_constraintBottom_toBottomOf="@+id/publicYearText"
+            app:layout_constraintStart_toEndOf="@+id/publicYearText"
+            app:layout_constraintTop_toTopOf="@+id/publicYearText"
+            tools:text="2008" />
+
+        <TextView
+            android:id="@+id/bookPagesText"
+            style="@style/item_book_paged_count"
+            android:layout_marginStart="8dp"
+            android:fontFamily="@font/poppins"
+            android:text="@string/pages"
+            android:textSize="10sp"
+            app:layout_constraintBottom_toBottomOf="@+id/publishedYear"
+            app:layout_constraintStart_toEndOf="@+id/publishedYear"
+            app:layout_constraintTop_toTopOf="@+id/publishedYear" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/bookPages"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="none"
+            android:fadingEdgeLength="60dp"
+            android:fontFamily="@font/poppins"
+            android:requiresFadingEdge="horizontal"
+            android:singleLine="true"
+            android:textSize="@dimen/item_book_attribute_size"
+            app:layout_constraintBottom_toBottomOf="@+id/bookPagesText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/bookPagesText"
+            app:layout_constraintTop_toTopOf="@+id/bookPagesText"
+            tools:text="400" />
+
+        <com.joseph.ui_core.custom.MyTextView
+            android:id="@+id/bookCratedAtText"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="3dp"
+            android:fontFamily="@font/poppins"
+            android:textColor="?attr/text_secondary"
+            android:textSize="9sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bookPagesText"
+            tools:text="Добавлено 9 часов назад" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
+
+
+
+

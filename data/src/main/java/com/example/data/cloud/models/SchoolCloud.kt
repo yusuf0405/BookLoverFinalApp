@@ -3,7 +3,7 @@ package com.example.data.cloud.models
 import com.google.gson.annotations.SerializedName
 
 data class SchoolResponse(
-    @SerializedName("results") var school: List<SchoolCloud>,
+    @SerializedName("results") var schools: List<SchoolCloud>,
 )
 
 data class SchoolCloud(

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/transparent">
+
+    <ImageView
+        android:id="@+id/back_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="24dp"
+        android:elevation="1dp"
+        android:src="@drawable/ic_white_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/save_icon"
+        android:layout_width="22dp"
+        android:layout_height="22dp"
+        android:layout_marginEnd="8dp"
+        android:elevation="1dp"
+        android:src="@drawable/saved_single_icon"
+        app:layout_constraintBottom_toBottomOf="@+id/more_icon"
+        app:layout_constraintEnd_toStartOf="@+id/more_icon"
+        app:layout_constraintTop_toTopOf="@+id/more_icon"
+        app:tint="@color/white" />
+
+    <ImageView
+        android:id="@+id/more_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="16dp"
+        android:elevation="1dp"
+        android:src="@drawable/ic_more_vertical_icon"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:tint="@color/white" />
+
+
+    <ImageView
+        android:id="@+id/book_blur_background_poster"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-45dp"
+        android:foreground="@drawable/blur_background_gradient"
+        android:scaleType="centerCrop"
+        app:layout_constraintBottom_toBottomOf="@+id/book_author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:src="@tools:sample/avatars" />
+
+    <FrameLayout
+        android:id="@+id/book_blur_background_poster_container"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="-125dp"
+        app:layout_constraintBottom_toBottomOf="@+id/book_author"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </FrameLayout>
+
+
+    <ImageView
+        android:id="@+id/book_poster"
+        android:layout_width="191dp"
+        android:layout_height="290dp"
+        android:layout_marginTop="16dp"
+        android:elevation="1dp"
+        android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/back_icon"
+        tools:src="@tools:sample/avatars" />
+
+    <View
+        android:id="@+id/outline"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/ic_item_outline_4dp"
+        android:elevation="1dp"
+        app:layout_constraintBottom_toBottomOf="@+id/book_poster"
+        app:layout_constraintEnd_toEndOf="@+id/book_poster"
+        app:layout_constraintStart_toStartOf="@+id/book_poster"
+        app:layout_constraintTop_toTopOf="@+id/book_poster" />
+
+    <TextView
+        android:id="@+id/book_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:elevation="3dp"
+        android:ellipsize="none"
+        android:fadingEdgeLength="60dp"
+        android:requiresFadingEdge="horizontal"
+        android:singleLine="true"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/book_poster"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/book_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:elevation="2dp"
+        android:fontFamily="@font/poppins_medium"
+        android:textColor="@color/white_smoke"
+        android:textSize="17sp"
+        app:layout_constraintEnd_toEndOf="@+id/book_title"
+        app:layout_constraintStart_toStartOf="@+id/book_title"
+        app:layout_constraintTop_toBottomOf="@+id/book_title"
+        tools:text="Suzy Menkes " />
+</androidx.constraintlayout.widget.ConstraintLayout>

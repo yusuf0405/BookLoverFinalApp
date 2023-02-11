@@ -1,5 +1,6 @@
 package com.example.domain.repository
 
+import com.example.domain.RequestState
 import com.example.domain.Resource
 import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookThatReadDomain
@@ -8,25 +9,29 @@ import kotlinx.coroutines.flow.Flow
 
 interface BookThatReadRepository {
 
-    fun fetchMyBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
+    fun fetchUserAllBooksThatReadByUserId(id: String): Flow<List<BookThatReadDomain>>
 
-    fun onRefresh(id: String): Flow<Resource<List<BookThatReadDomain>>>
+    fun fetchUserAllBooksThatReadFromCloud(userId: String): Flow<List<BookThatReadDomain>>
+
+    suspend fun fetchSavedBookByBookIdFromCache(bookId: String): BookThatReadDomain
 
     fun fetchStudentBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 
-    fun fetchMyBook(id: String, userId: String): Flow<Resource<Int>>
+    suspend fun deleteBookInSavedBooks(id: String): RequestState<Unit>
 
-    fun deleteMyBook(id: String): Flow<Resource<Unit>>
+    suspend fun addBookToSavedBooks(book: AddNewBookThatReadDomain): RequestState<Unit>
 
-    fun addBook(book: AddNewBookThatReadDomain): Flow<Resource<Unit>>
+    suspend fun updateProgress(
+        id: String,
+        progress: Int,
+        currentDayProgress: Int
+    ): RequestState<Unit>
 
-    fun updateProgress(id: String, progress: Int): Flow<Resource<Unit>>
-
-    fun updateChapters(
+    suspend fun updateChapters(
         id: String,
         chapters: Int,
         isReadingPages: List<Boolean>,
-    ): Flow<Resource<Unit>>
+    ): RequestState<Unit>
 
     fun fetchUsersBooks(id: String): Flow<Resource<List<BookThatReadDomain>>>
 

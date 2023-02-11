@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--region CollapsedPlayerPager-->
+    <dimen name="collapsed_player_pager_width">0dp</dimen>
+    <dimen name="collapsed_player_pager_height">56dp</dimen>
+    <dimen name="collapsed_music_player_pager_margin_end">14dp</dimen>
+    <dimen name="collapsed_radio_player_pager_margin_end">60dp</dimen>
+    <!--endregion-->
+
+    <!--region CollapsedPlayerYaRotatingProgress-->
+    <dimen name="collapsed_player_ya_rot_progress_width">40dp</dimen>
+    <dimen name="collapsed_player_ya_rot_progress_height">40dp</dimen>
+    <dimen name="collapsed_player_ya_rot_progress_margin_start">20dp</dimen>
+    <dimen name="collapsed_player_ya_rot_progress_margin_top">8dp</dimen>
+    <!--endregion-->
+
+    <!--region CollapsedPlayerTextViewLoadingPlayer-->
+    <dimen name="collapsed_player_text_loading_player_width">0dp</dimen>
+    <dimen name="collapsed_player_text_loading_player_height">40dp</dimen>
+    <dimen name="collapsed_player_text_loading_player_margin_start">12dp</dimen>
+    <dimen name="collapsed_player_text_loading_player_margin_top">8dp</dimen>
+    <dimen name="collapsed_player_text_loading_player_text_size">12sp</dimen>
+    <!--endregion-->
+
+    <!--region ExpandedPlayerControls -->
+    <dimen name="exp_player_margin_from_play_pause">12dp</dimen>
+    <dimen name="exp_player_play_pause_btn_size">76dp</dimen>
+    <dimen name="exp_player_play_pause_auto">88dp</dimen>
+    <!--endregion-->
+
+</resources>

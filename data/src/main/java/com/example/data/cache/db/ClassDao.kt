@@ -5,6 +5,7 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.data.cache.models.ClassCache
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ClassDao {
@@ -13,7 +14,7 @@ interface ClassDao {
     suspend fun addNewClass(schoolClass: ClassCache)
 
     @Query("select * from school_classes")
-    suspend fun getAllClass(): MutableList<ClassCache>
+    fun getAllClass(): Flow<MutableList<ClassCache>>
 
     @Query("DELETE FROM school_classes WHERE id = :id")
     fun deleteByClassId(id: String)

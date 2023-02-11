@@ -11,26 +11,42 @@ import com.example.bookloverfinalapp.app.utils.communication.ProgressCommunicati
 import com.example.bookloverfinalapp.app.utils.communication.ProgressDialogCommunication
 import com.example.bookloverfinalapp.app.utils.dispatchers.Dispatchers
 import com.example.bookloverfinalapp.app.utils.event.Event
+import com.example.bookloverfinalapp.app.utils.navigation.NavCommand
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
-import javax.inject.Inject
+import com.example.data.cache.models.IdResourceString
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.*
 
 
 abstract class BaseViewModel : ViewModel() {
 
-    @Inject
-    lateinit var progressCommunication: ProgressCommunication
+    private var progressCommunication = ProgressCommunication.Base()
 
-    @Inject
-    lateinit var errorCommunication: ErrorCommunication
+    private var errorCommunication = ErrorCommunication.Base()
 
-    @Inject
-    lateinit var navigationCommunication: NavigationCommunication
+    private var navigationCommunication = NavigationCommunication.Base()
 
-    @Inject
-    lateinit var progressDialogCommunication: ProgressDialogCommunication
+    private var progressDialogCommunication = ProgressDialogCommunication.Base()
 
-    @Inject
-    lateinit var dispatchers: Dispatchers
+    private var dispatchers = Dispatchers.Base()
+
+    private var _navCommand = createMutableSharedFlowAsSingleLiveEvent<NavCommand>()
+    val navCommand: SharedFlow<NavCommand> get() = _navCommand.asSharedFlow()
+
+    private val _isErrorMessageIdFlow = createMutableSharedFlowAsSingleLiveEvent<IdResourceString>()
+    val isErrorMessageIdFlow: SharedFlow<IdResourceString> get() = _isErrorMessageIdFlow.asSharedFlow()
+
+    private val _isErrorMessageFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val isErrorMessageFlow: SharedFlow<String> get() = _isErrorMessageFlow.asSharedFlow()
+
+    private val _showSuccessSnackbarFlow = createMutableSharedFlowAsSingleLiveEvent<IdResourceString>()
+    val showSuccessSnackbarFlow get() = _showSuccessSnackbarFlow.asSharedFlow()
+
+    fun <T> createMutableSharedFlowAsSingleLiveEvent(): MutableSharedFlow<T> =
+        MutableSharedFlow(0, 1, BufferOverflow.DROP_OLDEST)
+
+    fun <T> createMutableSharedFlowAsLiveData(): MutableSharedFlow<T> =
+        MutableSharedFlow(1, 0, BufferOverflow.DROP_OLDEST)
 
     fun collectProgressAnimation(owner: LifecycleOwner, observer: Observer<Event<Boolean>>) =
         progressCommunication.observe(owner = owner, observer = observer)
@@ -47,6 +63,16 @@ abstract class BaseViewModel : ViewModel() {
     fun navigate(navDirections: NavDirections) =
         navigationCommunication.put(Event(NavigationCommand.ToDirection(navDirections)))
 
+    fun emitToErrorMessageFlow(messageId: IdResourceString) =
+        _isErrorMessageIdFlow.tryEmit(messageId)
+
+    fun emitToShowSuccessNotificationFlow(messageId: IdResourceString) =
+        _showSuccessSnackbarFlow.tryEmit(messageId)
+
+    fun emitToErrorMessageFlow(message: String) = _isErrorMessageFlow.tryEmit(message)
+
+    fun navigate(navCommand: NavCommand) = _navCommand.tryEmit(navCommand)
+
     fun navigateBack() =
         launchInBackground { navigationCommunication.put(Event(value = NavigationCommand.Back)) }
 
@@ -59,13 +85,12 @@ abstract class BaseViewModel : ViewModel() {
     fun dismissProgressAnimation() =
         launchInBackground { progressCommunication.put(Event(value = false)) }
 
-    fun showProgressDialog() =
-        launchInBackground { progressDialogCommunication.put(true) }
-
-    fun dismissProgressDialog() =
-        launchInBackground { progressDialogCommunication.put(false) }
 
     fun <T> launchInBackground(backgroundCall: suspend () -> T) =
         dispatchers.launchInBackground(viewModelScope) { backgroundCall() }
+
+    companion object {
+        const val SEARCH_DEBOUNCE = 300L
+    }
 }
 

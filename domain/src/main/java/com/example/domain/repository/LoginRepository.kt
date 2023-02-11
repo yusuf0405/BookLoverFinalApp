@@ -1,5 +1,6 @@
 package com.example.domain.repository
 
+import com.example.domain.RequestState
 import com.example.domain.models.UserDomain
 import com.example.domain.Resource
 import com.example.domain.models.PostRequestAnswerDomain
@@ -8,9 +9,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface LoginRepository {
 
-    fun signIn(email: String, password: String): Flow<Resource<UserDomain>>
+    suspend fun signIn(email: String, password: String): RequestState<UserDomain>
 
-    fun signUp(user: UserSignUpDomain): Flow<Resource<PostRequestAnswerDomain>>
+    suspend fun signUp(user: UserSignUpDomain): RequestState<PostRequestAnswerDomain>
 
-    fun passwordReset(email: String): Flow<Resource<Unit>>
+    suspend fun passwordReset(email: String): RequestState<Unit>
 }

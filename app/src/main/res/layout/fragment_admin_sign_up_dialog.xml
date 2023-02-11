@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.joseph.ui_core.custom.CurvedContainer xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:elevation="8dp"
+    app:containerBackground="?attr/background_primary_elevated"
+    tools:context=".app.ui.general_screens.screen_sign_up.admin_sign_up.FragmentAdminSignUpDialog">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="vertical"
+        android:paddingBottom="24dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"
+            android:text="@string/admin_sighUp"
+            android:textColor="?attr/blackOrWhiteColor"
+            android:textSize="16sp" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:layout_height="60dp"
+            android:layout_marginTop="0dp"
+            android:hint="@string/your_email">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/email_field"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:inputType="textEmailSubject"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_field_box"
+            style="@style/EditTextStyleInputLayoutLoginStyle"
+            android:layout_height="60dp"
+            android:hint="@string/your_password"
+            app:endIconMode="password_toggle">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/password_field"
+                style="@style/EditTextStyleInputLoginStyle"
+                android:inputType="textPassword"
+                android:textSize="14sp" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/signUpBtn"
+            style="@style/ButtonStyle.Blue.AppStyle"
+            android:text="@string/signUp"
+            android:layout_marginBottom="8dp"
+            android:textSize="14sp" />
+    </LinearLayout>
+</com.joseph.ui_core.custom.CurvedContainer>

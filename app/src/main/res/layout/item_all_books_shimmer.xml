@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_marginTop="16dp"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:text="@string/saved_books"
+            android:textColor="@color/shimmerColor"
+            android:textSize="20sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+            <include layout="@layout/item_save_book_shimmer" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="20dp"
+                android:paddingBottom="8dp"
+                android:layout_marginTop="16dp"
+                android:text="@string/my_students"
+                android:textColor="@color/shimmerColor"
+                android:textSize="20sp" />
+
+
+            <include layout="@layout/item_shimmer_student" />
+
+            <include layout="@layout/item_shimmer_student" />
+
+            <include layout="@layout/item_shimmer_student" />
+
+            <include layout="@layout/item_shimmer_student" />
+
+            <include layout="@layout/item_shimmer_student" />
+        </LinearLayout>
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="20dp"
+            android:paddingBottom="8dp"
+            android:text="@string/all_books"
+            android:textColor="@color/shimmerColor"
+            android:textSize="20sp"
+            app:drawableEndCompat="@drawable/ic_right" />
+
+        <include layout="@layout/item_shimmer_book" />
+
+        <include layout="@layout/item_shimmer_book" />
+
+        <include layout="@layout/item_shimmer_book" />
+
+        <include layout="@layout/item_shimmer_book" />
+
+        <include layout="@layout/item_shimmer_book" />
+
+    </LinearLayout>
+</com.facebook.shimmer.ShimmerFrameLayout>
