@@ -49,6 +49,9 @@ dependencies {
     //Image
     implementation "com.github.bumptech.glide:glide:$glide_version"
 
+    //Lottie
+    implementation "com.airbnb.android:lottie:$lottie_version"
+
     // Coroutines
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
