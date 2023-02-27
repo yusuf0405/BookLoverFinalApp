@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View
 import android.view.Window
@@ -14,6 +13,7 @@ import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.MultiTransformation
@@ -26,6 +26,7 @@ import com.example.bookloverfinalapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.button.MaterialButton
 import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 import java.text.DecimalFormat
@@ -63,10 +64,8 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
                 !playerOverlayContainerConstraintLayout.pointInView(event.x, event.y)
             ) {
                 audioService?.audioBookId?.let { audioBookId ->
-                    Log.i("Joseph", "audioBookId $audioBookId")
                     viewModel.play(audioBookId = audioBookId)
                 }
-                Log.i("Joseph", "collapsePlayerOverlay")
                 collapsePlayerOverlay()
             }
             return super.dispatchTouchEvent(event)
@@ -84,12 +83,6 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
             binding.includeBottomSheetPlayer.playerView.player = binder.exoPlayer
             // Pass player updates to interested observers
             // .
-            audioService?.updateAudioBookPosition?.onEach {
-                viewModel.updateAudioBookCurrentStartPosition(
-                    audioBookId = it.first,
-                    currentPosition = it.second
-                )
-            }?.launchIn(lifecycleScope)
 
             audioService?.playerStatusFlow?.onEach { status ->
                 _playerStatusFlow.tryEmit(status)
@@ -158,8 +151,7 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
             }
         }.launchIn(lifecycleScope)
 
-        audioBookFlow
-            .filter { it != AudioBook.unknown() }
+        audioBookFlow.filter { it != AudioBook.unknown() }
             .onEach(::renderContent)
             .launchIn(lifecycleScope)
         audioBookIdFlow.launchIn(lifecycleScope)
@@ -167,7 +159,7 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
 
     private fun showChoiceSchoolModalPage(currentSpeed: String) = ModalPage.Builder()
         .fragment(FragmentPlaybackSpeedDialog.newInstance(currentSpeed))
-        .title("Изменить скорость воспроизводение")
+        .title(getString(R.string.change_the_playback_speed))
         .build()
         .show(supportFragmentManager, ModalPage.TAG)
 
@@ -226,21 +218,20 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
     private fun setupPlayerBottomSheet() {
         dismissPlayerOverlay()
 
-        binding.includeBottomSheetPlayer.playerOverlayPeekLinearLayout.setOnDownEffectClickListener {
+        binding.includeBottomSheetPlayer.playerOverlayPeekLinearLayout.setOnClickListener {
             togglePlayerOverlayShowState()
         }
 
         BottomSheetBehavior.from(playerOverlayContainerConstraintLayout).apply {
             setBottomSheetCallback(object : BottomSheetBehavior.BottomSheetCallback() {
                 override fun onStateChanged(bottomSheet: View, newState: Int) = when (newState) {
-                    BottomSheetBehavior.STATE_HIDDEN -> hidePlayerOverlayPlaceHolder()
-                    BottomSheetBehavior.STATE_EXPANDED -> showPlayerOverlayPlaceHolder()
-                    BottomSheetBehavior.STATE_COLLAPSED -> showPlayerOverlayPlaceHolder()
+                    BottomSheetBehavior.STATE_HIDDEN -> setPlayerOverlayPlaceHolder(false)
+                    BottomSheetBehavior.STATE_EXPANDED -> setPlayerOverlayPlaceHolder(true)
+                    BottomSheetBehavior.STATE_COLLAPSED -> setPlayerOverlayPlaceHolder(true)
                     else -> {}
                 }
 
-                override fun onSlide(bottomSheet: View, slideOffset: Float) {
-                }
+                override fun onSlide(bottomSheet: View, slideOffset: Float) = Unit
             })
         }
     }
@@ -270,12 +261,11 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
         window.callback = PlayerWindowCallback(window.callback)
         BottomSheetBehavior.from(playerOverlayContainerConstraintLayout).apply {
             isHideable = false
-            showPlayerOverlayPlaceHolder()
+            setPlayerOverlayPlaceHolder(isVisible = true)
         }
     }
 
     private fun collapsePlayerOverlay() {
-        Log.i("Joseph", "collapsePlayerOverlay")
         BottomSheetBehavior.from(playerOverlayContainerConstraintLayout).apply {
             if (state == BottomSheetBehavior.STATE_EXPANDED) state =
                 BottomSheetBehavior.STATE_COLLAPSED
@@ -283,7 +273,6 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
     }
 
     private fun togglePlayerOverlayShowState() {
-        Log.i("Joseph", "togglePlayerOverlayShowState")
         BottomSheetBehavior.from(playerOverlayContainerConstraintLayout).apply {
             val collapse = state == BottomSheetBehavior.STATE_EXPANDED
             state = if (collapse) BottomSheetBehavior.STATE_COLLAPSED
@@ -292,7 +281,6 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
     }
 
     private fun dismissPlayerOverlay() {
-        Log.i("Joseph", "dismissPlayerOverlay")
         // Restore original window callback.
         (window.callback as? PlayerWindowCallback)?.originalCallback?.let {
             window.callback = it
@@ -300,19 +288,12 @@ abstract class BasePlayerActivity : AppCompatActivity(), PlayerCallback,
 
         BottomSheetBehavior.from(playerOverlayContainerConstraintLayout).apply {
             isHideable = true
-            hidePlayerOverlayPlaceHolder()
+            setPlayerOverlayPlaceHolder(isVisible = false)
             state = BottomSheetBehavior.STATE_HIDDEN
         }
     }
 
-    private fun showPlayerOverlayPlaceHolder() {
-        Log.i("Joseph", "showPlayerOverlayPlaceHolder")
-        binding.includeContentMain.collapsedPlayerOverlayPlaceHolderView.visibility = View.VISIBLE
+    private fun setPlayerOverlayPlaceHolder(isVisible: Boolean) {
+        binding.includeContentMain.collapsedPlayerOverlayPlaceHolderView.isVisible = isVisible
     }
-
-    private fun hidePlayerOverlayPlaceHolder() {
-        Log.i("Joseph", "hidePlayerOverlayPlaceHolder")
-        binding.includeContentMain.collapsedPlayerOverlayPlaceHolderView.visibility = View.GONE
-    }
-
 }
