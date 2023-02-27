@@ -36,6 +36,23 @@ fun DialogFragment?.tuneBottomDialog(
     }
 }
 
+fun DialogFragment?.tuneCenterDialog(
+    marginHorizontal: Int = 16,
+) {
+    this?.dialog?.let { dialog ->
+        val window = dialog.window ?: return
+        window.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+        val windowLayoutParams = window.attributes
+        windowLayoutParams.gravity = Gravity.CENTER
+        windowLayoutParams.width = requireActivity().getWidth() - dpToPx(
+            requireContext(),
+            2 * marginHorizontal
+        )
+        window.attributes = windowLayoutParams
+    }
+}
+
+
 fun dpToPx(context: Context, dp: Int): Int {
     return dp * getMetrics(context).densityDpi / 160
 }
