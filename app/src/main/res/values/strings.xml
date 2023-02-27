@@ -366,5 +366,28 @@
     <string name="chapters">Chapters</string>
     <string name="public_year">Public year</string>
     <string name="pagess">Pages</string>
+    <string name="orientation">Orientation</string>
+    <string name="horizontal">Horizontal</string>
+    <string name="vertical">Vertical</string>
+    <string name="go_to_page">Go to page</string>
+    <string name="loading_the_book">Loading the book</string>
+    <string name="uploading_a_new_avatar">Uploading a new avatar</string>
+    <string name="back">Back</string>
+    <string name="hide_toolbar">Hide toolbar</string>
+    <string name="show_toolbar">Show toolbar</string>
+    <string name="information_book">Book Information</string>
+    <string name="options">Options</string>
+    <string name="video">Видео</string>
+    <string name="photo">Фото</string>
+    <string name="gallery">Gallery</string>
+    <string name="camera">Camera</string>
+    <string name="create_stories">Create stories</string>
+    <string name="uploading_files">Uploading files</string>
+    <string name="stories_added_successfully">Stories added successfully</string>
+    <string name="select_file_type">Select file type</string>
+    <string name="continuee">Continue</string>
+    <string name="your_file_has_been_uploaded_successfully">Your file has been uploaded successfully</string>
+    <string name="success">Success!</string>
+    <string name="change_the_playback_speed">Change the playback speed</string>
 
 </resources>
