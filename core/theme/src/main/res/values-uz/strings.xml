@@ -128,6 +128,7 @@
     <string name="teacher_sighUp">Oqituvchini royxatdan otkazish</string>
     <string name="next">Keyingi</string>
     <string name="books">Kitoblar</string>
+    <string name="book">Kitob</string>
     <string name="progress">Taraqqiyot</string>
     <string name="account">Profil</string>
     <string name="settings">Sozlamalar</string>
@@ -338,7 +339,7 @@
     <string name="all_genres">Barcha janrlar</string>
     <string name="learn_more">Ko\'proq o\'rganing</string>
     <string name="more">Ko\'proq</string>
-    <string name="audio_books">Audio kitoblar</string>
+    <string name="audio_books">Audio kitob</string>
     <string name="exclusive_books">Eksklyuziv kitoblar</string>
     <string name="what_are_we_looking_for">Nimani izlayapmiz?</string>
     <string name="pages">Betlar:</string>
@@ -363,6 +364,7 @@
     <string name="gallery">Galereya</string>
     <string name="camera">Kamera</string>
     <string name="create_stories">Hikoyani yaratish</string>
+    <string name="stories">Hikoya</string>
     <string name="uploading_files">Fayllar yuklanmoqda</string>
     <string name="stories_added_successfully">Hikoyalar muvaffaqiyatli qo\'shildi</string>
     <string name="select_file_type">Fayl turini tanlang</string>

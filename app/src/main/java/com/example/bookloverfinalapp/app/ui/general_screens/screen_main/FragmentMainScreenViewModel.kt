@@ -64,7 +64,6 @@ class FragmentMainScreenViewModel @Inject constructor(
     val showAddStoriesDialogFlow get() = _showAddStoriesDialogFlow.asSharedFlow()
 
     private val recyclerViewStateFlow = MutableStateFlow<Parcelable?>(null)
-    private val floatingActionButtonIsClickedFlow = MutableStateFlow(false)
 
     private var _motionPosition = MutableStateFlow(0f)
     val motionPosition get() = _motionPosition.asStateFlow()
@@ -90,14 +89,10 @@ class FragmentMainScreenViewModel @Inject constructor(
 
     fun updateMotionPosition(position: Float) = _motionPosition.tryEmit(position)
 
-    fun updateFloatingActionButtonIsClickedFlow(isClick: Boolean) =
-        floatingActionButtonIsClickedFlow.tryEmit(isClick)
 
     fun saveRecyclerViewCurrentState(state: Parcelable?) = recyclerViewStateFlow.tryEmit(state)
 
     fun fetchRecyclerViewCurrentState(): Parcelable? = recyclerViewStateFlow.value
-
-    fun floatingActionButtonIsClickedFlow() = floatingActionButtonIsClickedFlow.value
 
     fun navigateUploadBookFragment(uploadType: UploadFileType) =
         navigate(router.navigateToUploadBookFragment(uploadType))
