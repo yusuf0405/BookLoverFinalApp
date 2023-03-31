@@ -1,15 +1,15 @@
 package com.example.domain.repository
 
-import java.io.InputStream
+import kotlinx.coroutines.flow.Flow
+
 
 interface BooksSaveToFileRepository {
 
     suspend fun saveBookToFile(
-        inputStream: InputStream,
+        fileUrl: String,
         key: String,
         fileName: String,
-        fileSuffix: String
-    )
+    ): Flow<String>
 
     fun fetchSavedBookFilePath(key: String): String?
 }

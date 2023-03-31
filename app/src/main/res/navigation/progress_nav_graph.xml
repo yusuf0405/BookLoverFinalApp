@@ -23,6 +23,35 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentProgress_to_fragmentAllSavedBooks"
+            app:destination="@id/fragmentAllSavedBooks"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
     </fragment>
+
+    <fragment
+        android:id="@+id/fragmentAllSavedBooks"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.FragmentAllSavedBooks"
+        android:label="fragment_my_books">
+
+        <action
+            android:id="@+id/action_fragmentAllSavedBooks_to_book_read_nav_graph"
+            app:destination="@id/book_read_nav_graph"
+            app:enterAnim="@anim/slide_up"
+            app:exitAnim="@anim/slide_down"
+            app:popEnterAnim="@anim/slide_up"
+            app:popExitAnim="@anim/slide_down">
+            <argument
+                android:name="book"
+                app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+            <argument
+                android:name="path"
+                app:argType="string" />
+        </action>
+    </fragment>
+    <include app:graph="@navigation/book_read_nav_graph" />
 
 </navigation>

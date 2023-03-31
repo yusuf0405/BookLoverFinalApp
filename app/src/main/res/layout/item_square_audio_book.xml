@@ -6,6 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_marginStart="12dp"
+    android:layout_marginBottom="8dp"
     android:orientation="vertical">
 
     <com.google.android.material.card.MaterialCardView
@@ -38,9 +39,9 @@
             app:cardCornerRadius="8dp">
 
             <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginHorizontal="7dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginHorizontal="3dp"
                 android:layout_marginVertical="2dp"
                 android:src="@drawable/headphones_icon" />
         </com.google.android.material.card.MaterialCardView>

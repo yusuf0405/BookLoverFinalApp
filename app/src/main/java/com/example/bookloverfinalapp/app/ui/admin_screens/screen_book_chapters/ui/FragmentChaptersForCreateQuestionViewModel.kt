@@ -1,6 +1,5 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.ui
 
-import android.util.Log
 import android.widget.SearchView
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.base.BaseViewModel
@@ -8,22 +7,23 @@ import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.adapter.QuesionChapterItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.adapter.QuestionChapterAdapterModel
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.router.FragmentChaptersForCreateQuestionRouter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.models.CreateQuestionType
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SearchAdapterModel
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.BookDomain
 import com.example.domain.repository.BooksRepository
 import com.example.domain.repository.BooksSaveToFileRepository
+import com.joseph.ui_core.adapter.Item
 import com.shockwave.pdfium.PdfDocument
-import kotlinx.coroutines.delay
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
-import kotlinx.coroutines.launch
-import javax.inject.Singleton
 
-@Singleton
-class FragmentChaptersForCreateQuestionViewModel constructor(
-    private val bookId: String,
+
+class FragmentChaptersForCreateQuestionViewModel @AssistedInject constructor(
+    @Assisted private val bookId: String,
     private val booksRepository: BooksRepository,
     private val booksSaveToFileRepository: BooksSaveToFileRepository,
     private val router: FragmentChaptersForCreateQuestionRouter,
@@ -56,11 +56,12 @@ class FragmentChaptersForCreateQuestionViewModel constructor(
         .map(::addSearchViewModelToAdapter)
         .flowOn(dispatchersProvider.default())
 
-    fun navigateToCreateQuestionFragment() {
+    fun navigateToCreateQuestionFragment(type: CreateQuestionType) {
         navigate(
             router.navigateNavigateToCreateQuestionFragment(
                 bookId = bookId,
-                chapter = currentChapterFlow.value
+                chapter = currentChapterFlow.value,
+                type = type
             )
         )
     }
@@ -118,5 +119,12 @@ class FragmentChaptersForCreateQuestionViewModel constructor(
     override fun chapterItemOnClickListener(currentChapterPosition: Int) {
         currentChapterFlow.tryEmit(currentChapterPosition)
         _showChoiceCreateQuestionDialogFlow.tryEmit(Unit)
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            bookId: String
+        ): FragmentChaptersForCreateQuestionViewModel
     }
 }

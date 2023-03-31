@@ -9,9 +9,11 @@ interface AudioBooksRepository {
 
     fun fetchAllAudioBooksFromCache(): Flow<List<AudioBookDomain>>
 
-    suspend fun fetchAudioBookFromCache(audioBookId: String): AudioBookDomain
+    fun fetchAudioBookFromCacheObservable(audioBookId: String): Flow<AudioBookDomain>
 
     suspend fun updateAudioBookCurrentStartPosition(audioBookId: String, currentPosition: Int)
+
+    suspend fun updateAudioBookIsPlayingState(audioBookId: String, isPlaying: Boolean)
 
     suspend fun clearTable()
 }

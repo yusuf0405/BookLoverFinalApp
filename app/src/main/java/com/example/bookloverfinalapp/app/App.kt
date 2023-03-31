@@ -6,6 +6,7 @@ import androidx.work.*
 import com.example.bookloverfinalapp.app.di.APPLICATION_ID
 import com.example.bookloverfinalapp.app.workers.ClearCacheWorker
 import com.example.bookloverfinalapp.app.utils.cons.CLIENT_KEY
+import com.example.bookloverfinalapp.app.workers.CheckBookIsSaveWorker
 import com.parse.Parse
 import com.yariksoffice.lingver.Lingver
 import dagger.hilt.android.HiltAndroidApp
@@ -30,14 +31,15 @@ class App : Application(), Configuration.Provider {
             Parse.Configuration.Builder(this)
                 .applicationId(APPLICATION_ID)
                 .clientKey(CLIENT_KEY)
-                .server("https://parseapi.back4app.com")
+                .server(PARSE_URL)
                 .build()
         )
-        startSyncWorker()
+        val workManager = WorkManager.getInstance(this)
+
+        startSyncWorker(workManager)
     }
 
-    private fun startSyncWorker() {
-        val workManager = WorkManager.getInstance(this)
+    private fun startSyncWorker(workManager: WorkManager) {
         workManager.enqueueUniquePeriodicWork(
             ClearCacheWorker.TAG,
             ExistingPeriodicWorkPolicy.KEEP,
@@ -48,9 +50,11 @@ class App : Application(), Configuration.Provider {
     private fun createConstraintsWithInternetConnectedAndBatteryCharged() =
         Constraints
             .Builder()
+            .setRequiredNetworkType(NetworkType.CONNECTED)
             .build()
 
     companion object {
+        private const val PARSE_URL = "https://parseapi.back4app.com"
         lateinit var applicationScope: CoroutineScope
     }
 

@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.choice_image_dialog
 
 import androidx.annotation.DrawableRes
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 
 data class DefaultAvatarItem(
     @DrawableRes val imageResource: Int,

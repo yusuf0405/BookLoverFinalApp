@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models
 
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.listener.UserItemOnClickListener
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 
 data class UserAdapterModel(
     val id: String,

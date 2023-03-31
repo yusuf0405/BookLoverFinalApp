@@ -1,5 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile
 
+import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
@@ -62,7 +63,7 @@ class FragmentProfileViewModel @Inject constructor(
     private val _motionPosition = MutableStateFlow(0f)
     val motionPosition get() = _motionPosition.asStateFlow()
 
-    val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .flowOn(Dispatchers.IO)
         .map(userDomainToUser::map)
         .onEach(internalCurrentUserFlow::emit)
@@ -108,6 +109,7 @@ class FragmentProfileViewModel @Inject constructor(
 
     private fun saveImage() {
         currentUserImageFile.value?.apply {
+            Log.i("Josephhh","parseFile = ${this}")
             saveInBackground((this@FragmentProfileViewModel), (this@FragmentProfileViewModel))
         }
     }
@@ -120,7 +122,6 @@ class FragmentProfileViewModel @Inject constructor(
         if (parseException == null) {
             updateCurrentUserImage()
             _imageUploadDialogIsShowFlow.tryEmit(false)
-            _startUpdateUserFlow.tryEmit(Unit)
         } else {
             emitToErrorMessageFlow(IdResourceString(R.string.generic_error))
         }

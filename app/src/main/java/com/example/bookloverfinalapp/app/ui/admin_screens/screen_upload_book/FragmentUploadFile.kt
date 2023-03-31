@@ -19,8 +19,8 @@ import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Genre
-import com.example.bookloverfinalapp.app.ui.MotionListener
-import com.example.bookloverfinalapp.app.ui.MotionState
+import com.joseph.utils_core.motion.MotionListener
+import com.joseph.utils_core.motion.MotionState
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
@@ -29,7 +29,11 @@ import com.example.bookloverfinalapp.databinding.FragmentAdminUploadPdfBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
+import com.joseph.ui_core.dialog.UploadFileDialog
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.getAttrColor
+import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.utils_core.extensions.showRoundedImage
 import com.parse.ParseFile
 import com.shockwave.pdfium.PdfDocument
 import dagger.hilt.android.AndroidEntryPoint
@@ -52,11 +56,13 @@ class FragmentUploadFile :
 
     private val motionListener = MotionListener(::setToolbarState)
 
-    private val uploadFileDialog: UploadBookDialog by lazy(LazyThreadSafetyMode.NONE) {
-        UploadBookDialog.getInstance()
+    private var isExclusive = false
+
+    private val uploadFileDialog: UploadFileDialog by lazy(LazyThreadSafetyMode.NONE) {
+        UploadFileDialog.getInstance()
     }
 
-    private val uploafFileType: UploadFileType by lazy(LazyThreadSafetyMode.NONE) {
+    private val uploadFileType: UploadFileType by lazy(LazyThreadSafetyMode.NONE) {
         FragmentUploadFileArgs.fromBundle(requireArguments()).uploadType
     }
 
@@ -70,26 +76,30 @@ class FragmentUploadFile :
 
     private fun setupViews() = with(binding()) {
         root.addTransitionListener(motionListener)
-        requireContext().showRoundedImage(
-            imageUrl = String(),
-            imageView = bookUploadPoster
-        )
     }
 
     private fun setOnClickListeners() = with(binding()) {
-        downEffect(saveContainer).setOnClickListener { saveFiles() }
-        downEffect(pickPdfFile).setOnClickListener { startPickPdfFileInStorage() }
-        downEffect(upButtonSaveContainer).setOnClickListener { viewModel.navigateBack() }
-        downEffect(upButton).setOnClickListener { viewModel.navigateBack() }
-        downEffect(changeBookPoster).setOnClickListener { pickImageFileInStorage() }
+        exclusiveSwitch.setOnCheckedChangeListener { _, isChecked -> isExclusive = isChecked }
+        saveContainer.setOnDownEffectClickListener { saveFiles() }
+        pickPdfFile.setOnDownEffectClickListener { startPickPdfFileInStorage() }
+        upButtonSaveContainer.setOnDownEffectClickListener { viewModel.navigateBack() }
+        upButton.setOnDownEffectClickListener { viewModel.navigateBack() }
+        changeBookPoster.setOnDownEffectClickListener { pickImageFileInStorage() }
     }
 
     private fun observeData() = with(viewModel) {
         launchWhenViewStarted {
-            startAddNewBookFlow.observe { startAddNewBook() }
+            startAddNewBookFlow.observe { showSuccessUploadDialog() }
             fileUploadNotificationsShowingFlow.observe(::handleUploadFileDialogIsShowing)
             fileUploadProgressFlow.observe(uploadFileDialog::setTitle)
             allGenres.observe(::handleGenreFetching)
+        }
+    }
+
+    private fun showSuccessUploadDialog() {
+        uploadFileDialog.showSuccessBlock {
+            startAddNewBook()
+            uploadFileDialog.dismiss()
         }
     }
 
@@ -112,11 +122,6 @@ class FragmentUploadFile :
         pickPdfFileInStorage()
     }
 
-    private val resultPickReadExternalStorage =
-        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
-            if (!isGranted) return@registerForActivityResult
-            pickPdfFileInStorage()
-        }
 
     private fun pickImageFileInStorage() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -132,8 +137,14 @@ class FragmentUploadFile :
         false
     } else true
 
+    private val resultPickReadExternalStorage =
+        registerForActivityResult(ActivityResultContracts.RequestPermission()) { isGranted ->
+            if (!isGranted) return@registerForActivityResult
+            pickPdfFileInStorage()
+        }
+
     private fun pickPdfFileInStorage() {
-        val intentType = when (uploafFileType) {
+        val intentType = when (uploadFileType) {
             UploadFileType.PDF_BOOK -> INTENT_PDF_TYPE
             UploadFileType.AUDIO_BOOK -> INTENT_AUDIO_TYPE
         }
@@ -171,7 +182,12 @@ class FragmentUploadFile :
     }
 
     private fun handlePickPosterResult(uri: Uri) {
-        viewModel.updateBookPosterFlow(ParseFile(DEFAULT_IMAGE_TITLE, uriToImage(uri)))
+        viewModel.updateBookPosterFlow(
+            ParseFile(
+                DEFAULT_IMAGE_TITLE,
+                convertImageUriToByteArray(uri)
+            )
+        )
         requireContext().showRoundedImage(
             roundedSize = POSTER_ROUNDED_SIZE,
             imageUri = uri,
@@ -205,7 +221,8 @@ class FragmentUploadFile :
             description = fetchBookCurrentSubtitleFromInput(),
             author = fetchBookCurrentAuthorFromInput(),
             title = fetchBookCurrentTitleFromInput(),
-            publicYear = fetchBookCurrentPublicYearFromInput()
+            publicYear = fetchBookCurrentPublicYearFromInput(),
+            isExclusive = isExclusive
         )
     }
 
@@ -257,7 +274,6 @@ class FragmentUploadFile :
     override fun onError(t: Throwable?) = Unit
 
     override fun genreItemOnClickListener(genre: Genre, textView: TextView, container: CardView) {
-
         if (viewModel.fetchCheckedBookGenresListValue().contains(genre)) {
             val backgroundColor = requireContext().getAttrColor(R.attr.whiteOrGrayColor)
             container.setCardBackgroundColor(backgroundColor)

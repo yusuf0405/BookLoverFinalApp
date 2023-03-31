@@ -2,19 +2,19 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.FrameLayout
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showImage
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
-import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
+import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemUserCircleBinding
+import com.joseph.utils_core.extensions.toDp
 
-class HorizontalUserFingerprint :
+class HorizontalUserFingerprint(private val isWrapContent: Boolean = false) :
     ItemFingerprint<ItemUserCircleBinding, UserAdapterModel> {
 
     override fun isRelativeItem(item: Item) = item is UserAdapterModel
@@ -26,6 +26,14 @@ class HorizontalUserFingerprint :
         parent: ViewGroup
     ): BaseViewHolder<ItemUserCircleBinding, UserAdapterModel> {
         val binding = ItemUserCircleBinding.inflate(layoutInflater, parent, false)
+        if (isWrapContent) {
+            val newLayoutParams = FrameLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+            )
+            newLayoutParams.setMargins(4.toDp, 4.toDp, 4.toDp, 4.toDp)
+            binding.root.layoutParams = newLayoutParams
+        }
         return UserHorizontalViewHolder(binding)
     }
 

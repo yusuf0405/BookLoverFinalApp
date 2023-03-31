@@ -5,16 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.downEffect
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
-import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
+import com.joseph.utils_core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.databinding.ItemHorizontalSavedBookBinding
 
-class SavedBookMainFingerprint : ItemFingerprint<ItemHorizontalSavedBookBinding, SavedBookAdapterModel> {
+class SavedBookMainFingerprint :
+    ItemFingerprint<ItemHorizontalSavedBookBinding, SavedBookAdapterModel> {
 
     override fun isRelativeItem(item: Item) = item is SavedBookAdapterModel
 
@@ -80,6 +80,7 @@ class SavedBookMainViewHolder(
     private fun setOnClickListeners() = with(binding) {
         root.setOnDownEffectClickListener { item.listeners.saveBookItemOnClick(item.savedBook) }
         button.setOnDownEffectClickListener { item.listeners.saveBookItemOnClick(item.savedBook) }
+        removeButton.setOnDownEffectClickListener { item.listeners.saveBookItemOnLongClick(item.savedBook.bookId) }
         root.downEffect().setOnLongClickListener {
             item.listeners.saveBookItemOnLongClick(item.savedBook.bookId)
             true

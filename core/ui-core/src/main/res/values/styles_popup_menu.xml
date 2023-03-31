@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="PopupMenuDefaultStyle" parent="@style/Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:popupBackground">@drawable/popup_menu_background</item>
+        <item name="android:dropDownVerticalOffset">16dp</item>
+        <item name="android:dropDownHorizontalOffset">16dp</item>
+        <item name="android:listPreferredItemHeight">52dp</item>
+    </style>
+
+    <style name="itemTextStyle.PopupMenuDefaultTextStyle" parent="@android:style/TextAppearance.Widget.IconMenu.Item">
+        <item name="android:textColor">?attr/blackOrWhiteColor</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:layout_marginStart">12dp</item>
+        <item name="android:fontFamily">@font/poppins_semi_bold</item>
+    </style>
+</resources>

@@ -2,14 +2,15 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AudioBookAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
+import com.joseph.utils_core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemAudioBookBinding
 
@@ -55,10 +56,14 @@ class AudioBookViewHolder(
     }
 
     private fun setupViews() = with(binding) {
+        val context = itemView.context
         container.startSlideInLeftAnim()
-        cover.context.showRoundedImage(8, item.audioBook.audioBookPoster.url, cover)
+        context.showRoundedImage(8, item.audioBook.audioBookPoster.url, cover)
         title.text = item.audioBook.title
         author.text = item.audioBook.author
+        val actualIcon = if (item.audioBook.isPlaying) R.drawable.pause_icon
+        else R.drawable.play_icon
+        playOrPauseIcon.setImageDrawable(ContextCompat.getDrawable(context, actualIcon))
     }
 
     private fun setOnClickListeners() = with(binding) {

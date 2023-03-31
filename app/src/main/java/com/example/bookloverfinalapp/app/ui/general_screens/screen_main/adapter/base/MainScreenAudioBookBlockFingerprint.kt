@@ -8,10 +8,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenAudioBookBlockBinding
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 
 class MainScreenAudioBookBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,
-    private val viewPool: RecyclerView.RecycledViewPool,
+    private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool(),
 ) : ItemFingerprint<MainScreenAudioBookBlockBinding, MainScreenAudioBookBlockItem> {
 
     override fun isRelativeItem(item: Item) = item is MainScreenAudioBookBlockItem

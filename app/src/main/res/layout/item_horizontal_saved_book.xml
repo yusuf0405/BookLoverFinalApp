@@ -37,9 +37,9 @@
             app:cardCornerRadius="8dp">
 
             <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_marginHorizontal="7dp"
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:layout_marginHorizontal="3dp"
                 android:layout_marginVertical="2dp"
                 android:src="@drawable/closed_book_icon" />
         </com.google.android.material.card.MaterialCardView>
@@ -65,63 +65,44 @@
 
     <TextView
         android:id="@+id/book_title"
+        style="@style/TextViewHeadingH4.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="8dp"
-        android:ellipsize="none"
-        android:fadingEdgeLength="30dp"
-        android:requiresFadingEdge="horizontal"
-        android:singleLine="true"
-        android:textColor="?attr/blackOrWhiteColor"
-        android:textSize="17sp"
         tools:text="Fashionopolis" />
 
     <TextView
         android:id="@+id/book_description"
+        style="@style/TextViewBodyH2.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="4dp"
-        android:ellipsize="none"
-        android:fadingEdgeLength="30dp"
-        android:requiresFadingEdge="horizontal"
-        android:singleLine="true"
         android:textColor="@color/gray_middle"
-        android:textSize="15sp"
         tools:text="Dana Thomas" />
 
-    <com.google.android.material.card.MaterialCardView
+    <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/button"
+        style="@style/ButtonStyle.Blue"
         android:layout_width="match_parent"
         android:layout_height="30dp"
-        android:layout_gravity="center"
         android:layout_marginTop="12dp"
-        app:cardBackgroundColor="?attr/button_gradient_background"
-        app:cardElevation="4dp">
+        android:text="@string/read_book"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center">
-
-            <ImageView
-                android:layout_width="17dp"
-                android:layout_height="17dp"
-                android:layout_gravity="center"
-                android:layout_marginEnd="4dp"
-                android:src="@drawable/read_book_light_icon"
-                app:tint="@color/white" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:text="@string/read_book"
-                android:textColor="@color/white" />
-        </LinearLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/remove_button"
+        style="@style/ButtonStyle.Grey.Stone"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="4dp"
+        android:text="@string/delete"
+        android:textAllCaps="false"
+        android:textSize="14sp"
+        android:textStyle="bold" />
 
 </LinearLayout>

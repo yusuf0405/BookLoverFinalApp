@@ -30,6 +30,7 @@ class BookDbToDataMapper : Mapper<BookCache, BookData> {
             publicYear = publicYear,
             savedStatus = mapSavedStatus(savedStatus),
             description = description,
+            isExclusive = isExclusive
         )
         bookData
     }

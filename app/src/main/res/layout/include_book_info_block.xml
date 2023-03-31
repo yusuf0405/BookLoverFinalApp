@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nestedScroolView"
     android:layout_width="match_parent"
-    android:fillViewport="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:fillViewport="true">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -149,7 +149,7 @@
                 android:fontFamily="@font/poppins"
                 android:textColor="?attr/text_secondary"
                 app:except_last_the_letters="4"
-                tools:text="@tools:sample/lorem/random" />
+                tools:text="@tools:sample/lorem" />
 
         </androidx.core.widget.NestedScrollView>
 
@@ -161,6 +161,15 @@
             android:layout_marginTop="8dp"
             android:padding="4dp" />
 
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/read_button"
+            style="@style/ButtonStyle.Blue.AppStyle"
+            android:layout_marginHorizontal="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:textStyle="bold"
+            android:text="@string/read_book" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_recycler_view"

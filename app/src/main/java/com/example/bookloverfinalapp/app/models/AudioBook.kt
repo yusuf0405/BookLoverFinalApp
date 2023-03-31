@@ -9,13 +9,16 @@ import java.util.*
 class AudioBook(
     val id: String,
     val title: String,
+    val description: String,
     val author: String,
     val schoolId: String,
     val createdAt: Date,
+    val isExclusive: Boolean,
     val currentStartPosition: Int,
     val genres: List<String>,
     val audioBookFile: AudioBookFile,
-    val audioBookPoster: AudioBookPoster
+    val audioBookPoster: AudioBookPoster,
+    val isPlaying: Boolean,
 ) : Parcelable {
 
     companion object {
@@ -28,7 +31,10 @@ class AudioBook(
             currentStartPosition = 0,
             genres = emptyList(),
             audioBookFile = AudioBookFile(String(), String()),
-            audioBookPoster = AudioBookPoster(String(), String())
+            audioBookPoster = AudioBookPoster(String(), String()),
+            description = String(),
+            isExclusive = false,
+            isPlaying = false
         )
     }
 }

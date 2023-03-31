@@ -6,13 +6,14 @@ import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_user_info.pager_adapter.UserInfoPagerAdapter
-import com.example.bookloverfinalapp.app.utils.extensions.showImage
+import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.FragmentStudentDetailsBinding
 import com.example.data.cache.models.IdResourceString
 import com.example.domain.models.StudentDomain
 import com.google.android.material.tabs.TabLayoutMediator
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenStarted
+import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -28,8 +29,8 @@ class FragmentUserInfo :
 
 
     @Inject
-    lateinit var factory: FragmentUserInfoDialogViewModelFactory.Factory
-    override val viewModel: FragmentUserInfoViewModel by viewModels {
+    lateinit var factory: FragmentUserInfoViewModel.Factory
+    override val viewModel: FragmentUserInfoViewModel by viewModelCreator {
         factory.create(userId = userId)
     }
 
@@ -64,7 +65,7 @@ class FragmentUserInfo :
 
 
     private fun observeResource() = with(viewModel) {
-        launchWhenStarted {
+        launchWhenViewStarted {
             userFlow.observe(::handleUserFetching)
             isErrorFlow.observe(::showErrorSnackBar)
         }

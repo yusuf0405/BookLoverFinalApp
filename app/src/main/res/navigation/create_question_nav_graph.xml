@@ -28,5 +28,16 @@
         <argument
             android:name="bookId"
             app:argType="string" />
+        <argument
+            android:name="type"
+            app:argType="com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.models.CreateQuestionType" />
+        <action
+            android:id="@+id/action_fragmentCreateNewQuestion_to_fragmentChoiceDataForQuestion"
+            app:destination="@id/fragmentChoiceDataForQuestion" />
     </fragment>
+    <fragment
+        android:id="@+id/fragmentChoiceDataForQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_questions.FragmentChoiceDataForQuestion"
+        android:label="fragment_choice_data_for_question"
+        tools:layout="@layout/fragment_choice_data_for_question" />
 </navigation>

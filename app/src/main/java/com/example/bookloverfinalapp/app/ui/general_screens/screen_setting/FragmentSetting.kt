@@ -14,7 +14,7 @@ import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.cons.*
-import com.example.bookloverfinalapp.app.utils.extensions.dataStore
+import com.joseph.utils_core.extensions.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

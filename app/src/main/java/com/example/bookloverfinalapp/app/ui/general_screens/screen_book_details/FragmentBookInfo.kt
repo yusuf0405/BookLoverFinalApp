@@ -6,6 +6,7 @@ import android.widget.TextView
 import androidx.annotation.DrawableRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
@@ -15,25 +16,25 @@ import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Genre
 import com.example.bookloverfinalapp.app.models.SavedStatus
-import com.example.bookloverfinalapp.app.ui.MotionListener
-import com.example.bookloverfinalapp.app.ui.MotionState
-import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
+import com.joseph.utils_core.motion.MotionListener
+import com.joseph.utils_core.motion.MotionState
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialogClickListeners
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.confim_dialog.FragmentConfirmDialog
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemsFingerprintSecond
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenBookBlockFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
-import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showBlurImage
-import com.example.bookloverfinalapp.app.utils.extensions.showOnlyOne
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
 import com.example.bookloverfinalapp.app.utils.genre.GenreTags
 import com.example.bookloverfinalapp.databinding.FragmentBookInfoBinding
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.showBlurImage
+import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -50,8 +51,8 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
     private var currentBook = Book.unknown()
 
     @Inject
-    lateinit var factory: FragmentBookInfoViewModelFactory.Factory
-    override val viewModel: FragmentBookInfoViewModel by viewModels {
+    lateinit var factory: FragmentBookInfoViewModel.Factory
+    override val viewModel: FragmentBookInfoViewModel by viewModelCreator {
         factory.create(bookId = bookId)
     }
 
@@ -72,11 +73,8 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
 
     private val motionListener = MotionListener(::setToolbarState)
 
-    private val progressDialog: ProgressDialog by lazy(LazyThreadSafetyMode.NONE) {
-        ProgressDialog.getInstance()
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isFullScreen = true
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigationView()
         setupViews()
@@ -101,6 +99,9 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
             saveIcon.setOnDownEffectClickListener { addOrDeleteBookInSavedBooks() }
             backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
         }
+        includeBookInfoBlock.readButton.setOnDownEffectClickListener {
+            viewModel.navigateToReadBookFragment()
+        }
     }
 
     private fun observeResource() = with(viewModel) {
@@ -112,6 +113,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
             progressDialogIsShowingDialog.observe(::showAndDismissProgressDialog)
             genres.observe(::showGenres)
             showBookOptionDialogFlow.observe(::showFragmentBookOptionDialog)
+            showSavedBookDeleteDialogFlow.observe { showConfirmDialog() }
         }
     }
 
@@ -161,18 +163,20 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
         viewModel.addOrDeleteBookInSavedBooks()
     }
 
-    private fun showAndDismissProgressDialog(isShow: Boolean) =
-        if (isShow) progressDialog.showOnlyOne(parentFragmentManager)
-        else progressDialog.dismiss()
+    private fun showAndDismissProgressDialog(isShow: Boolean) = Unit
+//        if (isShow) progressDialog.showOnlyOne(parentFragmentManager)
+//        else progressDialog.dismiss()
 
     private fun handleBookIsSavedStatus(status: SavedStatus) = with(binding()) {
         when (status) {
             SavedStatus.SAVING -> Unit
             SavedStatus.SAVED -> {
+                setReadBookButtonVisibility(isVisible = true)
                 setSaveIconInToolbarBlock(R.drawable.saved_single_icon)
                 setSaveIconInPosterBlock(R.drawable.saved_single_white_icon)
             }
             SavedStatus.NOT_SAVED -> {
+                setReadBookButtonVisibility(isVisible = false)
                 setSaveIconInToolbarBlock(R.drawable.save_single_icon)
                 setSaveIconInPosterBlock(R.drawable.save_single_white_icon)
             }
@@ -217,6 +221,10 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
         GenreTags(context = requireContext(), actionListener = this@FragmentBookInfo)
             .getGenreTag(genre)
 
+    private fun setReadBookButtonVisibility(isVisible: Boolean) {
+        binding().includeBookInfoBlock.readButton.isVisible = isVisible
+    }
+
     override fun genreItemOnClickListener(genre: Genre, textView: TextView, container: CardView) {
         viewModel.navigateToGenreInfoFragment(genreId = genre.id)
     }
@@ -230,13 +238,12 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
     }
 
     override fun bookReadOnClickListener(savedBook: BookThatRead) {
-        viewModel.navigateToReadBookFragment(savedBook)
+        viewModel.navigateToReadBookFragment()
     }
 
-    override fun onStart() {
-        super.onStart()
-        binding().root.progress = viewModel.motionPosition.value
-    }
+    private fun showConfirmDialog() = FragmentConfirmDialog.newInstance(
+        setOnPositiveButtonClickListener = { viewModel.startDeleteBookInSavedBooks() }
+    ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     override fun onDestroyView() {
         binding().root.removeTransitionListener(motionListener)

@@ -1,37 +1,48 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.activity_main
 
 import android.os.Bundle
+import androidx.core.view.WindowCompat
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.plusAssign
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.player.BasePlayerActivity
-import com.example.bookloverfinalapp.app.utils.extensions.findNavControllerById
 import com.example.bookloverfinalapp.app.utils.setting.SettingManager.setAppSetting
 import com.example.bookloverfinalapp.databinding.ActivityMainBinding
+import com.google.android.material.bottomsheet.BottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
-class ActivityMain : BasePlayerActivity() {
+class ActivityMain : PlayerControlActivity() {
 
     override val binding: ActivityMainBinding by lazy(LazyThreadSafetyMode.NONE) {
         ActivityMainBinding.inflate(layoutInflater)
     }
 
+    private val navHostFragment: NavHostFragment by lazy(LazyThreadSafetyMode.NONE) {
+        supportFragmentManager
+            .findFragmentById(R.id.nav_host_fragment_activity_main)
+                as NavHostFragment
+    }
+
+    override val navController: NavController
+        get() = navHostFragment.navController
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setWindowToFullScreen()
         setAppSetting(scope = lifecycleScope, context = this)
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_activity_main) as NavHostFragment
-        val navController = navHostFragment.navController
+
         binding.bottomNavigationView.setupWithNavController(navController)
         initBottomNavigationView(navController)
+    }
+
+    private fun setWindowToFullScreen() {
+        WindowCompat.setDecorFitsSystemWindows(window, false)
     }
 
     private fun initBottomNavigationView(navController: NavController) {
@@ -61,15 +72,17 @@ class ActivityMain : BasePlayerActivity() {
     }
 
     override fun onBackPressed() {
-        val currentFragment =
-            findChildFragmentManagerById(R.id.nav_host_fragment_activity_main)
-                .fragments[0]
-
-        if (currentFragment is OnBackPressedListener) {
-            if (currentFragment.onBackPressed()) {
-                return
-            }
+        val behavior = BottomSheetBehavior.from(binding.playerContainerView)
+        if (behavior.state == BottomSheetBehavior.STATE_EXPANDED) {
+            behavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            return
         }
+        val currentFragment =
+            findChildFragmentManagerById(R.id.nav_host_fragment_activity_main).fragments[0]
+        if (currentFragment is OnBackPressedListener) {
+            if (currentFragment.onBackPressed()) return
+        }
+
         super.onBackPressed()
     }
 

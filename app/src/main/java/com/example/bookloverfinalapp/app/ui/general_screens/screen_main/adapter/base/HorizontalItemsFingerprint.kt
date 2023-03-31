@@ -1,26 +1,26 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base
 
 import android.os.Parcelable
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.LinearSnapHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.adapter.snap.OnSnapPositionChangeListener
-import com.example.bookloverfinalapp.app.utils.extensions.attachSnapHelperWithListener
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemSavedListBinding
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 
 class HorizontalItemsFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,
-    private val viewPool: RecyclerView.RecycledViewPool,
+    private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool(),
 ) : ItemFingerprint<ItemSavedListBinding, HorizontalItem> {
 
     override fun isRelativeItem(item: Item) = item is HorizontalItem
 
-    override fun getLayoutId() = R.layout.item_saved_list
+    override fun getLayoutId() = R.layout.item_saved_book
 
     override fun getViewHolder(
         layoutInflater: LayoutInflater,

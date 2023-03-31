@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:elevation="4dp"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:id="@+id/playerOverlayPeekLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="61dp"
+        android:background="?attr/card_background"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/playerOverlayImageView"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="2dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:scaleType="centerCrop"
+            tools:src="@drawable/avatar_third" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/playerOverlayTitleTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fadingEdgeLength="60dp"
+                android:gravity="center_vertical"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                tools:text="@tools:sample/lorem/random" />
+
+            <TextView
+                android:id="@+id/playerOverlayAuthorTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="none"
+                android:fadingEdgeLength="60dp"
+                android:gravity="center_vertical"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                android:textColor="?attr/text_secondary"
+                android:textSize="12sp"
+                tools:text="@tools:sample/lorem/random" />
+
+        </LinearLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/playerOverlayPlayMaterialButton"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            android:layout_width="56dp"
+            android:layout_height="match_parent"
+            app:icon="@drawable/pause_icon"
+            app:strokeWidth="0dp" />
+
+    </LinearLayout>
+
+    <com.google.android.exoplayer2.ui.PlayerView
+        android:id="@+id/playerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"
+        app:controller_layout_id="@layout/audio_controller_expended"
+        app:hide_on_touch="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/playerOverlayPeekLinearLayout"
+        app:show_timeout="0" />
+    <!--        app:player_layout_id="@layout/audio_player_view"-->
+    <!--        app:resize_mode="fixed_width"-->
+    <!--        app:show_buffering="always"-->
+    <!--        app:use_controller="true"-->
+</LinearLayout>

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="?attr/card_container_background"
     app:layoutDescription="@xml/fragment_main_screen_scene"
     tools:context=".app.ui.general_screens.screen_main.FragmentMainScreen">
 

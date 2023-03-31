@@ -21,14 +21,19 @@ class BookResponseToBookCloudMapper @Inject constructor() : Mapper<BookResponse,
             updatedAt = book.updatedAt,
             page = book.page,
             genres = book.genres,
-            book = BookPdfCloud(name = book.book.name, url = book.book.url, type = book.book.type),
+            book = BookPdfCloud(
+                name = book.book?.name ?: String(),
+                url = book.book?.url ?: String(),
+                type = book.book?.type ?: String()
+            ),
             chapterCount = book.chapterCount,
             poster = BookPosterCloud(
-                name = book.poster.name,
-                url = book.poster.url,
-                type = book.poster.type
+                name = book.poster?.name ?: String(),
+                url = book.poster?.url ?: String(),
+                type = book.poster?.type ?: String()
             ),
-            description = book.description
+            description = book.description,
+            isExclusive = book.isExclusive
         )
     }
 }

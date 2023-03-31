@@ -2,59 +2,54 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AudioBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.BookGenreAdapterModel
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.BookGenreItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showImage
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
+import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.app.utils.genre.checkLanguageAndGetActualString
-import com.example.bookloverfinalapp.databinding.ItemAudioBookBinding
-import com.example.bookloverfinalapp.databinding.ItemBookBinding
 import com.example.bookloverfinalapp.databinding.ItemBookGenreBinding
 
 
-class BookGenreFingerprint : ItemFingerprint<ItemBookGenreBinding, BookGenreAdapterModel> {
+class BookGenreFingerprint : ItemFingerprint<ItemBookGenreBinding, BookGenreItem> {
 
-    override fun isRelativeItem(item: Item) = item is BookGenreAdapterModel
+    override fun isRelativeItem(item: Item) = item is BookGenreItem
 
     override fun getLayoutId() = R.layout.item_book_genre
 
     override fun getViewHolder(
         layoutInflater: LayoutInflater,
         parent: ViewGroup
-    ): BaseViewHolder<ItemBookGenreBinding, BookGenreAdapterModel> {
+    ): BaseViewHolder<ItemBookGenreBinding, BookGenreItem> {
         val binding = ItemBookGenreBinding.inflate(layoutInflater, parent, false)
         return BookGenreViewHolder(binding)
     }
 
     override fun getDiffUtil() = diffUtil
 
-    private val diffUtil = object : DiffUtil.ItemCallback<BookGenreAdapterModel>() {
+    private val diffUtil = object : DiffUtil.ItemCallback<BookGenreItem>() {
 
         override fun areItemsTheSame(
-            oldItem: BookGenreAdapterModel,
-            newItem: BookGenreAdapterModel
+            oldItem: BookGenreItem,
+            newItem: BookGenreItem
         ) = oldItem.id == newItem.id
 
         override fun areContentsTheSame(
-            oldItem: BookGenreAdapterModel,
-            newItem: BookGenreAdapterModel
+            oldItem: BookGenreItem,
+            newItem: BookGenreItem
         ) = oldItem == newItem
     }
 }
 
 class BookGenreViewHolder(
     binding: ItemBookGenreBinding,
-) : BaseViewHolder<ItemBookGenreBinding, BookGenreAdapterModel>(binding) {
+) : BaseViewHolder<ItemBookGenreBinding, BookGenreItem>(binding) {
 
-    override fun onBind(item: BookGenreAdapterModel) {
+    override fun onBind(item: BookGenreItem) {
         super.onBind(item)
         setupViews()
         setOnClickListeners()

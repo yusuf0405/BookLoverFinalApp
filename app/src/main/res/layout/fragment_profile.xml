@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?attr/background_primary_elevated"
+    android:background="?attr/card_container_background"
     app:layoutDescription="@xml/fragment_profile_scene"
     tools:context=".app.ui.general_screens.screen_profile.FragmentProfile">
 
@@ -18,7 +18,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="8dp"
-            app:cardBackgroundColor="?attr/background_primary_elevated"
+            app:cardBackgroundColor="?attr/card_container_background"
             app:cardElevation="5dp"
             app:shapeAppearanceOverlay="@style/BottomCornerRadius" />
     </FrameLayout>

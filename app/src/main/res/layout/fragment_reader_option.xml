@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rootContainer"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="32dp"
+    android:transitionName="transition"
+    tools:context=".app.ui.general_screens.screen_login.setting.FragmentSetting">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/go_to_book_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/poppins_semi_bold_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/information_book"
+                android:textSize="14sp"
+                app:drawableRightCompat="@drawable/ic_right" />
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:id="@+id/go_to_page_setting"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                style="@style/poppins_semi_bold_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/go_to_page"
+                android:textSize="14sp"
+                app:drawableRightCompat="@drawable/ic_right" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/hide_toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/hide_or_show_toolbar"
+                style="@style/poppins_semi_bold_style"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/hide_toolbar"
+                android:textSize="14sp"
+                app:drawableRightCompat="@drawable/ic_right" />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+
+</androidx.core.widget.NestedScrollView>

@@ -13,16 +13,12 @@
 
     <TextView
         android:id="@+id/chapterText"
+        style="@style/TextViewHeadingH4.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_margin="16dp"
         android:layout_marginStart="16dp"
         android:layout_marginEnd="15dp"
-        android:ellipsize="none"
-        android:fadingEdgeLength="30dp"
-        android:requiresFadingEdge="horizontal"
-        android:singleLine="true"
-        android:textSize="18sp"
         tools:text="Глава 1" />
 
 </com.google.android.material.card.MaterialCardView>

@@ -4,16 +4,42 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_gravity="bottom"
+    android:layout_marginVertical="16dp"
     android:orientation="vertical"
-    tools:context=".FragmentGoToPage">
+    tools:context=".app.ui.general_screens.screen_reader.FragmentGoToPage">
 
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="16dp"
+        android:text="@string/go_to_page"
+        android:textSize="22sp" />
+
+    <View
+        android:id="@+id/line_view"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
+        android:background="?attr/blackOrWhiteColor" />
+
+    <TextView
+        android:id="@+id/description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginVertical="16dp"
+        android:text="@string/default_delete_alert_message" />
 
     <EditText
         android:id="@+id/go_page_edit_text"
-        style="@style/EditTextStyleInputLoginStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/book_qustion_background"
+        android:backgroundTint="?attr/blackOrWhiteColor"
         android:inputType="number"
         android:paddingHorizontal="9dp"
         android:paddingTop="16dp"
@@ -24,27 +50,29 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="32dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
         android:paddingBottom="16dp">
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/cancel_button"
-            style="@style/ButtonStyle.Red.AppStyle"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="12dp"
+            style="@style/ButtonStyle.Grey.Stone"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:textAllCaps="false" />
 
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/confirm_button"
-            style="@style/ButtonStyle.Blue.AppStyle"
-            android:layout_marginHorizontal="0dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
+            style="@style/ButtonStyle.Blue"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
             android:layout_weight="1"
-            android:text="@string/action_confirm" />
+            android:text="@string/action_confirm"
+            android:textAllCaps="false" />
     </LinearLayout>
 
 </LinearLayout>

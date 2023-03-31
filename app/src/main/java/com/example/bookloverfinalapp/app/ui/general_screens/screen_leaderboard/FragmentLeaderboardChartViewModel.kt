@@ -18,7 +18,7 @@ class FragmentLeaderboardChartViewModel @Inject constructor(
     private val studentDomainToUserRatingModelMapper: StudentDomainToUserRatingModelMapper,
 ) : BaseViewModel() {
 
-    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     val fetchRatingType = MutableStateFlow(FetchRatingType.CLASS)

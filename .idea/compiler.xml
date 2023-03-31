@@ -3,7 +3,20 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel target="1.7">
       <module name="KnigolyubApp.app" target="11" />
+      <module name="KnigolyubApp.core.common.common-api" target="11" />
+      <module name="KnigolyubApp.core.common.common-impl" target="11" />
+      <module name="KnigolyubApp.core.theme" target="11" />
+      <module name="KnigolyubApp.core.themes" target="11" />
+      <module name="KnigolyubApp.core.ui-core" target="11" />
+      <module name="KnigolyubApp.core.utils-core" target="11" />
       <module name="KnigolyubApp.data" target="11" />
+      <module name="KnigolyubApp.features.screen-profile-api" target="11" />
+      <module name="KnigolyubApp.features.screen_profile.screen-profile-api" target="11" />
+      <module name="KnigolyubApp.features.screen_profile.screen-profile-impl" target="11" />
+      <module name="KnigolyubApp.features.screen_profile.screen-profile-ui" target="11" />
+      <module name="KnigolyubApp.features.select-favorite-book" target="11" />
+      <module name="KnigolyubApp.features.sign-in" target="11" />
+      <module name="KnigolyubApp.features.stories" target="11" />
       <module name="KnigolyubApp.ui-core" target="11" />
       <module name="KnigolyubApp.ui_core" target="11" />
     </bytecodeTargetLevel>

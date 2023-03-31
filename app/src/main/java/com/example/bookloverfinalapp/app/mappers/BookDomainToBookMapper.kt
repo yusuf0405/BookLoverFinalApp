@@ -19,7 +19,8 @@ class BookDomainToBookMapper : Mapper<BookDomain, Book> {
             bookPdf = BookPdf(name = book.name, url = book.url),
             genreIds = genreIds,
             description = description,
-            savedStatus = mapSavedStatus(savedStatus)
+            savedStatus = mapSavedStatus(savedStatus),
+            isExclusive = isExclusive
         )
     }
 

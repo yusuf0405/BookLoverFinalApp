@@ -7,7 +7,6 @@ import android.widget.SearchView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.App
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -24,12 +23,13 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.mappers.UserDomainToAdapterModelMapper
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.sort_dialog.SortingUsersSelectOptionActionHandler
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.AudioBookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookGenreItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.GenreItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.*
+import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
 import com.example.bookloverfinalapp.app.utils.navigation.NavCommand
 import com.example.data.ResourceProvider
@@ -55,7 +55,6 @@ class BaseItemsViewModel @Inject constructor(
     private val userCacheRepository: UserCacheRepository,
     private val savedBooksRepository: BookThatReadRepository,
     private val booksSaveToFileRepository: BooksSaveToFileRepository,
-    private val checkBookIsSavedAndSaveUseCase: CheckBookIsSavedAndSaveUseCase,
     private val fetchAllSortedSavedBooksUseCase: FetchAllSortedSavedBooksUseCase,
     private val tasksRepository: TasksRepository,
     private val genresRepository: GenresRepository,
@@ -122,7 +121,7 @@ class BaseItemsViewModel @Inject constructor(
         flow
     }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
-    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
     private val sortingBookSelectOptionValueFlow =
@@ -188,7 +187,6 @@ class BaseItemsViewModel @Inject constructor(
 
     private val userSavedBooksFlow = currentSortValueFlow
         .flatMapLatest(fetchAllSortedSavedBooksUseCase::invoke)
-        .onEach(checkBookIsSavedAndSaveUseCase::invoke)
         .combine(searchStringFlow.debounce(SEARCH_DEBOUNCE))
         { items, searchString -> applySavedBookSearchFiltered(items, searchString) }
         .map(::mapSavedBooksToAdapterModel)
@@ -211,15 +209,14 @@ class BaseItemsViewModel @Inject constructor(
         { items, searchString -> applyAllUsersSearchFiltered(items, searchString) }
         .map(::addSearchViewAdapterModel)
         .flowOn(dispatchersProvider.default())
-        .catch { exception: Throwable ->
-            emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(exception))
+        .catch { exception: Throwable -> emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(exception))
         }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     private val allGenresFlow = genresRepository.fetchAllGenres()
         .flowOn(dispatchersProvider.io())
         .map { genres ->
             genres.map { genre ->
-                BookGenreAdapterModel(
+                BookGenreItem(
                     id = genre.id,
                     titles = genre.titles,
                     posterUrl = genre.poster.url,
@@ -311,7 +308,7 @@ class BaseItemsViewModel @Inject constructor(
         else items.filter { it.fullName().contains(searchString, ignoreCase = true) }
 
     private fun applyAllGenresSearchFiltered(
-        items: List<BookGenreAdapterModel>,
+        items: List<BookGenreItem>,
         searchString: String
     ) = if (searchString.isBlank()) items else items.filter { it.titles.contains(searchString) }
 

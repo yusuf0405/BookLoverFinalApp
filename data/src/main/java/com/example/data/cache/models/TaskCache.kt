@@ -2,12 +2,18 @@ package com.example.data.cache.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
 const val TASKS_TABLE_NAME = "tasks_table"
 
-@Entity(tableName = TASKS_TABLE_NAME)
+@Entity(
+    tableName = TASKS_TABLE_NAME,
+    indices = [
+        Index("id")
+    ]
+)
 data class TaskCache(
     @PrimaryKey val id: String,
     @ColumnInfo(name = "title") val title: String,

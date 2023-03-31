@@ -13,21 +13,19 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleComm
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialogClickListeners
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenAudioBookBlockFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenBookBlockFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AudioBookHorizontalFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SearchFingerprint
-import com.example.bookloverfinalapp.app.ui.player.PlayerCallback
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.*
+import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showImage
+import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.app.utils.genre.checkLanguageAndGetActualString
 import com.example.bookloverfinalapp.databinding.FragmentGenreInfoBinding
 import com.example.domain.models.GenreDomain
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -36,31 +34,21 @@ class FragmentGenreInfo :
     BaseFragment<FragmentGenreInfoBinding, FragmentGenreInfoViewModel>(FragmentGenreInfoBinding::inflate),
     FragmentBookOptionDialogClickListeners {
 
-    @Inject
-    lateinit var factory: FragmentGenreInfoViewModelFactory.Factory
+
 
     private val genreId: String by lazy(LazyThreadSafetyMode.NONE) {
         FragmentGenreInfoArgs.fromBundle(requireArguments()).genreId
     }
 
-    override val viewModel: FragmentGenreInfoViewModel by viewModels {
+    @Inject
+    lateinit var factory: FragmentGenreInfoViewModel.Factory
+    override val viewModel: FragmentGenreInfoViewModel by viewModelCreator {
         factory.create(genreId)
     }
 
-    private val backgroundImages: List<Int> by lazy(LazyThreadSafetyMode.NONE) {
+    private val adapter = FingerprintAdapter(
         listOf(
-            R.drawable.genre_background_first,
-            R.drawable.genre_background_second,
-            R.drawable.genre_background_third,
-            R.drawable.genre_background_fouth,
-            R.drawable.genre_background_fifth,
-            R.drawable.genre_background_sixth,
-            R.drawable.genre_background_seventh,
-        )
-    }
-
-    private val bookAdapter = FingerprintAdapter(
-        listOf(
+            EmptyDataFingerprint(),
             SearchFingerprint(),
             HeaderFingerprint(),
             MainScreenBookBlockFingerprint(
@@ -85,6 +73,7 @@ class FragmentGenreInfo :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isFullScreen = true
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigationView()
         setupViews()
@@ -93,7 +82,7 @@ class FragmentGenreInfo :
     }
 
     private fun setupViews() = with(binding()) {
-        booksRecyclerView.adapter = bookAdapter
+        booksRecyclerView.adapter = adapter
         booksRecyclerView.itemAnimator = createAddableItemAnimator()
     }
 
@@ -105,7 +94,7 @@ class FragmentGenreInfo :
     private fun observeData() = with(viewModel) {
         launchWhenViewStarted {
             genre.observe(::handleGenre)
-            fetchGenreBooks(genreId).observe(bookAdapter::submitList)
+            fetchGenreBooks(genreId).observe(adapter::submitList)
             showBookOptionDialogFlow.observe(::showFragmentBookOptionDialog)
             playAudioBookFlow.observe { audioBookId ->
                 playerCallback?.play(audioBookId = audioBookId)

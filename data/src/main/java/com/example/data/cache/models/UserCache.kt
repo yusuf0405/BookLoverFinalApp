@@ -2,10 +2,18 @@ package com.example.data.cache.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "users")
+@Entity(
+    tableName = "users",
+    indices = [
+        Index("class_id"),
+        Index("objectId"),
+        Index("school_id"),
+    ]
+)
 data class UserCache(
     @PrimaryKey var objectId: String,
     @ColumnInfo(name = "class_id") var classId: String,

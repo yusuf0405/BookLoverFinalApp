@@ -6,7 +6,7 @@ import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.router.FragmentProgressRouter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.mappers.StudentDomainToUserRatingModelMapper
 import com.example.data.cache.models.IdResourceString
@@ -38,7 +38,7 @@ class FragmentProgressViewModel @Inject constructor(
     private val _userStatisticDays = MutableStateFlow<List<UserStatisticModel>>(emptyList())
     val userStatisticDays: StateFlow<List<UserStatisticModel>> get() = _userStatisticDays.asStateFlow()
 
-    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .map(mapUserDomainToUiMapper::map)
         .flowOn(dispatchersProvider.io())
 
@@ -70,6 +70,10 @@ class FragmentProgressViewModel @Inject constructor(
         viewModelScope.launch(dispatchersProvider.io()) {
             _userStatisticDays.tryEmit(userStatisticsRepository.fetchStatisticDays())
         }
+    }
+
+    fun navigateToAllSavedBooksFragment() {
+        navigate(router.navigateToAllSavedBooksFragment())
     }
 
     private fun addHeaderToRecyclerView(items: List<Item>): List<Item> {

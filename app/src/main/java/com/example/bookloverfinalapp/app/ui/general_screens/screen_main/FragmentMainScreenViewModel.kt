@@ -5,16 +5,19 @@ import android.util.Log
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
-import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
+import com.example.bookloverfinalapp.app.models.Collections
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book.UploadFileType
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.listener.UserItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.*
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.mappers.MainItemsToSearchFilteredModelMapper
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AddNewBooksItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.MainScreenErrorItem
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SelectFavoriteBooksItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.router.FragmentMainScreenRouter
+import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
 import com.example.data.ResourceProvider
 import com.example.data.cache.models.IdResourceString
@@ -23,9 +26,9 @@ import com.example.domain.Mapper
 import com.example.domain.models.MainScreenItems
 import com.example.domain.models.UserDomain
 import com.example.domain.repository.BookThatReadRepository
-import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.domain.repository.UserCacheRepository
 import com.example.domain.use_cases.FetchAllMainScreenItemsUseCase
+import com.joseph.stories.presentation.models.StoriesItemOnClickListener
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
@@ -44,7 +47,9 @@ class FragmentMainScreenViewModel @Inject constructor(
     userDomainToUserMapper: Mapper<UserDomain, User>
 ) : BaseViewModel(), BookItemOnClickListener, MainScreenOpenMoreClickListeners,
     GenreItemOnClickListeners, ErrorItemOnClickListener, UserItemOnClickListener,
-    SavedBookItemOnClickListeners, AudioBookItemOnClickListener, BookGenreItemOnClickListeners {
+    SavedBookItemOnClickListeners, AudioBookItemOnClickListener, BookGenreItemOnClickListeners,
+    StoriesItemOnClickListener, CollectionItemOnClickListener,
+    SelectFavoriteBooksItemOnClickListeners, AddNewBooksItemOnClickListeners {
 
     private val _showConfirmDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
     val showConfirmDialogFlow get() = _showConfirmDialogFlow.asSharedFlow()
@@ -55,13 +60,16 @@ class FragmentMainScreenViewModel @Inject constructor(
     private val _showBookOptionDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
     val showBookOptionDialogFlow get() = _showBookOptionDialogFlow.asSharedFlow()
 
+    private val _showAddStoriesDialogFlow = createMutableSharedFlowAsSingleLiveEvent<Unit>()
+    val showAddStoriesDialogFlow get() = _showAddStoriesDialogFlow.asSharedFlow()
+
     private val recyclerViewStateFlow = MutableStateFlow<Parcelable?>(null)
     private val floatingActionButtonIsClickedFlow = MutableStateFlow(false)
 
     private var _motionPosition = MutableStateFlow(0f)
     val motionPosition get() = _motionPosition.asStateFlow()
 
-    val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .flowOn(Dispatchers.IO)
         .map(userDomainToUserMapper::map)
         .flowOn(Dispatchers.Default)
@@ -126,7 +134,11 @@ class FragmentMainScreenViewModel @Inject constructor(
             userItemOnClickListener = this,
             savedBookItemOnClickListener = this,
             genreItemOnClickListeners = this,
-            bookGenreItemOnClickListeners = this
+            bookGenreItemOnClickListeners = this,
+            storiesOnClickListener = this,
+            collectionItemOnClickListener = this,
+            selectFavoriteBooksItemOnClickListener = this,
+            addNewBooksItemOnClickListener = this,
         )
 
     private fun handleError(exception: Throwable) {
@@ -212,4 +224,31 @@ class FragmentMainScreenViewModel @Inject constructor(
     }
 
     override fun genreBlockButtonOnClickListener() = Unit
+
+    override fun storiesOnClickListener(position: Int) {
+        navigate(router.navigateToStoriesFragment(position))
+    }
+
+    override fun addStoriesOnClickListener() {
+        _showAddStoriesDialogFlow.tryEmit(Unit)
+    }
+
+    override fun collectionItemOnClick(collections: Collections) {
+        when (collections) {
+            Collections.ALL_BOOKS -> navigateToAllBooksFragment()
+            Collections.ALL_AUDIO_BOOKS -> navigateToAllAudioBooksFragment()
+            Collections.SAVED_BOOKS -> navigateToAllSavedBooksFragment()
+            Collections.GENRES -> navigateToAllGenresFragment()
+            Collections.USERS -> navigateToAllStudentsFragment()
+        }
+    }
+
+    override fun onClickSelectFavoriteBook() {
+        val destination = router.navigateToSelectFavoriteBookFragment()
+        navigate(destination)
+    }
+
+    override fun onClickAddNewBook() {
+
+    }
 }

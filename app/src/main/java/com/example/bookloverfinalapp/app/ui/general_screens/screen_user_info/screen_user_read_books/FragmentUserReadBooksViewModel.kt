@@ -13,10 +13,13 @@ import com.example.domain.Mapper
 import com.example.domain.models.BookThatReadDomain
 import com.example.domain.repository.BookThatReadRepository
 import com.example.domain.repository.UserRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
 
-class FragmentUserReadBooksViewModel constructor(
-    userId: String,
+class FragmentUserReadBooksViewModel @AssistedInject constructor(
+    @Assisted userId: String,
     private val userRepository: UserRepository,
     private val bookThatReadRepository: BookThatReadRepository,
     dispatchersProvider: DispatchersProvider,
@@ -39,4 +42,10 @@ class FragmentUserReadBooksViewModel constructor(
             _isErrorFlow.tryEmit(resourceProvider.fetchIdErrorMessage(exception))
         }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            userId: String,
+        ): FragmentUserReadBooksViewModel
+    }
 }

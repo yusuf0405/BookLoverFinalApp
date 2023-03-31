@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.motion.widget.MotionLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layoutDescription="@xml/fragment_admin_upload_pdf_scene">
@@ -123,23 +124,48 @@
                 android:id="@+id/pick_pdf_file"
                 style="@style/ButtonStyle.Blue.AppStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/choose"
                 android:textAllCaps="false"
+                android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="@+id/book_upload_poster"
                 app:layout_constraintStart_toStartOf="@+id/book_upload_poster"
                 app:layout_constraintTop_toBottomOf="@+id/book_upload_poster" />
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/pick_pdf_file">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/exclusive_book" />
+
+                <Switch
+                    android:id="@+id/exclusive_switch"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content" />
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/change_book_poster"
                 style="@style/ButtonStyle.Blue.AppStyle"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
+                android:layout_height="30dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/to_change"
                 android:textAllCaps="false"
-                android:textSize="13sp"
+                android:textSize="10sp"
                 android:visibility="gone"
                 app:layout_constraintEnd_toEndOf="@+id/book_upload_poster"
                 app:layout_constraintStart_toStartOf="@+id/book_upload_poster"
@@ -149,9 +175,9 @@
             <EditText
                 android:id="@+id/book_title_input"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="43dp"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="@string/bookTitle"
@@ -159,7 +185,7 @@
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pick_pdf_file" />
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
 
             <EditText
@@ -186,7 +212,7 @@
                 android:layout_marginEnd="16dp"
                 android:ems="10"
                 android:hint="@string/bookPublicYear"
-                android:inputType="number"
+                android:inputType="date"
                 android:textSize="13sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

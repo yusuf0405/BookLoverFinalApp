@@ -5,7 +5,9 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 
 @HiltViewModel
-class FragmentSignUpViewModel @Inject constructor() : BaseViewModel() {
+class FragmentSignUpViewModel @Inject constructor(
+
+) : BaseViewModel() {
 
     fun goTeacherToLoginFragment() =
         navigate(FragmentSignUpDirections.actionFragmentSignUpToFragmentLogin())

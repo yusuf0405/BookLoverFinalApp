@@ -18,6 +18,10 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.rout
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.router.FragmentProgressRouterImpl
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.router.FragmentMainScreenRouter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.router.FragmentMainScreenRouterImpl
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_questions.router.FragmentBookQuestionRouter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_questions.router.FragmentBookQuestionRouterImpl
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_reader.router.FragmentReaderRouter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_reader.router.FragmentReaderRouterImpl
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_search.router.FragmentSearchRouter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_search.router.FragmentSearchRouterImpl
 import dagger.Binds
@@ -69,6 +73,16 @@ abstract class RouterModule {
     abstract fun bindFragmentSearchRouter(
         impl: FragmentSearchRouterImpl
     ): FragmentSearchRouter
+
+    @Binds
+    abstract fun bindFragmentReaderRouter(
+        impl: FragmentReaderRouterImpl
+    ): FragmentReaderRouter
+
+    @Binds
+    abstract fun bindFFragmentBookQuestionRouter(
+        impl: FragmentBookQuestionRouterImpl
+    ): FragmentBookQuestionRouter
 
 
 }

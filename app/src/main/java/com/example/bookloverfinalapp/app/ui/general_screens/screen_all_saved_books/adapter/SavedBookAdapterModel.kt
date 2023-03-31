@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.preference.PreferenceManager
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_ENGLISH_KEY
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_KEY
 import org.ocpsoft.prettytime.PrettyTime

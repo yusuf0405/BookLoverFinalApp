@@ -3,6 +3,9 @@ package com.example.bookloverfinalapp.app.di
 import android.content.Context
 import android.content.SharedPreferences
 import android.preference.PreferenceManager
+import com.example.bookloverfinalapp.app.ui.service_uplaod.book_save_to_file.CheckBookIsSavedAndSaveUseCase
+import com.example.bookloverfinalapp.app.ui.service_uplaod.book_save_to_file.CheckBookIsSavedAndSaveUseCaseImpl
+import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.bookloverfinalapp.app.utils.FetchInternetConnectedStatus
 import com.example.bookloverfinalapp.app.utils.FetchInternetConnectedStatusImpl
 import com.example.domain.DispatchersProvider
@@ -13,6 +16,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -83,7 +87,7 @@ object InteractorModule {
         audioBooksRepository: AudioBooksRepository,
         savedBooksRepository: BookThatReadRepository,
         genresRepository: GenresRepository,
-        checkBookIsSavedAndSaveUseCase: CheckBookIsSavedAndSaveUseCase,
+        storiesRepository: StoriesRepository,
     ): FetchAllMainScreenItemsUseCase =
         FetchAllMainScreenItemsUseCaseImpl(
             dispatchersProvider = dispatchersProvider,
@@ -92,8 +96,8 @@ object InteractorModule {
             booksRepository = booksRepository,
             audioBooksRepository = audioBooksRepository,
             savedBooksRepository = savedBooksRepository,
-            checkBookIsSavedAndSaveUseCase = checkBookIsSavedAndSaveUseCase,
             tasksRepository = tasksRepository,
+            storiesRepository = storiesRepository,
             genresRepository = genresRepository
         )
 
@@ -109,6 +113,7 @@ object InteractorModule {
 
 
     @Provides
+    @Singleton
     fun provideCheckBookIsSavedAndSaveUseCase(
         booksSaveToFileRepository: BooksSaveToFileRepository,
         booksRepository: BooksRepository,
@@ -123,5 +128,15 @@ object InteractorModule {
     ): FetchAllSortedAudioBooksUseCase = FetchAllSortedAudioBooksUseCaseImpl(
         audioBooksRepository = audioBooksRepository
     )
+
+    @Provides
+    fun provideAddBookToSavedBooksUseCase(
+        bookThatReadRepository: BookThatReadRepository,
+        booksSaveToFileRepository: BooksSaveToFileRepository,
+    ): AddBookToSavedBooksUseCase = AddBookToSavedBooksUseCaseImpl(
+        bookThatReadRepository = bookThatReadRepository,
+        booksSaveToFileRepository = booksSaveToFileRepository
+    )
+
 
 }

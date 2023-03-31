@@ -10,11 +10,13 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.UserSignUp
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.choice_school.FragmentChoiceSchool
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
+import com.joseph.utils_core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentAdminSignUpDialogBinding
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
+import com.joseph.utils_core.extensions.tuneBottomDialog
+import com.joseph.utils_core.extensions.tuneLyricsDialog
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

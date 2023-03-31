@@ -5,10 +5,10 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
-import com.example.bookloverfinalapp.app.utils.extensions.downEffect
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
+import com.example.bookloverfinalapp.app.utils.extensions.makeTicker
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemChapterBinding
@@ -60,6 +60,7 @@ class SavedBookViewHolder(
         chapterText.text = item.chapter.title
         root.isEnabled = item.chapterIsRead
         val context = chapterText.context
+        chapterText.makeTicker()
         if (item.chapterIsRead.not()) chapterText.setTextColor(Color.GRAY)
         else {
             val attrs = intArrayOf(R.attr.blackOrWhiteColor)

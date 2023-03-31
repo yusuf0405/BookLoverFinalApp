@@ -8,22 +8,26 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main.ActivityAdminMain
+import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain
-import com.example.bookloverfinalapp.app.utils.extensions.intentClearTask
-import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.validateEmail
-import com.example.bookloverfinalapp.app.utils.extensions.validatePassword
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentLoginBinding
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenStarted
+import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.filterNotNull
 
 @AndroidEntryPoint
 class FragmentLogin :
     BaseFragment<FragmentLoginBinding, FragmentLoginViewModel>(FragmentLoginBinding::inflate) {
 
     override val viewModel: FragmentLoginViewModel by viewModels()
+
+    private val progressDialog: ProgressDialog by lazy(LazyThreadSafetyMode.NONE) {
+        ProgressDialog.getInstance()
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -39,13 +43,22 @@ class FragmentLogin :
     }
 
     private fun observeData() = with(viewModel) {
-        launchWhenStarted {
+        launchWhenViewStarted {
             successSignInFlow.observe { user ->
                 user.password = binding().password.text.toString()
                 SharedPreferences().saveCurrentUser(user = user, activity = requireActivity())
                 if (user.userType == UserType.admin) intentClearTask(activity = ActivityAdminMain())
                 else intentClearTask(activity = ActivityMain())
             }
+            loadingDialogFlow.filterNotNull().observe(::handleProgressDialogShowing)
+        }
+    }
+
+    private fun handleProgressDialogShowing(isShow: Boolean) {
+        if (isShow) {
+            progressDialog.showOnlyOne(requireActivity().supportFragmentManager)
+        } else {
+            progressDialog.dismiss()
         }
     }
 

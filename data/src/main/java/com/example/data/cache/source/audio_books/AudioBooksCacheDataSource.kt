@@ -11,9 +11,11 @@ interface AudioBooksCacheDataSource {
 
     suspend fun saveNewAudioBooksToCache(audioBook: AudioBookData)
 
-    suspend fun fetchAudioBookFromId(audioBookId: String): AudioBookData
+    fun fetchAudioBookFromIdObservable(audioBookId: String): Flow<AudioBookData>
 
     suspend fun updateAudioBookCurrentStartPosition(audioBookId: String, currentPosition: Int)
+
+    suspend fun updateAudioBookIsPlayingState(audioBookId: String, isPlaying: Boolean)
 
     suspend fun clearTable()
 }

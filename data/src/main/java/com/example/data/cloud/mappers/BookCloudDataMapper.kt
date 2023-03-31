@@ -6,6 +6,7 @@ import com.example.data.models.BookPdfData
 import com.example.data.models.BookPosterData
 import com.example.data.models.SavedStatusData
 import com.example.domain.Mapper
+import java.util.*
 
 interface BookCloudDataMapper {
     fun map(from: BookCloud, cachedBooksIds: List<String> = emptyList()): BookData
@@ -24,26 +25,30 @@ class BookCloudDataMapperImpl : BookCloudDataMapper {
 
     private fun createBookData(bookCloud: BookCloud, cachedBooksIds: List<String>) = bookCloud.run {
         BookData(
-            id = id,
-            author = author,
-            createdAt = createdAt,
-            page = page,
+            id = id ?: String(),
+            author = author ?: String(),
+            createdAt = createdAt ?: Date(),
+            page = page ?: 0,
             book = BookPdfData(
-                name = book.name,
-                type = book.type,
-                url = book.url
+                name = book?.name ?: String(),
+                type = book?.type ?: String(),
+                url = book?.url ?: String()
             ),
-            title = title,
-            chapterCount = chapterCount,
+            title = title ?: String(),
+            chapterCount = chapterCount ?: 0,
             poster = BookPosterData(
-                name = poster.name,
-                url = poster.url
+                name = poster?.name ?: String(),
+                url = poster?.url ?: String()
             ),
-            updatedAt = updatedAt,
-            publicYear = publicYear,
-            genres = genres,
-            description = description,
-            savedStatus = handleSavedStatus(currentId = id, cachedBooksIds = cachedBooksIds)
+            updatedAt = updatedAt ?: Date(),
+            publicYear = publicYear ?: String(),
+            genres = genres ?: emptyList(),
+            description = description ?: String(),
+            savedStatus = handleSavedStatus(
+                currentId = id ?: String(),
+                cachedBooksIds = cachedBooksIds
+            ),
+            isExclusive = isExclusive ?: false
         )
     }
 

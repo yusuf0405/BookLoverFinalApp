@@ -15,16 +15,15 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.choice_class.FragmentChoiceClass
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showOnlyOne
 import com.example.bookloverfinalapp.app.utils.modalPageNavigateTo
 import com.example.bookloverfinalapp.databinding.FragmentChoiceSchoolBinding
 import com.example.data.cache.models.IdResourceString
 import com.google.android.material.snackbar.Snackbar
-import com.joseph.ui_core.custom.modal_page.ModalPageFragment
 import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import com.joseph.ui_core.extensions.launchOnLifecycle
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 

@@ -13,8 +13,13 @@ class AddBookDataMapperToCloudMapper : Mapper<AddNewBookData, AddNewBookCloud> {
             publicYear = publicYear,
             page = page,
             author = author,
+            description = description,
             poster = BookPosterCloud(name = poster.name, url = poster.url, type = "File"),
             book = BookPdfCloud(name = book.name, type = book.type, url = book.url),
-            chapterCount = chapterCount, schoolId = schoolId, genres = genres)
+            chapterCount = chapterCount,
+            schoolId = schoolId,
+            genres = genres,
+            isExclusive = isExclusive
+        )
     }
 }

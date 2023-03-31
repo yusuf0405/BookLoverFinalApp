@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-
-    <style name="SplashScreenTheme" parent="AppTheme.Dark">
-        <item name="android:background">@drawable/background_splash</item>
-    </style>
-
-</resources>

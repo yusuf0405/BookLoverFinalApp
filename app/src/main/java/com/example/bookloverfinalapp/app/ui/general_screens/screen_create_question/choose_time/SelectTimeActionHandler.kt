@@ -1,7 +1,0 @@
-package com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.choose_time
-
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.sort_dialog.SortingBookOptionsMenuActions
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.select_value_option.SelectValueandler
-import javax.inject.Inject
-import javax.inject.Singleton
-

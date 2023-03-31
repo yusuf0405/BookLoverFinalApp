@@ -12,10 +12,13 @@ class AddBookDomainToDataMapper : Mapper<AddNewBookDomain, AddNewBookData> {
             title = title,
             publicYear = publicYear,
             page = page,
+            description = description,
             author = author,
             poster = BookPosterData(name = poster.name, url = poster.url),
             book = BookPdfData(name = book.name, type = book.type, url = book.url),
             chapterCount = chapterCount, schoolId = schoolId,
-            genres = genres)
+            genres = genres,
+            isExclusive = isExclusive
+        )
     }
 }

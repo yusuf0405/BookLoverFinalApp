@@ -2,12 +2,11 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.view.animation.AnimationUtils
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.GenreAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.downEffect
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim

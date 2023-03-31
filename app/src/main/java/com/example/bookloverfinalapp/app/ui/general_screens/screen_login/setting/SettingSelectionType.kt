@@ -6,12 +6,14 @@ import com.example.bookloverfinalapp.R
 
 enum class SettingSelectionType {
     THEME_SETTING,
+    ORIENTATION_SETTING,
     LANGUAGE_SETTING;
 
     companion object {
         fun valueOf(value: Int) = when (value) {
             THEME_SETTING.ordinal -> THEME_SETTING
             LANGUAGE_SETTING.ordinal -> LANGUAGE_SETTING
+            ORIENTATION_SETTING.ordinal -> ORIENTATION_SETTING
             else -> THEME_SETTING
         }
     }
@@ -21,6 +23,10 @@ enum class SettingSelectionType {
             THEME_SETTING -> arrayListOf(
                 context.getString(R.string.night_mode),
                 context.getString(R.string.light_mode),
+            )
+            ORIENTATION_SETTING -> arrayListOf(
+                context.getString(R.string.horizontal),
+                context.getString(R.string.vertical),
             )
             LANGUAGE_SETTING -> arrayListOf(
                 context.getString(R.string.english),

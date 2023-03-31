@@ -2,13 +2,17 @@ package com.example.data.cache.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 import java.util.*
 
 private const val GENRE_TABLE_NAME = "genres_table"
 
-@Entity(tableName = GENRE_TABLE_NAME)
+@Entity(tableName = GENRE_TABLE_NAME,
+    indices = [
+        Index("id")
+    ])
 class GenreCache(
     @PrimaryKey
     @ColumnInfo(name = "id") val id: String,

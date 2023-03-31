@@ -59,5 +59,8 @@ object RoomModule {
     fun provideGenreDao(database: AppDatabase): GenreDao =
         database.genresDao()
 
+    @Provides
+    @Singleton
+    fun provideStoriesDao(database: AppDatabase): StoriesDao = database.storiesDao()
 
 }

@@ -30,10 +30,10 @@ class AudioBooksCacheDataSourceImpl @Inject constructor(
         dao.addNewBook(audioBook = audioBookDataToCacheMapper.map(audioBook))
     }
 
-    override suspend fun fetchAudioBookFromId(audioBookId: String): AudioBookData {
-        val audioBook = dao.fetchAudioBookFromId(audioBookId)
-        return audioBookCacheToDataMapper.map(audioBook)
-    }
+    override fun fetchAudioBookFromIdObservable(audioBookId: String): Flow<AudioBookData> =
+        dao.fetchAudioBookFromIdObservable(audioBookId)
+            .map { it ?: AudioBookCache.unknown }
+            .map(audioBookCacheToDataMapper::map)
 
     override suspend fun updateAudioBookCurrentStartPosition(
         audioBookId: String,
@@ -42,6 +42,13 @@ class AudioBooksCacheDataSourceImpl @Inject constructor(
         dao.updateAudioBookCurrentStartPosition(
             audioBookId = audioBookId,
             currentPosition = currentPosition
+        )
+    }
+
+    override suspend fun updateAudioBookIsPlayingState(audioBookId: String, isPlaying: Boolean) {
+        dao.updateAudioBookIsPlayingState(
+            audioBookId = audioBookId,
+            isPlaying = isPlaying
         )
     }
 

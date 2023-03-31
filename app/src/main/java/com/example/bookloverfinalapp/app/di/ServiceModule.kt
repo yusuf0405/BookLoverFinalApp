@@ -58,4 +58,14 @@ object ServiceModule {
     fun provideGenreService(retrofit: Retrofit): GenreService =
         retrofit.create(GenreService::class.java)
 
+    @Provides
+    @Singleton
+    fun provideStoriesService(retrofit: Retrofit): StoriesService =
+        retrofit.create(StoriesService::class.java)
+
+    @Provides
+    @Singleton
+    fun provideQuestionsService(retrofit: Retrofit): QuestionsService =
+        retrofit.create(QuestionsService::class.java)
+
 }

@@ -3,14 +3,13 @@ package com.example.bookloverfinalapp.app.utils.setting
 import android.annotation.SuppressLint
 import android.app.Activity
 import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.preference.PreferenceManager
 import com.example.bookloverfinalapp.app.utils.cons.*
-import com.example.bookloverfinalapp.app.utils.extensions.dataStore
+import com.joseph.utils_core.extensions.dataStore
 import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest

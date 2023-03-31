@@ -6,12 +6,13 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
 import com.example.bookloverfinalapp.databinding.FragmentUserReadBooksBinding
 import com.example.data.cache.models.IdResourceString
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenStarted
+import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -26,8 +27,8 @@ class FragmentUserReadBooks :
     }
 
     @Inject
-    lateinit var factory: FragmentUserReadBooksViewModelFactory.Factory
-    override val viewModel: FragmentUserReadBooksViewModel by viewModels {
+    lateinit var factory: FragmentUserReadBooksViewModel.Factory
+    override val viewModel: FragmentUserReadBooksViewModel by viewModelCreator {
         factory.create(userId = userId)
     }
 
@@ -49,7 +50,7 @@ class FragmentUserReadBooks :
     }
 
     private fun observeResource() = with(viewModel) {
-        launchWhenStarted {
+        launchWhenViewStarted {
             userBooksFlow.observe(adapter::submitList)
             isErrorFlow.observe(::showErrorSnackBar)
         }

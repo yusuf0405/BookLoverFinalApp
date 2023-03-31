@@ -25,7 +25,7 @@ class FetchAllSortedUsersUseCaseImpl(
     }.flowOn(Dispatchers.Default)
 
     private val currentUserFlow = userCacheRepository
-        .fetchCurrentUserFromCache()
+        .fetchCurrentUserFromCacheFlow()
         .flowOn(Dispatchers.IO)
 
     private val allClassUsers = currentUserFlow.flatMapLatest {

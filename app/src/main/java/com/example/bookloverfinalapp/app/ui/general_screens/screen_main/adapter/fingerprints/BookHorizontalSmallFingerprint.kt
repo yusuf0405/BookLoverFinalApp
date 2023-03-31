@@ -7,12 +7,13 @@ import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.SavedStatus
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.ItemHorizontalBookBinding
-import com.joseph.ui_core.extensions.toDp
+import com.joseph.utils_core.extensions.toDp
+import com.joseph.utils_core.extensions.showRoundedImage
 
 
 class BookHorizontalSmallFingerprint :
@@ -34,7 +35,7 @@ class BookHorizontalSmallFingerprint :
         newLayoutParams.setMargins(10.toDp, 4.toDp, 8.toDp, 10.toDp)
         binding.root.layoutParams = newLayoutParams
         binding.root.layoutParams = binding.root.layoutParams.also {
-            it.width = 120.toDp
+            it.width = 130.toDp
             it.height = 190.toDp
         }
         return BookViewHorizontalSmallHolder(binding)

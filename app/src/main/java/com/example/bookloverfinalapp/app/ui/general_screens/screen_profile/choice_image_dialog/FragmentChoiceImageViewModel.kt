@@ -6,11 +6,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
+import com.example.bookloverfinalapp.app.utils.extensions.createSharedFlowAsLiveData
 import com.example.data.cache.models.IdResourceString
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.flow.stateIn
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 @HiltViewModel
@@ -21,6 +20,9 @@ class FragmentChoiceImageViewModel @Inject constructor(
     val adapterItems = flow {
         emit(createAdapterItems())
     }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
+
+    private val _choiceImageResourceFlow = MutableStateFlow<Int?>(null)
+    val choiceImageResourceFlow = _choiceImageResourceFlow.asStateFlow()
 
     private fun createAdapterItems() = listOf(
         createHeader(R.string.default_avatars),
@@ -45,8 +47,10 @@ class FragmentChoiceImageViewModel @Inject constructor(
         titleId = IdResourceString(resource)
     )
 
-    override fun defaultAvatarOnClickListener(imageResource: Int) {
+    fun clearChoiceImageResourceFlow() = _choiceImageResourceFlow.tryEmit(null)
 
+    override fun defaultAvatarOnClickListener(imageResource: Int) {
+        _choiceImageResourceFlow.tryEmit(imageResource)
     }
 
 }

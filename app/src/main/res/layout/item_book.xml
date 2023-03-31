@@ -47,15 +47,10 @@
 
             <com.joseph.ui_core.custom.MyTextView
                 android:id="@+id/bookTitle"
+                style="@style/TextViewHeadingH4.SingleLine"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:ellipsize="none"
-                android:fadingEdgeLength="30dp"
-                android:requiresFadingEdge="horizontal"
-                android:singleLine="true"
-                android:textColor="?attr/blackOrWhiteColor"
-                android:textSize="18sp"
                 app:layout_constrainedWidth="true"
                 app:layout_constraintEnd_toStartOf="@id/downloaded_mark"
                 app:layout_constraintHorizontal_bias="0"
@@ -80,14 +75,9 @@
 
             <com.joseph.ui_core.custom.MyTextView
                 android:id="@+id/bookAuthor"
+                style="@style/TextViewBodyH2.SingleLine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:ellipsize="none"
-                android:fadingEdgeLength="60dp"
-                android:requiresFadingEdge="horizontal"
-                android:singleLine="true"
-                android:textColor="?attr/text_secondary"
-                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/bookTitle"
                 app:layout_constraintTop_toBottomOf="@+id/bookTitle"
@@ -103,6 +93,7 @@
 
                 <TextView
                     android:id="@+id/publicYearText"
+                    style="@style/TextViewBodyH2.SingleLine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/year_of_publication"
@@ -120,6 +111,7 @@
 
                 <TextView
                     android:id="@+id/bookPagesText"
+                    style="@style/TextViewBodyH2.SingleLine"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="8dp"

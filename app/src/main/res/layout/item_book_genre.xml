@@ -26,14 +26,9 @@
 
     <TextView
         android:id="@+id/title"
+        style="@style/TextViewHeadingH4.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
-        android:ellipsize="none"
-        android:fadingEdgeLength="30dp"
-        android:fontFamily="@font/poppins_extra_bold"
-        android:requiresFadingEdge="horizontal"
-        android:singleLine="true"
-        android:textSize="16sp"
         tools:text="@tools:sample/lorem/random" />
 </LinearLayout>

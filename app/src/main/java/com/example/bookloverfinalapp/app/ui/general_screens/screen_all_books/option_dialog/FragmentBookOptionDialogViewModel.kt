@@ -1,6 +1,5 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.R
@@ -12,6 +11,7 @@ import com.example.data.ResourceProvider
 import com.example.data.cache.models.IdResourceString
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
+import com.example.domain.RequestState
 import com.example.domain.models.AddNewBookThatReadDomain
 import com.example.domain.models.BookDomain
 import com.example.domain.models.BookThatReadDomain
@@ -19,16 +19,21 @@ import com.example.domain.models.UserDomain
 import com.example.domain.repository.BookThatReadRepository
 import com.example.domain.repository.BooksRepository
 import com.example.domain.repository.UserCacheRepository
+import com.example.domain.use_cases.AddBookToSavedBooksUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 
-class FragmentBookOptionDialogViewModel constructor(
-    private val bookId: String,
+class FragmentBookOptionDialogViewModel @AssistedInject constructor(
+   @Assisted private val bookId: String,
     private val savedBooksRepository: BookThatReadRepository,
     private val userCacheRepository: UserCacheRepository,
     private val booksRepository: BooksRepository,
     private val dispatchersProvider: DispatchersProvider,
     private val resourceProvider: ResourceProvider,
+    private val addBookToSavedBooksUseCase: AddBookToSavedBooksUseCase,
     private val savedBookDomainToUiMapper: Mapper<BookThatReadDomain, BookThatRead>,
     private val addBookMapper: Mapper<AddNewBookModel, AddNewBookThatReadDomain>,
     private val userDomainToUiMapper: Mapper<UserDomain, User>,
@@ -50,7 +55,7 @@ class FragmentBookOptionDialogViewModel constructor(
     val isSuccessNotification: SharedFlow<IdResourceString> get() = _isSuccessNotification.asSharedFlow()
 
     val currentUserFlow = userCacheRepository
-        .fetchCurrentUserFromCache()
+        .fetchCurrentUserFromCacheFlow()
         .flowOn(dispatchersProvider.io())
         .map(userDomainToUiMapper::map)
         .stateIn(viewModelScope, SharingStarted.Lazily, User.unknown())
@@ -58,7 +63,6 @@ class FragmentBookOptionDialogViewModel constructor(
     init {
         viewModelScope.launch(dispatchersProvider.io()) {
             val book = savedBooksRepository.fetchSavedBookByBookIdFromCache(bookId = bookId)
-            Log.i("Joseph9", "${book.title} ${book.bookId}")
             internalSavedBook = savedBookDomainToUiMapper.map(book)
         }
     }
@@ -78,7 +82,7 @@ class FragmentBookOptionDialogViewModel constructor(
         )
     }
 
-    fun startAddBookToSavedBooks() {
+    fun startAddBookToSavedBooks() = viewModelScope.launch {
         val isReading = arrayListOf<Boolean>()
         val book = bookFlow.value
         isReading.add(true)
@@ -98,16 +102,19 @@ class FragmentBookOptionDialogViewModel constructor(
             userId = currentUserFlow.value.id
         )
 
-        App.applicationScope.launchSafe(
-            dispatcher = dispatchersProvider.io(),
-            safeAction = { savedBooksRepository.addBookToSavedBooks(addBookMapper.map(newBook)) },
-            onSuccess = {
-                emitSuccessNotification(IdResourceString(R.string.book_success_added))
-            },
-            onError = {
-                emitErrorNotification(resourceProvider.fetchIdErrorMessage(it))
+        addBookToSavedBooksUseCase(
+            addBookMapper.map(newBook),
+            bookFlow.value.bookPdf.url
+        ).onEach { state ->
+            when (state) {
+                is RequestState.Error -> {
+                    emitErrorNotification(resourceProvider.fetchIdErrorMessage(state.error))
+                }
+                is RequestState.Success -> {
+                    emitSuccessNotification(IdResourceString(R.string.book_success_added))
+                }
             }
-        )
+        }.launchIn(App.applicationScope)
     }
 
     private fun emitErrorNotification(errorMessageId: IdResourceString) {
@@ -116,6 +123,12 @@ class FragmentBookOptionDialogViewModel constructor(
 
     private fun emitSuccessNotification(successMessageId: IdResourceString) {
         _isSuccessNotification.tryEmit(successMessageId)
+    }
 
+    @AssistedFactory
+    interface Factory {
+        fun create(
+           bookId: String
+        ): FragmentBookOptionDialogViewModel
     }
 }

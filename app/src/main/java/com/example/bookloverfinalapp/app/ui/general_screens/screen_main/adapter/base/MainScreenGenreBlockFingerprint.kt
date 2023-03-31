@@ -4,14 +4,15 @@ import android.os.Parcelable
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.GenreBlockAdapterItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenGenreBlockBinding
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 
 class MainScreenGenreBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,

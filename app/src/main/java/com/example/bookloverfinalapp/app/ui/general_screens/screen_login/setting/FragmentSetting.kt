@@ -5,32 +5,45 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import com.example.bookloverfinalapp.R
+import com.joseph.utils_core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.modalPageNavigateTo
 import com.example.bookloverfinalapp.databinding.FragmentLoginSettingBinding
 import com.joseph.ui_core.custom.modal_page.ModalPage
 
 class FragmentSetting : Fragment(), OnClickListener {
 
-    private val binding: FragmentLoginSettingBinding by lazy(LazyThreadSafetyMode.NONE) {
-        FragmentLoginSettingBinding.inflate(layoutInflater)
-    }
+    private var _binding: FragmentLoginSettingBinding? = null
+    val binding get() = _binding ?: bindingLifecycleError()
+
+    private var isBookReaderSettingShow = false
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?,
-    ): View = binding.root
+    ): View {
+        _binding = FragmentLoginSettingBinding.inflate(layoutInflater)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        setupViews()
         setOnClickListeners()
+    }
+
+    private fun setupViews() = with(binding) {
+        languageSetting.isVisible = !isBookReaderSettingShow
+        orientationSetting.isVisible = isBookReaderSettingShow
     }
 
     private fun setOnClickListeners() = with(binding) {
         languageSetting.setOnClickListener(this@FragmentSetting)
         themeSetting.setOnClickListener(this@FragmentSetting)
+        orientationSetting.setOnClickListener(this@FragmentSetting)
     }
 
     override fun onClick(view: View?) {
@@ -43,7 +56,10 @@ class FragmentSetting : Fragment(), OnClickListener {
                 SettingSelectionType.LANGUAGE_SETTING,
                 getString(R.string.language)
             )
-
+            R.id.orientation_setting -> navigateToSelectionFragment(
+                SettingSelectionType.ORIENTATION_SETTING,
+                getString(R.string.orientation)
+            )
         }
     }
 
@@ -51,15 +67,24 @@ class FragmentSetting : Fragment(), OnClickListener {
         val newFragment = SettingSelectionFragment.newInstance(selectionType)
         modalPageNavigateTo(
             newFragment = newFragment,
-            title = getString(R.string.class_setup),
+            title = title,
             rootContainer = binding.rootContainer,
             transitionName = binding.rootContainer.transitionName
         )
         binding.root.translationX = -resources.displayMetrics.widthPixels.toFloat()
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     companion object {
-        fun newInstance(title: String) = FragmentSetting().run {
+        fun newInstance(
+            title: String,
+            isBookReaderSettingShow: Boolean = false,
+        ) = FragmentSetting().run {
+            this.isBookReaderSettingShow = isBookReaderSettingShow
             ModalPage.Builder()
                 .fragment(this)
                 .title(title)

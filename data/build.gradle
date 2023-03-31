@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    compileSdk 33
+    compileSdk targetAndroidSdk
 
     defaultConfig {
-        minSdk 24
-        targetSdk 33
+        minSdk minAndroidSdk
+        targetSdk targetAndroidSdk
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
@@ -39,33 +39,39 @@ android {
 
 dependencies {
 
-    implementation project(":domain")
+    implementation project(Modules.Domain)
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:$hilt_version")
-    kapt("com.google.dagger:hilt-android-compiler:$hilt_version")
+    implementation Libs.Google.Hilt
+    kapt Libs.Google.HiltCompiler
 
     // Parse-SDK-Android
-    implementation "com.parse:parse-android:$parse_version"
+    implementation Libs.Parse.ParseAndroid
 
     //Networking
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
-    implementation "com.squareup.retrofit2:converter-gson:$retrofit_version"
-    implementation "com.squareup.okhttp3:okhttp:$okhttp_version"
-    implementation "com.squareup.okhttp3:logging-interceptor:$logging_version"
+    implementation Libs.Squareup.Retrofit2
+    implementation Libs.Squareup.Retrofit2Gson
+    implementation Libs.Squareup.OkHttp3
+    implementation Libs.Squareup.LoggingInterceptor
 
-    // Room
-    implementation "androidx.room:room-ktx:$room_version"
-    kapt "androidx.room:room-compiler:$room_version"
+    //Room
+    implementation Libs.Android.RoomKtx
+    kapt Libs.Android.RoomCompiler
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutines_version"
+    implementation Libs.JetBrains.CoroutinesCore
+    implementation Libs.JetBrains.CoroutinesAndroid
+
+    // Android Test
+    androidTestImplementation Libs.Android.JUnitExt
+    androidTestImplementation Libs.Android.EspressoCore
+    androidTestImplementation Libs.Android.ArchCoreTesting
+    androidTestImplementation Libs.Android.TestRules
+    androidTestImplementation Libs.Android.TestRunner
+    androidTestImplementation Libs.Mockito.MockitoAndroid
 
     //Test
-    testImplementation "junit:junit:$junit_version"
-    androidTestImplementation "androidx.test.ext:junit:$ext_junit_version"
-    androidTestImplementation "androidx.test.espresso:espresso-core:$espresso_version"
-    testImplementation "org.mockito:mockito-core:3.11.1"
-    testImplementation "io.mockk:mockk:$mockk_version"
+    testImplementation Libs.Testing.JUnit
+    testImplementation Libs.Mockito.MockitoCore
+    testImplementation Libs.Mockito.Mockk
 }

@@ -9,11 +9,15 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenExclusiveBookBlockBinding
-import com.joseph.ui_core.extensions.toDp
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.utils_core.extensions.toDp
 
 class MainScreenExclusiveBookBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,
-    private val viewPool: RecyclerView.RecycledViewPool,
+    private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool(),
 ) : ItemFingerprint<MainScreenExclusiveBookBlockBinding, ExclusiveBookHorizontalItem> {
 
     override fun isRelativeItem(item: Item) = item is ExclusiveBookHorizontalItem
@@ -31,7 +35,7 @@ class MainScreenExclusiveBookBlockFingerprint(
         )
         newLayoutParams.setMargins(0.toDp, 0.toDp, 8.toDp, 0.toDp)
         binding.root.layoutParams = newLayoutParams
-        return MMainScreenExclusiveBookBlockViewHolder(binding, fingerprintsList, viewPool)
+        return MainScreenExclusiveBookBlockViewHolder(binding, fingerprintsList, viewPool)
     }
 
     override fun getDiffUtil() = diffUtil
@@ -54,7 +58,7 @@ class MainScreenExclusiveBookBlockFingerprint(
 
 }
 
-class MMainScreenExclusiveBookBlockViewHolder(
+class MainScreenExclusiveBookBlockViewHolder(
     binding: MainScreenExclusiveBookBlockBinding,
     fingerprints: List<ItemFingerprint<*, *>>,
     viewPool: RecyclerView.RecycledViewPool,

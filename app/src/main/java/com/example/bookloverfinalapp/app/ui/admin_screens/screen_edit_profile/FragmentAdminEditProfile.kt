@@ -5,16 +5,13 @@ import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
-import com.example.bookloverfinalapp.app.models.UserGender
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.utils.cons.RESULT_LOAD_IMAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentAdminEditProfileBinding
-import com.example.domain.models.UserUpdateDomain
 import com.parse.ParseFile
 import com.parse.SaveCallback
 import dagger.hilt.android.AndroidEntryPoint
@@ -154,7 +151,7 @@ class FragmentAdminEditProfile :
             data != null && data.data != null
         ) {
             val uri = data.data!!
-            parseFile = ParseFile("image.png", uriToImage(uri))
+            parseFile = ParseFile("image.png", convertImageUriToByteArray(uri))
         }
     }
 }

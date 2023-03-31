@@ -30,7 +30,8 @@ class BookDataToDomainMapper : Mapper<BookData, BookDomain> {
             publicYear = publicYear,
             genreIds = genres,
             description = description,
-            savedStatus = mapSavedStatus(savedStatus)
+            savedStatus = mapSavedStatus(savedStatus),
+            isExclusive = isExclusive
         )
     }
 

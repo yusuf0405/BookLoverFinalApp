@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="pushwoosh_push_action">ru.mts.music.android.action.PUSH_MESSAGE_RECEIVE</string>
-    <string name="pushwoosh_c2d_message_permission">ru.mts.music.android.permission.C2D_MESSAGE</string>
-    <string name="metrica_api_key">2194e42c-c78c-41bd-97ab-ea0829c7e9be</string>
-</resources>

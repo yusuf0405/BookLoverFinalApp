@@ -9,6 +9,8 @@ data class AddNewBookCloud(
     @SerializedName("page") var page: Int,
     @SerializedName("genres") var genres: List<String>,
     @SerializedName("author") var author: String,
+    @SerializedName("isExclusive") var isExclusive: Boolean,
+    @SerializedName("description") var description: String,
     @SerializedName("poster") var poster: BookPosterCloud,
     @SerializedName("book") var book: BookPdfCloud,
     @SerializedName("chapterCount") var chapterCount: Int,

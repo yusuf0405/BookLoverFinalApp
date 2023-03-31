@@ -17,13 +17,16 @@ import com.example.domain.repository.ClassRepository
 import com.example.domain.repository.LoginRepository
 import com.example.domain.repository.UserCacheRepository
 import com.example.domain.repository.UserRepository
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
-class FragmentChoiceClassViewModel(
-    schoolId: String,
-    repository: ClassRepository,
-    private val userSignUp: UserSignUp,
+class FragmentChoiceClassViewModel @AssistedInject constructor(
+    @Assisted private val schoolId: String,
+    @Assisted private val userSignUp: UserSignUp,
+    private val repository: ClassRepository,
     private var loginRepository: LoginRepository,
     private val userRepository: UserRepository,
     private val dispatchersProvider: DispatchersProvider,
@@ -137,5 +140,14 @@ class FragmentChoiceClassViewModel(
 
     private fun emitIsErrorMessageVisibleFlow(isVisible: Boolean) {
         _isErrorMessageVisibleFlow.tryEmit(isVisible)
+    }
+
+    @AssistedFactory
+    interface Factory {
+
+        fun create(
+            schoolId: String,
+            userSignUp: UserSignUp
+        ): FragmentChoiceClassViewModel
     }
 }

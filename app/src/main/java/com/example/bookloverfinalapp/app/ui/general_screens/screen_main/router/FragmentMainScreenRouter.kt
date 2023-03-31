@@ -8,6 +8,10 @@ interface FragmentMainScreenRouter {
 
     fun navigateToSearchFragment(): NavCommand
 
+    fun navigateToSelectFavoriteBookFragment(): NavCommand
+
+    fun navigateToStoriesFragment(position:Int): NavCommand
+
     fun navigateToAllSavedBooksFragment(): NavCommand
 
     fun navigateToAllStudentsFragment(): NavCommand

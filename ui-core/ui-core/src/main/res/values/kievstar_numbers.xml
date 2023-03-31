@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string name="kievstar_subscribe_number">*303*1#</string>
-    <string name="kievstar_subscription_info_number">*303*2#</string>
-    <string name="kievstar_disable_subscription_number">*303*3#</string>
-</resources>

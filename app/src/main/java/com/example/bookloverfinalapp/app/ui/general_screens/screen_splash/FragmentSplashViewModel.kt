@@ -44,7 +44,7 @@ class FragmentSplashViewModel @Inject constructor(
         .flowOn(Dispatchers.IO)
         .shareIn(viewModelScope, SharingStarted.Lazily, 1)
 
-    private val currentUserFromCacheFlow = userCacheRepository.fetchCurrentUserFromCache()
+    private val currentUserFromCacheFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .flowOn(Dispatchers.IO)
         .map(mapper::map)
         .filterNotNull()

@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.models
 
 import android.widget.ImageView
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
+import com.joseph.utils_core.extensions.showRoundedImage
 import java.util.*
 
 data class User(
