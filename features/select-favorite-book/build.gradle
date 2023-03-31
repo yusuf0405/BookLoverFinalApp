@@ -32,11 +32,11 @@ android {
     }
     buildFeatures {
         viewBinding true
-//        compose = true
+        compose = true
     }
-//    composeOptions {
-//        kotlinCompilerExtensionVersion '1.2.0'
-//    }
+    composeOptions {
+        kotlinCompilerExtensionVersion kotlin_compiler_extension_version
+    }
 }
 
 dependencies {
@@ -53,10 +53,16 @@ dependencies {
     implementation Libs.Android.AppCompat
     implementation Libs.Android.ConstraintLayout
     implementation Libs.Android.RecyclerView
-//    implementation platform(Libs.Android.ComposeBom)
-//    implementation platform(Libs.Android.ComposeUi)
-//    implementation platform(Libs.Android.ComposeMaterial)
-//    implementation platform(Libs.Android.ComposeToolingPrewiew)
+
+    //Compose
+    implementation Libs.Android.UiCompose
+    implementation Libs.Android.UiToolingPreviewCompose
+    implementation Libs.Android.ActivityCompose
+    implementation Libs.Android.MaterialCompose
+    implementation Libs.Android.UiToolingCompose
+    
+    debugImplementation Libs.Android.UiTestManifestCompose
+    debugImplementation Libs.Android.UiToolingCompose
 
     //Material
     implementation Libs.Google.Material

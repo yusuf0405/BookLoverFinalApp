@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.adapter.animations.AddableItemAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
@@ -29,7 +28,7 @@ import kotlinx.coroutines.flow.filter
 class FragmentLeaderboardChart :
     BaseFragment<FragmentLeaderboardChartBinding, FragmentLeaderboardChartViewModel>(
         FragmentLeaderboardChartBinding::inflate
-    ), ItemOnClickListener {
+    ) {
 
     override val viewModel: FragmentLeaderboardChartViewModel by viewModels()
 

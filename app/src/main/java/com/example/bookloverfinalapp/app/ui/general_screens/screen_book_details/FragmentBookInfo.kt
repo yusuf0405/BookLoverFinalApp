@@ -7,21 +7,16 @@ import androidx.annotation.DrawableRes
 import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.example.bookloverfinalapp.app.base.ItemOnClickListener
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Genre
 import com.example.bookloverfinalapp.app.models.SavedStatus
-import com.joseph.utils_core.motion.MotionListener
-import com.joseph.utils_core.motion.MotionState
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialogClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.confim_dialog.FragmentConfirmDialog
-import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemsFingerprintSecond
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenBookBlockFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalFingerprint
@@ -30,10 +25,13 @@ import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
 import com.example.bookloverfinalapp.app.utils.genre.GenreTags
 import com.example.bookloverfinalapp.databinding.FragmentBookInfoBinding
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
 import com.joseph.utils_core.extensions.showBlurImage
 import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.utils_core.motion.MotionListener
+import com.joseph.utils_core.motion.MotionState
 import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -42,7 +40,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoViewModel>(
     FragmentBookInfoBinding::inflate
-), GenreOnClickListener, ItemOnClickListener, FragmentBookOptionDialogClickListeners {
+), GenreOnClickListener, FragmentBookOptionDialogClickListeners {
 
     private val bookId: String by lazy(LazyThreadSafetyMode.NONE) {
         FragmentBookInfoArgs.fromBundle(requireArguments()).bookId ?: String()

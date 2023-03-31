@@ -93,12 +93,6 @@ object MappersModule {
     fun provideBookQuestionDataMapper(): Mapper<BookQuestionData, BookQuestionDomain> =
         BookQuestionDataMapper()
 
-
-    @Provides
-    @Singleton
-    fun provideBookQuestionAdapterModelDomainMapper(): Mapper<BookQuestionDomain, QuestionModel> =
-        BookQuestionDomainToAdapterModelMapper()
-
     @Provides
     @Singleton
     fun provideBookQuestionsDomainMapper(): Mapper<BookQuestionDomain, BookQuestion> =
@@ -194,11 +188,6 @@ object MappersModule {
 
     @Provides
     @Singleton
-    fun provideClassDomainToAdapterModelMapper(): Mapper<ClassDomain, SchoolClassModel> =
-        ClassDomainToAdapterModelMapper()
-
-    @Provides
-    @Singleton
     fun provideClassCacheToDataMapper(): Mapper<ClassCache, ClassData> =
         ClassCacheToDataMapper()
 
@@ -235,21 +224,6 @@ object MappersModule {
         UpdateBookDataToCloudMapper()
 
 
-    @Provides
-    @Singleton
-    fun provideBookQuestionAdapterModelToQuestionMapper(): Mapper<QuestionModel, BookQuestion> =
-        BookQuestionAdapterModelToQuestionMapper()
-
-    @Provides
-    @Singleton
-    fun provideBookThatReadAdapterModelToBookThatReadMapper(): Mapper<BookThatReadModel, BookThatRead> =
-        BookThatReadAdapterModelToBookThatReadMapper()
-
-    @Provides
-    @Singleton
-    fun provideBookThatReadDomainToModelMapper(): Mapper<BookThatReadDomain, BookThatReadModel> =
-        BookThatReadDomainToModelMapper()
-
 
     @Provides
     @Singleton
@@ -260,9 +234,4 @@ object MappersModule {
     @Singleton
     fun provideUserDomainToSaveModelMapper(): Mapper<UserDomain, UserSaveModel> =
         UserDomainToSaveModelMapper()
-
-    @Provides
-    @Singleton
-    fun provideUserModelToUserMapper(): Mapper<UserModel, Student> =
-        UserModelToUserMapper()
 }
