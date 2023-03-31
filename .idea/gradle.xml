@@ -12,9 +12,24 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/build-src" />
+            <option value="$PROJECT_DIR$/core" />
+            <option value="$PROJECT_DIR$/core/common" />
+            <option value="$PROJECT_DIR$/core/common/common-api" />
+            <option value="$PROJECT_DIR$/core/common/common-impl" />
+            <option value="$PROJECT_DIR$/core/theme" />
+            <option value="$PROJECT_DIR$/core/ui-core" />
+            <option value="$PROJECT_DIR$/core/utils-core" />
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
-            <option value="$PROJECT_DIR$/ui-core" />
+            <option value="$PROJECT_DIR$/features" />
+            <option value="$PROJECT_DIR$/features/screen_profile" />
+            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-api" />
+            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-impl" />
+            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-ui" />
+            <option value="$PROJECT_DIR$/features/select-favorite-book" />
+            <option value="$PROJECT_DIR$/features/sign-in" />
+            <option value="$PROJECT_DIR$/features/stories" />
           </set>
         </option>
       </GradleProjectSettings>

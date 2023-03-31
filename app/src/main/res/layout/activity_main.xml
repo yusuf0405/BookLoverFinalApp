@@ -18,9 +18,18 @@
             android:id="@+id/include_content_main"
             layout="@layout/include_content_main" />
 
+        <FrameLayout
+            android:id="@+id/playerContainerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:behavior_hideable="false"
+            app:behavior_peekHeight="@dimen/player_collapsed_height"
+            app:layout_behavior="com.joseph.ui_core.custom.ScrollBottomSheetBehavior" />
+
         <include
             android:id="@+id/include_bottom_sheet_player"
-            layout="@layout/include_bottom_sheet_player" />
+            layout="@layout/include_bottom_sheet_player"
+            android:visibility="gone" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
@@ -29,10 +38,10 @@
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="0dp"
-        android:layout_marginEnd="0dp"
         android:background="?attr/card_container_background"
+        android:elevation="8dp"
         android:visibility="visible"
+        app:itemHorizontalTranslationEnabled="false"
         app:itemIconTint="@color/bottom_navigation_colors"
         app:itemTextColor="@color/bottom_navigation_colors"
         app:layout_constraintBottom_toBottomOf="parent"

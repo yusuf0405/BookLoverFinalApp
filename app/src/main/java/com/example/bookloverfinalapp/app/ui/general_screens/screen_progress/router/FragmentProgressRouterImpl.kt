@@ -10,4 +10,10 @@ class FragmentProgressRouterImpl @Inject constructor() : FragmentProgressRouter 
     override fun navigateToFragmentLeaderboardChart(): NavCommand = FragmentProgressDirections
         .actionFragmentProgressToFragmentLeaderboardChart()
         .toNavCommand()
+
+    override fun navigateToAllSavedBooksFragment(): NavCommand =
+        FragmentProgressDirections
+            .actionFragmentProgressToFragmentAllSavedBooks()
+            .toNavCommand()
+
 }

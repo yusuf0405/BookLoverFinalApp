@@ -11,6 +11,7 @@ class BookData(
     var book: BookPdfData,
     val description: String,
     var title: String,
+    var isExclusive: Boolean,
     var chapterCount: Int,
     var poster: BookPosterData,
     var updatedAt: Date,
@@ -29,7 +30,8 @@ class BookData(
             genres = emptyList(),
             book = BookPdfData(String(), String(), String()),
             chapterCount = 0,
-            poster = BookPosterData(String(), String())
+            poster = BookPosterData(String(), String()),
+            isExclusive = false
         )
     }
 }

@@ -12,7 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:paddingTop="16dp"
+        android:paddingTop="32dp"
         android:paddingBottom="8dp"
         android:weightSum="1">
 

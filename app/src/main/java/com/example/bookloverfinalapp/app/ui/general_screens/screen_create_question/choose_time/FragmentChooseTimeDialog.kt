@@ -1,67 +1,66 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.choose_time
 
 import android.os.Bundle
-import android.util.Log
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.adapter.ChooseModelFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
-import com.example.bookloverfinalapp.app.utils.extensions.tuneBottomDialog
-import com.example.bookloverfinalapp.app.utils.extensions.tuneLyricsDialog
+import androidx.core.os.bundleOf
+import com.example.bookloverfinalapp.app.base.BaseBindingFragment
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentChoosePointBinding
-import com.joseph.ui_core.extensions.launchOnLifecycle
-import com.joseph.ui_core.extensions.launchWhenStarted
-import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.onEach
+import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui_core.custom.modal_page.dismissModalPage
 
-@AndroidEntryPoint
-class FragmentChooseTimeDialog : DialogFragment() {
 
-    private var _binding: FragmentChoosePointBinding? = null
-    private val binding get() = _binding ?: bindingLifecycleError()
+class FragmentChooseTimeDialog :
+    BaseBindingFragment<FragmentChoosePointBinding>(FragmentChoosePointBinding::inflate) {
 
-    private var adapter = FingerprintAdapter(
-        listOf(ChooseModelFingerprint())
-    )
+    private var setTimeChoiceListener: ((minute: Int, seconds: Int) -> Unit)? = null
 
-    private val viewModel: FragmentChooseTimeViewModel by viewModels()
-
-    override fun onStart() {
-        super.onStart()
-        tuneBottomDialog()
-        tuneLyricsDialog()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentChoosePointBinding.inflate(inflater)
-        return binding.root
-    }
+    private var checkedMinutes: Int = 0
+    private var checkedSeconds: Int = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setWindowAnimations(com.joseph.ui_core.R.style.ModalPage_Animation)
         setupViews()
-        observeResource()
+        setListeners()
     }
 
-    private fun setupViews() = with(binding) {
-        recyclerView.adapter = adapter
+    private fun setupViews() = with(binding()) {
+        val minutes = arguments?.getInt(MINUTES_KEY) ?: 0
+        val seconds = arguments?.getInt(SECONDS_KEY) ?: 0
+        timePicker.setIs24HourView(true)
+        timePicker.currentHour = minutes
+        timePicker.currentMinute = seconds
     }
 
-    private fun observeResource() = with(viewModel) {
-        launchOnLifecycle {
-            itemsFlow.observe {
-                Log.i("Joseph", it.toString())
-                adapter.submitList(it)
-                update(it)
-            }
+    private fun setListeners() = with(binding()) {
+        timePicker.setOnTimeChangedListener { _, hourOfDay, minute ->
+            checkedMinutes = hourOfDay
+            checkedSeconds = minute
         }
+        confirmButton.setOnDownEffectClickListener {
+            setTimeChoiceListener?.invoke(checkedMinutes, checkedSeconds)
+            dismissModalPage()
+        }
+        cancelButton.setOnDownEffectClickListener { dismissModalPage() }
     }
 
+    companion object {
+        private const val MINUTES_KEY = "MINUTES_KEY"
+        private const val SECONDS_KEY = "SECONDS_KEY"
+        fun newInstance(
+            checkedMinutes: Int,
+            checkedSeconds: Int,
+            setTimeChoiceListener: (minute: Int, seconds: Int) -> Unit
+        ) = FragmentChooseTimeDialog().run {
+            arguments = bundleOf(
+                MINUTES_KEY to checkedMinutes,
+                SECONDS_KEY to checkedSeconds
+            )
+            this.setTimeChoiceListener = setTimeChoiceListener
+            ModalPage.Builder()
+                .fragment(this)
+                .build()
+        }
+
+    }
 }

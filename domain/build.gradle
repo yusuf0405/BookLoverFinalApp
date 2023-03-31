@@ -5,12 +5,10 @@ plugins {
 
 dependencies {
     // Retrofit
-    implementation "com.squareup.retrofit2:retrofit:$retrofit_version"
+    implementation Libs.Squareup.Retrofit2
 
     // Coroutines
-    implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:$coroutines_version"
-
-
+    implementation Libs.JetBrains.CoroutinesCore
 }
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7

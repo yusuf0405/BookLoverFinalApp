@@ -6,22 +6,23 @@ import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Student
-import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.adapter.animations.AddableItemAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.adapter.DayOfTheWeekAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserRatingFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserTopRatingFingerprint
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.adapter.DayOfTheWeekAdapterModel
+import com.example.bookloverfinalapp.app.utils.extensions.hide
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.databinding.FragmentProgressBinding
 import com.example.domain.models.UserStatisticModel
-import com.joseph.ui_core.extensions.launchWhenStarted
+import com.joseph.ui_core.extensions.launchWhenViewStarted
 import com.statistics.library.line_chart.data.DataEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.filterNotNull
 import java.util.*
 
 @AndroidEntryPoint
@@ -48,6 +49,7 @@ class FragmentProgress :
         super.onViewCreated(view, savedInstanceState)
         showBottomNavigationView()
         setupViews()
+        setOnClickListeners()
         observeData()
     }
 
@@ -58,11 +60,17 @@ class FragmentProgress :
     }
 
     private fun observeData() = with(viewModel) {
-        launchWhenStarted {
+        launchWhenViewStarted {
             fetchUserStatisticDays()
-            userStatisticDays.filter { it.isNotEmpty() }.observe(::handleStatisticDaysFetching)
+            userStatisticDays.observe(::handleStatisticDaysFetching)
             studentsFromClass.filter { it.isNotEmpty() }.observe(leaderboardAdapter::submitList)
 //            userAndProgressFlow.filterNotNull().observe(::handleCurrentUserFetching)
+        }
+    }
+
+    private fun setOnClickListeners() = with(binding()) {
+        readBookButton.setOnDownEffectClickListener {
+            viewModel.navigateToAllSavedBooksFragment()
         }
     }
 
@@ -73,6 +81,13 @@ class FragmentProgress :
     }
 
     private fun handleStatisticDaysFetching(statisticDays: List<UserStatisticModel>) {
+        if (statisticDays.size <= 3) {
+            binding().statisticsAnimationContainer.show()
+            binding().statisticsContainer.hide()
+            return
+        }
+        binding().statisticsAnimationContainer.hide()
+        binding().statisticsContainer.show()
         val dataEntity = statisticDays.mapIndexed { index, value ->
             val entity = DataEntity(index)
             entity.value = value.progress

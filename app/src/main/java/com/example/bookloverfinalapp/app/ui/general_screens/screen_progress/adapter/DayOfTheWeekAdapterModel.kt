@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.adapter
 
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 
 data class DayOfTheWeekAdapterModel(
     val day: String,

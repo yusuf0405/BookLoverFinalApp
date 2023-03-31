@@ -28,7 +28,7 @@
         </KeyFrameSet>
     </Transition>
 
-    <ConstraintSet android:id="@+id/start">
+    <ConstraintSet>
         <Constraint
             android:id="@+id/fragment_profile"
             android:layout_width="0dp"

@@ -7,24 +7,28 @@ import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.cons.KEY_APP_MODE
 import com.example.bookloverfinalapp.app.utils.cons.KEY_DEFAULT_LANGUAGE
-import com.example.bookloverfinalapp.app.utils.extensions.dataStore
-import com.example.bookloverfinalapp.app.utils.setting.SettingManager
+import com.joseph.utils_core.extensions.dataStore
 import com.example.bookloverfinalapp.databinding.FragmentSettingSelectionBinding
+import com.joseph.ui_core.extensions.launchOnViewLifecycle
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 
+@AndroidEntryPoint
 class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelectionListener {
 
     companion object {
         private const val TYPE = "type"
-
+        const val ORIENTATION_KEY = "ORIENTATION_KEY"
         fun newInstance(type: SettingSelectionType) = SettingSelectionFragment().apply {
             arguments = bundleOf(TYPE to type.ordinal)
         }
@@ -34,9 +38,10 @@ class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelec
         FragmentSettingSelectionBinding.inflate(layoutInflater)
     }
 
+
     private val type: SettingSelectionType by lazy(LazyThreadSafetyMode.NONE) {
         SettingSelectionType.valueOf(
-            arguments?.getInt(TYPE) ?: SettingSelectionType.THEME_SETTING.ordinal
+            arguments?.getInt(TYPE) ?: SettingSelectionType.ORIENTATION_SETTING.ordinal
         )
     }
 
@@ -46,6 +51,7 @@ class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelec
 
     private var currentLanguage = String()
     private var currentIsDarkMode = false
+    private var orientation = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,9 +77,10 @@ class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelec
     }
 
     private fun getAppSettings() {
-        lifecycleScope.launch {
+        launchOnViewLifecycle {
             requireContext().dataStore.data.collectLatest { pref ->
                 currentLanguage = pref[stringPreferencesKey(KEY_DEFAULT_LANGUAGE)] ?: ""
+                orientation = pref[intPreferencesKey(ORIENTATION_KEY)] ?: 1
                 currentIsDarkMode = pref[booleanPreferencesKey(KEY_APP_MODE)] ?: false
             }
         }
@@ -94,6 +101,13 @@ class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelec
                     else -> String()
                 }
             }
+            SettingSelectionType.ORIENTATION_SETTING -> {
+                when (orientation) {
+                    0 -> getString(R.string.horizontal)
+                    1 -> getString(R.string.vertical)
+                    else -> ""
+                }
+            }
         }
         populateAdapterModels(checkedItem)
     }
@@ -108,33 +122,41 @@ class SettingSelectionFragment : Fragment(), SettingSelectionAdapter.OnItemSelec
     override fun onItemSelected(item: SettingSelectionItem) {
         when (type) {
             SettingSelectionType.LANGUAGE_SETTING -> setLanguageSetting(item.title)
-            SettingSelectionType.THEME_SETTING -> handleAppLanguage(isCheckedTheme = item.title)
+            SettingSelectionType.THEME_SETTING -> handleAppLanguage(item.title)
+            SettingSelectionType.ORIENTATION_SETTING -> handleOrientationSetting(item.title)
         }
     }
 
-    private fun handleAppLanguage(isCheckedTheme: String) = with(requireContext()) {
-        when (isCheckedTheme) {
-            getString(R.string.night_mode) -> setAppTheme(isNightMode = true)
-            getString(R.string.light_mode) -> setAppTheme(isNightMode = false)
+    private fun handleOrientationSetting(isCheckedTheme: String) = when (isCheckedTheme) {
+        getString(R.string.horizontal) -> setOrientationSetting(0)
+        getString(R.string.vertical) -> setOrientationSetting(1)
+        else -> Job()
+    }
+
+    private fun handleAppLanguage(isCheckedTheme: String) = when (isCheckedTheme) {
+        getString(R.string.night_mode) -> setAppTheme(isNightMode = true)
+        getString(R.string.light_mode) -> setAppTheme(isNightMode = false)
+        else -> Job()
+    }
+
+    private fun setOrientationSetting(orientation: Int) = lifecycleScope.launch {
+        requireContext().dataStore.edit { pref ->
+            pref[intPreferencesKey(ORIENTATION_KEY)] = orientation
         }
     }
 
-    private fun setAppTheme(isNightMode: Boolean) {
-        if (isNightMode == currentIsDarkMode) return
-        lifecycleScope.launch {
-            requireContext().dataStore.edit { pref ->
-                pref[booleanPreferencesKey(KEY_APP_MODE)] = isNightMode
-            }
+    private fun setAppTheme(isNightMode: Boolean) = lifecycleScope.launch {
+        if (isNightMode == currentIsDarkMode) return@launch
+        requireContext().dataStore.edit { pref ->
+            pref[booleanPreferencesKey(KEY_APP_MODE)] = isNightMode
         }
     }
 
-    private fun setLanguageSetting(typeKey: String) {
+    private fun setLanguageSetting(typeKey: String) = lifecycleScope.launch {
         val newLanguage = LanguageTypes.checkAndGetLanguageType(typeKey = typeKey).name
-        if (newLanguage == currentLanguage) return
-        lifecycleScope.launch {
-            requireContext().dataStore.edit { pref ->
-                pref[stringPreferencesKey(KEY_DEFAULT_LANGUAGE)] = newLanguage
-            }
+        if (newLanguage == currentLanguage) return@launch
+        requireContext().dataStore.edit { pref ->
+            pref[stringPreferencesKey(KEY_DEFAULT_LANGUAGE)] = newLanguage
         }
     }
 }

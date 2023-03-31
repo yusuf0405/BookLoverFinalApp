@@ -1,0 +1,69 @@
+<resources>
+    <attr name="grayButtonColor" formant="reference|color" />
+
+    <attr name="buttonNotEnableBackground" format="reference|color" />
+
+    <attr name="textNegativeColor" formant="reference|color" />
+
+    <attr name="blueOrGrayColor" formant="reference|color" />
+
+    <attr name="blackOrWhiteColor" formant="reference|color" />
+
+    <attr name="whiteOrBlackColor" formant="reference|color" />
+
+    <attr name="grayOrWhiteColor" formant="reference|color" />
+
+    <attr name="whiteOrGrayColor" formant="reference|color" />
+
+    <attr name="background_primary_elevated" formant="reference|color" />
+
+    <attr name="text_secondary" formant="reference|color" />
+
+    <attr name="button_gradient_background" formant="reference|color" />
+
+    <attr name="toolbar_gradient_background" formant="reference|color" />
+
+    <attr name="collapsedPlayerOutlineColor" formant="reference|color" />
+
+    <attr name="card_background" formant="reference|color" />
+
+    <attr name="card_container_background" formant="reference|color" />
+
+    <attr name="checked_item_color" formant="reference|color" />
+
+    <declare-styleable name="CurvedContainer">
+        <attr name="containerBackground" format="color" />
+    </declare-styleable>
+
+    <declare-styleable name="SegmentedProgressBar">
+        <attr format="integer" name="totalSegments"/>
+        <attr format="integer" name="timePerSegment"/>
+        <attr format="dimension" name="segmentMargins"/>
+        <attr format="dimension" name="segmentCornerRadius"/>
+        <attr format="dimension" name="segmentStrokeWidth"/>
+        <attr format="color" name="segmentBackgroundColor"/>
+        <attr format="color" name="segmentSelectedBackgroundColor"/>
+        <attr format="color" name="segmentStrokeColor"/>
+        <attr format="color" name="segmentSelectedStrokeColor"/>
+    </declare-styleable>
+
+    <declare-styleable name="FadingEdgeLayout">
+        <attr name="fade_edge" format="integer">
+            <flag name="top" value="1" />
+            <flag name="bottom" value="2" />
+            <flag name="left" value="4" />
+            <flag name="right" value="8" />
+        </attr>
+        <attr name="fade_size_top" format="dimension" />
+        <attr name="fade_size_bottom" format="dimension" />
+        <attr name="fade_size_left" format="dimension" />
+        <attr name="fade_size_right" format="dimension" />
+    </declare-styleable>
+
+    <declare-styleable name="FadingTextView">
+        <attr name="except_last_the_letters" format="integer" />
+        <attr name="fade_length" format="float" />
+        <attr name="hide_last_faded_letters" format="boolean" />
+    </declare-styleable>
+
+</resources>

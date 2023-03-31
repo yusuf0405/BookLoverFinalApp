@@ -7,7 +7,7 @@ import com.example.bookloverfinalapp.app.base.AllItemsFetchType
 import com.example.bookloverfinalapp.app.base.BaseFragmentAllItems
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.sort_dialog.FragmentSavedBookSortDialog
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SearchFingerprint
 
 class FragmentAllSavedBooks : BaseFragmentAllItems() {

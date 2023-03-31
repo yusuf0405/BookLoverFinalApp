@@ -5,7 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserCacheRepository {
 
-    fun fetchCurrentUserFromCache(): Flow<UserDomain>
+    fun fetchCurrentUserFromCacheFlow(): Flow<UserDomain>
+
+    fun fetchCurrentUserFromCache(): UserDomain
 
     suspend fun saveCurrentUserFromCache(newUser: UserDomain): Boolean
 }

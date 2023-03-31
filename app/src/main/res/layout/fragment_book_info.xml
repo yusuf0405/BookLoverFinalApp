@@ -25,10 +25,9 @@
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/book_info_block"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_marginTop="-425dp"
         android:elevation="8dp"
-        android:paddingBottom="200dp"
         app:cardBackgroundColor="?attr/card_container_background"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

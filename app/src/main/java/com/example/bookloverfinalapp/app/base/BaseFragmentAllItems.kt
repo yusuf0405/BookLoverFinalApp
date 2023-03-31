@@ -10,12 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.ui.MotionListener
-import com.example.bookloverfinalapp.app.ui.MotionState
+import com.joseph.utils_core.motion.MotionListener
+import com.joseph.utils_core.motion.MotionState
 import com.example.bookloverfinalapp.app.ui.adapter.animations.AddableItemAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
@@ -23,16 +22,19 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTop
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.OnBackPressedListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialogClickListeners
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.player.PlayerCallback
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.confim_dialog.FragmentConfirmDialog
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
+import com.joseph.utils_core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentAllItemsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.setupLayoutManager
+import com.joseph.utils_core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.filter
@@ -71,6 +73,11 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
         playerCallback = context as? PlayerCallback
     }
 
+    override fun onStart() {
+        super.onStart()
+        binding.root.progress = viewModel.motionPosition.value
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -89,6 +96,7 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
     }
 
     private fun setupViews() = with(binding) {
+        root.setPaddingTopHeightStatusBar()
         root.addTransitionListener(motionListener)
         title.setText(toolbarTitle)
         setupRecyclerView()
@@ -97,7 +105,11 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
     private fun setupRecyclerView() = with(binding.itemsRecyclerView) {
         adapter = this@BaseFragmentAllItems.adapter
         layoutManager = layoutManager
-        setupLayoutManager(this@BaseFragmentAllItems.adapter)
+        setupLayoutManager(
+            currentItem = this@BaseFragmentAllItems.adapter::getItemViewType,
+            itemId = R.layout.item_genre,
+            secondItemId = R.layout.item_user_circle
+        )
         itemAnimator = createAddableItemAnimator()
     }
 
@@ -184,16 +196,9 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
     private fun showSortDialogFragment() = sortDialogFragment.showOnlyOne(parentFragmentManager)
 
     private fun showConfirmDialogFlow(id: String) {
-        createConfirmationDialog(
-            title = R.string.default_delete_alert_message,
-            message = R.string.default_delete_alert_message,
-            positiveButtonMessage = R.string.action_yes,
-            negativeButtonMessage = R.string.action_no,
-            iconId = R.drawable.ic_delete,
-            setOnPositiveButtonClickListener = {
-                viewModel.deleteBookInSavedBooks(id)
-            }
-        ).show()
+        FragmentConfirmDialog.newInstance(
+            setOnPositiveButtonClickListener = { viewModel.deleteBookInSavedBooks(id) }
+        ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
     }
 
     private fun hideBottomNavigationView() = boomNav?.apply { hide() }
@@ -226,13 +231,12 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
 
     private var isBack = AtomicBoolean(true)
     override fun onBackPressed(): Boolean {
-        if (isBack.get()) {
-            adapter.submitList(emptyList()) {
-                isBack.set(false)
-                lifecycleScope.launch {
-                    delay(DEFAULT_ITEMS_ANIMATOR_DURATION)
-                    requireActivity().onBackPressed()
-                }
+        if (!isBack.get()) return false
+        adapter.submitList(emptyList()) {
+            isBack.set(false)
+            lifecycleScope.launch {
+                delay(DEFAULT_ITEMS_ANIMATOR_DURATION)
+                requireActivity().onBackPressed()
             }
         }
         return isBack.get()

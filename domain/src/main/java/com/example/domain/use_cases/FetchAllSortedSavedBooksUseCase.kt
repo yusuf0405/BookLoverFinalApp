@@ -25,7 +25,7 @@ class FetchAllSortedSavedBooksUseCaseImpl(
     }.flowOn(Dispatchers.Default)
 
     private val currentUserFlow = userCacheRepository
-        .fetchCurrentUserFromCache()
+        .fetchCurrentUserFromCacheFlow()
         .flowOn(Dispatchers.IO)
 
     private val userSavedBooksFlow = currentUserFlow.map { it.id }

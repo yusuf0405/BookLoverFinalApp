@@ -21,28 +21,30 @@ class FetchAllMainScreenItemsUseCaseImpl(
     audioBooksRepository: AudioBooksRepository,
     tasksRepository: TasksRepository,
     genresRepository: GenresRepository,
-    checkBookIsSavedAndSaveUseCase: CheckBookIsSavedAndSaveUseCase,
+    storiesRepository: StoriesRepository,
 ) : FetchAllMainScreenItemsUseCase {
 
     override fun invoke(): Flow<MainScreenItems> = combine(
-        allBooksFlow,
+        allBooksAndCurrentUserFlow,
         userSavedBooksFlow,
         allClassUsersAndIsTeacherFlow,
-        audioBooksAndTasksFlow,
-        allGenresFlow
-    ) { allBooks, savedBooks, usersAndIsTeacher, audioBooksAndTasks, genres ->
+        allAudioBooks,
+        allStoriesAndGenresFlow
+    ) { allBooksAndCurrentUser, savedBooks, usersAndIsTeacher, audioBooks, genresAndStories ->
         MainScreenItems(
-            books = allBooks,
+            currentUser = allBooksAndCurrentUser.second,
+            books = allBooksAndCurrentUser.first,
             savedBooks = savedBooks,
             isTeacher = usersAndIsTeacher.second,
             users = usersAndIsTeacher.first,
-            audioBooks = audioBooksAndTasks.first,
-            tasks = audioBooksAndTasks.second,
-            genres = genres
+            audioBooks = audioBooks,
+            tasks = emptyList(),
+            genres = genresAndStories.first,
+            stories = genresAndStories.second,
         )
     }.flowOn(dispatchersProvider.default())
 
-    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCache()
+    private val currentUserFlow = userCacheRepository.fetchCurrentUserFromCacheFlow()
         .flowOn(dispatchersProvider.io())
 
     private val allAudioBooks = currentUserFlow.map { it.schoolId }
@@ -50,11 +52,6 @@ class FetchAllMainScreenItemsUseCaseImpl(
 
     private val allTasksFlow =
         currentUserFlow.map { it.classId }.flatMapLatest(tasksRepository::fetchAllClassTasks)
-
-    private val allGenresFlow = genresRepository.fetchAllGenres()
-
-    private val audioBooksAndTasksFlow = allAudioBooks.combine(allTasksFlow)
-    { audioBooks, tasks -> Pair(audioBooks, tasks) }
 
     private
     val allClassUsers = currentUserFlow.flatMapLatest {
@@ -75,15 +72,32 @@ class FetchAllMainScreenItemsUseCaseImpl(
         .flatMapLatest { booksRepository.fetchAllBooks(schoolId = it.first, userId = it.second) }
         .flowOn(dispatchersProvider.io())
 
+    private val allBooksAndCurrentUserFlow = allBooksFlow
+        .combine(currentUserFlow) { allBooks, user -> Pair(allBooks, user) }
+        .flowOn(dispatchersProvider.default())
+
+
     private val userSavedBooksFlow = currentUserFlow.map { it.id }
         .flowOn(dispatchersProvider.default())
         .flatMapLatest(savedBooksRepository::fetchUserAllBooksThatReadByUserId)
-        .onEach(checkBookIsSavedAndSaveUseCase::invoke)
         .flowOn(dispatchersProvider.io())
+
+    private val allGenresFlow = genresRepository.fetchAllGenres()
+        .flowOn(dispatchersProvider.io())
+
+    private val storiesFlow = currentUserFlow.map { it.schoolId }
+        .flatMapLatest(storiesRepository::fetchAllStories)
+        .flowOn(dispatchersProvider.io())
+
+
+    private val allStoriesAndGenresFlow = allGenresFlow.combine(storiesFlow) { genres, stories ->
+        Pair(genres, stories)
+    }.flowOn(dispatchersProvider.default())
 
     private val allAndSavedBooksFlow = allBooksFlow
         .combine(userSavedBooksFlow) { allBooks, savedBooks -> Pair(allBooks, savedBooks) }
         .flowOn(dispatchersProvider.default())
+
 
     private companion object {
         const val TEACHER = "teacher"

@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.di
 
-import com.example.bookloverfinalapp.app.ui.player.PlaybackManager
-import com.example.bookloverfinalapp.app.ui.player.PlaybackManagerImpl
+import com.example.bookloverfinalapp.app.ui.service_player.PlaybackManager
+import com.example.bookloverfinalapp.app.ui.service_player.PlaybackManagerImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

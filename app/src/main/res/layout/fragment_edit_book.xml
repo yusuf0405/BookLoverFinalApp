@@ -29,13 +29,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@drawable/ic_item_outline_4dp" />
-
-
-        <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_gravity="bottom|right"
-            android:src="@drawable/image_edit_icon" />
     </FrameLayout>
 
 
@@ -127,7 +120,7 @@
     </LinearLayout>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/signInBtn"
+        android:id="@+id/save_button"
         style="@style/ButtonStyle.Blue.AppStyle"
         android:layout_marginTop="24dp"
         android:text="@string/save_book" />

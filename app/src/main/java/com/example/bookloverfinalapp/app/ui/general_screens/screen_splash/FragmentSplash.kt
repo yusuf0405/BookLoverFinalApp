@@ -9,6 +9,8 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
+import com.example.bookloverfinalapp.app.utils.extensions.dismissPlayerOverlay
+import com.example.bookloverfinalapp.app.utils.extensions.showPlayerOverlay
 import com.example.bookloverfinalapp.databinding.FragmentSplashBinding
 import com.joseph.ui_core.extensions.launchOnLifecycle
 import com.joseph.ui_core.extensions.launchWhenViewStarted
@@ -23,6 +25,7 @@ class FragmentSplash :
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigationView()
+        dismissPlayerOverlay()
         observeData()
     }
 
@@ -72,5 +75,10 @@ class FragmentSplash :
 
     private fun setProgressBarVisible(isVisible: Boolean) {
         binding().progressBar.isVisible = isVisible
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        showPlayerOverlay()
     }
 }

@@ -129,6 +129,7 @@
         android:layout_marginHorizontal="18dp"
         android:background="?attr/whiteOrGrayColor" />
 
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/editProfileBtn"
         style="@style/ButtonStyle.Blue.AppStyle"

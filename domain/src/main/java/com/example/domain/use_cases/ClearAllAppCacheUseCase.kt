@@ -13,7 +13,8 @@ class ClearAllAppCacheUseCaseImpl(
     private val booksRepository: BooksRepository,
     private val audioBooksRepository: AudioBooksRepository,
     private val bookThatReadRepository: BookThatReadRepository,
-    private var classRepository: ClassRepository
+    private var classRepository: ClassRepository,
+    private var storiesRepository: StoriesRepository
 ) : ClearAllAppCacheUseCase {
 
     override suspend operator fun invoke() {
@@ -22,5 +23,6 @@ class ClearAllAppCacheUseCaseImpl(
 //        bookThatReadRepository.clearBooksCache()
 //        audioBooksRepository.clearTable()
 //        classRepository.clearTable()
+//        storiesRepository.clearTable()
     }
 }

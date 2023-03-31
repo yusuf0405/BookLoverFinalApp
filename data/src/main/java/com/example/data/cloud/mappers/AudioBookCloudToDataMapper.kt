@@ -22,8 +22,10 @@ class AudioBookCloudToDataMapper @Inject constructor() : Mapper<AudioBookCloud, 
             audioBookPoster = AudioBookPosterData(
                 name = audioBookPoster.name,
                 url = audioBookPoster.url
-            )
+            ),
+            isExclusive = isExclusive,
+            description = description,
+            isPlaying = false
         )
     }
-
 }

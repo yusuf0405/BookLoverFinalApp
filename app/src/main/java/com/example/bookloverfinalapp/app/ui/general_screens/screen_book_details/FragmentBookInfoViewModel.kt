@@ -10,35 +10,44 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details.router.FragmentBookInfoRouter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemSecond
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BookHorizontalItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
+import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
 import com.example.data.ResourceProvider
 import com.example.data.cache.models.IdResourceString
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
+import com.example.domain.RequestState
 import com.example.domain.models.*
 import com.example.domain.use_cases.FetchSimilarBooksUseCase
 import com.example.domain.repository.*
+import com.example.domain.use_cases.AddBookToSavedBooksUseCase
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.launch
 
-class FragmentBookInfoViewModel(
-    private val bookId: String,
+class FragmentBookInfoViewModel @AssistedInject constructor(
+    @Assisted private val bookId: String,
     fetchSimilarBooksUseCase: FetchSimilarBooksUseCase,
     private val savedBooksRepository: BookThatReadRepository,
     private val userCacheRepository: UserCacheRepository,
     private val booksRepository: BooksRepository,
     private val genresRepository: GenresRepository,
     private val booksSaveToFileRepository: BooksSaveToFileRepository,
+    private val addBookToSavedBooksUseCase: AddBookToSavedBooksUseCase,
     private val userRepository: UserRepository,
     private val dispatchersProvider: DispatchersProvider,
     private val resourceProvider: ResourceProvider,
     private val router: FragmentBookInfoRouter,
     private val bookDomainToBookMapper: Mapper<BookDomain, Book>,
     private val userDomainToUIMapper: Mapper<UserDomain, User>,
-    private val genreDomainToUiMapper: Mapper<GenreDomain, Genre>
+    private val genreDomainToUiMapper: Mapper<GenreDomain, Genre>,
+    private val savedBookDomainToUiMapper: Mapper<BookThatReadDomain, BookThatRead>,
 ) : BaseViewModel(), UserItemOnClickListener, BookItemOnClickListener {
 
     private var _motionPosition = MutableStateFlow(0f)
@@ -46,6 +55,18 @@ class FragmentBookInfoViewModel(
 
     private val bookSavedStatusFlow = MutableStateFlow(SavedStatus.SAVING)
     private val bookIdFlow = MutableStateFlow(bookId)
+
+    var internalSavedBook = MutableStateFlow(BookThatRead.unknown())
+
+    init {
+        viewModelScope.launch(dispatchersProvider.io()) {
+            val book = savedBooksRepository.fetchSavedBookByBookIdFromCache(bookId = bookId)
+            internalSavedBook.tryEmit(savedBookDomainToUiMapper.map(book))
+        }
+    }
+
+    private val _showSavedBookDeleteDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val showSavedBookDeleteDialogFlow get() = _showSavedBookDeleteDialogFlow.asSharedFlow()
 
     val bookFlow = bookIdFlow.flatMapLatest(booksRepository::fetchBookObservable)
         .map(bookDomainToBookMapper::map)
@@ -68,7 +89,7 @@ class FragmentBookInfoViewModel(
     val showBookOptionDialogFlow get() = _showBookOptionDialogFlow.asSharedFlow()
 
     private val currentUserFlow = userCacheRepository
-        .fetchCurrentUserFromCache()
+        .fetchCurrentUserFromCacheFlow()
         .flowOn(dispatchersProvider.io())
         .stateIn(viewModelScope, SharingStarted.Lazily, UserDomain.unknown())
 
@@ -163,8 +184,9 @@ class FragmentBookInfoViewModel(
         navigate(router.navigateToGenreInfoFragment(genreId = genreId))
     }
 
-    fun navigateToReadBookFragment(savedBook: BookThatRead) {
-        val savedBookPath = booksSaveToFileRepository.fetchSavedBookFilePath(savedBook.bookId)
+    fun navigateToReadBookFragment() {
+        val savedBook = internalSavedBook.value
+        val savedBookPath = booksSaveToFileRepository.fetchSavedBookFilePath(bookId)
         if (savedBookPath == null) emitToErrorMessageFlow(IdResourceString(R.string.book_is_not_ready))
         else navigate(router.navigateToReadBookFragment(patch = savedBookPath, book = savedBook))
     }
@@ -174,9 +196,8 @@ class FragmentBookInfoViewModel(
     }
 
     fun addOrDeleteBookInSavedBooks() {
-        emitProgressDialogIsShowingDialog(isShow = true)
         when (bookSavedStatusFlow.value) {
-            SavedStatus.SAVED -> startDeleteBookInSavedBooks()
+            SavedStatus.SAVED -> _showSavedBookDeleteDialogFlow.tryEmit("")
             SavedStatus.NOT_SAVED -> startAddBookToSavedBooks()
             SavedStatus.SAVING -> Unit
         }
@@ -189,9 +210,10 @@ class FragmentBookInfoViewModel(
             schoolId = parameters.first.schoolId
         )
 
-    private fun startDeleteBookInSavedBooks() = viewModelScope.launchSafe(
+    fun startDeleteBookInSavedBooks() = viewModelScope.launchSafe(
         dispatcher = dispatchersProvider.io(),
         safeAction = { savedBooksRepository.deleteBookInSavedBooks(bookFlow.value.id) },
+        onStart = { emitProgressDialogIsShowingDialog(isShow = true) },
         onSuccess = {
             emitAddOrDeleteOperationFlow((SavedStatus.NOT_SAVED))
             dismissProgressDialog()
@@ -203,18 +225,23 @@ class FragmentBookInfoViewModel(
     )
 
 
-    private fun startAddBookToSavedBooks() = viewModelScope.launchSafe(
-        dispatcher = dispatchersProvider.io(),
-        safeAction = { savedBooksRepository.addBookToSavedBooks(createAddNewBookModel()) },
-        onSuccess = {
-            emitAddOrDeleteOperationFlow((SavedStatus.SAVED))
-            dismissProgressDialog()
-        },
-        onError = {
-            emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(it))
-            dismissProgressDialog()
-        }
-    )
+    private fun startAddBookToSavedBooks() = viewModelScope.launch {
+        addBookToSavedBooksUseCase(
+            createAddNewBookModel(),
+            bookFlow.value.bookPdf.url
+        ).onEach { state ->
+            when (state) {
+                is RequestState.Error -> {
+                    emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(state.error))
+                    dismissProgressDialog()
+                }
+                is RequestState.Success -> {
+                    emitAddOrDeleteOperationFlow((SavedStatus.SAVED))
+                    dismissProgressDialog()
+                }
+            }
+        }.launchIn(viewModelScope)
+    }
 
     private fun createAddNewBookModel(): AddNewBookThatReadDomain {
         val book = bookFlow.value
@@ -259,5 +286,13 @@ class FragmentBookInfoViewModel(
 
     override fun bookOptionMenuOnClick(bookId: String) {
         _showBookOptionDialogFlow.tryEmit(bookId)
+    }
+
+    @AssistedFactory
+    interface Factory {
+
+        fun create(
+            bookId: String
+        ): FragmentBookInfoViewModel
     }
 }

@@ -14,6 +14,7 @@ import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.dialog.LoadingDialog
 import com.example.bookloverfinalapp.app.utils.extensions.hide
 import com.example.bookloverfinalapp.app.utils.extensions.navigateTo
+import com.example.bookloverfinalapp.app.utils.extensions.setPaddingTopHeightStatusBar
 import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
@@ -28,6 +29,8 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     protected abstract val viewModel: VM
 
     private var isCustomLoadingDialog: Boolean = false
+
+    protected var isFullScreen: Boolean = false
 
     private var viewBinding: V? = null
 
@@ -58,6 +61,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         observeRecourse()
+        if (!isFullScreen) binding().root.setPaddingTopHeightStatusBar()
     }
 
     private fun observeRecourse() = with(viewModel) {
@@ -74,8 +78,6 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
         }
         collectProgressDialog(viewLifecycleOwner) { status ->
             if (isCustomLoadingDialog) return@collectProgressDialog
-//            if (status) loadingDialog.show()
-//            else loadingDialog.dismiss()
         }
 
 
@@ -100,7 +102,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
 
     private fun handleNavigation(navCommand: NavigationCommand) {
         when (navCommand) {
-            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions)
+            is NavigationCommand.ToDirection -> findNavController().navigate(navCommand.directions.actionId)
             is NavigationCommand.Back -> findNavController().navigateUp()
         }
     }

@@ -4,7 +4,7 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BookHorizontalItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenAudioBookBlockItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.AudioBookItemOnClickListener

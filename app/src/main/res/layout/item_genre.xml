@@ -17,7 +17,7 @@
         android:layout_marginVertical="4dp"
         android:layout_marginEnd="4dp"
         app:cardBackgroundColor="?attr/card_background"
-        app:cardCornerRadius="100dp">
+        app:cardCornerRadius="60dp">
 
         <TextView
             android:id="@+id/genreTextView"

@@ -18,12 +18,18 @@ interface AudioBooksDao {
     suspend fun fetchAllAudioBooksSingle(): MutableList<AudioBookCache>
 
     @Query("select * from AUDIO_BOOKS_TABLE where id == :audioBookId")
-    suspend fun fetchAudioBookFromId(audioBookId: String): AudioBookCache
+    fun fetchAudioBookFromIdObservable(audioBookId: String): Flow<AudioBookCache?>
 
     @Query("UPDATE AUDIO_BOOKS_TABLE SET current_start_position  =:currentPosition WHERE id = :audioBookId")
     suspend fun updateAudioBookCurrentStartPosition(
         audioBookId: String,
         currentPosition: Int
+    )
+
+    @Query("UPDATE AUDIO_BOOKS_TABLE SET is_playing =:isPlaying WHERE id = :audioBookId")
+    suspend fun updateAudioBookIsPlayingState(
+        audioBookId: String,
+        isPlaying: Boolean
     )
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)

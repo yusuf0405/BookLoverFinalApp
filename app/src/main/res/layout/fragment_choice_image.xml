@@ -17,47 +17,89 @@
         tools:listitem="@layout/item_default_avatar" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp">
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/pick_in_gallery"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="8dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:elevation="6dp"
-            app:cardBackgroundColor="?grayButtonColor"
-            app:cardCornerRadius="12dp">
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="?attr/card_background"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="4dp"
-                android:src="@drawable/gallery_icon"
-                android:tint="@color/blue" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/pick_video"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/gallery_icon"
+                    android:outlineProvider="background" />
+
+                <TextView
+                    android:id="@+id/gallery_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/gallery"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </com.google.android.material.card.MaterialCardView>
-
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/pick_in_camera"
-            android:layout_width="80dp"
-            android:layout_height="80dp"
-            android:layout_marginStart="24dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="4dp"
             android:layout_marginBottom="16dp"
-            android:elevation="6dp"
-            app:cardBackgroundColor="?grayButtonColor"
-            app:cardCornerRadius="12dp">
+            android:clickable="true"
+            android:focusable="true"
+            app:cardBackgroundColor="?attr/card_background"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="4dp">
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:tint="@color/plum_normal"
-                android:layout_margin="4dp"
-                android:src="@drawable/camera_icon" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <ImageView
+                    android:id="@+id/take_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/camera_icon"
+                    android:outlineProvider="background"
+                    android:padding="8dp" />
+
+                <TextView
+                    android:id="@+id/camera_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:fontFamily="@font/poppins"
+                    android:text="@string/camera"
+                    android:textSize="14sp" />
+            </LinearLayout>
+
         </com.google.android.material.card.MaterialCardView>
-
     </LinearLayout>
 
 </LinearLayout>

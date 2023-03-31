@@ -1,6 +1,7 @@
 package com.example.bookloverfinalapp.app.di
 
 import android.content.Context
+import com.example.domain.repository.BooksSaveToFileRepository
 import com.example.data.ResourceProvider
 import com.example.data.cache.models.ClassCache
 import com.example.data.cache.models.UserCache
@@ -10,11 +11,16 @@ import com.example.data.cloud.models.SignUpAnswerCloud
 import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.service.LoginService
 import com.example.data.cloud.service.SchoolService
-import com.example.data.cloud.source.BooksThatReadCloudDataSource
-import com.example.data.cloud.source.ClassCloudDataSource
-import com.example.data.cloud.source.UsersCloudDataSource
+import com.example.data.cloud.source.saved_books.BooksThatReadCloudDataSource
+import com.example.data.cloud.source.school_classes.ClassCloudDataSource
+import com.example.data.cloud.users.UsersCloudDataSource
 import com.example.data.models.*
 import com.example.data.repository.*
+import com.example.bookloverfinalapp.app.ui.service_uplaod.book_save_to_file.BooksSaveToFileRepositoryImpl
+import com.example.data.repository.login.LoginRepositoryImpl
+import com.example.data.repository.school.SchoolRepositoryImpl
+import com.example.data.repository.school_classes.ClassRepositoryImpl
+import com.example.data.repository.user_cache.UserCacheRepositoryImpl
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.*
@@ -105,8 +111,10 @@ object RepositoryModule {
     @Provides
     @Singleton
     fun provideBooksSaveToFileRepository(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        dispatchersProvider: DispatchersProvider,
     ): BooksSaveToFileRepository = BooksSaveToFileRepositoryImpl(
-        context = context
+        context = context,
+        dispatchersProvider = dispatchersProvider
     )
 }

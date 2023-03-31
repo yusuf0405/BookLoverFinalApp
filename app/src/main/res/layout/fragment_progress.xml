@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/card_container_background"
     tools:context=".app.ui.general_screens.screen_progress.FragmentProgress">
 
     <LinearLayout
@@ -31,11 +32,45 @@
             app:cardCornerRadius="16dp"
             app:cardElevation="4dp">
 
+            <LinearLayout
+                android:id="@+id/statistics_animation_container"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone"
+                tools:visibility="visible">
+
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/no_data_animation"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/statistics_animation" />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/read_book_button"
+                    style="@style/ButtonStyle.Blue"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:text="@string/read_book"
+                    android:textAllCaps="false"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
             <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/statistics_container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="8dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:visibility="gone">
 
                 <com.statistics.library.line_chart.LineChartView
                     android:id="@+id/line_chart_view"

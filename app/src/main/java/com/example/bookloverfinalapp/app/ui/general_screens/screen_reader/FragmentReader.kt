@@ -3,23 +3,28 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_reader
 import android.content.res.Configuration
 import android.os.Bundle
 import android.view.View
+import androidx.core.view.isVisible
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.FragmentGoToPage
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.example.bookloverfinalapp.app.utils.extensions.hide
-import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.show
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.FragmentSetting
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionFragment
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_reader.dialog_option.FragmentReaderOption
+import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationManager
 import com.example.bookloverfinalapp.databinding.FragmentReaderBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.util.FitPolicy
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.dataStore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.flow.collectLatest
 import java.io.File
 
 
@@ -62,22 +67,29 @@ class FragmentReader :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        setupUi()
+        setupViews()
         setOnClickListeners()
         observeResource()
     }
 
-    private fun setupUi() = with(binding()) {
+    private fun setupViews() = with(binding()) {
         pdfview.useBestQuality(true)
         title.text = chapterTitle
-        setupPdfView()
+        dismissPlayerOverlay()
+        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).hide()
     }
 
-    private fun observeResource()= with(viewModel) {
-        launchWhenViewStarted {  }
+    private fun observeResource() = with(viewModel) {
+        launchWhenViewStarted {
+            requireContext().dataStore.data.collectLatest { pref ->
+                val orientation =
+                    pref[intPreferencesKey(SettingSelectionFragment.ORIENTATION_KEY)] ?: 1
+                setupPdfView(orientation)
+            }
+        }
     }
 
-    private fun setupPdfView() {
+    private fun setupPdfView(orientation: Int) {
         bookCurrentProgress = book.progress
         for (i in startPage until lastPage) {
             pdfPages.add(i)
@@ -91,7 +103,7 @@ class FragmentReader :
         }
         binding().pdfview.fromFile(File(path))
             .pages(*pdfPages.toIntArray())
-            .swipeHorizontal(true)
+            .swipeHorizontal(orientation == 0)
             .pageSnap(true)
             .fitEachPage(false)
             .autoSpacing(true)
@@ -102,20 +114,19 @@ class FragmentReader :
             .onLoad(this)
             .enableAnnotationRendering(true)
             .nightMode(isNightMode)
+            .onRender { binding().pdfview.fitToWidth(binding().pdfview.currentPage) }
             .load()
     }
 
     private fun setOnClickListeners() = with(binding()) {
         pageEnterField.setOnDownEffectClickListener {
-            showFragmentGoToPage(currentPage = pageEnterField.text.toString().toInt())
+            showFragmentGoToPage(currentPage = fetchCurrentPage())
         }
+        setting.setOnDownEffectClickListener { showSettingModalPage() }
+        option.setOnDownEffectClickListener { showReaderOptionModalPage() }
         endRead.setOnDownEffectClickListener {
             if (NavigationManager().isOnline(context = requireContext())) {
-                viewModel.goQuestionFragment(
-                    book = book,
-                    chapter = chapter,
-                    path = path
-                )
+                viewModel.navigateToQuestionFragment(book, chapter, path)
             } else showErrorSnackbar(getString(R.string.network_error))
         }
         pageLast.setOnDownEffectClickListener {
@@ -166,6 +177,26 @@ class FragmentReader :
         } else showInfoSnackBar(getString(R.string.have_gone_beyond))
     }
 
+
+    private fun fetchCurrentPage() = binding().pageEnterField.text.toString().toInt()
+
+    private fun showReaderOptionModalPage() = FragmentReaderOption.newInstance(
+        title = getString(R.string.options),
+        isToolbarState = binding().toolbar.isVisible,
+        goToPageListener = { showFragmentGoToPage(currentPage = fetchCurrentPage()) },
+        goToBookInfoListener = { viewModel.navigateToBookInfoFragment(book.bookId) },
+        hideOrShowToolbarListener = { hideOrShowToolbar() }
+    ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
+
+    private fun hideOrShowToolbar() = with(binding()) {
+        toolbar.isVisible = !toolbar.isVisible
+    }
+
+    private fun showSettingModalPage() = FragmentSetting.newInstance(
+        title = getString(R.string.setting),
+        isBookReaderSettingShow = true,
+    ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
+
     private fun showFragmentGoToPage(currentPage: Int) {
         FragmentGoToPage.newInstance(
             title = "${getString(R.string.go_to_pages)} $startPage ... ${lastPage - 1}",
@@ -178,8 +209,9 @@ class FragmentReader :
         super.onPause()
         saveChanges()
     }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        showPlayerOverlay()
+    }
 }
-
-
-
-

@@ -4,17 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BaseViewHolder
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.ItemFingerprint
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AudioBookAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showImage
-import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
+import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemSquareAudioBookBinding
 
 
-class AudioBookHorizontalFingerprint : ItemFingerprint<ItemSquareAudioBookBinding, AudioBookAdapterModel> {
+class AudioBookHorizontalFingerprint :
+    ItemFingerprint<ItemSquareAudioBookBinding, AudioBookAdapterModel> {
 
     override fun isRelativeItem(item: Item) = item is AudioBookAdapterModel
 

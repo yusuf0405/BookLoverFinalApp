@@ -10,9 +10,13 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.*
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_search.mappers.ItemsToSearchFilteredModelMapper
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_search.router.FragmentSearchRouter
-import com.example.data.cache.models.IdResourceString
-import com.example.domain.models.MainScreenItems
 import com.example.domain.repository.BooksSaveToFileRepository
+import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe
+import com.example.data.ResourceProvider
+import com.example.data.cache.models.IdResourceString
+import com.example.domain.DispatchersProvider
+import com.example.domain.models.MainScreenItems
+import com.example.domain.repository.BookThatReadRepository
 import com.example.domain.use_cases.FetchAllMainScreenItemsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -23,6 +27,9 @@ import javax.inject.Inject
 class FragmentSearchViewModel @Inject constructor(
     fetchAllMainScreenItemsUseCase: FetchAllMainScreenItemsUseCase,
     private val booksSaveToFileRepository: BooksSaveToFileRepository,
+    private val savedBooksRepository: BookThatReadRepository,
+    private val dispatchersProvider: DispatchersProvider,
+    private val resourceProvider: ResourceProvider,
     private val itemsToSearchFilteredModelMapper: ItemsToSearchFilteredModelMapper,
     private val router: FragmentSearchRouter
 ) : BaseViewModel(), BookItemOnClickListener, AudioBookItemOnClickListener,
@@ -32,6 +39,9 @@ class FragmentSearchViewModel @Inject constructor(
 
     private val _showBookOptionDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
     val showBookOptionDialogFlow get() = _showBookOptionDialogFlow.asSharedFlow()
+
+    private val _showSavedBookDeleteDialogFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
+    val showSavedBookDeleteDialogFlow get() = _showSavedBookDeleteDialogFlow.asSharedFlow()
 
     private val _playAudioBookFlow = createMutableSharedFlowAsSingleLiveEvent<String>()
     val playAudioBookFlow get() = _playAudioBookFlow.asSharedFlow()
@@ -51,6 +61,15 @@ class FragmentSearchViewModel @Inject constructor(
         .stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
     fun updateSearchQuery(searchString: String) = searchStringFlow.tryEmit(searchString)
+
+    fun deleteBookInSavedBooks(id: String) {
+        viewModelScope.launchSafe(
+            dispatcher = dispatchersProvider.io(),
+            safeAction = { savedBooksRepository.deleteBookInSavedBooks(id) },
+            onSuccess = { emitToShowSuccessNotificationFlow(IdResourceString(R.string.book_removed_successfully)) },
+            onError = { emitToErrorMessageFlow(resourceProvider.fetchIdErrorMessage(it)) }
+        )
+    }
 
     private fun mapToAdapterModel(items: MainScreenItems, searchString: String) =
         itemsToSearchFilteredModelMapper.map(
@@ -95,6 +114,10 @@ class FragmentSearchViewModel @Inject constructor(
 
     override fun bookOptionMenuOnClick(bookId: String) {
         _showBookOptionDialogFlow.tryEmit(bookId)
+    }
+
+    override fun saveBookItemOnLongClick(savedBookId: String) {
+        _showSavedBookDeleteDialogFlow.tryEmit(savedBookId)
     }
 
     override fun bookGenreOnClickListener(id: String) = Unit

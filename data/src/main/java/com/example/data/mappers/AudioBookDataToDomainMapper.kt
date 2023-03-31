@@ -22,7 +22,10 @@ class AudioBookDataToDomainMapper @Inject constructor() : Mapper<AudioBookData, 
             audioBookPoster = AudioBookPosterDomain(
                 name = audioBookPoster.name,
                 url = audioBookPoster.url
-            )
+            ),
+            isExclusive = isExclusive,
+            description = description,
+            isPlaying = isPlaying
         )
     }
 

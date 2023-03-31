@@ -7,8 +7,8 @@ import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
-import com.example.bookloverfinalapp.app.utils.extensions.tuneBottomDialog
+import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.utils_core.extensions.tuneBottomDialog
 import com.example.bookloverfinalapp.databinding.FragmentSavedBookSortDialogBinding
 import com.joseph.ui_core.extensions.launchWhenCreated
 import dagger.hilt.android.AndroidEntryPoint

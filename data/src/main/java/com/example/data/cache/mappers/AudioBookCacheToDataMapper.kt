@@ -5,7 +5,6 @@ import com.example.data.models.AudioBookData
 import com.example.data.models.AudioBookFileData
 import com.example.data.models.AudioBookPosterData
 import com.example.domain.Mapper
-import com.example.domain.models.AudioBookPosterDomain
 import javax.inject.Inject
 
 class AudioBookCacheToDataMapper @Inject constructor() : Mapper<AudioBookCache, AudioBookData> {
@@ -23,7 +22,10 @@ class AudioBookCacheToDataMapper @Inject constructor() : Mapper<AudioBookCache, 
             audioBookPoster = AudioBookPosterData(
                 name = audioBookPoster.name,
                 url = audioBookPoster.url
-            )
+            ),
+            isExclusive = isExclusive,
+            description = description,
+            isPlaying = isPlaying
         )
     }
 

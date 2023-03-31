@@ -14,6 +14,7 @@
         android:id="@+id/background_color"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:tint="@color/black_20_alpha"
         tools:src="@color/rating_second_color" />
 
     <LinearLayout
@@ -24,44 +25,37 @@
 
         <TextView
             android:id="@+id/title"
+            style="@style/TextViewHeadingH3.TwoLine"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:ellipsize="end"
-            android:maxLines="2"
-            android:textColor="@color/black"
-            android:textSize="20sp"
+            android:textColor="@color/white"
             tools:text="@tools:sample/lorem/random" />
 
         <TextView
             android:id="@+id/description"
+            style="@style/TextViewBodyH3"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:ellipsize="end"
-            android:fontFamily="@font/poppins"
             android:maxLines="2"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             tools:text="@tools:sample/lorem/random" />
 
-        <FrameLayout
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="300dp"
+            android:layout_marginTop="8dp"
+            app:cardElevation="12dp">
 
             <ImageView
                 android:id="@+id/poster"
                 android:layout_width="match_parent"
-                android:layout_height="300dp"
+                android:layout_height="match_parent"
                 android:layout_gravity="center"
                 android:scaleType="centerCrop"
                 tools:src="@tools:sample/avatars" />
 
-            <View
-                android:id="@+id/outline"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_gravity="center"
-                android:background="@drawable/ic_item_outline_4dp" />
-        </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 

@@ -18,6 +18,7 @@ class AddNewBookToDomainMapper : Mapper<AddNewBook, AddNewBookDomain> {
             chapterCount = chapterCount, schoolId = schoolId,
             genres = genres,
             description = description,
+            isExclusive = isExclusive
         )
     }
 }

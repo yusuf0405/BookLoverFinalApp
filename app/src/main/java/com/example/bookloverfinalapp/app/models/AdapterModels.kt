@@ -12,11 +12,9 @@ import com.example.bookloverfinalapp.app.base.GenericViewHolder.Companion.VIEW_P
 import com.example.bookloverfinalapp.app.base.GenericViewHolder.Companion.VIEW_POSITION_SIXTH
 import com.example.bookloverfinalapp.app.base.GenericViewHolder.Companion.VIEW_POSITION_THIRD
 import com.example.bookloverfinalapp.app.base.GenericViewHolder.Companion.VIEW_POSITION_ZERO
-import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_ADMIN_BOOK_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_BOOK_LOADING_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_BOOK_THAT_READ_LOADING_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_BOOK_THAT_READ_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_BOOK_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_CAT_EMPTY_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_CUBE_EMPTY_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_ERROR_VIEW_HOLDER
@@ -27,7 +25,7 @@ import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.AD
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_LOADING_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_RATING_VIEW_HOLDER
 import com.example.bookloverfinalapp.app.ui.adapter.ViewHolderChain.Companion.ADAPTER_USER_TYPE_VIEW_HOLDER
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_ENGLISH_KEY
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_KEY
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences

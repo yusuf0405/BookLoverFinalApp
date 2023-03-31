@@ -2,32 +2,37 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile
 
 import android.app.Activity
 import android.content.Intent
-import android.net.Uri
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserGender
-import com.example.bookloverfinalapp.app.ui.MotionListener
-import com.example.bookloverfinalapp.app.ui.MotionState
-import com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book.UploadBookDialog
+import com.joseph.utils_core.motion.MotionListener
+import com.joseph.utils_core.motion.MotionState
+import com.joseph.ui_core.dialog.UploadFileDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.OnBackPressedListener
+import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.FragmentChooseQuestionPoster
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.FragmentSetting
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.choice_image_dialog.FragmentChoiceImage
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.login_out.FragmentLoginOutDialog
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentProfileBinding
-import com.example.domain.models.UpdateAnswerDomain
 import com.example.domain.models.UserUpdateDomain
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.convertDrawableToByteArray
+import com.joseph.utils_core.extensions.showImage
+import com.joseph.utils_core.extensions.showOnlyOne
 import com.parse.ParseFile
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class FragmentProfile :
@@ -42,9 +47,15 @@ class FragmentProfile :
         ProgressDialog.getInstance()
     }
 
-    private val uploadFileDialog: UploadBookDialog by lazy(LazyThreadSafetyMode.NONE) {
-        UploadBookDialog.getInstance()
+    private val uploadFileDialog: UploadFileDialog by lazy(LazyThreadSafetyMode.NONE) {
+        UploadFileDialog.getInstance()
     }
+
+    private val choiceImageDialog = FragmentChoiceImage.newInstance(
+        pickInGalleryListener = { pickImageFileInStorage() },
+        pickInCameraListener = { pickImageFileInCamera() },
+        choiceImageListener = { resourceDrawable -> choiceDefaultImage(resourceDrawable) }
+    )
 
     private val motionListener = MotionListener(::setToolbarState)
 
@@ -64,10 +75,7 @@ class FragmentProfile :
         toolbar.setOnDownEffectClickListener { startMotionSceneToStart() }
         with(fragmentEditProfile) {
             saveEditButton.setOnDownEffectClickListener { checkChanges() }
-            changeImage.setOnDownEffectClickListener {
-                showFragmentChoiceImage()
-//                pickImageFileInStorage()
-            }
+            changeImage.setOnDownEffectClickListener { showFragmentChooseQuestionPoster() }
             female.setOnDownEffectClickListener { gender = UserGender.female }
             male.setOnDownEffectClickListener { gender = UserGender.male }
         }
@@ -84,10 +92,10 @@ class FragmentProfile :
         launchWhenViewStarted {
             currentUserFlow.observe(::handleCurrentUser)
             saveNewUserStatusFlow.observe(::handleUserUpdated)
-            userSuccessUpdatedFlow.observe(::handleSuccessUpdated)
             imageUploadDialogPercentFlow.observe(::setUploadFileDialogTitle)
             imageUploadDialogIsShowFlow.observe(::handleImageUploadDialogIsShow)
             startUpdateUserFlow.observe { startUpdateUser() }
+            userSuccessUpdatedFlow.observe { handleSuccessUpdated() }
         }
     }
 
@@ -112,9 +120,37 @@ class FragmentProfile :
         }
     }
 
+    private fun createActivityResultContracts() = ActivityResultContracts.StartActivityForResult()
+
     private fun pickImageFileInStorage() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
         resultPickUserAvatar.launch(intent)
+    }
+
+    private val resultPickUserAvatar = registerForActivityResult(
+        createActivityResultContracts()
+    ) { result ->
+        if (result.resultCode != Activity.RESULT_OK) return@registerForActivityResult
+        val data: Intent? = result.data
+        data?.data?.let { uri -> handlePickPosterResult(convertImageUriToByteArray(uri)) }
+    }
+
+    private fun pickImageFileInCamera() {
+        val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
+        resultCamera.launch(intent)
+    }
+
+    private val resultCamera = registerForActivityResult(
+        createActivityResultContracts()
+    ) { result ->
+        if (result.resultCode != Activity.RESULT_OK) return@registerForActivityResult
+        val photo = result.data?.extras?.get(DATA) as? Bitmap ?: return@registerForActivityResult
+        handlePickPosterResult(convertBitmapToByteArray(photo))
+    }
+
+    private fun choiceDefaultImage(resourceId: Int) {
+        val resourceDrawable = ContextCompat.getDrawable(requireContext(), resourceId) ?: return
+        handlePickPosterResult(requireContext().convertDrawableToByteArray(resourceDrawable))
     }
 
     private fun setToolbarState(state: MotionState) {
@@ -127,7 +163,10 @@ class FragmentProfile :
 
     private fun checkChanges() = with(binding()) {
         val user = viewModel.getCurrentUser()
-        if (name() == user.name && lastName() == user.lastname && email() == user.email && number() == user.number && gender == user.gender && viewModel.currentUserImageFile.value == null) {
+        if (name() == user.name && lastName() == user.lastname &&
+            email() == user.email && number() == user.number && gender == user.gender &&
+            viewModel.currentUserImageFile.value == null
+        ) {
             showInfoSnackBar(getString(R.string.enter_the_change))
             return
         }
@@ -145,10 +184,6 @@ class FragmentProfile :
         }
     }
 
-    private fun showProgressDialog() = progressDialog.showOnlyOne(parentFragmentManager)
-
-    private fun dismissProgressDialog() = progressDialog.dismiss()
-
     private fun startUpdateUser() = with(binding()) {
         showProgressDialog()
         val newUser = UserUpdateDomain(
@@ -163,15 +198,23 @@ class FragmentProfile :
     }
 
     private fun setUploadFileDialogTitle(progress: Int) {
-        uploadFileDialog.setTitle(progress = progress, title = "Загружаем новый аватар ")
+        uploadFileDialog.setTitle(
+            progress = progress,
+            description = getString(R.string.uploading_a_new_avatar)
+        )
     }
 
     private fun handleImageUploadDialogIsShow(isShow: Boolean) {
         if (isShow) uploadFileDialog.showOnlyOne(parentFragmentManager)
-        else uploadFileDialog.dismiss()
+        else {
+            uploadFileDialog.showSuccessBlock {
+                startUpdateUser()
+                uploadFileDialog.dismiss()
+            }
+        }
     }
 
-    private fun handleSuccessUpdated(userUpdateDomain: UpdateAnswerDomain) = with(binding()) {
+    private fun handleSuccessUpdated() = with(binding()) {
         val user = viewModel.getCurrentUser()
         val newUser = User(
             gender = gender,
@@ -193,16 +236,9 @@ class FragmentProfile :
         viewModel.saveNewUserFromCache(newUser)
     }
 
-    private val resultPickUserAvatar =
-        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode != Activity.RESULT_OK) return@registerForActivityResult
-            val data: Intent? = result.data
-            data?.data?.let(::handlePickPosterResult)
-        }
-
-    private fun handlePickPosterResult(uri: Uri) {
-        viewModel.updateCurrentUserImageFile(ParseFile(DEFAULT_IMAGE_TITLE, uriToImage(uri)))
-        requireContext().showImage(uri, binding().profileImg)
+    private fun handlePickPosterResult(byteArray: ByteArray) {
+        viewModel.updateCurrentUserImageFile(ParseFile(DEFAULT_IMAGE_TITLE, byteArray))
+        requireContext().showImage(byteArray, binding().profileImg)
     }
 
     private fun handleUserUpdated(isSuccess: Boolean) {
@@ -225,12 +261,20 @@ class FragmentProfile :
 
     private fun startMotionSceneToEnd() = binding().root.transitionToState(R.id.end)
 
-    private fun showFragmentChoiceImage() = FragmentChoiceImage.newInstance(
-        pickInGalleryListener = { pickImageFileInStorage() }
+    private fun showFragmentChoiceImage() = choiceImageDialog
+        .show(requireActivity().supportFragmentManager, ModalPage.TAG)
+
+    private fun showFragmentChooseQuestionPoster() = FragmentChooseQuestionPoster.newInstance(
+        onNetworkPosterSelectedListener = {},
+        onLocalPosterSelectedListener = {}
     ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     private fun showSettingModalPage() = FragmentSetting.newInstance(getString(R.string.setting))
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)
+
+    private fun showProgressDialog() = progressDialog.showOnlyOne(parentFragmentManager)
+
+    private fun dismissProgressDialog() = progressDialog.dismiss()
 
     override fun onStart() {
         super.onStart()
@@ -248,7 +292,8 @@ class FragmentProfile :
         true
     } else false
 
-    private companion object {
+    companion object {
         const val DEFAULT_IMAGE_TITLE = "image.png"
+        const val DATA = "data"
     }
 }

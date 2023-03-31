@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/fragmentMainScreen"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_main.FragmentMainScreen"
-        android:label="fragment_all_books"
+        android:label="fragmentMainScreen"
         tools:layout="@layout/fragment_main_screen">
         <action
             android:id="@+id/action_fragmentMainScreen_to_fragmentMyBooks"
@@ -84,7 +84,11 @@
             app:destination="@id/fragmentAllSavedBooks" />
         <action
             android:id="@+id/action_fragmentMainScreen_to_fragmentAllAudioBooks"
-            app:destination="@id/fragmentAllAudioBooks" />
+            app:destination="@id/fragmentAllAudioBooks"
+            app:enterAnim="@anim/to_left_in"
+            app:exitAnim="@anim/to_right_out"
+            app:popEnterAnim="@anim/to_left_in"
+            app:popExitAnim="@anim/to_right_out" />
         <action
             android:id="@+id/action_fragmentMainScreen_to_fragmentAllTasks"
             app:destination="@id/fragmentAllTasks" />
@@ -133,6 +137,16 @@
             app:exitAnim="@anim/slide_down"
             app:popEnterAnim="@anim/slide_up"
             app:popExitAnim="@anim/slide_down" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentSelectFavoriteBook"
+            app:destination="@id/fragmentSelectFavoriteBook" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_stories_nav_graph"
+            app:destination="@id/stories_nav_graph">
+            <argument
+                android:name="position"
+                app:argType="integer" />
+        </action>
     </fragment>
     <fragment
         android:id="@+id/fragmentAllSavedBooks"
@@ -158,16 +172,6 @@
         android:id="@+id/fragmentAllStudents"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.FragmentAllStudents"
         android:label="fragment_my_students" />
-
-    <fragment
-        android:id="@+id/fragmentStudentDetails"
-        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_student_details.FragmentStudentDetails"
-        android:label="fragment_student_details"
-        tools:layout="@layout/fragment_student_details">
-        <argument
-            android:name="student"
-            app:argType="com.example.bookloverfinalapp.app.models.Student" />
-    </fragment>
 
     <fragment
         android:id="@+id/fragmentAllBooks"
@@ -250,6 +254,7 @@
             android:name="book_id"
             app:argType="string" />
     </fragment>
+    <include app:graph="@navigation/stories_nav_graph" />
 
     <include app:graph="@navigation/search_nav_graph" />
 
@@ -264,5 +269,10 @@
     <include app:graph="@navigation/create_question_nav_graph" />
 
     <include app:graph="@navigation/book_read_nav_graph" />
+
+    <fragment
+        android:id="@+id/fragmentSelectFavoriteBook"
+        android:name="com.joseph.select_favorite_book.presentation.FragmentSelectFavoriteBook"
+        android:label="FragmentSelectFavoriteBook" />
 
 </navigation>

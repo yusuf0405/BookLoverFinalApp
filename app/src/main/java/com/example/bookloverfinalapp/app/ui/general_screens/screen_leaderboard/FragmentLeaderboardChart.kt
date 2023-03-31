@@ -12,12 +12,12 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.AddableItemAnimat
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTopCommonAnimator
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserRatingFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserTopRatingFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models.FetchRatingType
-import com.example.bookloverfinalapp.app.utils.extensions.getAttrColor
+import com.joseph.utils_core.extensions.getAttrColor
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentLeaderboardChartBinding
 import com.joseph.ui_core.extensions.launchWhenViewStarted

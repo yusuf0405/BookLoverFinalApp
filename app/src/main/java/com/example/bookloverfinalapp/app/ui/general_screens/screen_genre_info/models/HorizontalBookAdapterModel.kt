@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models
 
 import com.example.bookloverfinalapp.app.models.SavedStatus
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
 
 data class HorizontalBookAdapterModel(

@@ -2,10 +2,19 @@ package com.example.data.cache.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "books_that_read")
+@Entity(
+    tableName = "books_that_read",
+    indices = [
+        Index("objectId"),
+        Index("progress","objectId"),
+        Index("chapters_read","objectId"),
+        Index("is_reading_pages","objectId"),
+    ]
+)
 data class BookThatReadCache(
     @PrimaryKey var objectId: String,
     @ColumnInfo(name = "author") var author: String,

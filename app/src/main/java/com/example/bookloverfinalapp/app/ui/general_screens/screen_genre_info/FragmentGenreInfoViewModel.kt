@@ -8,16 +8,18 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.ma
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.router.FragmentGenreInfoRouter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.AudioBookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
-import com.example.data.cache.models.IdResourceString
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.EmptyDataItem
 import com.example.domain.repository.BooksSaveToFileRepository
+import com.example.data.cache.models.IdResourceString
 import com.example.domain.repository.GenresRepository
 import com.example.domain.use_cases.FetchSimilarBooksUseCase
-import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
-import javax.inject.Inject
 
-class FragmentGenreInfoViewModel constructor(
-    private val genreId: String,
+class FragmentGenreInfoViewModel @AssistedInject constructor(
+    @Assisted private val genreId: String,
     private val fetchSimilarBooksUseCase: FetchSimilarBooksUseCase,
     private val genresRepository: GenresRepository,
     private val booksSaveToFileRepository: BooksSaveToFileRepository,
@@ -43,6 +45,9 @@ class FragmentGenreInfoViewModel constructor(
                 audioBookItemOnClickListener = this,
                 bookOnClickListeners = this
             )
+        }.map {
+            if (it.size <= 2) listOf(EmptyDataItem)
+            else it
         }.stateIn(viewModelScope, SharingStarted.Lazily, emptyList())
 
 
@@ -68,11 +73,16 @@ class FragmentGenreInfoViewModel constructor(
 
     override fun bookItemOnClick(bookId: String) {
         navigate(router.navigateToBookInfoFragment(bookId = bookId))
-
     }
 
     override fun bookOptionMenuOnClick(bookId: String) {
         _showBookOptionDialogFlow.tryEmit(bookId)
     }
 
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            genreId: String
+        ): FragmentGenreInfoViewModel
+    }
 }

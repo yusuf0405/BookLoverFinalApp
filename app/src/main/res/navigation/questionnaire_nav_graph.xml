@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/questionnaire_nav_graph"
+    app:startDestination="@id/fragmentBookQuestion">
+
+    <fragment
+        android:id="@+id/fragmentBookQuestion"
+        android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_questions.FragmentBookQuestion"
+        android:label="fragment_student_book_question"
+        tools:layout="@layout/fragment_book_question">
+        <argument
+            android:name="book"
+            app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+        <argument
+            android:name="chapter"
+            app:argType="integer" />
+        <argument
+            android:name="path"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_fragmentBookQuestion_to_book_read_nav_graph"
+            app:destination="@id/book_read_nav_graph"
+            app:popUpTo="@+id/fragmentMainScreen">
+            <argument
+                android:name="book"
+                app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />
+            <argument
+                android:name="path"
+                app:argType="string" />
+        </action>
+    </fragment>
+</navigation>

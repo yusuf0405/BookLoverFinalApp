@@ -1,4 +1,3 @@
-@file:Suppress("DEPRECATION")
 
 package com.example.bookloverfinalapp.app.utils.extensions
 
@@ -22,7 +21,6 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleCoroutineScope
-import androidx.lifecycle.LiveData
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import com.bumptech.glide.Glide
@@ -36,16 +34,14 @@ import com.example.domain.models.UserDomainImage
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.tabs.TabLayout
+import com.google.firebase.crashlytics.buildtools.reloc.com.google.common.io.ByteStreams
 import com.parse.ParseFile
 import com.thekhaeng.pushdownanim.PushDownAnim
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collect
-import java.io.ByteArrayOutputStream
-import java.io.File
-import java.io.FileOutputStream
-import java.io.InputStream
-
+import java.io.*
+import java.util.*
 
 fun Fragment.setCardViewColor(cardView: MaterialCardView) {
     when (requireContext().resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK) {
@@ -240,7 +236,8 @@ fun EditText.validatePhone(): Boolean {
 
 fun AppCompatActivity.findNavControllerById(fragmentContainerId: Int): NavController {
     val contentFragment = supportFragmentManager.findFragmentById(fragmentContainerId)
-    val navController = if (contentFragment is NavHostFragment) contentFragment.navController else null
+    val navController =
+        if (contentFragment is NavHostFragment) contentFragment.navController else null
     return navController ?: throw IllegalStateException("NavController is not initialized")
 }
 
@@ -249,8 +246,17 @@ fun Fragment.getImage() {
     startActivityForResult(intent, RESULT_LOAD_IMAGE)
 }
 
-fun Fragment.uriToImage(uri: Uri): ByteArray {
+fun Fragment.convertImageUriToByteArray(uri: Uri): ByteArray {
     val bitmap = MediaStore.Images.Media.getBitmap(requireActivity().contentResolver, uri)
+    return convertBitmapToByteArray(bitmap)
+}
+
+fun Fragment.convertVideoUriToByteArray(uri: Uri): ByteArray {
+    val stream = requireActivity().contentResolver.openInputStream(uri)
+    return ByteStreams.toByteArray(stream)
+}
+
+fun convertBitmapToByteArray(bitmap: Bitmap): ByteArray {
     val stream = ByteArrayOutputStream()
     bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream)
     return stream.toByteArray()
@@ -281,7 +287,6 @@ fun Fragment.showCustomInputAlertDialog(radioButton: RadioButton) {
 }
 
 
-
 fun Fragment.getFile(documentUri: Uri): File {
     val inputStream = requireActivity().contentResolver?.openInputStream(documentUri)
     var file: File
@@ -308,8 +313,6 @@ fun Context.showImage(uri: Uri, imageView: ImageView) {
         .load(uri)
         .into(imageView)
 }
-
-
 
 
 fun Context.getGoldColor(): Int = this.resources.getColor(R.color.gold)

@@ -9,18 +9,17 @@ import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.*
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
+import com.joseph.utils_core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showRoundedImage
-import com.example.bookloverfinalapp.app.utils.extensions.tuneBottomDialog
-import com.example.bookloverfinalapp.app.utils.extensions.tuneLyricsDialog
+import com.joseph.utils_core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.databinding.FragmentBookOptionDialogBinding
 import com.example.data.cache.models.IdResourceString
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.ui_core.extensions.toDp
+import com.joseph.utils_core.extensions.toDp
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
@@ -36,8 +35,8 @@ class FragmentBookOptionDialog : DialogFragment() {
     }
 
     @Inject
-    lateinit var factory: FragmentBookOptionDialogViewModelFactory.Factory
-    private val viewModel: FragmentBookOptionDialogViewModel by viewModels {
+    lateinit var factory: FragmentBookOptionDialogViewModel.Factory
+    private val viewModel: FragmentBookOptionDialogViewModel by viewModelCreator {
         factory.create(bookId = bookId)
     }
 
@@ -78,7 +77,9 @@ class FragmentBookOptionDialog : DialogFragment() {
             listener?.addQuestionOnClickListener(bookId)
         }
         editBookBlock.setOnDownEffectClickListener {
+            showInfoSnackBar("Функция временно недоступно!")
             dismissModalPage()
+            return@setOnDownEffectClickListener
             listener?.editBookOnClickListener(bookId = bookId)
         }
     }
@@ -128,6 +129,14 @@ class FragmentBookOptionDialog : DialogFragment() {
             .Builder(requireActivity().findViewById(R.id.rootContainer))
             .success()
             .message(messageId.format(requireContext()))
+            .build()
+            .show()
+
+    private fun showInfoSnackBar(message: String) =
+        GenericSnackbar
+            .Builder(requireActivity().findViewById(R.id.rootContainer))
+            .info()
+            .message(message)
             .build()
             .show()
 

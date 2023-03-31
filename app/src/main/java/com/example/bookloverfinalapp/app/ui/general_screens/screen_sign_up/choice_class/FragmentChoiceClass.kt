@@ -14,11 +14,12 @@ import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.showOnlyOne
 import com.example.bookloverfinalapp.databinding.FragmentChoiceClassBinding
 import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.extensions.launchOnLifecycle
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.utils_core.viewModelCreator
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -29,8 +30,8 @@ class FragmentChoiceClass :
     ), SettingSelectionAdapter.OnItemSelectionListener {
 
     @Inject
-    lateinit var factory: FragmentChoiceClassViewModelFactory.Factory
-    override val viewModel: FragmentChoiceClassViewModel by viewModels {
+    lateinit var factory: FragmentChoiceClassViewModel.Factory
+    override val viewModel: FragmentChoiceClassViewModel by viewModelCreator {
         factory.create(schoolId = getSchoolId(), userSignUp = getUserSignUp())
     }
 

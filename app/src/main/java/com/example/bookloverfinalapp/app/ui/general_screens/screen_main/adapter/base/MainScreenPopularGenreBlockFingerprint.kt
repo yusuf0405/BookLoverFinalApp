@@ -9,13 +9,16 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.PopularGenreBlockItem
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
-import com.example.bookloverfinalapp.databinding.MainScreenBookBlockBinding
 import com.example.bookloverfinalapp.databinding.MainScreenPopularGenreBlockBinding
-import com.joseph.ui_core.extensions.toDp
+import com.joseph.ui_core.adapter.BaseViewHolder
+import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui_core.adapter.Item
+import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.utils_core.extensions.toDp
 
 class MainScreenPopularGenreBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,
-    private val viewPool: RecyclerView.RecycledViewPool,
+    private val viewPool: RecyclerView.RecycledViewPool = RecyclerView.RecycledViewPool(),
 ) : ItemFingerprint<MainScreenPopularGenreBlockBinding, PopularGenreBlockItem> {
 
     override fun isRelativeItem(item: Item) = item is PopularGenreBlockItem
@@ -29,9 +32,9 @@ class MainScreenPopularGenreBlockFingerprint(
         val binding = MainScreenPopularGenreBlockBinding.inflate(layoutInflater)
         val newLayoutParams = FrameLayout.LayoutParams(
             ViewGroup.LayoutParams.WRAP_CONTENT,
-            ViewGroup.LayoutParams.WRAP_CONTENT
+            400.toDp
         )
-        newLayoutParams.setMargins(16.toDp, 8.toDp, 16.toDp, 16.toDp)
+        newLayoutParams.setMargins(8.toDp, 20.toDp, 8.toDp, 20.toDp)
         binding.root.layoutParams = newLayoutParams
         return MainScreenPopularGenreBlockViewHolder(binding, fingerprintsList, viewPool)
     }
@@ -43,15 +46,12 @@ class MainScreenPopularGenreBlockFingerprint(
         override fun areItemsTheSame(
             oldItem: PopularGenreBlockItem,
             newItem: PopularGenreBlockItem
-        ) =
-            oldItem == newItem
+        ) = oldItem == newItem
 
         override fun areContentsTheSame(
             oldItem: PopularGenreBlockItem,
             newItem: PopularGenreBlockItem
-        ) =
-            oldItem == newItem
-
+        ) = oldItem == newItem
     }
 
 }

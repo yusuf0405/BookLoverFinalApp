@@ -5,10 +5,10 @@
     <Transition
         motion:constraintSetEnd="@+id/end"
         motion:constraintSetStart="@id/start"
-        motion:duration="1000">
+        motion:duration="999999999">
         <OnSwipe
             motion:dragScale="1"
-            motion:maxAcceleration="10"
+            motion:maxAcceleration="0"
             motion:touchAnchorId="@id/book_info_block"
             motion:touchAnchorSide="top" />
         <KeyFrameSet>
@@ -35,15 +35,16 @@
         <Constraint
             android:id="@+id/book_info_block"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_marginTop="-125dp"
             android:elevation="28dp"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"
+            motion:layout_constraintBottom_toBottomOf="parent"
             motion:layout_constraintTop_toBottomOf="@+id/include_book_info_poster_block" />
         <Constraint
             android:id="@+id/include_book_info_toolbar_block"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:visibility="invisible"
             motion:layout_constraintEnd_toEndOf="parent"
             motion:layout_constraintStart_toStartOf="parent"

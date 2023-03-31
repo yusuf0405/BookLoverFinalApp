@@ -10,5 +10,6 @@ data class AddNewBookDomain(
     var author: String,
     var poster: BookPosterDomain,
     var book: BookPdfDomain,
+    var isExclusive: Boolean,
     var chapterCount: Int,
 )

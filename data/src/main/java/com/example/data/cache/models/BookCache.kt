@@ -2,16 +2,28 @@ package com.example.data.cache.models
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 import java.util.*
 
-@Entity(tableName = "books")
+@Entity(
+    tableName = "books",
+    indices = [
+        Index("id"),
+        Index("title", "id"),
+        Index("author", "id"),
+        Index("public_year", "id"),
+        Index("poster", "id"),
+        Index("saved_status", "id"),
+    ]
+)
 data class BookCache(
     @PrimaryKey var id: String,
     @ColumnInfo(name = "author") var author: String,
     @ColumnInfo(name = "description") val description: String,
     @ColumnInfo(name = "created_at") var createdAt: Date,
     @ColumnInfo(name = "page") var page: Int,
+    @ColumnInfo(name = "is_exclusive") var isExclusive: Boolean,
     @ColumnInfo(name = "public_year") var publicYear: String,
     @ColumnInfo(name = "book") var book: BookPdfCache,
     @ColumnInfo(name = "genres") var genres: List<String>,

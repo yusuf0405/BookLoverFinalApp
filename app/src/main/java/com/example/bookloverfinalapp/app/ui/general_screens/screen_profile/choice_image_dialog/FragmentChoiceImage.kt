@@ -7,17 +7,18 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.FingerprintAdapter
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SmallHeaderFingerprint
-import com.example.bookloverfinalapp.app.utils.bindingLifecycleError
+import com.joseph.utils_core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.setupLayoutManager
 import com.example.bookloverfinalapp.databinding.FragmentChoiceImageBinding
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.setupLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterNotNull
 
 
 @AndroidEntryPoint
@@ -29,6 +30,8 @@ class FragmentChoiceImage : Fragment() {
     private val viewModel: FragmentChoiceImageViewModel by viewModels()
 
     private var pickInGalleryListener: (() -> Unit)? = null
+    private var pickInCameraListener: (() -> Unit)? = null
+    private var choiceImageListener: ((Int) -> Unit)? = null
 
     private var adapter = FingerprintAdapter(
         listOf(
@@ -55,25 +58,31 @@ class FragmentChoiceImage : Fragment() {
     private fun setupViews() = with(binding) {
         recyclerView.adapter = adapter
         recyclerView.setupLayoutManager(
-            adapter = adapter,
-            R.layout.item_default_avatar
+            currentItem = adapter::getItemViewType,
+            itemId = R.layout.item_default_avatar,
+            secondItemId = R.layout.item_user_circle
         )
         pickInGallery.setOnDownEffectClickListener {
             pickInGalleryListener?.invoke()
             dismissModalPage()
         }
         pickInCamera.setOnDownEffectClickListener {
-            pickInGalleryListener?.invoke()
+            pickInCameraListener?.invoke()
             dismissModalPage()
         }
     }
 
     private fun observeResource() = with(viewModel) {
         launchWhenViewStarted {
-            adapterItems
-                .filter { it.isNotEmpty() }
-                .observe(adapter::submitList)
+            adapterItems.filter { it.isNotEmpty() }.observe(adapter::submitList)
+            choiceImageResourceFlow.filterNotNull().observe(::handleChoiceDefaultImage)
         }
+    }
+
+    private fun handleChoiceDefaultImage(resourceId: Int) {
+        choiceImageListener?.invoke(resourceId)
+        viewModel.clearChoiceImageResourceFlow()
+        dismissModalPage()
     }
 
     override fun onDestroyView() {
@@ -83,9 +92,13 @@ class FragmentChoiceImage : Fragment() {
 
     companion object {
         fun newInstance(
-            pickInGalleryListener: () -> Unit
+            pickInGalleryListener: () -> Unit,
+            choiceImageListener: (Int) -> Unit,
+            pickInCameraListener: () -> Unit
         ) = FragmentChoiceImage().run {
             this.pickInGalleryListener = pickInGalleryListener
+            this.choiceImageListener = choiceImageListener
+            this.pickInCameraListener = pickInCameraListener
             ModalPage.Builder()
                 .fragment(this)
                 .build()

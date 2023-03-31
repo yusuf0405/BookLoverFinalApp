@@ -12,7 +12,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginTop="16dp"
+        android:layout_marginTop="40dp"
         android:background="@color/transparent"
         android:elevation="1dp"
         android:src="@drawable/ic_white_back"
@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/genre_background_image"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="360dp"
         android:scaleType="centerCrop"
         android:tint="@color/blackout"
         tools:src="@drawable/genre_background_first" />

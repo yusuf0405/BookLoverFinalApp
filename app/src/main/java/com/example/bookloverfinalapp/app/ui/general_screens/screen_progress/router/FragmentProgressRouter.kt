@@ -5,4 +5,6 @@ import com.example.bookloverfinalapp.app.utils.navigation.NavCommand
 interface FragmentProgressRouter {
 
     fun navigateToFragmentLeaderboardChart(): NavCommand
+
+    fun navigateToAllSavedBooksFragment(): NavCommand
 }

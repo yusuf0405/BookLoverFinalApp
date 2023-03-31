@@ -2,15 +2,22 @@
     <!-- Base application theme. -->
     <style name="Theme.KnigolyubApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
+        <item name="android:windowDrawsSystemBarBackgrounds">true</item>
+        <item name="android:statusBarColor">@color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/transparent</item>
         <item name="colorPrimary">@color/black_smoke</item>
-        <item name="colorPrimaryVariant">@color/blue</item>
+        <item name="colorPrimaryVariant">@color/cardBackground</item>
         <item name="colorOnPrimary">@color/white</item>
+        <item name="android:popupMenuStyle">@style/PopupMenuDefaultStyle</item>
         <item name="progressColor">@color/red</item>
         <item name="android:textColorSecondary">@color/black_smoke</item>
         <item name="progressTextColor">@color/progressTextColor</item>
         <item name="tabIndicatorColor">@color/violet</item>
         <item name="cardBackgroundColor">@color/white_smoke</item>
         <item name="totalColor">@color/progressLeftcolor</item>
+        <item name="android:itemTextAppearance">@style/itemTextStyle.PopupMenuDefaultTextStyle</item>
+
         <item name="background">@color/cardBackground</item>
         <item name="android:fontFamily">@font/poppins_semi_bold</item>
         <item name="android:textColor">@color/black</item>
@@ -20,7 +27,6 @@
         <item name="colorSecondaryVariant">@color/blue</item>
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
-        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="grayButtonColor">@color/grey_active_day</item>
         <item name="buttonNotEnableBackground">@color/grey_stone</item>
@@ -38,6 +44,19 @@
         <item name="button_gradient_background">@color/blue</item>
         <item name="toolbar_gradient_background">@color/white</item>
         <item name="collapsedPlayerOutlineColor">@color/controls_light_inactive</item>
+    </style>
+
+    <style name="FullScreenDialogTheme" parent="Theme.AppCompat.Light.NoActionBar">
+        <item name="android:windowLayoutInDisplayCutoutMode">shortEdges</item>
+        <item name="android:fitsSystemWindows">false</item>
+    </style>
+
+
+    <style name="TimePickerTitleSize">
+        <item name="android:textSize">34sp</item>
+    </style>
+    <style name="NumberPickerTitleSize">
+        <item name="android:textSize">38sp</item>
     </style>
 
 
@@ -270,7 +289,6 @@
         <item name="android:shadowRadius">6</item>
         <item name="android:ems">10</item>
         <item name="android:textColor">@color/white</item>
-        <item name="android:background">@drawable/violet_btn_bg</item>
     </style>
 
 </resources>

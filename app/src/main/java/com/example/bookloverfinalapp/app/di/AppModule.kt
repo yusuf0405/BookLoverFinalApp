@@ -77,13 +77,15 @@ object AppModule {
         booksRepository: BooksRepository,
         audioBooksRepository: AudioBooksRepository,
         bookThatReadRepository: BookThatReadRepository,
-        classRepository: ClassRepository
+        classRepository: ClassRepository,
+        storiesRepository: StoriesRepository
     ): ClearAllAppCacheUseCase =
         ClearAllAppCacheUseCaseImpl(
             userRepository = userRepository,
             booksRepository = booksRepository,
             audioBooksRepository = audioBooksRepository,
             bookThatReadRepository = bookThatReadRepository,
-            classRepository = classRepository
+            classRepository = classRepository,
+            storiesRepository = storiesRepository
         )
 }

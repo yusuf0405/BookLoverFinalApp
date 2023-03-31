@@ -37,8 +37,8 @@ class FragmentUploadFileViewModel @Inject constructor(
     private val genreDomainToUiMapper: Mapper<GenreDomain, Genre>
 ) : BaseViewModel(), ProgressCallback, SaveCallback {
 
-    private val currentUser = userCacheRepository.fetchCurrentUserFromCache()
-        .stateIn(viewModelScope, SharingStarted.Lazily, UserDomain.unknown())
+    private val currentUser = userCacheRepository.fetchCurrentUserFromCacheFlow()
+        .stateIn(viewModelScope, SharingStarted.Eagerly, UserDomain.unknown())
 
     private val bookPdfFlow = MutableStateFlow<ParseFile?>(null)
     private val bookPosterFlow = MutableStateFlow<ParseFile?>(null)
@@ -92,7 +92,13 @@ class FragmentUploadFileViewModel @Inject constructor(
 
     fun fetchCheckedBookGenresListValue() = checkedBookGenresListFlow.value
 
-    fun addBook(title: String, description: String, author: String, publicYear: String) {
+    fun addBook(
+        title: String,
+        description: String,
+        author: String,
+        publicYear: String,
+        isExclusive: Boolean
+    ) {
         val newBook = AddNewBook(
             author = author,
             description = description,
@@ -103,7 +109,8 @@ class FragmentUploadFileViewModel @Inject constructor(
             book = parseFileMapToBookPdf(bookPdfFlow.value),
             page = bookPageCountFlow.value,
             schoolId = currentUser.value.schoolId,
-            genres = emptyList()
+            genres = checkedBookGenresListFlow.value.map { it.id },
+            isExclusive = isExclusive
         )
         viewModelScope.launchSafe(
             dispatcher = dispatchersProvider.io(),

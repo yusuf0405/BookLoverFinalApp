@@ -8,7 +8,7 @@ import androidx.core.text.buildSpannedString
 import androidx.core.view.isVisible
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.appendClickable
-import com.example.bookloverfinalapp.app.utils.extensions.getAttrColor
+import com.joseph.utils_core.extensions.getAttrColor
 import com.example.bookloverfinalapp.app.utils.extensions.getTextUpToNLine
 import com.example.bookloverfinalapp.app.utils.extensions.removeLastNChars
 import com.joseph.ui_core.custom.FadingTextView
@@ -26,6 +26,7 @@ data class Book(
     var publicYear: String,
     var title: String,
     var chapterCount: Int,
+    var isExclusive: Boolean,
     var poster: BookPoster,
     var updatedAt: Date,
     var bookPdf: BookPdf,
@@ -50,7 +51,8 @@ data class Book(
             poster = BookPoster(String(), String()),
             updatedAt = Date(),
             bookPdf = BookPdf(String(), String()),
-            savedStatus = SavedStatus.SAVED
+            savedStatus = SavedStatus.SAVED,
+            isExclusive = false
         )
 
     }

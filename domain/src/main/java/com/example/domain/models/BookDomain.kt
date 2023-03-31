@@ -12,6 +12,7 @@ data class BookDomain(
     var title: String,
     val description: String,
     var genreIds: List<String>,
+    var isExclusive: Boolean,
     var chapterCount: Int,
     var poster: BookPosterDomain,
     var updatedAt: Date,
@@ -29,6 +30,7 @@ data class BookDomain(
             genreIds = emptyList(),
             book = BookPdfDomain(String(), String(), String()),
             chapterCount = 0,
+            isExclusive = false,
             poster = BookPosterDomain(String(), String()),
             savedStatus = SavedStatusDomain.SAVING
         )

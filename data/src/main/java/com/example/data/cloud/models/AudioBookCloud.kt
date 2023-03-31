@@ -9,6 +9,8 @@ class AudioBookCloud(
     @SerializedName("author") val author: String,
     @SerializedName("createdAt") val createdAt: Date,
     @SerializedName("schoolId") val schoolId: String,
+    @SerializedName("isExclusive") val isExclusive: Boolean,
+    @SerializedName("description") val description: String,
     @SerializedName("audio_book") val audioBookFile: AudioBookFileCloud,
     @SerializedName("genres") val genres: List<String>,
     @SerializedName("audio_book_poster") val audioBookPoster: AudioBookPosterCloud

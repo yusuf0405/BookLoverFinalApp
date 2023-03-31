@@ -14,6 +14,16 @@ class FragmentMainScreenRouterImpl @Inject constructor() : FragmentMainScreenRou
             .actionFragmentMainScreenToSearchNavGraph()
             .toNavCommand()
 
+    override fun navigateToSelectFavoriteBookFragment(): NavCommand =
+        FragmentMainScreenDirections
+            .actionFragmentMainScreenToFragmentSelectFavoriteBook()
+            .toNavCommand()
+
+    override fun navigateToStoriesFragment(position: Int): NavCommand =
+        FragmentMainScreenDirections
+            .actionFragmentMainScreenToStoriesNavGraph(position)
+            .toNavCommand()
+
     override fun navigateToAllSavedBooksFragment(): NavCommand =
         FragmentMainScreenDirections
             .actionFragmentMainScreenToFragmentMyBooks()

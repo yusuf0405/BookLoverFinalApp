@@ -10,11 +10,31 @@ import com.example.data.cache.source.classes.ClassCacheDataSource
 import com.example.data.cache.source.classes.ClassCacheDataSourceImpl
 import com.example.data.cache.source.genres.GenresCacheDataSource
 import com.example.data.cache.source.genres.GenresCacheDataSourceImpl
+import com.example.data.cache.source.stories.StoriesCacheDataSource
+import com.example.data.cache.source.stories.StoriesCacheDataSourceImpl
 import com.example.data.cache.source.tasks.TasksCacheDataSource
 import com.example.data.cache.source.tasks.TasksCacheDataSourceImpl
 import com.example.data.cache.source.users.UsersCacheDataSource
 import com.example.data.cache.source.users.UsersCacheDataSourceImpl
 import com.example.data.cloud.source.*
+import com.example.data.cloud.source.audio_books.AudioBookCloudDataSource
+import com.example.data.cloud.source.audio_books.AudioBookCloudDataSourceImpl
+import com.example.data.cloud.source.books.BooksCloudDataSource
+import com.example.data.cloud.source.books.BooksCloudDataSourceImpl
+import com.example.data.cloud.source.genres.GenresCloudDataSource
+import com.example.data.cloud.source.genres.GenresCloudDataSourceImpl
+import com.example.data.cloud.source.questions.QuestionsCloudDataSource
+import com.example.data.cloud.source.questions.QuestionsCloudDataSourceImpl
+import com.example.data.cloud.source.saved_books.BooksThatReadCloudDataSource
+import com.example.data.cloud.source.saved_books.BooksThatReadCloudDataSourceImpl
+import com.example.data.cloud.source.school_classes.ClassCloudDataSource
+import com.example.data.cloud.source.school_classes.ClassCloudDataSourceImpl
+import com.example.data.cloud.source.stories.StoriesCloudDataSource
+import com.example.data.cloud.source.stories.StoriesCloudDataSourceImpl
+import com.example.data.cloud.source.tasks.TasksCloudDataSource
+import com.example.data.cloud.source.tasks.TasksCloudDataSourceImpl
+import com.example.data.cloud.users.UsersCloudDataSource
+import com.example.data.cloud.users.UsersCloudDataSourceImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -95,5 +115,18 @@ abstract class DataSourceBindModule {
         impl: GenresCacheDataSourceImpl
     ): GenresCacheDataSource
 
+    @Binds
+    abstract fun bindStoriesCacheDataSource(
+        impl: StoriesCacheDataSourceImpl
+    ): StoriesCacheDataSource
 
+    @Binds
+    abstract fun bindStoriesCloudDataSource(
+        impl: StoriesCloudDataSourceImpl
+    ): StoriesCloudDataSource
+
+    @Binds
+    abstract fun bindQuestionsCloudDataSource(
+        impl: QuestionsCloudDataSourceImpl
+    ): QuestionsCloudDataSource
 }

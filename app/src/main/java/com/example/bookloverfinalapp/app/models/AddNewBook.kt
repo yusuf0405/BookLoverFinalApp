@@ -9,6 +9,7 @@ data class AddNewBook(
     val description: String,
     var poster: BookPoster,
     var book: BookPdf,
+    var isExclusive: Boolean,
     var chapterCount: Int,
     var schoolId: String,
 )

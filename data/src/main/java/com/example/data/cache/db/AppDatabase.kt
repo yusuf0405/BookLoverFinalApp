@@ -20,9 +20,10 @@ import java.util.*
         ClassCache::class,
         UserStatisticCache::class,
         GenreCache::class,
+        StoriesCache::class,
         UserCache::class],
-    version = 5,
-    exportSchema = true
+    version = 11,
+    exportSchema = true,
 )
 
 @TypeConverters(AppDatabase.DatabaseConverter::class)
@@ -42,6 +43,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun userStatisticDao(): UserStatisticDao
 
     abstract fun genresDao(): GenreDao
+
+    abstract fun storiesDao(): StoriesDao
 
     class DatabaseConverter {
 

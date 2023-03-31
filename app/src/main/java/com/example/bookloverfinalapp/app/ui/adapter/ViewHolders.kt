@@ -13,6 +13,7 @@ import com.example.bookloverfinalapp.app.models.BookThatReadModel
 import com.example.bookloverfinalapp.app.models.UserModel
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.*
+import com.joseph.utils_core.extensions.showImage
 
 class BookViewHolder(private val view: View, private val actionListener: ItemOnClickListener) :
     GenericViewHolder(view) {

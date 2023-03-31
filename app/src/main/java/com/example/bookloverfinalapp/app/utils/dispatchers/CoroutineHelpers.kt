@@ -8,10 +8,12 @@ inline fun <T> CoroutineScope.launchSafe(
     crossinline safeAction: suspend () -> RequestState<T>,
     crossinline onError: suspend (Throwable) -> Unit,
     crossinline onSuccess: (T) -> Unit,
+    crossinline onStart: () -> Unit = {},
     dispatcher: CoroutineDispatcher,
     errorDispatcher: CoroutineDispatcher = Dispatchers.Main,
     start: CoroutineStart = CoroutineStart.DEFAULT,
 ): Job {
+    onStart.invoke()
     val exceptionHandler = CoroutineExceptionHandler { _, exception ->
         launch(context = errorDispatcher, start = start) { onError(exception) }
     }

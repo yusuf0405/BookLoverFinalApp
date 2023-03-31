@@ -52,7 +52,6 @@ private const val RUSSIAN = "русский"
 private const val UZBEK = "o‘zbek"
 private const val KYGYZ = "кыргызча"
 fun checkLanguageAndGetActualString(strings: List<String>): String {
-    Log.i("Joseph", "language -${Locale.getDefault().displayLanguage}")
     return when (Locale.getDefault().displayLanguage) {
         ENGLISH -> {
             if (strings.isEmpty()) String()

@@ -15,6 +15,7 @@ import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.data.cache.models.IdResourceString
 import com.example.domain.Mapper
 import com.example.domain.models.*
+import com.joseph.ui_core.adapter.Item
 import javax.inject.Inject
 
 interface ItemsToSearchFilteredModelMapper {
@@ -86,7 +87,7 @@ class ItemsToSearchFilteredModelMapperImpl @Inject constructor(
 
         val genres = items.genres.swapElements()
             .take(4).map { genre ->
-                BookGenreAdapterModel(
+                BookGenreItem(
                     id = genre.id,
                     titles = genre.titles,
                     posterUrl = genre.poster.url,

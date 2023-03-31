@@ -7,15 +7,18 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.router.FragmentChapterBookRouter
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.Item
+import com.joseph.ui_core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SearchAdapterModel
 import com.shockwave.pdfium.PdfDocument.Bookmark
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 
-class FragmentStudentChapterBookViewModel(
-    private val book: BookThatRead,
-    private val patch: String,
+class FragmentStudentChapterBookViewModel @AssistedInject constructor(
+    @Assisted private val book: BookThatRead,
+    @Assisted private val patch: String,
     private val router: FragmentChapterBookRouter
 ) : BaseViewModel(), SearchView.OnQueryTextListener, ChapterItemOnClickListener {
 
@@ -34,15 +37,16 @@ class FragmentStudentChapterBookViewModel(
 
     fun updateBookLastPage(page: Int) = bookLastPageFlow.tryEmit(page)
 
-    private fun mapToAdapterModels(chapters: List<Bookmark>) =
-        chapters.mapIndexed { index, bookmark ->
+    private fun mapToAdapterModels(chapters: List<Bookmark>): List<ChapterAdapterModel> {
+        return chapters.mapIndexed { index, bookmark ->
             ChapterAdapterModel(
                 chapter = bookmark,
                 actionListener = this,
-                chapterIsRead = book.isReadingPages[index],
+                chapterIsRead = if (book.isReadingPages.size == index || book.isReadingPages.size < index) false else book.isReadingPages[index],
                 currentChapterPosition = index + 1
             )
         }
+    }
 
     private fun applySearchFiltered(items: List<ChapterAdapterModel>, searchString: String) =
         if (searchString.isBlank()) items
@@ -83,7 +87,7 @@ class FragmentStudentChapterBookViewModel(
         )
     }
 
-    fun navigate(){
+    fun navigate() {
         navigate(
             router.navigateToReaderFragment(
                 book = book,
@@ -98,5 +102,13 @@ class FragmentStudentChapterBookViewModel(
 
     private companion object {
         const val SEARCH_DEBOUNCE = 300L
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(
+            book: BookThatRead,
+            patch: String,
+        ): FragmentStudentChapterBookViewModel
     }
 }

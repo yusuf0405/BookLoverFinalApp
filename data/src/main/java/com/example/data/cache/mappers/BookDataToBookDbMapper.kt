@@ -31,7 +31,8 @@ class BookDataToBookDbMapper : Mapper<BookData, BookCache> {
             ),
             description = description,
             genres = genres,
-            savedStatus = mapSavedStatus(savedStatus)
+            savedStatus = mapSavedStatus(savedStatus),
+            isExclusive = isExclusive
         )
     }
 

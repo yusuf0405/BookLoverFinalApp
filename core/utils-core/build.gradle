@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library'
+    id 'org.jetbrains.kotlin.android'
+}
+
+android {
+    namespace 'com.joseph.utils_core'
+    compileSdk targetAndroidSdk
+
+    defaultConfig {
+        minSdk minAndroidSdk
+        targetSdk targetAndroidSdk
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+    buildFeatures {
+        viewBinding true
+    }
+}
+
+dependencies {
+    implementation Libs.Google.Material
+
+    // AndroidX
+    implementation Libs.Android.CoreKtx
+    implementation Libs.Android.FragmentKtx
+    implementation Libs.Android.ActivityKtx
+    implementation Libs.Android.AppCompat
+    implementation Libs.Android.ConstraintLayout
+    implementation Libs.Android.RecyclerView
+    implementation Libs.Android.DataStorePreferences
+
+    implementation Libs.GitHub.Glide
+    implementation(Libs.GitHub.PushDownAnim) {
+        exclude group: 'com.android.support'
+    }
+
+    implementation Libs.Other.ShimmerEffect
+}

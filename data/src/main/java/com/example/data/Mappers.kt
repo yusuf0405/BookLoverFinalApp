@@ -35,12 +35,14 @@ internal fun AddNewBookDomain.mapToBook(id: String, createdAt: Date): BookData =
     author = author,
     poster = BookPosterData(name = poster.name, url = poster.url),
     updatedAt = createdAt,
-    chapterCount = chapterCount, page = page, publicYear = publicYear,
+    chapterCount = chapterCount,
+    page = page,
+    publicYear = publicYear,
     title = title,
     genres = genres,
     description = description,
-
-    )
+    isExclusive = isExclusive
+)
 
 internal fun SchoolCloud.toSchool(): SchoolDomain =
     SchoolDomain(id = objectId, title = title)
