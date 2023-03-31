@@ -74,7 +74,7 @@
 
     <TextView
         android:id="@+id/book_description"
-        style="@style/TextViewBodyH2.SingleLine"
+        style="@style/TextViewBodyH3.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"

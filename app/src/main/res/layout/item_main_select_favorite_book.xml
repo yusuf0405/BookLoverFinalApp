@@ -26,7 +26,7 @@
             android:orientation="vertical">
 
             <TextView
-                style="@style/TextViewHeadingH1.TwoLine"
+                style="@style/TextViewHeadingH2.TwoLine"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Select your favorite books" />

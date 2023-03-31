@@ -7,8 +7,8 @@
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="4dp"
-    app:cardCornerRadius="4dp"
     app:cardBackgroundColor="?attr/card_background"
+    app:cardCornerRadius="4dp"
     app:cardElevation="15dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,9 +36,9 @@
             app:layout_constraintStart_toStartOf="@+id/rounded_book_image"
             app:layout_constraintTop_toTopOf="@+id/rounded_book_image" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <TextView
             android:id="@+id/bookTitle"
-            style="@style/item_book_title_style"
+            style="@style/TextViewHeadingH4.SingleLine"
             android:layout_marginStart="16dp"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="8dp"
@@ -47,15 +47,10 @@
             app:layout_constraintTop_toTopOf="parent"
             tools:text="Война и мир" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <TextView
             android:id="@+id/bookAuthor"
-            style="@style/item_book_author"
+            style="@style/TextViewBodyH3.SingleLine"
             android:layout_marginEnd="8dp"
-            android:ellipsize="none"
-            android:fadingEdgeLength="60dp"
-            android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
-            android:textSize="15sp"
             app:layout_constraintEnd_toStartOf="@+id/bookProgress"
             app:layout_constraintStart_toStartOf="@+id/bookTitle"
             app:layout_constraintTop_toBottomOf="@+id/bookTitle"
