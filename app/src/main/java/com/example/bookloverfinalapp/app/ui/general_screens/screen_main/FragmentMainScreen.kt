@@ -6,14 +6,10 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.Menu
 import android.view.View
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.widget.CustomPopupMenu
 import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
-import androidx.core.view.isInvisible
-import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -114,19 +110,6 @@ class FragmentMainScreen :
 
     private val motionListener = MotionListener(::setToolbarState)
 
-    private val rotateOpenAnim: Animation by lazy(LazyThreadSafetyMode.NONE) {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_open_anim)
-    }
-    private val rotateCloseAnim: Animation by lazy(LazyThreadSafetyMode.NONE) {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_close_anim)
-    }
-    private val fromBottomAnim: Animation by lazy(LazyThreadSafetyMode.NONE) {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.from_bottom_anim)
-    }
-    private val toBottomAnim: Animation by lazy(LazyThreadSafetyMode.NONE) {
-        AnimationUtils.loadAnimation(requireContext(), R.anim.to_bottom_anim)
-    }
-
     private var playerCallback: PlayerCallback? = null
 
     override fun onAttach(context: Context) {
@@ -208,18 +191,15 @@ class FragmentMainScreen :
 
     private fun setOnClickListeners() = with(binding()) {
         avatarAndNameBlock.avatar.setOnDownEffectClickListener { viewModel.navigateToProfileFragment() }
-        avatarAndNameBlock.addIcon.setOnDownEffectClickListener(::showPopupMenu)
+        avatarAndNameBlock.addIcon.setOnDownEffectClickListener(::showAddPopupMenu)
         avatarAndNameBlock.searchIcon.setOnDownEffectClickListener {
             hideBottomNavigationView()
             viewModel.navigateToSearchFragment()
         }
         avatarAndNameBlock.settingIcon.setOnDownEffectClickListener { showSettingModalPage() }
-        addPdfBook.setOnDownEffectClickListener { navigateUploadFragment(UploadFileType.PDF_BOOK) }
-        addAudioBook.setOnDownEffectClickListener { navigateUploadFragment(UploadFileType.AUDIO_BOOK) }
-        floatingActionButton.setOnDownEffectClickListener { onAddButtonClicked() }
     }
 
-    private fun showPopupMenu(view: View) {
+    private fun showAddPopupMenu(view: View) {
         val popupMenu =
             CustomPopupMenu(
                 context = requireContext(),
@@ -228,32 +208,24 @@ class FragmentMainScreen :
                 com.joseph.ui_core.R.style.PopupMenuDefaultStyle
             )
 
-
-        val context = view.context
-        popupMenu.menu.add(0, ID_MOVE_UP, Menu.NONE, context.getString(R.string.audio_books))
+        popupMenu.menu.add(0, ID_ADD_BOOK, Menu.NONE, getString(R.string.audio_book))
             .apply {
                 setIcon(R.drawable.audio_icon)
             }
-        popupMenu.menu.add(0, ID_MOVE_DOWN, Menu.NONE, context.getString(R.string.books))
+        popupMenu.menu.add(0, ID_ADD_AUDIO_BOOK, Menu.NONE, getString(R.string.book))
             .apply {
-                setIcon(R.drawable.ic_book)
+                setIcon(R.drawable.read_book_icon)
             }
-        popupMenu.menu.add(0, ID_REMOVE, Menu.NONE, context.getString(R.string.create_stories))
+        popupMenu.menu.add(0, ID_ADD_STORIES, Menu.NONE, getString(R.string.stories))
             .apply {
                 setIcon(R.drawable.star_icon)
             }
 
         popupMenu.setOnMenuItemClickListener {
             when (it.itemId) {
-                ID_MOVE_UP -> {
-//                    actionListener.onUserMove(user, -1)
-                }
-                ID_MOVE_DOWN -> {
-//                    actionListener.onUserMove(user, 1)
-                }
-                ID_REMOVE -> {
-//                    actionListener.onUserDelete(user)
-                }
+                ID_ADD_BOOK -> navigateUploadFragment(UploadFileType.PDF_BOOK)
+                ID_ADD_AUDIO_BOOK -> navigateUploadFragment(UploadFileType.AUDIO_BOOK)
+                ID_ADD_STORIES -> showFragmentChoiceUploadFileForStoriesDialog()
             }
             return@setOnMenuItemClickListener true
         }
@@ -279,29 +251,6 @@ class FragmentMainScreen :
     private fun restoreRecyclerViewCurrentState() {
         val currentPosition = viewModel.fetchRecyclerViewCurrentState()
         binding().bookRecyclerView.layoutManager?.onRestoreInstanceState(currentPosition)
-    }
-
-    private fun onAddButtonClicked() {
-        setVisibility()
-        setAnimation()
-        viewModel.updateFloatingActionButtonIsClickedFlow(!viewModel.floatingActionButtonIsClickedFlow())
-    }
-
-    private fun setVisibility() = with(binding()) {
-        addPdfBook.isVisible = viewModel.floatingActionButtonIsClickedFlow()
-        addAudioBook.isInvisible = viewModel.floatingActionButtonIsClickedFlow()
-    }
-
-    private fun setAnimation() = with(binding()) {
-        if (!viewModel.floatingActionButtonIsClickedFlow()) {
-            addAudioBook.startAnimation(fromBottomAnim)
-            addPdfBook.startAnimation(fromBottomAnim)
-            floatingActionButton.startAnimation(rotateOpenAnim)
-            return@with
-        }
-        addAudioBook.startAnimation(toBottomAnim)
-        addPdfBook.startAnimation(toBottomAnim)
-        floatingActionButton.startAnimation(rotateCloseAnim)
     }
 
     private fun showFragmentBookOptionDialog(bookId: String) = FragmentBookOptionDialog
@@ -356,8 +305,8 @@ class FragmentMainScreen :
     }
 
     private companion object {
-        private const val ID_MOVE_UP = 1
-        private const val ID_MOVE_DOWN = 2
-        private const val ID_REMOVE = 3
+        private const val ID_ADD_BOOK = 1
+        private const val ID_ADD_AUDIO_BOOK = 2
+        private const val ID_ADD_STORIES = 3
     }
 }

@@ -130,6 +130,7 @@
     <string name="admin_sighUp">Администраторду каттоо</string>
     <string name="next">Кийинки</string>
     <string name="books">Китептер</string>
+    <string name="book">Китеп</string>
     <string name="progress">Прогресс</string>
     <string name="account">Кароо</string>
     <string name="settings">Орнотуулар</string>
@@ -339,6 +340,7 @@
     <string name="learn_more">Көбүрөөк билүү</string>
     <string name="more">Дагы</string>
     <string name="audio_books">Аудио китептер</string>
+    <string name="audio_book">Аудио китепте</string>
     <string name="exclusive_books">Эксклюзивдүү китептер</string>
     <string name="what_are_we_looking_for">Биз эмне издеп жатабыз?</string>
     <string name="pages">Барактар:</string>
@@ -363,6 +365,7 @@
     <string name="gallery">Галерея</string>
     <string name="camera">Камера</string>
     <string name="create_stories">Окуяларды түзүңүз</string>
+    <string name="stories">Окуя</string>
     <string name="uploading_files">Файлдар жүктөлүүдө</string>
     <string name="stories_added_successfully">Окуялар ийгиликтүү кошулду</string>
     <string name="select_file_type">Файл түрүн тандаңыз</string>
