@@ -40,6 +40,7 @@ class FragmentLeaderboardChart :
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         showBottomNavigationView()
         hideBottomNavigationView()
@@ -67,7 +68,7 @@ class FragmentLeaderboardChart :
         choiceSchoolBlock.setOnDownEffectClickListener {
             viewModel.updateFetchRatingType(FetchRatingType.SCHOOL)
         }
-        upButton.setOnDownEffectClickListener {
+        toolbar.setNavigationOnClickListener {
             viewModel.navigateBack()
         }
     }
@@ -92,6 +93,7 @@ class FragmentLeaderboardChart :
                 setTypeToCheckedColor(choiceClass)
                 setTypeToUncheckedColor(choiceSchool)
             }
+
             FetchRatingType.SCHOOL -> {
                 setTypeToCheckedColor(choiceSchool)
                 setTypeToUncheckedColor(choiceClass)
@@ -112,7 +114,6 @@ class FragmentLeaderboardChart :
     private fun setTypeToUncheckedColor(textView: TextView) {
         textView.setTextColor(Color.GRAY)
     }
-
 
     private companion object {
         const val ITEMS_ADD_ANIMATOR_DURATION = 1000L

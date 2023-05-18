@@ -3,12 +3,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/profile_nav_graph"
-    app:startDestination="@id/fragment_profile">
+    app:startDestination="@id/fragmentProfileScreen">
 
     <fragment
         android:id="@+id/fragment_profile"
         android:name="com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.FragmentProfile"
         android:label="fragment_student_profile"
         tools:layout="@layout/profile_block" />
+    <fragment
+        android:id="@+id/fragmentProfileScreen"
+        android:name="com.joseph.profile.presentation.FragmentProfileScreen"
+        android:label="FragmentProfileScreen" />
 
 </navigation>

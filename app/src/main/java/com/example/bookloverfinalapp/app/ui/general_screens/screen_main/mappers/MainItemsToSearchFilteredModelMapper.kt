@@ -145,15 +145,18 @@ class MainItemsToSearchFilteredModelMapperImpl @Inject constructor(
         )
         allAdapterItems.addAll(listOf(exclusiveAudioBooksHorizontal))
 
-        val popularGenreItems = mutableListOf<Item>()
-        listOf(limitedAudioBooks, filteredBooksList)
-        popularGenreItems.addAll(limitedAudioBooks.shuffled())
-        popularGenreItems.addAll(limitedBooks.shuffled())
-
         val booksHorizontalItem = BookHorizontalItem(limitedBooks)
         if (booksHorizontalItem.items.isNotEmpty()) allAdapterItems.add(
             createHeaderModelForAllBooks { openMoreClickListeners.navigateToAllBooksFragment() })
         allAdapterItems.addAll(listOf(booksHorizontalItem))
+
+        val popularGenreItems = mutableListOf<Item>()
+        listOf(limitedAudioBooks, filteredBooksList)
+        popularGenreItems.addAll(limitedAudioBooks.shuffled())
+        popularGenreItems.addAll(limitedBooks.shuffled())
+        val popularGenreBlockItem = PopularGenreBlockItem(items = popularGenreItems.shuffled())
+        allAdapterItems.addAll(listOf(popularGenreBlockItem))
+
 
         val addNewBooks = AddNewBooksItem(addNewBooksItemOnClickListener)
         allAdapterItems.addAll(listOf(addNewBooks))
@@ -162,9 +165,6 @@ class MainItemsToSearchFilteredModelMapperImpl @Inject constructor(
         if (savedHorizontalItem.items.isNotEmpty()) allAdapterItems.add(
             createHeaderModelForSavedBooks { openMoreClickListeners.navigateToAllSavedBooksFragment() })
         allAdapterItems.addAll(listOf(savedHorizontalItem))
-
-        val popularGenreBlockItem = PopularGenreBlockItem(items = popularGenreItems.shuffled())
-        allAdapterItems.addAll(listOf(popularGenreBlockItem))
 
         val audioBooksHorizontalItem = MainScreenAudioBookBlockItem(limitedAudioBooks)
         if (audioBooksHorizontalItem.items.isNotEmpty()) allAdapterItems.add(

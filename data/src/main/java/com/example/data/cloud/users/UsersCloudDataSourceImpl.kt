@@ -9,7 +9,7 @@ import com.example.data.cloud.models.*
 import com.example.data.cloud.service.UserService
 import com.example.data.models.StudentData
 import com.example.data.models.UserImageData
-import com.example.data.repository.StudentsResponseType
+import com.example.data.repository.users.StudentsResponseType
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.UpdateAnswerDomain
@@ -135,7 +135,7 @@ class UsersCloudDataSourceImpl @Inject constructor(
 
 
     override fun getCurrentUser(sessionToken: String): Flow<UserCloud> = flow {
-        emit(service.getMe(sessionToken = sessionToken))
+        emit(service.getCurrentUserInfo(sessionToken = sessionToken))
     }.flowOn(Dispatchers.IO)
         .map { it.body() ?: UserCloud.unknown() }
         .flowOn(Dispatchers.Default)

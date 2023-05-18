@@ -21,6 +21,7 @@ data class IdResourceString(@StringRes val id: Int) : ResourceString() {
 
 /** Wrapper for message from formatted string resource. */
 data class FormatResourceString(@StringRes val id: Int, val values: List<Any>) : ResourceString() {
-    constructor(@StringRes id: Int, vararg values: Any): this(id, values.toList())
+    constructor(@StringRes id: Int, vararg values: Any) : this(id, values.toList())
+
     override fun format(context: Context): String = context.getString(id, *values.toTypedArray())
 }

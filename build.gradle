@@ -26,6 +26,7 @@ buildscript {
 
         //Test
         junit_version = "4.13.2"
+        jupiter_version = "5.8.2"
         ext_junit_version = "1.1.3"
         espresso_version = "3.5.1"
         mockito_version = "3.11.1"
@@ -55,6 +56,8 @@ buildscript {
         navigation_version = "2.5.3"
         compose_bom_version = "2023.03.00"
         compose_ui_version = "1.4.0"
+        accompanist_version = "0.28.0"
+        nav_version = "2.5.3"
 
         //Google
         hilt_version = "2.44"
@@ -128,7 +131,8 @@ buildscript {
                         ComposeUi              : "androidx.compose.ui:ui:$compose_ui_version",
                         ComposeMaterial        : "androidx.compose.material:material:$compose_ui_version",
                         ComposeToolingPrewiew  : "androidx.compose.ui:ui-tooling-preview:$compose_ui_version",
-
+                        SystemUiController     : "com.google.accompanist:accompanist-systemuicontroller:$accompanist_version",
+                        ComposeNavigation      : "androidx.navigation:navigation-compose:$nav_version",
                         JUnitExt               : "androidx.test.ext:junit:$ext_junit_version",
                         EspressoCore           : "androidx.test.espresso:espresso-core:$espresso_version",
                         ArchCoreTesting        : "androidx.arch.core:core-testing:$arch_core_testing_version",
@@ -174,6 +178,7 @@ buildscript {
                 ,
                 Testing   : [
                         JUnit: "junit:junit:$junit_version",
+                        Jupiter:"org.junit.jupiter:junit-jupiter-api:$jupiter_version"
                 ],
                 Mockito   : [
                         MockitoAndroid: "org.mockito:mockito-android:$mockito_android_version",
@@ -202,12 +207,11 @@ buildscript {
                         Theme     : ":core:theme",
                 ],
                 Features: [
-                        ProfileApi        : ":features:screen_profile:screen-profile-api",
-                        ProfileImpl       : ":features:screen-profile:screen-profile-impl",
-                        ProfileUi         : ":features:screen-profile:screen-profile-ui",
+                        Profile           : ":features:profile",
                         SelectFavoriteBook: ":features:select-favorite-book",
                         Stories           : ":features:stories",
                         SignIn            : ":features:sign-in",
+                        Onboarding            : ":features:onboarding",
                 ],
         ]
 

@@ -5,7 +5,7 @@
     android:id="@+id/container_card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginHorizontal="16dp"
+    android:layout_marginHorizontal="8dp"
     android:layout_marginTop="6dp"
     android:layout_marginBottom="4dp"
     app:cardBackgroundColor="?attr/card_background"
@@ -88,7 +88,7 @@
                 android:id="@+id/linearLayout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/bookAuthor"
                 app:layout_constraintTop_toBottomOf="@+id/bookAuthor">
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:text="@string/year_of_publication"
                     android:textColor="?attr/text_secondary"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <com.joseph.ui_core.custom.MyTextView
                     android:id="@+id/publishedYear"
@@ -107,7 +107,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="4dp"
                     android:textColor="?attr/blackOrWhiteColor"
-                    android:textSize="@dimen/item_book_attribute_size"
+                    android:textSize="12sp"
                     tools:text="2008" />
 
                 <TextView
@@ -118,7 +118,7 @@
                     android:layout_marginStart="8dp"
                     android:text="@string/pages"
                     android:textColor="?attr/text_secondary"
-                    android:textSize="10sp" />
+                    android:textSize="11sp" />
 
                 <com.joseph.ui_core.custom.MyTextView
                     android:id="@+id/bookPages"
@@ -130,7 +130,7 @@
                     android:requiresFadingEdge="horizontal"
                     android:singleLine="true"
                     android:textColor="?attr/blackOrWhiteColor"
-                    android:textSize="@dimen/item_book_attribute_size"
+                    android:textSize="12sp"
                     tools:text="400" />
 
             </LinearLayout>

@@ -19,7 +19,7 @@ class FragmentAllAudioBooks : BaseFragmentAllItems() {
         get() = R.string.all_audio_books
 
     override val sortDialogFragment: DialogFragment
-        get() = FragmentAudioBookSortDialog()
+        get() = FragmentAudioBookSortDialog.newInstance()
 
     override val layoutManager: LinearLayoutManager
         get() = LinearLayoutManager(requireContext())

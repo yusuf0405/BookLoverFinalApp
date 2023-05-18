@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.*
 import com.joseph.utils_core.bindingLifecycleError
@@ -19,7 +18,7 @@ import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import com.joseph.ui_core.extensions.launchWhenViewStarted
 import com.joseph.utils_core.extensions.toDp
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import javax.inject.Inject
@@ -36,7 +35,7 @@ class FragmentBookOptionDialog : DialogFragment() {
 
     @Inject
     lateinit var factory: FragmentBookOptionDialogViewModel.Factory
-    private val viewModel: FragmentBookOptionDialogViewModel by viewModelCreator {
+    private val viewModel: FragmentBookOptionDialogViewModel by assistedViewModel {
         factory.create(bookId = bookId)
     }
 

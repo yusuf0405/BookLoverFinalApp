@@ -3,8 +3,17 @@
     <color name="red_mts">#E30611</color>
     <color name="red_button_skip">#EB4A13</color>
 
+    <string-array name="analyticalPieChartColorArray">
+        <item>#E480F4</item>
+        <item>#6CC3F3</item>
+        <item>#7167ED</item>
+        <item>#D9455F</item>
+        <item>#6054EA</item>
+    </string-array>
 
     <color name="dark_blue">#151729</color>
+    <color name="dark_orange">#D9455F</color>
+    <color name="dark_purple">#6054EA</color>
     <color name="black_smoke">#1D2023</color>
     <color name="black_space">#2C3135</color>
     <color name="license">#969FA8</color>
@@ -312,7 +321,7 @@
     <color name="colorAccent">#E91E63</color>
     <color name="yellow">#D5C42F</color>
     <color name="green">#7EC52C</color>
-    <color name="blue">#268AFF</color>
+    <color name="blue">#4B92FF</color>
     <color name="rating_color">#FFC41F</color>
     <color name="rating_background">#1F1D2B</color>
     <color name="rating_first_background">#2F3142</color>

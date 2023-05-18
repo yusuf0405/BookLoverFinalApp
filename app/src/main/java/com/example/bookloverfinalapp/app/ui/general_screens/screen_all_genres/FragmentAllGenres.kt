@@ -22,7 +22,7 @@ class FragmentAllGenres : BaseFragmentAllItems() {
         get() = R.string.genres
 
     override val sortDialogFragment: DialogFragment
-        get() = FragmentSavedBookSortDialog()
+        get() = FragmentSavedBookSortDialog.newInstance()
 
     override val layoutManager: LinearLayoutManager
         get() = GridLayoutManager(requireContext(), 2)

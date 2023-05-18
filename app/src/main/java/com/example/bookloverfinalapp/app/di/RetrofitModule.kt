@@ -22,7 +22,6 @@ const val CONTENT_TYPE = "application/json"
 @InstallIn(SingletonComponent::class)
 object RetrofitModule {
 
-
     @Provides
     @Singleton
     fun requestInterceptor() = Interceptor { chain ->

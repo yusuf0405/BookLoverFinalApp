@@ -4,7 +4,6 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import com.example.bookloverfinalapp.R
@@ -19,7 +18,7 @@ import com.joseph.ui_core.custom.modal_page.dismissModalPage
 import com.joseph.ui_core.extensions.launchOnLifecycle
 import com.joseph.ui_core.extensions.launchWhenViewStarted
 import com.joseph.utils_core.extensions.showOnlyOne
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -31,7 +30,7 @@ class FragmentChoiceClass :
 
     @Inject
     lateinit var factory: FragmentChoiceClassViewModel.Factory
-    override val viewModel: FragmentChoiceClassViewModel by viewModelCreator {
+    override val viewModel: FragmentChoiceClassViewModel by assistedViewModel {
         factory.create(schoolId = getSchoolId(), userSignUp = getUserSignUp())
     }
 

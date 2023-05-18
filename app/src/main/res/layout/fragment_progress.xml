@@ -1,130 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="?attr/card_container_background"
+    android:orientation="vertical"
     tools:context=".app.ui.general_screens.screen_progress.FragmentProgress">
 
-    <LinearLayout
+    <include
+        android:id="@+id/include_default_toolbar"
+        layout="@layout/include_default_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_height="match_parent">
 
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:text="@string/my_statistics"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            app:cardBackgroundColor="?attr/card_background"
-            app:cardCornerRadius="16dp"
-            app:cardElevation="4dp">
-
-            <LinearLayout
-                android:id="@+id/statistics_animation_container"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:visibility="gone"
-                tools:visibility="visible">
-
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/no_data_animation"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/statistics_animation" />
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/read_book_button"
-                    style="@style/ButtonStyle.Blue"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="16dp"
-                    android:layout_marginBottom="16dp"
-                    android:text="@string/read_book"
-                    android:textAllCaps="false"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/statistics_container"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginBottom="8dp"
-                android:orientation="vertical"
-                android:visibility="gone">
-
-                <com.statistics.library.line_chart.LineChartView
-                    android:id="@+id/line_chart_view"
-                    android:layout_width="match_parent"
-                    android:layout_height="360dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:lcv_chart_line_color="@color/blue"
-                    app:lcv_chart_outer_circle_color="@color/blue"
-                    app:lcv_dot_shape="0"
-                    app:lcv_inner_radius="2dp"
-                    app:lcv_line_width="1dp"
-                    app:lcv_radius="2dp"
-                    app:lcv_stroke_width="2dp"
-                    app:lcv_text_size="10dp" />
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/day_of_the_week_recycler_view"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/line_chart_view"
-                    tools:itemCount="7"
-                    tools:listitem="@layout/item_day_of_the_week" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-        </com.google.android.material.card.MaterialCardView>
-
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/your_achievements"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:text="@string/your_achievements"
-            android:textSize="24sp"
-            android:textStyle="bold" />
-
-        <include
-            android:id="@+id/progress_block"
-            layout="@layout/progress_block" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/leaderboard_recycler_view"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            tools:itemCount="2"
-            tools:listitem="@layout/item_top_rating_users" />
-    </LinearLayout>
+            android:orientation="vertical"
+            android:paddingTop="16dp">
 
-</androidx.core.widget.NestedScrollView>
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="8dp"
+                android:elevation="12dp"
+                app:cardBackgroundColor="?attr/toolbar_background"
+                app:cardCornerRadius="12dp">
+
+                <com.joseph.ui_core.custom.analytical_pie_chart.AnalyticalPieChart
+                    android:id="@+id/analyticalPieChart"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="12dp"
+                    android:layout_marginVertical="8dp"
+                    android:paddingVertical="16dp"
+                    app:pieChartCirclePadding="8dp"
+                    app:pieChartCirclePaintRoundSize="false"
+                    app:pieChartCircleSectionSpace="0"
+                    app:pieChartCircleStrokeWidth="10dp"
+                    app:pieChartColors="@array/analyticalPieChartColorArray"
+                    app:pieChartTextAmount="@string/analyticalPieChartAmount"
+                    app:pieChartTextAmountColor="?android:attr/textColor"
+                    app:pieChartTextAmountSize="24sp"
+                    app:pieChartTextDescriptionColor="?android:attr/textColorHint"
+                    app:pieChartTextDescriptionSize="12sp"
+                    app:pieChartTextNumberColor="?android:attr/textColor"
+                    app:pieChartTextNumberSize="14sp" />
+            </com.google.android.material.card.MaterialCardView>
+
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/your_achievements"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="24dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:text="@string/your_achievements"
+                android:textSize="20sp" />
+
+            <include
+                android:id="@+id/progress_block"
+                layout="@layout/progress_block" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                android:visibility="gone"
+                app:cardBackgroundColor="?attr/card_background"
+                app:cardCornerRadius="16dp"
+                app:cardElevation="4dp">
+
+                <LinearLayout
+                    android:id="@+id/statistics_animation_container"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:visibility="gone"
+                    tools:visibility="visible">
+
+                    <com.airbnb.lottie.LottieAnimationView
+                        android:id="@+id/no_data_animation"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lottie_autoPlay="true"
+                        app:lottie_loop="true"
+                        app:lottie_rawRes="@raw/statistics_animation" />
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/read_book_button"
+                        style="@style/ButtonStyle.Blue"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="16dp"
+                        android:layout_marginBottom="16dp"
+                        android:text="@string/read_book"
+                        android:textAllCaps="false"
+                        android:textStyle="bold"
+                        android:visibility="gone" />
+                </LinearLayout>
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/statistics_container"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:orientation="vertical"
+                    android:visibility="gone">
+
+                    <com.statistics.library.line_chart.LineChartView
+                        android:id="@+id/line_chart_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="360dp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:lcv_chart_line_color="@color/blue"
+                        app:lcv_chart_outer_circle_color="@color/blue"
+                        app:lcv_dot_shape="0"
+                        app:lcv_inner_radius="2dp"
+                        app:lcv_line_width="1dp"
+                        app:lcv_radius="2dp"
+                        app:lcv_stroke_width="2dp"
+                        app:lcv_text_size="10dp" />
+
+                    <androidx.recyclerview.widget.RecyclerView
+                        android:id="@+id/day_of_the_week_recycler_view"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/line_chart_view"
+                        tools:itemCount="7"
+                        tools:listitem="@layout/item_day_of_the_week" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/leaderboard_recycler_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:itemCount="2"
+                tools:listitem="@layout/item_top_rating_users" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</LinearLayout>

@@ -21,6 +21,7 @@ import com.example.data.repository.login.LoginRepositoryImpl
 import com.example.data.repository.school.SchoolRepositoryImpl
 import com.example.data.repository.school_classes.ClassRepositoryImpl
 import com.example.data.repository.user_cache.UserCacheRepositoryImpl
+import com.example.data.repository.users.UserRepositoryImpl
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.*

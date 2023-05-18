@@ -66,6 +66,7 @@ class FragmentReader :
     private var bookCurrentProgress = 0
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         setOnClickListeners()
@@ -74,7 +75,7 @@ class FragmentReader :
 
     private fun setupViews() = with(binding()) {
         pdfview.useBestQuality(true)
-        title.text = chapterTitle
+        includeDefaultToolbar.title.text = chapterTitle
         dismissPlayerOverlay()
         requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).hide()
     }
@@ -124,19 +125,19 @@ class FragmentReader :
         }
         setting.setOnDownEffectClickListener { showSettingModalPage() }
         option.setOnDownEffectClickListener { showReaderOptionModalPage() }
-        endRead.setOnDownEffectClickListener {
-            if (NavigationManager().isOnline(context = requireContext())) {
-                viewModel.navigateToQuestionFragment(book, chapter, path)
-            } else showErrorSnackbar(getString(R.string.network_error))
-        }
+//        endRead.setOnDownEffectClickListener {
+//            if (NavigationManager().isOnline(context = requireContext())) {
+//                viewModel.navigateToQuestionFragment(book, chapter, path)
+//            } else showErrorSnackbar(getString(R.string.network_error))
+//        }
         pageLast.setOnDownEffectClickListener {
             setPdfViewPage(pdfPages.size)
-            if (bookCurrentProgress <= progress) endRead.show()
+//            if (bookCurrentProgress <= progress) endRead.show()
         }
         pageFirst.setOnDownEffectClickListener { setPdfViewPage(0) }
         pageForward.setOnDownEffectClickListener { setPdfViewPage(binding().pdfview.currentPage + 1) }
         pageBack.setOnDownEffectClickListener { setPdfViewPage(binding().pdfview.currentPage - 1) }
-        upButton.setOnDownEffectClickListener { viewModel.navigateBack() }
+        includeDefaultToolbar.toolbar.setNavigationOnClickListener { viewModel.navigateBack() }
     }
 
     override fun loadComplete(nbPages: Int) = Unit
@@ -149,9 +150,9 @@ class FragmentReader :
     override fun onPageChanged(page: Int, pageCount: Int) {
         binding().apply {
             pageEnterField.text = pdfPages[page].toString()
-            if (page == pageCount - 1) {
-                if (bookCurrentProgress <= progress) endRead.show()
-            } else endRead.hide()
+//            if (page == pageCount - 1) {
+//                if (bookCurrentProgress <= progress) endRead.show()
+//            } else endRead.hide()
             progress = pdfPages[page]
         }
 
@@ -182,14 +183,14 @@ class FragmentReader :
 
     private fun showReaderOptionModalPage() = FragmentReaderOption.newInstance(
         title = getString(R.string.options),
-        isToolbarState = binding().toolbar.isVisible,
+        isToolbarState = binding().includeDefaultToolbar.root.isVisible,
         goToPageListener = { showFragmentGoToPage(currentPage = fetchCurrentPage()) },
         goToBookInfoListener = { viewModel.navigateToBookInfoFragment(book.bookId) },
         hideOrShowToolbarListener = { hideOrShowToolbar() }
     ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     private fun hideOrShowToolbar() = with(binding()) {
-        toolbar.isVisible = !toolbar.isVisible
+        includeDefaultToolbar.root.isVisible = !includeDefaultToolbar.root.isVisible
     }
 
     private fun showSettingModalPage() = FragmentSetting.newInstance(

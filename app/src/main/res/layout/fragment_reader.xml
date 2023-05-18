@@ -7,84 +7,11 @@
     android:orientation="vertical"
     tools:context=".app.ui.general_screens.screen_reader.FragmentReader">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="top"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="8dp"
-        android:elevation="1dp">
-
-        <ImageButton
-            android:id="@+id/up_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@color/transparent"
-            android:paddingVertical="10dp"
-            android:src="@drawable/ic_white_back"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/blackOrWhiteColor" />
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginStart="8dp"
-            android:layout_marginEnd="16dp"
-            android:ellipsize="none"
-            android:fadingEdgeLength="30dp"
-            android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
-            android:textColor="?attr/blackOrWhiteColor"
-            android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/end_read"
-            app:layout_constraintStart_toEndOf="@+id/up_button"
-            app:layout_constraintTop_toTopOf="parent"
-            tools:text="@tools:sample/lorem/random" />
-
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/end_read"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginVertical="4dp"
-            android:visibility="visible"
-            app:cardBackgroundColor="?attr/card_background"
-            app:cardElevation="2dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:shapeAppearanceOverlay="@style/LiftCornerRadius">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:paddingHorizontal="12dp"
-                android:text="@string/next"
-                android:textSize="18sp"
-                tools:ignore="RtlSymmetry" />
-        </com.google.android.material.card.MaterialCardView>
-
-        <ImageButton
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:background="@color/transparent"
-            android:paddingVertical="10dp"
-            android:rotation="180"
-            android:src="@drawable/ic_white_back"
-            android:visibility="invisible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:tint="?attr/blackOrWhiteColor" />
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
+    <include
+        android:id="@+id/include_default_toolbar"
+        layout="@layout/include_default_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfview"
@@ -99,17 +26,16 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom"
         app:cardBackgroundColor="?attr/card_background"
-        app:cardElevation="8dp"
+        app:cardElevation="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:shapeAppearanceOverlay="@style/TopCornerRadius">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="65dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent">
 
             <ImageView
@@ -126,6 +52,7 @@
                 android:id="@+id/page_first"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginEnd="8dp"
                 android:rotation="180"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toStartOf="@+id/page_back"
@@ -138,7 +65,7 @@
                 android:id="@+id/page_back"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginEnd="4dp"
+                android:layout_marginEnd="8dp"
                 android:rotation="180"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toStartOf="@+id/page_enter_field"
@@ -169,7 +96,7 @@
                 android:id="@+id/page_forward"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
-                android:layout_marginStart="4dp"
+                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toStartOf="@+id/page_last"
                 app:layout_constraintStart_toEndOf="@+id/page_enter_field"
@@ -180,6 +107,7 @@
                 android:id="@+id/page_last"
                 android:layout_width="35dp"
                 android:layout_height="35dp"
+                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/page_forward"

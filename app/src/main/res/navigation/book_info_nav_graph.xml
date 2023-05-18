@@ -17,7 +17,11 @@
             app:destination="@id/fragmentEditBook" />
         <action
             android:id="@+id/action_fragmentBookInfo_to_book_read_nav_graph"
-            app:destination="@id/book_read_nav_graph">
+            app:destination="@id/book_read_nav_graph"
+            app:enterAnim="@anim/to_right_in"
+            app:exitAnim="@anim/to_left_out"
+            app:popEnterAnim="@anim/to_right_in"
+            app:popExitAnim="@anim/to_left_out">
             <argument
                 android:name="book"
                 app:argType="com.example.bookloverfinalapp.app.models.BookThatRead" />

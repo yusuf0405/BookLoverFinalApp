@@ -35,5 +35,5 @@ class FragmentAllStudents : BaseFragmentAllItems() {
         get() = R.string.my_students
 
     override val sortDialogFragment: DialogFragment
-        get() = FragmentUsersSortDialog()
+        get() = FragmentUsersSortDialog.newInstance()
 }

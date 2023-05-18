@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/card_container_background"
     android:orientation="vertical"
     tools:context=".app.ui.general_screens.screen_sign_up.FragmentSelectSignUp">
 
@@ -11,18 +12,17 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:layout_marginBottom="30dp"
         android:orientation="horizontal">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:layout_marginBottom="30dp"
-            android:gravity="center"
             android:text="@string/signUp"
             android:textColor="?attr/blackOrWhiteColor"
-            android:textSize="28sp" />
+            android:textSize="22sp" />
 
         <ImageView
             android:id="@+id/setting_button"
@@ -38,7 +38,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="16dp"
         app:srcCompat="@drawable/book" />
 
     <TextView

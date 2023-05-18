@@ -17,14 +17,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <ImageView
+        <de.hdodenhof.circleimageview.CircleImageView
             android:id="@+id/playerOverlayImageView"
             android:layout_width="48dp"
             android:layout_height="48dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="2dp"
-            android:paddingTop="8dp"
-            android:paddingBottom="8dp"
             android:scaleType="centerCrop"
             tools:src="@drawable/avatar_third" />
 

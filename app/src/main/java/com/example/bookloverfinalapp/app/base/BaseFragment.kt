@@ -1,5 +1,6 @@
 package com.example.bookloverfinalapp.app.base
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -21,6 +22,7 @@ import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.joseph.ui_core.custom.snackbar.GenericSnackbar
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.getAttrColor
 
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     private val binder: (LayoutInflater, ViewGroup?, Boolean) -> V,
@@ -31,6 +33,8 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     private var isCustomLoadingDialog: Boolean = false
 
     protected var isFullScreen: Boolean = false
+
+    protected var isHaveToolbar: Boolean = false
 
     private var viewBinding: V? = null
 
@@ -46,6 +50,22 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
 
     protected val loadingDialog: LoadingDialog by lazy(LazyThreadSafetyMode.NONE) {
         LoadingDialog(context = requireContext(), getString(R.string.loading_please_wait))
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if (isHaveToolbar) {
+            requireActivity().apply {
+                window.statusBarColor = getAttrColor(R.attr.toolbar_background)
+            }
+        }
+    }
+
+    override fun onStop() {
+        super.onStop()
+        if (isHaveToolbar) {
+            requireActivity().window.statusBarColor = Color.TRANSPARENT
+        }
     }
 
     override fun onCreateView(

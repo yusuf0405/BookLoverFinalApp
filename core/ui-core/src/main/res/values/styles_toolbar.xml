@@ -4,7 +4,7 @@
     <style name="ToolbarStylesLogin">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">?android:attr/actionBarSize</item>
-        <item name="android:background">?attr/toolbar_gradient_background</item>
+        <item name="android:background">?attr/toolbar_background</item>
         <item name="android:titleTextColor" tools:targetApi="m">?attr/blackOrWhiteColor</item>
         <item name="android:navigationIcon">@drawable/ic_white_back</item>
         <item name="android:textSize">21sp</item>

@@ -31,7 +31,7 @@
         <item name="android:minHeight">45dp</item>
         <item name="android:background">@drawable/button_primary_background</item>
         <item name="android:textAppearance">@style/ButtonTextStyle</item>
-        <item name="android:fontFamily">@font/poppins_medium</item>
+        <item name="android:fontFamily">@font/poppins_bold</item>
         <item name="android:textColor">@android:color/white</item>
         <item name="android:stateListAnimator">@null</item>
     </style>

@@ -107,7 +107,7 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
         layoutManager = layoutManager
         setupLayoutManager(
             currentItem = this@BaseFragmentAllItems.adapter::getItemViewType,
-            itemId = R.layout.item_genre,
+            itemId = R.layout.item_book_genre,
             secondItemId = R.layout.item_user_circle
         )
         itemAnimator = createAddableItemAnimator()
@@ -193,7 +193,8 @@ abstract class BaseFragmentAllItems : Fragment(), OnBackPressedListener,
         .newInstance(bookId = bookId, listener = this)
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
-    private fun showSortDialogFragment() = sortDialogFragment.showOnlyOne(parentFragmentManager)
+    private fun showSortDialogFragment() =
+        sortDialogFragment.showOnlyOne(requireActivity().supportFragmentManager)
 
     private fun showConfirmDialogFlow(id: String) {
         FragmentConfirmDialog.newInstance(

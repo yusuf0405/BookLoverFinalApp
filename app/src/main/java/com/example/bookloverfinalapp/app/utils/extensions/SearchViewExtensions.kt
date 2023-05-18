@@ -4,9 +4,10 @@ import android.util.TypedValue
 import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.SearchView
+import androidx.core.content.res.ResourcesCompat
 import com.example.bookloverfinalapp.R
 
-fun SearchView.setupTextSize() {
+fun SearchView.setupSearchViewParams() {
     val searchText = this.findViewById<View>(
         this.context.resources.getIdentifier(
             "android:id/search_src_text",
@@ -14,9 +15,10 @@ fun SearchView.setupTextSize() {
             null
         )
     ) as AutoCompleteTextView
-//    searchText.setTextColor(Color.WHITE)
     searchText.setTextSize(
         TypedValue.COMPLEX_UNIT_PX,
-        resources.getDimensionPixelSize(R.dimen.text_small).toFloat()
+        resources.getDimensionPixelSize(R.dimen.textSizeForSmallTexts).toFloat()
     )
+    val typeface = ResourcesCompat.getFont(this.context, R.font.poppins_regular)
+    searchText.typeface = typeface
 }

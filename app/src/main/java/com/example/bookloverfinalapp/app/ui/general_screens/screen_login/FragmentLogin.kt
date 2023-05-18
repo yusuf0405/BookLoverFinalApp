@@ -39,7 +39,7 @@ class FragmentLogin :
         signInBtn.setOnDownEffectClickListener { signInWithEmail() }
         blockNoAccount.signUpLink.setOnDownEffectClickListener { viewModel.goOverSignUpFragment() }
         forgotPassword.setOnDownEffectClickListener { viewModel.goForgotPasswordFragment() }
-        toolbar.setOnDownEffectClickListener { viewModel.navigateBack() }
+//        toolbar.setOnDownEffectClickListener { viewModel.navigateBack() }
     }
 
     private fun observeData() = with(viewModel) {

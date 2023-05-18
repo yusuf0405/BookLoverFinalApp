@@ -28,17 +28,19 @@
         <!-- Status bar color. -->
 
         <item name="grayButtonColor">@color/grey_active_night</item>
+        <item name="app_color">#001736</item>
         <item name="buttonNotEnableBackground">@color/controls_dark_inactive</item>
         <item name="textNegativeColor">@color/text_dark_negative</item>
         <item name="blueOrGrayColor">@color/blue</item>
         <item name="whiteOrBlackColor">@color/black</item>
+        <item name="whiteOrGrayStoneColor">@color/white</item>
         <item name="blackOrWhiteColor">@color/white</item>
         <item name="grayOrWhiteColor">@color/black_8_no_alpha</item>
         <item name="whiteOrGrayColor">@color/white_with_transparency_10</item>
         <item name="background_primary_elevated">@color/black_smoke</item>
         <item name="text_secondary">@color/grey_steel</item>
         <item name="button_gradient_background">@color/blue</item>
-        <item name="toolbar_gradient_background">@color/black_smoke</item>
+        <item name="toolbar_background">@color/rating_first_background</item>
         <item name="card_container_background">@color/rating_background</item>
         <item name="collapsedPlayerOutlineColor">@color/controls_dark_inactive</item>
         <item name="checked_item_color">@color/blueberry_dark</item>

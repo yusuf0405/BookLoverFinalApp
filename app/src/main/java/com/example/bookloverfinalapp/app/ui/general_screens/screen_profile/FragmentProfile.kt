@@ -82,7 +82,7 @@ class FragmentProfile :
         with(fragmentProfile) {
             editProfileBtn.setOnDownEffectClickListener { startMotionSceneToEnd() }
             loginOutBlock.setOnDownEffectClickListener {
-                showConfirmationDialog()
+                showFragmentLoginOutDialog()
             }
             navigateToSetting.setOnDownEffectClickListener { showSettingModalPage() }
         }
@@ -254,7 +254,7 @@ class FragmentProfile :
 
     private fun number() = binding().fragmentEditProfile.editStudentNumber.text.toString()
 
-    private fun showConfirmationDialog() = FragmentLoginOutDialog.newInstance()
+    private fun showFragmentLoginOutDialog() = FragmentLoginOutDialog.newInstance()
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     private fun startMotionSceneToStart() = binding().root.transitionToState(R.id.start)

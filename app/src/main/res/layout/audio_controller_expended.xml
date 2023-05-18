@@ -20,21 +20,26 @@
         app:shapeAppearanceOverlay="@style/BottomCornerRadius"
         app:tint="@color/black_50_alpha" />
 
-    <ImageView
-        android:id="@+id/poster_image_view"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/poster_image_view_container"
         android:layout_width="158dp"
         android:layout_height="201dp"
-        android:layout_marginStart="32dp"
         android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:elevation="3dp"
-        android:paddingTop="@dimen/first_keyline"
-        android:scaleType="centerCrop"
-        android:src="@drawable/background_start"
+        android:elevation="12dp"
+        app:cardBackgroundColor="?attr/card_background"
+        app:cardCornerRadius="33dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/poster_image_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/fullscreen_bg_gradient" />
+    </com.google.android.material.card.MaterialCardView>
+
 
     <LinearLayout
         android:id="@+id/info_container"
@@ -47,7 +52,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/poster_image_view">
+        app:layout_constraintTop_toBottomOf="@+id/poster_image_view_container">
 
         <TextView
             android:id="@+id/titleTextView"
@@ -119,7 +124,7 @@
                 android:id="@+id/linearLayout6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:gravity="center_vertical"
                 android:orientation="horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -142,7 +147,7 @@
                 <com.google.android.exoplayer2.ui.DefaultTimeBar
                     android:id="@id/exo_progress"
                     android:layout_width="0dp"
-                    android:layout_height="22dp"
+                    android:layout_height="12dp"
                     app:buffered_color="@color/gray"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -170,7 +175,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginHorizontal="16dp"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="24dp"
                 android:orientation="vertical"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"

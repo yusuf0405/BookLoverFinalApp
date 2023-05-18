@@ -11,11 +11,11 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="38dp"
         android:elevation="1dp"
         android:src="@drawable/ic_white_back"
+        app:layout_constraintBottom_toBottomOf="@+id/save_icon"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/save_icon"
         app:tint="@color/white" />
 
     <ImageView
@@ -34,7 +34,7 @@
         android:id="@+id/more_icon"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="38dp"
+        android:layout_marginTop="42dp"
         android:layout_marginEnd="16dp"
         android:elevation="1dp"
         android:src="@drawable/ic_more_vertical_icon"

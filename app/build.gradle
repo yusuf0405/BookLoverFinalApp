@@ -58,6 +58,8 @@ dependencies {
     implementation project(Modules.Features.SelectFavoriteBook)
     implementation project(Modules.Features.Stories)
     implementation project(Modules.Features.SignIn)
+    implementation project(Modules.Features.Profile)
+    implementation project(Modules.Features.Onboarding)
 
     // ---------------------------------------------------------------------------------------------
 
@@ -68,6 +70,8 @@ dependencies {
     implementation Libs.Android.AppCompat
     implementation Libs.Android.ConstraintLayout
     implementation Libs.Android.RecyclerView
+
+    implementation "com.folioreader:folioreader:0.5.4"
 
     // More
     implementation Libs.Android.SwiperefReshLayout
@@ -185,4 +189,5 @@ dependencies {
     testImplementation Libs.Testing.JUnit
     testImplementation Libs.Mockito.MockitoCore
     testImplementation Libs.Mockito.Mockk
+
 }

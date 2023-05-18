@@ -31,9 +31,11 @@ class FadingTextView @JvmOverloads constructor(
             exceptLastNLetters = arr.getInt(R.styleable.FadingTextView_except_last_the_letters, 0)
             fadeLength = arr.getFloat(R.styleable.FadingTextView_fade_length, 0.0f)
 
-            val hideLastFadedLetters =  arr.getBoolean(R.styleable.FadingTextView_hide_last_faded_letters, false)
-            if(hideLastFadedLetters) {
-                shader = LinearGradient(0f, 0f, 0.5f, 0f, 0x00000000, -0x1000000, Shader.TileMode.CLAMP)
+            val hideLastFadedLetters =
+                arr.getBoolean(R.styleable.FadingTextView_hide_last_faded_letters, false)
+            if (hideLastFadedLetters) {
+                shader =
+                    LinearGradient(0f, 0f, 0.5f, 0f, 0x00000000, -0x1000000, Shader.TileMode.CLAMP)
             }
 
             arr.recycle()
