@@ -3,7 +3,7 @@ package com.example.data.cloud.users
 import com.example.data.cloud.CloudDataRequestState
 import com.example.data.cloud.models.UserCloud
 import com.example.data.models.StudentData
-import com.example.data.repository.StudentsResponseType
+import com.example.data.repository.users.StudentsResponseType
 import com.example.domain.models.UpdateAnswerDomain
 import com.example.domain.models.UserUpdateDomain
 import kotlinx.coroutines.flow.Flow

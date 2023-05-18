@@ -14,6 +14,7 @@ import android.view.*
 import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.example.bookloverfinalapp.R
@@ -56,10 +57,11 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
         setupPlayScreenFragment()
         setupPlayer()
         observeData()
+        dismissPlayerOverlay()
     }
 
     private fun setupPlayScreenFragment() {
-        supportFragmentManager.beginTransaction().replace(
+        supportFragmentManager.beginTransaction().add(
             R.id.playerContainerView,
             PlayScreenFragment.newInstance(),
             PlayScreenFragment.TAG
@@ -92,19 +94,25 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
             }
         }.launchIn(lifecycleScope)
 
-        audioBookFlow
-            .onEach {
-                if (it == null) dismissPlayerOverlay()
-                if (it == AudioBook.unknown()) dismissPlayerOverlay()
-            }
-            .onEach(viewModel::startRenderContent)
+        audioBookFlow.onEach {
+            if (it == null) dismissPlayerOverlay()
+            if (it == AudioBook.unknown()) dismissPlayerOverlay()
+        }.onEach(viewModel::startRenderContent)
             .launchIn(lifecycleScope)
 
         audioBookIdFlow.launchIn(lifecycleScope)
 
         viewModel.showOpacityCollapsed.onEach {
-//            binding.bottomNavigationView.alpha = it
+            Log.i("Joseppa", "showOpacityCollapsed = ${it}")
+            binding.bottomNavigationView.alpha = it
         }.launchIn(lifecycleScope)
+
+        viewModel.showOpacityExpanded.onEach {
+            Log.i("Joseppa", "showOpacityExpanded opacity = ${it.opacity}")
+            Log.i("Joseppa", "showOpacityExpanded reducedAlpha = ${it.reducedAlpha}")
+//            binding.bottomNavigationView.alpha = it
+//            binding.bottomNavigationView.isVisible = true
+        }
 
     }
 
@@ -190,6 +198,7 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
         }
 
         override fun onSlide(bottomSheet: View, slideOffset: Float) {
+            Log.i("Joseph", "slideOffset = ${slideOffset}")
             if (slideOffset <= 0f) return
             viewModel.transitModes(slideOffset)
             if (slideOffset < 0.4) {
@@ -206,6 +215,7 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
             R.id.fragmentMainScreen -> true
             R.id.fragmentProgress -> true
             R.id.fragment_profile -> true
+            R.id.stories_nav_graph -> true
             else -> false
         }
         if (isVisible) toggle(true)
@@ -213,7 +223,7 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
 
     private fun toggle(show: Boolean) {
         val transition: Transition = Slide(Gravity.BOTTOM)
-        transition.duration = if (show) 200 else 800
+        transition.duration = if (show) 1 else 800
         transition.addTarget(binding.bottomNavigationView)
         TransitionManager.beginDelayedTransition(binding.root, transition)
         binding.bottomNavigationView.visibility = if (show) View.VISIBLE else View.GONE
@@ -224,19 +234,24 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
         BottomSheetBehavior.STATE_EXPANDED -> {
             viewModel.setPlayerState(PlayerState.STATE_EXPANDED)
         }
+
         BottomSheetBehavior.STATE_COLLAPSED -> {
             Log.i("Joseph", "BottomSheetBehavior = STATE_COLLAPSED")
             viewModel.setPlayerState(PlayerState.STATE_COLLAPSED)
         }
+
         BottomSheetBehavior.STATE_DRAGGING -> {
             viewModel.setPlayerState(PlayerState.STATE_DRAGGING)
         }
+
         BottomSheetBehavior.STATE_SETTLING -> {
             viewModel.setPlayerState(PlayerState.STATE_SETTLING)
         }
+
         BottomSheetBehavior.STATE_HIDDEN -> {
             viewModel.setPlayerState(PlayerState.STATE_HIDDEN)
         }
+
         else -> Unit
     }
 

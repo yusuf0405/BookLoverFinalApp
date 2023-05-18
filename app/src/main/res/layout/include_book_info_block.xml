@@ -15,14 +15,14 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="38dp"
+            android:layout_marginHorizontal="16dp"
             android:gravity="center"
             android:weightSum="3">
 
             <View
                 android:layout_width="@dimen/profileLineHeight"
                 android:layout_height="match_parent"
-                android:background="?attr/whiteOrGrayColor" />
+                android:background="?attr/whiteOrGrayStoneColor" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -35,8 +35,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="21sp"
                     app:layout_constraintEnd_toEndOf="@+id/book_title"
                     app:layout_constraintStart_toStartOf="@+id/book_title"
                     app:layout_constraintTop_toBottomOf="@+id/book_author"
@@ -51,13 +51,13 @@
                     android:singleLine="true"
                     android:text="@string/public_year"
                     android:textColor="?attr/text_secondary"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="@dimen/profileLineHeight"
                 android:layout_height="match_parent"
-                android:background="?attr/whiteOrGrayColor" />
+                android:background="?attr/whiteOrGrayStoneColor" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
@@ -70,7 +70,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="21sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="@+id/book_title"
                     app:layout_constraintStart_toStartOf="@+id/book_title"
@@ -85,19 +86,18 @@
                     android:singleLine="true"
                     android:text="@string/chapters"
                     android:textColor="?attr/text_secondary"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="@dimen/profileLineHeight"
                 android:layout_height="match_parent"
-                android:background="?attr/whiteOrGrayColor" />
+                android:background="?attr/whiteOrGrayStoneColor" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-
                 android:orientation="vertical">
 
                 <TextView
@@ -105,7 +105,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:textSize="18sp"
+                    android:fontFamily="@font/poppins_bold"
+                    android:textSize="21sp"
                     android:textStyle="bold"
                     tools:text="555 " />
 
@@ -117,22 +118,33 @@
                     android:singleLine="true"
                     android:text="@string/pagess"
                     android:textColor="?attr/text_secondary"
-                    android:textSize="12sp" />
+                    android:textSize="11sp" />
             </LinearLayout>
 
             <View
                 android:layout_width="@dimen/profileLineHeight"
                 android:layout_height="match_parent"
-                android:background="?attr/whiteOrGrayColor" />
+                android:background="?attr/whiteOrGrayStoneColor" />
 
         </LinearLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/read_button"
+            style="@style/ButtonStyle.Blue.AppStyle"
+            android:layout_marginHorizontal="0dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:layout_weight="1"
+            android:text="@string/read_book"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/book_annotations_header"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="8dp"
             android:text="@string/introduction"
             android:textSize="18sp" />
 
@@ -140,16 +152,18 @@
             android:id="@+id/book_subtitle_scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp">
+            android:layout_marginHorizontal="8dp">
 
             <com.joseph.ui_core.custom.FadingTextView
                 android:id="@+id/book_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:fontFamily="@font/poppins"
                 android:textColor="?attr/text_secondary"
                 app:except_last_the_letters="4"
-                tools:text="@tools:sample/lorem" />
+                tools:maxLines="8"
+                tools:text="@tools:sample/lorem/random" />
 
         </androidx.core.widget.NestedScrollView>
 
@@ -157,19 +171,8 @@
             android:id="@+id/book_genres_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"
             android:padding="4dp" />
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/read_button"
-            style="@style/ButtonStyle.Blue.AppStyle"
-            android:layout_marginHorizontal="0dp"
-            android:layout_marginStart="12dp"
-            android:layout_marginBottom="16dp"
-            android:layout_weight="1"
-            android:textStyle="bold"
-            android:text="@string/read_book" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_recycler_view"

@@ -11,7 +11,6 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleComm
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserRatingFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.adapter.UserTopRatingFingerprint
-import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.adapter.DayOfTheWeekAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.hide
@@ -19,11 +18,12 @@ import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickLi
 import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.databinding.FragmentProgressBinding
 import com.example.domain.models.UserStatisticModel
+import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.joseph.ui_core.extensions.launchWhenViewStarted
 import com.statistics.library.line_chart.data.DataEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
-import java.util.*
+import java.util.Calendar
 
 @AndroidEntryPoint
 class FragmentProgress :
@@ -46,14 +46,27 @@ class FragmentProgress :
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         showBottomNavigationView()
         setupViews()
         setOnClickListeners()
         observeData()
+
+        binding().analyticalPieChart.setDataChart(
+            listOf(
+                Pair(4, "my books"),
+                Pair(6, "joint books"),
+                Pair(6, "books supported"),
+            )
+        )
+        binding().analyticalPieChart.startAnimation()
+
     }
 
     private fun setupViews() = with(binding()) {
+        includeDefaultToolbar.title.text = getString(com.joseph.ui_core.R.string.my_statistics)
+        includeDefaultToolbar.toolbar.navigationIcon = null
         dayOfTheWeekRecyclerView.adapter = statisticsAdapter
         leaderboardRecyclerView.adapter = leaderboardAdapter
         dayOfTheWeekRecyclerView.itemAnimator = createAddableItemAnimator()

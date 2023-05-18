@@ -118,6 +118,7 @@ class FragmentMainScreen :
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         showBottomNavigationView()
         setupViews()
@@ -134,7 +135,7 @@ class FragmentMainScreen :
     }
 
     private fun setupViews() = with(binding()) {
-        root.addTransitionListener(motionListener)
+//        root.addTransitionListener(motionListener)
         bookRecyclerView.adapter = concatAdapter
 
         bookRecyclerView.setupLayoutManager(
@@ -177,26 +178,26 @@ class FragmentMainScreen :
         }
     }
 
-    private fun setupAvatarAndNameBlock(user: User) = with(binding().avatarAndNameBlock) {
-        val greetingTextList = arrayListOf(
-            getString(R.string.find_you_best_book),
-            getString(R.string.we_wish_you_good_time),
-            getString(R.string.pump_your_brains),
-        )
-        val greetingText = "${getString(R.string.hello_plus)} ${user.name}!"
-        userFullName.text = greetingText
-        randomText.text = greetingTextList.random()
-        requireContext().showImage(user.image?.url, avatar)
+    private fun setupAvatarAndNameBlock(user: User) = with(binding().includeMainScreenToolbar) {
+//        val greetingTextList = arrayListOf(
+//            getString(R.string.find_you_best_book),
+//            getString(R.string.we_wish_you_good_time),
+//            getString(R.string.pump_your_brains),
+//        )
+//        val greetingText = "${getString(R.string.hello_plus)} ${user.name}!"
+//        userFullName.text = greetingText
+//        randomText.text = greetingTextList.random()
+//        requireContext().showImage(user.image?.url, avatar)
     }
 
     private fun setOnClickListeners() = with(binding()) {
-        avatarAndNameBlock.avatar.setOnDownEffectClickListener { viewModel.navigateToProfileFragment() }
-        avatarAndNameBlock.addIcon.setOnDownEffectClickListener(::showAddPopupMenu)
-        avatarAndNameBlock.searchIcon.setOnDownEffectClickListener {
+//        avatarAndNameBlock.avatar.setOnDownEffectClickListener { viewModel.navigateToProfileFragment() }
+        includeMainScreenToolbar.addIcon.setOnDownEffectClickListener(::showAddPopupMenu)
+        includeMainScreenToolbar.searchIcon.setOnDownEffectClickListener {
             hideBottomNavigationView()
             viewModel.navigateToSearchFragment()
         }
-        avatarAndNameBlock.settingIcon.setOnDownEffectClickListener { showSettingModalPage() }
+        includeMainScreenToolbar.settingIcon.setOnDownEffectClickListener { showSettingModalPage() }
     }
 
     private fun showAddPopupMenu(view: View) {
@@ -291,11 +292,11 @@ class FragmentMainScreen :
 
     override fun onStart() {
         super.onStart()
-        binding().root.progress = viewModel.motionPosition.value
+//        binding().root.progress = viewModel.motionPosition.value
     }
 
     override fun onDestroyView() {
-        binding().root.removeTransitionListener(motionListener)
+//        binding().root.removeTransitionListener(motionListener)
         super.onDestroyView()
     }
 

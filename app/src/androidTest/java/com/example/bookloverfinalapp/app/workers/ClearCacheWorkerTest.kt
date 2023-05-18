@@ -55,31 +55,7 @@ class ClearCacheWorkerTest {
             applicationContext, workManagerTaskExecutor.mainThreadExecutor,
             true
         )
-        workParameters = WorkerParameters(
-            UUID.fromString("d1e5a17a-bed4-11ec-9d64-0242ac120002"),
-            Data.EMPTY,
-            listOf(),
-            WorkerParameters.RuntimeExtras(),
-            1,
-            1,
-            executor,
-            workManagerTaskExecutor,
-            configuration.workerFactory,
-            WorkProgressUpdater(workDatabase, workManagerTaskExecutor),
-            WorkForegroundUpdater(
-                workDatabase,
-                object : ForegroundProcessor {
-                    override fun startForeground(
-                        workSpecId: String,
-                        foregroundInfo: ForegroundInfo
-                    ) = Unit
 
-                    override fun stopForeground(workSpecId: String) = Unit
-                    override fun isEnqueuedInForeground(workSpecId: String): Boolean = true
-                },
-                workManagerTaskExecutor
-            )
-        )
         worker = ClearCacheWorker(
             context = applicationContext,
             workerParams = workParameters,

@@ -32,7 +32,7 @@ import com.joseph.utils_core.extensions.showBlurImage
 import com.joseph.utils_core.extensions.showRoundedImage
 import com.joseph.utils_core.motion.MotionListener
 import com.joseph.utils_core.motion.MotionState
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -50,7 +50,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
 
     @Inject
     lateinit var factory: FragmentBookInfoViewModel.Factory
-    override val viewModel: FragmentBookInfoViewModel by viewModelCreator {
+    override val viewModel: FragmentBookInfoViewModel by assistedViewModel {
         factory.create(bookId = bookId)
     }
 
@@ -73,6 +73,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         isFullScreen = true
+//        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigationView()
         setupViews()
@@ -90,7 +91,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
         with(includeBookInfoToolbarBlock) {
             moreIcon.setOnDownEffectClickListener { showFragmentBookOptionDialog(currentBook.id) }
             saveIcon.setOnDownEffectClickListener { addOrDeleteBookInSavedBooks() }
-            backIcon.setOnDownEffectClickListener { viewModel.navigateBack() }
+            toolbar.setNavigationOnClickListener { viewModel.navigateBack() }
         }
         with(includeBookInfoPosterBlock) {
             moreIcon.setOnDownEffectClickListener { showFragmentBookOptionDialog(currentBook.id) }
@@ -134,7 +135,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
                 openFullDescription = { bookSubtitleScrollView.smoothScrollTo(0, 0) }
             )
         }
-        includeBookInfoToolbarBlock.toolbarBookTitle.text = book.title
+        includeBookInfoToolbarBlock.title.text = book.title
         handleBookIsSavedStatus(status = book.savedStatus)
         applyPosterImages(posterUrl = book.poster.url)
     }
@@ -145,6 +146,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
                 viewModel.updateMotionPosition(COLLAPSED)
                 binding().includeBookInfoBlock.nestedScroolView.smoothScrollTo(0, 0)
             }
+
             MotionState.EXPANDED -> viewModel.updateMotionPosition(EXPANDED)
             else -> Unit
         }
@@ -173,6 +175,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
                 setSaveIconInToolbarBlock(R.drawable.saved_single_icon)
                 setSaveIconInPosterBlock(R.drawable.saved_single_white_icon)
             }
+
             SavedStatus.NOT_SAVED -> {
                 setReadBookButtonVisibility(isVisible = false)
                 setSaveIconInToolbarBlock(R.drawable.save_single_icon)

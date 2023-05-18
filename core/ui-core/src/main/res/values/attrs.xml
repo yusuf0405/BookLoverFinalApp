@@ -1,6 +1,8 @@
 <resources>
     <attr name="grayButtonColor" formant="reference|color" />
 
+    <attr name="app_color" formant="reference|color" />
+
     <attr name="buttonNotEnableBackground" format="reference|color" />
 
     <attr name="textNegativeColor" formant="reference|color" />
@@ -8,6 +10,8 @@
     <attr name="blueOrGrayColor" formant="reference|color" />
 
     <attr name="blackOrWhiteColor" formant="reference|color" />
+
+    <attr name="whiteOrGrayStoneColor" formant="reference|color" />
 
     <attr name="whiteOrBlackColor" formant="reference|color" />
 
@@ -21,7 +25,7 @@
 
     <attr name="button_gradient_background" formant="reference|color" />
 
-    <attr name="toolbar_gradient_background" formant="reference|color" />
+    <attr name="toolbar_background" formant="reference|color" />
 
     <attr name="collapsedPlayerOutlineColor" formant="reference|color" />
 
@@ -64,6 +68,31 @@
         <attr name="except_last_the_letters" format="integer" />
         <attr name="fade_length" format="float" />
         <attr name="hide_last_faded_letters" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="AnalyticalPieChart">
+        <attr name="pieChartColors" format="reference"/>
+
+        <attr name="pieChartMarginTextFirst" format="dimension"/>
+        <attr name="pieChartMarginTextSecond" format="dimension"/>
+        <attr name="pieChartMarginTextThird" format="dimension"/>
+        <attr name="pieChartMarginSmallCircle" format="dimension"/>
+
+        <attr name="pieChartCircleStrokeWidth" format="dimension"/>
+        <attr name="pieChartCirclePadding" format="dimension"/>
+        <attr name="pieChartCirclePaintRoundSize" format="boolean"/>
+        <attr name="pieChartCircleSectionSpace" format="float"/>
+
+        <attr name="pieChartTextCircleRadius" format="dimension"/>
+        <attr name="pieChartTextAmountSize" format="dimension"/>
+        <attr name="pieChartTextNumberSize" format="dimension"/>
+        <attr name="pieChartTextDescriptionSize" format="dimension"/>
+
+        <attr name="pieChartTextAmountColor" format="color"/>
+        <attr name="pieChartTextNumberColor" format="color"/>
+        <attr name="pieChartTextDescriptionColor" format="color"/>
+
+        <attr name="pieChartTextAmount" format="string"/>
     </declare-styleable>
 
 </resources>

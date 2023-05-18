@@ -1,53 +1,33 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.sort_dialog
 
 import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.view.isVisible
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
-import com.joseph.utils_core.bindingLifecycleError
-import com.joseph.utils_core.extensions.tuneBottomDialog
-import com.joseph.utils_core.extensions.tuneLyricsDialog
 import com.example.bookloverfinalapp.databinding.FragmentBookSortDialogBinding
-import com.joseph.ui_core.extensions.launchWhenCreated
+import com.joseph.common_api.base.BaseBindingFragment
+import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui_core.custom.modal_page.dismissModalPage
+import com.joseph.ui_core.extensions.launchOnLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FragmentBookSortDialog : DialogFragment(), View.OnClickListener {
-
-    private var _binding: FragmentBookSortDialogBinding? = null
-    val binding get() = _binding ?: bindingLifecycleError()
+class FragmentBookSortDialog :
+    BaseBindingFragment<FragmentBookSortDialogBinding>(FragmentBookSortDialogBinding::inflate),
+    View.OnClickListener {
 
     private val viewModel: SortingBookOptionsViewModel by viewModels()
 
     private var actions: Map<Int, SortingBookOptionsMenuActions>? = null
 
-    override fun onStart() {
-        super.onStart()
-        tuneBottomDialog()
-        tuneLyricsDialog()
-    }
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        _binding = FragmentBookSortDialogBinding.inflate(inflater)
-        return binding.root
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setWindowAnimations(com.joseph.ui_core.R.style.ModalPage_Animation)
         setupActions()
         setOnClickListeners()
         observeData()
     }
 
-    private fun setupActions() = with(binding) {
+    private fun setupActions() = with(binding()) {
         actions = mapOf(
             sortByDate.id to SortingBookOptionsMenuActions.OrderByDate,
             sortByBookAuthor.id to SortingBookOptionsMenuActions.OrderByAuthorName,
@@ -57,7 +37,7 @@ class FragmentBookSortDialog : DialogFragment(), View.OnClickListener {
     }
 
     private fun observeData() = with(viewModel) {
-        launchWhenCreated {
+        launchOnLifecycle {
             internalSelection.observe(::updateSelectionMark)
         }
     }
@@ -65,10 +45,10 @@ class FragmentBookSortDialog : DialogFragment(), View.OnClickListener {
     override fun onClick(view: View) {
         if (actions == null) return
         actions!![view.id]?.let(viewModel::orderBooks)
-        dismiss()
+        dismissModalPage()
     }
 
-    private fun setOnClickListeners() = with(binding) {
+    private fun setOnClickListeners() = with(binding()) {
         val listener = this@FragmentBookSortDialog
         sortByDate.setOnClickListener(listener)
         sortByBookName.setOnClickListener(listener)
@@ -76,7 +56,7 @@ class FragmentBookSortDialog : DialogFragment(), View.OnClickListener {
         sortByCached.setOnClickListener(listener)
     }
 
-    private fun updateSelectionMark(action: SortingBookOptionsMenuActions) = with(binding) {
+    private fun updateSelectionMark(action: SortingBookOptionsMenuActions) = with(binding()) {
         dateConnectedMark.isVisible = action == SortingBookOptionsMenuActions.OrderByDate
         bookAuthorConnectedMark.isVisible =
             action == SortingBookOptionsMenuActions.OrderByAuthorName
@@ -84,8 +64,11 @@ class FragmentBookSortDialog : DialogFragment(), View.OnClickListener {
         byCachedConnectedMark.isVisible = action == SortingBookOptionsMenuActions.OrderByCached
     }
 
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+    companion object {
+        fun newInstance() = FragmentBookSortDialog().run {
+            ModalPage.Builder()
+                .fragment(this)
+                .build()
+        }
     }
 }

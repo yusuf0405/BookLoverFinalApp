@@ -3,7 +3,6 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isInvisible
-import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -19,7 +18,7 @@ import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
@@ -36,7 +35,7 @@ class FragmentChapterBook :
 
     @Inject
     lateinit var factory: FragmentStudentChapterBookViewModel.Factory
-    override val viewModel: FragmentStudentChapterBookViewModel by viewModelCreator {
+    override val viewModel: FragmentStudentChapterBookViewModel by assistedViewModel {
         factory.create(book = book, patch = path)
     }
 
@@ -56,6 +55,7 @@ class FragmentChapterBook :
     )
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        isHaveToolbar = true
         super.onViewCreated(view, savedInstanceState)
         hideBottomNavigationView()
         setupViews()
@@ -63,11 +63,10 @@ class FragmentChapterBook :
     }
 
     private fun setupViews() = with(binding()) {
-        toolbarBlock.title.text = book.title
-        toolbarBlock.sortOptions.isInvisible = true
+        includeDefaultToolbar.title.text = book.title
         chapterRecyclerView.adapter = adapter
         chapterRecyclerView.itemAnimator = createAddableItemAnimator()
-        toolbarBlock.upButton.setOnClickListener { viewModel.navigateBack() }
+        includeDefaultToolbar.toolbar.setNavigationOnClickListener { viewModel.navigateBack() }
         setupPdfView()
     }
 

@@ -17,7 +17,7 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.*
 import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.app.utils.extensions.setupTextSize
+import com.example.bookloverfinalapp.app.utils.extensions.setupSearchViewParams
 import com.example.bookloverfinalapp.databinding.FragmentSearchBinding
 import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.joseph.ui_core.adapter.Item
@@ -80,11 +80,11 @@ class FragmentSearch :
     }
 
     private fun setupViews() = with(binding()) {
-        itemSearchView.searchHeader.setupTextSize()
+        itemSearchView.searchHeader.setupSearchViewParams()
         upButton.setOnDownEffectClickListener { viewModel.navigateBack() }
         recyclerView.adapter = adapter
         itemSearchView.searchHeader.setOnQueryTextListener(this@FragmentSearch)
-        val hint = getString(R.string.title_of_the_book_name_of_the_author_or_user)
+        val hint = getString(R.string.search)
         itemSearchView.searchHeader.queryHint = hint
     }
 

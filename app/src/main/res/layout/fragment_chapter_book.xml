@@ -19,10 +19,11 @@
             android:visibility="invisible" />
     </FrameLayout>
 
-
     <include
-        android:id="@+id/toolbar_block"
-        layout="@layout/toolbar_block" />
+        android:id="@+id/include_default_toolbar"
+        layout="@layout/include_default_toolbar"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/chapter_recycler_view"

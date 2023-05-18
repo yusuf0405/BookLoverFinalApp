@@ -1,4 +1,4 @@
-package com.example.data.repository
+package com.example.data.repository.users
 
 import android.util.Log
 import com.example.data.cache.models.UserCache
@@ -7,8 +7,10 @@ import com.example.data.cloud.models.UserCloud
 import com.example.data.cloud.source.saved_books.BooksThatReadCloudDataSource
 import com.example.data.cloud.users.UsersCloudDataSource
 import com.example.data.models.StudentData
+import com.example.data.repository.BaseRepository
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
+import com.example.domain.RequestState
 import com.example.domain.Resource
 import com.example.domain.models.StudentDomain
 import com.example.domain.models.UserDomain
@@ -38,6 +40,10 @@ class UserRepositoryImpl(
         result = cloudDataSource.deleteUser(id = id, sessionToken = sessionToken),
         onSuccess = { cacheDataSource.deleteUser(id = id) }
     )
+
+    override fun fetchUserInfoFromCloud(sessionToken: String): Flow<UserDomain> =
+        cloudDataSource.getCurrentUser(sessionToken = sessionToken)
+            .map(userCloudToDomainMapper::map)
 
     override fun fetchAllStudentsFromClassId(
         classId: String,

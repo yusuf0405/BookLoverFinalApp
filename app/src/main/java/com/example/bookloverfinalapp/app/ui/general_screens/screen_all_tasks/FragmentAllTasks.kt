@@ -29,6 +29,6 @@ class FragmentAllTasks : BaseFragmentAllItems() {
         get() = GridLayoutManager(requireContext(), 2)
 
     override val sortDialogFragment: DialogFragment
-        get() =  FragmentAudioBookSortDialog()
+        get() =  FragmentAudioBookSortDialog.newInstance()
 
 }

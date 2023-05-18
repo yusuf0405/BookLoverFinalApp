@@ -1,57 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.appbar.AppBarLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/app_bar_layout"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:cardBackgroundColor="?attr/card_container_background"
-    app:cardElevation="5dp"
-    app:shapeAppearanceOverlay="@style/BottomCornerRadius.18">
+    android:layout_height="60dp"
+    android:background="?attr/card_background"
+    android:elevation="4dp"
+    android:fitsSystemWindows="true">
 
-    <LinearLayout
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:paddingTop="32dp"
-        android:paddingBottom="8dp"
-        android:weightSum="1">
-
-        <ImageView
-            android:id="@+id/back_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginStart="16dp"
-            android:src="@drawable/ic_white_back" />
-
-        <TextView
-            android:id="@+id/toolbar_book_title"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
-            android:layout_marginEnd="8dp"
-            android:layout_weight="1"
-            android:ellipsize="none"
-            android:fadingEdgeLength="60dp"
-            android:requiresFadingEdge="horizontal"
-            android:singleLine="true"
-            android:textSize="20sp"
-            tools:text="@tools:sample/lorem/random" />
-
-        <ImageView
-            android:id="@+id/save_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="8dp"
-            android:src="@drawable/save_single_icon"
-            app:tint="?attr/blackOrWhiteColor" />
-
-        <ImageView
-            android:id="@+id/more_icon"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="16dp"
-            android:src="@drawable/ic_more_vertical_icon" />
-    </LinearLayout>
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        app:contentInsetStartWithNavigation="0dp"
+        app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+        app:titleMarginStart="0dp"
+        app:titleTextColor="?attr/blackOrWhiteColor">
 
 
-</com.google.android.material.card.MaterialCardView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
+                android:ellipsize="none"
+                android:fadingEdgeLength="60dp"
+                android:fontFamily="@font/poppins_semi_bold"
+                android:requiresFadingEdge="horizontal"
+                android:singleLine="true"
+                android:textSize="20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/save_icon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="@tools:sample/lorem/random" />
+
+            <ImageView
+                android:id="@+id/save_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/save_single_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/more_icon"
+                app:layout_constraintTop_toTopOf="parent"
+                app:tint="?attr/blackOrWhiteColor" />
+
+            <ImageView
+                android:id="@+id/more_icon"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_marginEnd="8dp"
+                android:src="@drawable/ic_more_vertical_icon"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.appbar.MaterialToolbar>
+
+</com.google.android.material.appbar.AppBarLayout>

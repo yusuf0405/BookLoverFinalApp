@@ -3,7 +3,6 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info
 import android.content.Context
 import android.os.Bundle
 import android.view.View
-import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
@@ -25,7 +24,7 @@ import com.example.bookloverfinalapp.databinding.FragmentGenreInfoBinding
 import com.example.domain.models.GenreDomain
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -42,7 +41,7 @@ class FragmentGenreInfo :
 
     @Inject
     lateinit var factory: FragmentGenreInfoViewModel.Factory
-    override val viewModel: FragmentGenreInfoViewModel by viewModelCreator {
+    override val viewModel: FragmentGenreInfoViewModel by assistedViewModel {
         factory.create(genreId)
     }
 

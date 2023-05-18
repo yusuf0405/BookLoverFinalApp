@@ -4,17 +4,17 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginVertical="12dp"
-    android:layout_marginHorizontal="16dp">
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginVertical="12dp">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
+        android:fontFamily="@font/poppins_semi_bold"
         android:textColor="?attr/blackOrWhiteColor"
-        android:textSize="22sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
         tools:text="Saved Books" />
 
     <TextView

@@ -3,7 +3,6 @@ package com.example.bookloverfinalapp.app.ui.admin_screens.screen_book_chapters.
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isInvisible
-import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Book
@@ -23,7 +22,7 @@ import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.joseph.ui_core.custom.modal_page.ModalPage
 import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 import javax.inject.Inject
@@ -41,7 +40,7 @@ class FragmentChaptersForCreateQuestion :
 
     @Inject
     lateinit var factory: FragmentChaptersForCreateQuestionViewModel.Factory
-    override val viewModel: FragmentChaptersForCreateQuestionViewModel by viewModelCreator {
+    override val viewModel: FragmentChaptersForCreateQuestionViewModel by assistedViewModel {
         factory.create(bookId = bookId)
     }
 

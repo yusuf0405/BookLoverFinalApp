@@ -9,7 +9,7 @@ import com.joseph.stories.presentation.adapter.StoriesViewPagerAdapter
 import com.joseph.stories.presentation.adapter.StoriesViewPagerTransformer
 import com.joseph.stories.presentation.models.UserStoriesModel
 import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.viewModelCreator
+import com.joseph.utils_core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -23,7 +23,7 @@ class MainStoriesFragment :
 
     @Inject
     lateinit var factory: StoriesFragmentViewModel.Factory
-    private val viewModel: StoriesFragmentViewModel by viewModelCreator {
+    private val viewModel: StoriesFragmentViewModel by assistedViewModel {
         factory.create(storiesId = String())
     }
 

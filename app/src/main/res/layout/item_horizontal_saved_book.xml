@@ -65,7 +65,7 @@
 
     <TextView
         android:id="@+id/book_title"
-        style="@style/TextViewHeadingH4.SingleLine"
+        style="@style/TextViewHeadingH5.SingleLine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
@@ -95,7 +95,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/remove_button"
-        style="@style/ButtonStyle.Grey.Stone"
+        style="@style/ButtonStyle.Red"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_marginTop="8dp"

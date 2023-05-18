@@ -29,20 +29,22 @@
         <!-- Status bar color. -->
         <!-- Customize your theme here. -->
         <item name="grayButtonColor">@color/grey_active_day</item>
+        <item name="app_color">@color/blue</item>
         <item name="buttonNotEnableBackground">@color/grey_stone</item>
         <item name="textNegativeColor">@color/text_light_negative</item>
         <item name="blueOrGrayColor">@color/blue</item>
         <item name="blackOrWhiteColor">@color/black</item>
         <item name="whiteOrBlackColor">@color/white</item>
-        <item name="whiteOrGrayColor">@color/black_8_no_alpha</item>
+        <item name="whiteOrGrayColor">#F5F5FA</item>
+        <item name="whiteOrGrayStoneColor">@color/gray_chateau</item>
         <item name="grayOrWhiteColor">@color/white</item>
         <item name="text_secondary">@color/grey_slate</item>
         <item name="checked_item_color">@color/blackberry_normal</item>
-        <item name="card_background">@color/text_inverted</item>
+        <item name="card_background">@color/white_95_alpha</item>
         <item name="card_container_background">@color/cardBackground</item>
         <item name="background_primary_elevated">@color/background_primary_elevated</item>
         <item name="button_gradient_background">@color/blue</item>
-        <item name="toolbar_gradient_background">@color/white</item>
+        <item name="toolbar_background">@color/white</item>
         <item name="collapsedPlayerOutlineColor">@color/controls_light_inactive</item>
     </style>
 
@@ -69,7 +71,6 @@
     </style>
 
     <style name="BottomCornerRadius.18" parent="@style/Widget.MaterialComponents.CardView">
-        <item name="cornerFamily">cut</item>
         <item name="cornerSizeBottomRight">18dp</item>
         <item name="cornerSizeTopLeft">0dp</item>
         <item name="android:topRightRadius">0dp</item>

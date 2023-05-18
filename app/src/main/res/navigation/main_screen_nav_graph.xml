@@ -147,6 +147,12 @@
                 android:name="position"
                 app:argType="integer" />
         </action>
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_fragmentUserProfile"
+            app:destination="@id/fragmentUserProfile" />
+        <action
+            android:id="@+id/action_fragmentMainScreen_to_profileScreen"
+            app:destination="@id/profileScreen" />
     </fragment>
     <fragment
         android:id="@+id/fragmentAllSavedBooks"
@@ -274,5 +280,13 @@
         android:id="@+id/fragmentSelectFavoriteBook"
         android:name="com.joseph.select_favorite_book.presentation.FragmentSelectFavoriteBook"
         android:label="FragmentSelectFavoriteBook" />
+    <fragment
+        android:id="@+id/fragmentUserProfile"
+        android:name="com.joseph.profile.FragmentUserProfile"
+        android:label="FragmentUserProfile" />
+    <fragment
+        android:id="@+id/profileScreen"
+        android:name="com.joseph.profile.presentation.FragmentProfileScreen"
+        android:label="ProfileScreen" />
 
 </navigation>

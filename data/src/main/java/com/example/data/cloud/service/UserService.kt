@@ -33,7 +33,7 @@ interface UserService {
     ): Response<Unit>
 
     @GET("users/me")
-    suspend fun getMe(
+    suspend fun getCurrentUserInfo(
         @Header("X-Parse-Session-Token") sessionToken: String,
     ): Response<UserCloud>
 

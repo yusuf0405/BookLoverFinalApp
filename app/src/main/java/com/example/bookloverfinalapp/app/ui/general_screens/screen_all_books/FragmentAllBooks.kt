@@ -19,7 +19,7 @@ class FragmentAllBooks : BaseFragmentAllItems() {
         get() = R.string.all_books
 
     override val sortDialogFragment: DialogFragment
-        get() = FragmentBookSortDialog()
+        get() = FragmentBookSortDialog.newInstance()
 
     override val layoutManager: LinearLayoutManager
         get() = LinearLayoutManager(requireContext())

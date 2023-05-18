@@ -8,7 +8,7 @@ import com.joseph.ui_core.adapter.BaseViewHolder
 import com.joseph.ui_core.adapter.Item
 import com.joseph.ui_core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SearchAdapterModel
-import com.example.bookloverfinalapp.app.utils.extensions.setupTextSize
+import com.example.bookloverfinalapp.app.utils.extensions.setupSearchViewParams
 import com.example.bookloverfinalapp.databinding.ItemSearchViewBinding
 
 
@@ -45,11 +45,12 @@ class SearchViewHolder(
 
     override fun onBind(item: SearchAdapterModel) {
         super.onBind(item)
-        binding.searchHeader.setupTextSize()
+        binding.searchHeader.setupSearchViewParams()
         if (item.queryText.isNotEmpty()){
             binding.searchHeader.queryHint = item.queryText
         }
         binding.searchHeader.setOnQueryTextListener(item.listener)
     }
+
 }
 

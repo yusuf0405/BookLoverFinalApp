@@ -1,0 +1,137 @@
+{
+  ConstraintSets: {
+    end: {
+      profile_pic: {
+        width: 140,
+        height: 50,
+        start: [
+          'parent',
+          'start',
+          16
+        ],
+        top: [
+          'parent',
+          'top',
+          16
+        ],
+      },
+      username: {
+        width: 'spread',
+        height: 'spread',
+        top: [
+          'profile_pic',
+          'top'
+        ],
+        bottom: [
+          'profile_pic',
+          'bottom'
+        ],
+        start: [
+          'profile_pic',
+          'end',
+          16
+        ]
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        start: [
+          'parent',
+          'start'
+        ],
+        bottom: [
+          'parent',
+          'bottom',
+          -16
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        top: [
+          'parent',
+          'top'
+        ],
+      }
+    },
+    start: {
+      profile_pic: {
+        width: 250,
+        height: 250,
+        start: [
+          'parent',
+          'start',
+        ],
+        end: [
+          'parent',
+          'end',
+        ],
+        top: [
+          'parent',
+          'top',
+          16
+        ],
+      },
+      username: {
+        width: 'spread',
+        height: 'spread',
+        top: [
+          'profile_pic',
+          'bottom',
+          16
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        start: [
+          'parent',
+          'start',
+        ]
+      },
+      box: {
+        width: 'spread',
+        height: 'spread',
+        start: [
+          'parent',
+          'start'
+        ],
+        bottom: [
+          'parent',
+          'bottom',
+          -16
+        ],
+        end: [
+          'parent',
+          'end'
+        ],
+        top: [
+          'parent',
+          'top'
+        ],
+      }
+    }
+  },
+  Transitions: {
+    default: {
+      from: 'start',
+      to: 'end',
+      pathMotionArc: 'startHorizontal',
+      KeyFrames: {
+        KeyAttributes: [
+          {
+            target: 'profile_pic',
+            frames: [
+              0,
+              100
+            ],
+            translationX: [
+              50,
+              0
+            ],
+          }
+        ],
+      }
+    }
+  }
+}

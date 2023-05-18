@@ -29,6 +29,7 @@ import com.example.bookloverfinalapp.databinding.FragmentPlayScreenBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.card.MaterialCardView
 import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.utils_core.extensions.showImage
 import com.joseph.utils_core.extensions.toDp
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
@@ -92,11 +93,7 @@ class PlayScreenFragment :
             description.text = audioBook.description
             authorTextView.makeTicker()
             titleTextView.makeTicker()
-            requireContext().showRoundedImage(
-                roundedSize = IMAGE_ROUNDED_SIZE.toDp,
-                posterUrl,
-                posterImageView
-            )
+            requireContext().showImage(posterUrl, posterImageView)
             Glide.with(requireActivity())
                 .asBitmap()
                 .load(posterUrl)
@@ -108,12 +105,7 @@ class PlayScreenFragment :
             playerOverlayAuthorTextView.text = audioBook.author
             playerOverlayTitleTextView.makeTicker()
             playerOverlayAuthorTextView.makeTicker()
-            Glide.with(requireActivity())
-                .load(posterUrl)
-                .transform(MultiTransformation(CenterCrop(), CircleCrop()))
-                .placeholder(R.drawable.image_placeholder)
-                .error(R.drawable.image_placeholder)
-                .into(playerOverlayImageView)
+            requireContext().showImage(posterUrl, playerOverlayImageView)
         }
     }
 
@@ -128,8 +120,8 @@ class PlayScreenFragment :
     private fun createPaletteAsync(bitmap: Bitmap, cardView: MaterialCardView) {
         Palette.from(bitmap).generate { palette ->
             val color = when {
-                palette?.dominantSwatch != null -> palette.dominantSwatch!!.rgb
                 palette?.lightVibrantSwatch != null -> palette.lightVibrantSwatch!!.rgb
+                palette?.dominantSwatch != null -> palette.dominantSwatch!!.rgb
                 palette?.lightMutedSwatch != null -> palette.lightMutedSwatch!!.rgb
                 palette?.vibrantSwatch != null -> palette.vibrantSwatch!!.rgb
                 palette?.mutedSwatch != null -> palette.mutedSwatch!!.rgb
@@ -150,14 +142,17 @@ class PlayScreenFragment :
                 setPlayerExpendedButtonImage(R.drawable.pause_icon)
                 setPlayerCollapsedButtonImage(R.drawable.pause_icon)
             }
+
             is PlayerStatus.Paused -> {
                 cancelRotateAnimToImageView()
                 setPlayerCollapsedButtonImage(R.drawable.play_icon)
                 setPlayerExpendedButtonImage(R.drawable.play_icon)
             }
+
             is PlayerStatus.Cancelled -> {
                 viewModel.useCollapsedPlayerMode()
             }
+
             is PlayerStatus.Ended -> Unit
             is PlayerStatus.Error -> Unit
             is PlayerStatus.Other -> Unit
@@ -218,10 +213,12 @@ class PlayScreenFragment :
             viewModel.useExpandedPlayerMode()
             setPlayerState(false)
         }
+
         PlayerState.STATE_COLLAPSED -> {
             viewModel.useCollapsedPlayerMode()
             setPlayerState(true)
         }
+
         PlayerState.STATE_DRAGGING -> Unit
         PlayerState.STATE_SETTLING -> Unit
         PlayerState.STATE_HIDDEN -> Unit

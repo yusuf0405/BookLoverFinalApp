@@ -44,39 +44,3 @@ fun <T> Request<T>.asFlow(): Flow<T> {
         awaitClose { this@asFlow.cancel() }
     }
 }
-
-class Test {
-
-    fun dd(): Request<String> {
-
-        val dsd = object : Request<String> {
-            override fun execute(callback: Request.Callback<String>) {
-                callback.onSuccess("dsd")
-            }
-
-            override fun cancel() {
-
-
-            }
-        }
-
-
-        return dsd
-    }
-
-    fun dwddwdwd() {
-        val dd = object : Request.Callback<String> {
-
-            override fun onSuccess(value: String) {
-
-            }
-
-            override fun onError(e: Exception) {
-
-            }
-
-        }
-        dd().execute(dd)
-
-    }
-}

@@ -10,6 +10,8 @@ import kotlinx.coroutines.flow.Flow
 
 interface UserRepository {
 
+    fun fetchUserInfoFromCloud(sessionToken: String): Flow<UserDomain>
+
     fun fetchAllStudentsFromClassId(
         classId: String,
         schoolId: String,

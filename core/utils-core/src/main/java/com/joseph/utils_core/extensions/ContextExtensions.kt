@@ -25,6 +25,7 @@ import java.io.File
 
 
 private const val SETTINGS_NAME = "settings"
+
 val Context.dataStore by preferencesDataStore(SETTINGS_NAME)
 
 private fun shimmerDrawable(): ShimmerDrawable {
@@ -197,12 +198,14 @@ fun Context.showImage(uri: String?, imageView: ImageView) {
         .placeholder(shimmerDrawable())
         .into(imageView)
 }
+
 fun Context.showImage(file: File?, imageView: ImageView) {
     Glide.with(this).setDefaultRequestOptions(RequestOptions())
         .load(file)
         .placeholder(shimmerDrawable())
         .into(imageView)
 }
+
 fun Context.showImage(byteArray: ByteArray?, imageView: ImageView) {
     Glide.with(this).setDefaultRequestOptions(RequestOptions())
         .load(byteArray)

@@ -23,10 +23,9 @@
             <option value="$PROJECT_DIR$/data" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/features" />
-            <option value="$PROJECT_DIR$/features/screen_profile" />
-            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-api" />
-            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-impl" />
-            <option value="$PROJECT_DIR$/features/screen_profile/screen-profile-ui" />
+            <option value="$PROJECT_DIR$/features/epub-reader" />
+            <option value="$PROJECT_DIR$/features/onboarding" />
+            <option value="$PROJECT_DIR$/features/profile" />
             <option value="$PROJECT_DIR$/features/select-favorite-book" />
             <option value="$PROJECT_DIR$/features/sign-in" />
             <option value="$PROJECT_DIR$/features/stories" />

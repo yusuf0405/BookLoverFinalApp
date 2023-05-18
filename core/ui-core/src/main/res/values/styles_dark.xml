@@ -7,4 +7,11 @@
         <item name="textNegativeColor">@color/text_dark_negative</item>
     </style>
 
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" >
+        <item name="android:fontFamily">@font/poppins_bold</item>
+        <item name="android:elevation">4dp</item>
+        /// change your font
+    </style>
+
+
 </resources>
