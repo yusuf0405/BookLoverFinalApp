@@ -3,15 +3,14 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.ItemStoriesBinding
 import com.joseph.stories.presentation.models.StoriesAdapterItem
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-import com.joseph.utils_core.extensions.showImage
-
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.joseph.core.extensions.showImage
+import com.example.bookloverfinalapp.R
 
 class StoriesFingerprint :
     ItemFingerprint<ItemStoriesBinding, StoriesAdapterItem> {

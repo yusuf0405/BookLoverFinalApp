@@ -2,9 +2,9 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_bo
 
 import android.content.Context
 import androidx.preference.PreferenceManager
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.BookThatRead
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_ENGLISH_KEY
 import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_KEY
 import org.ocpsoft.prettytime.PrettyTime

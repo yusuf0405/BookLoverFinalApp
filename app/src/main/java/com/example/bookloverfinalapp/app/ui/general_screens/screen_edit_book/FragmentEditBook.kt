@@ -7,18 +7,18 @@ import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
-import com.joseph.ui_core.dialog.UploadFileDialog
+import com.joseph.ui.core.dialog.UploadFileDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.FragmentProfile
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentEditBookBinding
 import com.example.domain.models.UpdateBookDomain
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showImage
-import com.joseph.utils_core.extensions.showOnlyOne
-import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showImage
+import com.joseph.core.extensions.showOnlyOne
+import com.joseph.core.extensions.showRoundedImage
 import com.parse.ParseFile
 import dagger.hilt.android.AndroidEntryPoint
 

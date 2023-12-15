@@ -1,10 +1,10 @@
 package com.joseph.profile.domain.usecases
 
-import com.joseph.common_api.IdResourceString
+import com.joseph.common.IdResourceString
 import com.joseph.profile.domain.models.*
 import com.joseph.profile.domain.models.UserFieldValidatorCorrectState
 import com.joseph.profile.domain.models.UserFieldValidatorErrorState
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 import javax.inject.Inject
 
 interface NameValidatorUseCase {
@@ -25,11 +25,11 @@ class NameValidatorUseCaseImpl @Inject constructor(
         currentName: String
     ): UserFieldValidatorState = when {
         userName.isEmpty() -> {
-            val defaultText = IdResourceString(R.string.whats_your_name)
+            val defaultText = IdResourceString(R.string.zero)
             UserFieldValidatorEmptyState(defaultText)
         }
         userName == currentName -> {
-            UserFieldValidatorDefaultState(IdResourceString(R.string.start_update_your_name))
+            UserFieldValidatorDefaultState(IdResourceString(R.string.zero))
         }
         userName.length <= NAME_MIN_LENGTH -> {
             val errorText =

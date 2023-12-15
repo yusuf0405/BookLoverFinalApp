@@ -6,13 +6,13 @@ import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentAdminProfileBinding
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 

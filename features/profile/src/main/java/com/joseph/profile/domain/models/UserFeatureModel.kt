@@ -1,7 +1,7 @@
 package com.joseph.profile.domain.models
 
 import android.os.Parcelable
-import com.joseph.ui_core.extensions.firstLetterCapital
+import com.joseph.ui.core.extensions.firstLetterCapital
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
@@ -25,7 +25,7 @@ data class UserFeatureModel(
             id = String(),
             firstName = "Joseph",
             lastName = "Barbera",
-            imageUrl = "https://i.pinimg.com/originals/9a/13/99/9a13990bf715d7b5f5ea51913b6ce1b9.png",
+            imageUrl = "https://cdn3.iconfinder.com/data/icons/avatars-9/145/Avatar_Alien-1024.png",
             email = "planetapluton888@gmail.com",
             password = "Joseph123"
         )

@@ -2,8 +2,8 @@ package com.example.bookloverfinalapp.app.ui.admin_screens.screen_edit_question
 
 import android.os.Bundle
 import android.view.View
+import com.joseph.ui.core.R
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
 import com.example.bookloverfinalapp.app.models.BookQuestion

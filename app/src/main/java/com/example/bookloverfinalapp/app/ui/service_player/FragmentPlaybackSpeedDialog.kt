@@ -5,12 +5,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionItem
-import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.core.bindingLifecycleError
 import com.example.bookloverfinalapp.databinding.FragmentPlaybackSpeedDialogBinding
 import java.text.DecimalFormat
+import com.example.bookloverfinalapp.R as MainRes
 
 class FragmentPlaybackSpeedDialog : Fragment(),
     SettingSelectionAdapter.OnItemSelectionListener {
@@ -58,7 +59,7 @@ class FragmentPlaybackSpeedDialog : Fragment(),
         recyclerView.itemAnimator = null
         val items = requireContext()
             .resources
-            .getStringArray(R.array.playback_speed_options).map {
+            .getStringArray(MainRes.array.playback_speed_options).map {
 
                 val formatter = DecimalFormat("0.#")
                 val title = getString(R.string.playback_speed, formatter.format(it.toFloat()))

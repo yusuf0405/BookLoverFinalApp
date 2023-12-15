@@ -5,10 +5,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import com.example.bookloverfinalapp.databinding.FragmentSavedBookSortDialogBinding
-import com.joseph.common_api.base.BaseBindingFragment
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.extensions.launchWhenCreated
+import com.joseph.common.base.BaseBindingFragment
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.extensions.launchWhenCreated
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

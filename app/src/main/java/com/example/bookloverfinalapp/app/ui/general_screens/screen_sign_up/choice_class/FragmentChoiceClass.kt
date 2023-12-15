@@ -6,7 +6,7 @@ import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserSignUp
 import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
@@ -14,13 +14,14 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentChoiceClassBinding
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.extensions.launchOnLifecycle
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showOnlyOne
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.extensions.launchOnLifecycle
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showOnlyOne
+import com.joseph.core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class FragmentChoiceClass :
@@ -78,7 +79,7 @@ class FragmentChoiceClass :
         dismissModalPage()
         navControllerPopBackStackInclusive()
         findNavController().navigate(
-            R.id.main_navigation,
+            MainRes.id.main_navigation,
             bundleOf(),
             createNavOptionsWithAnimations()
         )
@@ -93,7 +94,7 @@ class FragmentChoiceClass :
         .build()
 
     private fun navControllerPopBackStackInclusive() =
-        findNavController().popBackStack(R.id.login_navigation, false)
+        findNavController().popBackStack(MainRes.id.login_navigation, false)
 
     override fun onItemSelected(item: SettingSelectionItem) {
         viewModel.handleItemOnClickListener(item.id)

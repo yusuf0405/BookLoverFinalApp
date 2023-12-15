@@ -66,6 +66,7 @@ class FragmentSplashViewModel @Inject constructor(
             UserType.unknown to StartNavigationDestination.NavigateToLoginScreen,
             UserType.admin to StartNavigationDestination.NavigateToAdminScreen,
             UserType.teacher to StartNavigationDestination.NavigateToMainScreen,
+            UserType.student to StartNavigationDestination.NavigateToMainScreen,
         )
     }
 

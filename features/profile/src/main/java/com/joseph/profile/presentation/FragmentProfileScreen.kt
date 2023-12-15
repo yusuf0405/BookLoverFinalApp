@@ -3,8 +3,10 @@ package com.joseph.profile.presentation
 import android.content.res.Configuration
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
@@ -18,12 +20,12 @@ import androidx.lifecycle.lifecycleScope
 import com.joseph.profile.domain.models.UserFeatureModel
 import com.joseph.profile.presentation.screen_edit_profile.EditProfileViewModel
 import com.joseph.profile.presentation.screen_profile.FragmentProfileScreenViewModel
-import com.joseph.ui_core.MyApplicationTheme
-import com.joseph.ui_core.R
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.utils_core.assistedViewModel
-import com.joseph.utils_core.extensions.dataStore
-import com.joseph.utils_core.extensions.getAttrColor
+import com.joseph.ui.core.MyApplicationTheme
+import com.joseph.ui.core.R
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.core.assistedViewModel
+import com.joseph.core.extensions.dataStore
+import com.joseph.core.extensions.getAttrColor
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -61,7 +63,7 @@ class FragmentProfileScreen : Fragment() {
     ) = ComposeView(requireContext()).apply {
         setContent {
             MyApplicationTheme(
-                darkTheme = isNightMode
+                darkTheme = isSystemInDarkTheme()
             ) {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
@@ -69,7 +71,7 @@ class FragmentProfileScreen : Fragment() {
                 ) {
                     ProfileScreensApp(
                         profileScreenViewModel = viewModel,
-                        isDarkTheme = isNightMode,
+                        isDarkTheme = isSystemInDarkTheme(),
                         onThemeChange = ::setAppTheme,
                         navigateSettingScreen = ::navigateSettingScreen,
                         navigateLoginOutScreen = ::navigateLoginOutScreen,

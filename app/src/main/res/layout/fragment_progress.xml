@@ -33,7 +33,7 @@
                 app:cardBackgroundColor="?attr/toolbar_background"
                 app:cardCornerRadius="12dp">
 
-                <com.joseph.ui_core.custom.analytical_pie_chart.AnalyticalPieChart
+                <com.joseph.ui.core.custom.analytical_pie_chart.AnalyticalPieChart
                     android:id="@+id/analyticalPieChart"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

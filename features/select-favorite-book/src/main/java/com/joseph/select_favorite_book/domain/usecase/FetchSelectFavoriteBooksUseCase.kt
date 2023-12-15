@@ -1,6 +1,6 @@
 package com.joseph.select_favorite_book.domain.usecase
 
-import com.joseph.common_api.EmptyListException
+import com.joseph.common.EmptyListException
 import com.joseph.select_favorite_book.domain.models.SelectFavoriteBook
 import com.joseph.select_favorite_book.domain.repositories.SelectFavoriteBooksRepository
 import kotlinx.coroutines.flow.Flow

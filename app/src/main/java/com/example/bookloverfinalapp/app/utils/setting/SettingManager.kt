@@ -9,7 +9,7 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.preference.PreferenceManager
 import com.example.bookloverfinalapp.app.utils.cons.*
-import com.joseph.utils_core.extensions.dataStore
+import com.joseph.core.extensions.dataStore
 import com.yariksoffice.lingver.Lingver
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.collectLatest

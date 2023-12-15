@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details
 
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.*
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.listener.UserItemOnClickListener
@@ -10,7 +10,7 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details.router.FragmentBookInfoRouter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemSecond
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.BookHorizontalItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem

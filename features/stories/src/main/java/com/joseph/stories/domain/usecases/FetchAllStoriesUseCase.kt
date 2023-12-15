@@ -1,7 +1,7 @@
 package com.joseph.stories.domain.usecases
 
-import com.joseph.common_api.CheckInternetConnection
-import com.joseph.common_api.EmptyListException
+import com.joseph.common.CheckInternetConnection
+import com.joseph.common.EmptyListException
 import com.joseph.stories.domain.repositories.StoriesFeatureRepository
 import com.joseph.stories.presentation.models.StoriesModel
 import kotlinx.coroutines.flow.Flow

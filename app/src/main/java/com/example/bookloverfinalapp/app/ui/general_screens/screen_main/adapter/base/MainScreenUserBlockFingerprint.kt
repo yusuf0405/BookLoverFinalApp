@@ -9,10 +9,10 @@ import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.UserBlockAdapterItem
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenUserBlockBinding
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 
 class MainScreenUserBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,

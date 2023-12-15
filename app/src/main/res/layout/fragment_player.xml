@@ -166,7 +166,7 @@
             tools:text="@tools:sample/lorem" />
     </LinearLayout>
 
-    <com.joseph.ui_core.custom.FadingEdgeLayout
+    <com.joseph.ui.core.custom.FadingEdgeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:fade_edge="top"
@@ -193,7 +193,7 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </com.joseph.ui_core.custom.FadingEdgeLayout>
+    </com.joseph.ui.core.custom.FadingEdgeLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView7"

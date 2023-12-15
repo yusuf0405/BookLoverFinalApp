@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.glue.profile.di
 
 import com.example.bookloverfinalapp.app.glue.profile.mappers.UserDomainToUserFeatureModelMapper
 import com.example.domain.models.UserDomain
-import com.joseph.common_api.Mapper
+import com.joseph.common.Mapper
 import com.joseph.profile.domain.models.UserFeatureModel
 import dagger.Binds
 import dagger.Module

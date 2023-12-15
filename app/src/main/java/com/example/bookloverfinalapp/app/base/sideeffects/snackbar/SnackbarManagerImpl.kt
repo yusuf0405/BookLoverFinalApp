@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.base.sideeffects.snackbar
 
 import android.app.Activity
 import android.view.View
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
 import javax.inject.Inject
 
 class SnackbarManagerImpl @Inject constructor(

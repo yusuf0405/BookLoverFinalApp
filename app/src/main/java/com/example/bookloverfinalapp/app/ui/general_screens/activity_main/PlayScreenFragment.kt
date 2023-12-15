@@ -12,25 +12,20 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.MultiTransformation
-import com.bumptech.glide.load.resource.bitmap.CenterCrop
-import com.bumptech.glide.load.resource.bitmap.CircleCrop
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.ui.service_player.PlayerStatus
 import com.example.bookloverfinalapp.app.utils.extensions.hide
 import com.example.bookloverfinalapp.app.utils.extensions.makeTicker
 import com.example.bookloverfinalapp.app.utils.extensions.show
-import com.joseph.utils_core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.databinding.FragmentPlayScreenBinding
 import com.google.android.exoplayer2.ExoPlayer
 import com.google.android.material.card.MaterialCardView
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showImage
-import com.joseph.utils_core.extensions.toDp
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showImage
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.map
 import java.text.DecimalFormat
@@ -230,7 +225,10 @@ class PlayScreenFragment :
     }
 
     private fun startRotateAnimToImageView() {
-        val rotateAnim = AnimationUtils.loadAnimation(requireContext(), R.anim.rotate_anim)
+        val rotateAnim = AnimationUtils.loadAnimation(
+            requireContext(),
+            com.example.bookloverfinalapp.R.anim.rotate_anim
+        )
         rotateAnim.interpolator = LinearInterpolator()
         rotateAnim.repeatCount = Animation.INFINITE
         rotateAnim.duration = 3000

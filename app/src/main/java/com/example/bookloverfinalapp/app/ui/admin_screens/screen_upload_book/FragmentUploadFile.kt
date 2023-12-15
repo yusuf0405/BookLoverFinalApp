@@ -16,11 +16,11 @@ import androidx.core.content.PermissionChecker
 import androidx.core.view.isInvisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Genre
-import com.joseph.utils_core.motion.MotionListener
-import com.joseph.utils_core.motion.MotionState
+import com.joseph.core.motion.MotionListener
+import com.joseph.core.motion.MotionState
 import com.example.bookloverfinalapp.app.utils.cons.READ_EXTERNAL_STORAGE
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
@@ -29,11 +29,11 @@ import com.example.bookloverfinalapp.databinding.FragmentAdminUploadPdfBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
-import com.joseph.ui_core.dialog.UploadFileDialog
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.getAttrColor
-import com.joseph.utils_core.extensions.showOnlyOne
-import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.ui.core.dialog.UploadFileDialog
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.getAttrColor
+import com.joseph.core.extensions.showOnlyOne
+import com.joseph.core.extensions.showRoundedImage
 import com.parse.ParseFile
 import com.shockwave.pdfium.PdfDocument
 import dagger.hilt.android.AndroidEntryPoint
@@ -105,7 +105,7 @@ class FragmentUploadFile :
 
     private fun handleGenreFetching(genres: List<Genre>) {
         genres.forEach { genre ->
-            binding().bookGenresLayout.addView(createGenreTag(genre))
+//            binding().bookGenresLayout.addView(createGenreTag(genre))
         }
     }
 

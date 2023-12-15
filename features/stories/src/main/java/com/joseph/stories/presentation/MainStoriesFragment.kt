@@ -3,13 +3,13 @@ package com.joseph.stories.presentation
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.joseph.common_api.base.BaseBindingFragment
+import com.joseph.common.base.BaseBindingFragment
 import com.joseph.stories.databinding.FragmentMainStoriesBinding
 import com.joseph.stories.presentation.adapter.StoriesViewPagerAdapter
 import com.joseph.stories.presentation.adapter.StoriesViewPagerTransformer
 import com.joseph.stories.presentation.models.UserStoriesModel
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

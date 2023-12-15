@@ -12,19 +12,21 @@ import androidx.preference.ListPreference
 import androidx.preference.Preference
 import androidx.preference.PreferenceFragmentCompat
 import androidx.preference.SwitchPreference
-import com.example.bookloverfinalapp.R
-import com.example.bookloverfinalapp.app.utils.cons.*
-import com.joseph.utils_core.extensions.dataStore
+import com.example.bookloverfinalapp.app.utils.cons.KEY_APP_MODE
+import com.example.bookloverfinalapp.app.utils.cons.KEY_DEFAULT_LANGUAGE
+import com.example.bookloverfinalapp.app.utils.cons.SETTING_LANGUAGE_KEY
+import com.example.bookloverfinalapp.app.utils.cons.SETTING_THEME_KEY
+import com.joseph.core.extensions.dataStore
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
-
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class
 FragmentSetting : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
-        setPreferencesFromResource(R.xml.root_preferences, rootKey)
+        setPreferencesFromResource(MainRes.xml.root_preferences, rootKey)
     }
 
     override fun onCreateView(

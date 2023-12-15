@@ -7,124 +7,151 @@
     android:orientation="vertical"
     tools:context=".app.ui.general_screens.screen_reader.FragmentReader">
 
-    <include
-        android:id="@+id/include_default_toolbar"
-        layout="@layout/include_default_toolbar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/include_default_toolbar"
+            layout="@layout/include_default_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1">
+
+            <TextView
+                android:id="@+id/textpdfview"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_weight="1"
+                android:lineSpacingExtra="12dp"
+                android:fontFamily="@font/poppins_medium"
+                android:gravity="center"
+                android:textSize="20sp"
+                tools:text="@tools:sample/lorem/random" />
+        </androidx.core.widget.NestedScrollView>
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom"
+            app:cardBackgroundColor="?attr/card_background"
+            app:cardElevation="36dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:shapeAppearanceOverlay="@style/TopCornerRadius">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent">
+
+                <ImageView
+                    android:id="@+id/setting"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/setting_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/page_first"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="8dp"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
+                    app:layout_constraintEnd_toStartOf="@+id/page_back"
+                    app:layout_constraintHorizontal_chainStyle="packed"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/page_enter_field"
+                    app:srcCompat="@drawable/ic_last_page" />
+
+                <ImageView
+                    android:id="@+id/page_back"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginEnd="8dp"
+                    android:rotation="180"
+                    app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
+                    app:layout_constraintEnd_toStartOf="@+id/page_enter_field"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/page_first"
+                    app:layout_constraintTop_toTopOf="@+id/page_enter_field"
+                    app:srcCompat="@drawable/ic_arrow_bold" />
+
+                <TextView
+                    android:id="@+id/page_enter_field"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/book_qustion_background"
+                    android:ems="3"
+                    android:paddingTop="4dp"
+                    android:textAlignment="center"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/page_forward"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toEndOf="@+id/page_back"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="0" />
+
+                <ImageView
+                    android:id="@+id/page_forward"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
+                    app:layout_constraintEnd_toStartOf="@+id/page_last"
+                    app:layout_constraintStart_toEndOf="@+id/page_enter_field"
+                    app:layout_constraintTop_toTopOf="@+id/page_enter_field"
+                    app:srcCompat="@drawable/ic_arrow_bold" />
+
+                <ImageView
+                    android:id="@+id/page_last"
+                    android:layout_width="35dp"
+                    android:layout_height="35dp"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/page_forward"
+                    app:layout_constraintTop_toTopOf="@+id/page_enter_field"
+                    app:srcCompat="@drawable/ic_last_page" />
+
+                <ImageView
+                    android:id="@+id/option"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_more_vertical_icon"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
+
 
     <com.github.barteksc.pdfviewer.PDFView
         android:id="@+id/pdfview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginStart="-40dp"
-        android:layout_marginEnd="-40dp" />
-
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardView3"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        app:cardBackgroundColor="?attr/card_background"
-        app:cardElevation="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:shapeAppearanceOverlay="@style/TopCornerRadius">
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
-            android:layout_width="match_parent"
-            android:layout_height="65dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
-
-            <ImageView
-                android:id="@+id/setting"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginStart="16dp"
-                android:src="@drawable/setting_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/page_first"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="8dp"
-                android:rotation="180"
-                app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
-                app:layout_constraintEnd_toStartOf="@+id/page_back"
-                app:layout_constraintHorizontal_chainStyle="packed"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/page_enter_field"
-                app:srcCompat="@drawable/ic_last_page" />
-
-            <ImageView
-                android:id="@+id/page_back"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginEnd="8dp"
-                android:rotation="180"
-                app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
-                app:layout_constraintEnd_toStartOf="@+id/page_enter_field"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/page_first"
-                app:layout_constraintTop_toTopOf="@+id/page_enter_field"
-                app:srcCompat="@drawable/ic_arrow_bold" />
-
-            <TextView
-                android:id="@+id/page_enter_field"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginBottom="4dp"
-                android:background="@drawable/book_qustion_background"
-                android:ems="3"
-                android:paddingTop="4dp"
-                android:textAlignment="center"
-                android:textSize="14sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/page_forward"
-                app:layout_constraintHorizontal_bias="0.5"
-                app:layout_constraintStart_toEndOf="@+id/page_back"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="0" />
-
-            <ImageView
-                android:id="@+id/page_forward"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
-                app:layout_constraintEnd_toStartOf="@+id/page_last"
-                app:layout_constraintStart_toEndOf="@+id/page_enter_field"
-                app:layout_constraintTop_toTopOf="@+id/page_enter_field"
-                app:srcCompat="@drawable/ic_arrow_bold" />
-
-            <ImageView
-                android:id="@+id/page_last"
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:layout_marginStart="8dp"
-                app:layout_constraintBottom_toBottomOf="@+id/page_enter_field"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/page_forward"
-                app:layout_constraintTop_toTopOf="@+id/page_enter_field"
-                app:srcCompat="@drawable/ic_last_page" />
-
-            <ImageView
-                android:id="@+id/option"
-                android:layout_width="28dp"
-                android:layout_height="28dp"
-                android:layout_marginEnd="16dp"
-                android:src="@drawable/ic_more_vertical_icon"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </com.google.android.material.card.MaterialCardView>
+        android:layout_marginEnd="-40dp"
+        android:visibility="gone" />
 
 </FrameLayout>

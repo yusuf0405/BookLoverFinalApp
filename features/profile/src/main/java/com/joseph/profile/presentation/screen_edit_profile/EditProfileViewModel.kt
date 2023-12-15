@@ -4,32 +4,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewModelScope
-import com.joseph.common_api.base.BaseViewModel
+import com.joseph.common.base.BaseViewModel
 import com.joseph.profile.domain.models.*
 import com.joseph.profile.domain.usecases.EmailValidatorUseCase
 import com.joseph.profile.domain.usecases.LastNameValidatorUseCase
 import com.joseph.profile.domain.usecases.NameValidatorUseCase
 import com.joseph.profile.domain.usecases.PasswordValidatorUseCase
-import com.joseph.ui_core.extensions.firstLetterCapital
+import com.joseph.ui.core.extensions.firstLetterCapital
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.flow.*
-
-data class EditProfileUiSate(
-    val userFeatureModel: UserFeatureModel = UserFeatureModel.unknown(),
-    val editProfileColorsState: EditProfileColorsState = EditProfileDefaultState,
-    val emailValidatorState: UserFieldValidatorState? = null,
-    val passwordValidatorState: UserFieldValidatorState? = null,
-    val nameValidatorState: UserFieldValidatorState? = null,
-    val lastNameValidatorState: UserFieldValidatorState? = null,
-    val email: String = userFeatureModel.email,
-    val password: String = userFeatureModel.password,
-    val firstName: String = userFeatureModel.firstName,
-    val lastName: String = userFeatureModel.lastName,
-    val buttonEnabled: Boolean = false,
-    val refreshButtonIsVisible: Boolean = false,
-)
 
 class EditProfileViewModel @AssistedInject constructor(
     @Assisted private val userFeatureModel: UserFeatureModel,

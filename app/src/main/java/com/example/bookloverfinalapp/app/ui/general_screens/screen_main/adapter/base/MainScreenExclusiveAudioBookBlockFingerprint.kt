@@ -7,15 +7,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenExclusiveAudioBookBlockBinding
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-import com.joseph.ui_core.adapter.managers.PeekingLinearLayoutManager
-import com.joseph.utils_core.extensions.attachSnapHelperWithListener
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.managers.PeekingLinearLayoutManager
+import com.joseph.core.extensions.attachSnapHelperWithListener
+import com.joseph.core.snap.OnSnapPositionChangeListener
+import com.example.bookloverfinalapp.R
 
 class MainScreenExclusiveAudioBookBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,
@@ -58,7 +59,7 @@ class MainScreenExclusiveAudioBookBlockViewHolder(
     viewPool: RecyclerView.RecycledViewPool,
 ) : BaseViewHolder<MainScreenExclusiveAudioBookBlockBinding,
         ExclusiveAudioBookHorizontalItem>(binding),
-    com.joseph.utils_core.snap.OnSnapPositionChangeListener {
+    OnSnapPositionChangeListener {
 
     private val fingerprintAdapter = FingerprintAdapter(fingerprints)
 

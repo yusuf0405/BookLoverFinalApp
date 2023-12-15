@@ -10,24 +10,33 @@ import android.transition.Slide
 import android.transition.Transition
 import android.transition.TransitionManager
 import android.util.Log
-import android.view.*
+import android.view.Gravity
+import android.view.MotionEvent
+import android.view.View
+import android.view.Window
 import android.widget.FrameLayout
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.AudioBook
-import com.example.bookloverfinalapp.app.ui.service_player.*
+import com.example.bookloverfinalapp.app.ui.service_player.AudioService
+import com.example.bookloverfinalapp.app.ui.service_player.BaseWindowCallback
+import com.example.bookloverfinalapp.app.ui.service_player.FragmentPlaybackSpeedDialog
+import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
+import com.example.bookloverfinalapp.app.ui.service_player.PlayerStatus
+import com.example.bookloverfinalapp.app.ui.service_player.PlayerViewModel
 import com.example.bookloverfinalapp.app.utils.extensions.createSharedFlowAsLiveData
 import com.example.bookloverfinalapp.app.utils.extensions.pointInView
 import com.example.bookloverfinalapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
-import com.joseph.ui_core.custom.ScrollBottomSheetBehavior
+import com.joseph.ui.core.custom.ScrollBottomSheetBehavior
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.*
-
+import kotlinx.coroutines.flow.SharedFlow
+import kotlinx.coroutines.flow.asSharedFlow
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 
 @AndroidEntryPoint
 abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
@@ -215,7 +224,7 @@ abstract class PlayerControlActivity : AppCompatActivity(), PlayerCallback,
             R.id.fragmentMainScreen -> true
             R.id.fragmentProgress -> true
             R.id.fragment_profile -> true
-            R.id.stories_nav_graph -> true
+//            R.id.stories_nav_graph -> true
             else -> false
         }
         if (isVisible) toggle(true)

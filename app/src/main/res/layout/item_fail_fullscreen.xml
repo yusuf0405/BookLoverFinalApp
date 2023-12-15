@@ -18,7 +18,7 @@
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/error_response" />
 
-    <com.joseph.ui_core.custom.MyTextView
+    <com.joseph.ui.core.custom.MyTextView
         android:id="@+id/message_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

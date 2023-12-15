@@ -1,9 +1,9 @@
 package com.joseph.stories.presentation
 
 import androidx.lifecycle.viewModelScope
-import com.joseph.common_api.DispatchersProvider
-import com.joseph.common_api.Mapper
-import com.joseph.common_api.base.BaseViewModel
+import com.joseph.common.DispatchersProvider
+import com.joseph.common.Mapper
+import com.joseph.common.base.BaseViewModel
 import com.joseph.stories.domain.usecases.FetchAllStoriesUseCase
 import com.joseph.stories.presentation.mappers.StoriesToUserStoriesMapper
 import com.joseph.stories.presentation.models.StoriesModel

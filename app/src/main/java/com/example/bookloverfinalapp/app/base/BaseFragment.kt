@@ -10,7 +10,7 @@ import androidx.annotation.StringRes
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import androidx.viewbinding.ViewBinding
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.utils.dialog.LoadingDialog
 import com.example.bookloverfinalapp.app.utils.extensions.hide
@@ -20,9 +20,9 @@ import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.app.utils.navigation.NavigationCommand
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.getAttrColor
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.getAttrColor
 
 abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     private val binder: (LayoutInflater, ViewGroup?, Boolean) -> V,
@@ -45,7 +45,7 @@ abstract class BaseFragment<V : ViewBinding, VM : BaseViewModel>(
     }
 
     private val bottomNavigationView: BottomNavigationView? by lazy(LazyThreadSafetyMode.NONE) {
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView) ?: null
+        requireActivity().findViewById<BottomNavigationView>(com.example.bookloverfinalapp.R.id.bottomNavigationView) ?: null
     }
 
     protected val loadingDialog: LoadingDialog by lazy(LazyThreadSafetyMode.NONE) {

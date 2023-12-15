@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.utils.communication
 
-import com.joseph.ui_core.custom.ItemUi
+import com.joseph.ui.core.custom.ItemUi
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.SchoolClass

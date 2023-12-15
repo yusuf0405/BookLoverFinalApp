@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.utils.extensions.setTabLayoutColor
 import com.example.bookloverfinalapp.databinding.FragmentAdminMainRootBinding
 import com.google.android.material.tabs.TabLayoutMediator

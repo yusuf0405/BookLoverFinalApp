@@ -29,7 +29,7 @@
             android:orientation="vertical"
             tools:ignore="UnusedAttribute">
 
-            <com.joseph.ui_core.custom.MyImageView
+            <com.joseph.ui.core.custom.MyImageView
                 android:id="@+id/similar_book_poster"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"

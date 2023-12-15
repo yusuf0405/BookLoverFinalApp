@@ -1,12 +1,12 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_progress
 
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.Student
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.router.FragmentProgressRouter
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.mappers.StudentDomainToUserRatingModelMapper
 import com.example.data.cache.models.IdResourceString

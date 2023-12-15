@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.joseph.ui_core.databinding.ItemSelectionSettingBinding
+import com.joseph.ui.core.databinding.ItemSelectionSettingBinding
 
 
 class SettingSelectionAdapter(

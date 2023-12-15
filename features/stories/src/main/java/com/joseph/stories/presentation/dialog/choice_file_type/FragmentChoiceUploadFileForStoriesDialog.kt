@@ -7,14 +7,14 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
-import com.joseph.common_api.base.BaseBindingFragment
-import com.joseph.stories.R
+import com.joseph.common.base.BaseBindingFragment
+import com.joseph.ui.core.R
 import com.joseph.stories.databinding.ChoiceUploadFileForStoriesDialogBinding
 import com.joseph.stories.presentation.dialog.FragmentCreateNewStories
 import com.joseph.stories.presentation.models.MediaType
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.utils_core.extensions.setOnDownEffectClickListener
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.core.extensions.setOnDownEffectClickListener
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

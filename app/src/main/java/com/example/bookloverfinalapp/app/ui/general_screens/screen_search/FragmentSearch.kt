@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
@@ -19,10 +19,10 @@ import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.setupSearchViewParams
 import com.example.bookloverfinalapp.databinding.FragmentSearchBinding
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 

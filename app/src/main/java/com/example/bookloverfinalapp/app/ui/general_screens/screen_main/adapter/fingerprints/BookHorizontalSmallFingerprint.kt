@@ -4,17 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.SavedStatus
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.models.HorizontalBookAdapterModel
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.ItemHorizontalBookBinding
-import com.joseph.utils_core.extensions.toDp
-import com.joseph.utils_core.extensions.showRoundedImage
-
+import com.joseph.ui.core.extensions.toDp
+import com.joseph.core.extensions.showRoundedImage
+import com.example.bookloverfinalapp.R
 
 class BookHorizontalSmallFingerprint :
     ItemFingerprint<ItemHorizontalBookBinding, HorizontalBookAdapterModel> {

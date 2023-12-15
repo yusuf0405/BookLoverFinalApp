@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.AutoCompleteTextView
 import android.widget.SearchView
 import androidx.core.content.res.ResourcesCompat
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 
 fun SearchView.setupSearchViewParams() {
     val searchText = this.findViewById<View>(

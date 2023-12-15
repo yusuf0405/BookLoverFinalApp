@@ -1,10 +1,10 @@
 package com.joseph.profile.domain.usecases
 
-import com.joseph.common_api.IdResourceString
+import com.joseph.common.IdResourceString
 import com.joseph.profile.domain.models.*
 import com.joseph.profile.domain.models.UserFieldValidatorCorrectState
 import com.joseph.profile.domain.models.UserFieldValidatorErrorState
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 import javax.inject.Inject
 
 interface EmailValidatorUseCase {
@@ -28,11 +28,11 @@ class EmailValidatorUseCaseImpl @Inject constructor(
         currentEmail: String
     ): UserFieldValidatorState = when {
         userEmail.isEmpty() -> {
-            val defaultText = IdResourceString(R.string.whats_your_email)
+            val defaultText = IdResourceString(R.string.zero)
             UserFieldValidatorEmptyState(defaultText)
         }
         userEmail == currentEmail -> {
-            UserFieldValidatorDefaultState(IdResourceString(R.string.start_update_your_email))
+            UserFieldValidatorDefaultState(IdResourceString(R.string.zero))
         }
         userEmail.length <= EMAIL_MIN_LENGTH -> {
             val errorText =

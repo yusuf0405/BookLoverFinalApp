@@ -6,8 +6,8 @@ import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.models.CreateQuestionType
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentChoiceQuestionBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -3,16 +3,16 @@ package com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.choos
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.PhotoType
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.PosterItem
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemPosterBinding
 import java.io.File
+import com.example.bookloverfinalapp.R
 
 
 class PosterFingerprint : ItemFingerprint<ItemPosterBinding, PosterItem> {

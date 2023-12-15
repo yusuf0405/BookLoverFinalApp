@@ -61,7 +61,7 @@
         app:layout_constraintTop_toBottomOf="@+id/user_full_name_text"
         tools:text="@tools:sample/full_names" />
 
-    <com.joseph.ui_core.custom.CurvedContainer
+    <com.joseph.ui.core.custom.CurvedContainer
         android:id="@+id/user_info_block"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -77,6 +77,6 @@
             android:layout_height="match_parent"
             android:layout_marginTop="24dp" />
 
-    </com.joseph.ui_core.custom.CurvedContainer>
+    </com.joseph.ui.core.custom.CurvedContainer>
 
 </androidx.constraintlayout.motion.widget.MotionLayout>

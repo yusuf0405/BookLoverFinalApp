@@ -32,7 +32,7 @@
             android:layout_marginEnd="24dp"
             android:orientation="vertical">
 
-            <com.joseph.ui_core.custom.MyTextView
+            <com.joseph.ui.core.custom.MyTextView
                 android:id="@+id/progressProfileLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -60,7 +60,7 @@
                     android:textColor="?attr/text_secondary"
                     android:textSize="11sp" />
 
-                <com.joseph.ui_core.custom.MyTextView
+                <com.joseph.ui.core.custom.MyTextView
                     android:id="@+id/countOfStudentPages"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -86,7 +86,7 @@
                     android:textColor="?attr/text_secondary"
                     android:textSize="11sp" />
 
-                <com.joseph.ui_core.custom.MyTextView
+                <com.joseph.ui.core.custom.MyTextView
                     android:id="@+id/countOfStudentDimonds"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -110,7 +110,7 @@
                     android:textColor="?attr/text_secondary"
                     android:textSize="11sp" />
 
-                <com.joseph.ui_core.custom.MyTextView
+                <com.joseph.ui.core.custom.MyTextView
                     android:id="@+id/countOfStudentCrowns"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

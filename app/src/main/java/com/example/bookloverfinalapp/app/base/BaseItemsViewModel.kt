@@ -6,7 +6,7 @@ import android.os.Parcelable
 import android.widget.SearchView
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -23,7 +23,7 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.mappers.UserDomainToAdapterModelMapper
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.sort_dialog.SortingUsersSelectOptionActionHandler
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.AudioBookItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookGenreItemOnClickListeners
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.listeners.BookItemOnClickListener

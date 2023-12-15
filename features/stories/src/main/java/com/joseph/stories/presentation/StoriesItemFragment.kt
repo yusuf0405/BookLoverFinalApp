@@ -10,16 +10,16 @@ import com.google.android.exoplayer2.PlaybackException
 import com.google.android.exoplayer2.Player
 import com.google.android.exoplayer2.source.ProgressiveMediaSource
 import com.google.android.exoplayer2.upstream.DefaultHttpDataSource
-import com.joseph.common_api.base.BaseBindingFragment
+import com.joseph.common.base.BaseBindingFragment
 import com.joseph.stories.presentation.StoriesFragment.Companion.DEFAULT_STORIES_SHOW_TIME
 import com.joseph.stories.databinding.FragmentStoriesItemBinding
 import com.joseph.stories.presentation.gesture.SwipeDetector
 import com.joseph.stories.presentation.models.MediaType
 import com.joseph.stories.presentation.models.StoriesModel
-import com.joseph.utils_core.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showBlurImage
-import com.joseph.utils_core.extensions.showRoundedImage
-import com.joseph.utils_core.extensions.toDp
+import com.joseph.core.extensions.setOnDownEffectClickListener
+import com.joseph.core.extensions.showBlurImage
+import com.joseph.core.extensions.showRoundedImage
+import com.joseph.ui.core.extensions.toDp
 
 const val EXTRA_STORY_MODEL = "EXTRA_STORY_MODEL"
 

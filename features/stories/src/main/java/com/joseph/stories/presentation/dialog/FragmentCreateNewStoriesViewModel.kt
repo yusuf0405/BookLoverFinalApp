@@ -1,8 +1,8 @@
 package com.joseph.stories.presentation.dialog
 
 import androidx.lifecycle.viewModelScope
-import com.joseph.common_api.DispatchersProvider
-import com.joseph.common_api.base.BaseViewModel
+import com.joseph.common.DispatchersProvider
+import com.joseph.common.base.BaseViewModel
 import com.joseph.stories.domain.repositories.StoriesFeatureRepository
 import com.parse.ParseException
 import com.parse.ParseFile

@@ -3,14 +3,13 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.ItemAddStoriesBinding
 import com.joseph.stories.presentation.models.StoriesAddAdapterItem
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.example.bookloverfinalapp.R
 
 class AddStoriesFingerprint :
     ItemFingerprint<ItemAddStoriesBinding, StoriesAddAdapterItem> {
@@ -56,7 +55,7 @@ class StoriesAddViewHolder(
 
     private fun setOnClickListeners() = with(binding) {
         root.setOnDownEffectClickListener {
-           item.listener.addStoriesOnClickListener()
+            item.listener.addStoriesOnClickListener()
         }
     }
 }

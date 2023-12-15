@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 import com.example.bookloverfinalapp.app.utils.extensions.setPaddingTopHeightStatusBar
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
 
 abstract class BaseBindingFragment<V : ViewBinding>(
     private val binder: (LayoutInflater, ViewGroup?, Boolean) -> V,

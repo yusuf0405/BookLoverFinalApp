@@ -14,7 +14,7 @@ import com.example.domain.Mapper
 import com.example.domain.models.BookDomain
 import com.example.domain.repository.BooksRepository
 import com.example.domain.repository.BooksSaveToFileRepository
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.shockwave.pdfium.PdfDocument
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory

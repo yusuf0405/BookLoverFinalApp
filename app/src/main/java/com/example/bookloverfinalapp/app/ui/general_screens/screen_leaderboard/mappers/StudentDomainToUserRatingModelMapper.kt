@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.mappers
 
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models.RatingTopUsers
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models.UserRatingAdapterModel
 import com.example.domain.models.StudentDomain

@@ -3,13 +3,13 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models.UserRatingAdapterModel
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemStudentRatingBinding
+import com.example.bookloverfinalapp.R
 
 class UserRatingFingerprint : ItemFingerprint<ItemStudentRatingBinding, UserRatingAdapterModel> {
 
@@ -57,7 +57,7 @@ class UserRatingViewHolder(
         val fullName = "${item.lastName} ${item.name}"
         progressProfileLastName.text = fullName
         progressProfileName.text = item.name
-        val progress = "${item.progress} ${context.getString(R.string.points)}"
+        val progress = "${item.progress} ${context.getString(com.joseph.ui.core.R.string.points)}"
         countOfStudentPages.text = progress
         studentRatingPosition.text = item.userRatingPosition.toString()
         context.showImage(item.imageUrl, studentProfileImage)

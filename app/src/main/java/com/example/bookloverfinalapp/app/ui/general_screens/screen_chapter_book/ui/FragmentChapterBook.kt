@@ -2,7 +2,6 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book
 
 import android.os.Bundle
 import android.view.View
-import androidx.core.view.isInvisible
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -11,21 +10,20 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleComm
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInLeftCommonAnimator
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterFingerprint
-import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SearchFingerprint
 import com.example.bookloverfinalapp.databinding.FragmentChapterBookBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.core.assistedViewModel
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.onEach
 import java.io.File
 import javax.inject.Inject
-
 
 @AndroidEntryPoint
 class FragmentChapterBook :

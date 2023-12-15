@@ -3,6 +3,7 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_progress
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
+import com.joseph.ui.core.R as UiCore
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Student
@@ -18,8 +19,8 @@ import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickLi
 import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.databinding.FragmentProgressBinding
 import com.example.domain.models.UserStatisticModel
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import com.statistics.library.line_chart.data.DataEntity
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
@@ -65,7 +66,7 @@ class FragmentProgress :
     }
 
     private fun setupViews() = with(binding()) {
-        includeDefaultToolbar.title.text = getString(com.joseph.ui_core.R.string.my_statistics)
+        includeDefaultToolbar.title.text = getString(com.joseph.ui.core.R.string.my_statistics)
         includeDefaultToolbar.toolbar.navigationIcon = null
         dayOfTheWeekRecyclerView.adapter = statisticsAdapter
         leaderboardRecyclerView.adapter = leaderboardAdapter
@@ -119,7 +120,7 @@ class FragmentProgress :
 
         dayOfTheWeekAdapterModels.add(
             DayOfTheWeekAdapterModel(
-                day = getString(R.string.your_point_this_week),
+                day = getString(UiCore.string.your_point_this_week),
                 progress = progress
             )
         )
@@ -147,25 +148,25 @@ class FragmentProgress :
 
     private fun checkDayAndReturnDayShortTitle(day: Int): String =
         when (day) {
-            Calendar.MONDAY -> getString(R.string.mon)
-            Calendar.TUESDAY -> getString(R.string.tue)
-            Calendar.THURSDAY -> getString(R.string.thu)
-            Calendar.SATURDAY -> getString(R.string.sat)
-            Calendar.SUNDAY -> getString(R.string.sun)
-            Calendar.WEDNESDAY -> getString(R.string.web)
-            Calendar.FRIDAY -> getString(R.string.fri)
-            else -> getString(R.string.exo_track_unknown)
+            Calendar.MONDAY -> getString(UiCore.string.mon)
+            Calendar.TUESDAY -> getString(UiCore.string.tue)
+            Calendar.THURSDAY -> getString(UiCore.string.thu)
+            Calendar.SATURDAY -> getString(UiCore.string.sat)
+            Calendar.SUNDAY -> getString(UiCore.string.sun)
+            Calendar.WEDNESDAY -> getString(UiCore.string.web)
+            Calendar.FRIDAY -> getString(UiCore.string.fri)
+            else -> getString(UiCore.string.progress)
         }
 
     private fun checkDayAndReturnDayLongTitle(day: Int): String =
         when (day) {
-            Calendar.MONDAY -> getString(R.string.monday)
-            Calendar.TUESDAY -> getString(R.string.tuesday)
-            Calendar.THURSDAY -> getString(R.string.thursday)
-            Calendar.SATURDAY -> getString(R.string.satuday)
-            Calendar.SUNDAY -> getString(R.string.sunday)
-            Calendar.WEDNESDAY -> getString(R.string.webnesday)
-            Calendar.FRIDAY -> getString(R.string.friday)
-            else -> getString(R.string.exo_track_unknown)
+            Calendar.MONDAY -> getString(UiCore.string.monday)
+            Calendar.TUESDAY -> getString(UiCore.string.tuesday)
+            Calendar.THURSDAY -> getString(UiCore.string.thursday)
+            Calendar.SATURDAY -> getString(UiCore.string.satuday)
+            Calendar.SUNDAY -> getString(UiCore.string.sunday)
+            Calendar.WEDNESDAY -> getString(UiCore.string.webnesday)
+            Calendar.FRIDAY -> getString(UiCore.string.friday)
+            else -> getString(UiCore.string.progress)
         }
 }

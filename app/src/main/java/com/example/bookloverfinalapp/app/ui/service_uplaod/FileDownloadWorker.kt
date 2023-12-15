@@ -13,7 +13,7 @@ import androidx.core.app.ActivityCompat
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.*
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.domain.RequestState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

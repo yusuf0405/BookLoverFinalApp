@@ -3,15 +3,15 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up
 import android.os.Bundle
 import android.view.View
 import androidx.navigation.fragment.findNavController
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.FragmentSetting
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.admin_sign_up.FragmentAdminSignUpDialog
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentSelectSignUpBinding
-import com.joseph.common_api.base.BaseBindingFragment
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.common.base.BaseBindingFragment
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.core.extensions.showOnlyOne
 
 class FragmentSelectSignUp :
     BaseBindingFragment<FragmentSelectSignUpBinding>(FragmentSelectSignUpBinding::inflate) {

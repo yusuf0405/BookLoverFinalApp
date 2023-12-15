@@ -4,15 +4,15 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserSignUp
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_sign_up.choice_school.FragmentChoiceSchool
 import com.example.bookloverfinalapp.app.utils.extensions.*
-import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
 import com.example.bookloverfinalapp.databinding.FragmentSignUpBinding
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

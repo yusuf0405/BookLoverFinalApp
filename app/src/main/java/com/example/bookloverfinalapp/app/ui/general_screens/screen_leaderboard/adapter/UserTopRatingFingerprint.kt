@@ -5,12 +5,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models.RatingTopUsers
 import com.example.bookloverfinalapp.databinding.ItemTopRatingUsersBinding
+import com.example.bookloverfinalapp.R
 
 class UserTopRatingFingerprint : ItemFingerprint<ItemTopRatingUsersBinding, RatingTopUsers> {
 

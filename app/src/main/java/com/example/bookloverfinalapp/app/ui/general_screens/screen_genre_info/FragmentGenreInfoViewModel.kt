@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info
 
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_genre_info.mappers.GenreItemsToAdapterModelMapper

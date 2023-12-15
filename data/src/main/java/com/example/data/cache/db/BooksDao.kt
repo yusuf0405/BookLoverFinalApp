@@ -46,6 +46,4 @@ interface BooksDao {
 
     @Query("DELETE FROM books")
     fun clearTable()
-
-
 }

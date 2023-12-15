@@ -1,6 +1,6 @@
 package com.joseph.select_favorite_book.presentation.mappers
 
-import com.joseph.common_api.Mapper
+import com.joseph.common.Mapper
 import com.joseph.select_favorite_book.domain.models.SelectFavoriteBook
 import com.joseph.select_favorite_book.presentation.adapter.models.SelectFavoriteBookItem
 import javax.inject.Inject

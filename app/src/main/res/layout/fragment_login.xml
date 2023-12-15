@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/login_background"
+    android:fitsSystemWindows="true"
     tools:context=".app.ui.general_screens.screen_login.FragmentLogin">
+
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="376dp"
         android:layout_gravity="bottom"
         android:layout_marginBottom="-2dp"
+        android:elevation="2dp"
         app:cardBackgroundColor="?attr/card_background"
         app:shapeAppearanceOverlay="@style/TopCornerRadius">
 
@@ -35,12 +38,15 @@
                 android:id="@+id/email_box"
                 style="@style/EditTextStyleInputLayoutLoginStyle"
                 android:layout_marginStart="0dp"
+
                 android:layout_marginEnd="0dp"
+                android:drawablePadding="10dp"
                 android:hint="@string/your_email">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email"
                     style="@style/EditTextStyleInputLoginStyle"
+                    android:drawablePadding="12dp"
                     android:inputType="textEmailAddress" />
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -48,14 +54,15 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/password_box"
                 style="@style/EditTextStyleInputLayoutLoginStyle"
-                android:hint="@string/your_password"
                 android:layout_marginStart="0dp"
                 android:layout_marginEnd="0dp"
+                android:hint="@string/your_password"
                 app:endIconMode="password_toggle">
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password"
                     style="@style/EditTextStyleInputLoginStyle"
+                    android:drawablePadding="12dp"
                     android:inputType="textPassword" />
             </com.google.android.material.textfield.TextInputLayout>
 

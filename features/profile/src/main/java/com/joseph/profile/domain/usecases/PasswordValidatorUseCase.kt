@@ -1,10 +1,10 @@
 package com.joseph.profile.domain.usecases
 
-import com.joseph.common_api.IdResourceString
+import com.joseph.common.IdResourceString
 import com.joseph.profile.domain.models.*
 import com.joseph.profile.domain.models.UserFieldValidatorCorrectState
 import com.joseph.profile.domain.models.UserFieldValidatorErrorState
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 import javax.inject.Inject
 
 interface PasswordValidatorUseCase {
@@ -25,10 +25,10 @@ class PasswordValidatorUseCaseImpl @Inject constructor(
         currentPassword: String
     ): UserFieldValidatorState = when {
         userPassword == currentPassword -> {
-            UserFieldValidatorDefaultState(IdResourceString(R.string.start_changing_your_password))
+            UserFieldValidatorDefaultState(IdResourceString(R.string.zero))
         }
         userPassword.isEmpty() -> {
-            val defaultText = IdResourceString(R.string.set_a_new_password)
+            val defaultText = IdResourceString(R.string.zero)
             UserFieldValidatorEmptyState(defaultText)
         }
         userPassword.length <= PASSWORD_MIN_LENGTH -> {

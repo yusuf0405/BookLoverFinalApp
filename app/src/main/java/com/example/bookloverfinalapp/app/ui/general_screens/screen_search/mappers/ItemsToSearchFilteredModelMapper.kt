@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_search.mappers
 
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.*
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookItemOnClickListeners
@@ -15,7 +15,7 @@ import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.data.cache.models.IdResourceString
 import com.example.domain.Mapper
 import com.example.domain.models.*
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import javax.inject.Inject
 
 interface ItemsToSearchFilteredModelMapper {

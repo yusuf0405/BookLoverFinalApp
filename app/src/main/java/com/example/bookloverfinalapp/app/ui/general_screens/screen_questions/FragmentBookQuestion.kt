@@ -5,7 +5,7 @@ import android.view.View
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookQuestion
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -14,7 +14,7 @@ import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickLi
 import com.example.bookloverfinalapp.app.utils.extensions.show
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.bookloverfinalapp.databinding.FragmentBookQuestionBinding
-import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

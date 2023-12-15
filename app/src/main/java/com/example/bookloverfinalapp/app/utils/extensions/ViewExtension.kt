@@ -7,7 +7,7 @@ import androidx.core.graphics.Insets
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.updatePadding
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.thekhaeng.pushdownanim.PushDownAnim
 
 fun View?.show() {

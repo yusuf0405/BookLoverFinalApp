@@ -3,12 +3,12 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_create_quest
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentInputAnswerDialogBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
 
 
 class FragmentInputAnswerDialog :

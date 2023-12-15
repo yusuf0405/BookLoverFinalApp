@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.choose_poster
 
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 
 
 data class PosterItem(

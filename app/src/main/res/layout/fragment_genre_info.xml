@@ -27,7 +27,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <com.joseph.ui_core.custom.CurvedContainer
+    <com.joseph.ui.core.custom.CurvedContainer
         android:id="@+id/curvedContainer"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -45,7 +45,7 @@
             android:orientation="vertical">
 
 
-            <com.joseph.ui_core.custom.FadingTextView
+            <com.joseph.ui.core.custom.FadingTextView
                 android:id="@+id/genre_description"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -63,8 +63,5 @@
                 tools:listitem="@layout/item_book" />
         </LinearLayout>
 
-
-    </com.joseph.ui_core.custom.CurvedContainer>
-
-
+    </com.joseph.ui.core.custom.CurvedContainer>
 </androidx.constraintlayout.motion.widget.MotionLayout>

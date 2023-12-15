@@ -1,7 +1,7 @@
 package com.joseph.profile.domain.models
 
-import com.joseph.common_api.IdResourceString
-import com.joseph.ui_core.R
+import com.joseph.common.IdResourceString
+import com.joseph.ui.core.R
 
 interface EditProfileValidatorState
 
