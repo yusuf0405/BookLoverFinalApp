@@ -2,7 +2,7 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_edit_book
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.UserImage
 import com.example.bookloverfinalapp.app.utils.dispatchers.launchSafe

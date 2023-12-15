@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_leaderboard.models
 
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 
 
 data class UserRatingAdapterModel(

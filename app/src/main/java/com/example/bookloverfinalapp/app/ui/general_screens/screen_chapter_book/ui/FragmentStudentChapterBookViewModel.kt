@@ -7,7 +7,7 @@ import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterAdapterModel
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.adapter.ChapterItemOnClickListener
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_chapter_book.router.FragmentChapterBookRouter
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SearchAdapterModel
 import com.shockwave.pdfium.PdfDocument.Bookmark
 import dagger.assisted.Assisted

@@ -18,7 +18,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:shapeAppearanceOverlay="@style/BottomCornerRadius"
-        app:tint="@color/black_50_alpha" />
+        app:tint="@color/black_50_alpha" >
+
+        <TextView
+            android:id="@+id/textView7"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="blue" />
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/poster_image_view_container"
@@ -77,7 +84,7 @@
             tools:text="@tools:sample/lorem" />
     </LinearLayout>
 
-    <com.joseph.ui_core.custom.FadingEdgeLayout
+    <com.joseph.ui.core.custom.FadingEdgeLayout
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:fade_edge="top"
@@ -104,7 +111,7 @@
 
         </androidx.core.widget.NestedScrollView>
 
-    </com.joseph.ui_core.custom.FadingEdgeLayout>
+    </com.joseph.ui.core.custom.FadingEdgeLayout>
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView7"

@@ -3,17 +3,16 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
-import com.joseph.ui_core.adapter.ItemFingerprint
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemUserBinding
-import com.joseph.utils_core.extensions.toDp
-
+import com.joseph.ui.core.extensions.toDp
+import com.example.bookloverfinalapp.R
 
 class ClassStudentsFingerprint : ItemFingerprint<ItemUserBinding, UserAdapterModel> {
 

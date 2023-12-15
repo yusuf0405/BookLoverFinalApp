@@ -3,7 +3,7 @@ package com.example.bookloverfinalapp.app.ui.admin_screens.screen_add_question
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.AddBookQuestion
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener

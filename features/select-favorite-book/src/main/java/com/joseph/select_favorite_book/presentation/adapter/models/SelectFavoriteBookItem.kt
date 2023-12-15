@@ -1,6 +1,6 @@
 package com.joseph.select_favorite_book.presentation.adapter.models
 
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 
 data class SelectFavoriteBookItem(
     val id: String,

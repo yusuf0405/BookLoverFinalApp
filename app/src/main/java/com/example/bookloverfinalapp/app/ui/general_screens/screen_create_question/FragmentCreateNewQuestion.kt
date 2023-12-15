@@ -17,9 +17,9 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_questi
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_create_question.models.CreateQuestionType
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentCreateNewQuestionBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.utils_core.extensions.toDp
-import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.toDp
+import com.joseph.core.extensions.showRoundedImage
 import dagger.hilt.android.AndroidEntryPoint
 import java.io.File
 

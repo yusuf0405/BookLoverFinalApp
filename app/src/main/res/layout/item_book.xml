@@ -23,7 +23,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="0">
 
-            <com.joseph.ui_core.custom.MyImageView
+            <com.joseph.ui.core.custom.MyImageView
                 android:id="@+id/rounded_book_image"
                 android:layout_width="78dp"
                 android:layout_height="115dp"
@@ -45,7 +45,7 @@
             android:layout_weight="2"
             android:orientation="vertical">
 
-            <com.joseph.ui_core.custom.MyTextView
+            <com.joseph.ui.core.custom.MyTextView
                 android:id="@+id/bookTitle"
                 style="@style/TextViewHeadingH4.SingleLine"
                 android:layout_width="wrap_content"
@@ -73,7 +73,7 @@
                 app:layout_constraintTop_toTopOf="@+id/bookTitle"
                 app:srcCompat="@drawable/book_downloaded_icon" />
 
-            <com.joseph.ui_core.custom.MyTextView
+            <com.joseph.ui.core.custom.MyTextView
                 android:id="@+id/bookAuthor"
                 style="@style/TextViewBodyH3.SingleLine"
                 android:layout_width="0dp"
@@ -101,7 +101,7 @@
                     android:textColor="?attr/text_secondary"
                     android:textSize="11sp" />
 
-                <com.joseph.ui_core.custom.MyTextView
+                <com.joseph.ui.core.custom.MyTextView
                     android:id="@+id/publishedYear"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -120,7 +120,7 @@
                     android:textColor="?attr/text_secondary"
                     android:textSize="11sp" />
 
-                <com.joseph.ui_core.custom.MyTextView
+                <com.joseph.ui.core.custom.MyTextView
                     android:id="@+id/bookPages"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.joseph.ui_core.custom.MyImageView
+        <com.joseph.ui.core.custom.MyImageView
             android:id="@+id/more_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

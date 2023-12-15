@@ -3,12 +3,13 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_progress
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R as UiCore
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_progress.adapter.DayOfTheWeekAdapterModel
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.databinding.ItemDayOfTheWeekBinding
+import com.example.bookloverfinalapp.R
 
 
 class DayOfTheWeekFingerprint : ItemFingerprint<ItemDayOfTheWeekBinding, DayOfTheWeekAdapterModel> {
@@ -50,7 +51,7 @@ class DayOfTheWeekHolder(
     override fun onBind(item: DayOfTheWeekAdapterModel) {
         super.onBind(item)
         with(binding) {
-            if (item.day == dayText.context.getString(R.string.your_point_this_week)) {
+            if (item.day == dayText.context.getString(UiCore.string.your_point_this_week)) {
                 dayText.textSize = 18F
                 progressText.textSize = 18F
             }

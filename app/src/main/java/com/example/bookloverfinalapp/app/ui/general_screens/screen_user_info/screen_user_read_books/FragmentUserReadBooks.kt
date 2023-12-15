@@ -5,13 +5,13 @@ import android.view.View
 import androidx.core.os.bundleOf
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.adapter.SavedBookFingerprint
-import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
 import com.example.bookloverfinalapp.databinding.FragmentUserReadBooksBinding
 import com.example.data.cache.models.IdResourceString
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

@@ -15,11 +15,11 @@
         android:orientation="vertical"
         android:paddingHorizontal="8dp">
 
-        <org.apmem.tools.layouts.FlowLayout
-            android:id="@+id/genre_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp" />
+<!--        <org.apmem.tools.layouts.FlowLayout-->
+<!--            android:id="@+id/genre_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp" />-->
 
         <TextView
             android:id="@+id/title"

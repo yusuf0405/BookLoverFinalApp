@@ -6,20 +6,19 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SmallHeaderFingerprint
-import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentChoiceImageBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.setupLayoutManager
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.setupLayoutManager
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.filterNotNull
-
+import com.example.bookloverfinalapp.R
 
 @AndroidEntryPoint
 class FragmentChoiceImage : Fragment() {

@@ -5,16 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AddNewBooksItem
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.SelectFavoriteBooksItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.example.bookloverfinalapp.databinding.ItemAddStoriesBinding
 import com.example.bookloverfinalapp.databinding.ItemMainAddBookBinding
-import com.example.bookloverfinalapp.databinding.ItemMainSelectFavoriteBookBinding
-import com.joseph.stories.presentation.models.StoriesAddAdapterItem
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 
 class AddNewBooksFingerprint :
     ItemFingerprint<ItemMainAddBookBinding, AddNewBooksItem> {

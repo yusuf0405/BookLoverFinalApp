@@ -11,12 +11,12 @@ import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.utils.cons.KEY_APP_MODE
 import com.example.bookloverfinalapp.app.utils.cons.KEY_DEFAULT_LANGUAGE
-import com.joseph.utils_core.extensions.dataStore
+import com.joseph.core.extensions.dataStore
 import com.example.bookloverfinalapp.databinding.FragmentSettingSelectionBinding
-import com.joseph.ui_core.extensions.launchOnViewLifecycle
+import com.joseph.ui.core.extensions.launchOnViewLifecycle
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.collectLatest

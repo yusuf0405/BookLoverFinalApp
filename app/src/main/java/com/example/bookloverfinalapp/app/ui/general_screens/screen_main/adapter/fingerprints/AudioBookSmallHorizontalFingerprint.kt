@@ -4,17 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AudioBookAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.hide
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemSquareAudioBookBinding
-import com.joseph.utils_core.extensions.toDp
-
+import com.joseph.ui.core.extensions.toDp
+import com.example.bookloverfinalapp.R
 
 class AudioBookSmallHorizontalFingerprint :
     ItemFingerprint<ItemSquareAudioBookBinding, AudioBookAdapterModel> {

@@ -5,8 +5,8 @@ import android.view.View
 import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.FragmentConfirmDialogBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
 
 
 class FragmentConfirmDialog :

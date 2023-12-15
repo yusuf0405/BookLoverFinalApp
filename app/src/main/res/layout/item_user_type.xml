@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:padding="8dp">
 
-    <com.joseph.ui_core.custom.MyTextView
+    <com.joseph.ui.core.custom.MyTextView
         android:id="@+id/user_type_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

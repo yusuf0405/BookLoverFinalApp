@@ -3,11 +3,11 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_forgot_passw
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.utils.extensions.validateEmail
 import com.example.bookloverfinalapp.databinding.FragmentForgotPasswordBinding
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

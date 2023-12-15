@@ -41,8 +41,6 @@ class FragmentChooseFromCamera :
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("Joseph","onViewCreated")
-        // Request camera permissions
         if (allPermissionsGranted()) {
             startCamera()
         } else {

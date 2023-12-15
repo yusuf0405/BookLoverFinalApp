@@ -15,7 +15,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.joseph.ui_core.custom.MyImageView
+        <com.joseph.ui.core.custom.MyImageView
             android:id="@+id/rounded_book_image"
             android:layout_width="78dp"
             android:layout_height="0dp"
@@ -60,7 +60,7 @@
             tools:text="Лев Толстой" />
 
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/countOfDimonds"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -94,7 +94,7 @@
             app:layout_constraintVertical_bias="0.285"
             app:srcCompat="@drawable/ic_open_book" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/countOfPages"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -136,7 +136,7 @@
             app:layout_constraintStart_toStartOf="@+id/countOfDimonds"
             app:layout_constraintTop_toBottomOf="@+id/bookDiamond" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/publishedYear"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -159,7 +159,7 @@
             app:layout_constraintStart_toEndOf="@+id/publishedYear"
             app:layout_constraintTop_toTopOf="@+id/publishedYear" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/bookPages"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -176,7 +176,7 @@
             app:layout_constraintTop_toTopOf="@+id/bookPagesText"
             tools:text="400" />
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/bookCratedAtText"
             android:layout_width="0dp"
             android:layout_height="wrap_content"

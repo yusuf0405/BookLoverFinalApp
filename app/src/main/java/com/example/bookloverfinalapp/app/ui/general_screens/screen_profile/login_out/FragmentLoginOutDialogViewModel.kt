@@ -1,14 +1,13 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.login_out
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.example.bookloverfinalapp.app.App
 import com.example.bookloverfinalapp.app.models.User
 import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
-import com.example.domain.use_cases.ClearAllAppCacheUseCase
 import com.example.domain.models.UserDomain
 import com.example.domain.repository.UserCacheRepository
+import com.example.domain.use_cases.ClearAllAppCacheUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject

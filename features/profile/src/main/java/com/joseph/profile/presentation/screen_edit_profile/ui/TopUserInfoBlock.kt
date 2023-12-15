@@ -1,15 +1,16 @@
 package com.joseph.profile.presentation.screen_edit_profile.ui
 
-import androidx.compose.foundation.background
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -20,20 +21,22 @@ import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.res.colorResource
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
-import com.joseph.profile.R
+import com.joseph.ui.core.R
 import com.joseph.profile.presentation.screen_edit_profile.EditProfileUiSate
-
 
 @Composable
 internal fun UserAvatarEndEmail(
@@ -48,17 +51,16 @@ internal fun UserAvatarEndEmail(
 ) {
     Row(
         modifier = modifier
-            .padding(top = 16.dp)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(top = 16.dp),
         horizontalArrangement = Arrangement.Center,
     ) {
 
-        Spacer(modifier = modifier.height(1.dp))
+        Spacer(modifier = modifier.weight(1f))
         Column(
             modifier = modifier
-                .weight(1f)
                 .padding(start = 40.dp),
-            horizontalAlignment = Alignment.CenterHorizontally
+            horizontalAlignment = Alignment.CenterHorizontally,
         ) {
             UserAvatar(
                 borderColor = borderColor,
@@ -86,20 +88,17 @@ internal fun UserAvatarEndEmail(
             }
         }
 
-        val alpha = if (refreshButtonIsVisible) 1f else 0f
-
+        val alpha = if (refreshButtonIsVisible && !isFullScreenMode) 1f else 0f
+        Spacer(modifier = modifier.weight(1f))
         IconButton(
             modifier = modifier
-                .size(40.dp)
-                .alpha(alpha)
-                .padding(start = 20.dp)
-                .fillMaxSize(),
+                .alpha(alpha),
             onClick = refreshButtonOnClick,
         ) {
             Icon(
                 modifier = modifier
-                    .size(32.dp)
-                    .fillMaxSize(0.5f),
+                    .size(44.dp)
+                    .padding(end = 20.dp),
                 imageVector = Icons.Outlined.Info,
                 tint = borderColor,
                 contentDescription = null,
@@ -119,25 +118,49 @@ fun UserAvatar(
     avatarUrl: String,
     showAvatarToFulScreenListener: () -> Unit,
 ) {
-    val newModifier = if (isFullScreenMode) {
-        modifier
-            .size(animatedSizeDp)
-            .background(Color.Green)
-    } else modifier
-        .clip(CircleShape)
-        .border(
-            3.dp,
-            color = borderColor,
-            CircleShape
+    Box(
+        modifier = modifier,
+    ) {
+        AsyncImage(
+            model = avatarUrl,
+            contentDescription = null,
+            contentScale = ContentScale.Crop,
+            modifier = modifier
+                .border(
+                    3.dp,
+                    color = borderColor,
+                    CircleShape
+                )
+                .size(animatedSizeDp)
+                .clip(CircleShape)
+                .size(animatedSizeDp)
+                .clickable {
+                    showAvatarToFulScreenListener()
+                }
         )
-    AsyncImage(
-        model = avatarUrl,
-        contentDescription = null,
-        contentScale = ContentScale.Crop,
-        modifier = newModifier
-            .size(animatedSizeDp)
-            .clickable {
-                showAvatarToFulScreenListener()
+
+        AnimatedVisibility(
+            modifier = modifier
+                .align(Alignment.BottomEnd)
+                .padding(top = 32.dp),
+            visible = isFullScreenMode,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            IconButton(
+                onClick = {
+
+                }) {
+                Icon(
+                    modifier = modifier
+                        .size(40.dp),
+                    painter = painterResource(id = R.drawable.edit_icon),
+                    tint = colorResource(id = R.color.gray_yandex),
+                    contentDescription = null,
+                )
+
             }
-    )
+        }
+    }
+
 }

@@ -1,12 +1,10 @@
 package com.example.bookloverfinalapp.app.base.sideeffects.dialogs
 
-import android.app.Activity
 import android.app.AlertDialog
 import android.content.DialogInterface
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain
 import com.example.data.cache.models.IdResourceString
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.joseph.ui.core.R
 import javax.inject.Inject
 
 class DialogsManagerImpl @Inject constructor(
@@ -27,6 +25,7 @@ class DialogsManagerImpl @Inject constructor(
                 DialogInterface.BUTTON_POSITIVE -> {
                     setOnPositiveButtonClickListener()
                 }
+
                 DialogInterface.BUTTON_NEGATIVE -> {
                     setOnNegativeButtonClickListener()
                 }

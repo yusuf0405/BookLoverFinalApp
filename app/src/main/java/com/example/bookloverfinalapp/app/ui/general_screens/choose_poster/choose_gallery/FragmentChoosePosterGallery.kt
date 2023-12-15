@@ -9,11 +9,11 @@ import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.PhotoType
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.PosterItem
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.choose_online.fingerprint.PosterFingerprint
-import com.joseph.ui_core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.utils.extensions.swapElements
 import com.example.bookloverfinalapp.databinding.FragmentChoosePosterGalleryBinding
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.extensions.launchOnViewLifecycle
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.extensions.launchOnViewLifecycle
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.withContext

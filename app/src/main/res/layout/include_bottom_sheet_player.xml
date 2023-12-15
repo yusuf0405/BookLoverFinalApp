@@ -6,6 +6,6 @@
     android:layout_height="wrap_content"
     app:behavior_hideable="false"
     app:behavior_peekHeight="61dp"
-    app:layout_behavior="com.joseph.ui_core.custom.ScrollBottomSheetBehavior">
+    app:layout_behavior="com.joseph.ui.core.custom.ScrollBottomSheetBehavior">
 
 </FrameLayout>

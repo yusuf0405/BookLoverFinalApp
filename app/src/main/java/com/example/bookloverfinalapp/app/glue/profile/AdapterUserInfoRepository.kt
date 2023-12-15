@@ -1,11 +1,9 @@
 package com.example.bookloverfinalapp.app.glue.profile
 
 import com.example.domain.models.UserDomain
-import com.example.domain.models.UserDomainImage
-import com.example.domain.models.UserUpdateDomain
 import com.example.domain.repository.UserCacheRepository
 import com.example.domain.repository.UserRepository
-import com.joseph.common_api.Mapper
+import com.joseph.common.Mapper
 import com.joseph.profile.domain.models.UserFeatureModel
 import com.joseph.profile.domain.models.UserUpdateModel
 import com.joseph.profile.domain.repositories.UserInfoRepository

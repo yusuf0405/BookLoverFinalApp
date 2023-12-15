@@ -4,7 +4,7 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.SchoolClass
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain

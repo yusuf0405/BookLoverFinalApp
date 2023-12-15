@@ -6,27 +6,35 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import androidx.lifecycle.lifecycleScope
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.FragmentSetting
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.SettingSelectionFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_reader.dialog_option.FragmentReaderOption
-import com.example.bookloverfinalapp.app.utils.extensions.*
-import com.example.bookloverfinalapp.app.utils.navigation.NavigationManager
+import com.example.bookloverfinalapp.app.utils.extensions.dismissPlayerOverlay
+import com.example.bookloverfinalapp.app.utils.extensions.hide
+import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
+import com.example.bookloverfinalapp.app.utils.extensions.showPlayerOverlay
 import com.example.bookloverfinalapp.databinding.FragmentReaderBinding
 import com.github.barteksc.pdfviewer.listener.OnErrorListener
 import com.github.barteksc.pdfviewer.listener.OnLoadCompleteListener
 import com.github.barteksc.pdfviewer.listener.OnPageChangeListener
 import com.github.barteksc.pdfviewer.util.FitPolicy
 import com.google.android.material.bottomnavigation.BottomNavigationView
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.dataStore
+import com.itextpdf.text.pdf.PdfReader
+import com.itextpdf.text.pdf.parser.PdfTextExtractor
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.dataStore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.File
-
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class FragmentReader :
@@ -77,7 +85,13 @@ class FragmentReader :
         pdfview.useBestQuality(true)
         includeDefaultToolbar.title.text = chapterTitle
         dismissPlayerOverlay()
-        requireActivity().findViewById<BottomNavigationView>(R.id.bottomNavigationView).hide()
+        requireActivity().findViewById<BottomNavigationView>(MainRes.id.bottomNavigationView).hide()
+        lifecycleScope.launch {
+            val text = extractTextUsingItextg()
+            withContext(Dispatchers.Main) {
+                textpdfview.text = text
+            }
+        }
     }
 
     private fun observeResource() = with(viewModel) {
@@ -102,6 +116,8 @@ class FragmentReader :
             pages.add(page)
 
         }
+
+
         binding().pdfview.fromFile(File(path))
             .pages(*pdfPages.toIntArray())
             .swipeHorizontal(orientation == 0)
@@ -118,6 +134,25 @@ class FragmentReader :
             .onRender { binding().pdfview.fitToWidth(binding().pdfview.currentPage) }
             .load()
     }
+
+    private suspend fun extractTextUsingItextg(): String = withContext(Dispatchers.Default) {
+        try {
+            var parsedText = ""
+            val reader = PdfReader(path)
+            val n: Int = reader.numberOfPages
+            for (i in 0 until n) {
+                parsedText = """$parsedText${
+                    PdfTextExtractor.getTextFromPage(reader, i + 1).trim { it <= ' ' }
+                }
+            """.trimIndent()
+            }
+            reader.close()
+            parsedText
+        } catch (e: Exception) {
+            "Empty"
+        }
+    }
+
 
     private fun setOnClickListeners() = with(binding()) {
         pageEnterField.setOnDownEffectClickListener {

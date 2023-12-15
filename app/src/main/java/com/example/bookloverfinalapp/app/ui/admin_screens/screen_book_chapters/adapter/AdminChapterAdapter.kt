@@ -9,7 +9,6 @@ import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickLi
 import com.example.bookloverfinalapp.databinding.ItemChapterBinding
 import com.shockwave.pdfium.PdfDocument
 
-
 class AdminChapterAdapter(private val actionListener: AdminChapterItemOnClickListener) :
     RecyclerView.Adapter<AdminChapterAdapter.ViewHolder>() {
 

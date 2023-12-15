@@ -1,6 +1,6 @@
 package com.joseph.stories.presentation.models
 
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 
 
 data class StoriesAddAdapterItem(

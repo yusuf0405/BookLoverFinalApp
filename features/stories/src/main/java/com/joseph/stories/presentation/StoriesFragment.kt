@@ -7,10 +7,10 @@ import androidx.navigation.fragment.findNavController
 import com.joseph.stories.presentation.adapter.MainStoriesViewPagerAdapter
 import com.joseph.stories.presentation.models.StoriesModel
 import com.joseph.stories.presentation.models.UserStoriesModel
-import com.joseph.common_api.base.BaseBindingFragment
+import com.joseph.common.base.BaseBindingFragment
 import com.joseph.stories.databinding.FragmentStoriesBinding
-import com.joseph.ui_core.custom.progress_bar.SegmentedProgressBarListener
-import com.joseph.ui_core.extensions.launchOnViewLifecycle
+import com.joseph.ui.core.custom.progress_bar.SegmentedProgressBarListener
+import com.joseph.ui.core.extensions.launchOnViewLifecycle
 import kotlinx.coroutines.channels.BufferOverflow
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow

@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.admin_screens.screen_upload_book
 
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.AddNewBook
 import com.example.bookloverfinalapp.app.models.BookPdf

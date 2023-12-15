@@ -8,10 +8,10 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.setting.SettingManager.setAppSetting
 import com.example.bookloverfinalapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.example.bookloverfinalapp.R
 import dagger.hilt.android.AndroidEntryPoint
 
 

@@ -6,12 +6,12 @@ import android.text.util.Linkify
 import android.view.View
 import androidx.core.text.buildSpannedString
 import androidx.core.view.isVisible
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.utils.extensions.appendClickable
-import com.joseph.utils_core.extensions.getAttrColor
+import com.joseph.core.extensions.getAttrColor
 import com.example.bookloverfinalapp.app.utils.extensions.getTextUpToNLine
 import com.example.bookloverfinalapp.app.utils.extensions.removeLastNChars
-import com.joseph.ui_core.custom.FadingTextView
+import com.joseph.ui.core.custom.FadingTextView
 import kotlinx.parcelize.Parcelize
 import java.util.*
 

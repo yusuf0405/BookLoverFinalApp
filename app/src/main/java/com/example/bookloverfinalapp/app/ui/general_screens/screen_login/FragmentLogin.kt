@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserType
 import com.example.bookloverfinalapp.app.ui.admin_screens.screen_main.ActivityAdminMain
@@ -13,9 +13,9 @@ import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.Activi
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.pref.SharedPreferences
 import com.example.bookloverfinalapp.databinding.FragmentLoginBinding
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
 

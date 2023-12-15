@@ -6,10 +6,10 @@ import androidx.recyclerview.widget.DiffUtil
 import com.joseph.select_favorite_book.R
 import com.joseph.select_favorite_book.databinding.ItemSelectFavoriteBookBinding
 import com.joseph.select_favorite_book.presentation.adapter.models.SelectFavoriteBookItem
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.joseph.core.extensions.showImage
 
 
 internal class SelectFavoriteBookFingerprint :

@@ -19,7 +19,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.joseph.profile.domain.models.UserFeatureModel
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 
 @Composable
 internal fun ProfileInfo(

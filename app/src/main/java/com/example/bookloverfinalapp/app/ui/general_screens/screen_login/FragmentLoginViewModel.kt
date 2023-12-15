@@ -9,10 +9,13 @@ import com.example.domain.DispatchersProvider
 import com.example.domain.Mapper
 import com.example.domain.models.UserDomain
 import com.example.domain.repository.LoginRepository
+import com.example.domain.repository.UserCacheRepository
+import com.joseph.profile.domain.repositories.UserInfoRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
@@ -20,6 +23,7 @@ class FragmentLoginViewModel @Inject constructor(
     private var repository: LoginRepository,
     private val dispatchersProvider: DispatchersProvider,
     private val resourceProvider: ResourceProvider,
+    private val userInfoRepository: UserCacheRepository,
     private val mapper: Mapper<UserDomain, User>,
 ) : BaseViewModel() {
 
@@ -36,6 +40,9 @@ class FragmentLoginViewModel @Inject constructor(
             safeAction = { repository.signIn(email, password) },
             onStart = { showLoadingDialog() },
             onSuccess = {
+                viewModelScope.launch {
+                    userInfoRepository.saveCurrentUserFromCache(it)
+                }
                 _successSignInFlow.tryEmit(mapper.map(it))
                 dismissLoadingDialog()
             },

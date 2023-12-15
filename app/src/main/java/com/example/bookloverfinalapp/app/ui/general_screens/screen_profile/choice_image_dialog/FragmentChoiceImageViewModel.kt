@@ -4,7 +4,7 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.HeaderItem
 import com.example.bookloverfinalapp.app.utils.extensions.createSharedFlowAsLiveData
 import com.example.data.cache.models.IdResourceString

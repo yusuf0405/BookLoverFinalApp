@@ -1,20 +1,37 @@
 package com.joseph.profile.presentation.screen_edit_profile.ui
 
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.outlined.*
-import androidx.compose.runtime.*
-import androidx.compose.ui.graphics.Color
-import com.joseph.profile.domain.models.UserFeatureModel
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import com.joseph.profile.domain.models.UserFieldValidatorState
 import com.joseph.profile.presentation.screen_edit_profile.EditProfileUiSate
+import com.joseph.ui.core.MyApplicationTheme
+import com.joseph.ui.core.R
+
+
+@Preview
+@Composable
+fun EditProfileScreenPreview() {
+    MyApplicationTheme() {
+        AllTextFiledBlock(
+            editProfileUiSate = EditProfileUiSate()
+        )
+
+    }
+}
 
 @Composable
 internal fun AllTextFiledBlock(
     editProfileUiSate: EditProfileUiSate,
-    onEmailValueChange: (String) -> Unit,
-    onNameValueChange: (String) -> Unit,
-    onLastNameValueChange: (String) -> Unit,
-    onPasswordValueChange: (String) -> Unit,
+    onEmailValueChange: (String) -> Unit = {},
+    onNameValueChange: (String) -> Unit = {},
+    onLastNameValueChange: (String) -> Unit = {},
+    onPasswordValueChange: (String) -> Unit = {},
 ) {
     val userFeatureModel = editProfileUiSate.userFeatureModel
 
@@ -40,19 +57,26 @@ internal fun AllTextFiledBlock(
     passwordText = editProfileUiSate.password
     emailText = editProfileUiSate.email
 
+
     nameValidatorState?.let { state ->
         TextFieldEditProfile(
             text = nameText,
-            imageVector = Icons.Outlined.Person,
+            userFieldValidatorState = state,
             onValueChange = onNameValueChange,
-            userFieldValidatorState = state
+            painter = painterResource(id = R.drawable.ic_account),
         )
+//        TextFieldEditProfile(
+//            text = nameText,
+//            imageVector = painterResource(id = R.drawable.ic_account),
+//            onValueChange = onNameValueChange,
+//            userFieldValidatorState = state
+//        )
     }
 
     lastNameValidatorState?.let { state ->
         TextFieldEditProfile(
             text = lastNameText,
-            imageVector = Icons.Outlined.Person,
+            painter = painterResource(id = R.drawable.ic_account),
             onValueChange = onLastNameValueChange,
             userFieldValidatorState = state
         )
@@ -61,7 +85,7 @@ internal fun AllTextFiledBlock(
     emailValidatorState?.let { state ->
         TextFieldEditProfile(
             text = emailText,
-            imageVector = Icons.Outlined.Email,
+            painter = painterResource(id = R.drawable.ic_mail),
             onValueChange = onEmailValueChange,
             userFieldValidatorState = state
         )
@@ -70,10 +94,16 @@ internal fun AllTextFiledBlock(
     passwordValidatorState?.let { state ->
         TextFieldEditProfile(
             text = passwordText,
-            imageVector = Icons.Outlined.Lock,
+            painter = painterResource(id = R.drawable.ic_lock),
             onValueChange = onPasswordValueChange,
             userFieldValidatorState = state,
             isPassword = true
         )
     }
+
+    var phoneNumber by rememberSaveable { mutableStateOf("") }
+    PhoneField(
+        phoneNumber,
+        maskNumber = '0',
+        onPhoneChanged = { phoneNumber = it })
 }

@@ -5,9 +5,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
-import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.extensions.runWithArgumentsOrSkip
-import com.joseph.utils_core.extensions.tuneLyricsDialog
+import com.joseph.core.extensions.tuneLyricsDialog
 import com.example.bookloverfinalapp.databinding.ProgressDialogBinding
 
 class ProgressDialog : DialogFragment() {

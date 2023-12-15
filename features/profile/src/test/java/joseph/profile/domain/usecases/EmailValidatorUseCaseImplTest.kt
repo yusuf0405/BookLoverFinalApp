@@ -1,6 +1,6 @@
 package joseph.profile.domain.usecases
 
-import com.joseph.common_api.IdResourceString
+import com.joseph.common.IdResourceString
 import com.joseph.profile.domain.models.UserFieldValidatorCorrectState
 import com.joseph.profile.domain.models.UserFieldValidatorDefaultState
 import com.joseph.profile.domain.models.UserFieldValidatorErrorState
@@ -9,7 +9,7 @@ import com.joseph.profile.domain.usecases.EmailValidatorUseCaseImpl
 import com.joseph.profile.domain.usecases.EmailValidatorUseCaseImpl.Companion.EMAIL_COM_SUFFIX
 import com.joseph.profile.domain.usecases.EmailValidatorUseCaseImpl.Companion.EMAIL_RU_SUFFIX
 import com.joseph.profile.domain.usecases.EmailValidatorUseCaseImpl.Companion.EMAIL_SYMBOL
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 import org.junit.Assert.*
 import org.junit.Test
 

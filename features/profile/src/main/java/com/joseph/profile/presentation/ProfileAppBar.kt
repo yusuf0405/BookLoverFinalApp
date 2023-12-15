@@ -23,7 +23,7 @@ import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.unit.dp
 import com.joseph.profile.domain.models.EditProfileColorsState
 import com.joseph.profile.presentation.navigation.Destinations
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 
 
 @Composable

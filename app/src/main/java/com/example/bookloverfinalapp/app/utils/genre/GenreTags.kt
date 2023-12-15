@@ -1,21 +1,17 @@
 package com.example.bookloverfinalapp.app.utils.genre
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import android.widget.TextView
-import androidx.annotation.StringRes
 import androidx.cardview.widget.CardView
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.Genre
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.LanguageTypes
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.databinding.ItemGenreBinding
 import java.util.*
-
 
 class GenreTags(private val context: Context, private val actionListener: GenreOnClickListener) {
 

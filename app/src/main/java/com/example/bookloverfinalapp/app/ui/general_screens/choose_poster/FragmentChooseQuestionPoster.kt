@@ -2,12 +2,12 @@ package com.example.bookloverfinalapp.app.ui.general_screens.choose_poster
 
 import android.os.Bundle
 import android.view.View
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseBindingFragment
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.adapter.ChooseQuestionPosterPagerAdapter
 import com.example.bookloverfinalapp.databinding.FragmentChooseQuestionPosterBinding
 import com.google.android.material.tabs.TabLayoutMediator
-import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
 
 class FragmentChooseQuestionPoster :
     BaseBindingFragment<FragmentChooseQuestionPosterBinding>(FragmentChooseQuestionPosterBinding::inflate) {

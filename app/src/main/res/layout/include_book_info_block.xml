@@ -154,7 +154,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="8dp">
 
-            <com.joseph.ui_core.custom.FadingTextView
+            <com.joseph.ui.core.custom.FadingTextView
                 android:id="@+id/book_subtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -167,12 +167,12 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <org.apmem.tools.layouts.FlowLayout
-            android:id="@+id/book_genres_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:padding="4dp" />
+<!--        <org.apmem.tools.layouts.FlowLayout-->
+<!--            android:id="@+id/book_genres_layout"-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginTop="8dp"-->
+<!--            android:padding="4dp" />-->
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/items_recycler_view"

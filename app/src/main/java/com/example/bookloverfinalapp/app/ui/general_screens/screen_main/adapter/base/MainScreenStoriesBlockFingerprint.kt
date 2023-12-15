@@ -6,14 +6,14 @@ import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.MainScreenStoriesBlockBinding
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
-import com.joseph.utils_core.extensions.toDp
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
+import com.joseph.ui.core.extensions.toDp
+import com.example.bookloverfinalapp.R
 
 class MainScreenStoriesBlockFingerprint(
     private val fingerprintsList: List<ItemFingerprint<*, *>>,

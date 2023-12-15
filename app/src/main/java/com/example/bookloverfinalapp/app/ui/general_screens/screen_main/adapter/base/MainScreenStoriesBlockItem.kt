@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base
 
 import android.os.Parcelable
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 
 data class MainScreenStoriesBlockItem(
     val items: List<Item>,

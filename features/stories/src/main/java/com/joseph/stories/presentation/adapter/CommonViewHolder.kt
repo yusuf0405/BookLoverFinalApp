@@ -2,8 +2,8 @@ package com.joseph.stories.presentation.adapter
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.joseph.utils_core.extensions.getDpFromPixel
-import com.joseph.utils_core.extensions.getPixelFromDp
+import com.joseph.core.extensions.getDpFromPixel
+import com.joseph.core.extensions.getPixelFromDp
 
 abstract class CommonViewHolder(private val view: View) :
     RecyclerView.ViewHolder(view) {

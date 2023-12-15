@@ -7,7 +7,8 @@ import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
+import com.joseph.ui.core.R as UiCore
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.UserSignUp
 import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
@@ -19,13 +20,14 @@ import com.example.bookloverfinalapp.app.utils.modalPageNavigateTo
 import com.example.bookloverfinalapp.databinding.FragmentChoiceSchoolBinding
 import com.example.data.cache.models.IdResourceString
 import com.google.android.material.snackbar.Snackbar
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.custom.snackbar.GenericSnackbar
-import com.joseph.ui_core.extensions.launchOnLifecycle
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.custom.snackbar.GenericSnackbar
+import com.joseph.ui.core.extensions.launchOnLifecycle
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class FragmentChoiceSchool :
@@ -93,7 +95,7 @@ class FragmentChoiceSchool :
         dismissModalPage()
         navControllerPopBackStackInclusive()
         findNavController().navigate(
-            R.id.admin_navigation,
+            MainRes.id.admin_navigation,
             bundleOf(),
             createNavOptionsWithAnimations()
         )
@@ -101,14 +103,14 @@ class FragmentChoiceSchool :
 
     private fun createNavOptionsWithAnimations() = NavOptions
         .Builder()
-        .setEnterAnim(R.anim.slide_up)
-        .setExitAnim(R.anim.slide_down)
-        .setPopEnterAnim(R.anim.slide_up)
-        .setPopExitAnim(R.anim.slide_down)
+        .setEnterAnim(UiCore.anim.slide_up)
+        .setExitAnim(UiCore.anim.slide_down)
+        .setPopEnterAnim(UiCore.anim.slide_up)
+        .setPopExitAnim(UiCore.anim.slide_down)
         .build()
 
     private fun navControllerPopBackStackInclusive() =
-        findNavController().popBackStack(R.id.login_navigation, false)
+        findNavController().popBackStack(MainRes.id.login_navigation, false)
 
     private fun showErrorSnackbar(messageId: IdResourceString) =
         GenericSnackbar
@@ -126,7 +128,7 @@ class FragmentChoiceSchool :
         )
         modalPageNavigateTo(
             newFragment = newFragment,
-            title = getString(R.string.class_setup),
+            title = getString(UiCore.string.class_setup),
             rootContainer = binding().rootContainer,
             transitionName = binding().rootContainer.transitionName
         )

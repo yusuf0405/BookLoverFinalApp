@@ -11,7 +11,7 @@ import androidx.core.view.updateLayoutParams
 import androidx.interpolator.view.animation.FastOutSlowInInterpolator
 import androidx.transition.Transition
 import androidx.transition.TransitionValues
-import com.joseph.ui_core.extensions.getStatusBarHeight
+import com.joseph.ui.core.extensions.getStatusBarHeight
 
 
 class ModalPageNavigationTransition(

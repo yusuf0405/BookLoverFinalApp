@@ -6,11 +6,12 @@ import android.view.View
 import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.example.bookloverfinalapp.R
-import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.ui.core.R
+import com.joseph.core.bindingLifecycleError
 import com.example.bookloverfinalapp.databinding.FragmentReaderOptionBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.example.bookloverfinalapp.R as MainRes
 
 class FragmentReaderOption : Fragment(), OnClickListener {
 
@@ -51,12 +52,12 @@ class FragmentReaderOption : Fragment(), OnClickListener {
 
     override fun onClick(view: View?) {
         when (view?.id) {
-            R.id.go_to_page_setting -> goToPageListener.invoke()
-            R.id.hide_toolbar -> {
+            MainRes.id.go_to_page_setting -> goToPageListener.invoke()
+            MainRes.id.hide_toolbar -> {
                 dismissModalPage()
                 hideOrShowToolbarListener.invoke()
             }
-            R.id.go_to_book_info -> {
+            MainRes.id.go_to_book_info -> {
                 dismissModalPage()
                 goToBookInfoListener.invoke()
             }

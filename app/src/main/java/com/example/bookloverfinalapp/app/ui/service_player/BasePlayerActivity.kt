@@ -17,14 +17,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.palette.graphics.Palette
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.ActivityMainBinding
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.card.MaterialCardView
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.utils_core.extensions.isServiceRunning
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.core.extensions.isServiceRunning
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.*
 

@@ -1,6 +1,6 @@
 package com.example.bookloverfinalapp.app.models
 
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.data.cache.models.IdResourceString
 
 enum class Collections(val title: IdResourceString) {

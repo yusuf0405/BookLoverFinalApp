@@ -10,11 +10,8 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.colorResource
-import androidx.core.content.ContextCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -22,7 +19,6 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.joseph.profile.domain.models.EditProfileColors
 import com.joseph.profile.domain.models.EditProfileColorsState
-import com.joseph.profile.domain.models.UserFeatureModel
 import com.joseph.profile.presentation.navigation.EditProfile
 import com.joseph.profile.presentation.navigation.Profile
 import com.joseph.profile.presentation.navigation.profileDestinations
@@ -30,15 +26,14 @@ import com.joseph.profile.presentation.screen_edit_profile.EditProfileScreen
 import com.joseph.profile.presentation.screen_edit_profile.EditProfileViewModel
 import com.joseph.profile.presentation.screen_profile.FragmentProfileScreenViewModel
 import com.joseph.profile.presentation.screen_profile.ProfileScreen
-import com.joseph.ui_core.R
-import com.joseph.utils_core.extensions.getAttrColor
+import com.joseph.ui.core.R
 
 
 @Composable
 fun ProfileScreensApp(
     profileScreenViewModel: FragmentProfileScreenViewModel,
-    isDarkTheme: Boolean,
     editProfileViewModel: EditProfileViewModel,
+    isDarkTheme: Boolean,
     onThemeChange: (Boolean) -> Unit,
     navigateSettingScreen: () -> Unit,
     navigateLoginOutScreen: () -> Unit,

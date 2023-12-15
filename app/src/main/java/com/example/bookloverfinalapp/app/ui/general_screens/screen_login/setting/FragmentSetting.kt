@@ -7,11 +7,12 @@ import android.view.View.OnClickListener
 import android.view.ViewGroup
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import com.joseph.ui.core.R as UiCore
 import com.example.bookloverfinalapp.R
-import com.joseph.utils_core.bindingLifecycleError
+import com.joseph.core.bindingLifecycleError
 import com.example.bookloverfinalapp.app.utils.modalPageNavigateTo
 import com.example.bookloverfinalapp.databinding.FragmentLoginSettingBinding
-import com.joseph.ui_core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.ModalPage
 
 class FragmentSetting : Fragment(), OnClickListener {
 
@@ -50,15 +51,15 @@ class FragmentSetting : Fragment(), OnClickListener {
         when (view?.id) {
             R.id.theme_setting -> navigateToSelectionFragment(
                 SettingSelectionType.THEME_SETTING,
-                getString(R.string.theme)
+                getString(UiCore.string.theme)
             )
             R.id.language_setting -> navigateToSelectionFragment(
                 SettingSelectionType.LANGUAGE_SETTING,
-                getString(R.string.language)
+                getString(UiCore.string.language)
             )
             R.id.orientation_setting -> navigateToSelectionFragment(
                 SettingSelectionType.ORIENTATION_SETTING,
-                getString(R.string.orientation)
+                getString(UiCore.string.orientation)
             )
         }
     }

@@ -4,16 +4,16 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.AudioBookAdapterModel
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showRoundedImage
+import com.joseph.core.extensions.showRoundedImage
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemAudioBookBinding
-
+import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R as UiCore
 
 class AudioBookFingerprint : ItemFingerprint<ItemAudioBookBinding, AudioBookAdapterModel> {
 
@@ -61,8 +61,8 @@ class AudioBookViewHolder(
         context.showRoundedImage(8, item.audioBook.audioBookPoster.url, cover)
         title.text = item.audioBook.title
         author.text = item.audioBook.author
-        val actualIcon = if (item.audioBook.isPlaying) R.drawable.pause_icon
-        else R.drawable.play_icon
+        val actualIcon = if (item.audioBook.isPlaying) UiCore.drawable.pause_icon
+        else UiCore.drawable.play_icon
         playOrPauseIcon.setImageDrawable(ContextCompat.getDrawable(context, actualIcon))
     }
 

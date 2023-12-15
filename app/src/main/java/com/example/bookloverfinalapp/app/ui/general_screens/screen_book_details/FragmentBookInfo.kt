@@ -8,7 +8,7 @@ import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.Book
 import com.example.bookloverfinalapp.app.models.BookThatRead
@@ -25,14 +25,14 @@ import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.app.utils.genre.GenreOnClickListener
 import com.example.bookloverfinalapp.app.utils.genre.GenreTags
 import com.example.bookloverfinalapp.databinding.FragmentBookInfoBinding
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.showBlurImage
-import com.joseph.utils_core.extensions.showRoundedImage
-import com.joseph.utils_core.motion.MotionListener
-import com.joseph.utils_core.motion.MotionState
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.showBlurImage
+import com.joseph.core.extensions.showRoundedImage
+import com.joseph.core.motion.MotionListener
+import com.joseph.core.motion.MotionState
+import com.joseph.core.assistedViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -83,7 +83,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
 
     private fun setupViews() = with(binding()) {
         root.addTransitionListener(motionListener)
-        includeBookInfoBlock.bookGenresLayout.removeAllViews()
+//        includeBookInfoBlock.bookGenresLayout.removeAllViews()
         includeBookInfoBlock.itemsRecyclerView.adapter = adapter
     }
 
@@ -110,7 +110,7 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
             similarBooksFlow.observe(adapter::submitList)
             addOrDeleteOperationStatus.observe(::handleSuccessOperation)
             progressDialogIsShowingDialog.observe(::showAndDismissProgressDialog)
-            genres.observe(::showGenres)
+//            genres.observe(::showGenres)
             showBookOptionDialogFlow.observe(::showFragmentBookOptionDialog)
             showSavedBookDeleteDialogFlow.observe { showConfirmDialog() }
         }
@@ -211,12 +211,12 @@ class FragmentBookInfo : BaseFragment<FragmentBookInfoBinding, FragmentBookInfoV
     }
 
 
-    private fun showGenres(
-        genreList: List<Genre>
-    ) = with(binding().includeBookInfoBlock.bookGenresLayout) {
-        removeAllViews()
-        genreList.forEach { genre -> addView(createGenreTag(genre)) }
-    }
+//    private fun showGenres(
+//        genreList: List<Genre>
+//    ) = with(binding().includeBookInfoBlock.bookGenresLayout) {
+//        removeAllViews()
+//        genreList.forEach { genre -> addView(createGenreTag(genre)) }
+//    }
 
     private fun createGenreTag(genre: Genre) =
         GenreTags(context = requireContext(), actionListener = this@FragmentBookInfo)

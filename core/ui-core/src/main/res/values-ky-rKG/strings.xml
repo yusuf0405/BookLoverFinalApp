@@ -395,4 +395,6 @@
     <string name="start_update_your_last_name">Start update your last name!</string>
     <string name="the_last_name_is_too_short">The last name is too short!</string>
     <string name="the_last_name_cannot_contain_numbers">The last name cannot contain numbers!</string>
+    <string name="zero"></string>
+
 </resources>

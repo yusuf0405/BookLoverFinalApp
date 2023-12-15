@@ -1,7 +1,7 @@
 package com.example.bookloverfinalapp.app.ui.adapter
 
 import androidx.recyclerview.widget.DiffUtil
-import com.joseph.ui_core.custom.ItemUi
+import com.joseph.ui.core.custom.ItemUi
 
 class DiffUtilCallback(
     private val oldList: List<ItemUi>,

@@ -3,18 +3,20 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_splash
 import android.os.Bundle
 import android.view.View
 import androidx.core.os.bundleOf
+import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.utils.extensions.dismissPlayerOverlay
 import com.example.bookloverfinalapp.app.utils.extensions.showPlayerOverlay
 import com.example.bookloverfinalapp.databinding.FragmentSplashBinding
-import com.joseph.ui_core.extensions.launchOnLifecycle
-import com.joseph.ui_core.extensions.launchWhenViewStarted
+import com.joseph.ui.core.extensions.launchOnLifecycle
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class FragmentSplash :
@@ -27,9 +29,11 @@ class FragmentSplash :
         hideBottomNavigationView()
         dismissPlayerOverlay()
         observeData()
+        binding().lottieAnimationView.isAnimating
     }
 
     private fun observeData() = with(viewModel) {
+        binding().lottieAnimationView.isInvisible
         launchOnLifecycle { isProgressBarVisibleFlow.observe(::setProgressBarVisible) }
         launchWhenViewStarted { navigateToFlow.observe(::navigateTo) }
     }
@@ -45,22 +49,22 @@ class FragmentSplash :
     }
 
     private fun navControllerPopBackStackInclusive() =
-        findNavController().popBackStack(R.id.splash_navigation, false)
+        findNavController().popBackStack(MainRes.id.splash_navigation, false)
 
     private fun navigateToLoginScreens() = findNavController().navigate(
-        R.id.login_navigation,
+        MainRes.id.login_navigation,
         bundleOf(),
         createNavOptionsWithAnimations()
     )
 
     private fun navigateToMainScreens() = findNavController().navigate(
-        R.id.main_navigation,
+        MainRes.id.main_navigation,
         bundleOf(),
         createNavOptionsWithAnimations()
     )
 
     private fun navigateToAdminScreens() = findNavController().navigate(
-        R.id.admin_navigation,
+        MainRes.id.admin_navigation,
         bundleOf(),
         createNavOptionsWithAnimations()
     )

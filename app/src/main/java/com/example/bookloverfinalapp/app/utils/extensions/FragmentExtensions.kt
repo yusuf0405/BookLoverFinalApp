@@ -7,12 +7,12 @@ import androidx.annotation.DrawableRes
 import androidx.annotation.IdRes
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AlertDialog
-import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.service_player.BasePlayerActivity
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.joseph.ui.core.R
+import com.example.bookloverfinalapp.R as MainRes
 
 fun <T : Parcelable> Fragment.runWithArgumentsOrSkip(id: String, block: (arguments: T) -> Unit) =
     this.arguments?.getParcelable<T>(id)?.let(block) ?: Unit
@@ -29,7 +29,7 @@ fun Fragment.dismissPlayerOverlay() {
 
 fun Fragment.replace(
     target: Fragment,
-    @IdRes containerId: Int = R.id.nav_host_fragment_activity_main,
+    @IdRes containerId: Int = MainRes.id.nav_host_fragment_activity_main,
     fragmentManager: FragmentManager = requireActivity().supportFragmentManager
 ) {
     val beginTransaction = fragmentManager.beginTransaction()

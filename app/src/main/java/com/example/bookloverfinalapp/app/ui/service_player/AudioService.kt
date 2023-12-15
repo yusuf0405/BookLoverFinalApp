@@ -1,5 +1,6 @@
 package com.example.bookloverfinalapp.app.ui.service_player
 
+import android.annotation.SuppressLint
 import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
@@ -8,7 +9,6 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Canvas
-import android.graphics.Color
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import android.os.Binder
@@ -29,7 +29,6 @@ import androidx.lifecycle.lifecycleScope
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.models.AudioBook
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.ActivityMain
 import com.example.bookloverfinalapp.app.utils.extensions.createSharedFlowAsLiveData
@@ -48,7 +47,7 @@ import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import java.util.*
 import javax.inject.Inject
-
+import com.joseph.ui.core.R as UiCore
 
 private const val PLAYBACK_CHANNEL_ID = "playback_channel"
 private const val PLAYBACK_NOTIFICATION_ID = 2
@@ -111,6 +110,7 @@ class AudioService : LifecycleService() {
     private val _playerStatusFlow = createSharedFlowAsLiveData<PlayerStatus>()
     val playerStatusFlow: SharedFlow<PlayerStatus> get() = _playerStatusFlow.asSharedFlow()
 
+    @SuppressLint("ForegroundServiceType")
     override fun onCreate() {
         super.onCreate()
 
@@ -176,6 +176,7 @@ class AudioService : LifecycleService() {
                 stopSelf()
             }
 
+            @SuppressLint("ForegroundServiceType")
             override fun onNotificationPosted(
                 notificationId: Int,
                 notification: Notification,
@@ -196,7 +197,7 @@ class AudioService : LifecycleService() {
 
         override fun getCurrentContentTitle(
             player: Player
-        ): String = audioBookTitle ?: getString(R.string.loading_book)
+        ): String = audioBookTitle ?: getString(UiCore.string.loading_book)
 
         override fun createCurrentContentIntent(
             player: Player
@@ -209,7 +210,7 @@ class AudioService : LifecycleService() {
             callback: PlayerNotificationManager.BitmapCallback
         ): Bitmap? = getBitmapFromVectorDrawable(
             applicationContext,
-            R.drawable.background_start
+            UiCore.drawable.background_start
         )
     }
 
@@ -225,7 +226,7 @@ class AudioService : LifecycleService() {
                 putParcelable(MediaMetadataCompat.METADATA_KEY_DISPLAY_ICON, posterBitmap)
             }
 
-            val title = audioBookTitle ?: getString(R.string.loading_book)
+            val title = audioBookTitle ?: getString(UiCore.string.loading_book)
             return MediaDescriptionCompat.Builder()
                 .setIconBitmap(posterBitmap)
                 .setTitle(title)
@@ -249,7 +250,7 @@ class AudioService : LifecycleService() {
         }
 
         override fun onLoadCleared(placeholder: Drawable?) {
-            posterBitmap = getBitmapFromVectorDrawable(applicationContext, R.drawable.play_icon)
+            posterBitmap = getBitmapFromVectorDrawable(applicationContext, UiCore.drawable.play_icon)
         }
     }
 
@@ -260,7 +261,7 @@ class AudioService : LifecycleService() {
             applicationContext,
             PLAYBACK_CHANNEL_ID
         )
-        builder.setSmallIcon(R.drawable.play_icon)
+        builder.setSmallIcon(UiCore.drawable.play_icon)
         val notification = builder.build()
         notificationManager.notify(PLAYBACK_NOTIFICATION_ID, notification)
         return notification

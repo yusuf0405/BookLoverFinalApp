@@ -9,15 +9,14 @@ import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.transition.Transition
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.models.ExclusiveAudioBookItem
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemExclusiveAudioBookBinding
-
+import com.example.bookloverfinalapp.R
 
 class ExclusiveAudioBookFingerprint :
     ItemFingerprint<ItemExclusiveAudioBookBinding, ExclusiveAudioBookItem> {
@@ -92,7 +91,7 @@ class ExclusiveAudioBookViewHolder(
                 palette?.vibrantSwatch != null -> palette.vibrantSwatch!!.rgb
                 palette?.mutedSwatch != null -> palette.mutedSwatch!!.rgb
                 palette?.darkVibrantSwatch != null -> palette.darkVibrantSwatch!!.rgb
-                else -> itemView.context.getColor(R.color.rating_second_color)
+                else -> itemView.context.getColor(com.joseph.ui.core.R.color.rating_second_color)
             }
             binding.backgroundColor.setBackgroundColor(color)
         }

@@ -4,7 +4,6 @@ import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Text
@@ -22,12 +21,7 @@ import androidx.constraintlayout.compose.ExperimentalMotionApi
 import androidx.constraintlayout.compose.MotionLayout
 import androidx.constraintlayout.compose.MotionScene
 import com.joseph.profile.R
-
-@Composable
-fun MotionLayoutExample() {
-
-
-}
+import com.joseph.ui.core.R as UiCore
 
 @OptIn(ExperimentalMotionApi::class)
 @Composable
@@ -52,7 +46,7 @@ fun ProfileHeader(
         ) {
 
             Image(
-                painter = painterResource(id = R.drawable.avatar_01),
+                painter = painterResource(id = UiCore.drawable.avatar_01),
                 contentDescription = null,
                 modifier = modifier
                     .clip(CircleShape)

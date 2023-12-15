@@ -12,19 +12,23 @@ import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SimpleComm
 import com.example.bookloverfinalapp.app.ui.adapter.animations.custom.SlideInTopCommonAnimator
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.option_dialog.FragmentBookOptionDialogClickListeners
-import com.joseph.ui_core.adapter.FingerprintAdapter
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenAudioBookBlockFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenBookBlockFingerprint
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.*
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AudioBookHorizontalFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.EmptyDataFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SearchFingerprint
 import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
 import com.example.bookloverfinalapp.app.utils.genre.checkLanguageAndGetActualString
 import com.example.bookloverfinalapp.databinding.FragmentGenreInfoBinding
 import com.example.domain.models.GenreDomain
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.assistedViewModel
+import com.joseph.core.assistedViewModel
+import com.joseph.core.extensions.showImage
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,7 +36,6 @@ import javax.inject.Inject
 class FragmentGenreInfo :
     BaseFragment<FragmentGenreInfoBinding, FragmentGenreInfoViewModel>(FragmentGenreInfoBinding::inflate),
     FragmentBookOptionDialogClickListeners {
-
 
 
     private val genreId: String by lazy(LazyThreadSafetyMode.NONE) {
@@ -106,7 +109,7 @@ class FragmentGenreInfo :
             genre.poster.url,
             includeGenreInfoPosterBlock.genreBackgroundImage
         )
-        genreDescription.text = checkLanguageAndGetActualString(genre.descriptions)
+//        genreDescription.text = checkLanguageAndGetActualString(genre.descriptions)
         val title = checkLanguageAndGetActualString(genre.titles)
         includeGenreInfoPosterBlock.genreTitle.text = title
         includeGenreInfoToolbarBlock.genreTitle.text = title

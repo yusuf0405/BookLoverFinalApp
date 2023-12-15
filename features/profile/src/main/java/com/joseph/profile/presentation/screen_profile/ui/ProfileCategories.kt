@@ -10,7 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.joseph.profile.presentation.screen_profile.ui.Categories
 import com.joseph.profile.presentation.screen_profile.ui.CategoriesSwitch
-import com.joseph.ui_core.R
+import com.joseph.ui.core.R
 
 
 @Composable

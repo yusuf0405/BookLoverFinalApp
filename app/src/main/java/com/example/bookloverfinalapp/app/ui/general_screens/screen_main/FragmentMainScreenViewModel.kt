@@ -3,7 +3,7 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_main
 import android.os.Parcelable
 import android.util.Log
 import androidx.lifecycle.viewModelScope
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseViewModel
 import com.example.bookloverfinalapp.app.models.BookThatRead
 import com.example.bookloverfinalapp.app.models.Collections
@@ -62,6 +62,9 @@ class FragmentMainScreenViewModel @Inject constructor(
 
     private val _showAddStoriesDialogFlow = createMutableSharedFlowAsSingleLiveEvent<Unit>()
     val showAddStoriesDialogFlow get() = _showAddStoriesDialogFlow.asSharedFlow()
+
+    private val _fefef = createMutableSharedFlowAsSingleLiveEvent<Unit>()
+    val fefef get() = _fefef.asSharedFlow()
 
     private val recyclerViewStateFlow = MutableStateFlow<Parcelable?>(null)
 
@@ -239,6 +242,7 @@ class FragmentMainScreenViewModel @Inject constructor(
     }
 
     override fun onClickSelectFavoriteBook() {
+        _fefef.tryEmit(Unit)
         val destination = router.navigateToSelectFavoriteBookFragment()
         navigate(destination)
     }

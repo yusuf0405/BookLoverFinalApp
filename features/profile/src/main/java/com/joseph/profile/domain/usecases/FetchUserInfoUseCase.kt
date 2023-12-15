@@ -1,12 +1,12 @@
 package com.joseph.profile.domain.usecases
 
-import com.joseph.common_api.CheckInternetConnection
+import com.joseph.common.CheckInternetConnection
 import com.joseph.profile.domain.models.UserFeatureModel
 import com.joseph.profile.domain.repositories.UserInfoRepository
-import com.joseph.utils_core.extensions.addDays
-import com.joseph.utils_core.extensions.startOfDay
-import kotlinx.coroutines.flow.Flow
-import java.util.*
+import com.joseph.core.extensions.addDays
+import com.joseph.core.extensions.startOfDay
+import java.util.Calendar
+import java.util.Date
 import javax.inject.Inject
 
 interface FetchUserInfoUseCase {

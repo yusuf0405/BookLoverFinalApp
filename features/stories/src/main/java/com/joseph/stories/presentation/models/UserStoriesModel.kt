@@ -1,7 +1,7 @@
 package com.joseph.stories.presentation.models
 
 import android.os.Parcelable
-import com.joseph.ui_core.adapter.Item
+import com.joseph.ui.core.adapter.Item
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize

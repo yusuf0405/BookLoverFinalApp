@@ -9,13 +9,13 @@ import android.view.View
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
-import com.example.bookloverfinalapp.R
+import com.joseph.ui.core.R
 import com.example.bookloverfinalapp.app.base.BaseFragment
 import com.example.bookloverfinalapp.app.models.User
 import com.example.bookloverfinalapp.app.models.UserGender
-import com.joseph.utils_core.motion.MotionListener
-import com.joseph.utils_core.motion.MotionState
-import com.joseph.ui_core.dialog.UploadFileDialog
+import com.joseph.core.motion.MotionListener
+import com.joseph.core.motion.MotionState
+import com.joseph.ui.core.dialog.UploadFileDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.ProgressDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.activity_main.OnBackPressedListener
 import com.example.bookloverfinalapp.app.ui.general_screens.choose_poster.FragmentChooseQuestionPoster
@@ -25,14 +25,14 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.login
 import com.example.bookloverfinalapp.app.utils.extensions.*
 import com.example.bookloverfinalapp.databinding.FragmentProfileBinding
 import com.example.domain.models.UserUpdateDomain
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.convertDrawableToByteArray
-import com.joseph.utils_core.extensions.showImage
-import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.convertDrawableToByteArray
+import com.joseph.core.extensions.showImage
+import com.joseph.core.extensions.showOnlyOne
 import com.parse.ParseFile
 import dagger.hilt.android.AndroidEntryPoint
-
+import com.example.bookloverfinalapp.R as MainRes
 
 @AndroidEntryPoint
 class FragmentProfile :
@@ -257,9 +257,9 @@ class FragmentProfile :
     private fun showFragmentLoginOutDialog() = FragmentLoginOutDialog.newInstance()
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
-    private fun startMotionSceneToStart() = binding().root.transitionToState(R.id.start)
+    private fun startMotionSceneToStart() = binding().root.transitionToState(MainRes.id.start)
 
-    private fun startMotionSceneToEnd() = binding().root.transitionToState(R.id.end)
+    private fun startMotionSceneToEnd() = binding().root.transitionToState(MainRes.id.end)
 
     private fun showFragmentChoiceImage() = choiceImageDialog
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)

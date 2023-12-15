@@ -25,23 +25,49 @@ import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_books.opt
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_saved_books.confim_dialog.FragmentConfirmDialog
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_book_details.HorizontalUserFingerprint
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_login.setting.FragmentSetting
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.*
-import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.*
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemsFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.HorizontalItemsFingerprintSecond
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenAudioBookBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenBookBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenCollectionsBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenExclusiveAudioBookBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenExclusiveBookBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenPopularGenreBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenStoriesBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.base.MainScreenUserBlockFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AddNewBooksFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AddStoriesFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AudioBookHorizontalFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.AudioBookSmallHorizontalFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookGenreFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.BookHorizontalSmallFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.ButtonFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.CollectionsFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.ExclusiveAudioBookFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.ExclusiveBookFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.HeaderFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.MainScreenErrorFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.MainScreenShimmerFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SavedBookMainFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.SelectFavoriteBooksFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.StoriesFingerprint
+import com.example.bookloverfinalapp.app.ui.general_screens.screen_main.adapter.fingerprints.TaskFingerprint
 import com.example.bookloverfinalapp.app.ui.service_player.PlayerCallback
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.workers.CheckBookIsSaveWorker
 import com.example.bookloverfinalapp.databinding.FragmentMainScreenBinding
+import com.joseph.core.extensions.setupLayoutManager
+import com.joseph.core.motion.MotionListener
+import com.joseph.core.motion.MotionState
 import com.joseph.stories.presentation.dialog.choice_file_type.FragmentChoiceUploadFileForStoriesDialog
-import com.joseph.ui_core.adapter.FingerprintAdapter
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.setupLayoutManager
-import com.joseph.utils_core.extensions.showImage
-import com.joseph.utils_core.motion.MotionListener
-import com.joseph.utils_core.motion.MotionState
+import com.joseph.ui.core.adapter.FingerprintAdapter
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.extensions.launchWhenViewStarted
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.filterNotNull
+import com.joseph.ui.core.R as UiCore
 
 
 @AndroidEntryPoint
@@ -167,6 +193,9 @@ class FragmentMainScreen :
             playAudioBookFlow.observe { playerCallback?.play(it) }
             showBookOptionDialogFlow.observe(::showFragmentBookOptionDialog)
             showAddStoriesDialogFlow.observe { showFragmentChoiceUploadFileForStoriesDialog() }
+            fefef.observe {
+                hideBottomNavigationView()
+            }
         }
     }
 
@@ -206,20 +235,20 @@ class FragmentMainScreen :
                 context = requireContext(),
                 view = view,
                 gravity = Gravity.END,
-                com.joseph.ui_core.R.style.PopupMenuDefaultStyle
+                com.joseph.ui.core.R.style.PopupMenuDefaultStyle
             )
 
-        popupMenu.menu.add(0, ID_ADD_BOOK, Menu.NONE, getString(R.string.audio_book))
+        popupMenu.menu.add(0, ID_ADD_BOOK, Menu.NONE, getString(UiCore.string.audio_book))
             .apply {
-                setIcon(R.drawable.audio_icon)
+                setIcon(UiCore.drawable.audio_icon)
             }
-        popupMenu.menu.add(0, ID_ADD_AUDIO_BOOK, Menu.NONE, getString(R.string.book))
+        popupMenu.menu.add(0, ID_ADD_AUDIO_BOOK, Menu.NONE, getString(UiCore.string.book))
             .apply {
-                setIcon(R.drawable.read_book_icon)
+                setIcon(UiCore.drawable.read_book_icon)
             }
-        popupMenu.menu.add(0, ID_ADD_STORIES, Menu.NONE, getString(R.string.stories))
+        popupMenu.menu.add(0, ID_ADD_STORIES, Menu.NONE, getString(UiCore.string.stories))
             .apply {
-                setIcon(R.drawable.star_icon)
+                setIcon(UiCore.drawable.star_icon)
             }
 
         popupMenu.setOnMenuItemClickListener {
@@ -268,7 +297,7 @@ class FragmentMainScreen :
     ).show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
 
-    private fun showSettingModalPage() = FragmentSetting.newInstance(getString(R.string.setting))
+    private fun showSettingModalPage() = FragmentSetting.newInstance(getString(UiCore.string.setting))
         .show(requireActivity().supportFragmentManager, ModalPage.TAG)
 
     override fun addQuestionOnClickListener(bookId: String) {

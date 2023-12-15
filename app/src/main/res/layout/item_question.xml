@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/profileTextDP">
 
-        <com.joseph.ui_core.custom.MyTextView
+        <com.joseph.ui.core.custom.MyTextView
             android:id="@+id/chapterText"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
             android:layout_width="wrap_content"

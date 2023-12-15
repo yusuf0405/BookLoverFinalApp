@@ -7,7 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
-import com.joseph.profile.R
+import com.joseph.ui.core.R
 
 @Composable
 internal fun ProfileTextHeader(

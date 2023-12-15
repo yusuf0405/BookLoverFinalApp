@@ -4,15 +4,14 @@ import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.makeTicker
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
 import com.example.bookloverfinalapp.app.utils.extensions.startSlideInLeftAnim
 import com.example.bookloverfinalapp.databinding.ItemChapterBinding
-
+import com.example.bookloverfinalapp.R
 
 class ChapterFingerprint : ItemFingerprint<ItemChapterBinding, ChapterAdapterModel> {
 
@@ -63,7 +62,7 @@ class SavedBookViewHolder(
         chapterText.makeTicker()
         if (item.chapterIsRead.not()) chapterText.setTextColor(Color.GRAY)
         else {
-            val attrs = intArrayOf(R.attr.blackOrWhiteColor)
+            val attrs = intArrayOf(com.joseph.ui.core.R.attr.blackOrWhiteColor)
             val array = context.obtainStyledAttributes(attrs)
             chapterText.setTextColor(array.getColor(0, 0))
         }

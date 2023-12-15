@@ -6,13 +6,13 @@ import android.widget.FrameLayout
 import androidx.recyclerview.widget.DiffUtil
 import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.ui.general_screens.screen_all_students.models.UserAdapterModel
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemUserCircleBinding
-import com.joseph.utils_core.extensions.toDp
+import com.joseph.ui.core.extensions.toDp
 
 class HorizontalUserFingerprint(private val isWrapContent: Boolean = false) :
     ItemFingerprint<ItemUserCircleBinding, UserAdapterModel> {

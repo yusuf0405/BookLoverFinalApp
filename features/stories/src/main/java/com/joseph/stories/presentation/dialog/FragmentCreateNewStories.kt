@@ -3,16 +3,16 @@ package com.joseph.stories.presentation.dialog
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
-import com.joseph.common_api.base.BaseBindingFragment
-import com.joseph.stories.R
+import com.joseph.common.base.BaseBindingFragment
+import com.joseph.ui.core.R
 import com.joseph.stories.databinding.FragmentCreateNewStoriesBinding
 import com.joseph.stories.presentation.models.MediaType
-import com.joseph.ui_core.custom.modal_page.ModalPage
-import com.joseph.ui_core.custom.modal_page.dismissModalPage
-import com.joseph.ui_core.dialog.UploadFileDialog
-import com.joseph.ui_core.extensions.launchWhenViewStarted
-import com.joseph.utils_core.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showOnlyOne
+import com.joseph.ui.core.custom.modal_page.ModalPage
+import com.joseph.ui.core.custom.modal_page.dismissModalPage
+import com.joseph.ui.core.dialog.UploadFileDialog
+import com.joseph.ui.core.extensions.launchWhenViewStarted
+import com.joseph.core.extensions.setOnDownEffectClickListener
+import com.joseph.core.extensions.showOnlyOne
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -78,7 +78,9 @@ class FragmentCreateNewStories :
 
     private fun handleProgressDialogState(isShow: Boolean) {
         if (isShow) showProgressDialog()
-        else dismissProgressDialog()
+        else {
+            dismissProgressDialog()
+        }
     }
 
     private fun handleConfirmButtonClick() {

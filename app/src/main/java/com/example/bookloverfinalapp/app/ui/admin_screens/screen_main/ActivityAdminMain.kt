@@ -5,10 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import androidx.navigation.ui.setupWithNavController
-import com.example.bookloverfinalapp.R
 import com.example.bookloverfinalapp.app.utils.setting.SettingManager
 import com.example.bookloverfinalapp.databinding.ActivityAdminMainBinding
 import dagger.hilt.android.AndroidEntryPoint
+import com.example.bookloverfinalapp.R
 
 @AndroidEntryPoint
 class ActivityAdminMain : AppCompatActivity() {

@@ -3,14 +3,13 @@ package com.example.bookloverfinalapp.app.ui.general_screens.screen_profile.choi
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
-import com.example.bookloverfinalapp.R
-import com.joseph.ui_core.adapter.BaseViewHolder
-import com.joseph.ui_core.adapter.Item
-import com.joseph.ui_core.adapter.ItemFingerprint
+import com.joseph.ui.core.adapter.BaseViewHolder
+import com.joseph.ui.core.adapter.Item
+import com.joseph.ui.core.adapter.ItemFingerprint
 import com.example.bookloverfinalapp.app.utils.extensions.setOnDownEffectClickListener
-import com.joseph.utils_core.extensions.showImage
+import com.joseph.core.extensions.showImage
 import com.example.bookloverfinalapp.databinding.ItemDefaultAvatarBinding
-
+import com.example.bookloverfinalapp.R
 
 class DefaultAvatarFingerprint : ItemFingerprint<ItemDefaultAvatarBinding, DefaultAvatarItem> {
 
